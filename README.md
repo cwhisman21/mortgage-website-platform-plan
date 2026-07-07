@@ -4,6 +4,16 @@ Planning repo for a high-value mortgage website and local mortgage intelligence 
 
 This is not an app implementation yet. It captures the product architecture, page system, CMS/admin needs, data relationships, SEO strategy, AI local-news pipeline, compliance concerns, and grill-me questions before build work begins.
 
+## Start Here
+
+If you are opening this repo in a new Codex chat, start with:
+
+- [Agent Instructions](AGENTS.md)
+- [Chat Handoff](docs/00-chat-handoff.md)
+- [Grill Me Questions](docs/08-grill-me-questions.md)
+
+New chats do not automatically have the original conversation. The handoff file preserves the context needed to continue.
+
 ## Working Concept
 
 Build a mortgage editorial and placement platform that helps borrowers understand their local housing and mortgage market, compare options, and connect with the right local loan officer or branch.
@@ -35,6 +45,7 @@ Use this repo as the source of truth for:
 
 ## Docs
 
+- [Chat Handoff](docs/00-chat-handoff.md)
 - [Vision And Positioning](docs/01-vision-and-positioning.md)
 - [Information Architecture](docs/02-information-architecture.md)
 - [Page Templates](docs/03-page-templates.md)
