@@ -1,0 +1,1669 @@
+{
+  "locationId": "state-ne",
+  "locationType": "state",
+  "generatedAt": "2026-07-10",
+  "articles": [
+    {
+      "id": "news-ne-state-home-price-movement",
+      "route": "/learning-center/market-news/ne-state-home-price-movement",
+      "locationId": "state-ne",
+      "locationType": "state",
+      "articleType": "state_home_price_movement",
+      "title": "Nebraska home-price movement in the latest FHFA HPI",
+      "dek": "Quarterly, annual, and longer-run state HPI comparisons with a clear boundary between market movement and property value.",
+      "previewText": "Review the latest FHFA home-price movement for Nebraska and why an index cannot value a specific property.",
+      "metaDescription": "Review the latest FHFA home-price movement for Nebraska and why an index cannot value a specific property. Review official evidence, comparisons, limitations, and pr",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Home-price movement",
+      "topicIds": [
+        "home-price-index",
+        "state-market",
+        "home-values"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-conventional",
+        "product-home-equity",
+        "product-cash-out-refinance"
+      ],
+      "sourceLabels": [
+        "Federal Housing Finance Agency"
+      ],
+      "imageId": "home_values-07",
+      "keyTakeaways": [
+        "FHFA purchase-only HPI: 437.9.",
+        "quarterly HPI change: 1.4%.",
+        "annual HPI change: 4.0%.",
+        "five-year HPI change: 39.8%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "hpi-index",
+          "label": "FHFA purchase-only HPI",
+          "value": 437.88,
+          "display": "437.9",
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "quarterly-change",
+          "label": "quarterly HPI change",
+          "value": 1.41,
+          "display": "1.4%",
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-quarterly-change"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "annual-change",
+          "label": "annual HPI change",
+          "value": 3.95,
+          "display": "4.0%",
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-annual-change"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "five-year-change",
+          "label": "five-year HPI change",
+          "value": 39.84,
+          "display": "39.8%",
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "What the latest state index shows",
+          "body": [
+            "The latest evidence for Nebraska puts FHFA purchase-only HPI at 437.9, while quarterly HPI change is 1.4%. The purchase-only index tracks broad price movement in repeat transactions and is designed to show direction over time rather than a typical sale price. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Quarterly and annual changes use different windows",
+          "body": [
+            "The clearest comparison in this release is quarterly HPI change at 1.4%. The shorter comparison can be more sensitive to recent movement, while the annual and longer-run figures place the latest quarter in a broader sequence. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Nebraska. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use an index to frame, not price, a search",
+          "body": [
+            "For a borrower, annual HPI change at 4.0% is most useful as an input to an organized comparison. A borrower can use the trend to ask how current listings, concessions, inventory, and property types compare with the statewide pattern, then rely on property-specific evidence for an offer or valuation. In Nebraska, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Index movement and affordability are not the same",
+          "body": [
+            "Another boundary comes from five-year HPI change, reported here as 39.8%. An index does not include the borrower's income, financing costs, taxes, insurance, maintenance, or the mix of homes available at a chosen price point. A borrower comparing options in Nebraska can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 437.9 for FHFA purchase-only HPI nor 4.0% for annual HPI change determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. FHFA HPI cannot establish the market value of a home, predict a future sale price, identify a competitive offer, or determine a mortgage payment or approval. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Connect the state trend to current local evidence",
+          "body": [
+            "A practical next step is to carry 1.4% for quarterly HPI change and 1.4% for quarterly HPI change into a side-by-side planning conversation. Compare the state index with recent property-level information, a realistic payment worksheet, and current disclosures instead of multiplying a prior home value by the index change. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Nebraska, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state home-price index evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-ne-state-home-price-movement-comparison-chart",
+          "type": "bar",
+          "title": "Nebraska evidence comparison",
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ],
+          "data": [
+            {
+              "label": "FHFA purchase-only HPI",
+              "value": 437.88,
+              "display": "437.9"
+            },
+            {
+              "label": "quarterly HPI change",
+              "value": 1.41,
+              "display": "1.4%"
+            },
+            {
+              "label": "annual HPI change",
+              "value": 3.95,
+              "display": "4.0%"
+            },
+            {
+              "label": "five-year HPI change",
+              "value": 39.84,
+              "display": "39.8%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-ne-state-home-price-movement-evidence-table",
+          "title": "Nebraska evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "FHFA purchase-only HPI",
+              "437.9",
+              "news-ne-state-home-price-movement-source-hpi-index"
+            ],
+            [
+              "quarterly HPI change",
+              "1.4%",
+              "news-ne-state-home-price-movement-source-quarterly-change"
+            ],
+            [
+              "annual HPI change",
+              "4.0%",
+              "news-ne-state-home-price-movement-source-annual-change"
+            ],
+            [
+              "five-year HPI change",
+              "39.8%",
+              "news-ne-state-home-price-movement-source-five-year-change"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-home-price-movement-source-hpi-index",
+            "news-ne-state-home-price-movement-source-quarterly-change",
+            "news-ne-state-home-price-movement-source-annual-change",
+            "news-ne-state-home-price-movement-source-five-year-change"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses the official FHFA purchase-only state quarterly HPI and calculates changes from matching prior-quarter, prior-year, and five-year index observations when available. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "FHFA may revise index values, statewide movement can mask local and property-type differences, and an index level is not a dollar-denominated home value. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-ne-state-home-price-movement-source-hpi-index",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "FHFA purchase-only state House Price Index",
+          "sourceUrl": "https://www.fhfa.gov/house-price-index",
+          "variableOrSeriesId": "hpi-index",
+          "geographyType": "state",
+          "geographyId": "NE",
+          "period": "2026Q1",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 437.88,
+          "marginOfError": null,
+          "revisionStatus": "FHFA HPI values may be revised",
+          "citationLabel": "FHFA state HPI 2026Q1, hpi-index"
+        },
+        {
+          "sourceId": "news-ne-state-home-price-movement-source-quarterly-change",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "FHFA purchase-only state House Price Index",
+          "sourceUrl": "https://www.fhfa.gov/house-price-index",
+          "variableOrSeriesId": "quarterly-change",
+          "geographyType": "state",
+          "geographyId": "NE",
+          "period": "2026Q1",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1.41,
+          "marginOfError": null,
+          "revisionStatus": "FHFA HPI values may be revised",
+          "citationLabel": "FHFA state HPI 2026Q1, quarterly-change"
+        },
+        {
+          "sourceId": "news-ne-state-home-price-movement-source-annual-change",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "FHFA purchase-only state House Price Index",
+          "sourceUrl": "https://www.fhfa.gov/house-price-index",
+          "variableOrSeriesId": "annual-change",
+          "geographyType": "state",
+          "geographyId": "NE",
+          "period": "2026Q1",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.95,
+          "marginOfError": null,
+          "revisionStatus": "FHFA HPI values may be revised",
+          "citationLabel": "FHFA state HPI 2026Q1, annual-change"
+        },
+        {
+          "sourceId": "news-ne-state-home-price-movement-source-five-year-change",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "FHFA purchase-only state House Price Index",
+          "sourceUrl": "https://www.fhfa.gov/house-price-index",
+          "variableOrSeriesId": "five-year-change",
+          "geographyType": "state",
+          "geographyId": "NE",
+          "period": "2026Q1",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 39.84,
+          "marginOfError": null,
+          "revisionStatus": "FHFA HPI values may be revised",
+          "citationLabel": "FHFA state HPI 2026Q1, five-year-change"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/nebraska",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-ne-state-labor-market",
+      "route": "/learning-center/market-news/ne-state-labor-market",
+      "locationId": "state-ne",
+      "locationType": "state",
+      "articleType": "state_labor_market",
+      "title": "Nebraska statewide labor market: latest employment evidence",
+      "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Nebraska.",
+      "previewText": "See what changed in Nebraska's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Nebraska's labor market and why broad employment data cannot determine mortgage eligibility. Review official evidence, comparisons, limitations, ",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Labor market",
+      "topicIds": [
+        "labor-market",
+        "employment",
+        "borrower-planning"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-conventional",
+        "product-home-equity",
+        "product-cash-out-refinance"
+      ],
+      "sourceLabels": [
+        "U.S. Bureau of Labor Statistics"
+      ],
+      "imageId": "local_economy-04",
+      "keyTakeaways": [
+        "labor force: 1,101,499.",
+        "employment: 1,068,594.",
+        "unemployment: 32,905.",
+        "unemployment rate: 3.0%.",
+        "change in unemployment rate from a year earlier: 0.1%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "labor-force",
+          "label": "labor force",
+          "value": 1101499,
+          "display": "1,101,499",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "employment",
+          "label": "employment",
+          "value": 1068594,
+          "display": "1,068,594",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-employment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment",
+          "label": "unemployment",
+          "value": 32905,
+          "display": "32,905",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-unemployment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment-rate",
+          "label": "unemployment rate",
+          "value": 3,
+          "display": "3.0%",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-unemployment-rate"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "annual-rate-change",
+          "label": "change in unemployment rate from a year earlier",
+          "value": 0.1,
+          "display": "0.1%",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "What the latest LAUS release reports",
+          "body": [
+            "The latest evidence for Nebraska puts labor force at 1,101,499, while employment is 1,068,594. The labor force, employment, unemployment, and unemployment rate are related measures, and reading all of them prevents a rate movement from being interpreted without its underlying counts. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Month and year comparisons answer different questions",
+          "body": [
+            "The clearest comparison in this release is change in unemployment rate from a year earlier at 0.1%. A monthly movement can reflect short-term change and revision, while the year-over-year comparison gives a wider reference point without predicting the next release. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Nebraska. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use labor data as economic context",
+          "body": [
+            "For a borrower, unemployment at 32,905 is most useful as an input to an organized comparison. Broad labor evidence can help organize questions about timing and local economic conditions, but a lender evaluates documented income, employment history, debts, assets, and program rules at the borrower level. In Nebraska, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Employment counts do not measure mortgage readiness",
+          "body": [
+            "Another boundary comes from unemployment rate, reported here as 3.0%. The LAUS definition of employment is an economic statistic, not a review of income stability, job tenure, variable earnings, self-employment records, or the continuity standards used in underwriting. A borrower comparing options in Nebraska can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 1,101,499 for labor force nor 32,905 for unemployment determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. BLS does not evaluate any applicant and cannot indicate whether a person's income is eligible, sufficient, stable, or likely to continue for mortgage purposes. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Translate economic context into documentation questions",
+          "body": [
+            "A practical next step is to carry 1,068,594 for employment and 0.1% for change in unemployment rate from a year earlier into a side-by-side planning conversation. Keep the public trend separate from the borrower's records, and ask what pay history, tax returns, contracts, reserves, or explanations may be needed for the actual loan path. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Nebraska, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's labor-market evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-ne-state-labor-market-comparison-chart",
+          "type": "bar",
+          "title": "Nebraska evidence comparison",
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ],
+          "data": [
+            {
+              "label": "labor force",
+              "value": 1101499,
+              "display": "1,101,499"
+            },
+            {
+              "label": "employment",
+              "value": 1068594,
+              "display": "1,068,594"
+            },
+            {
+              "label": "unemployment",
+              "value": 32905,
+              "display": "32,905"
+            },
+            {
+              "label": "unemployment rate",
+              "value": 3,
+              "display": "3.0%"
+            },
+            {
+              "label": "change in unemployment rate from a year earlier",
+              "value": 0.1,
+              "display": "0.1%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-ne-state-labor-market-evidence-table",
+          "title": "Nebraska evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "labor force",
+              "1,101,499",
+              "news-ne-state-labor-market-source-latest-labor-force"
+            ],
+            [
+              "employment",
+              "1,068,594",
+              "news-ne-state-labor-market-source-latest-employment"
+            ],
+            [
+              "unemployment",
+              "32,905",
+              "news-ne-state-labor-market-source-latest-unemployment"
+            ],
+            [
+              "unemployment rate",
+              "3.0%",
+              "news-ne-state-labor-market-source-latest-unemployment-rate"
+            ],
+            [
+              "change in unemployment rate from a year earlier",
+              "0.1%",
+              "news-ne-state-labor-market-source-latest-unemployment-rate,news-ne-state-labor-market-source-yearago-year-ago-rate"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-labor-market-source-latest-labor-force",
+            "news-ne-state-labor-market-source-latest-employment",
+            "news-ne-state-labor-market-source-latest-unemployment",
+            "news-ne-state-labor-market-source-latest-unemployment-rate",
+            "news-ne-state-labor-market-source-previous-previous-rate",
+            "news-ne-state-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses BLS LAUS state monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "LAUS estimates can be revised, city series are unadjusted, and local labor statistics describe a population rather than an individual applicant's income or employment. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-ne-state-labor-market-source-latest-labor-force",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000006",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1101499,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 labor-force"
+        },
+        {
+          "sourceId": "news-ne-state-labor-market-source-latest-employment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000005",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1068594,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 employment"
+        },
+        {
+          "sourceId": "news-ne-state-labor-market-source-latest-unemployment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000004",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 32905,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment"
+        },
+        {
+          "sourceId": "news-ne-state-labor-market-source-latest-unemployment-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000003",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment-rate"
+        },
+        {
+          "sourceId": "news-ne-state-labor-market-source-previous-previous-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000003",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2026-M04",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M04 previous-rate"
+        },
+        {
+          "sourceId": "news-ne-state-labor-market-source-yearago-year-ago-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.1.CurrentS",
+          "variableOrSeriesId": "LASST310000000000003",
+          "geographyType": "state",
+          "geographyId": "ST3100000000000",
+          "period": "2025-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 2.9,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2025-M05 year-ago-rate"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/nebraska",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-ne-state-housing-costs",
+      "route": "/learning-center/market-news/ne-state-housing-costs",
+      "locationId": "state-ne",
+      "locationType": "state",
+      "articleType": "state_housing_costs",
+      "title": "Nebraska housing costs, ownership, and rent in the latest ACS",
+      "dek": "Statewide evidence on home value, income, owner costs, housing stock, tenure, vacancy, and rent for borrower planning.",
+      "previewText": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Nebraska with survey limitations and practical questions.",
+      "metaDescription": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Nebraska with survey limitations and practical questions. Review official evidence, comparison",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "State housing costs",
+      "topicIds": [
+        "state-housing",
+        "owner-costs",
+        "tenure",
+        "rent"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-conventional",
+        "product-home-equity",
+        "product-cash-out-refinance"
+      ],
+      "sourceLabels": [
+        "U.S. Census Bureau"
+      ],
+      "imageId": "housing_supply-02",
+      "keyTakeaways": [
+        "state median home value: $238,600.",
+        "state median household income: $76,475.",
+        "median monthly owner cost with a mortgage: $3,549.",
+        "median gross rent: $1,072.",
+        "total housing units: 863,444."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "home-value",
+          "label": "state median home value",
+          "value": 238600,
+          "display": "$238,600",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "income",
+          "label": "state median household income",
+          "value": 76475,
+          "display": "$76,475",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-income"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "owner-cost",
+          "label": "median monthly owner cost with a mortgage",
+          "value": 3549,
+          "display": "$3,549",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-owner-cost"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "rent",
+          "label": "median gross rent",
+          "value": 1072,
+          "display": "$1,072",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-rent"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "housing-units",
+          "label": "total housing units",
+          "value": 863444,
+          "display": "863,444",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-housing-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "owner-share",
+          "label": "owner share of occupied units",
+          "value": 66.5,
+          "display": "66.5%",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-occupied-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "vacancy-share",
+          "label": "vacant-unit share of housing stock",
+          "value": 7.6,
+          "display": "7.6%",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-housing-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "home-value-change",
+          "label": "change from the prior ACS home-value estimate",
+          "value": 53.1,
+          "display": "53.1%",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "Statewide values, income, and recurring housing costs",
+          "body": [
+            "The latest evidence for Nebraska puts state median home value at $238,600, while state median household income is $76,475. Value, income, owner-cost, and rent estimates describe different parts of the housing budget, while housing-stock and tenure records show the scale and use of the statewide inventory. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Tenure, vacancy, and change need separate readings",
+          "body": [
+            "The clearest comparison in this release is owner share of occupied units at 66.5%. Owner share, vacant-unit share, and change across survey periods answer different questions and should not be collapsed into a claim about current for-sale supply or future prices. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Nebraska. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Build comparable owner and renter budgets",
+          "body": [
+            "For a borrower, median monthly owner cost with a mortgage at $3,549 is most useful as an input to an organized comparison. Compare actual property and lease choices over the intended time horizon, including taxes, insurance, maintenance, association obligations, utilities, transaction costs, and cash reserves. In Nebraska, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "State medians do not describe every local market",
+          "body": [
+            "Another boundary comes from median gross rent, reported here as $1,072. A statewide midpoint can provide orientation while still sitting far from the conditions in a particular city, county, property type, or price segment. A borrower comparing options in Nebraska can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither $238,600 for state median home value nor $3,549 for median monthly owner cost with a mortgage determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The ACS cannot select a product, value a property, predict appreciation or rent, establish a payment, or determine whether an applicant meets underwriting requirements. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Move from statewide context to a local worksheet",
+          "body": [
+            "A practical next step is to carry $76,475 for state median household income and 66.5% for owner share of occupied units into a side-by-side planning conversation. Use the state evidence to identify cost categories and comparison questions, then replace statewide medians with current local, property-specific, and borrower-specific information. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Nebraska, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-ne-state-housing-costs-comparison-chart",
+          "type": "bar",
+          "title": "Nebraska evidence comparison",
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ],
+          "data": [
+            {
+              "label": "state median home value",
+              "value": 238600,
+              "display": "$238,600"
+            },
+            {
+              "label": "state median household income",
+              "value": 76475,
+              "display": "$76,475"
+            },
+            {
+              "label": "median monthly owner cost with a mortgage",
+              "value": 3549,
+              "display": "$3,549"
+            },
+            {
+              "label": "median gross rent",
+              "value": 1072,
+              "display": "$1,072"
+            },
+            {
+              "label": "total housing units",
+              "value": 863444,
+              "display": "863,444"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-ne-state-housing-costs-evidence-table",
+          "title": "Nebraska evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "state median home value",
+              "$238,600",
+              "news-ne-state-housing-costs-source-home-value"
+            ],
+            [
+              "state median household income",
+              "$76,475",
+              "news-ne-state-housing-costs-source-income"
+            ],
+            [
+              "median monthly owner cost with a mortgage",
+              "$3,549",
+              "news-ne-state-housing-costs-source-owner-cost"
+            ],
+            [
+              "median gross rent",
+              "$1,072",
+              "news-ne-state-housing-costs-source-rent"
+            ],
+            [
+              "total housing units",
+              "863,444",
+              "news-ne-state-housing-costs-source-housing-units"
+            ],
+            [
+              "owner share of occupied units",
+              "66.5%",
+              "news-ne-state-housing-costs-source-owner-units,news-ne-state-housing-costs-source-occupied-units"
+            ],
+            [
+              "vacant-unit share of housing stock",
+              "7.6%",
+              "news-ne-state-housing-costs-source-vacant-units,news-ne-state-housing-costs-source-housing-units"
+            ],
+            [
+              "change from the prior ACS home-value estimate",
+              "53.1%",
+              "news-ne-state-housing-costs-source-home-value,news-ne-state-housing-costs-source-home-value-prior"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-housing-costs-source-home-value",
+            "news-ne-state-housing-costs-source-income",
+            "news-ne-state-housing-costs-source-owner-cost",
+            "news-ne-state-housing-costs-source-rent",
+            "news-ne-state-housing-costs-source-housing-units",
+            "news-ne-state-housing-costs-source-occupied-units",
+            "news-ne-state-housing-costs-source-vacant-units",
+            "news-ne-state-housing-costs-source-owner-units",
+            "news-ne-state-housing-costs-source-renter-units",
+            "news-ne-state-housing-costs-source-home-value-prior"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-ne-state-housing-costs-source-home-value",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 238600,
+          "marginOfError": 1365,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-income",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
+          "variableOrSeriesId": "B19013_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 76475,
+          "marginOfError": 633,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B19013_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-owner-cost",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
+          "variableOrSeriesId": "B25103_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 3549,
+          "marginOfError": 22,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25103_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-rent",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat",
+          "variableOrSeriesId": "B25064_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 1072,
+          "marginOfError": 8,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25064_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-housing-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25001.dat",
+          "variableOrSeriesId": "B25001_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 863444,
+          "marginOfError": 628,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25001_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-occupied-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_002E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 797847,
+          "marginOfError": 2728,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-vacant-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_003E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 65597,
+          "marginOfError": 2361,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-owner-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_002E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 530878,
+          "marginOfError": 4181,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-renter-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_003E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 266969,
+          "marginOfError": 3420,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-ne-state-housing-costs-source-home-value-prior",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "state",
+          "geographyId": "31",
+          "period": "2019",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 155800,
+          "marginOfError": 724,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2019 ACS 5-year"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/nebraska",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-ne-state-loan-limit-landscape",
+      "route": "/learning-center/market-news/ne-state-loan-limit-landscape",
+      "locationId": "state-ne",
+      "locationType": "state",
+      "articleType": "state_loan_limit_landscape",
+      "title": "Nebraska 2026 county loan-limit landscape",
+      "dek": "How conforming and FHA one-unit limits vary across Nebraska counties and how borrowers can use them responsibly.",
+      "previewText": "See the range of 2026 conforming and FHA county limits across Nebraska without treating a limit as eligibility or pricing.",
+      "metaDescription": "See the range of 2026 conforming and FHA county limits across Nebraska without treating a limit as eligibility or pricing. Review official evidence, comparisons, lim",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "State loan-limit landscape",
+      "topicIds": [
+        "loan-limits",
+        "state-counties",
+        "fha",
+        "conventional"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-conventional",
+        "product-home-equity",
+        "product-cash-out-refinance"
+      ],
+      "sourceLabels": [
+        "Federal Housing Finance Agency",
+        "U.S. Department of Housing and Urban Development"
+      ],
+      "imageId": "loan_limits-06",
+      "keyTakeaways": [
+        "counties in the statewide limit summary: 93.",
+        "lowest one-unit conforming limit: $832,750.",
+        "highest one-unit conforming limit: $832,750.",
+        "lowest one-unit FHA limit: $541,287.",
+        "highest one-unit FHA limit: $603,750."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "county-count",
+          "label": "counties in the statewide limit summary",
+          "value": 93,
+          "display": "93",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "conforming-range-low",
+          "label": "lowest one-unit conforming limit",
+          "value": 832750,
+          "display": "$832,750",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-conforming-min"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "conforming-range-high",
+          "label": "highest one-unit conforming limit",
+          "value": 832750,
+          "display": "$832,750",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-conforming-max"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "fha-range-low",
+          "label": "lowest one-unit FHA limit",
+          "value": 541287,
+          "display": "$541,287",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-fha-min"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "fha-range-high",
+          "label": "highest one-unit FHA limit",
+          "value": 603750,
+          "display": "$603,750",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-fha-max"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "counties-above",
+          "label": "counties above the conforming baseline",
+          "value": 0,
+          "display": "0",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-conforming-above"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "The statewide range begins with county records",
+          "body": [
+            "The latest evidence for Nebraska puts counties in the statewide limit summary at 93, while lowest one-unit conforming limit is $832,750. A statewide summary is a map of county program boundaries, not a single limit that applies uniformly to every property in the state. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "High-cost counties create a range",
+          "body": [
+            "The clearest comparison in this release is highest one-unit conforming limit at $832,750. The low and high ends show why the property county must be confirmed before conventional, jumbo, or FHA categories are discussed. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Nebraska. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "County and unit count come before product labels",
+          "body": [
+            "For a borrower, highest one-unit conforming limit at $832,750 is most useful as an input to an organized comparison. Start with the property's county, legal unit count, price, down-payment plan, and expected loan amount, then look up the applicable official row. In Nebraska, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "County ceilings do not measure affordability",
+          "body": [
+            "Another boundary comes from lowest one-unit FHA limit, reported here as $541,287. A program can permit a larger loan category in a county without making that amount suitable, affordable, or available to a particular borrower. A borrower comparing options in Nebraska can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 93 for counties in the statewide limit summary nor $832,750 for highest one-unit conforming limit determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The statewide range cannot establish approval, pricing, debt capacity, appraisal, mortgage insurance, cash requirements, occupancy compliance, or which product is appropriate. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Verify the applicable county row",
+          "body": [
+            "A practical next step is to carry $832,750 for lowest one-unit conforming limit and $832,750 for highest one-unit conforming limit into a side-by-side planning conversation. Use the range to understand why location matters, then confirm the current county and unit-count limits with a licensed professional before comparing disclosures. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Nebraska, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Nebraska's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-ne-state-loan-limit-landscape-comparison-chart",
+          "type": "bar",
+          "title": "Nebraska evidence comparison",
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ],
+          "data": [
+            {
+              "label": "counties in the statewide limit summary",
+              "value": 93,
+              "display": "93"
+            },
+            {
+              "label": "lowest one-unit conforming limit",
+              "value": 832750,
+              "display": "$832,750"
+            },
+            {
+              "label": "highest one-unit conforming limit",
+              "value": 832750,
+              "display": "$832,750"
+            },
+            {
+              "label": "lowest one-unit FHA limit",
+              "value": 541287,
+              "display": "$541,287"
+            },
+            {
+              "label": "highest one-unit FHA limit",
+              "value": 603750,
+              "display": "$603,750"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-ne-state-loan-limit-landscape-evidence-table",
+          "title": "Nebraska evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "counties in the statewide limit summary",
+              "93",
+              "news-ne-state-loan-limit-landscape-source-county-count"
+            ],
+            [
+              "lowest one-unit conforming limit",
+              "$832,750",
+              "news-ne-state-loan-limit-landscape-source-conforming-min"
+            ],
+            [
+              "highest one-unit conforming limit",
+              "$832,750",
+              "news-ne-state-loan-limit-landscape-source-conforming-max"
+            ],
+            [
+              "lowest one-unit FHA limit",
+              "$541,287",
+              "news-ne-state-loan-limit-landscape-source-fha-min"
+            ],
+            [
+              "highest one-unit FHA limit",
+              "$603,750",
+              "news-ne-state-loan-limit-landscape-source-fha-max"
+            ],
+            [
+              "counties above the conforming baseline",
+              "0",
+              "news-ne-state-loan-limit-landscape-source-conforming-above"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-ne-state-loan-limit-landscape-source-county-count",
+            "news-ne-state-loan-limit-landscape-source-conforming-min",
+            "news-ne-state-loan-limit-landscape-source-conforming-max",
+            "news-ne-state-loan-limit-landscape-source-conforming-above",
+            "news-ne-state-loan-limit-landscape-source-fha-min",
+            "news-ne-state-loan-limit-landscape-source-fha-max",
+            "news-ne-state-loan-limit-landscape-source-fha-above"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article joins official 2026 FHFA conforming and HUD FHA county files by five-digit county FIPS, then summarizes the observed one-unit range and county counts for the state. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "State summaries can conceal special exceptions and multi-unit differences, and official program updates or property-location corrections can change the applicable row. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-county-count",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 county loan-limit landscape",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "county-count",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 93,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 county loan-limit landscape, county-count"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-conforming-min",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-min",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 832750,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-min"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-conforming-max",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-max",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 832750,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-max"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-conforming-above",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-above",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 0,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-above"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-fha-min",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-min",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 541287,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-min"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-fha-max",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-max",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 603750,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-max"
+        },
+        {
+          "sourceId": "news-ne-state-loan-limit-landscape-source-fha-above",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-above",
+          "geographyType": "state_counties",
+          "geographyId": "31",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 2,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-above"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/nebraska",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    }
+  ]
+}

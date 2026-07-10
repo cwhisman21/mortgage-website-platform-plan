@@ -1,0 +1,1411 @@
+{
+  "meta": {
+    "version": "prototype-v1",
+    "date": "2026-07-07",
+    "status": "fictional-prototype-data",
+    "note": "All people, branches, metrics, routes, and article titles are placeholder data for design and navigation feedback."
+  },
+  "recommendedCounts": {
+    "siteEntryPages": 1,
+    "states": 4,
+    "cities": 12,
+    "branches": 6,
+    "loanOfficers": 16,
+    "products": 8,
+    "ratesPages": 1,
+    "locationProductModules": 16,
+    "blogPages": 10,
+    "articles": 24,
+    "calculators": 4,
+    "directoryPages": 5,
+    "ctaRules": 20,
+    "complianceDisclosures": 10
+  },
+  "siteEntryPages": [
+    {
+      "id": "entry-home",
+      "name": "Home / path entry",
+      "route": "/",
+      "purpose": "Route users into deeper pages for rates, locations, borrower goals, products, calculators, learning content, and local expert matching.",
+      "primaryBlocks": [
+        "PathEntryHero",
+        "BorrowerGoalPaths",
+        "LeadInCards",
+        "FeaturedProducts",
+        "RatesEntryPoint",
+        "CalculatorEntryPoints",
+        "FeaturedLearningCenterContent",
+        "LocalExpertMatcher"
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "state-tx",
+      "name": "Texas",
+      "abbr": "TX",
+      "route": "/locations/texas",
+      "prototypeRole": "Primary growth market with broad purchase and refinance demand.",
+      "cityIds": ["city-austin-tx", "city-dallas-tx", "city-houston-tx"],
+      "branchIds": ["branch-austin-central", "branch-dallas-north", "branch-houston-west"],
+      "featuredProductIds": ["product-purchase", "product-fha", "product-va", "product-refinance"],
+      "marketSnapshot": {
+        "medianHomePrice": "$354K",
+        "paymentScenario": "$2,410/mo",
+        "inventory": "3.4 months",
+        "propertyTaxContext": "Higher tax variation by county",
+        "insuranceContext": "Moderate to high by metro",
+        "lastUpdated": "2026-06-30"
+      }
+    },
+    {
+      "id": "state-ca",
+      "name": "California",
+      "abbr": "CA",
+      "route": "/locations/california",
+      "prototypeRole": "High-cost market for jumbo and affordability comparisons.",
+      "cityIds": ["city-irvine-ca", "city-san-diego-ca", "city-sacramento-ca"],
+      "branchIds": ["branch-orange-county"],
+      "featuredProductIds": ["product-jumbo", "product-va", "product-refinance", "product-conventional"],
+      "marketSnapshot": {
+        "medianHomePrice": "$789K",
+        "paymentScenario": "$5,620/mo",
+        "inventory": "2.7 months",
+        "propertyTaxContext": "Prop 13 context required",
+        "insuranceContext": "Wildfire and coastal risk notes",
+        "lastUpdated": "2026-06-30"
+      }
+    },
+    {
+      "id": "state-co",
+      "name": "Colorado",
+      "abbr": "CO",
+      "route": "/locations/colorado",
+      "prototypeRole": "VA, relocation, and mixed metro/mountain affordability context.",
+      "cityIds": ["city-denver-co", "city-colorado-springs-co", "city-boulder-co"],
+      "branchIds": ["branch-denver-tech-center"],
+      "featuredProductIds": ["product-va", "product-conventional", "product-jumbo", "product-refinance"],
+      "marketSnapshot": {
+        "medianHomePrice": "$542K",
+        "paymentScenario": "$3,860/mo",
+        "inventory": "3.1 months",
+        "propertyTaxContext": "Lower effective tax, high price sensitivity",
+        "insuranceContext": "Mountain and hail risk notes",
+        "lastUpdated": "2026-06-30"
+      }
+    },
+    {
+      "id": "state-fl",
+      "name": "Florida",
+      "abbr": "FL",
+      "route": "/locations/florida",
+      "prototypeRole": "Insurance, taxes, refinance, and migration-driven market context.",
+      "cityIds": ["city-tampa-fl", "city-orlando-fl", "city-miami-fl"],
+      "branchIds": ["branch-tampa-bay"],
+      "featuredProductIds": ["product-refinance", "product-fha", "product-home-equity", "product-jumbo"],
+      "marketSnapshot": {
+        "medianHomePrice": "$416K",
+        "paymentScenario": "$3,140/mo",
+        "inventory": "4.2 months",
+        "propertyTaxContext": "Homestead and county variation",
+        "insuranceContext": "Insurance is a primary affordability factor",
+        "lastUpdated": "2026-06-30"
+      }
+    }
+  ],
+  "cities": [
+    {
+      "id": "city-austin-tx",
+      "name": "Austin",
+      "stateId": "state-tx",
+      "route": "/locations/texas/austin",
+      "prototypeEmphasis": "Dashboard-first city hub, purchase and refinance demand.",
+      "nearbyCityIds": ["city-dallas-tx", "city-houston-tx"],
+      "branchIds": ["branch-austin-central"],
+      "loanOfficerIds": ["lo-ava-martinez", "lo-marcus-reed", "lo-harper-ellis"],
+      "productIds": ["product-purchase", "product-fha", "product-va", "product-refinance"],
+      "articleIds": ["article-austin-market-update", "article-texas-tax-guide", "article-first-time-buyer"],
+      "marketSnapshot": {
+        "medianHomePrice": "$515K",
+        "paymentScenario": "$3,480/mo",
+        "inventory": "3.2 months",
+        "taxRate": "1.82%",
+        "insurance": "Moderate",
+        "daysOnMarket": "49"
+      }
+    },
+    {
+      "id": "city-dallas-tx",
+      "name": "Dallas",
+      "stateId": "state-tx",
+      "route": "/locations/texas/dallas",
+      "prototypeEmphasis": "Branch-rich metro and conventional/FHA comparison.",
+      "nearbyCityIds": ["city-austin-tx", "city-houston-tx"],
+      "branchIds": ["branch-dallas-north"],
+      "loanOfficerIds": ["lo-priya-shah", "lo-harper-ellis"],
+      "productIds": ["product-purchase", "product-fha", "product-conventional", "product-jumbo"],
+      "articleIds": ["article-dallas-market-update", "article-texas-tax-guide", "article-fha-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$392K",
+        "paymentScenario": "$2,760/mo",
+        "inventory": "3.6 months",
+        "taxRate": "2.05%",
+        "insurance": "Moderate",
+        "daysOnMarket": "43"
+      }
+    },
+    {
+      "id": "city-houston-tx",
+      "name": "Houston",
+      "stateId": "state-tx",
+      "route": "/locations/texas/houston",
+      "prototypeEmphasis": "Refinance, insurance, and affordability spread.",
+      "nearbyCityIds": ["city-austin-tx", "city-dallas-tx"],
+      "branchIds": ["branch-houston-west"],
+      "loanOfficerIds": ["lo-ethan-brooks", "lo-grace-morgan", "lo-harper-ellis"],
+      "productIds": ["product-refinance", "product-cash-out-refinance", "product-home-equity", "product-fha"],
+      "articleIds": ["article-houston-market-update", "article-texas-tax-guide", "article-cash-out-guide"],
+      "marketSnapshot": {
+        "medianHomePrice": "$334K",
+        "paymentScenario": "$2,390/mo",
+        "inventory": "4.1 months",
+        "taxRate": "2.14%",
+        "insurance": "Moderate-high",
+        "daysOnMarket": "51"
+      }
+    },
+    {
+      "id": "city-irvine-ca",
+      "name": "Irvine",
+      "stateId": "state-ca",
+      "route": "/locations/california/irvine",
+      "prototypeEmphasis": "Jumbo and high-cost affordability.",
+      "nearbyCityIds": ["city-san-diego-ca", "city-sacramento-ca"],
+      "branchIds": ["branch-orange-county"],
+      "loanOfficerIds": ["lo-sofia-nguyen", "lo-nolan-carter", "lo-harper-ellis"],
+      "productIds": ["product-jumbo", "product-conventional", "product-purchase", "product-refinance"],
+      "articleIds": ["article-irvine-market-update", "article-california-insurance-guide", "article-jumbo-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$1.43M",
+        "paymentScenario": "$9,780/mo",
+        "inventory": "2.4 months",
+        "taxRate": "0.78%",
+        "insurance": "Moderate",
+        "daysOnMarket": "37"
+      }
+    },
+    {
+      "id": "city-san-diego-ca",
+      "name": "San Diego",
+      "stateId": "state-ca",
+      "route": "/locations/california/san-diego",
+      "prototypeEmphasis": "VA, coastal pricing, branch fallback.",
+      "nearbyCityIds": ["city-irvine-ca", "city-sacramento-ca"],
+      "branchIds": ["branch-orange-county"],
+      "loanOfficerIds": ["lo-caleb-turner", "lo-harper-ellis"],
+      "productIds": ["product-va", "product-jumbo", "product-conventional", "product-purchase"],
+      "articleIds": ["article-san-diego-market-update", "article-california-insurance-guide", "article-va-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$941K",
+        "paymentScenario": "$6,520/mo",
+        "inventory": "2.1 months",
+        "taxRate": "0.76%",
+        "insurance": "Moderate-high",
+        "daysOnMarket": "34"
+      }
+    },
+    {
+      "id": "city-sacramento-ca",
+      "name": "Sacramento",
+      "stateId": "state-ca",
+      "route": "/locations/california/sacramento",
+      "prototypeEmphasis": "Move-up and affordability comparison.",
+      "nearbyCityIds": ["city-irvine-ca", "city-san-diego-ca"],
+      "branchIds": [],
+      "loanOfficerIds": ["lo-naomi-patel", "lo-harper-ellis"],
+      "productIds": ["product-refinance", "product-conventional", "product-purchase", "product-fha"],
+      "articleIds": ["article-sacramento-market-update", "article-california-insurance-guide", "article-move-up-buyer"],
+      "marketSnapshot": {
+        "medianHomePrice": "$512K",
+        "paymentScenario": "$3,690/mo",
+        "inventory": "3.0 months",
+        "taxRate": "0.88%",
+        "insurance": "Moderate",
+        "daysOnMarket": "41"
+      }
+    },
+    {
+      "id": "city-denver-co",
+      "name": "Denver",
+      "stateId": "state-co",
+      "route": "/locations/colorado/denver",
+      "prototypeEmphasis": "Relocation and conventional/jumbo mix.",
+      "nearbyCityIds": ["city-colorado-springs-co", "city-boulder-co"],
+      "branchIds": ["branch-denver-tech-center"],
+      "loanOfficerIds": ["lo-jordan-kim", "lo-nolan-carter", "lo-harper-ellis"],
+      "productIds": ["product-conventional", "product-jumbo", "product-refinance", "product-purchase"],
+      "articleIds": ["article-denver-market-update", "article-colorado-tax-guide", "article-move-up-buyer"],
+      "marketSnapshot": {
+        "medianHomePrice": "$594K",
+        "paymentScenario": "$4,140/mo",
+        "inventory": "3.4 months",
+        "taxRate": "0.55%",
+        "insurance": "Moderate-high",
+        "daysOnMarket": "39"
+      }
+    },
+    {
+      "id": "city-colorado-springs-co",
+      "name": "Colorado Springs",
+      "stateId": "state-co",
+      "route": "/locations/colorado/colorado-springs",
+      "prototypeEmphasis": "VA-heavy city and military borrower routing.",
+      "nearbyCityIds": ["city-denver-co", "city-boulder-co"],
+      "branchIds": ["branch-denver-tech-center"],
+      "loanOfficerIds": ["lo-leah-foster", "lo-marcus-reed", "lo-harper-ellis"],
+      "productIds": ["product-va", "product-fha", "product-conventional", "product-purchase"],
+      "articleIds": ["article-colorado-springs-market-update", "article-colorado-tax-guide", "article-va-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$462K",
+        "paymentScenario": "$3,230/mo",
+        "inventory": "3.8 months",
+        "taxRate": "0.50%",
+        "insurance": "Moderate",
+        "daysOnMarket": "46"
+      }
+    },
+    {
+      "id": "city-boulder-co",
+      "name": "Boulder",
+      "stateId": "state-co",
+      "route": "/locations/colorado/boulder",
+      "prototypeEmphasis": "High-cost small-market comparison.",
+      "nearbyCityIds": ["city-denver-co", "city-colorado-springs-co"],
+      "branchIds": ["branch-denver-tech-center"],
+      "loanOfficerIds": ["lo-owen-blake", "lo-nolan-carter", "lo-harper-ellis"],
+      "productIds": ["product-jumbo", "product-conventional", "product-refinance", "product-purchase"],
+      "articleIds": ["article-boulder-market-update", "article-colorado-tax-guide", "article-jumbo-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$978K",
+        "paymentScenario": "$6,810/mo",
+        "inventory": "2.6 months",
+        "taxRate": "0.57%",
+        "insurance": "Moderate-high",
+        "daysOnMarket": "33"
+      }
+    },
+    {
+      "id": "city-tampa-fl",
+      "name": "Tampa",
+      "stateId": "state-fl",
+      "route": "/locations/florida/tampa",
+      "prototypeEmphasis": "Insurance/tax context and refinance.",
+      "nearbyCityIds": ["city-orlando-fl", "city-miami-fl"],
+      "branchIds": ["branch-tampa-bay"],
+      "loanOfficerIds": ["lo-camila-torres", "lo-daniel-price", "lo-harper-ellis"],
+      "productIds": ["product-refinance", "product-home-equity", "product-fha", "product-purchase"],
+      "articleIds": ["article-tampa-market-update", "article-florida-insurance-guide", "article-refinance-basics"],
+      "marketSnapshot": {
+        "medianHomePrice": "$423K",
+        "paymentScenario": "$3,180/mo",
+        "inventory": "4.4 months",
+        "taxRate": "0.98%",
+        "insurance": "High",
+        "daysOnMarket": "56"
+      }
+    },
+    {
+      "id": "city-orlando-fl",
+      "name": "Orlando",
+      "stateId": "state-fl",
+      "route": "/locations/florida/orlando",
+      "prototypeEmphasis": "First-time buyer and move-up buyer content.",
+      "nearbyCityIds": ["city-tampa-fl", "city-miami-fl"],
+      "branchIds": ["branch-tampa-bay"],
+      "loanOfficerIds": ["lo-camila-torres", "lo-harper-ellis"],
+      "productIds": ["product-fha", "product-purchase", "product-conventional", "product-refinance"],
+      "articleIds": ["article-orlando-market-update", "article-florida-insurance-guide", "article-first-time-buyer"],
+      "marketSnapshot": {
+        "medianHomePrice": "$391K",
+        "paymentScenario": "$2,960/mo",
+        "inventory": "4.0 months",
+        "taxRate": "0.93%",
+        "insurance": "High",
+        "daysOnMarket": "52"
+      }
+    },
+    {
+      "id": "city-miami-fl",
+      "name": "Miami",
+      "stateId": "state-fl",
+      "route": "/locations/florida/miami",
+      "prototypeEmphasis": "High-cost, condo, insurance, and multilingual routing.",
+      "nearbyCityIds": ["city-tampa-fl", "city-orlando-fl"],
+      "branchIds": [],
+      "loanOfficerIds": ["lo-mia-alvarez", "lo-grace-morgan", "lo-harper-ellis"],
+      "productIds": ["product-jumbo", "product-refinance", "product-home-equity", "product-conventional"],
+      "articleIds": ["article-miami-market-update", "article-florida-insurance-guide", "article-home-equity-guide"],
+      "marketSnapshot": {
+        "medianHomePrice": "$612K",
+        "paymentScenario": "$4,650/mo",
+        "inventory": "5.1 months",
+        "taxRate": "1.02%",
+        "insurance": "Very high",
+        "daysOnMarket": "61"
+      }
+    }
+  ],
+  "branches": [
+    {
+      "id": "branch-austin-central",
+      "name": "Austin Central Branch",
+      "route": "/branches/austin-central",
+      "stateId": "state-tx",
+      "cityIds": ["city-austin-tx"],
+      "loanOfficerIds": ["lo-ava-martinez", "lo-marcus-reed"],
+      "coverageNote": "Primary Austin metro coverage."
+    },
+    {
+      "id": "branch-dallas-north",
+      "name": "Dallas North Branch",
+      "route": "/branches/dallas-north",
+      "stateId": "state-tx",
+      "cityIds": ["city-dallas-tx"],
+      "loanOfficerIds": ["lo-priya-shah"],
+      "coverageNote": "Dallas and nearby North Texas coverage."
+    },
+    {
+      "id": "branch-houston-west",
+      "name": "Houston West Branch",
+      "route": "/branches/houston-west",
+      "stateId": "state-tx",
+      "cityIds": ["city-houston-tx"],
+      "loanOfficerIds": ["lo-ethan-brooks"],
+      "coverageNote": "Houston refinance and home equity coverage."
+    },
+    {
+      "id": "branch-orange-county",
+      "name": "Orange County Branch",
+      "route": "/branches/orange-county",
+      "stateId": "state-ca",
+      "cityIds": ["city-irvine-ca", "city-san-diego-ca"],
+      "loanOfficerIds": ["lo-sofia-nguyen", "lo-caleb-turner"],
+      "coverageNote": "High-cost California and coastal market fallback."
+    },
+    {
+      "id": "branch-denver-tech-center",
+      "name": "Denver Tech Center Branch",
+      "route": "/branches/denver-tech-center",
+      "stateId": "state-co",
+      "cityIds": ["city-denver-co", "city-colorado-springs-co", "city-boulder-co"],
+      "loanOfficerIds": ["lo-jordan-kim", "lo-leah-foster", "lo-owen-blake"],
+      "coverageNote": "Colorado metro, VA, relocation, and jumbo coverage."
+    },
+    {
+      "id": "branch-tampa-bay",
+      "name": "Tampa Bay Branch",
+      "route": "/branches/tampa-bay",
+      "stateId": "state-fl",
+      "cityIds": ["city-tampa-fl", "city-orlando-fl"],
+      "loanOfficerIds": ["lo-camila-torres", "lo-daniel-price"],
+      "coverageNote": "Florida refinance, insurance-sensitive markets, and buyer coverage."
+    }
+  ],
+  "loanOfficers": [
+    {
+      "id": "lo-ava-martinez",
+      "name": "Ava Martinez",
+      "route": "/loan-officers/ava-martinez",
+      "branchId": "branch-austin-central",
+      "licensedStates": ["TX"],
+      "specialties": ["First-time buyer", "FHA", "Bilingual English/Spanish"],
+      "priorityCityIds": ["city-austin-tx"],
+      "languages": ["English", "Spanish"],
+      "nmls": "NMLS-000101"
+    },
+    {
+      "id": "lo-marcus-reed",
+      "name": "Marcus Reed",
+      "route": "/loan-officers/marcus-reed",
+      "branchId": "branch-austin-central",
+      "licensedStates": ["TX", "CO"],
+      "specialties": ["VA", "Relocation"],
+      "priorityCityIds": ["city-austin-tx", "city-colorado-springs-co"],
+      "languages": ["English"],
+      "nmls": "NMLS-000102"
+    },
+    {
+      "id": "lo-priya-shah",
+      "name": "Priya Shah",
+      "route": "/loan-officers/priya-shah",
+      "branchId": "branch-dallas-north",
+      "licensedStates": ["TX"],
+      "specialties": ["Conventional", "Jumbo", "Self-employed"],
+      "priorityCityIds": ["city-dallas-tx"],
+      "languages": ["English"],
+      "nmls": "NMLS-000103"
+    },
+    {
+      "id": "lo-ethan-brooks",
+      "name": "Ethan Brooks",
+      "route": "/loan-officers/ethan-brooks",
+      "branchId": "branch-houston-west",
+      "licensedStates": ["TX"],
+      "specialties": ["Refinance", "Cash-out refinance"],
+      "priorityCityIds": ["city-houston-tx"],
+      "languages": ["English"],
+      "nmls": "NMLS-000104"
+    },
+    {
+      "id": "lo-sofia-nguyen",
+      "name": "Sofia Nguyen",
+      "route": "/loan-officers/sofia-nguyen",
+      "branchId": "branch-orange-county",
+      "licensedStates": ["CA"],
+      "specialties": ["Jumbo", "High-cost purchase"],
+      "priorityCityIds": ["city-irvine-ca"],
+      "languages": ["English"],
+      "nmls": "NMLS-000105"
+    },
+    {
+      "id": "lo-caleb-turner",
+      "name": "Caleb Turner",
+      "route": "/loan-officers/caleb-turner",
+      "branchId": "branch-orange-county",
+      "licensedStates": ["CA"],
+      "specialties": ["VA", "First-time buyer"],
+      "priorityCityIds": ["city-san-diego-ca"],
+      "languages": ["English"],
+      "nmls": "NMLS-000106"
+    },
+    {
+      "id": "lo-naomi-patel",
+      "name": "Naomi Patel",
+      "route": "/loan-officers/naomi-patel",
+      "branchId": null,
+      "licensedStates": ["CA"],
+      "specialties": ["Refinance", "Move-up buyer"],
+      "priorityCityIds": ["city-sacramento-ca"],
+      "languages": ["English"],
+      "nmls": "NMLS-000107"
+    },
+    {
+      "id": "lo-jordan-kim",
+      "name": "Jordan Kim",
+      "route": "/loan-officers/jordan-kim",
+      "branchId": "branch-denver-tech-center",
+      "licensedStates": ["CO"],
+      "specialties": ["Conventional", "Relocation"],
+      "priorityCityIds": ["city-denver-co"],
+      "languages": ["English"],
+      "nmls": "NMLS-000108"
+    },
+    {
+      "id": "lo-leah-foster",
+      "name": "Leah Foster",
+      "route": "/loan-officers/leah-foster",
+      "branchId": "branch-denver-tech-center",
+      "licensedStates": ["CO"],
+      "specialties": ["VA", "FHA"],
+      "priorityCityIds": ["city-colorado-springs-co"],
+      "languages": ["English"],
+      "nmls": "NMLS-000109"
+    },
+    {
+      "id": "lo-owen-blake",
+      "name": "Owen Blake",
+      "route": "/loan-officers/owen-blake",
+      "branchId": "branch-denver-tech-center",
+      "licensedStates": ["CO"],
+      "specialties": ["Jumbo", "Self-employed"],
+      "priorityCityIds": ["city-boulder-co"],
+      "languages": ["English"],
+      "nmls": "NMLS-000110"
+    },
+    {
+      "id": "lo-camila-torres",
+      "name": "Camila Torres",
+      "route": "/loan-officers/camila-torres",
+      "branchId": "branch-tampa-bay",
+      "licensedStates": ["FL"],
+      "specialties": ["First-time buyer", "Bilingual English/Spanish"],
+      "priorityCityIds": ["city-tampa-fl", "city-orlando-fl"],
+      "languages": ["English", "Spanish"],
+      "nmls": "NMLS-000111"
+    },
+    {
+      "id": "lo-daniel-price",
+      "name": "Daniel Price",
+      "route": "/loan-officers/daniel-price",
+      "branchId": "branch-tampa-bay",
+      "licensedStates": ["FL"],
+      "specialties": ["Refinance", "Home equity"],
+      "priorityCityIds": ["city-tampa-fl"],
+      "languages": ["English"],
+      "nmls": "NMLS-000112"
+    },
+    {
+      "id": "lo-mia-alvarez",
+      "name": "Mia Alvarez",
+      "route": "/loan-officers/mia-alvarez",
+      "branchId": null,
+      "licensedStates": ["FL"],
+      "specialties": ["Condo", "Jumbo", "Bilingual English/Spanish"],
+      "priorityCityIds": ["city-miami-fl"],
+      "languages": ["English", "Spanish"],
+      "nmls": "NMLS-000113"
+    },
+    {
+      "id": "lo-grace-morgan",
+      "name": "Grace Morgan",
+      "route": "/loan-officers/grace-morgan",
+      "branchId": null,
+      "licensedStates": ["TX", "FL"],
+      "specialties": ["Home equity", "Cash-out refinance"],
+      "priorityCityIds": ["city-houston-tx", "city-miami-fl"],
+      "languages": ["English"],
+      "nmls": "NMLS-000114"
+    },
+    {
+      "id": "lo-nolan-carter",
+      "name": "Nolan Carter",
+      "route": "/loan-officers/nolan-carter",
+      "branchId": null,
+      "licensedStates": ["CA", "CO"],
+      "specialties": ["Jumbo", "Relocation"],
+      "priorityCityIds": ["city-irvine-ca", "city-denver-co", "city-boulder-co"],
+      "languages": ["English"],
+      "nmls": "NMLS-000115"
+    },
+    {
+      "id": "lo-harper-ellis",
+      "name": "Harper Ellis",
+      "route": "/loan-officers/harper-ellis",
+      "branchId": null,
+      "licensedStates": ["TX", "CA", "CO", "FL"],
+      "specialties": ["Product specialist fallback", "Statewide routing"],
+      "priorityCityIds": [],
+      "languages": ["English"],
+      "nmls": "NMLS-000116"
+    }
+  ],
+  "products": [
+    {
+      "id": "product-purchase",
+      "name": "Home Purchase Loans",
+      "route": "/buy",
+      "borrowerGoal": "Buy a home",
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-rent-vs-buy"]
+    },
+    {
+      "id": "product-refinance",
+      "name": "Refinance",
+      "route": "/refinance",
+      "borrowerGoal": "Refinance a mortgage",
+      "relatedCalculatorIds": ["calc-refinance", "calc-payment"]
+    },
+    {
+      "id": "product-fha",
+      "name": "FHA Loans",
+      "route": "/loan-options/fha-loans",
+      "borrowerGoal": "Lower down payment purchase",
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+    },
+    {
+      "id": "product-va",
+      "name": "VA Loans",
+      "route": "/loan-options/va-loans",
+      "borrowerGoal": "Military or veteran home financing",
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+    },
+    {
+      "id": "product-conventional",
+      "name": "Conventional Loans",
+      "route": "/loan-options/conventional-loans",
+      "borrowerGoal": "Standard purchase or refinance",
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+    },
+    {
+      "id": "product-jumbo",
+      "name": "Jumbo Loans",
+      "route": "/loan-options/jumbo-loans",
+      "borrowerGoal": "High-cost home financing",
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+    },
+    {
+      "id": "product-home-equity",
+      "name": "Home Equity / HELOC",
+      "route": "/home-equity",
+      "borrowerGoal": "Use available home equity",
+      "relatedCalculatorIds": ["calc-payment"]
+    },
+    {
+      "id": "product-cash-out-refinance",
+      "name": "Cash-Out Refinance",
+      "route": "/loan-options/cash-out-refinance",
+      "borrowerGoal": "Refinance and access equity",
+      "relatedCalculatorIds": ["calc-refinance", "calc-payment"]
+    }
+  ],
+  "ratesPages": [
+    {
+      "id": "rates-mortgage",
+      "name": "Mortgage Rates",
+      "route": "/rates",
+      "purpose": "Bankrate/NerdWallet-style mortgage rates page with national averages, personalized filters, rate tables, trend context, local rate links, calculators, rate news, methodology, and disclosures.",
+      "rateTypes": ["30-year fixed", "15-year fixed", "FHA", "VA", "Jumbo", "Refinance", "Cash-out refinance", "HELOC"]
+    }
+  ],
+  "locationProductModules": [
+    {
+      "id": "module-tx-fha",
+      "name": "FHA loans in Texas",
+      "parentPageRoute": "/locations/texas",
+      "anchor": "#fha-loans",
+      "stateId": "state-tx",
+      "cityId": null,
+      "productId": "product-fha"
+    },
+    {
+      "id": "module-austin-fha",
+      "name": "FHA loans in Austin, TX",
+      "parentPageRoute": "/locations/texas/austin",
+      "anchor": "#fha-loans",
+      "stateId": "state-tx",
+      "cityId": "city-austin-tx",
+      "productId": "product-fha"
+    },
+    {
+      "id": "module-tx-va",
+      "name": "VA loans in Texas",
+      "parentPageRoute": "/locations/texas",
+      "anchor": "#va-loans",
+      "stateId": "state-tx",
+      "cityId": null,
+      "productId": "product-va"
+    },
+    {
+      "id": "module-houston-refinance",
+      "name": "Refinance in Houston, TX",
+      "parentPageRoute": "/locations/texas/houston",
+      "anchor": "#refinance",
+      "stateId": "state-tx",
+      "cityId": "city-houston-tx",
+      "productId": "product-refinance"
+    },
+    {
+      "id": "module-ca-jumbo",
+      "name": "Jumbo loans in California",
+      "parentPageRoute": "/locations/california",
+      "anchor": "#jumbo-loans",
+      "stateId": "state-ca",
+      "cityId": null,
+      "productId": "product-jumbo"
+    },
+    {
+      "id": "module-irvine-jumbo",
+      "name": "Jumbo loans in Irvine, CA",
+      "parentPageRoute": "/locations/california/irvine",
+      "anchor": "#jumbo-loans",
+      "stateId": "state-ca",
+      "cityId": "city-irvine-ca",
+      "productId": "product-jumbo"
+    },
+    {
+      "id": "module-san-diego-va",
+      "name": "VA loans in San Diego, CA",
+      "parentPageRoute": "/locations/california/san-diego",
+      "anchor": "#va-loans",
+      "stateId": "state-ca",
+      "cityId": "city-san-diego-ca",
+      "productId": "product-va"
+    },
+    {
+      "id": "module-sacramento-refinance",
+      "name": "Refinance in Sacramento, CA",
+      "parentPageRoute": "/locations/california/sacramento",
+      "anchor": "#refinance",
+      "stateId": "state-ca",
+      "cityId": "city-sacramento-ca",
+      "productId": "product-refinance"
+    },
+    {
+      "id": "module-co-va",
+      "name": "VA loans in Colorado",
+      "parentPageRoute": "/locations/colorado",
+      "anchor": "#va-loans",
+      "stateId": "state-co",
+      "cityId": null,
+      "productId": "product-va"
+    },
+    {
+      "id": "module-colorado-springs-va",
+      "name": "VA loans in Colorado Springs, CO",
+      "parentPageRoute": "/locations/colorado/colorado-springs",
+      "anchor": "#va-loans",
+      "stateId": "state-co",
+      "cityId": "city-colorado-springs-co",
+      "productId": "product-va"
+    },
+    {
+      "id": "module-boulder-jumbo",
+      "name": "Jumbo loans in Boulder, CO",
+      "parentPageRoute": "/locations/colorado/boulder",
+      "anchor": "#jumbo-loans",
+      "stateId": "state-co",
+      "cityId": "city-boulder-co",
+      "productId": "product-jumbo"
+    },
+    {
+      "id": "module-denver-refinance",
+      "name": "Refinance in Denver, CO",
+      "parentPageRoute": "/locations/colorado/denver",
+      "anchor": "#refinance",
+      "stateId": "state-co",
+      "cityId": "city-denver-co",
+      "productId": "product-refinance"
+    },
+    {
+      "id": "module-fl-refinance",
+      "name": "Refinance in Florida",
+      "parentPageRoute": "/locations/florida",
+      "anchor": "#refinance",
+      "stateId": "state-fl",
+      "cityId": null,
+      "productId": "product-refinance"
+    },
+    {
+      "id": "module-tampa-refinance",
+      "name": "Refinance in Tampa, FL",
+      "parentPageRoute": "/locations/florida/tampa",
+      "anchor": "#refinance",
+      "stateId": "state-fl",
+      "cityId": "city-tampa-fl",
+      "productId": "product-refinance"
+    },
+    {
+      "id": "module-orlando-fha",
+      "name": "FHA loans in Orlando, FL",
+      "parentPageRoute": "/locations/florida/orlando",
+      "anchor": "#fha-loans",
+      "stateId": "state-fl",
+      "cityId": "city-orlando-fl",
+      "productId": "product-fha"
+    },
+    {
+      "id": "module-miami-jumbo",
+      "name": "Jumbo loans in Miami, FL",
+      "parentPageRoute": "/locations/florida/miami",
+      "anchor": "#jumbo-loans",
+      "stateId": "state-fl",
+      "cityId": "city-miami-fl",
+      "productId": "product-jumbo"
+    }
+  ],
+  "blogPages": [
+    {
+      "id": "blog-learning-center-home",
+      "name": "Learning Center home",
+      "route": "/learning-center",
+      "topic": "all",
+      "purpose": "Editorial landing page with featured articles, topic hubs, local market updates, and product education.",
+      "featuredArticleIds": ["article-austin-market-update", "article-florida-insurance-guide", "article-fha-basics"]
+    },
+    {
+      "id": "blog-local-market-updates",
+      "name": "Local Market Updates",
+      "route": "/learning-center/local-market-updates",
+      "topic": "local_market_updates",
+      "purpose": "Index for city and state market update articles.",
+      "featuredArticleIds": ["article-austin-market-update", "article-irvine-market-update", "article-tampa-market-update"]
+    },
+    {
+      "id": "blog-buying-a-home",
+      "name": "Buying a Home",
+      "route": "/learning-center/buying-a-home",
+      "topic": "buying",
+      "purpose": "Buyer education hub and first-time buyer path.",
+      "featuredArticleIds": ["article-first-time-buyer", "article-move-up-buyer", "article-fha-basics"]
+    },
+    {
+      "id": "blog-refinance",
+      "name": "Refinance",
+      "route": "/learning-center/refinance",
+      "topic": "refinance",
+      "purpose": "Refinance article hub.",
+      "featuredArticleIds": ["article-refinance-basics", "article-cash-out-guide", "article-houston-market-update"]
+    },
+    {
+      "id": "blog-fha-loans",
+      "name": "FHA Loans",
+      "route": "/learning-center/fha-loans",
+      "topic": "fha",
+      "purpose": "FHA article hub.",
+      "featuredArticleIds": ["article-fha-basics", "article-first-time-buyer", "article-orlando-market-update"]
+    },
+    {
+      "id": "blog-va-loans",
+      "name": "VA Loans",
+      "route": "/learning-center/va-loans",
+      "topic": "va",
+      "purpose": "VA article hub.",
+      "featuredArticleIds": ["article-va-basics", "article-san-diego-market-update", "article-colorado-springs-market-update"]
+    },
+    {
+      "id": "blog-jumbo-loans",
+      "name": "Jumbo Loans",
+      "route": "/learning-center/jumbo-loans",
+      "topic": "jumbo",
+      "purpose": "Jumbo and high-cost market article hub.",
+      "featuredArticleIds": ["article-jumbo-basics", "article-irvine-market-update", "article-boulder-market-update"]
+    },
+    {
+      "id": "blog-home-equity",
+      "name": "Home Equity",
+      "route": "/learning-center/home-equity",
+      "topic": "home_equity",
+      "purpose": "HELOC, cash-out, and equity education hub.",
+      "featuredArticleIds": ["article-home-equity-guide", "article-cash-out-guide", "article-tampa-market-update"]
+    },
+    {
+      "id": "blog-taxes-insurance",
+      "name": "Taxes & Insurance",
+      "route": "/learning-center/taxes-insurance",
+      "topic": "taxes_insurance",
+      "purpose": "Tax, insurance, and affordability context hub.",
+      "featuredArticleIds": ["article-texas-tax-guide", "article-california-insurance-guide", "article-florida-insurance-guide"]
+    },
+    {
+      "id": "blog-editorial-team",
+      "name": "Editorial Team",
+      "route": "/learning-center/editorial-team",
+      "topic": "editorial_trust",
+      "purpose": "Author and reviewer placeholder page for article bylines and review credibility.",
+      "featuredArticleIds": []
+    }
+  ],
+  "articles": [
+    {
+      "id": "article-austin-market-update",
+      "title": "Austin mortgage market update: payments, inventory, and buyer leverage",
+      "route": "/learning-center/austin-mortgage-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-tx"],
+      "cityIds": ["city-austin-tx"],
+      "productIds": ["product-purchase", "product-refinance"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-dallas-market-update",
+      "title": "Dallas buyer update: comparing conventional and FHA payment paths",
+      "route": "/learning-center/dallas-buyer-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-tx"],
+      "cityIds": ["city-dallas-tx"],
+      "productIds": ["product-conventional", "product-fha"],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "article-houston-market-update",
+      "title": "Houston refinance watch: equity, insurance, and payment tradeoffs",
+      "route": "/learning-center/houston-refinance-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-tx"],
+      "cityIds": ["city-houston-tx"],
+      "productIds": ["product-refinance", "product-cash-out-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-irvine-market-update",
+      "title": "Irvine jumbo buyer update: high-cost payment scenarios to watch",
+      "route": "/learning-center/irvine-jumbo-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-ca"],
+      "cityIds": ["city-irvine-ca"],
+      "productIds": ["product-jumbo", "product-conventional"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-san-diego-market-update",
+      "title": "San Diego VA and coastal affordability update",
+      "route": "/learning-center/san-diego-va-affordability-update",
+      "type": "local_market_update",
+      "stateIds": ["state-ca"],
+      "cityIds": ["city-san-diego-ca"],
+      "productIds": ["product-va", "product-jumbo"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-sacramento-market-update",
+      "title": "Sacramento move-up buyer update: price and inventory context",
+      "route": "/learning-center/sacramento-move-up-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-ca"],
+      "cityIds": ["city-sacramento-ca"],
+      "productIds": ["product-purchase", "product-refinance"],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "article-denver-market-update",
+      "title": "Denver relocation buyer update: payment scenarios and timing",
+      "route": "/learning-center/denver-relocation-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-co"],
+      "cityIds": ["city-denver-co"],
+      "productIds": ["product-conventional", "product-jumbo"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-colorado-springs-market-update",
+      "title": "Colorado Springs VA buyer update: inventory and payment context",
+      "route": "/learning-center/colorado-springs-va-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-co"],
+      "cityIds": ["city-colorado-springs-co"],
+      "productIds": ["product-va", "product-fha"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-boulder-market-update",
+      "title": "Boulder high-cost market update: jumbo and self-employed borrowers",
+      "route": "/learning-center/boulder-jumbo-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-co"],
+      "cityIds": ["city-boulder-co"],
+      "productIds": ["product-jumbo", "product-conventional"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-tampa-market-update",
+      "title": "Tampa refinance update: insurance costs and payment decisions",
+      "route": "/learning-center/tampa-refinance-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-fl"],
+      "cityIds": ["city-tampa-fl"],
+      "productIds": ["product-refinance", "product-home-equity"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-orlando-market-update",
+      "title": "Orlando first-time buyer update: payment and inventory trends",
+      "route": "/learning-center/orlando-first-time-buyer-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-fl"],
+      "cityIds": ["city-orlando-fl"],
+      "productIds": ["product-fha", "product-purchase"],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "article-miami-market-update",
+      "title": "Miami condo and jumbo buyer update: insurance and affordability",
+      "route": "/learning-center/miami-condo-jumbo-market-update",
+      "type": "local_market_update",
+      "stateIds": ["state-fl"],
+      "cityIds": ["city-miami-fl"],
+      "productIds": ["product-jumbo", "product-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-texas-tax-guide",
+      "title": "How Texas property taxes affect mortgage payments",
+      "route": "/learning-center/texas-property-tax-mortgage-guide",
+      "type": "state_tax_insurance_explainer",
+      "stateIds": ["state-tx"],
+      "cityIds": ["city-austin-tx", "city-dallas-tx", "city-houston-tx"],
+      "productIds": ["product-purchase", "product-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-california-insurance-guide",
+      "title": "California taxes, insurance, and high-cost mortgage planning",
+      "route": "/learning-center/california-tax-insurance-mortgage-guide",
+      "type": "state_tax_insurance_explainer",
+      "stateIds": ["state-ca"],
+      "cityIds": ["city-irvine-ca", "city-san-diego-ca", "city-sacramento-ca"],
+      "productIds": ["product-jumbo", "product-conventional"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-colorado-tax-guide",
+      "title": "Colorado property tax and insurance considerations for buyers",
+      "route": "/learning-center/colorado-property-tax-insurance-guide",
+      "type": "state_tax_insurance_explainer",
+      "stateIds": ["state-co"],
+      "cityIds": ["city-denver-co", "city-colorado-springs-co", "city-boulder-co"],
+      "productIds": ["product-purchase", "product-va"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-florida-insurance-guide",
+      "title": "Florida insurance costs and mortgage payment planning",
+      "route": "/learning-center/florida-insurance-mortgage-guide",
+      "type": "state_tax_insurance_explainer",
+      "stateIds": ["state-fl"],
+      "cityIds": ["city-tampa-fl", "city-orlando-fl", "city-miami-fl"],
+      "productIds": ["product-purchase", "product-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-fha-basics",
+      "title": "How FHA loans work for lower down payment buyers",
+      "route": "/learning-center/fha-loan-basics",
+      "type": "product_explainer",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": ["product-fha"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-va-basics",
+      "title": "VA loan basics for eligible military borrowers",
+      "route": "/learning-center/va-loan-basics",
+      "type": "product_explainer",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": ["product-va"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-jumbo-basics",
+      "title": "Jumbo loan basics for high-cost home purchases",
+      "route": "/learning-center/jumbo-loan-basics",
+      "type": "product_explainer",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": ["product-jumbo"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-refinance-basics",
+      "title": "When refinancing may change your payment strategy",
+      "route": "/learning-center/refinance-basics",
+      "type": "product_explainer",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": ["product-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-first-time-buyer",
+      "title": "First-time buyer checklist for comparing local markets",
+      "route": "/learning-center/first-time-buyer-local-market-checklist",
+      "type": "borrower_intent_guide",
+      "stateIds": [],
+      "cityIds": ["city-austin-tx", "city-orlando-fl"],
+      "productIds": ["product-purchase", "product-fha"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-move-up-buyer",
+      "title": "Move-up buyer guide: comparing payment, equity, and timing",
+      "route": "/learning-center/move-up-buyer-payment-equity-guide",
+      "type": "borrower_intent_guide",
+      "stateIds": [],
+      "cityIds": ["city-sacramento-ca", "city-denver-co"],
+      "productIds": ["product-purchase", "product-conventional"],
+      "reviewStatus": "editor_reviewed"
+    },
+    {
+      "id": "article-home-equity-guide",
+      "title": "Home equity guide: HELOC and refinance options to compare",
+      "route": "/learning-center/home-equity-options-guide",
+      "type": "borrower_intent_guide",
+      "stateIds": [],
+      "cityIds": ["city-tampa-fl", "city-miami-fl"],
+      "productIds": ["product-home-equity", "product-cash-out-refinance"],
+      "reviewStatus": "compliance_review_required"
+    },
+    {
+      "id": "article-cash-out-guide",
+      "title": "Cash-out refinance guide for homeowners with equity",
+      "route": "/learning-center/cash-out-refinance-guide",
+      "type": "borrower_intent_guide",
+      "stateIds": [],
+      "cityIds": ["city-houston-tx"],
+      "productIds": ["product-cash-out-refinance", "product-refinance"],
+      "reviewStatus": "compliance_review_required"
+    }
+  ],
+  "calculators": [
+    {
+      "id": "calc-payment",
+      "name": "Mortgage Payment Calculator",
+      "route": "/calculators/mortgage-payment",
+      "captures": ["price", "downPayment", "rate", "taxes", "insurance", "location"]
+    },
+    {
+      "id": "calc-affordability",
+      "name": "Affordability Calculator",
+      "route": "/calculators/affordability",
+      "captures": ["income", "debts", "downPayment", "location", "borrowerGoal"]
+    },
+    {
+      "id": "calc-refinance",
+      "name": "Refinance Calculator",
+      "route": "/calculators/refinance",
+      "captures": ["currentLoan", "newRate", "term", "closingCosts", "breakeven"]
+    },
+    {
+      "id": "calc-rent-vs-buy",
+      "name": "Rent vs Buy Calculator",
+      "route": "/calculators/rent-vs-buy",
+      "captures": ["rent", "targetCity", "price", "timeline", "downPayment"]
+    }
+  ],
+  "directoryPages": [
+    {
+      "id": "directory-locations",
+      "name": "Locations",
+      "route": "/locations",
+      "filters": ["keyword", "state", "city"]
+    },
+    {
+      "id": "directory-loan-officers",
+      "name": "Loan Officers",
+      "route": "/loan-officers",
+      "filters": ["keyword", "state", "city", "product", "language"]
+    },
+    {
+      "id": "directory-branches",
+      "name": "Branches",
+      "route": "/branches",
+      "filters": ["keyword", "state", "city"]
+    },
+    {
+      "id": "directory-learning-center-search",
+      "name": "Learning Center Search",
+      "route": "/learning-center/search",
+      "filters": ["keyword", "state", "city", "product", "topic", "borrowerGoal"]
+    },
+    {
+      "id": "directory-loan-options",
+      "name": "Loan Options",
+      "route": "/loan-options",
+      "filters": ["keyword", "borrowerGoal", "product"]
+    }
+  ],
+  "ctaRules": [
+    {
+      "id": "cta-city-hero",
+      "pageType": "city",
+      "section": "hero",
+      "primary": "Get prequalified",
+      "secondary": "Find a local expert"
+    },
+    {
+      "id": "cta-city-market",
+      "pageType": "city",
+      "section": "market_snapshot",
+      "primary": "Estimate payment",
+      "secondary": "Compare nearby cities"
+    },
+    {
+      "id": "cta-city-payment",
+      "pageType": "city",
+      "section": "payment_scenarios",
+      "primary": "Run my numbers",
+      "secondary": "Talk to a loan officer"
+    },
+    {
+      "id": "cta-city-lo",
+      "pageType": "city",
+      "section": "loan_officers",
+      "primary": "Choose a local expert",
+      "secondary": "Ask a question"
+    },
+    {
+      "id": "cta-city-news",
+      "pageType": "city",
+      "section": "local_news",
+      "primary": "Get local guidance",
+      "secondary": "Save this market"
+    },
+    {
+      "id": "cta-state-hero",
+      "pageType": "state",
+      "section": "hero",
+      "primary": "Find your city",
+      "secondary": "Compare loan options"
+    },
+    {
+      "id": "cta-state-city-directory",
+      "pageType": "state",
+      "section": "city_directory",
+      "primary": "Compare cities",
+      "secondary": "Find a loan officer"
+    },
+    {
+      "id": "cta-product-hero",
+      "pageType": "product",
+      "section": "hero",
+      "primary": "See if this loan fits",
+      "secondary": "Estimate payment"
+    },
+    {
+      "id": "cta-product-requirements",
+      "pageType": "product",
+      "section": "requirements",
+      "primary": "Talk through eligibility",
+      "secondary": "Compare products"
+    },
+    {
+      "id": "cta-product-scenarios",
+      "pageType": "product",
+      "section": "scenarios",
+      "primary": "Run a scenario",
+      "secondary": "Contact a specialist"
+    },
+    {
+      "id": "cta-location-product-module",
+      "pageType": "location_product_module",
+      "section": "product_guidance",
+      "primary": "Get local loan guidance",
+      "secondary": "View local experts"
+    },
+    {
+      "id": "cta-location-product-market",
+      "pageType": "location_product_module",
+      "section": "local_market_data",
+      "primary": "Estimate local payment",
+      "secondary": "Compare this market"
+    },
+    {
+      "id": "cta-article-hero",
+      "pageType": "article",
+      "section": "hero",
+      "primary": "Get guidance",
+      "secondary": "Explore related pages"
+    },
+    {
+      "id": "cta-article-product",
+      "pageType": "article",
+      "section": "product_related",
+      "primary": "Compare options",
+      "secondary": "Run calculator"
+    },
+    {
+      "id": "cta-lo-profile",
+      "pageType": "loan_officer",
+      "section": "hero",
+      "primary": "Contact loan officer",
+      "secondary": "Start prequalification"
+    },
+    {
+      "id": "cta-lo-markets",
+      "pageType": "loan_officer",
+      "section": "markets_served",
+      "primary": "View local markets",
+      "secondary": "Ask about a city"
+    },
+    {
+      "id": "cta-branch-profile",
+      "pageType": "branch",
+      "section": "hero",
+      "primary": "Contact branch",
+      "secondary": "Meet the team"
+    },
+    {
+      "id": "cta-calculator-input",
+      "pageType": "calculator",
+      "section": "inputs",
+      "primary": "Calculate",
+      "secondary": "Use city defaults"
+    },
+    {
+      "id": "cta-calculator-results",
+      "pageType": "calculator",
+      "section": "results",
+      "primary": "Discuss these numbers",
+      "secondary": "Save scenario"
+    },
+    {
+      "id": "cta-directory-results",
+      "pageType": "directory",
+      "section": "results",
+      "primary": "Filter results",
+      "secondary": "Get matched"
+    }
+  ],
+  "complianceDisclosures": [
+    {
+      "id": "disclosure-rate-payment",
+      "name": "Rate and payment example assumptions",
+      "appliesTo": ["city", "state", "product", "calculator"]
+    },
+    {
+      "id": "disclosure-apr",
+      "name": "APR explanation placeholder",
+      "appliesTo": ["product", "calculator"]
+    },
+    {
+      "id": "disclosure-eligibility",
+      "name": "Product eligibility caveat",
+      "appliesTo": ["product", "article", "city", "state"]
+    },
+    {
+      "id": "disclosure-nmls",
+      "name": "NMLS and state licensing language",
+      "appliesTo": ["loan_officer", "branch", "city", "state"]
+    },
+    {
+      "id": "disclosure-equal-housing",
+      "name": "Equal Housing Lender language",
+      "appliesTo": ["global"]
+    },
+    {
+      "id": "disclosure-market-data",
+      "name": "Market data source and date range",
+      "appliesTo": ["city", "state", "article"]
+    },
+    {
+      "id": "disclosure-insurance-tax",
+      "name": "Tax and insurance estimate caveat",
+      "appliesTo": ["city", "state", "article", "calculator"]
+    },
+    {
+      "id": "disclosure-ai-assisted",
+      "name": "AI-assisted article review note",
+      "appliesTo": ["article"]
+    },
+    {
+      "id": "disclosure-not-commitment",
+      "name": "Not a commitment to lend",
+      "appliesTo": ["lead_capture", "calculator", "product"]
+    },
+    {
+      "id": "disclosure-state-specific",
+      "name": "State-specific licensing/disclosure placeholder",
+      "appliesTo": ["state", "city"]
+    }
+  ],
+  "prototypeNavigationLoops": [
+    {
+      "id": "loop-austin-fha",
+      "steps": ["/locations/texas/austin#fha-loans", "/loan-officers/ava-martinez", "/calculators/mortgage-payment"]
+    },
+    {
+      "id": "loop-california-jumbo",
+      "steps": ["/locations/california", "/locations/california/irvine", "/loan-options/jumbo-loans", "/loan-officers/sofia-nguyen", "/branches/orange-county"]
+    },
+    {
+      "id": "loop-colorado-va",
+      "steps": ["/locations/colorado/colorado-springs#va-loans", "/loan-officers/leah-foster", "/calculators/mortgage-payment"]
+    },
+    {
+      "id": "loop-tampa-refinance",
+      "steps": ["/locations/florida/tampa", "/learning-center/tampa-refinance-market-update", "/refinance", "/loan-officers/daniel-price"]
+    },
+    {
+      "id": "loop-miami-fallback",
+      "steps": ["/locations/florida/miami#jumbo-loans", "/loan-officers/mia-alvarez", "/loan-officers/harper-ellis"]
+    },
+    {
+      "id": "loop-calculator-to-market",
+      "steps": ["/calculators/mortgage-payment", "/locations/texas/austin", "/buy", "/loan-officers/ava-martinez"]
+    },
+    {
+      "id": "loop-article-graph",
+      "steps": ["/learning-center/florida-insurance-mortgage-guide", "/locations/florida/tampa", "/home-equity", "/loan-officers/daniel-price"]
+    }
+  ]
+}

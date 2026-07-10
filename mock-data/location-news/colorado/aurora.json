@@ -1,0 +1,1625 @@
+{
+  "locationId": "city-aurora-co",
+  "locationType": "city",
+  "generatedAt": "2026-07-10",
+  "articles": [
+    {
+      "id": "news-aurora-co-affordability-home-values",
+      "route": "/learning-center/market-news/aurora-co-affordability-home-values",
+      "locationId": "city-aurora-co",
+      "locationType": "city",
+      "articleType": "affordability_home_values",
+      "title": "Aurora, CO home values, income, and owner costs",
+      "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Aurora.",
+      "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Aurora.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Aurora. Review official evidence, comparisons, limitations, and practi",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Affordability evidence",
+      "topicIds": [
+        "affordability",
+        "home-values",
+        "owner-costs"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-va",
+        "product-conventional",
+        "product-refinance"
+      ],
+      "sourceLabels": [
+        "U.S. Census Bureau"
+      ],
+      "imageId": "home_values-01",
+      "keyTakeaways": [
+        "ACS median owner-occupied home value: $469,100.",
+        "ACS median household income: $88,368.",
+        "median monthly owner cost with a mortgage: $2,457.",
+        "change from the prior ACS home-value estimate: 61.8%.",
+        "Colorado median home value: $539,400."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "median-home-value",
+          "label": "ACS median owner-occupied home value",
+          "value": 469100,
+          "display": "$469,100",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "median-household-income",
+          "label": "ACS median household income",
+          "value": 88368,
+          "display": "$88,368",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-income-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "median-owner-cost",
+          "label": "median monthly owner cost with a mortgage",
+          "value": 2457,
+          "display": "$2,457",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "home-value-change",
+          "label": "change from the prior ACS home-value estimate",
+          "value": 61.8,
+          "display": "61.8%",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "state-home-value",
+          "label": "Colorado median home value",
+          "value": 539400,
+          "display": "$539,400",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "Home values and income in the latest ACS release",
+          "body": [
+            "The latest evidence for Aurora, CO puts ACS median owner-occupied home value at $469,100, while ACS median household income is $88,368. Together, home value, household income, and selected owner costs describe different sides of the local payment conversation without assuming that a typical household is buying a typical home. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "How the current estimate compares",
+          "body": [
+            "The clearest comparison in this release is change from the prior ACS home-value estimate at 61.8%. A change between ACS periods can show direction, but margins of error and the multi-year survey windows must be considered before treating the difference as precise. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Aurora, CO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use the evidence to test payment assumptions",
+          "body": [
+            "For a borrower, median monthly owner cost with a mortgage at $2,457 is most useful as an input to an organized comparison. Compare a realistic purchase range with verified principal, interest, taxes, insurance, association charges, and cash-to-close rather than converting the median value directly into a promised payment. In Aurora, CO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Owner costs are broader than principal and interest",
+          "body": [
+            "Another boundary comes from change from the prior ACS home-value estimate, reported here as 61.8%. Selected owner costs help keep the monthly discussion connected to recurring housing expenses, but the ACS measure is not a lender worksheet and is not tailored to a property under consideration. A borrower comparing options in Aurora, CO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither $469,100 for ACS median owner-occupied home value nor $2,457 for median monthly owner cost with a mortgage determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The ACS does not contain a borrower's credit, debts, down payment, loan term, current rate options, or the taxes and insurance for a selected property. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Build a property-specific affordability comparison",
+          "body": [
+            "A practical next step is to carry $88,368 for ACS median household income and 61.8% for change from the prior ACS home-value estimate into a side-by-side planning conversation. Use the local figures to challenge assumptions, then replace broad estimates with current property and loan information before deciding what range is comfortable. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Aurora, CO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-aurora-co-affordability-home-values-comparison-chart",
+          "type": "bar",
+          "title": "Aurora evidence comparison",
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ],
+          "data": [
+            {
+              "label": "ACS median owner-occupied home value",
+              "value": 469100,
+              "display": "$469,100"
+            },
+            {
+              "label": "ACS median household income",
+              "value": 88368,
+              "display": "$88,368"
+            },
+            {
+              "label": "median monthly owner cost with a mortgage",
+              "value": 2457,
+              "display": "$2,457"
+            },
+            {
+              "label": "change from the prior ACS home-value estimate",
+              "value": 61.8,
+              "display": "61.8%"
+            },
+            {
+              "label": "Colorado median home value",
+              "value": 539400,
+              "display": "$539,400"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-aurora-co-affordability-home-values-evidence-table",
+          "title": "Aurora evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "ACS median owner-occupied home value",
+              "$469,100",
+              "news-aurora-co-affordability-home-values-source-city-home-value-current"
+            ],
+            [
+              "ACS median household income",
+              "$88,368",
+              "news-aurora-co-affordability-home-values-source-city-income-current"
+            ],
+            [
+              "median monthly owner cost with a mortgage",
+              "$2,457",
+              "news-aurora-co-affordability-home-values-source-city-owner-cost-current"
+            ],
+            [
+              "change from the prior ACS home-value estimate",
+              "61.8%",
+              "news-aurora-co-affordability-home-values-source-city-home-value-current,news-aurora-co-affordability-home-values-source-city-home-value-prior"
+            ],
+            [
+              "Colorado median home value",
+              "$539,400",
+              "news-aurora-co-affordability-home-values-source-state-home-value-current"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-affordability-home-values-source-city-home-value-current",
+            "news-aurora-co-affordability-home-values-source-city-income-current",
+            "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+            "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+            "news-aurora-co-affordability-home-values-source-state-home-value-current"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-aurora-co-affordability-home-values-source-city-home-value-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 469100,
+          "marginOfError": 3518,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-affordability-home-values-source-city-income-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
+          "variableOrSeriesId": "B19013_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 88368,
+          "marginOfError": 2017,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B19013_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-affordability-home-values-source-city-owner-cost-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
+          "variableOrSeriesId": "B25103_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 2457,
+          "marginOfError": 35,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25103_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-affordability-home-values-source-city-home-value-prior",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2019",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 290000,
+          "marginOfError": 3155,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2019 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-affordability-home-values-source-state-home-value-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "state",
+          "geographyId": "08",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 539400,
+          "marginOfError": 2069,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/colorado/aurora",
+        "/locations/colorado",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-aurora-co-housing-supply-tenure",
+      "route": "/learning-center/market-news/aurora-co-housing-supply-tenure",
+      "locationId": "city-aurora-co",
+      "locationType": "city",
+      "articleType": "housing_supply_tenure",
+      "title": "Aurora, CO housing supply, ownership, and rent",
+      "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Aurora.",
+      "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Aurora.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Aurora. Review official evidence, comparisons, limitations",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Housing mix",
+      "topicIds": [
+        "housing-supply",
+        "tenure",
+        "rent"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-va",
+        "product-conventional",
+        "product-refinance"
+      ],
+      "sourceLabels": [
+        "U.S. Census Bureau"
+      ],
+      "imageId": "housing_supply-03",
+      "keyTakeaways": [
+        "total housing units: 152,377.",
+        "occupied housing units: 145,310.",
+        "vacant housing units: 7,067.",
+        "vacant-unit share of housing stock: 4.6%.",
+        "owner share of occupied units: 62.4%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "housing-units",
+          "label": "total housing units",
+          "value": 152377,
+          "display": "152,377",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "occupied-units",
+          "label": "occupied housing units",
+          "value": 145310,
+          "display": "145,310",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-occupied-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "vacant-units",
+          "label": "vacant housing units",
+          "value": 7067,
+          "display": "7,067",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-vacant-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "vacancy-share",
+          "label": "vacant-unit share of housing stock",
+          "value": 4.6,
+          "display": "4.6%",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-housing-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "owner-share",
+          "label": "owner share of occupied units",
+          "value": 62.4,
+          "display": "62.4%",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "median-rent",
+          "label": "median gross rent",
+          "value": 1835,
+          "display": "$1,835",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-median-rent"
+          ],
+          "comparison": false
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "The size and occupancy of the local housing stock",
+          "body": [
+            "The latest evidence for Aurora, CO puts total housing units at 152,377, while occupied housing units is 145,310. Unit counts establish the broad housing base, while occupancy and tenure measures show how that stock was being used across the ACS survey period. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Vacancy and ownership need careful definitions",
+          "body": [
+            "The clearest comparison in this release is vacant-unit share of housing stock at 4.6%. A vacant-unit share is not the same as homes listed for sale, and an owner share is not a forecast of buyer competition or future inventory. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Aurora, CO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Compare buying and renting on the same horizon",
+          "body": [
+            "For a borrower, vacant housing units at 7,067 is most useful as an input to an organized comparison. A useful worksheet aligns expected time in the home, maintenance responsibility, rent changes, transaction costs, and property-specific monthly costs instead of comparing rent with principal and interest alone. In Aurora, CO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Rent is context, not a break-even answer",
+          "body": [
+            "Another boundary comes from vacant-unit share of housing stock, reported here as 4.6%. Median gross rent reflects the occupied rental stock measured by ACS and does not identify an equivalent property, lease offer, or future rent for a particular household. A borrower comparing options in Aurora, CO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 152,377 for total housing units nor 7,067 for vacant housing units determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. Housing-stock counts do not show the condition, price, financing eligibility, insurance availability, or seller terms of homes currently offered to a borrower. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Match the broad housing mix to real choices",
+          "body": [
+            "A practical next step is to carry 145,310 for occupied housing units and 4.6% for vacant-unit share of housing stock into a side-by-side planning conversation. Use the local mix to frame questions, then compare actual listings, lease terms, taxes, insurance, maintenance, and financing disclosures over a consistent period. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Aurora, CO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-aurora-co-housing-supply-tenure-comparison-chart",
+          "type": "bar",
+          "title": "Aurora evidence comparison",
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ],
+          "data": [
+            {
+              "label": "total housing units",
+              "value": 152377,
+              "display": "152,377"
+            },
+            {
+              "label": "occupied housing units",
+              "value": 145310,
+              "display": "145,310"
+            },
+            {
+              "label": "vacant housing units",
+              "value": 7067,
+              "display": "7,067"
+            },
+            {
+              "label": "vacant-unit share of housing stock",
+              "value": 4.6,
+              "display": "4.6%"
+            },
+            {
+              "label": "owner share of occupied units",
+              "value": 62.4,
+              "display": "62.4%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-aurora-co-housing-supply-tenure-evidence-table",
+          "title": "Aurora evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "total housing units",
+              "152,377",
+              "news-aurora-co-housing-supply-tenure-source-housing-units"
+            ],
+            [
+              "occupied housing units",
+              "145,310",
+              "news-aurora-co-housing-supply-tenure-source-occupied-units"
+            ],
+            [
+              "vacant housing units",
+              "7,067",
+              "news-aurora-co-housing-supply-tenure-source-vacant-units"
+            ],
+            [
+              "vacant-unit share of housing stock",
+              "4.6%",
+              "news-aurora-co-housing-supply-tenure-source-vacant-units,news-aurora-co-housing-supply-tenure-source-housing-units"
+            ],
+            [
+              "owner share of occupied units",
+              "62.4%",
+              "news-aurora-co-housing-supply-tenure-source-owner-units,news-aurora-co-housing-supply-tenure-source-occupied-units"
+            ],
+            [
+              "median gross rent",
+              "$1,835",
+              "news-aurora-co-housing-supply-tenure-source-median-rent"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-housing-supply-tenure-source-housing-units",
+            "news-aurora-co-housing-supply-tenure-source-occupied-units",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units",
+            "news-aurora-co-housing-supply-tenure-source-owner-units",
+            "news-aurora-co-housing-supply-tenure-source-renter-units",
+            "news-aurora-co-housing-supply-tenure-source-median-rent",
+            "news-aurora-co-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses 2024 ACS 5-year place estimates for units, occupancy, vacancy, owner and renter tenure, and gross rent, with 2019 evidence retained for comparison review. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "ACS vacancy includes categories beyond for-sale availability, and tenure and rent estimates carry sampling error and do not measure current listing inventory. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-housing-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25001.dat",
+          "variableOrSeriesId": "B25001_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 152377,
+          "marginOfError": 1265,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25001_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-occupied-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_002E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 145310,
+          "marginOfError": 1460,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-vacant-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_003E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 7067,
+          "marginOfError": 815,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-owner-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_002E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 90683,
+          "marginOfError": 1871,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-renter-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_003E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 54627,
+          "marginOfError": 1467,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-median-rent",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat",
+          "variableOrSeriesId": "B25064_001E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 1835,
+          "marginOfError": 26,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25064_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-aurora-co-housing-supply-tenure-source-vacant-units-prior",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25002.dat",
+          "variableOrSeriesId": "B25002_003E",
+          "geographyType": "place",
+          "geographyId": "0804000",
+          "period": "2019",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 5505,
+          "marginOfError": 520,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_003E, 2019 ACS 5-year"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/colorado/aurora",
+        "/locations/colorado",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-aurora-co-local-labor-market",
+      "route": "/learning-center/market-news/aurora-co-local-labor-market",
+      "locationId": "city-aurora-co",
+      "locationType": "city",
+      "articleType": "local_labor_market",
+      "title": "Aurora, CO labor market: latest employment evidence",
+      "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Aurora.",
+      "previewText": "See what changed in Aurora's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Aurora's labor market and why broad employment data cannot determine mortgage eligibility. Review official evidence, comparisons, limitations, an",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Labor market",
+      "topicIds": [
+        "labor-market",
+        "employment",
+        "borrower-planning"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-va",
+        "product-conventional",
+        "product-refinance"
+      ],
+      "sourceLabels": [
+        "U.S. Bureau of Labor Statistics"
+      ],
+      "imageId": "local_economy-04",
+      "keyTakeaways": [
+        "labor force: 217,393.",
+        "employment: 208,908.",
+        "unemployment: 8,485.",
+        "unemployment rate: 3.9%.",
+        "change in unemployment rate from a year earlier: -0.2%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "labor-force",
+          "label": "labor force",
+          "value": 217393,
+          "display": "217,393",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "employment",
+          "label": "employment",
+          "value": 208908,
+          "display": "208,908",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-employment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment",
+          "label": "unemployment",
+          "value": 8485,
+          "display": "8,485",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-unemployment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment-rate",
+          "label": "unemployment rate",
+          "value": 3.9,
+          "display": "3.9%",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "annual-rate-change",
+          "label": "change in unemployment rate from a year earlier",
+          "value": -0.2,
+          "display": "-0.2%",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "What the latest LAUS release reports",
+          "body": [
+            "The latest evidence for Aurora, CO puts labor force at 217,393, while employment is 208,908. The labor force, employment, unemployment, and unemployment rate are related measures, and reading all of them prevents a rate movement from being interpreted without its underlying counts. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Month and year comparisons answer different questions",
+          "body": [
+            "The clearest comparison in this release is change in unemployment rate from a year earlier at -0.2%. A monthly movement can reflect short-term change and revision, while the year-over-year comparison gives a wider reference point without predicting the next release. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Aurora, CO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use labor data as economic context",
+          "body": [
+            "For a borrower, unemployment at 8,485 is most useful as an input to an organized comparison. Broad labor evidence can help organize questions about timing and local economic conditions, but a lender evaluates documented income, employment history, debts, assets, and program rules at the borrower level. In Aurora, CO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Employment counts do not measure mortgage readiness",
+          "body": [
+            "Another boundary comes from unemployment rate, reported here as 3.9%. The LAUS definition of employment is an economic statistic, not a review of income stability, job tenure, variable earnings, self-employment records, or the continuity standards used in underwriting. A borrower comparing options in Aurora, CO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 217,393 for labor force nor 8,485 for unemployment determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. BLS does not evaluate any applicant and cannot indicate whether a person's income is eligible, sufficient, stable, or likely to continue for mortgage purposes. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Translate economic context into documentation questions",
+          "body": [
+            "A practical next step is to carry 208,908 for employment and -0.2% for change in unemployment rate from a year earlier into a side-by-side planning conversation. Keep the public trend separate from the borrower's records, and ask what pay history, tax returns, contracts, reserves, or explanations may be needed for the actual loan path. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Aurora, CO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's labor-market evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-aurora-co-local-labor-market-comparison-chart",
+          "type": "bar",
+          "title": "Aurora evidence comparison",
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ],
+          "data": [
+            {
+              "label": "labor force",
+              "value": 217393,
+              "display": "217,393"
+            },
+            {
+              "label": "employment",
+              "value": 208908,
+              "display": "208,908"
+            },
+            {
+              "label": "unemployment",
+              "value": 8485,
+              "display": "8,485"
+            },
+            {
+              "label": "unemployment rate",
+              "value": 3.9,
+              "display": "3.9%"
+            },
+            {
+              "label": "change in unemployment rate from a year earlier",
+              "value": -0.2,
+              "display": "-0.2%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-aurora-co-local-labor-market-evidence-table",
+          "title": "Aurora evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "labor force",
+              "217,393",
+              "news-aurora-co-local-labor-market-source-latest-labor-force"
+            ],
+            [
+              "employment",
+              "208,908",
+              "news-aurora-co-local-labor-market-source-latest-employment"
+            ],
+            [
+              "unemployment",
+              "8,485",
+              "news-aurora-co-local-labor-market-source-latest-unemployment"
+            ],
+            [
+              "unemployment rate",
+              "3.9%",
+              "news-aurora-co-local-labor-market-source-latest-unemployment-rate"
+            ],
+            [
+              "change in unemployment rate from a year earlier",
+              "-0.2%",
+              "news-aurora-co-local-labor-market-source-latest-unemployment-rate,news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-local-labor-market-source-latest-labor-force",
+            "news-aurora-co-local-labor-market-source-latest-employment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment",
+            "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+            "news-aurora-co-local-labor-market-source-previous-previous-rate",
+            "news-aurora-co-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses BLS LAUS unadjusted city monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "LAUS estimates can be revised, city series are unadjusted, and local labor statistics describe a population rather than an individual applicant's income or employment. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-latest-labor-force",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000006",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 217393,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 labor-force"
+        },
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-latest-employment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000005",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 208908,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 employment"
+        },
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-latest-unemployment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000004",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 8485,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment"
+        },
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-latest-unemployment-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000003",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.9,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment-rate"
+        },
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-previous-previous-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000003",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2026-M04",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.7,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M04 previous-rate"
+        },
+        {
+          "sourceId": "news-aurora-co-local-labor-market-source-yearago-year-ago-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT080400000000003",
+          "geographyType": "city",
+          "geographyId": "CT0804000000000",
+          "period": "2025-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 4.1,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2025-M05 year-ago-rate"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/colorado/aurora",
+        "/locations/colorado",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-aurora-co-county-loan-limits",
+      "route": "/learning-center/market-news/aurora-co-county-loan-limits",
+      "locationId": "city-aurora-co",
+      "locationType": "city",
+      "articleType": "county_loan_limits",
+      "title": "Aurora, CO loan limits: 2026 conforming and FHA context",
+      "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
+      "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Aurora, including unit-count differences and important limits.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Aurora, including unit-count differences and important limits. Review official evidence, compariso",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "2026 loan limits",
+      "topicIds": [
+        "loan-limits",
+        "conventional",
+        "fha",
+        "jumbo"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-va",
+        "product-conventional",
+        "product-refinance"
+      ],
+      "sourceLabels": [
+        "Federal Housing Finance Agency",
+        "U.S. Department of Housing and Urban Development"
+      ],
+      "imageId": "loan_limits-06",
+      "keyTakeaways": [
+        "one-unit conforming limit: $862,500.",
+        "four-unit conforming limit: $1,658,700.",
+        "one-unit FHA limit: $862,500.",
+        "four-unit FHA limit: $1,658,700.",
+        "difference between one-unit conforming and FHA limits: $0."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "conforming-one",
+          "label": "one-unit conforming limit",
+          "value": 862500,
+          "display": "$862,500",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "conforming-four",
+          "label": "four-unit conforming limit",
+          "value": 1658700,
+          "display": "$1,658,700",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "fha-one",
+          "label": "one-unit FHA limit",
+          "value": 862500,
+          "display": "$862,500",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-fha-oneunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "fha-four",
+          "label": "four-unit FHA limit",
+          "value": 1658700,
+          "display": "$1,658,700",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "one-unit-difference",
+          "label": "difference between one-unit conforming and FHA limits",
+          "value": 0,
+          "display": "$0",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "The published loan-limit figures",
+          "body": [
+            "The latest evidence for Aurora, CO puts one-unit conforming limit at $862,500, while four-unit conforming limit is $1,658,700. Conforming and FHA limits come from different programs and should be read by the published county or county-equivalent geography and unit count before they are used to organize financing questions. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Why the one-unit limits differ",
+          "body": [
+            "The clearest comparison in this release is difference between one-unit conforming and FHA limits at $0. The gap marks different program boundaries, not a pricing advantage, approval result, required loan amount, or recommendation for a borrower. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Aurora, CO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Start with geography, unit count, and loan amount",
+          "body": [
+            "For a borrower, one-unit FHA limit at $862,500 is most useful as an input to an organized comparison. Confirm the property's county or county-equivalent geography and number of legal units, then compare the needed base loan amount with the current program tables before discussing product fit. In Aurora, CO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "A higher limit is not additional borrowing power",
+          "body": [
+            "Another boundary comes from four-unit FHA limit, reported here as $1,658,700. Published ceilings describe the maximum loan size within a program category for that geography; they do not increase income, reduce required cash, or waive underwriting standards. A borrower comparing options in Aurora, CO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither $862,500 for one-unit conforming limit nor $862,500 for one-unit FHA limit determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. A loan limit cannot determine credit eligibility, debt-to-income acceptance, appraisal results, mortgage insurance, occupancy rules, cash requirements, rates, fees, or approval. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Use limits to route the next product questions",
+          "body": [
+            "A practical next step is to carry $1,658,700 for four-unit conforming limit and $0 for difference between one-unit conforming and FHA limits into a side-by-side planning conversation. Bring the property geography, unit count, price, down-payment plan, and desired loan amount to a licensed professional who can verify current limits and applicable program rules. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Aurora, CO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Aurora, CO's loan-limit evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-aurora-co-county-loan-limits-comparison-chart",
+          "type": "bar",
+          "title": "Aurora evidence comparison",
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ],
+          "data": [
+            {
+              "label": "one-unit conforming limit",
+              "value": 862500,
+              "display": "$862,500"
+            },
+            {
+              "label": "four-unit conforming limit",
+              "value": 1658700,
+              "display": "$1,658,700"
+            },
+            {
+              "label": "one-unit FHA limit",
+              "value": 862500,
+              "display": "$862,500"
+            },
+            {
+              "label": "four-unit FHA limit",
+              "value": 1658700,
+              "display": "$1,658,700"
+            },
+            {
+              "label": "difference between one-unit conforming and FHA limits",
+              "value": 0,
+              "display": "$0"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-aurora-co-county-loan-limits-evidence-table",
+          "title": "Aurora evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "one-unit conforming limit",
+              "$862,500",
+              "news-aurora-co-county-loan-limits-source-conforming-oneunit"
+            ],
+            [
+              "four-unit conforming limit",
+              "$1,658,700",
+              "news-aurora-co-county-loan-limits-source-conforming-fourunit"
+            ],
+            [
+              "one-unit FHA limit",
+              "$862,500",
+              "news-aurora-co-county-loan-limits-source-fha-oneunit"
+            ],
+            [
+              "four-unit FHA limit",
+              "$1,658,700",
+              "news-aurora-co-county-loan-limits-source-fha-fourunit"
+            ],
+            [
+              "difference between one-unit conforming and FHA limits",
+              "$0",
+              "news-aurora-co-county-loan-limits-source-conforming-oneunit,news-aurora-co-county-loan-limits-source-fha-oneunit"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+            "news-aurora-co-county-loan-limits-source-conforming-twounit",
+            "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+            "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+            "news-aurora-co-county-loan-limits-source-fha-oneunit",
+            "news-aurora-co-county-loan-limits-source-fha-twounit",
+            "news-aurora-co-county-loan-limits-source-fha-threeunit",
+            "news-aurora-co-county-loan-limits-source-fha-fourunit"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article joins the official 2026 FHFA all-county conforming file and HUD 2026 FHA forward-limit file by the published five-digit county or county-equivalent FIPS and retains one- through four-unit amounts. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "The location mapping identifies a published source geography for this location record, but a specific property can require separate geography verification and current program guidance. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-conforming-oneunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-oneUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 862500,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-oneUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-conforming-twounit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-twoUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1104150,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-twoUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-conforming-threeunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-threeUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1334700,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-threeUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-conforming-fourunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-fourUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1658700,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-fourUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-fha-oneunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-oneUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 862500,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-oneUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-fha-twounit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-twoUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1104150,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-twoUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-fha-threeunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-threeUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1334700,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-threeUnit"
+        },
+        {
+          "sourceId": "news-aurora-co-county-loan-limits-source-fha-fourunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-fourUnit",
+          "geographyType": "county",
+          "geographyId": "08001",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1658700,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-fourUnit"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/colorado/aurora",
+        "/locations/colorado",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    }
+  ]
+}

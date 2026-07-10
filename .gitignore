@@ -9,3 +9,8 @@ Thumbs.db
 # Local scratch
 tmp/
 .tmp/
+
+.vercel
+.vercel-static-upload/
+.vercel-thinkwhale-upload/
+mock-data/source-cache/

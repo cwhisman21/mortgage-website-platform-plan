@@ -8,7 +8,7 @@ Primary SEO assets:
 
 - State mortgage guides.
 - City mortgage and housing guides.
-- Localized product pages.
+- Location-specific product sections on city and state pages.
 - Local market news.
 - Tax and insurance explainers.
 - Calculator pages.
@@ -39,7 +39,7 @@ Every reference to a correlated page should be a hyperlink:
 - City to state.
 - State to city.
 - City to related products.
-- Product to localized product pages.
+- Product to related state/city pages with matching product modules.
 - Article to city/state/product/LO/branch pages.
 - Loan officer to service areas and products.
 - Branch to nearby cities and team members.

@@ -41,7 +41,7 @@ Important entities:
 - Branch/office.
 - Loan officer.
 - Loan product.
-- Localized product page.
+- Location-specific product module on state/city pages.
 - Blog/news article.
 - Calculator/tool.
 - Market data.
@@ -193,6 +193,8 @@ The accidental nested repo folder was removed.
 ## Recommended Next Step
 
 Use `docs/08-grill-me-questions.md` to continue pressure-testing the plan.
+
+For the production-site direction, also use `docs/15-production-research-and-content-plan.md`. It adds the economist, researcher, copywriting, and mortgage-copywriter research layer: public data source map, page-family data requirements, chart catalog, copy rules, compliance gates, and the next prototype rebuild tasks needed to remove demo/instructional language from the current static prototype.
 
 The next unresolved strategic question from the prior conversation was:
 

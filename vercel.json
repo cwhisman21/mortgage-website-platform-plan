@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/site/index.html" },
+    { "source": "/locations", "destination": "/site/index.html" },
+    { "source": "/locations/:path*", "destination": "/site/index.html" },
+    { "source": "/learning-center/market-news/:slug", "destination": "/site/generated/learning-center/market-news/:slug.html" },
+    { "source": "/learning-center", "destination": "/site/index.html" },
+    { "source": "/learning-center/:path*", "destination": "/site/index.html" },
+    { "source": "/rates", "destination": "/site/index.html" },
+    { "source": "/rates/:path*", "destination": "/site/index.html" },
+    { "source": "/loan-options", "destination": "/site/index.html" },
+    { "source": "/loan-options/:path*", "destination": "/site/index.html" },
+    { "source": "/calculators", "destination": "/site/index.html" },
+    { "source": "/calculators/:path*", "destination": "/site/index.html" },
+    { "source": "/loan-officers", "destination": "/site/index.html" },
+    { "source": "/loan-officers/:path*", "destination": "/site/index.html" },
+    { "source": "/branches", "destination": "/site/index.html" },
+    { "source": "/branches/:path*", "destination": "/site/index.html" },
+    { "source": "/buy", "destination": "/site/index.html" },
+    { "source": "/refinance", "destination": "/site/index.html" },
+    { "source": "/home-equity", "destination": "/site/index.html" },
+    { "source": "/sitemap.xml", "destination": "/site/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "/site/robots.txt" }
+  ],
+  "redirects": [
+    {
+      "source": "/site",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}

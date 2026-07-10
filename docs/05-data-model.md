@@ -17,7 +17,7 @@ Suggested planning-level entities:
 - `loan_officer_public_profiles`
 - `branch_public_profiles`
 - `loan_products`
-- `localized_product_pages`
+- `location_product_modules`
 - `articles`
 - `market_metric_datasets`
 - `news_feed_rules`

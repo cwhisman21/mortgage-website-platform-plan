@@ -1,0 +1,227 @@
+{
+  "version": "location-news-media-v1",
+  "generatedAt": "2026-07-10",
+  "providerCredit": {
+    "label": "Photos provided by Pexels",
+    "url": "https://www.pexels.com/",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "attributionRequired": false,
+    "creditIncluded": true
+  },
+  "themePools": {
+    "home_values": [
+      "home_values-01",
+      "home_values-07"
+    ],
+    "housing_supply": [
+      "housing_supply-02",
+      "housing_supply-03"
+    ],
+    "local_economy": [
+      "local_economy-04"
+    ],
+    "loan_limits": [
+      "loan_limits-05",
+      "loan_limits-06"
+    ]
+  },
+  "assets": [
+    {
+      "id": "home_values-01",
+      "provider": "Pexels",
+      "providerAssetId": "29300161",
+      "photographer": "Aakash Makwana",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/aerial-view-of-suburban-homes-and-lush-trees-29300161/",
+      "imageUrl": "https://images.pexels.com/photos/29300161/pexels-photo-29300161.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-29300161.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "home_values",
+      "articleTheme": "home_values",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "Aerial view of suburban homes among mature trees",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "housing_supply-02",
+      "provider": "Pexels",
+      "providerAssetId": "7937283",
+      "photographer": "Pavel Danilyuk",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/aerial-view-of-a-residential-housing-development-7937283/",
+      "imageUrl": "https://images.pexels.com/photos/7937283/pexels-photo-7937283.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-7937283.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "housing_supply",
+      "articleTheme": "housing_supply",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "Aerial view of a residential housing development",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "housing_supply-03",
+      "provider": "Pexels",
+      "providerAssetId": "20473548",
+      "photographer": "Amanat Ali Warraich",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/apartment-buildings-under-construction-20473548/",
+      "imageUrl": "https://images.pexels.com/photos/20473548/pexels-photo-20473548.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-20473548.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "housing_supply",
+      "articleTheme": "housing_supply",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "Apartment buildings under construction",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "local_economy-04",
+      "provider": "Pexels",
+      "providerAssetId": "9672814",
+      "photographer": "angello",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/people-walking-on-the-street-9672814/",
+      "imageUrl": "https://images.pexels.com/photos/9672814/pexels-photo-9672814.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-9672814.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "local_economy",
+      "articleTheme": "local_economy",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "People walking along a city street",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "loan_limits-05",
+      "provider": "Pexels",
+      "providerAssetId": "8293750",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/gray-and-black-calculator-on-the-table-8293750/",
+      "imageUrl": "https://images.pexels.com/photos/8293750/pexels-photo-8293750.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-8293750.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "loan_limits",
+      "articleTheme": "loan_limits",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "Calculator on a table beside planning materials",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "loan_limits-06",
+      "provider": "Pexels",
+      "providerAssetId": "8293779",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/gold-keys-on-the-calculator-8293779/",
+      "imageUrl": "https://images.pexels.com/photos/8293779/pexels-photo-8293779.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-8293779.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "loan_limits",
+      "articleTheme": "loan_limits",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "House keys resting on a calculator",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    },
+    {
+      "id": "home_values-07",
+      "provider": "Pexels",
+      "providerAssetId": "32045958",
+      "photographer": "Jakub Zerdzicki",
+      "photographerUrl": null,
+      "photoPageUrl": "https://www.pexels.com/photo/real-estate-keys-and-documents-with-house-models-34135038/",
+      "imageUrl": "https://images.pexels.com/photos/32045958/pexels-photo-32045958.jpeg?auto=compress&cs=tinysrgb&w=1280&h=720&fit=crop",
+      "localPath": "/site/assets/news/pexels-32045958.jpeg",
+      "usageUrl": "https://www.pexels.com/license/",
+      "retrievedAt": "2026-07-10",
+      "theme": "home_values",
+      "articleTheme": "home_values",
+      "locationScope": "non_local_theme",
+      "localityClaimAllowed": false,
+      "alt": "House models, keys, and documents arranged for real estate planning",
+      "focalPoint": "50% 50%",
+      "crop": {
+        "aspectRatio": "16:9",
+        "width": 1280,
+        "height": 720,
+        "fit": "crop"
+      },
+      "width": 1280,
+      "height": 720,
+      "averageColor": null,
+      "approvalStatus": "approved"
+    }
+  ],
+  "refreshPolicy": "API candidates require human provenance and suitability approval before entering this manifest."
+}

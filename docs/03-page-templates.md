@@ -75,9 +75,11 @@ Standard modules:
 - Related city/state pages.
 - Related articles.
 
-## Localized Product Page Template
+## Location Product Module
 
-Examples:
+Location-specific product content should live as a reusable section on state and city pages, not as a standalone page template.
+
+Examples of modules:
 
 - FHA loans in Texas.
 - FHA loans in Austin, TX.
@@ -85,7 +87,7 @@ Examples:
 - Jumbo loans in Orange County, CA.
 - Refinance in Phoenix, AZ.
 
-These pages must include localized data, local loan officers, local articles, and location-specific FAQ content. They must not be duplicate text pages.
+These modules should include localized data, local loan officers, local articles, and location-specific FAQ content. They should link to the canonical product page when the user needs full product education.
 
 ## Blog Article Template
 

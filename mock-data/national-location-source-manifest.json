@@ -1,0 +1,249 @@
+{
+  "source": "SimpleMaps uscities.csv with source-aware generation for static review pages",
+  "sourceUrl": "https://simplemaps.com/static/data/us-cities/uscities.csv",
+  "threshold": "population_proper >= 50000",
+  "excludedRows": [
+    "United States territories",
+    "New York City borough rows when New York city is present"
+  ],
+  "supplementalRows": [
+    {
+      "city": "Honolulu",
+      "state": "HI",
+      "reason": "Source CSV includes Hawaii places with blank population fields; Honolulu is added so Hawaii is represented by its primary 50k+ city-proper market."
+    }
+  ],
+  "generatedAt": "2026-07-10",
+  "states": 49,
+  "cities": 737,
+  "batchesOf20": 37,
+  "batches": [
+    {
+      "batch": 1,
+      "count": 20,
+      "firstCityId": "city-anchorage-ak",
+      "lastCityId": "city-peoria-az"
+    },
+    {
+      "batch": 2,
+      "count": 20,
+      "firstCityId": "city-surprise-az",
+      "lastCityId": "city-riverside-ca"
+    },
+    {
+      "batch": 3,
+      "count": 20,
+      "firstCityId": "city-stockton-ca",
+      "lastCityId": "city-lancaster-ca"
+    },
+    {
+      "batch": 4,
+      "count": 20,
+      "firstCityId": "city-hayward-ca",
+      "lastCityId": "city-el-monte-ca"
+    },
+    {
+      "batch": 5,
+      "count": 20,
+      "firstCityId": "city-fairfield-ca",
+      "lastCityId": "city-vacaville-ca"
+    },
+    {
+      "batch": 6,
+      "count": 20,
+      "firstCityId": "city-compton-ca",
+      "lastCityId": "city-whittier-ca"
+    },
+    {
+      "batch": 7,
+      "count": 20,
+      "firstCityId": "city-newport-beach-ca",
+      "lastCityId": "city-baldwin-park-ca"
+    },
+    {
+      "batch": 8,
+      "count": 20,
+      "firstCityId": "city-perris-ca",
+      "lastCityId": "city-lodi-ca"
+    },
+    {
+      "batch": 9,
+      "count": 20,
+      "firstCityId": "city-santa-cruz-ca",
+      "lastCityId": "city-porterville-ca"
+    },
+    {
+      "batch": 10,
+      "count": 20,
+      "firstCityId": "city-san-rafael-ca",
+      "lastCityId": "city-placentia-ca"
+    },
+    {
+      "batch": 11,
+      "count": 20,
+      "firstCityId": "city-glendora-ca",
+      "lastCityId": "city-grand-junction-co"
+    },
+    {
+      "batch": 12,
+      "count": 20,
+      "firstCityId": "city-castle-rock-co",
+      "lastCityId": "city-tampa-fl"
+    },
+    {
+      "batch": 13,
+      "count": 20,
+      "firstCityId": "city-orlando-fl",
+      "lastCityId": "city-boca-raton-fl"
+    },
+    {
+      "batch": 14,
+      "count": 20,
+      "firstCityId": "city-sunrise-fl",
+      "lastCityId": "city-jupiter-fl"
+    },
+    {
+      "batch": 15,
+      "count": 20,
+      "firstCityId": "city-north-miami-fl",
+      "lastCityId": "city-sandy-springs-ga"
+    },
+    {
+      "batch": 16,
+      "count": 20,
+      "firstCityId": "city-roswell-ga",
+      "lastCityId": "city-ankeny-ia"
+    },
+    {
+      "batch": 17,
+      "count": 20,
+      "firstCityId": "city-dubuque-ia",
+      "lastCityId": "city-evanston-il"
+    },
+    {
+      "batch": 18,
+      "count": 20,
+      "firstCityId": "city-bolingbrook-il",
+      "lastCityId": "city-fishers-in"
+    },
+    {
+      "batch": 19,
+      "count": 20,
+      "firstCityId": "city-bloomington-in",
+      "lastCityId": "city-lexington-ky"
+    },
+    {
+      "batch": 20,
+      "count": 20,
+      "firstCityId": "city-bowling-green-ky",
+      "lastCityId": "city-fall-river-ma"
+    },
+    {
+      "batch": 21,
+      "count": 20,
+      "firstCityId": "city-somerville-ma",
+      "lastCityId": "city-sterling-heights-mi"
+    },
+    {
+      "batch": 22,
+      "count": 20,
+      "firstCityId": "city-ann-arbor-mi",
+      "lastCityId": "city-battle-creek-mi"
+    },
+    {
+      "batch": 23,
+      "count": 20,
+      "firstCityId": "city-minneapolis-mn",
+      "lastCityId": "city-kansas-city-mo"
+    },
+    {
+      "batch": 24,
+      "count": 20,
+      "firstCityId": "city-saint-louis-mo",
+      "lastCityId": "city-raleigh-nc"
+    },
+    {
+      "batch": 25,
+      "count": 20,
+      "firstCityId": "city-greensboro-nc",
+      "lastCityId": "city-omaha-ne"
+    },
+    {
+      "batch": 26,
+      "count": 20,
+      "firstCityId": "city-lincoln-ne",
+      "lastCityId": "city-west-new-york-nj"
+    },
+    {
+      "batch": 27,
+      "count": 20,
+      "firstCityId": "city-perth-amboy-nj",
+      "lastCityId": "city-mount-vernon-ny"
+    },
+    {
+      "batch": 28,
+      "count": 20,
+      "firstCityId": "city-schenectady-ny",
+      "lastCityId": "city-oklahoma-city-ok"
+    },
+    {
+      "batch": 29,
+      "count": 20,
+      "firstCityId": "city-tulsa-ok",
+      "lastCityId": "city-tigard-or"
+    },
+    {
+      "batch": 30,
+      "count": 20,
+      "firstCityId": "city-philadelphia-pa",
+      "lastCityId": "city-rapid-city-sd"
+    },
+    {
+      "batch": 31,
+      "count": 20,
+      "firstCityId": "city-nashville-tn",
+      "lastCityId": "city-plano-tx"
+    },
+    {
+      "batch": 32,
+      "count": 20,
+      "firstCityId": "city-laredo-tx",
+      "lastCityId": "city-beaumont-tx"
+    },
+    {
+      "batch": 33,
+      "count": 20,
+      "firstCityId": "city-odessa-tx",
+      "lastCityId": "city-temple-tx"
+    },
+    {
+      "batch": 34,
+      "count": 20,
+      "firstCityId": "city-flower-mound-tx",
+      "lastCityId": "city-ogden-ut"
+    },
+    {
+      "batch": 35,
+      "count": 20,
+      "firstCityId": "city-saint-george-ut",
+      "lastCityId": "city-seattle-wa"
+    },
+    {
+      "batch": 36,
+      "count": 20,
+      "firstCityId": "city-spokane-wa",
+      "lastCityId": "city-shoreline-wa"
+    },
+    {
+      "batch": 37,
+      "count": 17,
+      "firstCityId": "city-richland-wa",
+      "lastCityId": "city-casper-wy"
+    }
+  ],
+  "statesFromSource": 49,
+  "statesWithoutCityProper50k": [
+    "VT",
+    "WV"
+  ]
+}

@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page Template Wireframes</title>
+    <style>
+      :root {
+        --ink: #1f2933;
+        --line: #394b59;
+        --page: #f4f0e8;
+        --paper: #fffdf8;
+        --white-space-bg: #fffaf0;
+        --white-space-line: rgba(57, 75, 89, 0.22);
+        --header: #d7e8f7;
+        --context: #f2dfcf;
+        --c0: #cdebd6;
+        --c1: #f3d6e2;
+        --c2: #d8d0f2;
+        --c3: #f8e3a4;
+        --c4: #bfe8e0;
+        --c5: #f5c7ad;
+        --c6: #c9def8;
+        --c7: #e5d3a5;
+        --c8: #cfe1c3;
+        --c9: #e9cbd2;
+        --footer: #d9d6cf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family:
+          "Trebuchet MS",
+          "Avenir Next",
+          Verdana,
+          sans-serif;
+      }
+
+      .page {
+        width: 1440px;
+        min-height: 2120px;
+        margin: 0 auto;
+        background: var(--paper);
+        border-left: 2px solid var(--line);
+        border-right: 2px solid var(--line);
+      }
+
+      .block,
+      .white-space {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 92px;
+        border: 2px solid var(--line);
+        text-align: center;
+        color: var(--ink);
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .block span,
+      .white-space span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: min(88%, 560px);
+        min-height: 40px;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(57, 75, 89, 0.38);
+      }
+
+      .white-space {
+        min-height: 66px;
+        background:
+          repeating-linear-gradient(
+            135deg,
+            var(--white-space-bg) 0,
+            var(--white-space-bg) 12px,
+            var(--white-space-line) 12px,
+            var(--white-space-line) 14px
+          );
+        color: rgba(31, 41, 51, 0.74);
+      }
+
+      .header {
+        height: 86px;
+        background: var(--header);
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+      }
+
+      .context {
+        min-height: 56px;
+        background: var(--context);
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 2fr 0.95fr;
+        gap: 18px;
+        padding: 22px 32px 0;
+      }
+
+      .hero {
+        min-height: 270px;
+      }
+
+      .hero-side {
+        min-height: 270px;
+      }
+
+      .main-frame {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 284px;
+        gap: 22px;
+        padding: 0 32px 34px;
+      }
+
+      .main-stack,
+      .rail-stack {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .row {
+        display: grid;
+        gap: 18px;
+      }
+
+      .one {
+        grid-template-columns: 1fr;
+      }
+
+      .two {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .four {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .large {
+        min-height: 270px;
+      }
+
+      .medium {
+        min-height: 190px;
+      }
+
+      .small {
+        min-height: 130px;
+      }
+
+      .rail-large {
+        min-height: 410px;
+      }
+
+      .rail-medium {
+        min-height: 240px;
+      }
+
+      .section-gap {
+        margin: 18px 32px;
+      }
+
+      .footer {
+        min-height: 180px;
+        background: var(--footer);
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .c0 {
+        background: var(--c0);
+      }
+
+      .c1 {
+        background: var(--c1);
+      }
+
+      .c2 {
+        background: var(--c2);
+      }
+
+      .c3 {
+        background: var(--c3);
+      }
+
+      .c4 {
+        background: var(--c4);
+      }
+
+      .c5 {
+        background: var(--c5);
+      }
+
+      .c6 {
+        background: var(--c6);
+      }
+
+      .c7 {
+        background: var(--c7);
+      }
+
+      .c8 {
+        background: var(--c8);
+      }
+
+      .c9 {
+        background: var(--c9);
+      }
+
+      .index {
+        width: 1440px;
+        margin: 0 auto;
+        padding: 32px;
+        background: var(--paper);
+        border-left: 2px solid var(--line);
+        border-right: 2px solid var(--line);
+      }
+
+      .index-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .page,
+        .index {
+          width: 100%;
+          border: 0;
+        }
+
+        .hero-grid,
+        .main-frame,
+        .two,
+        .three,
+        .four,
+        .index-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-grid,
+        .main-frame {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .section-gap {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const templates = {
+        state: {
+          title: "State Page Wireframe",
+          context: "Page Context Bar: Home > Locations > Texas",
+          hero: "State Hero",
+          heroSide: "State CTA / City Finder",
+          rows: [
+            ["Statewide Market Snapshot Cards"],
+            "white",
+            ["Major City Comparison Table"],
+            ["Property Tax / Insurance Overview", "State Product Guidance"],
+            "white",
+            ["Featured City Links / City Directory"],
+            ["Statewide Loan Officer Directory", "Branch Directory"],
+            "white",
+            ["State News Feed"],
+            ["State FAQ", "Disclosure Block"]
+          ],
+          rail: ["Sticky CTA Rail", "white", "Featured City Prompt", "State Specialist LO Card", "white", "Market Follow Prompt"]
+        },
+        city: {
+          title: "City Page Wireframe",
+          context: "Page Context Bar: Home > Locations > Texas > Austin",
+          hero: "Location Hero",
+          heroSide: "Local Expert CTA Preview",
+          rows: [
+            ["Market Snapshot Cards"],
+            "white",
+            ["Home Price Trend Chart"],
+            ["Payment Scenario Table", "Tax / Insurance Table"],
+            ["Nearby City Comparison Table"],
+            "white",
+            ["Buyer Guidance Section", "Refinance Guidance Section"],
+            ["Loan Officer Grid"],
+            ["Branch Grid"],
+            "white",
+            ["Related Product Cards", "Local News Feed"],
+            ["FAQ Block", "Disclosure Block"]
+          ],
+          rail: ["Sticky CTA Rail", "white", "Estimate Payment CTA", "Featured Loan Officer Card", "white", "Save Market Prompt"]
+        },
+        product: {
+          title: "Product Page Wireframe",
+          context: "Page Context Bar: Home > Loan Options > FHA Loans",
+          hero: "Product Hero",
+          heroSide: "Product Fit Preview",
+          rows: [
+            ["Who It Fits Block"],
+            ["Requirements Overview", "Benefits / Tradeoffs Comparison"],
+            "white",
+            ["Payment / Down Payment Scenario Table"],
+            ["Related Calculators", "Related Products"],
+            "white",
+            ["Specialist Loan Officer Grid"],
+            ["Related Location Product Modules"],
+            ["Related Articles"],
+            ["Product FAQ", "Disclosure Block"]
+          ],
+          rail: ["Sticky CTA Rail", "white", "Eligibility CTA", "Scenario CTA", "white", "Specialist Contact Card"]
+        },
+        "loan-officer": {
+          title: "Loan Officer Profile Wireframe",
+          context: "Page Context Bar: Home > Loan Officers > Ava Martinez",
+          hero: "Loan Officer Profile Hero",
+          heroSide: "Contact / Apply Actions",
+          rows: [
+            ["Licensing And Service Area Summary"],
+            ["Specialties And Borrower Fit", "Languages / Availability"],
+            "white",
+            ["Local Markets Served"],
+            ["Related Products", "Branch Affiliation"],
+            "white",
+            ["Articles And Quotes"],
+            ["Testimonials / Trust Signals"],
+            ["Profile FAQ", "Licensing Block"]
+          ],
+          rail: ["Sticky Contact Rail", "white", "Apply Link Block", "Calendar Link Block", "white", "NMLS / License Summary"]
+        },
+        branch: {
+          title: "Branch Profile Wireframe",
+          context: "Page Context Bar: Home > Branches > Austin Central",
+          hero: "Branch Profile Hero",
+          heroSide: "Map / Contact Block",
+          rows: [
+            ["Branch Coverage Summary"],
+            ["Team Loan Officer Grid"],
+            "white",
+            ["Cities Served"],
+            ["Product Specialties", "Branch Local Articles"],
+            "white",
+            ["Nearby Branches"],
+            ["Branch FAQ", "Licensing Block"]
+          ],
+          rail: ["Sticky Branch CTA Rail", "white", "Call Branch Block", "Meet The Team CTA", "white", "Coverage Note"]
+        },
+        "blog-home": {
+          title: "Learning Center Home Wireframe",
+          context: "Page Context Bar: Home > Learning Center",
+          hero: "Learning Center Hero + Search",
+          heroSide: "Featured Editorial CTA",
+          rows: [
+            ["Featured Article"],
+            ["Topic Navigation"],
+            "white",
+            ["Local Market Updates Feed", "Product Education Feed"],
+            ["Borrower Goal Feed", "Tax / Insurance Feed"],
+            "white",
+            ["State / City Filter Module"],
+            ["Related Calculators"],
+            ["Newsletter / Market Follow Prompt", "Editorial Trust Note"]
+          ],
+          rail: ["Learning Center CTA Rail", "white", "Search Prompt", "Popular Topics", "white", "Compliance / Review Note"]
+        },
+        "blog-topic": {
+          title: "Blog Topic Page Wireframe",
+          context: "Page Context Bar: Learning Center > Refinance",
+          hero: "Topic Hero",
+          heroSide: "Topic Filter / Subscribe CTA",
+          rows: [
+            ["Featured Topic Article"],
+            ["Article Feed"],
+            "white",
+            ["Related Location Cards", "Related Product Cards"],
+            ["Related Calculator Cards"],
+            "white",
+            ["Topic FAQ"],
+            ["Disclosure / Review Note"]
+          ],
+          rail: ["Topic CTA Rail", "white", "Filter By State / City", "Featured Product CTA", "white", "Market Follow Prompt"]
+        },
+        article: {
+          title: "Article Page Wireframe",
+          context: "Page Context Bar: Learning Center > Austin Mortgage Market Update",
+          hero: "Article Hero",
+          heroSide: "Article CTA / Related Context",
+          rows: [
+            ["Article Metadata Row"],
+            ["Article Body"],
+            "white",
+            ["Inline CTA Panel"],
+            ["Source Notes"],
+            "white",
+            ["Related Location Cards", "Related Product Cards"],
+            ["Related Loan Officer Cards", "Related Calculator Cards"],
+            ["Disclosure Block"]
+          ],
+          rail: ["Article CTA Rail", "white", "Author / Reviewer Card", "Related City CTA", "white", "Product CTA"]
+        },
+        calculator: {
+          title: "Calculator Page Wireframe",
+          context: "Page Context Bar: Home > Calculators > Mortgage Payment",
+          hero: "Tool Hero",
+          heroSide: "Calculator CTA",
+          rows: [
+            ["Calculator Input Panel", "Calculator Result Panel"],
+            ["Scenario Assumptions Block"],
+            "white",
+            ["Related Guidance Section"],
+            ["Related Products", "Related Locations"],
+            ["Recommended Loan Officer / Branch"],
+            "white",
+            ["Calculator FAQ", "Disclosure Block"]
+          ],
+          rail: ["Calculator CTA Rail", "white", "Save Scenario Prompt", "Discuss These Numbers CTA", "white", "Assumptions Summary"]
+        },
+        directory: {
+          title: "Directory / Search Page Wireframe",
+          context: "Page Context Bar: Home > Loan Officers",
+          hero: "Directory Hero",
+          heroSide: "Directory Help CTA",
+          rows: [
+            ["Filter Rail", "Results List / Results Grid"],
+            ["Map / List Toggle Area"],
+            "white",
+            ["Pagination / Load More"],
+            ["Empty State Variant"],
+            "white",
+            ["Related Directory Links"],
+            ["Disclosure / Licensing Note"]
+          ],
+          rail: ["Directory CTA Rail", "white", "Get Matched Prompt", "Saved Filters", "white", "Support CTA"]
+        }
+      };
+
+      const colorClass = (index) => `c${index % 10}`;
+
+      function block(label, index, size = "medium") {
+        const div = document.createElement("div");
+        div.className = `block ${colorClass(index)} ${size}`;
+        div.innerHTML = `<span>${label}</span>`;
+        return div;
+      }
+
+      function whiteSpace() {
+        const div = document.createElement("div");
+        div.className = "white-space";
+        div.innerHTML = "<span>white space</span>";
+        return div;
+      }
+
+      function row(items, startIndex) {
+        if (items === "white") {
+          return whiteSpace();
+        }
+
+        const div = document.createElement("section");
+        const count = items.length;
+        div.className = `row ${count === 1 ? "one" : count === 2 ? "two" : count === 3 ? "three" : "four"}`;
+        items.forEach((item, offset) => {
+          div.appendChild(block(item, startIndex + offset, count === 1 ? "large" : "medium"));
+        });
+        return div;
+      }
+
+      function renderPage(key) {
+        const data = templates[key] || templates.state;
+        document.title = data.title;
+
+        const page = document.createElement("main");
+        page.className = "page";
+        page.setAttribute("aria-label", data.title);
+
+        page.appendChild(block("Global Header", 6, "header"));
+        page.lastChild.className = "block header";
+        page.lastChild.innerHTML = "<span>Global Header</span>";
+
+        page.appendChild(block(data.context, 5, "context"));
+        page.lastChild.className = "block context";
+        page.lastChild.innerHTML = `<span>${data.context}</span>`;
+
+        const hero = document.createElement("section");
+        hero.className = "hero-grid";
+        hero.appendChild(block(data.hero, 0, "hero"));
+        hero.appendChild(block(data.heroSide, 1, "hero-side"));
+        page.appendChild(hero);
+
+        const gap = whiteSpace();
+        gap.classList.add("section-gap");
+        page.appendChild(gap);
+
+        const frame = document.createElement("section");
+        frame.className = "main-frame";
+
+        const main = document.createElement("div");
+        main.className = "main-stack";
+        let colorIndex = 2;
+        data.rows.forEach((items) => {
+          main.appendChild(row(items, colorIndex));
+          if (items !== "white") {
+            colorIndex += Array.isArray(items) ? items.length : 1;
+          }
+        });
+
+        const rail = document.createElement("aside");
+        rail.className = "rail-stack";
+        data.rail.forEach((item, index) => {
+          if (item === "white") {
+            rail.appendChild(whiteSpace());
+          } else {
+            rail.appendChild(block(item, index + 8, index === 0 ? "rail-large" : "rail-medium"));
+          }
+        });
+
+        frame.appendChild(main);
+        frame.appendChild(rail);
+        page.appendChild(frame);
+
+        page.appendChild(block("Global Footer", 9, "footer"));
+        page.lastChild.className = "block footer";
+        page.lastChild.innerHTML = "<span>Global Footer</span>";
+
+        document.getElementById("app").replaceChildren(page);
+      }
+
+      function renderIndex() {
+        const wrap = document.createElement("main");
+        wrap.className = "index";
+        const header = block("Page Template Wireframe Index", 0, "large");
+        wrap.appendChild(header);
+        const spacer = whiteSpace();
+        spacer.style.margin = "18px 0";
+        wrap.appendChild(spacer);
+        const grid = document.createElement("section");
+        grid.className = "index-grid";
+        Object.keys(templates).forEach((key, index) => {
+          const link = document.createElement("a");
+          link.href = `?page=${key}`;
+          link.style.textDecoration = "none";
+          link.appendChild(block(templates[key].title, index + 1, "medium"));
+          grid.appendChild(link);
+        });
+        wrap.appendChild(grid);
+        document.getElementById("app").replaceChildren(wrap);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get("page");
+      if (page) {
+        renderPage(page);
+      } else {
+        renderIndex();
+      }
+    </script>
+  </body>
+</html>

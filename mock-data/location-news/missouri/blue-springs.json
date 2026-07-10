@@ -1,0 +1,1625 @@
+{
+  "locationId": "city-blue-springs-mo",
+  "locationType": "city",
+  "generatedAt": "2026-07-10",
+  "articles": [
+    {
+      "id": "news-blue-springs-mo-affordability-home-values",
+      "route": "/learning-center/market-news/blue-springs-mo-affordability-home-values",
+      "locationId": "city-blue-springs-mo",
+      "locationType": "city",
+      "articleType": "affordability_home_values",
+      "title": "Blue Springs, MO home values, income, and owner costs",
+      "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Blue Springs.",
+      "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Blue Springs.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Blue Springs. Review official evidence, comparisons, limitations, and ",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Affordability evidence",
+      "topicIds": [
+        "affordability",
+        "home-values",
+        "owner-costs"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-home-equity",
+        "product-cash-out-refinance",
+        "product-conventional"
+      ],
+      "sourceLabels": [
+        "U.S. Census Bureau"
+      ],
+      "imageId": "home_values-07",
+      "keyTakeaways": [
+        "ACS median owner-occupied home value: $263,100.",
+        "ACS median household income: $88,920.",
+        "median monthly owner cost with a mortgage: $3,324.",
+        "change from the prior ACS home-value estimate: 58.5%.",
+        "Missouri median home value: $230,300."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "median-home-value",
+          "label": "ACS median owner-occupied home value",
+          "value": 263100,
+          "display": "$263,100",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "median-household-income",
+          "label": "ACS median household income",
+          "value": 88920,
+          "display": "$88,920",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "median-owner-cost",
+          "label": "median monthly owner cost with a mortgage",
+          "value": 3324,
+          "display": "$3,324",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "home-value-change",
+          "label": "change from the prior ACS home-value estimate",
+          "value": 58.5,
+          "display": "58.5%",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "state-home-value",
+          "label": "Missouri median home value",
+          "value": 230300,
+          "display": "$230,300",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "Home values and income in the latest ACS release",
+          "body": [
+            "The latest evidence for Blue Springs, MO puts ACS median owner-occupied home value at $263,100, while ACS median household income is $88,920. Together, home value, household income, and selected owner costs describe different sides of the local payment conversation without assuming that a typical household is buying a typical home. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "How the current estimate compares",
+          "body": [
+            "The clearest comparison in this release is change from the prior ACS home-value estimate at 58.5%. A change between ACS periods can show direction, but margins of error and the multi-year survey windows must be considered before treating the difference as precise. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Blue Springs, MO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use the evidence to test payment assumptions",
+          "body": [
+            "For a borrower, median monthly owner cost with a mortgage at $3,324 is most useful as an input to an organized comparison. Compare a realistic purchase range with verified principal, interest, taxes, insurance, association charges, and cash-to-close rather than converting the median value directly into a promised payment. In Blue Springs, MO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Owner costs are broader than principal and interest",
+          "body": [
+            "Another boundary comes from change from the prior ACS home-value estimate, reported here as 58.5%. Selected owner costs help keep the monthly discussion connected to recurring housing expenses, but the ACS measure is not a lender worksheet and is not tailored to a property under consideration. A borrower comparing options in Blue Springs, MO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither $263,100 for ACS median owner-occupied home value nor $3,324 for median monthly owner cost with a mortgage determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The ACS does not contain a borrower's credit, debts, down payment, loan term, current rate options, or the taxes and insurance for a selected property. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Build a property-specific affordability comparison",
+          "body": [
+            "A practical next step is to carry $88,920 for ACS median household income and 58.5% for change from the prior ACS home-value estimate into a side-by-side planning conversation. Use the local figures to challenge assumptions, then replace broad estimates with current property and loan information before deciding what range is comfortable. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Blue Springs, MO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-blue-springs-mo-affordability-home-values-comparison-chart",
+          "type": "bar",
+          "title": "Blue Springs evidence comparison",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ],
+          "data": [
+            {
+              "label": "ACS median owner-occupied home value",
+              "value": 263100,
+              "display": "$263,100"
+            },
+            {
+              "label": "ACS median household income",
+              "value": 88920,
+              "display": "$88,920"
+            },
+            {
+              "label": "median monthly owner cost with a mortgage",
+              "value": 3324,
+              "display": "$3,324"
+            },
+            {
+              "label": "change from the prior ACS home-value estimate",
+              "value": 58.5,
+              "display": "58.5%"
+            },
+            {
+              "label": "Missouri median home value",
+              "value": 230300,
+              "display": "$230,300"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-blue-springs-mo-affordability-home-values-evidence-table",
+          "title": "Blue Springs evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "ACS median owner-occupied home value",
+              "$263,100",
+              "news-blue-springs-mo-affordability-home-values-source-city-home-value-current"
+            ],
+            [
+              "ACS median household income",
+              "$88,920",
+              "news-blue-springs-mo-affordability-home-values-source-city-income-current"
+            ],
+            [
+              "median monthly owner cost with a mortgage",
+              "$3,324",
+              "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current"
+            ],
+            [
+              "change from the prior ACS home-value estimate",
+              "58.5%",
+              "news-blue-springs-mo-affordability-home-values-source-city-home-value-current,news-blue-springs-mo-affordability-home-values-source-city-home-value-prior"
+            ],
+            [
+              "Missouri median home value",
+              "$230,300",
+              "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+            "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+            "news-blue-springs-mo-affordability-home-values-source-state-home-value-current"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-blue-springs-mo-affordability-home-values-source-city-home-value-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 263100,
+          "marginOfError": 8926,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-affordability-home-values-source-city-income-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
+          "variableOrSeriesId": "B19013_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 88920,
+          "marginOfError": 4089,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B19013_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-affordability-home-values-source-city-owner-cost-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
+          "variableOrSeriesId": "B25103_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 3324,
+          "marginOfError": 111,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25103_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-affordability-home-values-source-city-home-value-prior",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2019",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 166000,
+          "marginOfError": 3602,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2019 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-affordability-home-values-source-state-home-value-current",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
+          "variableOrSeriesId": "B25077_001E",
+          "geographyType": "state",
+          "geographyId": "29",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 230300,
+          "marginOfError": 880,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/missouri/blue-springs",
+        "/locations/missouri",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-blue-springs-mo-housing-supply-tenure",
+      "route": "/learning-center/market-news/blue-springs-mo-housing-supply-tenure",
+      "locationId": "city-blue-springs-mo",
+      "locationType": "city",
+      "articleType": "housing_supply_tenure",
+      "title": "Blue Springs, MO housing supply, ownership, and rent",
+      "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Blue Springs.",
+      "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Blue Springs.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Blue Springs. Review official evidence, comparisons, limit",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Housing mix",
+      "topicIds": [
+        "housing-supply",
+        "tenure",
+        "rent"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-home-equity",
+        "product-cash-out-refinance",
+        "product-conventional"
+      ],
+      "sourceLabels": [
+        "U.S. Census Bureau"
+      ],
+      "imageId": "housing_supply-03",
+      "keyTakeaways": [
+        "total housing units: 23,559.",
+        "occupied housing units: 22,908.",
+        "vacant housing units: 651.",
+        "vacant-unit share of housing stock: 2.8%.",
+        "owner share of occupied units: 68.9%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "housing-units",
+          "label": "total housing units",
+          "value": 23559,
+          "display": "23,559",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "occupied-units",
+          "label": "occupied housing units",
+          "value": 22908,
+          "display": "22,908",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "vacant-units",
+          "label": "vacant housing units",
+          "value": 651,
+          "display": "651",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "vacancy-share",
+          "label": "vacant-unit share of housing stock",
+          "value": 2.8,
+          "display": "2.8%",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "owner-share",
+          "label": "owner share of occupied units",
+          "value": 68.9,
+          "display": "68.9%",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "median-rent",
+          "label": "median gross rent",
+          "value": 1277,
+          "display": "$1,277",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent"
+          ],
+          "comparison": false
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "The size and occupancy of the local housing stock",
+          "body": [
+            "The latest evidence for Blue Springs, MO puts total housing units at 23,559, while occupied housing units is 22,908. Unit counts establish the broad housing base, while occupancy and tenure measures show how that stock was being used across the ACS survey period. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Vacancy and ownership need careful definitions",
+          "body": [
+            "The clearest comparison in this release is vacant-unit share of housing stock at 2.8%. A vacant-unit share is not the same as homes listed for sale, and an owner share is not a forecast of buyer competition or future inventory. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Blue Springs, MO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Compare buying and renting on the same horizon",
+          "body": [
+            "For a borrower, vacant housing units at 651 is most useful as an input to an organized comparison. A useful worksheet aligns expected time in the home, maintenance responsibility, rent changes, transaction costs, and property-specific monthly costs instead of comparing rent with principal and interest alone. In Blue Springs, MO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Rent is context, not a break-even answer",
+          "body": [
+            "Another boundary comes from vacant-unit share of housing stock, reported here as 2.8%. Median gross rent reflects the occupied rental stock measured by ACS and does not identify an equivalent property, lease offer, or future rent for a particular household. A borrower comparing options in Blue Springs, MO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 23,559 for total housing units nor 651 for vacant housing units determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. Housing-stock counts do not show the condition, price, financing eligibility, insurance availability, or seller terms of homes currently offered to a borrower. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Match the broad housing mix to real choices",
+          "body": [
+            "A practical next step is to carry 22,908 for occupied housing units and 2.8% for vacant-unit share of housing stock into a side-by-side planning conversation. Use the local mix to frame questions, then compare actual listings, lease terms, taxes, insurance, maintenance, and financing disclosures over a consistent period. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Blue Springs, MO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-blue-springs-mo-housing-supply-tenure-comparison-chart",
+          "type": "bar",
+          "title": "Blue Springs evidence comparison",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ],
+          "data": [
+            {
+              "label": "total housing units",
+              "value": 23559,
+              "display": "23,559"
+            },
+            {
+              "label": "occupied housing units",
+              "value": 22908,
+              "display": "22,908"
+            },
+            {
+              "label": "vacant housing units",
+              "value": 651,
+              "display": "651"
+            },
+            {
+              "label": "vacant-unit share of housing stock",
+              "value": 2.8,
+              "display": "2.8%"
+            },
+            {
+              "label": "owner share of occupied units",
+              "value": 68.9,
+              "display": "68.9%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-blue-springs-mo-housing-supply-tenure-evidence-table",
+          "title": "Blue Springs evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "total housing units",
+              "23,559",
+              "news-blue-springs-mo-housing-supply-tenure-source-housing-units"
+            ],
+            [
+              "occupied housing units",
+              "22,908",
+              "news-blue-springs-mo-housing-supply-tenure-source-occupied-units"
+            ],
+            [
+              "vacant housing units",
+              "651",
+              "news-blue-springs-mo-housing-supply-tenure-source-vacant-units"
+            ],
+            [
+              "vacant-unit share of housing stock",
+              "2.8%",
+              "news-blue-springs-mo-housing-supply-tenure-source-vacant-units,news-blue-springs-mo-housing-supply-tenure-source-housing-units"
+            ],
+            [
+              "owner share of occupied units",
+              "68.9%",
+              "news-blue-springs-mo-housing-supply-tenure-source-owner-units,news-blue-springs-mo-housing-supply-tenure-source-occupied-units"
+            ],
+            [
+              "median gross rent",
+              "$1,277",
+              "news-blue-springs-mo-housing-supply-tenure-source-median-rent"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+            "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+            "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses 2024 ACS 5-year place estimates for units, occupancy, vacancy, owner and renter tenure, and gross rent, with 2019 evidence retained for comparison review. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "ACS vacancy includes categories beyond for-sale availability, and tenure and rent estimates carry sampling error and do not measure current listing inventory. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-housing-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25001.dat",
+          "variableOrSeriesId": "B25001_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 23559,
+          "marginOfError": 722,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25001_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-occupied-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_002E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 22908,
+          "marginOfError": 716,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-vacant-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
+          "variableOrSeriesId": "B25002_003E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 651,
+          "marginOfError": 221,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-owner-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_002E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 15784,
+          "marginOfError": 750,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_002E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-renter-units",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+          "variableOrSeriesId": "B25003_003E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 7124,
+          "marginOfError": 734,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25003_003E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-median-rent",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat",
+          "variableOrSeriesId": "B25064_001E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2024",
+          "releasedAt": "2026-01-29",
+          "retrievedAt": "2026-07-10",
+          "estimate": 1277,
+          "marginOfError": 63,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25064_001E, 2024 ACS 5-year"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-housing-supply-tenure-source-vacant-units-prior",
+          "publisher": "U.S. Census Bureau",
+          "dataset": "Census ACS 5-year Table-Based Summary File",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25002.dat",
+          "variableOrSeriesId": "B25002_003E",
+          "geographyType": "place",
+          "geographyId": "2906652",
+          "period": "2019",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 959,
+          "marginOfError": 297,
+          "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
+          "citationLabel": "B25002_003E, 2019 ACS 5-year"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/missouri/blue-springs",
+        "/locations/missouri",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-blue-springs-mo-local-labor-market",
+      "route": "/learning-center/market-news/blue-springs-mo-local-labor-market",
+      "locationId": "city-blue-springs-mo",
+      "locationType": "city",
+      "articleType": "local_labor_market",
+      "title": "Blue Springs, MO labor market: latest employment evidence",
+      "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Blue Springs.",
+      "previewText": "See what changed in Blue Springs's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Blue Springs's labor market and why broad employment data cannot determine mortgage eligibility. Review official evidence, comparisons, limitatio",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "Labor market",
+      "topicIds": [
+        "labor-market",
+        "employment",
+        "borrower-planning"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-home-equity",
+        "product-cash-out-refinance",
+        "product-conventional"
+      ],
+      "sourceLabels": [
+        "U.S. Bureau of Labor Statistics"
+      ],
+      "imageId": "local_economy-04",
+      "keyTakeaways": [
+        "labor force: 32,775.",
+        "employment: 31,760.",
+        "unemployment: 1,015.",
+        "unemployment rate: 3.1%.",
+        "change in unemployment rate from a year earlier: -0.7%."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "labor-force",
+          "label": "labor force",
+          "value": 32775,
+          "display": "32,775",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "employment",
+          "label": "employment",
+          "value": 31760,
+          "display": "31,760",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-employment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment",
+          "label": "unemployment",
+          "value": 1015,
+          "display": "1,015",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "unemployment-rate",
+          "label": "unemployment rate",
+          "value": 3.1,
+          "display": "3.1%",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "annual-rate-change",
+          "label": "change in unemployment rate from a year earlier",
+          "value": -0.7,
+          "display": "-0.7%",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "What the latest LAUS release reports",
+          "body": [
+            "The latest evidence for Blue Springs, MO puts labor force at 32,775, while employment is 31,760. The labor force, employment, unemployment, and unemployment rate are related measures, and reading all of them prevents a rate movement from being interpreted without its underlying counts. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Month and year comparisons answer different questions",
+          "body": [
+            "The clearest comparison in this release is change in unemployment rate from a year earlier at -0.7%. A monthly movement can reflect short-term change and revision, while the year-over-year comparison gives a wider reference point without predicting the next release. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Blue Springs, MO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Use labor data as economic context",
+          "body": [
+            "For a borrower, unemployment at 1,015 is most useful as an input to an organized comparison. Broad labor evidence can help organize questions about timing and local economic conditions, but a lender evaluates documented income, employment history, debts, assets, and program rules at the borrower level. In Blue Springs, MO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "Employment counts do not measure mortgage readiness",
+          "body": [
+            "Another boundary comes from unemployment rate, reported here as 3.1%. The LAUS definition of employment is an economic statistic, not a review of income stability, job tenure, variable earnings, self-employment records, or the continuity standards used in underwriting. A borrower comparing options in Blue Springs, MO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither 32,775 for labor force nor 1,015 for unemployment determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. BLS does not evaluate any applicant and cannot indicate whether a person's income is eligible, sufficient, stable, or likely to continue for mortgage purposes. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Translate economic context into documentation questions",
+          "body": [
+            "A practical next step is to carry 31,760 for employment and -0.7% for change in unemployment rate from a year earlier into a side-by-side planning conversation. Keep the public trend separate from the borrower's records, and ask what pay history, tax returns, contracts, reserves, or explanations may be needed for the actual loan path. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Blue Springs, MO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's labor-market evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-blue-springs-mo-local-labor-market-comparison-chart",
+          "type": "bar",
+          "title": "Blue Springs evidence comparison",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ],
+          "data": [
+            {
+              "label": "labor force",
+              "value": 32775,
+              "display": "32,775"
+            },
+            {
+              "label": "employment",
+              "value": 31760,
+              "display": "31,760"
+            },
+            {
+              "label": "unemployment",
+              "value": 1015,
+              "display": "1,015"
+            },
+            {
+              "label": "unemployment rate",
+              "value": 3.1,
+              "display": "3.1%"
+            },
+            {
+              "label": "change in unemployment rate from a year earlier",
+              "value": -0.7,
+              "display": "-0.7%"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-blue-springs-mo-local-labor-market-evidence-table",
+          "title": "Blue Springs evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "labor force",
+              "32,775",
+              "news-blue-springs-mo-local-labor-market-source-latest-labor-force"
+            ],
+            [
+              "employment",
+              "31,760",
+              "news-blue-springs-mo-local-labor-market-source-latest-employment"
+            ],
+            [
+              "unemployment",
+              "1,015",
+              "news-blue-springs-mo-local-labor-market-source-latest-unemployment"
+            ],
+            [
+              "unemployment rate",
+              "3.1%",
+              "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate"
+            ],
+            [
+              "change in unemployment rate from a year earlier",
+              "-0.7%",
+              "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate,news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+            "news-blue-springs-mo-local-labor-market-source-latest-employment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+            "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+            "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+            "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article uses BLS LAUS unadjusted city monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "LAUS estimates can be revised, city series are unadjusted, and local labor statistics describe a population rather than an individual applicant's income or employment. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-latest-labor-force",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000006",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 32775,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 labor-force"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-latest-employment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000005",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 31760,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 employment"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-latest-unemployment",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000004",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1015,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-latest-unemployment-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000003",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2026-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.1,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M05 unemployment-rate"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-previous-previous-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000003",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2026-M04",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.1,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2026-M04 previous-rate"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-local-labor-market-source-yearago-year-ago-rate",
+          "publisher": "U.S. Bureau of Labor Statistics",
+          "dataset": "Local Area Unemployment Statistics",
+          "sourceUrl": "https://download.bls.gov/pub/time.series/la/la.data.65.City",
+          "variableOrSeriesId": "LAUCT290665200000003",
+          "geographyType": "city",
+          "geographyId": "CT2906652000000",
+          "period": "2025-M05",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 3.8,
+          "marginOfError": null,
+          "revisionStatus": "BLS data are subject to revision",
+          "citationLabel": "BLS LAUS 2025-M05 year-ago-rate"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/missouri/blue-springs",
+        "/locations/missouri",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    },
+    {
+      "id": "news-blue-springs-mo-county-loan-limits",
+      "route": "/learning-center/market-news/blue-springs-mo-county-loan-limits",
+      "locationId": "city-blue-springs-mo",
+      "locationType": "city",
+      "articleType": "county_loan_limits",
+      "title": "Blue Springs, MO loan limits: 2026 conforming and FHA context",
+      "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
+      "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Blue Springs, including unit-count differences and important limits.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Blue Springs, including unit-count differences and important limits. Review official evidence, com",
+      "publishedAt": "2026-07-10",
+      "updatedAt": "2026-07-10",
+      "relevanceLabel": "2026 loan limits",
+      "topicIds": [
+        "loan-limits",
+        "conventional",
+        "fha",
+        "jumbo"
+      ],
+      "productIds": [
+        "product-refinance",
+        "product-home-equity",
+        "product-cash-out-refinance",
+        "product-conventional"
+      ],
+      "sourceLabels": [
+        "Federal Housing Finance Agency",
+        "U.S. Department of Housing and Urban Development"
+      ],
+      "imageId": "loan_limits-06",
+      "keyTakeaways": [
+        "one-unit conforming limit: $832,750.",
+        "four-unit conforming limit: $1,601,750.",
+        "one-unit FHA limit: $541,287.",
+        "four-unit FHA limit: $1,041,125.",
+        "difference between one-unit conforming and FHA limits: $291,463."
+      ],
+      "evidenceFacts": [
+        {
+          "id": "conforming-one",
+          "label": "one-unit conforming limit",
+          "value": 832750,
+          "display": "$832,750",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "conforming-four",
+          "label": "four-unit conforming limit",
+          "value": 1601750,
+          "display": "$1,601,750",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "fha-one",
+          "label": "one-unit FHA limit",
+          "value": 541287,
+          "display": "$541,287",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "fha-four",
+          "label": "four-unit FHA limit",
+          "value": 1041125,
+          "display": "$1,041,125",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ],
+          "comparison": false
+        },
+        {
+          "id": "one-unit-difference",
+          "label": "difference between one-unit conforming and FHA limits",
+          "value": 291463,
+          "display": "$291,463",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit"
+          ],
+          "comparison": true
+        }
+      ],
+      "sections": [
+        {
+          "id": "latest-evidence",
+          "heading": "The published loan-limit figures",
+          "body": [
+            "The latest evidence for Blue Springs, MO puts one-unit conforming limit at $832,750, while four-unit conforming limit is $1,601,750. Conforming and FHA limits come from different programs and should be read by the published county or county-equivalent geography and unit count before they are used to organize financing questions. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "comparison",
+          "heading": "Why the one-unit limits differ",
+          "body": [
+            "The clearest comparison in this release is difference between one-unit conforming and FHA limits at $291,463. The gap marks different program boundaries, not a pricing advantage, approval result, required loan amount, or recommendation for a borrower. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Blue Springs, MO. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "borrower-planning",
+          "heading": "Start with geography, unit count, and loan amount",
+          "body": [
+            "For a borrower, one-unit FHA limit at $541,287 is most useful as an input to an organized comparison. Confirm the property's county or county-equivalent geography and number of legal units, then compare the needed base loan amount with the current program tables before discussing product fit. In Blue Springs, MO, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "tradeoffs",
+          "heading": "A higher limit is not additional borrowing power",
+          "body": [
+            "Another boundary comes from four-unit FHA limit, reported here as $1,041,125. Published ceilings describe the maximum loan size within a program category for that geography; they do not increase income, reduce required cash, or waive underwriting standards. A borrower comparing options in Blue Springs, MO can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "what-data-cannot-decide",
+          "heading": "What the data cannot decide for you",
+          "body": [
+            "Neither $832,750 for one-unit conforming limit nor $541,287 for one-unit FHA limit determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. A loan limit cannot determine credit eligibility, debt-to-income acceptance, appraisal results, mortgage insurance, occupancy rules, cash requirements, rates, fees, or approval. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        },
+        {
+          "id": "next-comparison",
+          "heading": "Use limits to route the next product questions",
+          "body": [
+            "A practical next step is to carry $1,601,750 for four-unit conforming limit and $291,463 for difference between one-unit conforming and FHA limits into a side-by-side planning conversation. Bring the property geography, unit count, price, down-payment plan, and desired loan amount to a licensed professional who can verify current limits and applicable program rules. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Blue Springs, MO, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Blue Springs, MO's loan-limit evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        }
+      ],
+      "visuals": [
+        {
+          "id": "news-blue-springs-mo-county-loan-limits-comparison-chart",
+          "type": "bar",
+          "title": "Blue Springs evidence comparison",
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ],
+          "data": [
+            {
+              "label": "one-unit conforming limit",
+              "value": 832750,
+              "display": "$832,750"
+            },
+            {
+              "label": "four-unit conforming limit",
+              "value": 1601750,
+              "display": "$1,601,750"
+            },
+            {
+              "label": "one-unit FHA limit",
+              "value": 541287,
+              "display": "$541,287"
+            },
+            {
+              "label": "four-unit FHA limit",
+              "value": 1041125,
+              "display": "$1,041,125"
+            },
+            {
+              "label": "difference between one-unit conforming and FHA limits",
+              "value": 291463,
+              "display": "$291,463"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "id": "news-blue-springs-mo-county-loan-limits-evidence-table",
+          "title": "Blue Springs evidence table",
+          "columns": [
+            "Measure",
+            "Value",
+            "Source"
+          ],
+          "rows": [
+            [
+              "one-unit conforming limit",
+              "$832,750",
+              "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit"
+            ],
+            [
+              "four-unit conforming limit",
+              "$1,601,750",
+              "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit"
+            ],
+            [
+              "one-unit FHA limit",
+              "$541,287",
+              "news-blue-springs-mo-county-loan-limits-source-fha-oneunit"
+            ],
+            [
+              "four-unit FHA limit",
+              "$1,041,125",
+              "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+            ],
+            [
+              "difference between one-unit conforming and FHA limits",
+              "$291,463",
+              "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit,news-blue-springs-mo-county-loan-limits-source-fha-oneunit"
+            ]
+          ],
+          "sourceRecordIds": [
+            "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+            "news-blue-springs-mo-county-loan-limits-source-fha-fourunit"
+          ]
+        }
+      ],
+      "ctaPlacements": [
+        {
+          "afterSectionId": "borrower-planning",
+          "type": "compare_options",
+          "label": "Compare verified loan options",
+          "route": "/loan-options"
+        }
+      ],
+      "methodology": "This article joins the official 2026 FHFA all-county conforming file and HUD 2026 FHA forward-limit file by the published five-digit county or county-equivalent FIPS and retains one- through four-unit amounts. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "limitations": "The location mapping identifies a published source geography for this location record, but a specific property can require separate geography verification and current program guidance. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "sourceRecords": [
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-conforming-oneunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-oneUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 832750,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-oneUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-conforming-twounit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-twoUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1066250,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-twoUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-conforming-threeunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-threeUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1288800,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-threeUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-conforming-fourunit",
+          "publisher": "Federal Housing Finance Agency",
+          "dataset": "2026 conforming county loan limits",
+          "sourceUrl": "https://www.fhfa.gov/data/conforming-loan-limit",
+          "variableOrSeriesId": "conforming-fourUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1601750,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 conforming county loan limits, conforming-fourUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-fha-oneunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-oneUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 541287,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-oneUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-fha-twounit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-twoUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 693050,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-twoUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-fha-threeunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-threeUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 837700,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-threeUnit"
+        },
+        {
+          "sourceId": "news-blue-springs-mo-county-loan-limits-source-fha-fourunit",
+          "publisher": "U.S. Department of Housing and Urban Development",
+          "dataset": "2026 FHA forward mortgage limits",
+          "sourceUrl": "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
+          "variableOrSeriesId": "fha-fourUnit",
+          "geographyType": "county",
+          "geographyId": "29095",
+          "period": "2026",
+          "releasedAt": null,
+          "retrievedAt": "2026-07-10",
+          "estimate": 1041125,
+          "marginOfError": null,
+          "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
+          "citationLabel": "2026 FHA forward mortgage limits, fha-fourUnit"
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/missouri/blue-springs",
+        "/locations/missouri",
+        "/loan-options",
+        "/loan-options/conventional",
+        "/loan-options/fha",
+        "/calculators/affordability",
+        "/rates"
+      ],
+      "reviewStatus": "editorial_review_required",
+      "complianceStatus": "compliance_review_required"
+    }
+  ]
+}

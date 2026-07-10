@@ -1,0 +1,1875 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mortgage Website Routed Wireframes</title>
+    <style>
+      :root {
+        --ink: #24323b;
+        --muted: #667781;
+        --line: #31424d;
+        --paper: #fffdf8;
+        --page: #ede8de;
+        --header: #d7e8f7;
+        --context: #f2dfcf;
+        --white-space-bg: #fffaf0;
+        --white-space-line: rgba(49, 66, 77, 0.22);
+        --c0: #cdebd6;
+        --c1: #f3d6e2;
+        --c2: #d8d0f2;
+        --c3: #f8e3a4;
+        --c4: #bfe8e0;
+        --c5: #f5c7ad;
+        --c6: #c9def8;
+        --c7: #e5d3a5;
+        --c8: #cfe1c3;
+        --c9: #e9cbd2;
+        --c10: #d1e3dc;
+        --c11: #f1d7b6;
+        --footer: #d9d6cf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .app-shell {
+        width: min(1440px, 100vw);
+        min-height: 100vh;
+        margin: 0 auto;
+        background: var(--paper);
+        border-left: 2px solid var(--line);
+        border-right: 2px solid var(--line);
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 260px 1fr auto;
+        align-items: center;
+        gap: 18px;
+        min-height: 88px;
+        padding: 14px 28px;
+        background: var(--header);
+        border-bottom: 2px solid var(--line);
+      }
+
+      .brand {
+        display: grid;
+        gap: 2px;
+        text-decoration: none;
+      }
+
+      .brand strong {
+        font-size: 22px;
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .nav a,
+      .action-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        padding: 7px 12px;
+        border: 2px solid var(--line);
+        background: rgba(255, 255, 255, 0.54);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .action-link {
+        background: var(--c3);
+      }
+
+      .contextbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+        min-height: 54px;
+        padding: 10px 28px;
+        background: var(--context);
+        border-bottom: 2px solid var(--line);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .contextbar span:last-child {
+        color: var(--muted);
+        text-align: right;
+      }
+
+      .page-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 330px;
+        gap: 18px;
+        padding: 22px 28px 0;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 22px;
+        padding: 0 28px 34px;
+      }
+
+      .stack,
+      .rail {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .rail {
+        position: sticky;
+        top: 14px;
+        align-self: start;
+      }
+
+      .wire-section {
+        display: grid;
+        gap: 12px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 10px 12px;
+        border: 2px solid var(--line);
+        background: #f7f1e7;
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-title span:last-child {
+        color: var(--muted);
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid.four {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .block,
+      .white-space {
+        position: relative;
+        display: flex;
+        min-height: 126px;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        border: 2px solid var(--line);
+        color: var(--ink);
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .block {
+        flex-direction: column;
+        gap: 8px;
+        transition:
+          transform 140ms ease,
+          box-shadow 140ms ease,
+          filter 140ms ease;
+      }
+
+      a.block:hover,
+      a.block:focus,
+      .nav a:hover,
+      .nav a:focus,
+      .action-link:hover,
+      .action-link:focus {
+        outline: 4px solid rgba(49, 66, 77, 0.18);
+        outline-offset: 2px;
+        transform: translateY(-1px);
+        box-shadow: 5px 5px 0 rgba(49, 66, 77, 0.18);
+      }
+
+      .block strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: min(94%, 660px);
+        min-height: 42px;
+        padding: 9px 14px;
+        border: 1px solid rgba(49, 66, 77, 0.42);
+        background: rgba(255, 255, 255, 0.7);
+        font-size: clamp(17px, 1.5vw, 23px);
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .block small {
+        max-width: 86%;
+        color: rgba(36, 50, 59, 0.74);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.25;
+      }
+
+      .block .route-hint {
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+        max-width: 70%;
+        color: rgba(36, 50, 59, 0.64);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .hero {
+        min-height: 310px;
+      }
+
+      .hero.tall {
+        min-height: 380px;
+      }
+
+      .large {
+        min-height: 270px;
+      }
+
+      .medium {
+        min-height: 184px;
+      }
+
+      .small {
+        min-height: 124px;
+      }
+
+      .rail-block {
+        min-height: 210px;
+      }
+
+      .rail-block.primary {
+        min-height: 360px;
+      }
+
+      .white-space {
+        min-height: 70px;
+        background:
+          repeating-linear-gradient(
+            135deg,
+            var(--white-space-bg) 0,
+            var(--white-space-bg) 12px,
+            var(--white-space-line) 12px,
+            var(--white-space-line) 14px
+          );
+        color: rgba(36, 50, 59, 0.74);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .page-gap {
+        margin: 18px 28px;
+      }
+
+      .c0 {
+        background: var(--c0);
+      }
+
+      .c1 {
+        background: var(--c1);
+      }
+
+      .c2 {
+        background: var(--c2);
+      }
+
+      .c3 {
+        background: var(--c3);
+      }
+
+      .c4 {
+        background: var(--c4);
+      }
+
+      .c5 {
+        background: var(--c5);
+      }
+
+      .c6 {
+        background: var(--c6);
+      }
+
+      .c7 {
+        background: var(--c7);
+      }
+
+      .c8 {
+        background: var(--c8);
+      }
+
+      .c9 {
+        background: var(--c9);
+      }
+
+      .c10 {
+        background: var(--c10);
+      }
+
+      .c11 {
+        background: var(--c11);
+      }
+
+      .footer {
+        display: grid;
+        grid-template-columns: 1.2fr repeat(5, 1fr);
+        gap: 14px;
+        min-height: 220px;
+        padding: 24px 28px;
+        border-top: 2px solid var(--line);
+        background: var(--footer);
+      }
+
+      .footer .block {
+        min-height: 130px;
+      }
+
+      .status {
+        padding: 44px 28px;
+      }
+
+      .status .block {
+        min-height: 260px;
+      }
+
+      @media (max-width: 1040px) {
+        .topbar,
+        .contextbar,
+        .page-intro,
+        .layout,
+        .footer {
+          grid-template-columns: 1fr;
+        }
+
+        .contextbar span:last-child {
+          text-align: left;
+        }
+
+        .rail {
+          position: static;
+        }
+
+        .grid.three,
+        .grid.four {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 700px) {
+        .app-shell {
+          border: 0;
+        }
+
+        .topbar,
+        .contextbar,
+        .page-intro,
+        .layout,
+        .footer {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .page-gap {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
+
+        .grid.two,
+        .grid.three,
+        .grid.four {
+          grid-template-columns: 1fr;
+        }
+
+        .block strong {
+          font-size: 17px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <section class="status">
+        <div class="block c0"><strong>Loading routed wireframes</strong></div>
+      </section>
+    </div>
+
+    <script>
+      const seedUrl = "../mock-data/prototype-seed.json";
+      let data;
+      let maps;
+      let colorCursor = 0;
+
+      const clean = (value) =>
+        String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+
+      const normalizeRoute = (route) => {
+        const value = route || "/";
+        return value.length > 1 && value.endsWith("/") ? value.slice(0, -1) : value;
+      };
+
+      const routeHref = (route) => `#${route || "/"}`;
+      const asMap = (items) => Object.fromEntries((items || []).map((item) => [item.id, item]));
+      const byIds = (ids, map) => (ids || []).map((id) => map[id]).filter(Boolean);
+      const first = (items, count) => (items || []).slice(0, count);
+
+      function block(title, options = {}) {
+        const {
+          hint = "",
+          to = "",
+          size = "medium",
+          className = "",
+          color,
+          anchor = ""
+        } = options;
+        const classColor = color || `c${colorCursor++ % 12}`;
+        const tag = to ? "a" : "div";
+        const href = to ? ` href="${clean(routeHref(to))}"` : "";
+        const id = anchor ? ` id="${clean(anchor)}"` : "";
+        const route = to ? `<span class="route-hint">${clean(to)}</span>` : "";
+        return `<${tag}${href}${id} class="block ${classColor} ${size} ${className}"><strong>${clean(title)}</strong>${hint ? `<small>${clean(hint)}</small>` : ""}${route}</${tag}>`;
+      }
+
+      function whiteSpace(label = "white space") {
+        return `<div class="white-space"><span>${clean(label)}</span></div>`;
+      }
+
+      function section(title, note, content) {
+        return `
+          <section class="wire-section">
+            <div class="section-title"><span>${clean(title)}</span><span>${clean(note || "")}</span></div>
+            ${content}
+          </section>
+        `;
+      }
+
+      function grid(items, columns = 2) {
+        const cls = columns === 4 ? "four" : columns === 3 ? "three" : columns === 2 ? "two" : "one";
+        return `<div class="grid ${cls}">${items.join("")}</div>`;
+      }
+
+      function currentRoute() {
+        const raw = decodeURI(window.location.hash.replace(/^#/, "")) || "/";
+        const [path, anchor] = raw.split("#");
+        return { path: normalizeRoute(path || "/"), anchor };
+      }
+
+      function buildMaps(seed) {
+        const built = {
+          states: asMap(seed.states),
+          cities: asMap(seed.cities),
+          branches: asMap(seed.branches),
+          loanOfficers: asMap(seed.loanOfficers),
+          products: asMap(seed.products),
+          ratesPages: asMap(seed.ratesPages),
+          blogPages: asMap(seed.blogPages),
+          articles: asMap(seed.articles),
+          calculators: asMap(seed.calculators),
+          directories: asMap(seed.directoryPages),
+          routeMap: new Map()
+        };
+
+        built.routeMap.set("/", { type: "home", item: seed.siteEntryPages[0] });
+        [
+          ["state", seed.states],
+          ["city", seed.cities],
+          ["branch", seed.branches],
+          ["loanOfficer", seed.loanOfficers],
+          ["product", seed.products],
+          ["rates", seed.ratesPages],
+          ["blog", seed.blogPages],
+          ["article", seed.articles],
+          ["calculator", seed.calculators],
+          ["directory", seed.directoryPages]
+        ].forEach(([type, list]) => {
+          (list || []).forEach((item) => built.routeMap.set(normalizeRoute(item.route), { type, item }));
+        });
+        built.routeMap.set("/locations", {
+          type: "locationOverview",
+          item: seed.directoryPages.find((page) => page.route === "/locations")
+        });
+        return built;
+      }
+
+      function header() {
+        return `
+          <header class="topbar">
+            <a class="brand" href="#/">
+              <strong>Snap Mortgage</strong>
+              <span>Routed wireframe prototype</span>
+            </a>
+            <nav class="nav" aria-label="Prototype navigation">
+              <a href="#/locations">Locations</a>
+              <a href="#/buy">Buy</a>
+              <a href="#/refinance">Refinance</a>
+              <a href="#/loan-options">Loan Options</a>
+              <a href="#/rates">Rates</a>
+              <a href="#/calculators/mortgage-payment">Calculators</a>
+              <a href="#/learning-center">Learning</a>
+              <a href="#/loan-officers">Loan Officers</a>
+              <a href="#/branches">Branches</a>
+            </nav>
+            <a class="action-link" href="#/loan-officers">Get matched</a>
+          </header>
+        `;
+      }
+
+      function pageShell(meta, introBlocks, mainBlocks, railBlocks) {
+        colorCursor = 0;
+        return `
+          ${header()}
+          <div class="contextbar">
+            <span>${clean(meta.crumbs)}</span>
+            <span>${clean(meta.source || "Prototype data - designer review")}</span>
+          </div>
+          <section class="page-intro">
+            ${introBlocks}
+          </section>
+          <div class="page-gap">${whiteSpace()}</div>
+          <section class="layout">
+            <main class="stack">${mainBlocks}</main>
+            <aside class="rail" aria-label="Page CTA rail">${railBlocks}</aside>
+          </section>
+          ${footer()}
+        `;
+      }
+
+      function footer() {
+        return `
+          <footer class="footer">
+            ${block("Global Footer - Compliance and NMLS", { hint: "Equal Housing, licensing, privacy, accessibility", size: "small", color: "c10" })}
+            ${block("Footer Locations", { to: "/locations", size: "small", color: "c6" })}
+            ${block("Footer Products", { to: "/loan-options", size: "small", color: "c4" })}
+            ${block("Footer Rates", { to: "/rates", size: "small", color: "c5" })}
+            ${block("Footer Learning", { to: "/learning-center", size: "small", color: "c2" })}
+            ${block("Footer Contact", { to: "/loan-officers", size: "small", color: "c1" })}
+          </footer>
+        `;
+      }
+
+      function rail(items) {
+        return items
+          .map((item, index) => {
+            if (item === "white") return whiteSpace();
+            return block(item.title, {
+              hint: item.hint,
+              to: item.to,
+              size: `rail-block ${index === 0 ? "primary" : ""}`
+            });
+          })
+          .join("");
+      }
+
+      function homePage() {
+        const products = first(data.products, 6);
+        const topics = data.blogPages.filter((page) => page.route !== "/learning-center").slice(0, 3);
+        const intro = `
+          ${block("Homepage Hero - Choose your mortgage path", {
+            hint: "Lead-in only: rates, calculators, products, locations, learning, and experts live on deeper pages",
+            to: "/locations",
+            size: "hero tall"
+          })}
+          ${block("Start Here CTA - Get matched or compare rates", {
+            hint: "Direct user to the next page instead of showing detailed data on home",
+            to: "/rates",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Homepage Lead-In Card Grid",
+            "Veterans United-style links into deeper pages",
+            grid([
+              block("Check today's mortgage rates", { to: "/rates", hint: "Compare rate types and get personalized options" }),
+              block("Find your city or state", { to: "/locations", hint: "Location hub with state and city pages" }),
+              block("Buy with a low down payment", { to: "/loan-options/fha-loans", hint: "FHA, VA, and first-time buyer paths" }),
+              block("Mortgage payment calculator", { to: "/calculators/mortgage-payment", hint: "Estimate payment with taxes and insurance" }),
+              block("First-time homebuyers", { to: "/learning-center/buying-a-home", hint: "Guides, checklists, and next steps" }),
+              block("Start your mortgage", { to: "/loan-officers", hint: "Get matched with a loan officer" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Deep-Dive Hubs",
+            "Home points out; deeper pages hold the details",
+            grid([
+              block("Location hub", { to: "/locations", hint: "State and city page library" }),
+              block("Rates hub", { to: "/rates", hint: "Bankrate/NerdWallet-style rates page" }),
+              block("Loan options hub", { to: "/loan-options", hint: "Product guides and comparisons" }),
+              block("Learning center", { to: "/learning-center", hint: "Articles, topic hubs, and local updates" })
+            ], 4)
+          ),
+          whiteSpace(),
+          section(
+            "Borrower Goal Paths",
+            "Rocket product routing plus loanDepot buy/refi split",
+            grid(products.map((product) => block(product.name, {
+              to: product.route,
+              hint: product.borrowerGoal || "Product guide"
+            })), 3)
+          ),
+          section(
+            "Learning Teasers",
+            "Preview only; full content lives in article/topic pages",
+            grid(topics.map((topic) => block(topic.name, {
+              to: topic.route,
+              hint: topic.purpose
+            })), 2)
+          ),
+          whiteSpace(),
+          section(
+            "Trust and Compliance",
+            "Visible from phase 1",
+            grid([
+              block("Source dates and data provenance", { hint: "Visible on deeper data pages" }),
+              block("NMLS and licensing footer", { hint: "Compliance review placeholder" }),
+              block("Editorial review signals", { hint: "Author, editor, reviewer model" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA Rail - Start your path", hint: "Home remains a routing surface", to: "/loan-officers" },
+          "white",
+          { title: "Compare Rates", hint: "New dedicated rates page", to: "/rates" },
+          { title: "Find a Local Expert", hint: "Loan officer directory", to: "/loan-officers" },
+          "white",
+          { title: "Learning Center Search", hint: "Editorial entry point", to: "/learning-center/search" }
+        ]);
+        return pageShell(
+          { crumbs: "Home", source: "Revised: home is a lead-in hub, not a market data page" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function locationOverviewPage() {
+        const states = first(data.states, 4);
+        const cities = first(data.cities, 12);
+        const branches = first(data.branches, 4);
+        const articles = data.articles.filter((article) => article.type === "local_market_update").slice(0, 4);
+        const intro = `
+          ${block("Location Overview Hero - Explore mortgage markets", {
+            hint: "Overall location page: state and city market data starts here, not on home",
+            to: states[0]?.route || "/locations",
+            size: "hero tall"
+          })}
+          ${block("Location Finder and Market Search", {
+            hint: "Search by state, city, branch coverage, or borrower goal",
+            to: "/learning-center/local-market-updates",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "State Market Entry Cards",
+            "Market-specific data moved off home",
+            grid(states.map((state) => block(`${state.name} mortgage market`, {
+              to: state.route,
+              hint: `${state.marketSnapshot.medianHomePrice} median - ${state.marketSnapshot.inventory} inventory`
+            })), 4)
+          ),
+          section(
+            "City Dashboard Links",
+            "Redfin-style city depth starts one click deeper",
+            grid(cities.map((city) => block(`${city.name} city dashboard`, {
+              to: city.route,
+              hint: `${city.marketSnapshot.paymentScenario} - ${city.marketSnapshot.daysOnMarket} DOM`
+            })), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Location Comparison Tools",
+            "Decision support before choosing a market",
+            grid([
+              block("Compare cities table", { hint: "Median price, payment, inventory, taxes" }),
+              block("Property tax and insurance overview", { hint: "State-level affordability factors" }),
+              block("Use city defaults in calculator", { to: "/calculators/mortgage-payment", hint: "Tool handoff" })
+            ], 3)
+          ),
+          section(
+            "Branch and Loan Officer Coverage",
+            "Placement modules attached to locations",
+            grid(branches.map((branch) => block(branch.name, {
+              to: branch.route,
+              hint: branch.coverageNote
+            })).concat([block("Loan officer directory", { to: "/loan-officers", hint: "Filter by state, city, product, language" })]), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Local Market Updates",
+            "Editorial feed for location context",
+            grid(articles.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "Location FAQ and Data Sources",
+            "Source dates and compliance",
+            grid([
+              block("Location FAQ", { hint: "How to compare cities and states" }),
+              block("Market data methodology", { hint: "Sources, date ranges, update cadence" }),
+              block("State licensing disclosure", { hint: "NMLS and state caveats" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - Find your market", hint: "Location overview action", to: states[0]?.route || "/locations" },
+          "white",
+          { title: "Compare City Payments", hint: "Use location data", to: "/calculators/mortgage-payment" },
+          { title: "Talk to a Local Expert", hint: "Location-aware placement", to: "/loan-officers" },
+          "white",
+          { title: "Read Market Updates", hint: "Editorial location hub", to: "/learning-center/local-market-updates" }
+        ]);
+        return pageShell(
+          { crumbs: "Home > Locations", source: "Revised: location overview houses state/city market entry" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function ratesPage(ratePage) {
+        const rateTypes = ratePage.rateTypes || ["30-year fixed", "15-year fixed", "FHA", "VA", "Jumbo", "Refinance"];
+        const stateLinks = first(data.states, 4);
+        const news = data.articles
+          .filter((article) => article.type === "local_market_update" || article.type === "product_explainer")
+          .slice(0, 4);
+        const intro = `
+          ${block("Rates Hero - Today's mortgage rates", {
+            hint: "Bankrate/NerdWallet-style rate comparison page",
+            to: "/calculators/mortgage-payment",
+            size: "hero tall"
+          })}
+          ${block("Personalized Rate Quote Form", {
+            hint: "Loan purpose, state, credit range, down payment, property type",
+            to: "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Current Rate Snapshot Cards",
+            "National averages and major loan types",
+            grid(rateTypes.slice(0, 6).map((type) => block(type, {
+              hint: "Rate, APR, points, source date placeholder"
+            })), 3)
+          ),
+          section(
+            "Personalized Rate Filters",
+            "NerdWallet-style inputs before table",
+            grid([
+              block("Loan Purpose Filter", { hint: "Purchase, refinance, cash-out, HELOC" }),
+              block("Location and Credit Filter", { hint: "State, city, credit score range" }),
+              block("Loan Amount and Down Payment", { hint: "Price, down payment, term" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Rate Comparison Table",
+            "Bankrate-style product rows",
+            grid([
+              block("Purchase Rates Table", { hint: "30-year, 15-year, FHA, VA, Jumbo", size: "large" }),
+              block("Refinance Rates Table", { hint: "Refi, cash-out, 15-year refi", size: "large" })
+            ], 2)
+          ),
+          section(
+            "Rate Trend and Market Context",
+            "Rates need explanation, not just numbers",
+            grid([
+              block("Mortgage Rate Trend Chart", { hint: "Daily/weekly movement and source date" }),
+              block("Fed and Inflation Context", { hint: "Plain-language editorial explanation" }),
+              block("Should I lock my rate?", { hint: "Decision support card" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Local Rate Links",
+            "Connect rates to location pages",
+            grid(stateLinks.map((state) => block(`${state.name} mortgage rates`, {
+              to: state.route,
+              hint: `${state.marketSnapshot.paymentScenario} payment context`
+            })), 4)
+          ),
+          section(
+            "Calculators and Rate News",
+            "Conversion and editorial support",
+            grid([
+              block("Mortgage Payment Calculator", { to: "/calculators/mortgage-payment", hint: "Estimate payment from a rate" }),
+              block("Affordability Calculator", { to: "/calculators/affordability", hint: "Buying power with rates" }),
+              block("Refinance Calculator", { to: "/calculators/refinance", hint: "Breakeven and savings" })
+            ].concat(news.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            }))), 3)
+          ),
+          section(
+            "Methodology, Assumptions, Disclosures",
+            "Bankrate/NerdWallet trust layer",
+            grid([
+              block("Rate methodology block", { hint: "How rates are sourced and updated" }),
+              block("APR and points assumptions", { hint: "Scenario disclosure" }),
+              block("Not a loan offer disclosure", { hint: "Compliance review placeholder" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - Get personalized rates", hint: "Primary rates conversion", to: "/loan-officers" },
+          "white",
+          { title: "Use Rate in Calculator", hint: "Payment handoff", to: "/calculators/mortgage-payment" },
+          { title: "Compare Local Markets", hint: "Location handoff", to: "/locations" },
+          "white",
+          { title: "Read Rate News", hint: "Learning center", to: "/learning-center/local-market-updates" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > ${ratePage.name}`, source: "New: Bankrate/NerdWallet-style rates page" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function statePage(state) {
+        const cities = byIds(state.cityIds, maps.cities);
+        const branches = byIds(state.branchIds, maps.branches);
+        const products = byIds(state.featuredProductIds, maps.products);
+        const stateModules = data.locationProductModules.filter((module) => module.stateId === state.id && !module.cityId);
+        const cityArticles = data.articles.filter((article) => (article.stateIds || []).includes(state.id)).slice(0, 4);
+        const intro = `
+          ${block(`State Hero - ${state.name} mortgage guide`, {
+            hint: "Redfin-style state market page with mortgage CTAs",
+            to: "/locations",
+            size: "hero tall"
+          })}
+          ${block("State CTA Rail Preview", {
+            hint: "Find city, compare loan options, contact statewide specialist",
+            to: cities[0]?.route || "/locations",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "State Market Snapshot",
+            "Data visible above the fold",
+            grid([
+              block("Median home price", { hint: state.marketSnapshot.medianHomePrice }),
+              block("Payment scenario", { hint: state.marketSnapshot.paymentScenario }),
+              block("Inventory", { hint: state.marketSnapshot.inventory }),
+              block("Tax context", { hint: state.marketSnapshot.propertyTaxContext })
+            ], 4)
+          ),
+          section(
+            "Major City Comparison",
+            "Redfin-style table and chart block",
+            grid(cities.map((city) => block(`${city.name} comparison row`, {
+              to: city.route,
+              hint: `${city.marketSnapshot.medianHomePrice} - ${city.marketSnapshot.taxRate} tax`
+            })), 3)
+          ),
+          whiteSpace(),
+          section(
+            "State Product Guidance",
+            "Localized product modules live inside state/city pages",
+            grid(products.map((product) => block(`${product.name} in ${state.name}`, {
+              to: product.route,
+              hint: "Canonical product route plus state context"
+            })).concat(stateModules.map((module) => block(module.name, {
+              to: `${module.parentPageRoute}${module.anchor}`,
+              anchor: module.anchor?.replace("#", ""),
+              hint: "Embedded location product module"
+            }))), 2)
+          ),
+          section(
+            "City Directory",
+            "Parent hub for city pages",
+            grid(cities.map((city) => block(`${city.name} city page`, {
+              to: city.route,
+              hint: city.prototypeEmphasis
+            })), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Loan Officers and Branches",
+            "Placement modules",
+            grid(branches.map((branch) => block(branch.name, {
+              to: branch.route,
+              hint: branch.coverageNote
+            })).concat([block("Statewide Loan Officer Grid", { to: "/loan-officers", hint: "Ranked specialists" })]), 2)
+          ),
+          section(
+            "State News Feed",
+            "Local market and tax/insurance coverage",
+            grid(cityArticles.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "State FAQ and Disclosures",
+            "Compliance-aware publishing",
+            grid([
+              block("State FAQ block", { hint: "Eligibility, taxes, insurance, products" }),
+              block("Market data source note", { hint: `Last updated ${state.marketSnapshot.lastUpdated}` }),
+              block("State-specific licensing disclosure", { hint: "NMLS and state caveats" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - Find your city", hint: "State hero action", to: cities[0]?.route || "/locations" },
+          "white",
+          { title: "Compare Loan Options", hint: "State product guidance", to: products[0]?.route || "/loan-options" },
+          { title: "State Branch Directory", hint: "Office fallback", to: "/branches" },
+          "white",
+          { title: "Follow This Market", hint: "Future Snap Homes hook", to: "/learning-center/local-market-updates" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Locations > ${state.name}`, source: "Approved: Redfin-style state data plus mortgage modules" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function cityPage(city, activeAnchor = "") {
+        const state = maps.states[city.stateId];
+        const branches = byIds(city.branchIds, maps.branches);
+        const officers = byIds(city.loanOfficerIds, maps.loanOfficers);
+        const products = byIds(city.productIds, maps.products);
+        const nearby = byIds(city.nearbyCityIds, maps.cities);
+        const articles = byIds(city.articleIds, maps.articles);
+        const modules = data.locationProductModules.filter((module) => module.cityId === city.id);
+        const intro = `
+          ${block(`City Hero - ${city.name}, ${state.abbr} mortgage and housing market`, {
+            hint: "Narrower Redfin-style market page with mortgage routing",
+            to: "/calculators/mortgage-payment",
+            size: "hero tall"
+          })}
+          ${block("Local Expert CTA Preview", {
+            hint: "Contextual LO/branch placement",
+            to: officers[0]?.route || "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const moduleBlocks = modules.map((module) => {
+          const product = maps.products[module.productId];
+          return block(module.name, {
+            to: `${city.route}${module.anchor}`,
+            anchor: module.anchor?.replace("#", ""),
+            hint: `${product?.name || "Product"} guidance embedded on city page`
+          });
+        });
+        const main = [
+          section(
+            "Market Snapshot Cards",
+            "First viewport data",
+            grid([
+              block("Median home price", { hint: city.marketSnapshot.medianHomePrice }),
+              block("Monthly payment scenario", { hint: city.marketSnapshot.paymentScenario }),
+              block("Inventory", { hint: city.marketSnapshot.inventory }),
+              block("Property tax", { hint: city.marketSnapshot.taxRate }),
+              block("Insurance context", { hint: city.marketSnapshot.insurance }),
+              block("Days on market", { hint: city.marketSnapshot.daysOnMarket })
+            ], 3)
+          ),
+          section(
+            "Trend Chart and Scenario Tables",
+            "Charts, payments, tax/insurance",
+            grid([
+              block("Home Price Trend Chart", { hint: "Line chart with source date", size: "large" }),
+              block("Payment Scenario Table", { hint: "Down payment and rate examples", size: "large", to: "/calculators/mortgage-payment" }),
+              block("Tax and Insurance Table", { hint: "Local assumptions and caveats", size: "large" })
+            ], 3)
+          ),
+          whiteSpace(activeAnchor ? `white space - anchored module: ${activeAnchor}` : "white space"),
+          section(
+            "Nearby City Comparison",
+            "Local market navigation",
+            grid(nearby.map((near) => block(`${near.name} comparison`, {
+              to: near.route,
+              hint: `${near.marketSnapshot.medianHomePrice} - ${near.marketSnapshot.inventory}`
+            })), 2)
+          ),
+          section(
+            "Embedded Local Product Modules",
+            "No standalone localized product pages",
+            grid(moduleBlocks.length ? moduleBlocks : products.map((product) => block(`${product.name} in ${city.name}`, {
+              to: product.route,
+              hint: "Canonical product route with local preview"
+            })), 2)
+          ),
+          whiteSpace(),
+          section(
+            "Buyer and Refinance Guidance",
+            "Short mortgage advice sections",
+            grid([
+              block("Buyer Guidance Section", { to: "/buy", hint: "Local purchase path" }),
+              block("Refinance Guidance Section", { to: "/refinance", hint: "Local refinance path" })
+            ], 2)
+          ),
+          section(
+            "Loan Officer and Branch Placement",
+            "Commercial conversion object",
+            grid(officers.map((officer) => block(officer.name, {
+              to: officer.route,
+              hint: `${officer.nmls} - ${officer.specialties.join(", ")}`
+            })).concat(branches.map((branch) => block(branch.name, {
+              to: branch.route,
+              hint: branch.coverageNote
+            }))), 3)
+          ),
+          section(
+            "Local News Feed",
+            "Editorial plus city graph links",
+            grid(articles.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "FAQ and Disclosure Footer",
+            "Source and compliance blocks",
+            grid([
+              block("City FAQ block", { hint: "Buying, refinance, taxes, insurance" }),
+              block("Market data source note", { hint: "Source/date range placeholder" }),
+              block("Licensing and eligibility caveats", { hint: "NMLS/state disclosure" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - Estimate payment", hint: city.marketSnapshot.paymentScenario, to: "/calculators/mortgage-payment" },
+          "white",
+          { title: "Contact Local Expert", hint: officers[0]?.name || "Loan officer", to: officers[0]?.route || "/loan-officers" },
+          { title: "Compare Nearby Cities", hint: "Market comparison loop", to: nearby[0]?.route || state.route },
+          "white",
+          { title: "Save This Market", hint: "Future Snap Homes hook", to: "/learning-center/local-market-updates" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Locations > ${state.name} > ${city.name}`, source: "Approved: Redfin market data, narrower mortgage column" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function productPage(product) {
+        const relatedCities = data.cities.filter((city) => (city.productIds || []).includes(product.id)).slice(0, 4);
+        const specialists = data.loanOfficers.filter((officer) =>
+          (officer.specialties || []).some((specialty) => specialty.toLowerCase().includes(product.name.split(" ")[0].toLowerCase()))
+        ).slice(0, 4);
+        const relatedArticles = data.articles.filter((article) => (article.productIds || []).includes(product.id)).slice(0, 4);
+        const modules = data.locationProductModules.filter((module) => module.productId === product.id).slice(0, 4);
+        const intro = `
+          ${block(`Product Hero - ${product.name}`, {
+            hint: "Bankrate FHA lender structure with local handoffs",
+            to: "/loan-officers",
+            size: "hero tall"
+          })}
+          ${block("Product Trust and CTA Rail Preview", {
+            hint: "Author/reviewer metadata, TOC, methodology, eligibility CTA",
+            to: "/calculators/mortgage-payment",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Editorial Trust and Table of Contents",
+            "Bankrate-inspired article/product trust layer",
+            grid([
+              block("Author, editor, reviewer row", { hint: "Trust metadata" }),
+              block("Product table of contents", { hint: "Requirements, comparison, FAQ" }),
+              block("Disclosure and methodology note", { hint: "Compliance-ready" })
+            ], 3)
+          ),
+          section(
+            "Product Fit and Requirements",
+            "Decision support above comparison",
+            grid([
+              block("Who It Fits Block", { hint: "Borrower fit summary" }),
+              block("Requirements Overview", { hint: "Credit, down payment, eligibility" }),
+              block("Benefits and Tradeoffs Table", { hint: "Comparison rows" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Scenario and Comparison Tables",
+            "Bankrate-style structured data",
+            grid([
+              block("Payment or Down Payment Scenario Table", { to: "/calculators/mortgage-payment", hint: "Run a scenario" }),
+              block("Largest Provider / Market Context", { hint: "Editorial comparison block" })
+            ], 2)
+          ),
+          section(
+            "Local Product Modules",
+            "City/state sections, not standalone routes",
+            grid(modules.map((module) => block(module.name, {
+              to: `${module.parentPageRoute}${module.anchor}`,
+              hint: "Embedded in location page"
+            })).concat(relatedCities.map((city) => block(`${product.name} context in ${city.name}`, {
+              to: city.route,
+              hint: "Local page handoff"
+            }))), 2)
+          ),
+          whiteSpace(),
+          section(
+            "Specialists and Calculators",
+            "Conversion handoffs",
+            grid((specialists.length ? specialists : first(data.loanOfficers, 4)).map((officer) => block(officer.name, {
+              to: officer.route,
+              hint: `${officer.nmls} - product specialist placeholder`
+            })).concat([block("Mortgage Payment Calculator", { to: "/calculators/mortgage-payment", hint: "Related calculator" })]), 3)
+          ),
+          section(
+            "Related Articles",
+            "Product editorial graph",
+            grid(relatedArticles.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "FAQ and Disclosures",
+            "Eligibility and APR caveats",
+            grid([
+              block("Product FAQ", { hint: "Structured FAQ schema candidate" }),
+              block("Eligibility caveat", { hint: "Not a commitment to lend" }),
+              block("APR and payment assumptions", { hint: "Source and review status" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - See if this loan fits", hint: "Product hero action", to: "/loan-officers" },
+          "white",
+          { title: "Estimate Payment", hint: "Scenario table action", to: "/calculators/mortgage-payment" },
+          { title: "Compare Products", hint: "Directory handoff", to: "/loan-options" },
+          "white",
+          { title: "Talk to a Specialist", hint: "Specialist LO grid", to: specialists[0]?.route || "/loan-officers" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Loan Options > ${product.name}`, source: "Approved: Bankrate product intelligence plus local routing" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function learningHome() {
+        const topics = data.blogPages.filter((page) => page.route !== "/learning-center").slice(0, 8);
+        const featured = first(data.articles, 6);
+        const intro = `
+          ${block("Learning Center Hero - NAF structure, Rocket polish", {
+            hint: "Search, categories, featured article, calculator CTA",
+            to: "/learning-center/search",
+            size: "hero tall"
+          })}
+          ${block("Featured Editorial CTA", {
+            hint: "Housing news, guides, videos, newsletter",
+            to: featured[0]?.route || "/learning-center",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Topic Navigation",
+            "NAF category depth",
+            grid(topics.map((topic) => block(topic.name, {
+              to: topic.route,
+              hint: topic.purpose
+            })), 4)
+          ),
+          whiteSpace(),
+          section(
+            "Featured Articles and Housing News",
+            "Publication rhythm",
+            grid(featured.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "Guides, Videos, and Calculator CTA",
+            "NAF learning hub modules",
+            grid([
+              block("Beginner Mortgage Guides", { to: "/learning-center/buying-a-home", hint: "Guide feed" }),
+              block("Latest Videos Placeholder", { hint: "Video card rail" }),
+              block("Mortgage Calculator CTA", { to: "/calculators/mortgage-payment", hint: "Tool handoff" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Newsletter and Editorial Trust",
+            "Compliance footer visible",
+            grid([
+              block("Newsletter / Market Follow Prompt", { hint: "Lead capture placeholder" }),
+              block("Editorial Team and Review Policy", { to: "/learning-center/editorial-team", hint: "Author/reviewer model" }),
+              block("Compliance and Licensing Footer", { hint: "Global disclosure" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Search Learning Center", hint: "Topic, city, product", to: "/learning-center/search" },
+          "white",
+          { title: "Popular Topic - Buying", hint: "Topic page", to: "/learning-center/buying-a-home" },
+          { title: "Popular Topic - Local Market Updates", hint: "Movement-style market tone", to: "/learning-center/local-market-updates" },
+          "white",
+          { title: "Run Calculator", hint: "Tool path", to: "/calculators/mortgage-payment" }
+        ]);
+        return pageShell(
+          { crumbs: "Home > Learning Center", source: "Approved: New American Funding plus Rocket" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function blogTopicPage(topic) {
+        if (topic.route === "/learning-center") return learningHome();
+        const articles = byIds(topic.featuredArticleIds, maps.articles);
+        const fallbackArticles = first(data.articles, 6);
+        const feed = articles.length ? articles : fallbackArticles;
+        const intro = `
+          ${block(`Topic Hero - ${topic.name}`, {
+            hint: "NAF deep topic hub plus Movement category pacing",
+            to: "/learning-center/search",
+            size: "hero tall"
+          })}
+          ${block("Topic Filter and Subscribe CTA", {
+            hint: "Search, category rail, city/product filters",
+            to: "/learning-center/search",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Subcategories and Featured Story",
+            "Topic page first viewport",
+            grid([
+              block("Featured Topic Article", { to: feed[0]?.route, hint: feed[0]?.reviewStatus || "Featured story" }),
+              block("Subcategory Tiles", { hint: "Buying, refinance, FHA, VA, local markets" }),
+              block("Topic Overview Copy", { hint: "Short, scannable, lender-owned" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Dated Article Feed",
+            "NAF grouped content plus Movement category feed",
+            grid(feed.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })), 2)
+          ),
+          section(
+            "Related Location and Product Cards",
+            "Content graph links",
+            grid(first(data.cities, 3).map((city) => block(city.name, {
+              to: city.route,
+              hint: "Related market"
+            })).concat(first(data.products, 3).map((product) => block(product.name, {
+              to: product.route,
+              hint: "Related product"
+            }))), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Topic FAQ and Trust Footer",
+            "Search/SEO support",
+            grid([
+              block("Topic FAQ", { hint: "Structured FAQ block" }),
+              block("Newsletter Prompt", { hint: "Market follow / lead capture" }),
+              block("Editorial Review Note", { hint: "Author and compliance status" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Topic CTA - Get guidance", hint: topic.name, to: "/loan-officers" },
+          "white",
+          { title: "Filter by City", hint: "Search route", to: "/learning-center/search" },
+          { title: "Related Calculator", hint: "Tool handoff", to: "/calculators/mortgage-payment" },
+          "white",
+          { title: "More Topics", hint: "Learning center home", to: "/learning-center" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Learning Center > ${topic.name}`, source: "Approved: New American Funding plus Movement category pages" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function articlePage(article) {
+        const cities = byIds(article.cityIds, maps.cities);
+        const products = byIds(article.productIds, maps.products);
+        const officers = data.loanOfficers.filter((officer) =>
+          (officer.priorityCityIds || []).some((id) => (article.cityIds || []).includes(id))
+        ).slice(0, 3);
+        const intro = `
+          ${block(`Article Hero - ${article.title}`, {
+            hint: "Bankrate trust, Rocket CTA, NAF/Movement lender tone",
+            to: cities[0]?.route || products[0]?.route || "/learning-center",
+            size: "hero tall"
+          })}
+          ${block("Author, Reviewer, Date, Share, CTA", {
+            hint: `${article.reviewStatus} - TOC and trust layer`,
+            to: "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Editorial Trust Row",
+            "Bankrate-inspired",
+            grid([
+              block("Author Bio Card", { hint: "Writer and credentials" }),
+              block("Editor / Reviewer Card", { hint: "Mortgage or compliance review" }),
+              block("Disclosure and Update Date", { hint: article.reviewStatus })
+            ], 3)
+          ),
+          section(
+            "Article Body",
+            "Publication layout",
+            grid([
+              block("Table of Contents", { hint: "Jump links" }),
+              block("Key Takeaways", { hint: "Bankrate-style summary" }),
+              block("Article Body Sections", { hint: "Source notes and callouts", size: "large" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Inline Conversion and Source Notes",
+            "Rocket conversion plus compliance",
+            grid([
+              block("Inline CTA Panel", { to: "/calculators/mortgage-payment", hint: "Run numbers or get guidance" }),
+              block("Source Notes", { hint: "Market data source/date range" }),
+              block("Methodology and AI Review Note", { hint: "Compliance placeholder" })
+            ], 3)
+          ),
+          section(
+            "Related Graph Blocks",
+            "Article is not a dead end",
+            grid(cities.map((city) => block(`Related city - ${city.name}`, {
+              to: city.route,
+              hint: city.marketSnapshot.paymentScenario
+            })).concat(products.map((product) => block(`Related product - ${product.name}`, {
+              to: product.route,
+              hint: "Product guide"
+            }))).concat(officers.map((officer) => block(`Related expert - ${officer.name}`, {
+              to: officer.route,
+              hint: officer.nmls
+            }))).concat([block("Related calculator", { to: "/calculators/mortgage-payment", hint: "Payment scenario" })]), 3)
+          ),
+          whiteSpace(),
+          section(
+            "FAQ, Feedback, Disclosures",
+            "Bankrate article trust pattern",
+            grid([
+              block("Article FAQ", { hint: "Structured FAQ" }),
+              block("Was this helpful / feedback", { hint: "Editorial quality loop" }),
+              block("Disclosure Block", { hint: "Eligibility and market-data caveats" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Article CTA - Get local guidance", hint: article.type, to: officers[0]?.route || "/loan-officers" },
+          "white",
+          { title: "Author / Reviewer Card", hint: article.reviewStatus, to: "/learning-center/editorial-team" },
+          { title: "Related City CTA", hint: cities[0]?.name || "Location", to: cities[0]?.route || "/locations" },
+          "white",
+          { title: "Compare Options", hint: products[0]?.name || "Loan options", to: products[0]?.route || "/loan-options" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Learning Center > ${article.title}`, source: "Approved: Bankrate trust plus Rocket/NAF/Movement" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function loanOfficerPage(officer) {
+        const branch = maps.branches[officer.branchId];
+        const cities = byIds(officer.priorityCityIds, maps.cities);
+        const products = data.products.filter((product) =>
+          officer.specialties.some((specialty) => product.name.toLowerCase().includes(specialty.split(" ")[0].toLowerCase()))
+        ).slice(0, 4);
+        const articles = data.articles.filter((article) =>
+          (article.cityIds || []).some((id) => officer.priorityCityIds.includes(id))
+        ).slice(0, 4);
+        const intro = `
+          ${block(`LO Hero - ${officer.name}`, {
+            hint: `${officer.nmls} - ${officer.specialties.join(", ")}`,
+            to: "/calculators/mortgage-payment",
+            size: "hero tall"
+          })}
+          ${block("Contact, Apply, Reviews, Social Links", {
+            hint: "NAF conversion plus Movement Amanda identity",
+            to: "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Proof and Service Area",
+            "Mortgage-native profile hero support",
+            grid([
+              block("Proof Stats and Review Signals", { hint: "Admin-controlled and sourceable" }),
+              block("Service Area Summary", { hint: officer.licensedStates.join(", ") }),
+              block("State Licensing Summary", { hint: "State authorization block" })
+            ], 3)
+          ),
+          section(
+            "Loan Fit Action Cards",
+            "Movement Amanda structure",
+            grid([
+              block("Mortgage Calculator Card", { to: "/calculators/mortgage-payment", hint: "Monthly payment" }),
+              block("Loan Fit / Product Card", { to: products[0]?.route || "/loan-options", hint: "Product handoff" }),
+              block("Start Application CTA", { hint: "Lead opportunity object" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Markets, Products, Branch",
+            "Structured relationships",
+            grid(cities.map((city) => block(`Market served - ${city.name}`, {
+              to: city.route,
+              hint: city.marketSnapshot.paymentScenario
+            })).concat((products.length ? products : first(data.products, 3)).map((product) => block(product.name, {
+              to: product.route,
+              hint: "Related product"
+            }))).concat(branch ? [block(`Branch - ${branch.name}`, { to: branch.route, hint: branch.coverageNote })] : []), 3)
+          ),
+          section(
+            "Articles, Quotes, Trust",
+            "Profile content feed",
+            grid(articles.map((article) => block(article.title, {
+              to: article.route,
+              hint: "Article/quote placement"
+            })).concat([block("Testimonials / Trust Signals", { hint: "Reviews and proof placeholder" })]), 2)
+          ),
+          whiteSpace(),
+          section(
+            "Contact Form and Licensing",
+            "Conversion and compliance",
+            grid([
+              block("Detailed Contact Form", { hint: "NAF-style form" }),
+              block("Office Hours and Phone/Email", { hint: "Movement-style contact data" }),
+              block("FAQ and Licensing Block", { hint: "NMLS, state licenses, EHL" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky Contact Rail", hint: "Call, email, apply", to: "/calculators/mortgage-payment" },
+          "white",
+          { title: "Start Prequalification", hint: "Primary CTA" },
+          { title: "Ask About a City", hint: cities[0]?.name || "Market", to: cities[0]?.route || "/locations" },
+          "white",
+          { title: "NMLS / License Summary", hint: officer.nmls }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Loan Officers > ${officer.name}`, source: "Approved: New American Funding plus Movement Amanda Silber" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function branchPage(branch) {
+        const state = maps.states[branch.stateId];
+        const cities = byIds(branch.cityIds, maps.cities);
+        const officers = byIds(branch.loanOfficerIds, maps.loanOfficers);
+        const products = first(data.products, 4);
+        const articles = data.articles.filter((article) =>
+          (article.cityIds || []).some((id) => branch.cityIds.includes(id))
+        ).slice(0, 4);
+        const intro = `
+          ${block(`Branch Hero - ${branch.name}`, {
+            hint: "Novus Edina branch identity, phone, address, manager",
+            to: officers[0]?.route || "/loan-officers",
+            size: "hero tall"
+          })}
+          ${block("Address, Map, Phone, Branch Manager", {
+            hint: "Branch manager card plus contact/map block",
+            to: "/branches",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Branch Identity and Manager",
+            "Novus primary reference",
+            grid([
+              block("Branch Manager Card", { hint: officers[0] ? `${officers[0].name} - ${officers[0].nmls}` : "Manager placeholder", to: officers[0]?.route }),
+              block("Where To Find Us Map Block", { hint: `${state.name} office location` }),
+              block("Local Branch Copy", { hint: "Proud to serve homebuyers copy" })
+            ], 3)
+          ),
+          section(
+            "Loan Officer Roster",
+            "LO names, roles, NMLS IDs, profile links",
+            grid(officers.map((officer) => block(officer.name, {
+              to: officer.route,
+              hint: `${officer.nmls} - ${officer.specialties.join(", ")}`
+            })), 2)
+          ),
+          whiteSpace(),
+          section(
+            "Services and Calculator Flow",
+            "Novus service modules plus embedded calculator",
+            grid([
+              block("Home Purchase Loans", { to: "/buy", hint: "Service module" }),
+              block("Refinancing Options", { to: "/refinance", hint: "Service module" }),
+              block("Personalized Consultation", { to: officers[0]?.route || "/loan-officers", hint: "Service module" }),
+              block("Embedded Mortgage Calculator", { to: "/calculators/mortgage-payment", hint: "Calculator flow" })
+            ], 4)
+          ),
+          section(
+            "Cities Served and Product Specialties",
+            "Coverage and product graph",
+            grid(cities.map((city) => block(city.name, {
+              to: city.route,
+              hint: city.marketSnapshot.paymentScenario
+            })).concat(products.map((product) => block(product.name, {
+              to: product.route,
+              hint: "Branch product specialty"
+            }))), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Local Articles and Nearby Branches",
+            "Branch content context",
+            grid(articles.map((article) => block(article.title, {
+              to: article.route,
+              hint: article.reviewStatus
+            })).concat(data.branches.filter((other) => other.id !== branch.id).slice(0, 2).map((other) => block(other.name, {
+              to: other.route,
+              hint: other.coverageNote
+            }))), 2)
+          ),
+          section(
+            "Branch FAQ and Licensing",
+            "Mortgage branch compliance",
+            grid([
+              block("Branch FAQ", { hint: "Hours, coverage, process, products" }),
+              block("Branch NMLS / Licensing Block", { hint: "State-specific disclosure" }),
+              block("Equal Housing and Contact Disclosure", { hint: "Footer compliance" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky Branch CTA - Contact Branch", hint: branch.coverageNote, to: officers[0]?.route || "/loan-officers" },
+          "white",
+          { title: "Meet the Team", hint: `${officers.length} loan officers`, to: officers[0]?.route || "/loan-officers" },
+          { title: "Run Branch Calculator", hint: "Embedded tool handoff", to: "/calculators/mortgage-payment" },
+          "white",
+          { title: "Coverage Note", hint: branch.coverageNote }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Branches > ${branch.name}`, source: "Approved: Novus Edina branch" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function calculatorPage(calc) {
+        const intro = `
+          ${block(`Tool Hero - ${calc.name}`, {
+            hint: "Capture scenario context, then route into city/product/expert recommendations",
+            to: "/locations/texas/austin",
+            size: "hero tall"
+          })}
+          ${block("Calculator CTA Preview", {
+            hint: "Use city defaults, save scenario, discuss numbers",
+            to: "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Calculator Inputs and Results",
+            "Core tool surface",
+            grid([
+              block("Input Panel", { hint: (calc.captures || []).join(", "), size: "large" }),
+              block("Result Panel", { hint: "Payment, taxes, insurance, PMI, next action", size: "large" })
+            ], 2)
+          ),
+          section(
+            "Scenario Assumptions",
+            "Disclosures by default",
+            grid([
+              block("Assumptions Block", { hint: "Rate, taxes, insurance, PMI, dates" }),
+              block("Scenario CTA", { to: "/loan-officers", hint: "Discuss these numbers" }),
+              block("Save Scenario Prompt", { hint: "Future account/Snap Homes hook" })
+            ], 3)
+          ),
+          whiteSpace(),
+          section(
+            "Related Guidance and Routing",
+            "Tool-to-content graph",
+            grid(first(data.products, 4).map((product) => block(product.name, {
+              to: product.route,
+              hint: "Related product"
+            })).concat(first(data.cities, 4).map((city) => block(city.name, {
+              to: city.route,
+              hint: "Use market defaults"
+            }))), 4)
+          ),
+          section(
+            "Recommended Expert or Branch",
+            "Conversion after calculation",
+            grid(first(data.loanOfficers, 3).map((officer) => block(officer.name, {
+              to: officer.route,
+              hint: officer.nmls
+            })).concat(first(data.branches, 3).map((branch) => block(branch.name, {
+              to: branch.route,
+              hint: branch.coverageNote
+            }))), 3)
+          ),
+          whiteSpace(),
+          section(
+            "FAQ and Disclosure",
+            "Calculator compliance",
+            grid([
+              block("Calculator FAQ", { hint: "Inputs, assumptions, interpretation" }),
+              block("Rate and Payment Assumptions", { hint: "Not a quote or commitment" }),
+              block("Tax and Insurance Caveat", { hint: "Local estimate caveat" })
+            ], 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky CTA - Calculate", hint: calc.name },
+          "white",
+          { title: "Use Austin Defaults", hint: "City route handoff", to: "/locations/texas/austin" },
+          { title: "Discuss These Numbers", hint: "Expert route", to: "/loan-officers" },
+          "white",
+          { title: "Assumptions Summary", hint: (calc.captures || []).slice(0, 4).join(", ") }
+        ]);
+        return pageShell(
+          { crumbs: `Home > Calculators > ${calc.name}`, source: "Calculator routes preserve scenario context" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function directoryPage(directory) {
+        const route = directory.route;
+        const resultSets = {
+          "/locations": data.states.concat(data.cities),
+          "/loan-officers": data.loanOfficers,
+          "/branches": data.branches,
+          "/learning-center/search": data.articles.concat(data.blogPages),
+          "/loan-options": data.products
+        };
+        const results = resultSets[route] || data.cities;
+        const intro = `
+          ${block(`Directory Hero - ${directory.name}`, {
+            hint: `Search and filter page for ${directory.filters.join(", ")}`,
+            to: results[0]?.route || "/",
+            size: "hero tall"
+          })}
+          ${block("Directory Help CTA", {
+            hint: "Get matched, saved filters, support CTA",
+            to: "/loan-officers",
+            size: "hero"
+          })}
+        `;
+        const main = [
+          section(
+            "Filter Rail and Results",
+            "Search page primary layout",
+            grid([
+              block("Filter Rail", { hint: directory.filters.join(", "), size: "large" }),
+              block("Results Grid / List", { hint: `${results.length} seeded results`, size: "large" })
+            ], 2)
+          ),
+          section(
+            "Example Result Cards",
+            "Clickable seeded entities",
+            grid(first(results, 12).map((item) => block(item.name || item.title, {
+              to: item.route,
+              hint: item.prototypeRole || item.prototypeEmphasis || item.purpose || item.reviewStatus || "Result card"
+            })), 3)
+          ),
+          whiteSpace(),
+          section(
+            "Map/List, Empty State, Pagination",
+            "Directory interaction states",
+            grid([
+              block("Map / List Toggle Area", { hint: "Useful for locations and branches" }),
+              block("Empty State Variant", { hint: "No results after filters" }),
+              block("Pagination / Load More", { hint: "Result navigation" })
+            ], 3)
+          ),
+          section(
+            "Related Directory Links",
+            "Cross-directory routing",
+            grid(data.directoryPages.map((page) => block(page.name, {
+              to: page.route,
+              hint: page.filters.join(", ")
+            })), 3)
+          )
+        ].join("");
+        const side = rail([
+          { title: "Sticky Directory CTA - Get matched", hint: directory.name, to: "/loan-officers" },
+          "white",
+          { title: "Saved Filters", hint: "Prototype state placeholder" },
+          { title: "Popular Result", hint: results[0]?.name || results[0]?.title, to: results[0]?.route },
+          "white",
+          { title: "Support CTA", hint: "Contact or route help" }
+        ]);
+        return pageShell(
+          { crumbs: `Home > ${directory.name}`, source: "Directory pages behave like filtered product search" },
+          intro,
+          main,
+          side
+        );
+      }
+
+      function notFoundPage(path) {
+        const intro = `
+          ${block("Route Not Found", {
+            hint: path,
+            to: "/",
+            size: "hero tall"
+          })}
+          ${block("Return to Prototype Home", {
+            to: "/",
+            size: "hero"
+          })}
+        `;
+        return pageShell(
+          { crumbs: `Missing route > ${path}`, source: "Prototype route fallback" },
+          intro,
+          section("Available Directories", "Use seeded routes", grid(data.directoryPages.map((page) => block(page.name, { to: page.route })), 3)),
+          rail([{ title: "Back Home", to: "/" }])
+        );
+      }
+
+      function render() {
+        const app = document.getElementById("app");
+        const { path, anchor } = currentRoute();
+        const found = maps.routeMap.get(path);
+        let html;
+        if (!found) {
+          html = notFoundPage(path);
+        } else if (found.type === "home") {
+          html = homePage();
+        } else if (found.type === "locationOverview") {
+          html = locationOverviewPage();
+        } else if (found.type === "rates") {
+          html = ratesPage(found.item);
+        } else if (found.type === "state") {
+          html = statePage(found.item);
+        } else if (found.type === "city") {
+          html = cityPage(found.item, anchor);
+        } else if (found.type === "product") {
+          html = productPage(found.item);
+        } else if (found.type === "blog") {
+          html = blogTopicPage(found.item);
+        } else if (found.type === "article") {
+          html = articlePage(found.item);
+        } else if (found.type === "loanOfficer") {
+          html = loanOfficerPage(found.item);
+        } else if (found.type === "branch") {
+          html = branchPage(found.item);
+        } else if (found.type === "calculator") {
+          html = calculatorPage(found.item);
+        } else if (found.type === "directory") {
+          html = directoryPage(found.item);
+        }
+        app.innerHTML = html;
+        if (anchor) {
+          requestAnimationFrame(() => {
+            const target = document.getElementById(anchor);
+            if (target) target.scrollIntoView({ block: "center" });
+          });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+      }
+
+      async function boot() {
+        try {
+          const response = await fetch(seedUrl);
+          data = await response.json();
+          maps = buildMaps(data);
+          render();
+          window.addEventListener("hashchange", render);
+        } catch (error) {
+          document.getElementById("app").innerHTML = `
+            <section class="status">
+              <div class="block c5">
+                <strong>Could not load mock-data/prototype-seed.json</strong>
+                <small>${clean(error.message)}</small>
+              </div>
+            </section>
+          `;
+        }
+      }
+
+      boot();
+    </script>
+  </body>
+</html>

@@ -64,7 +64,7 @@ Each product should support:
 - Related calculators.
 - Related products.
 - Specialist loan officers.
-- Localized variants.
+- Location-specific product module rules for state and city pages.
 
 ## Editorial Admin
 

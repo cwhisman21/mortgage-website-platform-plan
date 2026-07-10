@@ -21,7 +21,7 @@ Build a mortgage editorial and placement platform that helps borrowers understan
 The site should be more than a lender brochure:
 
 - Local city and state dashboards with standardized facts, tables, charts, and news.
-- Product pages and localized product pages for purchase, refinance, equity, FHA, VA, jumbo, and other loan paths.
+- Product pages for purchase, refinance, equity, FHA, VA, jumbo, and other loan paths, with location-specific product modules embedded on city and state pages.
 - Blog/news publishing tied back to locations, products, loan officers, branches, and calculators.
 - Sticky contextual CTAs that move with the user as they scroll.
 - Admin/CMS controls for locations, products, loan officers, branches, editorial content, market data, CTAs, and compliance review.
@@ -55,3 +55,16 @@ Use this repo as the source of truth for:
 - [SEO And Compliance](docs/07-seo-and-compliance.md)
 - [Grill Me Questions](docs/08-grill-me-questions.md)
 - [GitHub Setup Guide](docs/09-github-setup-guide.md)
+- [V1 PRD](docs/10-v1-prd.md)
+- [Wireframe Block Spec](docs/11-wireframe-block-spec.md)
+- [Prototype Content Seed Plan](docs/12-prototype-content-seed-plan.md)
+- [Prototype Route Inventory](docs/13-prototype-route-inventory.md)
+- [Design Reference Examples](docs/14-design-reference-examples.md)
+- [Production Research And Content Plan](docs/15-production-research-and-content-plan.md)
+- [Location News Feed Plan](docs/19-location-news-feed-plan.md)
+- [Location News Research And Build Brief](docs/20-location-news-research-and-build-brief.md)
+- [Location News Feed Implementation Plan](docs/superpowers/plans/2026-07-10-location-news-feed-implementation.md)
+
+## Seed Data
+
+- [Production Research Seed Data](mock-data/production-seed.json)

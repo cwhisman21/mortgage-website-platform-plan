@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homepage Wireframe</title>
+    <style>
+      :root {
+        --ink: #1f2933;
+        --line: #394b59;
+        --page: #f4f0e8;
+        --white-space-bg: #fffaf0;
+        --white-space-line: rgba(57, 75, 89, 0.22);
+        --header: #d7e8f7;
+        --context: #f2dfcf;
+        --hero: #cdebd6;
+        --hero-side: #f3d6e2;
+        --goal: #d8d0f2;
+        --market: #f8e3a4;
+        --product: #bfe8e0;
+        --calc: #f5c7ad;
+        --learn: #c9def8;
+        --expert: #e5d3a5;
+        --rail: #cfe1c3;
+        --footer: #d9d6cf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family:
+          "Trebuchet MS",
+          "Avenir Next",
+          Verdana,
+          sans-serif;
+      }
+
+      .page {
+        width: 1440px;
+        min-height: 2200px;
+        margin: 0 auto;
+        background: #fffdf8;
+        border-left: 2px solid var(--line);
+        border-right: 2px solid var(--line);
+      }
+
+      .block,
+      .white-space {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 96px;
+        border: 2px solid var(--line);
+        border-radius: 0;
+        text-align: center;
+        color: var(--ink);
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .block span,
+      .white-space span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: min(88%, 560px);
+        min-height: 42px;
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(57, 75, 89, 0.38);
+      }
+
+      .white-space {
+        min-height: 72px;
+        background:
+          repeating-linear-gradient(
+            135deg,
+            var(--white-space-bg) 0,
+            var(--white-space-bg) 12px,
+            var(--white-space-line) 12px,
+            var(--white-space-line) 14px
+          );
+        color: rgba(31, 41, 51, 0.74);
+      }
+
+      .header {
+        height: 92px;
+        background: var(--header);
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+      }
+
+      .context {
+        min-height: 54px;
+        background: var(--context);
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 2fr 0.95fr;
+        gap: 18px;
+        padding: 22px 32px 0;
+      }
+
+      .hero {
+        min-height: 360px;
+        background: var(--hero);
+      }
+
+      .hero-side {
+        min-height: 360px;
+        background: var(--hero-side);
+      }
+
+      .main-frame {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 284px;
+        gap: 22px;
+        padding: 0 32px 34px;
+      }
+
+      .main-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .rail-stack {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+
+      .cta-rail {
+        min-height: 430px;
+        background: var(--rail);
+      }
+
+      .rail-support {
+        min-height: 260px;
+        background: #e9cbd2;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .goal {
+        min-height: 190px;
+        background: var(--goal);
+      }
+
+      .market {
+        min-height: 270px;
+        background: var(--market);
+      }
+
+      .market-wide {
+        min-height: 310px;
+        background: #ecd38d;
+      }
+
+      .product {
+        min-height: 220px;
+        background: var(--product);
+      }
+
+      .calculator {
+        min-height: 230px;
+        background: var(--calc);
+      }
+
+      .learning {
+        min-height: 300px;
+        background: var(--learn);
+      }
+
+      .expert {
+        min-height: 280px;
+        background: var(--expert);
+      }
+
+      .footer {
+        min-height: 220px;
+        background: var(--footer);
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .section-gap {
+        margin: 18px 32px;
+      }
+
+      @media (max-width: 900px) {
+        .page {
+          width: 100%;
+          min-height: auto;
+          border: 0;
+        }
+
+        .hero-grid,
+        .main-frame,
+        .two-col,
+        .three-col {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-grid,
+        .main-frame {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .section-gap {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
+
+        .cta-rail {
+          min-height: 92px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page" aria-label="Homepage wireframe">
+      <section class="block header"><span>Global Header</span></section>
+      <section class="block context"><span>Homepage Context / Utility Bar</span></section>
+
+      <section class="hero-grid">
+        <div class="block hero"><span>Market Search Hero</span></div>
+        <div class="block hero-side"><span>Local Expert Matcher Preview</span></div>
+      </section>
+
+      <section class="white-space section-gap"><span>white space</span></section>
+
+      <section class="main-frame">
+        <div class="main-stack">
+          <section class="three-col">
+            <div class="block goal"><span>Borrower Goal Path: Buy</span></div>
+            <div class="block market"><span>Borrower Goal Path: Refinance</span></div>
+            <div class="block product"><span>Borrower Goal Path: Home Equity</span></div>
+          </section>
+
+          <section class="white-space"><span>white space</span></section>
+
+          <section class="block market-wide"><span>Featured Market Snapshot Grid</span></section>
+
+          <section class="two-col">
+            <div class="block product"><span>Featured State Pages</span></div>
+            <div class="block goal"><span>Featured City Pages</span></div>
+          </section>
+
+          <section class="white-space"><span>white space</span></section>
+
+          <section class="three-col">
+            <div class="block product"><span>Product Path: Purchase Loans</span></div>
+            <div class="block calculator"><span>Product Path: Refinance</span></div>
+            <div class="block learning"><span>Product Path: FHA / VA / Jumbo</span></div>
+          </section>
+
+          <section class="two-col">
+            <div class="block calculator"><span>Calculator Entry Points</span></div>
+            <div class="block expert"><span>Local Expert Match Module</span></div>
+          </section>
+
+          <section class="white-space"><span>white space</span></section>
+
+          <section class="block learning"><span>Featured Learning Center Content</span></section>
+
+          <section class="two-col">
+            <div class="block market"><span>Local Market Updates Feed</span></div>
+            <div class="block product"><span>Product Education Feed</span></div>
+          </section>
+
+          <section class="white-space"><span>white space</span></section>
+
+          <section class="block expert"><span>Trust / Compliance / Review Signals</span></section>
+        </div>
+
+        <aside class="rail-stack" aria-label="Homepage right rail">
+          <div class="block cta-rail"><span>Sticky CTA Rail</span></div>
+          <div class="white-space"><span>white space</span></div>
+          <div class="block rail-support"><span>Featured Loan Officer Card</span></div>
+          <div class="block calculator"><span>Mini Calculator Prompt</span></div>
+          <div class="white-space"><span>white space</span></div>
+          <div class="block learning"><span>Newsletter / Market Follow Prompt</span></div>
+        </aside>
+      </section>
+
+      <section class="block footer"><span>Global Footer</span></section>
+    </main>
+  </body>
+</html>
