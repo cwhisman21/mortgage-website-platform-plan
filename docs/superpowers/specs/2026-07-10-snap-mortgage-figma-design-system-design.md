@@ -48,14 +48,13 @@ Create a high-fidelity Figma source of truth for the Snap Mortgage public-site c
 
 ## Figma File Structure
 
-### 00 Reference
+The authenticated Figma Starter workspace allows three file pages. Preserve the approved organization with three Figma pages and named canvas sections rather than seven Figma pages.
+
+### 00 Reference & Foundations
 
 - Current approved public-site screenshots.
 - Existing wireframe inventory and page-template reference.
 - A short note that page structure is fixed during component cleanup.
-
-### 01 Foundations
-
 - Color variables for core navy, blue, teal, orange, neutral surfaces, borders, and semantic states.
 - Typography variables and styles: Outfield display headings plus the existing sans-serif UI/body scale.
 - Spacing, grid, breakpoint, radius, stroke, and elevation tokens.
@@ -72,7 +71,11 @@ Create a high-fidelity Figma source of truth for the Snap Mortgage public-site c
 - Calculator input controls, result summaries, assumption blocks, and compact calculator modules.
 - FAQ blocks, news cards, carousel controls, empty states, loading states, and error states.
 
-### 03 Desktop Templates
+### 02 Templates & Campaign
+
+Create these named sections on this Figma page: `Desktop Templates`, `Mobile Templates`, `Campaign Hero`, and `Future Custom Work`.
+
+#### Desktop Templates
 
 - Homepage.
 - City/State market dashboard.
@@ -81,19 +84,19 @@ Create a high-fidelity Figma source of truth for the Snap Mortgage public-site c
 - Product page.
 - Article page.
 
-### 04 Mobile Templates
+#### Mobile Templates
 
 - Matching mobile frame for each desktop core template.
 - Mobile navigation, single-column stacking, chart/table overflow behavior, sticky action treatment, and touch target rules.
 
-### 05 Campaign Hero
+#### Campaign Hero
 
 - Supplied mortgage-machine image retained as the visual source.
 - Baked wording removed from the working hero composition where editable copy is needed.
 - Headline, supporting copy, button label, machine-panel wording, and card labels recreated as editable text layers.
 - Decorative loan cards remain visual campaign elements; they do not become product selection controls.
 
-### 06 Future Custom Work
+#### Future Custom Work
 
 - Reserved for later page-specific image direction, bespoke illustrations, local-market visual treatments, and custom modules after the component system is approved.
 
@@ -141,7 +144,7 @@ The supplied campaign source uses approval and rate/APR language. It is accepted
 
 ## Acceptance Criteria
 
-- A new Figma file follows the six-page structure above.
+- A new Figma file follows the approved three-page Starter-plan structure above.
 - Foundations and reusable components are created before page-level custom work.
 - The six core templates have high-fidelity desktop and mobile frames using component instances.
 - Page-family composition matches the approved map.
