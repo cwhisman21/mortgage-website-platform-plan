@@ -250,3 +250,9 @@ test("stylesheet covers chart marks, tooltips, and reduced motion", () => {
   assert.match(stylesheet, /\[data-chart-active="true"\]/);
   assert.match(stylesheet, /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+test("keyboard chart marks retain an explicit high-contrast focus ring", () => {
+  const stylesheet = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+  assert.match(stylesheet, /\.market-chart-mark:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--navy\);[^}]*outline-offset:\s*3px;/);
+  assert.doesNotMatch(stylesheet, /\.market-chart-mark\s*\{[^}]*outline:\s*none;/);
+});

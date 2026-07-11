@@ -1080,7 +1080,11 @@ tr:last-child td {
 
 .market-chart-mark {
   cursor: crosshair;
-  outline: none;
+}
+
+.market-chart-mark:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
 }
 
 .market-chart-hit-target {
