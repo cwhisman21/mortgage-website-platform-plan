@@ -98,11 +98,15 @@ export function wireMarketChartInteractions(root) {
   };
   const markFrom = (target) => typeof target?.closest === "function" ? target.closest(".market-chart-mark") : null;
 
+  const hideMark = (mark) => {
+    const tooltip = mark?.closest("[data-market-chart]")?.querySelector("[data-chart-tooltip]");
+    mark?.removeAttribute("data-chart-active");
+    if (tooltip) tooltip.hidden = true;
+  };
+
   const hide = () => {
     if (!activeMark) return;
-    const tooltip = activeMark.closest("[data-market-chart]")?.querySelector("[data-chart-tooltip]");
-    activeMark.removeAttribute("data-chart-active");
-    if (tooltip) tooltip.hidden = true;
+    hideMark(activeMark);
     activeMark = null;
     touchPinned = false;
   };
@@ -112,7 +116,7 @@ export function wireMarketChartInteractions(root) {
     const tooltip = figure?.querySelector("[data-chart-tooltip]");
     if (!figure || !tooltip) return;
 
-    if (activeMark && activeMark !== mark) activeMark.removeAttribute("data-chart-active");
+    if (activeMark && activeMark !== mark) hideMark(activeMark);
     activeMark = mark;
     mark.setAttribute("data-chart-active", "true");
     tooltip.querySelector("[data-chart-tooltip-label]").textContent = mark.dataset.chartLabel;

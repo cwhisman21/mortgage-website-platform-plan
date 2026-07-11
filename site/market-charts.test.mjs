@@ -7,6 +7,7 @@ import {
   computeChartTooltipPosition,
   renderChartFigure,
   renderSnapshotSourceNote,
+  wireMarketChartInteractions,
 } from "./market-charts.mjs";
 
 const seed = JSON.parse(fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"));
@@ -15,6 +16,66 @@ const fixtures = loadMarketChartFixtures(
 );
 
 const chartCount = (chartId) => fixtures.charts.filter((fixture) => fixture.chartId === chartId).length;
+
+function chartInteractionHarness() {
+  const listeners = new Map();
+  const root = {
+    addEventListener(type, handler) {
+      if (!listeners.has(type)) listeners.set(type, new Set());
+      listeners.get(type).add(handler);
+    },
+    removeEventListener(type, handler) {
+      listeners.get(type)?.delete(handler);
+    },
+    dispatch(type, event) {
+      for (const handler of listeners.get(type) || []) handler(event);
+    },
+    listenerCount() {
+      return [...listeners.values()].reduce((count, handlers) => count + handlers.size, 0);
+    },
+  };
+  const rectangle = { left: 0, top: 0, width: 640, height: 400 };
+  const tooltip = () => {
+    const fields = new Map([
+      ["[data-chart-tooltip-label]", { textContent: "" }],
+      ["[data-chart-tooltip-value]", { textContent: "" }],
+      ["[data-chart-tooltip-source]", { textContent: "" }],
+      ["[data-chart-tooltip-as-of]", { textContent: "" }],
+    ]);
+    return {
+      hidden: true,
+      style: {},
+      querySelector(selector) { return fields.get(selector) || null; },
+      getBoundingClientRect() { return { ...rectangle, width: 180, height: 90 }; },
+    };
+  };
+  const figure = (chartTooltip) => ({
+    querySelector(selector) { return selector === "[data-chart-tooltip]" ? chartTooltip : null; },
+    getBoundingClientRect() { return rectangle; },
+  });
+  const mark = (chartFigure, label) => {
+    const attributes = new Map();
+    return {
+      dataset: { chartLabel: label, chartValue: "$100", chartSource: "Source", chartAsOf: "2026-07-11" },
+      closest(selector) {
+        if (selector === ".market-chart-mark") return this;
+        return selector === "[data-market-chart]" ? chartFigure : null;
+      },
+      contains(target) { return target === this; },
+      matches() { return false; },
+      setAttribute(name, value) { attributes.set(name, value); },
+      removeAttribute(name) { attributes.delete(name); },
+      hasAttribute(name) { return attributes.has(name); },
+      getBoundingClientRect() { return { ...rectangle, width: 16, height: 16 }; },
+    };
+  };
+  const tooltipA = tooltip();
+  const tooltipB = tooltip();
+  const markA = mark(figure(tooltipA), "A");
+  const markB = mark(figure(tooltipB), "B");
+  const touch = (target) => root.dispatch("pointerdown", { pointerType: "touch", target, clientX: 20, clientY: 20 });
+  return { root, tooltipA, tooltipB, markA, markB, touch };
+}
 
 test("fixtures cover every planned chart surface", () => {
   const expected = 1 + (seed.states.length * 2) + (seed.cities.length * 2) + seed.products.length + seed.calculators.length + seed.articles.length;
@@ -154,4 +215,30 @@ test("tooltip positioning follows the point and clamps inside the figure", () =>
     x: 315,
     y: 12,
   }), { left: 132, top: 24 });
+});
+
+test("delegated touch interactions hide prior figure tooltips and teardown clears all state", () => {
+  const harness = chartInteractionHarness();
+  const teardown = wireMarketChartInteractions(harness.root);
+
+  harness.touch(harness.markA);
+  assert.equal(harness.tooltipA.hidden, false);
+  assert.equal(harness.markA.hasAttribute("data-chart-active"), true);
+
+  harness.touch(harness.markB);
+  assert.equal(harness.tooltipA.hidden, true);
+  assert.equal(harness.markA.hasAttribute("data-chart-active"), false);
+  assert.equal(harness.tooltipB.hidden, false);
+  assert.equal(harness.markB.hasAttribute("data-chart-active"), true);
+
+  harness.root.dispatch("pointerdown", { pointerType: "touch", target: {} });
+  assert.equal(harness.tooltipA.hidden, true);
+  assert.equal(harness.tooltipB.hidden, true);
+
+  harness.touch(harness.markA);
+  harness.touch(harness.markB);
+  teardown();
+  assert.equal(harness.tooltipA.hidden, true);
+  assert.equal(harness.tooltipB.hidden, true);
+  assert.equal(harness.root.listenerCount(), 0);
 });
