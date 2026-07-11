@@ -5,6 +5,7 @@ import { renderLocationsHero } from "./locations-hero.mjs";
 
 const seed = JSON.parse(fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"));
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
+const stylesheet = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 
 test("renders a centered map-first borrower hero", () => {
   const html = renderLocationsHero(seed.states);
@@ -26,4 +27,12 @@ test("the locations page renders one hero map and no duplicate map section", () 
 
   assert.equal((locationsSource.match(/renderLocationsHero\(data\.states\)/g) || []).length, 1);
   assert.doesNotMatch(locationsSource, /Browse state mortgage markets|renderUsStateMap/);
+});
+
+test("styles the locations hero as a large centered map composition", () => {
+  assert.match(stylesheet, /\.locations-hero-inner\s*\{/);
+  assert.match(stylesheet, /\.locations-hero \.us-state-map\s*\{/);
+  assert.match(stylesheet, /width:\s*min\(1100px, 100%\)/);
+  assert.match(stylesheet, /aspect-ratio:\s*1000\s*\/\s*589/);
+  assert.match(stylesheet, /@media \(max-width: 760px\)[\s\S]*\.locations-hero-search/);
 });
