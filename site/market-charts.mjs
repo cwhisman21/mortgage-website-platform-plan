@@ -66,29 +66,66 @@ function seriesDescription(fixture) {
   return `${fixture.title}. ${fixture.table.rows.map((row) => row.join(": ")).join("; ")}.`;
 }
 
-function pointLabel(fixture, index) {
-  return fixture.table.rows[index]?.join(": ") || `${fixture.points[index].label}: ${fixture.points[index].value}`;
+function pointDetails(fixture, index) {
+  const row = fixture.table.rows[index] || [];
+  const label = String(row[0] ?? fixture.points[index].label);
+  const value = String(row.slice(1).join(" | ") || fixture.points[index].value);
+  const source = String(fixture._source?.label || "Source");
+  const asOf = String(fixture.asOf);
+  return { label, value, source, asOf };
+}
+
+function markAttributes(fixture, index) {
+  const details = pointDetails(fixture, index);
+  const accessibleName = `${details.label}: ${details.value}. Source: ${details.source}. As of: ${details.asOf}.`;
+  return `class="market-chart-mark" tabindex="0" role="img" aria-label="${escapeHtml(accessibleName)}" data-chart-label="${escapeHtml(details.label)}" data-chart-value="${escapeHtml(details.value)}" data-chart-source="${escapeHtml(details.source)}" data-chart-as-of="${escapeHtml(details.asOf)}"`;
+}
+
+function tooltipMarkup() {
+  return `<div class="market-chart-tooltip" role="tooltip" hidden data-chart-tooltip><strong data-chart-tooltip-label></strong><span data-chart-tooltip-value></span><small><span data-chart-tooltip-source></span><span data-chart-tooltip-as-of></span></small></div>`;
 }
 
 function lineSvg(fixture) {
   const values = fixture.points.map((point) => number(point.value));
-  const min = Math.min(...values); const max = Math.max(...values); const span = max - min || 1;
-  const width = 640; const height = 250; const pad = 32;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const span = max - min || 1;
+  const width = 640;
+  const height = 250;
+  const pad = 32;
   const xy = (value, index) => `${pad + (index * (width - pad * 2)) / Math.max(fixture.points.length - 1, 1)},${height - pad - ((value - min) / span) * (height - pad * 2)}`;
-  return `<svg viewBox="0 0 ${width} ${height}" role="img" focusable="false" aria-label="${escapeHtml(seriesDescription(fixture))}"><path d="M${pad} ${height - pad}H${width - pad}" stroke="currentColor" opacity=".25"/><polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${fixture.points.map((point, index) => xy(number(point.value), index)).join(" ")}"/>${fixture.points.map((point, index) => { const [cx, cy] = xy(number(point.value), index).split(","); return `<circle cx="${cx}" cy="${cy}" r="4" fill="currentColor"><title>${escapeHtml(pointLabel(fixture, index))}</title></circle>`; }).join("")}</svg>`;
+  const marks = fixture.points.map((point, index) => {
+    const [cx, cy] = xy(number(point.value), index).split(",");
+    return `<g ${markAttributes(fixture, index)}><circle class="market-chart-hit-target" cx="${cx}" cy="${cy}" r="16"/><circle class="market-chart-point" cx="${cx}" cy="${cy}" r="5" fill="currentColor"/></g>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${width} ${height}" role="img" focusable="false" aria-label="${escapeHtml(seriesDescription(fixture))}"><path d="M${pad} ${height - pad}H${width - pad}" stroke="currentColor" opacity=".25"/><polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${fixture.points.map((point, index) => xy(number(point.value), index)).join(" ")}"/>${marks}</svg>`;
 }
 
 function barSvg(fixture, stacked = false) {
   const values = fixture.points.map((point) => Math.max(number(point.value), 0));
   const max = stacked ? values.reduce((sum, value) => sum + value, 0) || 1 : Math.max(...values, 1);
-  const width = 640; const height = 250; const pad = 32;
+  const width = 640;
+  const height = 250;
+  const pad = 32;
   const svgOpen = `<svg viewBox="0 0 ${width} ${height}" role="img" focusable="false" aria-label="${escapeHtml(seriesDescription(fixture))}">`;
   if (stacked) {
     let offset = pad;
-    return `${svgOpen}${values.map((value, index) => { const barWidth = (value / max) * (width - pad * 2); const rect = `<rect x="${offset}" y="80" width="${barWidth}" height="90" fill="currentColor" opacity="${0.45 + index * 0.12}"><title>${escapeHtml(pointLabel(fixture, index))}</title></rect>`; offset += barWidth; return rect; }).join("")}</svg>`;
+    const marks = values.map((value, index) => {
+      const barWidth = (value / max) * (width - pad * 2);
+      const rect = `<g ${markAttributes(fixture, index)}><rect class="market-chart-bar" x="${offset}" y="80" width="${barWidth}" height="90" fill="currentColor" opacity="${0.45 + index * 0.12}"/></g>`;
+      offset += barWidth;
+      return rect;
+    }).join("");
+    return `${svgOpen}${marks}</svg>`;
   }
-  const gap = 18; const available = width - pad * 2; const barWidth = Math.max(available / fixture.points.length - gap, 8);
-  return `${svgOpen}<path d="M${pad} ${height - pad}H${width - pad}" stroke="currentColor" opacity=".25"/>${values.map((value, index) => { const barHeight = (value / max) * (height - pad * 2); return `<rect x="${pad + index * (barWidth + gap)}" y="${height - pad - barHeight}" width="${barWidth}" height="${barHeight}" fill="currentColor"><title>${escapeHtml(pointLabel(fixture, index))}</title></rect>`; }).join("")}</svg>`;
+  const gap = 18;
+  const available = width - pad * 2;
+  const barWidth = Math.max(available / fixture.points.length - gap, 8);
+  const marks = values.map((value, index) => {
+    const barHeight = (value / max) * (height - pad * 2);
+    return `<g ${markAttributes(fixture, index)}><rect class="market-chart-bar" x="${pad + index * (barWidth + gap)}" y="${height - pad - barHeight}" width="${barWidth}" height="${barHeight}" fill="currentColor"/></g>`;
+  }).join("");
+  return `${svgOpen}<path d="M${pad} ${height - pad}H${width - pad}" stroke="currentColor" opacity=".25"/>${marks}</svg>`;
 }
 
 function dataTable(fixture) {
@@ -106,7 +143,7 @@ export function renderChartFigure(fixture) {
     : fixture.dataMode === "input_estimate"
       ? "Estimate based on the inputs shown. Reference:"
       : "Source:";
-  return `<figure class="market-chart-figure market-chart-${fixture.chartType}"><figcaption><strong>${escapeHtml(fixture.title)}</strong><p>${escapeHtml(fixture.summary)}</p></figcaption>${graphic}<p class="market-chart-source">${sourceLead} ${sourceMarkup}. As of: ${escapeHtml(fixture.asOf)}.</p>${dataTable(fixture)}</figure>`;
+  return `<figure class="market-chart-figure market-chart-${fixture.chartType}" data-market-chart><figcaption><strong>${escapeHtml(fixture.title)}</strong><p>${escapeHtml(fixture.summary)}</p></figcaption>${graphic}${tooltipMarkup()}<p class="market-chart-source">${sourceLead} ${sourceMarkup}. As of: ${escapeHtml(fixture.asOf)}.</p>${dataTable(fixture)}</figure>`;
 }
 
 export function renderSnapshotSourceNote(fixtures, scope, entityId) {

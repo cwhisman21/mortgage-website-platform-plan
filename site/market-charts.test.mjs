@@ -92,3 +92,45 @@ test("fixture loader rejects invalid chart contracts", () => {
   };
   assert.throws(() => loadMarketChartFixtures(invalid), /Unsupported market chart type/);
 });
+
+test("line, bar, and payment charts expose the shared tooltip contract", () => {
+  const samples = [
+    chartFixtureFor(fixtures, "rates.benchmark_trend", "rates-mortgage"),
+    chartFixtureFor(fixtures, "market.location_compare", "state-tx"),
+    chartFixtureFor(fixtures, "calculator.payment_breakdown", "calc-payment"),
+  ];
+
+  for (const fixture of samples) {
+    const html = renderChartFigure(fixture);
+    assert.equal((html.match(/class="market-chart-mark"/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-label=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-value=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-source=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-as-of=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-tooltip(?:\s|>)/g) || []).length, 1);
+    assert.match(html, /role="tooltip" hidden/);
+    assert.doesNotMatch(html, /<title>/);
+  }
+});
+
+test("line charts provide a larger transparent hit target", () => {
+  const fixture = chartFixtureFor(fixtures, "rates.benchmark_trend", "rates-mortgage");
+  const html = renderChartFigure(fixture);
+  assert.equal((html.match(/class="market-chart-hit-target"/g) || []).length, fixture.points.length);
+  assert.match(html, /class="market-chart-hit-target"[^>]*r="16"/);
+});
+
+test("chart tooltip attributes escape public values", () => {
+  const fixture = {
+    ...chartFixtureFor(fixtures, "rates.benchmark_trend", "rates-mortgage"),
+    points: [{ label: "Unsafe", value: 1 }, { label: "Safe", value: 2 }],
+    table: {
+      headers: ["Period", "Value"],
+      rows: [["<img src=x>", "\"quoted\""], ["Safe", "2%"]],
+    },
+  };
+  const html = renderChartFigure(fixture);
+  assert.doesNotMatch(html, /<img src=x>/);
+  assert.match(html, /data-chart-label="&lt;img src=x&gt;"/);
+  assert.match(html, /data-chart-value="&quot;quoted&quot;"/);
+});
