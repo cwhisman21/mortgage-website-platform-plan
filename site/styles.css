@@ -1074,6 +1074,86 @@ tr:last-child td {
   color: var(--snap-blue);
 }
 
+.market-chart-figure {
+  position: relative;
+}
+
+.market-chart-mark {
+  cursor: crosshair;
+  outline: none;
+}
+
+.market-chart-hit-target {
+  fill: transparent;
+  stroke: none;
+  pointer-events: all;
+}
+
+.market-chart-point,
+.market-chart-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 140ms ease, stroke 140ms ease, stroke-width 140ms ease, transform 140ms ease;
+}
+
+.market-chart-mark:hover .market-chart-point,
+.market-chart-mark:focus-visible .market-chart-point,
+.market-chart-mark[data-chart-active="true"] .market-chart-point,
+.market-chart-mark:hover .market-chart-bar,
+.market-chart-mark:focus-visible .market-chart-bar,
+.market-chart-mark[data-chart-active="true"] .market-chart-bar {
+  opacity: 1;
+  stroke: var(--snap-amber);
+  stroke-width: 4;
+  transform: scale(1.025);
+}
+
+.market-chart-tooltip {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  gap: 3px;
+  width: max-content;
+  max-width: min(240px, calc(100% - 16px));
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--navy);
+  box-shadow: 0 12px 28px rgba(16, 37, 74, 0.22);
+  color: #fff;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.market-chart-tooltip[hidden] {
+  display: none;
+}
+
+.market-chart-tooltip strong,
+.market-chart-tooltip span,
+.market-chart-tooltip small {
+  display: block;
+}
+
+.market-chart-tooltip > span {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.market-chart-tooltip small {
+  margin-top: 3px;
+  color: #dce8f7;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-chart-point,
+  .market-chart-bar,
+  .market-chart-tooltip {
+    transition: none;
+  }
+}
+
 .market-chart-source a {
   color: var(--snap-blue-700);
   font-weight: 850;

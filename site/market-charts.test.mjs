@@ -242,3 +242,11 @@ test("delegated touch interactions hide prior figure tooltips and teardown clear
   assert.equal(harness.tooltipB.hidden, true);
   assert.equal(harness.root.listenerCount(), 0);
 });
+
+test("stylesheet covers chart marks, tooltips, and reduced motion", () => {
+  const stylesheet = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+  assert.match(stylesheet, /\.market-chart-tooltip\s*\{/);
+  assert.match(stylesheet, /\.market-chart-hit-target\s*\{/);
+  assert.match(stylesheet, /\[data-chart-active="true"\]/);
+  assert.match(stylesheet, /@media \(prefers-reduced-motion: reduce\)/);
+});
