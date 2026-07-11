@@ -4,6 +4,7 @@ import {
   loadMarketChartFixtures,
   renderChartFigure,
   renderSnapshotSourceNote,
+  wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderLocationsHero } from "/site/locations-hero.mjs";
 
@@ -12,6 +13,7 @@ const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
 const NEWS_MEDIA_URL = "/mock-data/location-news-media-manifest.json";
 const MARKET_CHART_FIXTURES_URL = "/mock-data/market-chart-fixtures.json";
 const app = document.getElementById("app");
+wireMarketChartInteractions(app);
 
 let data;
 let maps;

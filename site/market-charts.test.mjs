@@ -4,6 +4,7 @@ import fs from "node:fs";
 import {
   loadMarketChartFixtures,
   chartFixtureFor,
+  computeChartTooltipPosition,
   renderChartFigure,
   renderSnapshotSourceNote,
 } from "./market-charts.mjs";
@@ -133,4 +134,24 @@ test("chart tooltip attributes escape public values", () => {
   assert.doesNotMatch(html, /<img src=x>/);
   assert.match(html, /data-chart-label="&lt;img src=x&gt;"/);
   assert.match(html, /data-chart-value="&quot;quoted&quot;"/);
+});
+
+test("tooltip positioning follows the point and clamps inside the figure", () => {
+  assert.deepEqual(computeChartTooltipPosition({
+    figureWidth: 640,
+    figureHeight: 400,
+    tooltipWidth: 180,
+    tooltipHeight: 90,
+    x: 320,
+    y: 200,
+  }), { left: 332, top: 98 });
+
+  assert.deepEqual(computeChartTooltipPosition({
+    figureWidth: 320,
+    figureHeight: 220,
+    tooltipWidth: 180,
+    tooltipHeight: 90,
+    x: 315,
+    y: 12,
+  }), { left: 132, top: 24 });
 });

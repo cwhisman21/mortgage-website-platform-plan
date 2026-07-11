@@ -66,6 +66,122 @@ function seriesDescription(fixture) {
   return `${fixture.title}. ${fixture.table.rows.map((row) => row.join(": ")).join("; ")}.`;
 }
 
+const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+
+export function computeChartTooltipPosition({
+  figureWidth,
+  figureHeight,
+  tooltipWidth,
+  tooltipHeight,
+  x,
+  y,
+  gap = 12,
+  padding = 8,
+}) {
+  let top = y - tooltipHeight - gap;
+  if (top < padding) top = y + gap;
+  return {
+    left: Math.round(clamp(x + gap, padding, figureWidth - tooltipWidth - padding)),
+    top: Math.round(clamp(top, padding, figureHeight - tooltipHeight - padding)),
+  };
+}
+
+export function wireMarketChartInteractions(root) {
+  if (!root?.addEventListener) return () => {};
+
+  let activeMark = null;
+  let touchPinned = false;
+  const listeners = [];
+  const on = (type, handler) => {
+    root.addEventListener(type, handler);
+    listeners.push([type, handler]);
+  };
+  const markFrom = (target) => typeof target?.closest === "function" ? target.closest(".market-chart-mark") : null;
+
+  const hide = () => {
+    if (!activeMark) return;
+    const tooltip = activeMark.closest("[data-market-chart]")?.querySelector("[data-chart-tooltip]");
+    activeMark.removeAttribute("data-chart-active");
+    if (tooltip) tooltip.hidden = true;
+    activeMark = null;
+    touchPinned = false;
+  };
+
+  const show = (mark, event) => {
+    const figure = mark?.closest("[data-market-chart]");
+    const tooltip = figure?.querySelector("[data-chart-tooltip]");
+    if (!figure || !tooltip) return;
+
+    if (activeMark && activeMark !== mark) activeMark.removeAttribute("data-chart-active");
+    activeMark = mark;
+    mark.setAttribute("data-chart-active", "true");
+    tooltip.querySelector("[data-chart-tooltip-label]").textContent = mark.dataset.chartLabel;
+    tooltip.querySelector("[data-chart-tooltip-value]").textContent = mark.dataset.chartValue;
+    tooltip.querySelector("[data-chart-tooltip-source]").textContent = mark.dataset.chartSource;
+    tooltip.querySelector("[data-chart-tooltip-as-of]").textContent = `As of ${mark.dataset.chartAsOf}`;
+    tooltip.hidden = false;
+
+    const figureRect = figure.getBoundingClientRect();
+    const markRect = mark.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const hasPointer = Number.isFinite(event?.clientX) && Number.isFinite(event?.clientY);
+    const x = hasPointer ? event.clientX - figureRect.left : markRect.left + markRect.width / 2 - figureRect.left;
+    const y = hasPointer ? event.clientY - figureRect.top : markRect.top - figureRect.top;
+    const position = computeChartTooltipPosition({
+      figureWidth: figureRect.width,
+      figureHeight: figureRect.height,
+      tooltipWidth: tooltipRect.width,
+      tooltipHeight: tooltipRect.height,
+      x,
+      y,
+    });
+    tooltip.style.left = `${position.left}px`;
+    tooltip.style.top = `${position.top}px`;
+  };
+
+  on("pointerover", (event) => {
+    const mark = markFrom(event.target);
+    if (mark && event.pointerType !== "touch") show(mark, event);
+  });
+  on("pointermove", (event) => {
+    const mark = markFrom(event.target);
+    if (mark && mark === activeMark && !touchPinned) show(mark, event);
+  });
+  on("pointerout", (event) => {
+    const mark = markFrom(event.target);
+    if (!mark || mark.contains(event.relatedTarget) || touchPinned || mark.matches(":focus")) return;
+    hide();
+  });
+  on("pointerdown", (event) => {
+    const mark = markFrom(event.target);
+    if (event.pointerType === "touch" && mark) {
+      touchPinned = true;
+      show(mark, event);
+      return;
+    }
+    if (!mark && activeMark) hide();
+  });
+  on("focusin", (event) => {
+    const mark = markFrom(event.target);
+    if (mark) {
+      touchPinned = false;
+      show(mark);
+    }
+  });
+  on("focusout", (event) => {
+    const mark = markFrom(event.target);
+    if (mark && !mark.contains(event.relatedTarget)) hide();
+  });
+  on("keydown", (event) => {
+    if (event.key === "Escape") hide();
+  });
+
+  return () => {
+    hide();
+    listeners.forEach(([type, handler]) => root.removeEventListener(type, handler));
+  };
+}
+
 function pointDetails(fixture, index) {
   const row = fixture.table.rows[index] || [];
   const label = String(row[0] ?? fixture.points[index].label);
