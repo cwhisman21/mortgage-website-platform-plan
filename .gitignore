@@ -14,3 +14,4 @@ tmp/
 .vercel-static-upload/
 .vercel-thinkwhale-upload/
 mock-data/source-cache/
+.worktrees/
