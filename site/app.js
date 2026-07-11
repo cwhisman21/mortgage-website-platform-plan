@@ -5,7 +5,7 @@ import {
   renderChartFigure,
   renderSnapshotSourceNote,
 } from "/site/market-charts.mjs";
-import { renderUsStateMap } from "/site/us-state-map.mjs";
+import { renderLocationsHero } from "/site/locations-hero.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
@@ -1130,13 +1130,7 @@ function locationsPage() {
   });
 
   return pageShell(`
-    ${hero({
-      eyebrow: "Locations",
-      title: "Compare mortgage markets before choosing a path.",
-      lead: "Explore local price, payment, tax, insurance, inventory, loan options, branches, and loan officers by market.",
-      actions: `<a class="button" href="${route("/locations/texas")}">Start with Texas</a>${ctaButton("watchlist", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel"><h2>Location search</h2><p>Search by city, state, branch coverage, product, or borrower goal.</p><form class="search-form" data-search-form><input name="query" aria-label="Search locations" placeholder="Try Denver or Florida insurance" /><button class="button" type="submit">Search</button></form></aside>`
-    })}
+    ${renderLocationsHero(data.states)}
     ${editorialSection({
       label: "Compare markets with the payment in view",
       title: "Start broad, then narrow to the market that changes the payment.",
@@ -1154,7 +1148,6 @@ function locationsPage() {
         "What tax or insurance costs should I understand?"
       ]
     })}
-    ${section("Browse state mortgage markets", { label: "State markets", text: "Choose a state to compare local price, payment, loan paths, and market questions." }, `${renderUsStateMap(data.states)}`, "compact")}
     ${section("Market decision signals", { label: "Location intelligence", text: "These signals help you compare the cost factors that can change a mortgage payment." }, insightBand([
       { label: "Payment", value: "Monthly estimate", text: "Payment estimates pair price with taxes, insurance, rate assumptions, and loan type." },
       { label: "Inventory", value: "Market pace", text: "Inventory and days on market help borrowers understand timing without making predictions." },
