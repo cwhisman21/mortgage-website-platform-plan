@@ -158,24 +158,28 @@ test("loads both ACS vintages from official-format summary files without an API 
     const yearDir = path.join(root, year);
     await fs.mkdir(yearDir, { recursive: true });
     const geography = year === "2019"
-      ? "GEOID,DADSID,NAME\n04000US48,0400000US48,Texas\n16000US4805000,1600000US4805000,\"Austin city, Texas\"\n"
-      : "GEO_ID|NAME\n0400000US48|Texas\n1600000US4805000|Austin city, Texas\n";
+      ? "GEOID,DADSID,NAME\n04000US48,0400000US48,Texas\n04000US50,0400000US50,Vermont\n16000US4805000,1600000US4805000,\"Austin city, Texas\"\n"
+      : "GEO_ID|NAME\n0400000US48|Texas\n0400000US50|Vermont\n1600000US4805000|Austin city, Texas\n";
     const geographyFilename = year === "2019" ? `Geos${year}5YR.csv` : `Geos${year}5YR.txt`;
     await fs.writeFile(path.join(yearDir, geographyFilename), geography);
     for (const table of ACS_SUMMARY_TABLES) {
       const columns = metricsByTable.get(table).flatMap(([, estimateId, marginId]) => [summaryColumnForApiVariable(estimateId), summaryColumnForApiVariable(marginId)]);
       const cityValues = columns.map((_, index) => String((year === "2024" ? 1000 : 800) + index));
       const stateValues = columns.map((_, index) => String((year === "2024" ? 2000 : 1600) + index));
+      const vermontStateValues = columns.map((_, index) => String((year === "2024" ? 3000 : 2400) + index));
       await fs.writeFile(
         path.join(yearDir, `acsdt5y${year}-${table.toLowerCase()}.dat`),
-        [`GEO_ID|${columns.join("|")}`, `0400000US48|${stateValues.join("|")}`, `1600000US4805000|${cityValues.join("|")}`, ""].join("\n"),
+        [`GEO_ID|${columns.join("|")}`, `0400000US48|${stateValues.join("|")}`, `0400000US50|${vermontStateValues.join("|")}`, `1600000US4805000|${cityValues.join("|")}`, ""].join("\n"),
       );
     }
   }
 
   const evidence = await loadCensusEvidence({
     cities: [{ id: "city-austin-tx", name: "Austin", sourceGeography: { stateFips: "48", cityKey: "austin|TX" } }],
-    states: [{ id: "state-tx", name: "Texas", abbr: "TX" }],
+    states: [
+      { id: "state-tx", name: "Texas", abbr: "TX" },
+      { id: "state-vt", name: "Vermont", abbr: "VT" },
+    ],
     cacheDir: path.join(root, "cache"),
     summaryFileDir: root,
     apiKey: null,
@@ -183,5 +187,6 @@ test("loads both ACS vintages from official-format summary files without an API 
   assert.equal(evidence.mode, "table_based_summary_file");
   assert.equal(evidence.byCityId["city-austin-tx"].current.metrics.population.estimate, 1000);
   assert.equal(evidence.byStateId["state-tx"].prior.metrics.population.estimate, 1600);
+  assert.equal(evidence.byStateId["state-vt"].current.metrics.population.estimate, 3000);
   assert.equal(evidence.sources.length, 18);
 });

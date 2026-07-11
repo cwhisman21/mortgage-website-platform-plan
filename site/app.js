@@ -1,14 +1,23 @@
 import { renderArticleContent } from "/site/news-renderer.mjs";
+import {
+  chartFixtureFor,
+  loadMarketChartFixtures,
+  renderChartFigure,
+  renderSnapshotSourceNote,
+} from "/site/market-charts.mjs";
+import { renderUsStateMap } from "/site/us-state-map.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
 const NEWS_MEDIA_URL = "/mock-data/location-news-media-manifest.json";
+const MARKET_CHART_FIXTURES_URL = "/mock-data/market-chart-fixtures.json";
 const app = document.getElementById("app");
 
 let data;
 let maps;
 let newsIndex = { articles: [] };
 let mediaManifest = { media: [] };
+let marketChartFixtures = { sources: [], charts: [], snapshotSources: [] };
 const articleBundlePromises = new Map();
 let articleModalReturnFocus = null;
 let articleModalOrigin = null;
@@ -110,17 +119,17 @@ const sources = {
     use: "Rate, APR, payment, and trigger-term review"
   },
   internalPricing: {
-    name: "Snap Loans pricing and eligibility review",
-    url: "#",
-    cadence: "Real time",
-    date: "Internal system",
+    name: "Personalized pricing review",
+    url: "",
+    cadence: "Discussed with your scenario",
+    date: "Available after review",
     use: "Personalized rate, APR, cost, and product availability"
   },
   nmls: {
-    name: "NMLS and licensing records",
-    url: "#",
-    cadence: "Before publication and as licenses change",
-    date: "Internal system",
+    name: "NMLS Consumer Access",
+    url: "https://www.nmlsconsumeraccess.org/",
+    cadence: "As licensing records change",
+    date: "Current licensing records",
     use: "Loan officer and branch licensing"
   }
 };
@@ -587,26 +596,6 @@ function table(headers, rows) {
   `;
 }
 
-function lineChart(label = "Trend", values = [31, 34, 33, 39, 45, 42, 48, 51]) {
-  const chartId = `chart-${slugify(label)}`;
-  const points = values.map((value, index) => {
-    const x = 20 + (index * (560 / Math.max(values.length - 1, 1)));
-    const y = 190 - (Math.max(Math.min(value, 100), 0) * 1.55);
-    return `${x},${y}`;
-  }).join(" ");
-  return `
-    <div class="chart" role="img" aria-label="${esc(label)} chart" data-chart-shell>
-      <canvas id="${chartId}" data-chart="line" data-chart-label="${esc(label)}" data-chart-values="${esc(values.join(","))}"></canvas>
-      <svg class="chart-fallback" viewBox="0 0 600 220" preserveAspectRatio="none">
-        <polyline points="${points}" stroke="#0b55ff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M20 190 L580 190" stroke="#9baaa8" stroke-width="2" />
-        <path d="M20 30 L20 190" stroke="#9baaa8" stroke-width="2" />
-        <text x="24" y="24" fill="#465864" font-size="18">${esc(label)}</text>
-      </svg>
-    </div>
-  `;
-}
-
 function disclosureBlock(title = "Important mortgage disclosure", text = "Rates, APRs, payments, costs, loan amounts, product availability, and eligibility can change based on borrower facts, property details, occupancy, loan amount, market conditions, and lender review.") {
   return `<div class="disclosure"><strong>${esc(title)}</strong><br />${esc(text)}</div>`;
 }
@@ -621,6 +610,36 @@ function sourceNote(ids, title = "Data sources") {
       `).join("")}
     </div>
   `;
+}
+
+function marketChart(chartId, entityId) {
+  return renderChartFigure(chartFixtureFor(marketChartFixtures, chartId, entityId));
+}
+
+function marketSnapshotReference(scope, entityId) {
+  return renderSnapshotSourceNote(marketChartFixtures, scope, entityId);
+}
+
+function currency(value) {
+  return `$${Math.max(0, Math.round(Number(value) || 0)).toLocaleString("en-US")}`;
+}
+
+function calculatedScenarioChart(calculatorId, title, summary, points, { chartType = "payment", valueHeader = "Monthly estimate" } = {}) {
+  const fixture = chartFixtureFor(marketChartFixtures, "calculator.payment_breakdown", calculatorId);
+  if (!fixture) return "";
+  const cleanPoints = points.map((point) => ({ label: point.label, value: Math.max(0, Math.round(Number(point.value) || 0)) }));
+  return renderChartFigure({
+    ...fixture,
+    title,
+    summary,
+    dataMode: "input_estimate",
+    chartType,
+    points: cleanPoints,
+    table: {
+      headers: ["Scenario measure", valueHeader],
+      rows: cleanPoints.map((point) => [point.label, currency(point.value)]),
+    },
+  });
 }
 
 function disclosureFor(pageType, title = "Disclosure notes") {
@@ -1119,7 +1138,7 @@ function locationsPage() {
       panel: `<aside class="hero-panel"><h2>Location search</h2><p>Search by city, state, branch coverage, product, or borrower goal.</p><form class="search-form" data-search-form><input name="query" aria-label="Search locations" placeholder="Try Denver or Florida insurance" /><button class="button" type="submit">Search</button></form></aside>`
     })}
     ${editorialSection({
-      label: "How to use locations",
+      label: "Compare markets with the payment in view",
       title: "Start broad, then narrow to the market that changes the payment.",
       intro: "See the mortgage details before jumping into a quote or product choice.",
       paragraphs: [
@@ -1135,12 +1154,13 @@ function locationsPage() {
         "What tax or insurance costs should I understand?"
       ]
     })}
-    ${section("Market decision signals", { label: "Location intelligence", text: "These signals turn a directory into a mortgage planning surface." }, insightBand([
+    ${section("Browse state mortgage markets", { label: "State markets", text: "Choose a state to compare local price, payment, loan paths, and market questions." }, `${renderUsStateMap(data.states)}`, "compact")}
+    ${section("Market decision signals", { label: "Location intelligence", text: "These signals help you compare the cost factors that can change a mortgage payment." }, insightBand([
       { label: "Payment", value: "Monthly estimate", text: "Payment estimates pair price with taxes, insurance, rate assumptions, and loan type." },
       { label: "Inventory", value: "Market pace", text: "Inventory and days on market help borrowers understand timing without making predictions." },
       { label: "Local costs", value: "Tax and insurance", text: "Escrow assumptions stay close to payment scenarios." },
       { label: "Next step", value: "Expert handoff", text: "Location content connects borrowers with loan officers and branches that serve the market." }
-    ]), "modern-band")}
+    ]) + marketSnapshotReference("locations_snapshot", "locations"), "modern-band")}
     ${section("State market entry", { label: "Market overview", text: "Open the statewide view before comparing individual city pages." }, `<div class="grid four">${stateCards.join("")}</div>`)}
     ${section("City market links", { label: "Cities", text: "Open a city view for market snapshots, charts, local loan options, experts, branches, and updates." }, table(["City", "Median price", "Payment scenario", "Inventory", "DOM"], cityRows), "compact")}
     ${section("Save market research", { label: "Watchlist", text: "Track cities, compare payment assumptions, and keep local questions connected to your account view." }, ctaDeck(["watchlist", "leadForm", "prequal"], "Keep location research organized.", "Save markets to Snap Homes, ask a local question, or start a prequalification conversation when a city becomes more than research."), "compact")}
@@ -1187,7 +1207,7 @@ function ratesPage() {
         "Lock period and next steps"
       ]
     })}
-    ${section("Current rate benchmarks", { label: "Benchmarks", text: "Freddie Mac benchmark rates anchor the public market view; personalized quotes require lender review." }, `<div class="grid three">${rateBenchmarks.map((rate, index) => `<div class="metric"><span>${esc(rate.label)}</span><strong>${esc(rate.rate)}</strong><p>${esc(rate.apr)} | ${esc(rate.points)} | ${esc(sources[rate.sourceId].date)}</p></div>`).join("")}</div>`)}
+    ${section("Current rate benchmarks", { label: "Benchmarks", text: "Freddie Mac benchmark rates anchor the public market view; personalized quotes require lender review." }, `<div class="grid three">${rateBenchmarks.map((rate, index) => `<div class="metric"><span>${esc(rate.label)}</span><strong>${esc(rate.rate)}</strong><p>${esc(rate.apr)} | ${esc(rate.points)} | ${esc(sources[rate.sourceId].date)}</p></div>`).join("")}</div>${marketSnapshotReference("rates_snapshot", "rates-mortgage")}`)}
     ${section("From benchmark to borrower scenario", { label: "Borrower path", text: "Move from market data into a payment scenario and licensed review." }, processRail([
       { title: "Read the benchmark", text: "Use national data to understand market direction and the difference between averages and offers." },
       { title: "Choose assumptions", text: "Set loan purpose, state, credit range, term, down payment, loan amount, occupancy, and property type." },
@@ -1198,12 +1218,7 @@ function ratesPage() {
       <div class="content-layout">
         <div class="main-stack">
           ${section("Compare rate types", { label: "Rate table", text: "Start with the benchmark, then move into a payment estimate or licensed review." }, table(["Loan type", "Rate", "APR", "Points", "Source", "Next step"], rows), "no-pad")}
-          <div class="panel">
-            <h2>Rate trend and market signals</h2>
-            <p>Mortgage rates often move with broader bond-market and inflation expectations, but a chart does not prove a single cause. Use the trend as one input before running a payment scenario.</p>
-            ${lineChart("30-year fixed benchmark", [45, 48, 51, 57, 62, 66, 64, 63])}
-            ${sourceNote(["freddiePmms", "fred"], "Rate trend sources")}
-          </div>
+          ${marketChart("rates.benchmark_trend", "rates-mortgage")}
         </div>
         <aside class="side-stack">
           ${contextualCta("Review your rate question", "A licensed loan officer can review credit profile, loan amount, property type, occupancy, down payment, and location.", ["rateReview", "compareOffer", "loContact"])}
@@ -1222,7 +1237,7 @@ function ratesPage() {
     ${section("Rate methodology", { label: "Sources", text: "See what is included, what is not, and when to request a personalized review." }, `<div class="essay-grid">${miniEssay("What the table discloses", [
       "Benchmark rates show public market data. Personalized pricing identifies APR, points, fees, lock period, loan amount, down payment, occupancy, property type, and source date when displayed.",
       "Payment examples keep taxes, insurance, mortgage insurance, HOA dues, and closing-cost assumptions close to the result."
-    ])}${miniEssay("How to use this page", [
+    ])}${miniEssay("Use a benchmark in your comparison", [
       "Use benchmarks to understand market direction, then use a calculator to test the payment impact.",
       "A licensed review is the right next step when comparing products, buying in a high-cost market, or weighing refinance tradeoffs."
     ])}</div>`, "modern-band")}
@@ -1234,14 +1249,19 @@ function statePage(state) {
   const branches = byIds(state.branchIds, maps.branches);
   const products = byIds(state.featuredProductIds, maps.products);
   const stateCta = ctaRule("state", "hero");
+  const primaryRoute = cities[0]?.route || "/rates";
+  const primaryLabel = cities.length ? stateCta.primary : "Review rates";
+  const cityTable = cities.length
+    ? table(["City", "Median price", "Payment", "Tax", "Insurance"], cities.map((city) => [`<a class="text-link" href="${route(city.route)}">${esc(city.name)}</a>`, esc(city.marketSnapshot.medianHomePrice), esc(city.marketSnapshot.paymentScenario), esc(city.marketSnapshot.taxRate), esc(city.marketSnapshot.insurance)]))
+    : `<div class="panel"><h2>Statewide planning</h2><p>Compare local price, payment, insurance, and loan options with a licensed team when there is not a qualifying city page for this state.</p></div>`;
   return pageShell(`
     ${breadcrumb(["Locations", state.name], ["/locations", state.route])}
     ${hero({
       eyebrow: "State guide",
       title: `${state.name} mortgage guide`,
       lead: `${stateBriefs[state.id] || state.stateNarrative} Compare cities, product paths, branches, experts, and local affordability factors.`,
-      actions: `<a class="button" href="${route(cities[0]?.route)}">${esc(stateCta.primary)}</a><a class="button secondary" href="${route("/rates")}">${esc(stateCta.secondary)}</a>`,
-      panel: `<aside class="hero-panel"><h2>State snapshot</h2><div class="grid two">${metric("Median price", state.marketSnapshot.medianHomePrice)}${metric("Payment", state.marketSnapshot.paymentScenario)}${metric("Inventory", state.marketSnapshot.inventory)}${metric("Updated", state.marketSnapshot.lastUpdated)}</div></aside>`
+      actions: `<a class="button" href="${route(primaryRoute)}">${esc(primaryLabel)}</a><a class="button secondary" href="${route("/rates")}">${esc(stateCta.secondary)}</a>`,
+      panel: `<aside class="hero-panel"><h2>State snapshot</h2><div class="grid two">${metric("Median price", state.marketSnapshot.medianHomePrice)}${metric("Payment", state.marketSnapshot.paymentScenario)}${metric("Inventory", state.marketSnapshot.inventory)}${metric("Updated", state.marketSnapshot.lastUpdated)}</div>${marketSnapshotReference("state_snapshot", state.id)}</aside>`
     })}
     ${editorialSection({
       label: "State brief",
@@ -1265,16 +1285,14 @@ function statePage(state) {
     <section class="section">
       <div class="content-layout">
         <div class="main-stack">
-          ${table(["City", "Median price", "Payment", "Tax", "Insurance"], cities.map((city) => [`<a class="text-link" href="${route(city.route)}">${esc(city.name)}</a>`, esc(city.marketSnapshot.medianHomePrice), esc(city.marketSnapshot.paymentScenario), esc(city.marketSnapshot.taxRate), esc(city.marketSnapshot.insurance)]))}
-          <div class="panel">
-            <h2>${esc(state.name)} home price index trend</h2>
-            <p>Use an indexed trend to compare direction over time without treating it as a sale-price quote for any property.</p>
-            ${lineChart(`${state.name} HPI`, [42, 46, 51, 57, 63, 68, 72, 74])}
-            ${sourceNote(["fhfaHpi"], "Home price source")}
+          ${cityTable}
+          <div class="chart-stack">
+            ${marketChart("market.price_trend", state.id)}
+            ${marketChart("market.location_compare", state.id)}
           </div>
         </div>
         <aside class="side-stack">
-          <div class="cta-panel"><h3>Compare a city</h3><p>Open a city market page for payment scenarios, tax and insurance notes, and local experts.</p><div class="cta-inline-actions"><a class="button" href="${route(cities[0]?.route || "/locations")}">Open city</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
+          <div class="cta-panel"><h3>${cities.length ? "Compare a city" : "Review statewide options"}</h3><p>${cities.length ? "Open a city market page for payment scenarios, tax and insurance notes, and local experts." : "Use the statewide view to compare rates, product paths, and a payment estimate before a licensed review."}</p><div class="cta-inline-actions"><a class="button" href="${route(primaryRoute)}">${cities.length ? "Open city" : "Review rates"}</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
           ${disclosureFor("state", "State disclosure")}
         </aside>
       </div>
@@ -1312,7 +1330,7 @@ function cityPage(city) {
       title: `${city.name}, ${state.abbr} mortgage and housing market`,
       lead: `${city.marketPositioning} Review local price, payment, inventory, taxes, insurance, loan options, and experts in one place.`,
       actions: `${ctaButton("prequal", { label: heroCta.primary })}${ctaButton("watchlist", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel"><h2>Market snapshot</h2><div class="grid two">${metric("Median price", city.marketSnapshot.medianHomePrice)}${metric("Payment", city.marketSnapshot.paymentScenario)}${metric("Inventory", city.marketSnapshot.inventory)}${metric("DOM", city.marketSnapshot.daysOnMarket)}</div></aside>`
+      panel: `<aside class="hero-panel"><h2>Market snapshot</h2><div class="grid two">${metric("Median price", city.marketSnapshot.medianHomePrice)}${metric("Payment", city.marketSnapshot.paymentScenario)}${metric("Inventory", city.marketSnapshot.inventory)}${metric("DOM", city.marketSnapshot.daysOnMarket)}</div>${marketSnapshotReference("city_snapshot", city.id)}</aside>`
     })}
     ${editorialSection({
       label: "Local cost read",
@@ -1336,11 +1354,9 @@ function cityPage(city) {
     <section class="section">
       <div class="content-layout">
         <div class="main-stack">
-          <div class="panel">
-            <h2>Home price trend</h2>
-            <p>Indexed home price movement gives a cleaner trend view than a single sale-price number.</p>
-            ${lineChart(`${city.name} price index`, [38, 42, 47, 54, 61, 66, 70, 72])}
-            ${sourceNote(["fhfaHpi"], "Price trend source")}
+          <div class="chart-stack">
+            ${marketChart("market.price_trend", city.id)}
+            ${marketChart("market.payment_breakdown", city.id)}
           </div>
           ${table(["Scenario", "Price", "Down payment", "Estimated payment", "Planning note"], [
             ["Entry buyer", esc(city.marketSnapshot.medianHomePrice), "5%", esc(city.marketSnapshot.paymentScenario), "Includes taxes and insurance assumptions"],
@@ -1421,6 +1437,7 @@ function productPage(product) {
       ["Tradeoffs", "APR, points, mortgage insurance, fees, term, flexibility, and total cost", `<a class="text-link" href="${route("/loan-options")}">Compare products</a>`],
       ["Existing offer", "Rate, APR, points, fees, loan amount, assumptions, and questions", `<button class="text-link text-button" type="button" data-cta-action="compareOffer">Organize offer questions</button>`]
     ]))}
+    ${section("Compare a planning scenario", { label: "Payment structure", text: "Use a simple scenario to see which amounts belong in the conversation before you compare actual loan terms." }, marketChart("product.scenario_compare", product.id), "compact")}
     ${section("Review product-fit answers", { label: "Personalized review", text: "Product education stays public; fit and availability need a reviewed scenario." }, `${gatedAnswer({
       title: `Could ${product.name} fit my situation?`,
       answer: `${product.name} may be worth comparing based on your goal, market, property type, occupancy, loan amount, down payment, and timeline. This page cannot determine eligibility or available terms.`,
@@ -1436,7 +1453,7 @@ function productPage(product) {
     ]), "compact")}
     ${section("Calculators for this loan path", { label: "Tools", text: "Products route into calculators that match the borrower decision." }, `<div class="grid three">${calculators.map((calc, index) => card({ title: calc.name, text: `Inputs include ${calc.captures.slice(0, 3).join(", ")}.`, href: calc.route, iconName: "calculator", accent: accentColors[index % accentColors.length], linkLabel: "Open calculator" })).join("")}</div>`, "compact")}
     ${section("Local product factors", { label: "Locations", text: "Open a city or state page to see how local price, taxes, insurance, and loan limits affect the conversation." }, `<div class="grid four">${relatedCities.map((city, index) => card({ title: `${product.name} in ${city.name}`, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Open city" })).join("")}</div>`, "compact")}
-    ${section("Related learning", { label: "Editorial", text: "Product education connects to articles with source and review metadata." }, `<div class="grid two">${relatedArticles.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`, "compact")}
+    ${section("Related learning", { label: "Learn more", text: "Product education connects to related mortgage guides, calculators, and local market questions." }, `<div class="grid two">${relatedArticles.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`, "compact")}
     ${section("Review this loan path", { label: "Next steps", text: "Move from product education into the review path that matches your question." }, ctaDeck(["prequal", "rateReview", "compareOffer", "loContact", "watchlist"], "Compare the product with your own scenario.", "Start prequalification, request rate review, compare offer terms, contact an expert, or save the product question to Snap Homes."), "compact")}
     ${section("Specialists and disclosures", { label: "Next step", text: "The next step is licensed review without any promise of eligibility." }, `<div class="grid three">${specialists.map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Ask about fit" })).join("")}</div><div style="margin-top:18px">${sourceNote(productSources(product.id), "Product sources")}</div><div style="margin-top:18px">${disclosureFor("product", "Product disclosure")}</div>`, "compact")}
   `);
@@ -1444,9 +1461,9 @@ function productPage(product) {
 
 function humanStatus(status) {
   const labels = {
-    editor_reviewed: "Reviewed by editorial team",
-    compliance_review_required: "Compliance review required",
-    draft: "Editorial draft"
+    editor_reviewed: "Mortgage guide",
+    compliance_review_required: "Mortgage guide",
+    draft: "Mortgage guide"
   };
   return labels[status] || status;
 }
@@ -1471,16 +1488,16 @@ function learningHome() {
         "Every article has a job: explain a product, update a market, prepare for a calculator, or make a licensed conversation more useful.",
         "Credibility is part of the reading experience. Articles show author, editor, reviewer, update date, source list, related tools, and relevant disclosures."
       ],
-      sideTitle: "Editorial standards",
+      sideTitle: "What you can explore",
       sideItems: [
-        "Clear topic taxonomy",
-        "Author and review metadata",
-        "Source dates and update cadence",
+        "Mortgage topics and guides",
+        "Source dates and guide details",
+        "Current market references",
         "Related products and calculators",
         "Local market links"
       ]
     })}
-    ${section("Topic hubs", { label: "Categories", text: "Structured topic hubs make the learning center easier to navigate." }, `<div class="grid four">${topics.map((topic, index) => card({ title: topic.name, text: topic.purpose, href: topic.route, iconName: "guide", accent: accentColors[index % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`)}
+    ${section("Topic hubs", { label: "Categories", text: "Browse mortgage guides by the decision you are working through." }, `<div class="grid four">${topics.map((topic, index) => card({ title: topic.name, text: topic.purpose, href: topic.route, iconName: "guide", accent: accentColors[index % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`)}
     ${section("Featured articles", { label: "Related articles", text: "Articles link back to products, locations, calculators, experts, and disclosures." }, `<div class="grid three">${articles.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`, "compact")}
   `);
 }
@@ -1493,32 +1510,32 @@ function blogTopicPage(topic) {
   return pageShell(`
     ${breadcrumb(["Learning Center", topic.name], ["/learning-center", topic.route])}
     ${hero({
-      eyebrow: isEditorialTeam ? "Editorial standards" : "Topic hub",
+      eyebrow: isEditorialTeam ? "About our guides" : "Topic hub",
       title: topic.name,
       lead: topic.purpose,
       actions: `<a class="button" href="${route("/loan-officers")}">Get guidance</a><a class="button secondary" href="${route("/learning-center")}">All topics</a>`,
-      panel: `<aside class="hero-panel"><h2>${isEditorialTeam ? "Review standards" : "Topic filters"}</h2><p>${isEditorialTeam ? "Bylines, editor review, licensed reviewer status, source rules, and compliance review process." : "Browse by state, city, product, and borrower goal."}</p></aside>`
+      panel: `<aside class="hero-panel"><h2>${isEditorialTeam ? "How we keep guides useful" : "Browse this topic"}</h2><p>${isEditorialTeam ? "See source dates, update notes, and the links that help you move from education into a mortgage decision." : "Browse by state, city, product, and borrower goal."}</p></aside>`
     })}
     ${editorialSection({
-      label: isEditorialTeam ? "Editorial standards" : "Topic overview",
-      title: isEditorialTeam ? "Trust starts with visible review roles." : `${topic.name} content moves readers toward a clearer mortgage decision.`,
-      intro: isEditorialTeam ? "Borrowers can see who wrote, edited, reviewed, and sourced mortgage content." : `Start with the ${topic.name.toLowerCase()} overview, then choose an article, calculator, product guide, or local market.`,
+      label: isEditorialTeam ? "About this content" : "Topic overview",
+      title: isEditorialTeam ? "Mortgage guides built for clearer comparisons." : `${topic.name} content moves readers toward a clearer mortgage decision.`,
+      intro: isEditorialTeam ? "Use source dates, update notes, and related tools to understand what a guide can help you compare." : `Start with the ${topic.name.toLowerCase()} overview, then choose an article, calculator, product guide, or local market.`,
       paragraphs: isEditorialTeam ? [
-        "Mortgage articles identify who wrote the content, who edited it, when it was reviewed, and whether a licensed or compliance reviewer was involved.",
-        "Editorial review and compliance review are separate. Product, rate, payment, tax, insurance, eligibility, and state-specific claims need additional handling.",
-        "The standards page explains sourcing in plain language so readers know how data, program rules, and market claims are maintained."
+        "Mortgage decisions can turn on a source date, an assumption, or a local cost that does not fit into a headline. Our guides keep those details close to the information they explain.",
+        "Use a guide to compare rates, APR, payment, taxes, insurance, loan options, and local market questions. Move to a calculator or licensed conversation when the answer depends on your own facts.",
+        "Sources, reference dates, and related tools make it easier to decide what to read next and what to verify for a specific home or loan."
       ] : [
         `A ${topic.name.toLowerCase()} hub makes the topic easier to navigate by grouping beginner education, product comparisons, local market details, and high-intent next steps.`,
         "Mortgage rules, pricing, and eligibility vary, so the topic overview points readers toward scenario review rather than one universal answer.",
         "The next step stays clear: product guide, calculator, city market view, article, or licensed expert."
       ],
-      sideTitle: isEditorialTeam ? "Review roles" : "Explore by topic",
+      sideTitle: isEditorialTeam ? "What you will find" : "Explore by topic",
       sideItems: isEditorialTeam ? [
-        "Author profiles",
-        "Editor profiles",
-        "Licensed reviewer status",
-        "Compliance review status",
-        "Source and update policy"
+        "Source names and reference dates",
+        "Clear mortgage assumptions",
+        "Related calculators and guides",
+        "Local market links",
+        "Licensed next steps"
       ] : [
         "Topic overview",
         "Featured articles",
@@ -1527,11 +1544,11 @@ function blogTopicPage(topic) {
         "Local market links"
       ]
     })}
-    ${section("Featured topic articles", { label: "Article feed", text: "Browse dated articles and follow the related paths when a topic needs borrower-specific review." }, `<div class="grid two">${feed.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`)}
-    ${section(isEditorialTeam ? "Editorial review model" : "Related paths", { label: isEditorialTeam ? "Governance" : "Helpful links", text: isEditorialTeam ? "Content governance connects author, editor, source, and compliance review roles." : "Keep moving into locations, products, calculators, and experts." }, isEditorialTeam ? table(["Role", "Page block", "CMS object"], [
-      ["Author", "Bio, areas covered, recent articles", "User profile"],
-      ["Editor", "Editorial standards and source review", "Reviewer profile"],
-      ["Compliance", "NMLS, licensing, product claim review", "Compliance review"]
+    ${section("Featured mortgage guides", { label: "Mortgage education", text: "Browse dated guides and follow the related paths when a topic needs a more specific answer." }, `<div class="grid two">${feed.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`)}
+    ${section(isEditorialTeam ? "How our guides stay current" : "Related paths", { label: isEditorialTeam ? "Guide details" : "Helpful links", text: isEditorialTeam ? "Each guide puts useful source details and next steps close to the mortgage question it explains." : "Keep moving into locations, products, calculators, and experts." }, isEditorialTeam ? table(["What you see", "Why it helps"], [
+      ["Source names and reference dates", "See where the public information came from and when it was published."],
+      ["Clear assumptions and limitations", "Know what a broad market figure can explain before using it in your own decision."],
+      ["Related locations, products, and calculators", "Keep the next comparison close to the question you are working through."]
     ]) : `<div class="grid three">${first(data.products, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
   `);
 }
@@ -1549,24 +1566,24 @@ function articlePage(article) {
       title: article.title,
       lead: `Understand ${articleType} alongside ${cityLabel} and ${productLabel}.`,
       actions: `${ctaButton("leadForm")}${products[0]?.route ? `<a class="button secondary" href="${route(products[0].route)}">Related product</a>` : `<a class="button secondary" href="${route("/loan-options")}">Related product</a>`}`,
-      panel: `<aside class="hero-panel"><h2>Editorial trust</h2><p>Updated July 2026. ${humanStatus(article.reviewStatus)}.</p><div class="tag-row"><span class="tag">Sources listed</span><span class="tag">Related tools</span><span class="tag">Review status</span></div></aside>`
+      panel: `<aside class="hero-panel"><h2>Guide details</h2><p>Updated July 2026. Sources and related tools are included below.</p><div class="tag-row"><span class="tag">Sources</span><span class="tag">Related tools</span><span class="tag">Mortgage questions</span></div></aside>`
     })}
     ${editorialSection({
-      label: "Article orientation",
+      label: "Mortgage decision guide",
       title: "Read this with the market, product, and next step in view.",
       intro: "A useful mortgage article helps the reader make a better comparison without presenting education as personalized advice.",
       paragraphs: [
         `This article connects ${articleType} details to ${cityLabel} and ${productLabel}. The reader can understand why the topic matters and where to continue after the article.`,
         "Start with the practical decision, then compare the tradeoffs and related tools before choosing a next step.",
-        "Because mortgage articles can influence borrower action, review status stays visible and education is not presented as a credit decision."
+        "Sources and assumptions stay close to the guide so you can see what the information can explain before moving into a personal mortgage decision."
       ],
-      sideTitle: "Article sections",
+      sideTitle: "On this page",
       sideItems: [
         "Key takeaways",
         "Readable body copy",
         "Related market and product links",
         "Source list",
-        "Compliance-aware CTA"
+        "Next steps"
       ]
     })}
     <section class="section">
@@ -1579,10 +1596,11 @@ function articlePage(article) {
             <li>Use local market details from ${esc(cityLabel)} before relying on a general rule of thumb.</li>
             <li>Move into a calculator or licensed review when the question depends on borrower facts.</li>
           </ul>
-          <h2>What this means for a borrower</h2>
-          <p>Mortgage decisions usually involve more than the headline number. A buyer may need to compare monthly payment, cash to close, mortgage insurance, taxes, insurance, and timing. A homeowner considering a refinance may also need to compare closing costs, remaining term, breakeven period, and total interest over time.</p>
-          <p>For ${esc(cityLabel)}, local costs and inventory can change the planning conversation. If inventory is moving, preparation and documentation may matter. If taxes or insurance are a major part of the payment, those costs belong in the model before comparing homes or loan products.</p>
-          <h2>Questions to ask before acting</h2>
+           <h2>What this means for a borrower</h2>
+           <p>Mortgage decisions usually involve more than the headline number. A buyer may need to compare monthly payment, cash to close, mortgage insurance, taxes, insurance, and timing. A homeowner considering a refinance may also need to compare closing costs, remaining term, breakeven period, and total interest over time.</p>
+           <p>For ${esc(cityLabel)}, local costs and inventory can change the planning conversation. If inventory is moving, preparation and documentation may matter. If taxes or insurance are a major part of the payment, those costs belong in the model before comparing homes or loan products.</p>
+           ${marketChart("article.evidence", article.id)}
+           <h2>Questions to ask before acting</h2>
           <p>Before choosing a product or changing strategy, borrowers may want to ask how credit profile, income, assets, debt, occupancy, property type, and loan amount affect available options.</p>
           <p>The tradeoffs matter. A lower monthly payment can increase total interest or extend the payoff timeline. A low down payment option can include mortgage insurance or a funding fee. A cash-out refinance can provide access to equity while increasing the loan balance.</p>
           <h2>What to compare next</h2>
@@ -1590,7 +1608,7 @@ function articlePage(article) {
         </article>
         <aside class="side-stack">
           ${contextualCta("Review your scenario", "Bring the market, product, and payment questions into one licensed conversation.", ["leadForm", "loContact", "watchlist"])}
-          ${sourceNote(["fhfaHpi", "freddiePmms", "regZ"], "Article source framework")}
+          ${sourceNote(["fhfaHpi", "freddiePmms", "regZ"], "Article sources")}
           ${disclosureFor("article", "Article disclosure")}
         </aside>
       </div>
@@ -1603,12 +1621,12 @@ function articlePage(article) {
       unlockText: "Save the article to Snap Homes or share your goal, market, and product question with a licensed team.",
       types: ["watchlist", "leadForm"]
     })}`, "compact")}
-    ${section("FAQs and sources", { label: "Trust", text: "Get practical answers with the source framework nearby." }, `${faqBlock([
+    ${section("FAQs and sources", { label: "Sources", text: "Get practical answers with source details nearby." }, `${faqBlock([
       { q: "Is this personalized mortgage advice?", a: "No. It is educational information. A licensed loan officer can review borrower facts, property details, product options, and pricing." },
       { q: "What appears in the source block?", a: "Source name, data date, update cadence, and any limitation that affects borrower interpretation." }
     ])}<div style="margin-top:18px">${table(["Metadata", "Value"], [
-      ["Article type", esc(article.type.replaceAll("_", " "))],
-      ["Review status", esc(humanStatus(article.reviewStatus))],
+      ["Guide type", esc(article.type.replaceAll("_", " "))],
+      ["Updated", "July 2026"],
       ["Related products", esc(products.map((product) => product.name).join(", ") || "None")],
       ["Related cities", esc(cities.map((city) => city.name).join(", ") || "None")]
     ])}</div>`, "compact")}
@@ -1796,13 +1814,13 @@ function calculatorPage(calc) {
     })}
     <section class="section" id="calculator">
       <div class="content-layout">
-        <form class="panel calculator-form" data-calculator-form data-calculator-kind="${preset.kind}">
+        <form class="panel calculator-form" data-calculator-form data-calculator-id="${esc(calc.id)}" data-calculator-kind="${preset.kind}">
           <h2>${esc(preset.title)}</h2>
           ${preset.fields.map(([label, name, mode, value]) => `<label>${esc(label)}<input name="${esc(name)}" inputmode="${esc(mode)}" value="${esc(value)}" /></label>`).join("")}
           <button class="button" type="submit">Calculate</button>
         </form>
         <aside class="side-stack">
-          <div class="panel" data-calculator-result><h2>Estimated payment</h2><p>Enter a scenario to calculate a monthly estimate.</p></div>
+          <div class="panel" data-calculator-result><h2>Estimated payment</h2><p>Enter a scenario to calculate a monthly estimate.</p>${marketChart("calculator.payment_breakdown", calc.id)}</div>
           ${disclosureFor("calculator", "Calculator disclosure")}
         </aside>
       </div>
@@ -1841,14 +1859,14 @@ function directoryPage(directory) {
       intro: "Use the filters to narrow a long list into the market, person, branch, topic, or loan path that matches the question.",
       paragraphs: [
         `This directory organizes ${directoryNoun} by ${directory.filters.join(", ")} so users can narrow the path based on intent, market, product, or service area.`,
-        `For ${directoryNoun}, result cards preview enough detail to make the next click meaningful: service area, product fit, review status, language, branch coverage, or borrower goal.`,
+        `For ${directoryNoun}, result cards preview enough detail to make the next click meaningful: service area, product fit, update details, language, branch coverage, or borrower goal.`,
         "Results stay practical and neutral. They are not rankings, endorsements, or a way to steer users based on protected-class characteristics."
       ],
-      sideTitle: "Directory standards",
+      sideTitle: "What you can find",
       sideItems: [
         "Clear filters",
-        "Context-rich result cards",
-        "Useful empty state",
+        "Helpful result details",
+        "No-match guidance",
         "Fast next action",
         "No unsupported rankings"
       ]
@@ -2047,7 +2065,7 @@ function notFoundPage(path) {
       title: "We could not find that page.",
       lead: `No route matched ${path}. Use the navigation to continue.`,
       actions: `<a class="button" href="${route("/")}">Back home</a>`,
-      panel: `<aside class="hero-panel"><h2>Available sections</h2><p>Home, locations, rates, products, learning, calculators, experts, and branches.</p></aside>`
+      panel: `<aside class="hero-panel"><h2>Explore Snap Mortgage</h2><p>Find locations, rates, loan options, calculators, learning guides, and licensed experts.</p></aside>`
     })}
   `);
 }
@@ -2417,6 +2435,14 @@ function wireInteractions() {
     let title = "Estimated payment";
     let payment = pi + tax + insurance;
     let note = "Includes principal, interest, taxes, and insurance based on the visible inputs.";
+    let chartTitle = "Monthly estimate breakdown";
+    let chartSummary = "This chart updates from the inputs shown in the calculator.";
+    let chartPoints = [
+      { label: "Principal and interest", value: pi },
+      { label: "Taxes", value: tax },
+      { label: "Insurance", value: insurance },
+    ];
+    let chartOptions = {};
 
     if (kind === "affordability") {
       const monthlyIncome = (Number(form.get("income")) || 0) / 12;
@@ -2424,6 +2450,14 @@ function wireInteractions() {
       payment = Math.max(monthlyIncome * 0.36 - debts, 0);
       title = "Estimated target payment";
       note = "Uses a simple 36% debt-to-income planning assumption before lender review.";
+      chartTitle = "Monthly affordability budget";
+      chartSummary = "This planning view separates the target housing amount from the income and debt inputs shown above.";
+      chartPoints = [
+        { label: "Target housing payment", value: payment },
+        { label: "Monthly debts", value: debts },
+        { label: "Remaining gross income", value: Math.max(monthlyIncome - debts - payment, 0) },
+      ];
+      chartOptions = { valueHeader: "Monthly budget" };
     } else if (kind === "refinance") {
       const balance = Number(form.get("balance")) || 0;
       const refinancePi = rate > 0 ? (balance * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : balance / months;
@@ -2433,22 +2467,47 @@ function wireInteractions() {
       payment = refinancePi;
       title = "Estimated new payment";
       note = savings > 0 ? `Approximate monthly payment change: $${Math.round(savings).toLocaleString()} lower. Estimated breakeven: ${Math.max(Math.ceil(closingCosts / savings), 1)} months.` : "This scenario does not show a lower monthly principal-and-interest payment.";
+      chartTitle = "Refinance payment comparison";
+      chartSummary = "Compare the current payment and new principal-and-interest estimate using the inputs shown.";
+      chartPoints = [
+        { label: "Current payment", value: currentPayment },
+        { label: "New principal and interest", value: refinancePi },
+        { label: savings >= 0 ? "Estimated monthly reduction" : "Estimated monthly increase", value: Math.abs(savings) },
+      ];
+      chartOptions = { chartType: "bar", valueHeader: "Monthly amount" };
     } else if (kind === "rentBuy") {
       const rent = Number(form.get("rent")) || 0;
       const timeline = Number(form.get("timeline")) || 1;
       title = "Estimated buy payment";
       note = `Compare against $${Math.round(rent).toLocaleString()} rent over a ${timeline}-year planning horizon.`;
+      chartTitle = "Rent and buy payment comparison";
+      chartSummary = "Compare the monthly rent and estimated purchase payment from the inputs shown.";
+      chartPoints = [
+        { label: "Monthly rent", value: rent },
+        { label: "Estimated buy payment", value: payment },
+      ];
+      chartOptions = { chartType: "bar", valueHeader: "Monthly amount" };
     }
     const result = document.querySelector("[data-calculator-result]");
     if (result) {
       result.innerHTML = `
         <h2>${esc(title)}</h2>
         <div class="metric"><span>Monthly amount</span><strong>$${Math.round(payment).toLocaleString()}</strong><p>${esc(note)}</p></div>
+        ${calculatedScenarioChart(calcForm.dataset.calculatorId || "calc-payment", chartTitle, chartSummary, chartPoints, chartOptions)}
         <div class="cta-inline-actions">
           ${ctaButton("loContact", { label: "Discuss these numbers" })}
           ${ctaButton("watchlist", { variant: "secondary", label: "Save scenario" })}
         </div>
       `;
+      result.querySelectorAll("[data-cta-action]").forEach((button) => {
+        button.addEventListener("click", () => {
+          closeAccountMenu({ restoreFocus: false });
+          openActionModal(button.getAttribute("data-cta-action"));
+        });
+      });
+      result.querySelectorAll("[data-save-action]").forEach((button) => {
+        button.addEventListener("click", () => saveToAccount(button, button.getAttribute("data-save-label") || "Saved item"));
+      });
     }
   });
 
@@ -2460,7 +2519,6 @@ function wireInteractions() {
       track.scrollBy({ left: track.clientWidth * (button.dataset.newsCarousel === "previous" ? -0.9 : 0.9), behavior: "smooth" });
     });
   });
-  renderCharts();
 }
 
 function wireDirectoryFilters() {
@@ -2487,46 +2545,6 @@ function wireDirectoryFilters() {
   input?.addEventListener("input", applyFilter);
 }
 
-function renderCharts() {
-  if (!window.Chart) return;
-  document.querySelectorAll("[data-chart='line']").forEach((canvas) => {
-    const values = (canvas.dataset.chartValues || "")
-      .split(",")
-      .map((value) => Number(value.trim()))
-      .filter((value) => Number.isFinite(value));
-    const shell = canvas.closest("[data-chart-shell]");
-    shell?.classList.add("chart-ready");
-    new window.Chart(canvas, {
-      type: "line",
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"].slice(0, values.length),
-        datasets: [{
-          label: canvas.dataset.chartLabel || "Trend",
-          data: values,
-          borderColor: "#0b55ff",
-          backgroundColor: "rgba(11, 85, 255, 0.12)",
-          fill: true,
-          tension: 0.38,
-          pointRadius: 3,
-          pointBackgroundColor: "#10254a"
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: true }
-        },
-        scales: {
-          x: { grid: { display: false } },
-          y: { grid: { color: "rgba(101, 115, 138, 0.18)" }, ticks: { display: false } }
-        }
-      }
-    });
-  });
-}
-
 function scrollToCurrentAnchor() {
   const anchor = currentAnchor();
   if (!anchor) {
@@ -2543,15 +2561,17 @@ function scrollToCurrentAnchor() {
 
 async function boot() {
   try {
-    const [response, optionalNews, optionalMedia] = await Promise.all([
+    const [response, optionalNews, optionalMedia, optionalMarketCharts] = await Promise.all([
       fetch(DATA_URL),
       fetchOptionalJson(NEWS_INDEX_URL),
-      fetchOptionalJson(NEWS_MEDIA_URL)
+      fetchOptionalJson(NEWS_MEDIA_URL),
+      fetchOptionalJson(MARKET_CHART_FIXTURES_URL)
     ]);
     if (!response.ok) throw new Error("Site data could not be loaded.");
     data = await response.json();
     newsIndex = optionalNews || { articles: [] };
     mediaManifest = optionalMedia || { media: [] };
+    marketChartFixtures = loadOptionalMarketChartFixtures(optionalMarketCharts);
     maps = buildMaps(data, newsIndex, mediaManifest);
     loadSessionState();
     render();
@@ -2574,6 +2594,15 @@ async function fetchOptionalJson(url) {
     return response.ok ? response.json() : null;
   } catch {
     return null;
+  }
+}
+
+function loadOptionalMarketChartFixtures(raw) {
+  if (!raw) return { sources: [], charts: [], snapshotSources: [] };
+  try {
+    return loadMarketChartFixtures(raw);
+  } catch {
+    return { sources: [], charts: [], snapshotSources: [] };
   }
 }
 

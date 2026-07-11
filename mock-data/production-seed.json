@@ -7,13 +7,13 @@
   },
   "recommendedCounts": {
     "siteEntryPages": 1,
-    "states": 49,
+    "states": 51,
     "cities": 737,
     "branches": 6,
     "loanOfficers": 16,
     "products": 8,
     "ratesPages": 1,
-    "locationProductModules": 832,
+    "locationProductModules": 836,
     "blogPages": 10,
     "articles": 24,
     "calculators": 4,
@@ -2087,6 +2087,35 @@
       ]
     },
     {
+      "id": "state-vt",
+      "name": "Vermont",
+      "abbr": "VT",
+      "route": "/locations/vermont",
+      "stateNarrative": "Vermont borrowers can compare local price, payment, property tax, insurance, and loan options before choosing a mortgage path.",
+      "cityIds": [],
+      "branchIds": [],
+      "featuredProductIds": [
+        "product-conventional",
+        "product-fha",
+        "product-va",
+        "product-refinance"
+      ],
+      "marketSnapshot": {
+        "medianHomePrice": "$385K",
+        "paymentScenario": "$2,640/mo",
+        "inventory": "3.4 months",
+        "propertyTaxContext": "Local tax assumptions vary by city and county",
+        "insuranceContext": "Insurance assumptions should be confirmed before choosing a path",
+        "lastUpdated": "2026-07-10"
+      },
+      "newsArticleIds": [
+        "news-vt-state-home-price-movement",
+        "news-vt-state-labor-market",
+        "news-vt-state-housing-costs",
+        "news-vt-state-loan-limit-landscape"
+      ]
+    },
+    {
       "id": "state-va",
       "name": "Virginia",
       "abbr": "VA",
@@ -2181,6 +2210,35 @@
         "news-wa-state-labor-market",
         "news-wa-state-housing-costs",
         "news-wa-state-loan-limit-landscape"
+      ]
+    },
+    {
+      "id": "state-wv",
+      "name": "West Virginia",
+      "abbr": "WV",
+      "route": "/locations/west-virginia",
+      "stateNarrative": "West Virginia borrowers can compare local price, payment, property tax, insurance, and loan options before choosing a mortgage path.",
+      "cityIds": [],
+      "branchIds": [],
+      "featuredProductIds": [
+        "product-conventional",
+        "product-fha",
+        "product-va",
+        "product-refinance"
+      ],
+      "marketSnapshot": {
+        "medianHomePrice": "$215K",
+        "paymentScenario": "$1,470/mo",
+        "inventory": "3.4 months",
+        "propertyTaxContext": "Local tax assumptions vary by city and county",
+        "insuranceContext": "Insurance assumptions should be confirmed before choosing a path",
+        "lastUpdated": "2026-07-10"
+      },
+      "newsArticleIds": [
+        "news-wv-state-home-price-movement",
+        "news-wv-state-labor-market",
+        "news-wv-state-housing-costs",
+        "news-wv-state-loan-limit-landscape"
       ]
     },
     {
@@ -46186,6 +46244,46 @@
       "stateId": "state-wy",
       "cityId": "city-cheyenne-wy",
       "productId": "product-purchase",
+      "generated": true
+    },
+    {
+      "id": "module-vt-conventional",
+      "name": "Conventional loans in Vermont",
+      "parentPageRoute": "/locations/vermont",
+      "anchor": "#conventional-loans",
+      "stateId": "state-vt",
+      "cityId": null,
+      "productId": "product-conventional",
+      "generated": true
+    },
+    {
+      "id": "module-vt-fha",
+      "name": "FHA loans in Vermont",
+      "parentPageRoute": "/locations/vermont",
+      "anchor": "#fha-loans",
+      "stateId": "state-vt",
+      "cityId": null,
+      "productId": "product-fha",
+      "generated": true
+    },
+    {
+      "id": "module-wv-conventional",
+      "name": "Conventional loans in West Virginia",
+      "parentPageRoute": "/locations/west-virginia",
+      "anchor": "#conventional-loans",
+      "stateId": "state-wv",
+      "cityId": null,
+      "productId": "product-conventional",
+      "generated": true
+    },
+    {
+      "id": "module-wv-fha",
+      "name": "FHA loans in West Virginia",
+      "parentPageRoute": "/locations/west-virginia",
+      "anchor": "#fha-loans",
+      "stateId": "state-wv",
+      "cityId": null,
+      "productId": "product-fha",
       "generated": true
     }
   ],

@@ -166,7 +166,7 @@ function publicRoutes(seed, articles) {
   ])].sort();
 }
 
-async function publishStaticArticles({ seed, articles, indexItems, mediaById }) {
+async function publishStaticArticles({ seed, articles, indexItems, mediaById, sitemapArticles = articles }) {
   const indexByArticleId = new Map(indexItems.map((item) => [item.id, item]));
   for (const article of articles) {
     const indexItem = indexByArticleId.get(article.id);
@@ -178,10 +178,10 @@ async function publishStaticArticles({ seed, articles, indexItems, mediaById }) 
     );
   }
 
-  const lastmodByRoute = Object.fromEntries(articles.map((article) => [article.route, article.updatedAt || article.publishedAt]));
+  const lastmodByRoute = Object.fromEntries(sitemapArticles.map((article) => [article.route, article.updatedAt || article.publishedAt]));
   await writeTextAtomic(
     path.join(repoRoot, "site", "sitemap.xml"),
-    renderSitemap(publicRoutes(seed, articles), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
+    renderSitemap(publicRoutes(seed, sitemapArticles), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
   );
   await writeTextAtomic(
     path.join(repoRoot, "site", "robots.txt"),
@@ -197,6 +197,9 @@ async function main() {
   const allLocations = [...seed.states, ...seed.cities];
   const selectedLocations = options.locationId ? allLocations.filter((location) => location.id === options.locationId) : allLocations;
   if (!selectedLocations.length) throw new Error(`Unknown --location-id ${options.locationId}`);
+
+  const existingIndex = options.locationId ? JSON.parse(await fs.readFile(indexPath, "utf8")) : null;
+  const existingSourceManifest = options.locationId ? JSON.parse(await fs.readFile(sourceManifestPath, "utf8")) : null;
 
   const approvedManifest = createVerifiedMediaManifest("2026-07-10");
   await writeJsonAtomic(mediaManifestPath, approvedManifest);
@@ -261,14 +264,14 @@ async function main() {
     minimumArticles: selectedLocations.length * 4,
   });
   const sourceDatasets = await sourceRecordsWithChecksums([census.sources, bls.sources, loans.sources]);
-  const index = {
+  const generatedIndex = {
     version: "location-news-index-v1",
     generatedAt: "2026-07-10",
     locationCount: selectedLocations.length,
     articleCount: indexItems.length,
     articles: indexItems,
   };
-  const sourceManifest = {
+  const generatedSourceManifest = {
     version: "location-news-sources-v1",
     generatorVersion: "location-news-generator-v1",
     generatedAt: "2026-07-10",
@@ -296,10 +299,62 @@ async function main() {
   };
 
   if (!options.locationId) {
-    await writeJsonAtomic(indexPath, index);
-    await writeJsonAtomic(sourceManifestPath, sourceManifest);
+    await writeJsonAtomic(indexPath, generatedIndex);
+    await writeJsonAtomic(sourceManifestPath, generatedSourceManifest);
     await writeJsonAtomic(seedPath, seed);
     await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById });
+  } else {
+    const locationId = selectedLocations[0].id;
+    const retained = existingIndex.articles.filter((article) => article.locationId !== locationId);
+    const mergedArticles = [...retained, ...indexItems];
+    const locationIds = new Set(mergedArticles.map((article) => article.locationId));
+    const retainedBatches = (existingSourceManifest.batches || []).filter((batch) => !batch.locationIds.includes(locationId));
+    const mergedBatches = [...retainedBatches, ...batches]
+      .map((batch, index) => ({ ...batch, batch: index + 1 }));
+    const sourceIdentity = (source) => source.datasetUrl || source.sourceUrl || source.cachePath;
+    const sourceDatasets = [...(existingSourceManifest.sourceDatasets || []), ...generatedSourceManifest.sourceDatasets]
+      .filter((source, index, sources) => sources.findIndex((candidate) => sourceIdentity(candidate) === sourceIdentity(source)) === index);
+    const mergedIndex = {
+      ...existingIndex,
+      generatedAt: generatedIndex.generatedAt,
+      locationCount: locationIds.size,
+      articleCount: mergedArticles.length,
+      articles: mergedArticles,
+    };
+    const mergedSourceManifest = {
+      ...existingSourceManifest,
+      generatedAt: generatedSourceManifest.generatedAt,
+      censusMode: generatedSourceManifest.censusMode,
+      aliases: generatedSourceManifest.aliases,
+      sourceDatasets,
+      counts: {
+        ...existingSourceManifest.counts,
+        states: [...locationIds].filter((id) => id.startsWith("state-")).length,
+        cities: [...locationIds].filter((id) => id.startsWith("city-")).length,
+        locations: locationIds.size,
+        articles: mergedArticles.length,
+        bundles: locationIds.size,
+        batches: mergedBatches.length,
+        mediaAssets: mediaAssets.length,
+      },
+      validation: {
+        ...existingSourceManifest.validation,
+        articles: mergedArticles.length,
+        locations: locationIds.size,
+      },
+      batches: mergedBatches,
+      exceptions: generatedSourceManifest.exceptions,
+    };
+    await writeJsonAtomic(indexPath, mergedIndex);
+    await writeJsonAtomic(sourceManifestPath, mergedSourceManifest);
+    await writeJsonAtomic(seedPath, seed);
+    await publishStaticArticles({
+      seed,
+      articles: corpus,
+      indexItems,
+      mediaById: media.assetsById,
+      sitemapArticles: mergedArticles,
+    });
   }
   console.log(`Generated ${indexItems.length} articles for ${selectedLocations.length} locations in ${batches.length} validated batches.`);
 }

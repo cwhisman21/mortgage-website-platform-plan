@@ -638,9 +638,9 @@ for (const row of generatedRows) {
   rowsByStateId.get(stateId).push(row);
 }
 
-for (const [stateId, groupedRows] of rowsByStateId.entries()) {
-  const abbr = stateId.slice("state-".length).toUpperCase();
-  const stateName = stateNames[abbr];
+for (const [abbr, stateName] of Object.entries(stateNames)) {
+  const stateId = `state-${abbr.toLowerCase()}`;
+  const groupedRows = rowsByStateId.get(stateId) || [];
   const existing = existingStates.get(stateId);
   const cityEntries = groupedRows.map((row) => generatedCities.get(row.id)).filter(Boolean);
   statesById.set(stateId, {
@@ -655,7 +655,8 @@ for (const [stateId, groupedRows] of rowsByStateId.entries()) {
       .map((city) => city.id),
     branchIds: existing?.branchIds || [],
     featuredProductIds: existing?.featuredProductIds || stateProducts(cityEntries, abbr),
-    marketSnapshot: existing?.marketSnapshot || stateSnapshot(abbr, cityEntries)
+    marketSnapshot: existing?.marketSnapshot || stateSnapshot(abbr, cityEntries),
+    newsArticleIds: existing?.newsArticleIds || [],
   });
 }
 
@@ -691,8 +692,9 @@ seed.locationProductModules = buildLocationProductModules(seed, stateOrder, city
 seed.recommendedCounts.locationProductModules = seed.locationProductModules.length;
 
 const presentStateAbbrs = new Set(seed.states.map((state) => state.abbr));
-const expectedStateAbbrs = Object.keys(stateNames).filter((abbr) => rows.some((row) => row.state_id === abbr));
-const missingThresholdStates = Object.keys(stateNames).filter((abbr) => !presentStateAbbrs.has(abbr));
+const expectedStateAbbrs = Object.keys(stateNames);
+const sourceStateAbbrs = new Set(rows.map((row) => row.state_id));
+const statesWithoutCityProper50k = Object.keys(stateNames).filter((abbr) => !rows.some((row) => row.state_id === abbr));
 
 fs.writeFileSync(sourceManifestPath, `${JSON.stringify({
   source: "SimpleMaps uscities.csv with source-aware generation for static review pages",
@@ -712,8 +714,9 @@ fs.writeFileSync(sourceManifestPath, `${JSON.stringify({
   cities: seed.cities.length,
   batchesOf20: Math.ceil(seed.cities.length / 20),
   batches: batchReports,
-  statesFromSource: expectedStateAbbrs.length,
-  statesWithoutCityProper50k: missingThresholdStates
+  statesFromSource: sourceStateAbbrs.size,
+  pageCoverageStates: expectedStateAbbrs.length,
+  statesWithoutCityProper50k
 }, null, 2)}\n`);
 
 fs.writeFileSync(seedPath, `${JSON.stringify(seed, null, 2)}\n`);

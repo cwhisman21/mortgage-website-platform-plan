@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { fetchToCache, parseDelimited } from "./core.mjs";
+import { STATE_FIPS } from "./state-geography.mjs";
 
 export const LIMIT_SOURCES = {
   fhfa2026: "https://www.fhfa.gov/document/d/cll/fullcountyloanlimitlist2026_hera-based_final_flat.csv",
@@ -9,14 +10,6 @@ export const LIMIT_SOURCES = {
   hud2026: "https://apps.hud.gov/pub/chums/cy2026-forward-limits.txt",
   fhfaHpi2026Q1: "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_po_state.txt",
   fhfaHpiPage: "https://www.fhfa.gov/house-price-index",
-};
-
-const STATE_FIPS = {
-  AL: "01", AK: "02", AZ: "04", AR: "05", CA: "06", CO: "08", CT: "09", DE: "10", DC: "11", FL: "12",
-  GA: "13", HI: "15", ID: "16", IL: "17", IN: "18", IA: "19", KS: "20", KY: "21", LA: "22", ME: "23",
-  MD: "24", MA: "25", MI: "26", MN: "27", MS: "28", MO: "29", MT: "30", NE: "31", NV: "32", NH: "33",
-  NJ: "34", NM: "35", NY: "36", NC: "37", ND: "38", OH: "39", OK: "40", OR: "41", PA: "42", RI: "44",
-  SC: "45", SD: "46", TN: "47", TX: "48", UT: "49", VT: "50", VA: "51", WA: "53", WV: "54", WI: "55", WY: "56",
 };
 
 // Connecticut's planning regions became Census county equivalents in 2022.

@@ -212,17 +212,17 @@
     }
   ],
   "counts": {
-    "states": 49,
+    "states": 51,
     "cities": 737,
-    "locations": 786,
-    "articles": 3144,
-    "bundles": 786,
-    "batches": 40,
+    "locations": 788,
+    "articles": 3152,
+    "bundles": 788,
+    "batches": 42,
     "mediaAssets": 7
   },
   "validation": {
-    "articles": 3144,
-    "locations": 786,
+    "articles": 3152,
+    "locations": 788,
     "paragraphHashes": 18864
   },
   "batches": [
@@ -25038,6 +25038,90 @@
         "news-west-allis-wi-local-labor-market-source-latest-unemployment-rate",
         "news-west-allis-wi-local-labor-market-source-previous-previous-rate",
         "news-west-allis-wi-local-labor-market-source-yearago-year-ago-rate"
+      ],
+      "status": "validated"
+    },
+    {
+      "batch": 41,
+      "locationIds": [
+        "state-vt"
+      ],
+      "articleIds": [
+        "news-vt-state-home-price-movement",
+        "news-vt-state-labor-market",
+        "news-vt-state-housing-costs",
+        "news-vt-state-loan-limit-landscape"
+      ],
+      "sourceIds": [
+        "news-vt-state-home-price-movement-source-annual-change",
+        "news-vt-state-home-price-movement-source-five-year-change",
+        "news-vt-state-home-price-movement-source-hpi-index",
+        "news-vt-state-home-price-movement-source-quarterly-change",
+        "news-vt-state-housing-costs-source-home-value",
+        "news-vt-state-housing-costs-source-home-value-prior",
+        "news-vt-state-housing-costs-source-housing-units",
+        "news-vt-state-housing-costs-source-income",
+        "news-vt-state-housing-costs-source-occupied-units",
+        "news-vt-state-housing-costs-source-owner-cost",
+        "news-vt-state-housing-costs-source-owner-units",
+        "news-vt-state-housing-costs-source-rent",
+        "news-vt-state-housing-costs-source-renter-units",
+        "news-vt-state-housing-costs-source-vacant-units",
+        "news-vt-state-labor-market-source-latest-employment",
+        "news-vt-state-labor-market-source-latest-labor-force",
+        "news-vt-state-labor-market-source-latest-unemployment",
+        "news-vt-state-labor-market-source-latest-unemployment-rate",
+        "news-vt-state-labor-market-source-previous-previous-rate",
+        "news-vt-state-labor-market-source-yearago-year-ago-rate",
+        "news-vt-state-loan-limit-landscape-source-conforming-above",
+        "news-vt-state-loan-limit-landscape-source-conforming-max",
+        "news-vt-state-loan-limit-landscape-source-conforming-min",
+        "news-vt-state-loan-limit-landscape-source-county-count",
+        "news-vt-state-loan-limit-landscape-source-fha-above",
+        "news-vt-state-loan-limit-landscape-source-fha-max",
+        "news-vt-state-loan-limit-landscape-source-fha-min"
+      ],
+      "status": "validated"
+    },
+    {
+      "batch": 42,
+      "locationIds": [
+        "state-wv"
+      ],
+      "articleIds": [
+        "news-wv-state-home-price-movement",
+        "news-wv-state-labor-market",
+        "news-wv-state-housing-costs",
+        "news-wv-state-loan-limit-landscape"
+      ],
+      "sourceIds": [
+        "news-wv-state-home-price-movement-source-annual-change",
+        "news-wv-state-home-price-movement-source-five-year-change",
+        "news-wv-state-home-price-movement-source-hpi-index",
+        "news-wv-state-home-price-movement-source-quarterly-change",
+        "news-wv-state-housing-costs-source-home-value",
+        "news-wv-state-housing-costs-source-home-value-prior",
+        "news-wv-state-housing-costs-source-housing-units",
+        "news-wv-state-housing-costs-source-income",
+        "news-wv-state-housing-costs-source-occupied-units",
+        "news-wv-state-housing-costs-source-owner-cost",
+        "news-wv-state-housing-costs-source-owner-units",
+        "news-wv-state-housing-costs-source-rent",
+        "news-wv-state-housing-costs-source-renter-units",
+        "news-wv-state-housing-costs-source-vacant-units",
+        "news-wv-state-labor-market-source-latest-employment",
+        "news-wv-state-labor-market-source-latest-labor-force",
+        "news-wv-state-labor-market-source-latest-unemployment",
+        "news-wv-state-labor-market-source-latest-unemployment-rate",
+        "news-wv-state-labor-market-source-previous-previous-rate",
+        "news-wv-state-labor-market-source-yearago-year-ago-rate",
+        "news-wv-state-loan-limit-landscape-source-conforming-above",
+        "news-wv-state-loan-limit-landscape-source-conforming-max",
+        "news-wv-state-loan-limit-landscape-source-conforming-min",
+        "news-wv-state-loan-limit-landscape-source-county-count",
+        "news-wv-state-loan-limit-landscape-source-fha-above",
+        "news-wv-state-loan-limit-landscape-source-fha-max",
+        "news-wv-state-loan-limit-landscape-source-fha-min"
       ],
       "status": "validated"
     }

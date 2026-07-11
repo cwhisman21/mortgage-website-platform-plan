@@ -4,6 +4,7 @@ import path from "node:path";
 import readline from "node:readline";
 
 import { fetchToCache, slugify } from "./core.mjs";
+import { STATE_FIPS } from "./state-geography.mjs";
 
 export const ACS_VARIABLES = {
   population: ["B01003_001E", "B01003_001M"],
@@ -319,7 +320,10 @@ async function loadCensusSummaryEvidence({ cities, states, cacheDir, summaryFile
   const byCityId = {};
   const byStateId = {};
   const sources = [];
-  const stateFips = [...new Set(cities.map((city) => city.sourceGeography.stateFips))].sort();
+  const cityStateFips = cities.map((city) => city.sourceGeography.stateFips);
+  const missingStateFips = states.filter((state) => !STATE_FIPS[state.abbr]).map((state) => state.id);
+  if (missingStateFips.length) throw new Error(`Missing state FIPS coverage: ${missingStateFips.join(", ")}`);
+  const stateFips = [...new Set([...cityStateFips, ...states.map((state) => STATE_FIPS[state.abbr])])].sort();
   for (const year of ACS_YEARS) {
     const files = await acquireSummaryFiles({ year, cacheDir, summaryFileDir, refresh });
     const records = await readSummaryGeographies(files.geography, stateFips);
