@@ -6,16 +6,18 @@ const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const indexSource = fs.readFileSync(new URL("./index.html", import.meta.url), "utf8");
 const stylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 
-test("homepage uses the approved editable Figma campaign hero", async () => {
+test("homepage uses the original composite campaign image as the hero", async () => {
   const { renderCampaignHero } = await import("./campaign-hero.mjs");
   const html = renderCampaignHero();
 
-  assert.match(html, /class="campaign-hero"/);
-  assert.match(html, /There is a better way than hoping for the best\./);
-  assert.match(html, /Start My Comparison/);
-  assert.match(html, /Explore local markets/);
-  assert.match(html, /campaign-mortgage-machine\.webp/);
-  assert.equal((html.match(/<div class="campaign-option /g) || []).length, 3);
+  assert.match(html, /class="campaign-hero campaign-hero-image-only"/);
+  assert.match(html, /class="campaign-hero-image"/);
+  assert.match(html, /campaign-mortgage-machine\.png/);
+  assert.match(html, /class="campaign-image-cta"/);
+  assert.doesNotMatch(html, /campaign-hero-copy/);
+  assert.doesNotMatch(html, /campaign-option/);
+  assert.doesNotMatch(html, /class="lead"/);
+  assert.doesNotMatch(html, /class="hero-actions"/);
 });
 
 test("campaign hero is connected to the homepage renderer", () => {
@@ -32,7 +34,7 @@ test("public site loads the approved Figma typography", () => {
 
 test("campaign artwork is stored with the deployable site", () => {
   assert.equal(
-    fs.existsSync(new URL("./assets/campaign-mortgage-machine.webp", import.meta.url)),
+    fs.existsSync(new URL("./assets/campaign-mortgage-machine.png", import.meta.url)),
     true,
   );
 });
