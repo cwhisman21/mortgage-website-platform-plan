@@ -67,6 +67,22 @@ function seriesDescription(fixture) {
 }
 
 const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+const minimumHitTargetSize = 16;
+
+function rectangularHitTarget(x, y, markWidth, markHeight, viewBoxWidth, viewBoxHeight) {
+  const width = Math.max(markWidth, minimumHitTargetSize);
+  const height = Math.max(markHeight, minimumHitTargetSize);
+  return {
+    x: clamp(x - (width - markWidth) / 2, 0, viewBoxWidth - width),
+    y: clamp(y - (height - markHeight) / 2, 0, viewBoxHeight - height),
+    width,
+    height,
+  };
+}
+
+function hitTargetMarkup({ x, y, width, height }) {
+  return `<rect class="market-chart-hit-target" x="${x}" y="${y}" width="${width}" height="${height}"/>`;
+}
 
 export function computeChartTooltipPosition({
   figureWidth,
@@ -229,11 +245,39 @@ function barSvg(fixture, stacked = false) {
   const pad = 32;
   const svgOpen = `<svg viewBox="0 0 ${width} ${height}" role="img" focusable="false" aria-label="${escapeHtml(seriesDescription(fixture))}">`;
   if (stacked) {
-    let offset = pad;
-    const marks = values.map((value, index) => {
-      const barWidth = (value / max) * (width - pad * 2);
-      const rect = `<g ${markAttributes(fixture, index)}><rect class="market-chart-bar" x="${offset}" y="80" width="${barWidth}" height="90" fill="currentColor" opacity="${0.45 + index * 0.12}"/></g>`;
-      offset += barWidth;
+    const segmentWidths = values.map((value) => (value / max) * (width - pad * 2));
+    let segmentOffset = pad;
+    const segments = segmentWidths.map((barWidth) => {
+      const segment = { x: segmentOffset, width: barWidth };
+      segmentOffset += barWidth;
+      return segment;
+    });
+    const zeroTargets = new Map();
+    for (let index = 0; index < values.length;) {
+      if (values[index] !== 0) {
+        index += 1;
+        continue;
+      }
+      const start = index;
+      while (index < values.length && values[index] === 0) index += 1;
+      const targetsPerRow = Math.floor((width - pad * 2 - minimumHitTargetSize) / 18) + 1;
+      for (let rowStart = start; rowStart < index; rowStart += targetsPerRow) {
+        const rowEnd = Math.min(rowStart + targetsPerRow, index);
+        const rowWidth = minimumHitTargetSize + (rowEnd - rowStart - 1) * 18;
+        const targetStart = clamp(segments[start].x - rowWidth / 2, pad, width - pad - rowWidth);
+        for (let zeroIndex = rowStart; zeroIndex < rowEnd; zeroIndex += 1) {
+          zeroTargets.set(zeroIndex, {
+            x: targetStart + (zeroIndex - rowStart) * 18,
+            y: 176 + Math.floor((rowStart - start) / targetsPerRow) * 18,
+            width: minimumHitTargetSize,
+            height: minimumHitTargetSize,
+          });
+        }
+      }
+    }
+    const marks = segments.map(({ x, width: barWidth }, index) => {
+      const hitTarget = zeroTargets.get(index) || { x, y: 80, width: barWidth, height: 90 };
+      const rect = `<g ${markAttributes(fixture, index)}>${hitTargetMarkup(hitTarget)}<rect class="market-chart-bar" x="${x}" y="80" width="${barWidth}" height="90" fill="currentColor" opacity="${0.45 + index * 0.12}"/></g>`;
       return rect;
     }).join("");
     return `${svgOpen}${marks}</svg>`;
@@ -243,7 +287,10 @@ function barSvg(fixture, stacked = false) {
   const barWidth = Math.max(available / fixture.points.length - gap, 8);
   const marks = values.map((value, index) => {
     const barHeight = (value / max) * (height - pad * 2);
-    return `<g ${markAttributes(fixture, index)}><rect class="market-chart-bar" x="${pad + index * (barWidth + gap)}" y="${height - pad - barHeight}" width="${barWidth}" height="${barHeight}" fill="currentColor"/></g>`;
+    const x = pad + index * (barWidth + gap);
+    const y = height - pad - barHeight;
+    const hitTarget = rectangularHitTarget(x, y, barWidth, barHeight, width, height);
+    return `<g ${markAttributes(fixture, index)}>${hitTargetMarkup(hitTarget)}<rect class="market-chart-bar" x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" fill="currentColor"/></g>`;
   }).join("");
   return `${svgOpen}<path d="M${pad} ${height - pad}H${width - pad}" stroke="currentColor" opacity=".25"/>${marks}</svg>`;
 }

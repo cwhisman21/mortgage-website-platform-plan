@@ -17,6 +17,39 @@ const fixtures = loadMarketChartFixtures(
 
 const chartCount = (chartId) => fixtures.charts.filter((fixture) => fixture.chartId === chartId).length;
 
+function markMarkup(html, label) {
+  const mark = [...html.matchAll(/<g class="market-chart-mark"[\s\S]*?<\/g>/g)]
+    .find(([markup]) => markup.includes(`data-chart-label="${label}"`));
+  assert.ok(mark, `missing chart mark for ${label}`);
+  return mark[0];
+}
+
+function rectMarkup(mark, className) {
+  const rect = [...mark.matchAll(/<rect\b[^>]*>/g)]
+    .find(([markup]) => markup.includes(`class="${className}"`));
+  assert.ok(rect, `missing ${className} rect`);
+  return rect[0];
+}
+
+function rectGeometry(mark, className) {
+  const markup = rectMarkup(mark, className);
+  const attribute = (name) => Number(markup.match(new RegExp(`\\b${name}="([^"]+)"`))?.[1]);
+  return { x: attribute("x"), y: attribute("y"), width: attribute("width"), height: attribute("height") };
+}
+
+function paymentFixture(values) {
+  const sourceFixture = chartFixtureFor(fixtures, "calculator.payment_breakdown", "calc-payment");
+  return {
+    ...sourceFixture,
+    title: "Synthetic zero payment breakdown",
+    points: values.map((value, index) => ({ label: `Component ${index + 1}`, value })),
+    table: {
+      headers: ["Payment component", "Monthly estimate"],
+      rows: values.map((value, index) => [`Component ${index + 1}`, `$${value}`]),
+    },
+  };
+}
+
 function chartInteractionHarness() {
   const listeners = new Map();
   const root = {
@@ -180,6 +213,63 @@ test("line charts provide a larger transparent hit target", () => {
   const html = renderChartFigure(fixture);
   assert.equal((html.match(/class="market-chart-hit-target"/g) || []).length, fixture.points.length);
   assert.match(html, /class="market-chart-hit-target"[^>]*r="16"/);
+});
+
+test("the shipped VA zero down payment keeps its zero-height data bar and gets a minimum hit target", () => {
+  const fixture = chartFixtureFor(fixtures, "product.scenario_compare", "product-va");
+  const html = renderChartFigure(fixture);
+  const downPayment = markMarkup(html, "Down payment");
+  const visibleBar = rectGeometry(downPayment, "market-chart-bar");
+  const hitTarget = rectGeometry(downPayment, "market-chart-hit-target");
+
+  assert.equal(visibleBar.height, 0);
+  assert.ok(hitTarget.width >= 16);
+  assert.ok(hitTarget.height >= 16);
+  assert.ok(hitTarget.x >= 0 && hitTarget.y >= 0);
+  assert.ok(hitTarget.x + hitTarget.width <= 640);
+  assert.ok(hitTarget.y + hitTarget.height <= 250);
+  assert.equal((html.match(/class="market-chart-hit-target"/g) || []).length, fixture.points.length);
+});
+
+test("payment marks give zero segments distinct bounded hit targets without changing their visible widths", () => {
+  const scenarios = [
+    [0, 0, 100],
+    [100, 0, 100],
+    [100, 0, 0],
+    [0, 0, 0],
+    Array.from({ length: 33 }, () => 0),
+  ];
+
+  for (const values of scenarios) {
+    const fixture = paymentFixture(values);
+    const html = renderChartFigure(fixture);
+    const targets = fixture.points.map((point) => rectGeometry(markMarkup(html, point.label), "market-chart-hit-target"));
+
+    assert.equal((html.match(/class="market-chart-mark"/g) || []).length, values.length);
+    assert.equal((html.match(/class="market-chart-hit-target"/g) || []).length, values.length);
+    targets.forEach((target) => {
+      assert.ok(target.width >= 16);
+      assert.ok(target.height >= 16);
+      assert.ok(target.x >= 32 && target.y >= 0);
+      assert.ok(target.x + target.width <= 608);
+      assert.ok(target.y + target.height <= 250);
+    });
+
+    values.forEach((value, index) => {
+      const visibleBar = rectGeometry(markMarkup(html, `Component ${index + 1}`), "market-chart-bar");
+      if (value === 0) {
+        assert.equal(visibleBar.width, 0);
+        assert.ok(targets[index].y >= visibleBar.y + visibleBar.height);
+      } else {
+        assert.deepEqual(targets[index], visibleBar);
+      }
+    });
+
+    for (let index = 1; index < values.length; index += 1) {
+      if (values[index - 1] !== 0 || values[index] !== 0) continue;
+      assert.ok(targets[index - 1].x + targets[index - 1].width <= targets[index].x || targets[index].x + targets[index].width <= targets[index - 1].x);
+    }
+  }
 });
 
 test("chart tooltip attributes escape public values", () => {
