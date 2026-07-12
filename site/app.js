@@ -7,6 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderLocationsHero } from "/site/locations-hero.mjs";
+import { renderCampaignHero } from "/site/campaign-hero.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
@@ -739,34 +740,34 @@ const CTA_TYPES = {
 
 const CTA_MODALS = {
   account: {
-    title: "Your Snap Homes account would open next.",
-    body: `${SNAP_CUSTOMER.name} would continue to Snap Homes to manage saved mortgage research and account activity. This public site keeps you on Snap Mortgage for education, rates, calculators, local pages, and licensed-contact paths.`,
-    primary: "Got it"
+    title: "Continue to Snap Homes",
+    body: `${SNAP_CUSTOMER.name}, your saved mortgage research and account activity are available in Snap Homes.`,
+    primary: "Close"
   },
   leadForm: {
-    title: "Request mortgage guidance",
-    body: "In the live experience, this would send you to the account or contact path where your mortgage question can be shared with licensed help. No request is submitted from this static page.",
-    primary: "Continue"
+    title: "Connect with mortgage guidance",
+    body: "A licensed mortgage professional can help review your goals, property, timing, and questions. No information has been sent.",
+    primary: "Close"
   },
   prequal: {
     title: "Start a prequalification conversation",
-    body: "In the live experience, this would continue to the account path where borrower and property details can be reviewed. Nothing here is a credit decision, approval, rate lock, or commitment to lend.",
-    primary: "Continue"
+    body: "A loan officer may review borrower, property, income, asset, and timing details. This is not a credit decision, approval, rate lock, or commitment to lend.",
+    primary: "Close"
   },
   rateReview: {
     title: "Review rates",
-    body: "In the live experience, this would continue to a licensed review path. Personalized rates, APR, points, fees, and payments depend on borrower facts, property details, loan terms, and market conditions.",
-    primary: "Continue"
+    body: "Personalized rates, APR, points, fees, and payments depend on borrower facts, property details, loan terms, and market conditions. A licensed review can compare those details.",
+    primary: "Close"
   },
   compareOffer: {
     title: "Compare an offer",
-    body: "In the live experience, this would help you prepare offer questions for licensed review. This static page does not collect documents, review files, underwrite, or promise savings.",
-    primary: "Continue"
+    body: "Bring the rate, APR, points, fees, loan amount, and assumptions into a licensed conversation. Documents are not collected or reviewed here, and no savings are promised.",
+    primary: "Close"
   },
   loContact: {
-    title: "Contact an expert",
-    body: "In the live experience, this would continue to the contact path for licensed mortgage help. No message is sent from this static page.",
-    primary: "Continue"
+    title: "Connect with a licensed loan officer",
+    body: "Choose a loan officer who serves your market and mortgage goal. No message has been sent.",
+    primary: "Close"
   }
 };
 
@@ -1051,10 +1052,16 @@ function modalShell() {
 }
 
 function pageShell(content) {
-  return `<div data-page-content>${header()}<main id="main" class="page" tabindex="-1">${content}</main>${footer()}</div>${modalShell()}`;
+  return `<div data-page-content data-design-system="snap-figma-v1">${header()}<main id="main" class="page" tabindex="-1">${content}</main>${footer()}</div>${modalShell()}`;
 }
 
 function homePage() {
+  const decisionCards = [
+    { title: "Buy a home", text: "Compare local costs, rates, and loan options before choosing a purchase path.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Explore buying options" },
+    { title: "Refinance", text: "Review your current payment, timing, closing costs, and market context together.", href: "/refinance", iconName: "rates", accent: accentColors[1], linkLabel: "Review refinance options" },
+    { title: "Use home equity", text: "Learn how home equity options may change payment, cash flow, and long-term cost.", href: "/home-equity", iconName: "calculator", accent: accentColors[2], linkLabel: "Explore home equity" }
+  ];
+
   const leadCards = [
     { title: "Compare mortgage rates", text: "Review benchmark rates, APR details, assumptions, and payment next steps.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Compare rates" },
     { title: "Explore local markets", text: "Open state and city pages with price, payment, tax, insurance, and inventory details.", href: "/locations", iconName: "location", accent: accentColors[1], linkLabel: "Browse locations" },
@@ -1075,36 +1082,14 @@ function homePage() {
     })
   );
 
-  const panel = `
-    <aside class="hero-panel visual-panel">
-      <img src="${ASSETS.house}" alt="" />
-      <h2>Start with a question.</h2>
-      <p>Search a city, loan option, rate topic, article, loan officer, or branch.</p>
-      <form class="search-form" data-search-form>
-        <input name="query" aria-label="Search cities, products, or topics" placeholder="Search Austin, FHA, refinance..." />
-        <button class="button" type="submit">Search</button>
-      </form>
-    </aside>
-  `;
-
   return pageShell(`
-    ${hero({
-      eyebrow: "Mortgage intelligence",
-      title: "Find the mortgage path that fits your market.",
-      lead: "Compare rates, local housing data, loan options, calculators, and licensed experts from one connected mortgage site.",
-      actions: `<a class="button" href="${route("/rates")}">Compare rates</a>${ctaButton("account", { variant: "secondary" })}`,
-      panel
-    })}
-    ${routeStrip([
-      { label: "Mortgage rates", title: "Compare rates and APR", text: "Start with public benchmarks, then move into assumptions.", href: "/rates" },
-      { label: "Local markets", title: "Find your location", text: "Open state and city pages before choosing a path.", href: "/locations" },
-      { label: "Monthly payment", title: "Run the numbers", text: "Use visible assumptions before requesting guidance.", href: "/calculators/mortgage-payment" },
-      { label: "Licensed help", title: "Talk with an expert", text: "Connect with licensed help when the scenario gets specific.", href: "/loan-officers" }
-    ])}
-    ${section("Ways to continue", { label: "Next steps", text: "Choose the next step that matches your intent without leaving educational browsing behind." }, ctaDeck(["account", "leadForm", "prequal", "watchlist", "loContact", "rateReview", "compareOffer"], "Move from research into a useful next step.", "Save research, request guidance, start a prequalification conversation, contact a licensed expert, review rates, or organize an offer comparison."), "compact")}
-    ${section("Start with the right page", { label: "Borrower paths", text: "Choose a starting point; each path opens deeper market data, product detail, tools, or expert help." }, `<div class="grid three">${leadCards.map(card).join("")}</div>`, "home-paths")}
+    ${renderCampaignHero()}
+    ${section("Compare with the numbers in view", { label: "Mortgage intelligence", text: "Start with public benchmarks, broad market coverage, and tools that keep assumptions visible." }, `<div class="grid three home-metrics">${metric("30-year fixed benchmark", rateBenchmarks[0].rate, "Public survey benchmark; personal terms require review.")}${metric("Local market coverage", `${data.states.length} state guides`, `${data.cities.length} city market pages available.`)}${metric("Planning tools", `${data.calculators.length} calculators`, "Estimate payment, affordability, refinance, and rent versus buy.")}</div>`, "compact")}
+    ${section("Choose your path", { label: "Your goals", text: "Begin with the mortgage goal that matches the decision in front of you." }, `<div class="grid three home-decision-grid">${decisionCards.map(card).join("")}</div>`, "compact")}
+    ${section("Research with the right context", { label: "Mortgage guidance", text: "Open deeper market data, rate details, calculators, education, or licensed help without losing your place." }, `<div class="grid three">${leadCards.map(card).join("")}</div>`, "home-paths")}
     ${section("Loan paths", { label: "Products", text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby." }, `<div class="grid four">${productCards.join("")}</div>`, "compact product-shelf")}
     ${section("Helpful next reads", { label: "Learning center", text: "Read guides that connect market questions, loan options, calculators, and licensed guidance." }, `<div class="grid three">${first(data.blogPages.filter((page) => page.route !== "/learning-center"), 3).map((page, index) => card({ title: page.name, text: page.purpose, href: page.route, iconName: "guide", accent: accentColors[(index + 2) % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`, "compact reading-shelf")}
+    ${section("Bring your research into one clear conversation", { label: "Your next step", text: "Save the path, compare an offer, or connect with licensed guidance when you are ready." }, contextualCta("Choose the next step that fits your situation.", "Use your account, offer-comparison questions, or licensed guidance to continue from the research you have already done.", ["compareOffer", "loContact", "account"]), "compact home-cta-section")}
   `);
 }
 

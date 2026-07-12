@@ -37,6 +37,8 @@
   --shadow-line: 10px 10px 0 rgba(11, 85, 255, 0.06);
   --radius: 8px;
   --content: 1180px;
+  --font-display: "Outfield", "Outfit", "Aptos Display", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Aptos", "Segoe UI", system-ui, sans-serif;
 }
 
 * {
@@ -50,30 +52,11 @@ html {
 
 body {
   margin: 0;
-  background:
-    linear-gradient(180deg, #fbfdff 0, var(--paper) 360px, #f3f8fd 100%);
+  background: var(--paper);
   color: var(--ink);
-  font-family:
-    "Aptos",
-    "Segoe UI",
-    system-ui,
-    sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(16, 37, 74, 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(16, 37, 74, 0.028) 1px, transparent 1px);
-  background-size: 96px 96px;
-  mask-image: linear-gradient(180deg, #000 0, transparent 70%);
-  opacity: 0.38;
 }
 
 body.no-scroll {
@@ -371,6 +354,155 @@ button {
   min-height: 100vh;
 }
 
+.campaign-hero {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.campaign-hero-inner {
+  width: min(var(--content), calc(100vw - 32px));
+  min-height: 558px;
+  margin: 0 auto;
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 520px);
+  gap: 100px;
+  align-items: center;
+}
+
+.campaign-hero-copy {
+  display: grid;
+  gap: 16px;
+  align-content: center;
+  min-width: 0;
+}
+
+.campaign-hero-copy .eyebrow {
+  margin: 0;
+}
+
+.campaign-hero-copy .eyebrow::before {
+  display: none;
+}
+
+.campaign-hero-copy h1 {
+  max-width: 560px;
+  font-size: 68px;
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.campaign-hero-copy .lead {
+  max-width: 520px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.campaign-hero-copy .hero-actions {
+  margin-top: 2px;
+}
+
+.campaign-hero-copy .button {
+  gap: 10px;
+}
+
+.campaign-visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 520 / 462;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--snap-blue-100);
+}
+
+.campaign-visual > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 73% center;
+}
+
+.campaign-copy-mask {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 56.5%;
+  background: var(--snap-blue-100);
+}
+
+.campaign-card-stack {
+  position: absolute;
+  top: 29.5%;
+  left: 3%;
+  width: 52%;
+  height: 46%;
+}
+
+.campaign-option {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30.5%;
+  height: 81%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.campaign-option:nth-child(2) {
+  top: 5%;
+  left: 34.5%;
+}
+
+.campaign-option:nth-child(3) {
+  top: 10%;
+  left: 69%;
+}
+
+.campaign-option-band {
+  display: block;
+  height: 19%;
+  background: var(--snap-blue);
+}
+
+.campaign-option.teal .campaign-option-band {
+  background: var(--snap-teal);
+}
+
+.campaign-option.navy .campaign-option-band {
+  background: var(--snap-navy);
+}
+
+.campaign-option-line {
+  display: block;
+  height: 4%;
+  margin: 13% 14% 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.campaign-option-line.wide {
+  width: 68%;
+  background: var(--snap-blue-100);
+}
+
+.campaign-option-line.medium {
+  width: 62%;
+}
+
+.campaign-option-line.short {
+  width: 56%;
+}
+
+.campaign-option-line.shortest {
+  width: 50%;
+}
+
 .hero-band {
   position: relative;
   overflow: hidden;
@@ -428,7 +560,7 @@ button {
 h1,
 h2,
 h3 {
-  font-family: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 0;
   line-height: 1.08;
   overflow-wrap: break-word;
@@ -837,7 +969,7 @@ select {
 }
 
 .route-strip strong {
-  font-family: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-family: var(--font-display);
   font-size: 24px;
   line-height: 1.05;
 }
@@ -969,7 +1101,7 @@ select {
 .metric strong {
   display: block;
   margin-top: 6px;
-  font-family: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-family: var(--font-display);
   font-size: 30px;
   line-height: 1.05;
 }
@@ -2045,6 +2177,15 @@ tr:last-child td {
     display: flex;
   }
 
+  .campaign-hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+    gap: 40px;
+  }
+
+  .campaign-hero-copy h1 {
+    font-size: 54px;
+  }
+
   .site-nav.open {
     display: grid;
     grid-column: 1 / -1;
@@ -2112,6 +2253,7 @@ tr:last-child td {
   .section,
   .breadcrumb,
   .hero-inner,
+  .campaign-hero-inner,
   .footer-inner {
     width: min(calc(100vw - 24px), var(--content));
   }
@@ -2137,6 +2279,34 @@ tr:last-child td {
   .account-avatar {
     width: 28px;
     height: 28px;
+  }
+
+  .campaign-hero-inner {
+    min-height: 0;
+    padding: 32px 0 40px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .campaign-hero-copy h1 {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  .campaign-hero-copy .lead {
+    font-size: 17px;
+  }
+
+  .campaign-visual {
+    aspect-ratio: 352 / 272;
+  }
+
+  .campaign-copy-mask {
+    width: 54%;
+  }
+
+  .campaign-card-stack {
+    top: 25%;
   }
 
   .hero-inner {
@@ -2301,5 +2471,317 @@ tr:last-child td {
 
   .market-chart-figure svg {
     min-height: 160px;
+  }
+}
+
+/* Shared implementation of the approved Snap Mortgage Figma component layer. */
+[data-design-system="snap-figma-v1"] .site-header {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: none;
+}
+
+[data-design-system="snap-figma-v1"] .header-inner {
+  min-height: 76px;
+  grid-template-columns: 180px 1fr minmax(180px, auto);
+  gap: 24px;
+}
+
+[data-design-system="snap-figma-v1"] .site-nav {
+  gap: 20px;
+}
+
+[data-design-system="snap-figma-v1"] .site-nav a {
+  padding: 12px 0;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+[data-design-system="snap-figma-v1"] .site-nav a:hover,
+[data-design-system="snap-figma-v1"] .site-nav a:focus,
+[data-design-system="snap-figma-v1"] .site-nav a.active {
+  background: transparent;
+  color: var(--snap-blue);
+}
+
+[data-design-system="snap-figma-v1"] .account-trigger {
+  min-width: 180px;
+  min-height: 44px;
+  justify-content: center;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+[data-design-system="snap-figma-v1"] .hero-band {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+[data-design-system="snap-figma-v1"] .hero-band::after {
+  display: none;
+}
+
+[data-design-system="snap-figma-v1"] .hero-inner {
+  min-height: 380px;
+  padding: 48px 0;
+  grid-template-columns: minmax(0, 640px) minmax(0, 400px);
+  gap: 140px;
+}
+
+[data-design-system="snap-figma-v1"] .hero-copy h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+[data-design-system="snap-figma-v1"] .hero-panel {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .section {
+  padding: 64px 0;
+}
+
+[data-design-system="snap-figma-v1"] .section.compact {
+  padding: 48px 0;
+}
+
+[data-design-system="snap-figma-v1"] .section-header {
+  display: grid;
+  justify-content: start;
+  gap: 8px;
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+
+[data-design-system="snap-figma-v1"] .section-header > div {
+  max-width: 760px;
+}
+
+[data-design-system="snap-figma-v1"] .section-header h2 {
+  font-size: 36px;
+  line-height: 1.22;
+}
+
+[data-design-system="snap-figma-v1"] .section-header > p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+[data-design-system="snap-figma-v1"] .grid {
+  gap: 20px;
+}
+
+[data-design-system="snap-figma-v1"] .card {
+  min-height: 240px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .card::before,
+[data-design-system="snap-figma-v1"] .card-cue {
+  display: none;
+}
+
+[data-design-system="snap-figma-v1"] .card h3 {
+  margin-top: 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+[data-design-system="snap-figma-v1"] .card .icon {
+  border: 0;
+  background: var(--snap-blue-100);
+}
+
+[data-design-system="snap-figma-v1"] .card .text-link {
+  align-self: end;
+  color: var(--snap-blue);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+[data-design-system="snap-figma-v1"] .metric {
+  min-height: 156px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .metric strong {
+  font-size: 30px;
+}
+
+[data-design-system="snap-figma-v1"] .home-metrics .metric {
+  display: grid;
+  align-content: start;
+}
+
+[data-design-system="snap-figma-v1"] .home-decision-grid .card {
+  min-height: 272px;
+}
+
+[data-design-system="snap-figma-v1"] .home-paths .grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+[data-design-system="snap-figma-v1"] .home-paths .card,
+[data-design-system="snap-figma-v1"] .home-paths .card:nth-child(1),
+[data-design-system="snap-figma-v1"] .home-paths .card:nth-child(2) {
+  grid-column: auto;
+  min-height: 240px;
+}
+
+[data-design-system="snap-figma-v1"] .home-paths .card:nth-child(1) h3,
+[data-design-system="snap-figma-v1"] .home-paths .card:nth-child(2) h3 {
+  font-size: 24px;
+}
+
+[data-design-system="snap-figma-v1"] .route-strip-section {
+  margin-top: 0;
+  padding-top: 48px;
+}
+
+[data-design-system="snap-figma-v1"] .route-strip {
+  gap: 20px;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-design-system="snap-figma-v1"] .route-strip a {
+  min-height: 184px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .route-strip a:hover,
+[data-design-system="snap-figma-v1"] .route-strip a:focus {
+  background: var(--surface);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+[data-design-system="snap-figma-v1"] .route-strip span {
+  color: var(--snap-blue);
+  font-weight: 600;
+}
+
+[data-design-system="snap-figma-v1"] .route-strip strong {
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+[data-design-system="snap-figma-v1"] .route-strip p {
+  color: var(--ink-soft);
+}
+
+[data-design-system="snap-figma-v1"] .cta-panel {
+  width: min(560px, 100%);
+  min-height: 266px;
+  margin: 0 auto;
+  padding: 30px 32px;
+  align-content: center;
+  background: var(--snap-navy);
+  box-shadow: none;
+}
+
+[data-design-system="snap-figma-v1"] .cta-panel h3 {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+[data-design-system="snap-figma-v1"] .cta-deck {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .cta-type-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-design-system="snap-figma-v1"] .site-footer {
+  margin-top: 40px;
+  background: var(--snap-navy);
+}
+
+[data-design-system="snap-figma-v1"] .footer-inner {
+  min-height: 292px;
+  padding: 40px 0 28px;
+}
+
+@media (max-width: 1040px) {
+  [data-design-system="snap-figma-v1"] .header-inner {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  [data-design-system="snap-figma-v1"] .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  [data-design-system="snap-figma-v1"] .home-paths .grid.three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  [data-design-system="snap-figma-v1"] .hero-copy h1 {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  [data-design-system="snap-figma-v1"] .section,
+  [data-design-system="snap-figma-v1"] .section.compact {
+    padding: 42px 0;
+  }
+
+  [data-design-system="snap-figma-v1"] .section-header {
+    margin-bottom: 28px;
+  }
+
+  [data-design-system="snap-figma-v1"] .section-header h2 {
+    font-size: 30px;
+  }
+
+  [data-design-system="snap-figma-v1"] .home-paths .grid.three {
+    grid-template-columns: 1fr;
+  }
+
+  [data-design-system="snap-figma-v1"] .card,
+  [data-design-system="snap-figma-v1"] .home-decision-grid .card {
+    min-height: auto;
+  }
+
+  [data-design-system="snap-figma-v1"] .route-strip {
+    gap: 12px;
+  }
+
+  [data-design-system="snap-figma-v1"] .route-strip a {
+    min-height: auto;
+  }
+
+  [data-design-system="snap-figma-v1"] .cta-panel {
+    min-height: 0;
+    padding: 24px;
   }
 }

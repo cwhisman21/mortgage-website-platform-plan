@@ -23,6 +23,10 @@ test("public templates do not expose internal planning or review labels", () => 
     "Answer unlock",
     "Trust layer",
     "CMS object",
+    "In the live experience",
+    "static page",
+    "simulated in this build",
+    "would open next",
   ];
 
   for (const phrase of forbiddenVisiblePhrases) {
