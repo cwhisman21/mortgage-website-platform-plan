@@ -1,0 +1,198 @@
+{
+  "version": "snap-rates-marketplace-v1",
+  "disclosure": "These sample offers illustrate how participating companies and mortgage professionals may appear on Snap. Snap may receive platform fees, and not every provider or offer is represented. Rates, APRs, payments, fees, and availability are estimates for comparison only and may change after borrower, property, and lender review.",
+  "sampleOfferDisclosure": "Provider names, mortgage professionals, review snippets, and NMLS identifiers in this sample marketplace are fictional fixture data for UI development only.",
+  "allowedValues": {
+    "mortgageType": ["purchase", "refinance"],
+    "resultType": ["company", "loanOfficer"],
+    "sort": ["lowestEightYearCost", "lowestApr", "lowestRate", "lowestMonthlyPayment", "lowestUpfrontCost", "highestRating"],
+    "creditRange": ["620-679", "680-719", "720-739", "740-779", "780+"],
+    "term": [10, 15, 20, 30],
+    "occupancy": ["primary", "secondary", "rental"],
+    "propertyType": ["singleFamily", "condo", "townhome", "multiFamily"],
+    "dti": ["below40", "40plus"],
+    "points": ["all", "0", "0-1", "1-2"]
+  },
+  "detailsTemplates": {
+    "purchaseStandard": {
+      "summary": "This sample purchase estimate combines principal and interest with lender-controlled upfront fees for side-by-side comparison.",
+      "feeLines": [
+        { "label": "Origination", "amount": 2195 },
+        { "label": "Underwriting", "amount": 1295 },
+        { "label": "Processing", "amount": 845 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Taxes, insurance, and third-party settlement charges are not included in upfront costs."
+      ],
+      "assumptions": [
+        "Final pricing may change after borrower, property, and lender review.",
+        "Eligibility and product availability may vary by provider."
+      ]
+    },
+    "purchaseFha": {
+      "summary": "This sample FHA purchase estimate keeps lender charges visible while separating recurring mortgage insurance in the payment tab.",
+      "feeLines": [
+        { "label": "Origination", "amount": 1995 },
+        { "label": "Underwriting", "amount": 1195 },
+        { "label": "Processing", "amount": 795 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Upfront FHA mortgage insurance, taxes, insurance, and third-party settlement charges may vary."
+      ],
+      "assumptions": [
+        "Borrower-paid mortgage insurance is shown as a local payment assumption only.",
+        "Final pricing may change after borrower, property, and lender review."
+      ]
+    },
+    "purchaseVa": {
+      "summary": "This sample VA purchase estimate highlights lender-controlled fees while keeping any VA-specific funding assumptions outside the quoted rate comparison.",
+      "feeLines": [
+        { "label": "Origination", "amount": 2095 },
+        { "label": "Underwriting", "amount": 1185 },
+        { "label": "Processing", "amount": 785 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Funding-fee treatment, taxes, insurance, and third-party settlement charges may vary."
+      ],
+      "assumptions": [
+        "Provider availability may depend on borrower eligibility and military-service documentation.",
+        "Final pricing may change after borrower, property, and lender review."
+      ]
+    },
+    "refinanceStandard": {
+      "summary": "This sample refinance estimate compares lender-controlled charges and eight-year cost for a standard rate-and-term scenario.",
+      "feeLines": [
+        { "label": "Origination", "amount": 1995 },
+        { "label": "Underwriting", "amount": 1150 },
+        { "label": "Processing", "amount": 780 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Escrow reserves, taxes, insurance, and third-party settlement charges are not included."
+      ],
+      "assumptions": [
+        "This comparison does not guarantee savings or approval.",
+        "Final pricing may change after borrower, property, and lender review."
+      ]
+    },
+    "refinanceFha": {
+      "summary": "This sample refinance estimate keeps recurring mortgage-insurance assumptions visible in the payment panel while preserving comparable lender fees.",
+      "feeLines": [
+        { "label": "Origination", "amount": 1895 },
+        { "label": "Underwriting", "amount": 1095 },
+        { "label": "Processing", "amount": 760 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Mortgage-insurance treatment, escrow reserves, and third-party settlement charges may vary."
+      ],
+      "assumptions": [
+        "This comparison does not guarantee savings or approval.",
+        "Final pricing may change after borrower, property, and lender review."
+      ]
+    },
+    "refinanceVa": {
+      "summary": "This sample VA refinance estimate preserves comparable lender fees while leaving provider-specific funding assumptions outside the quote display.",
+      "feeLines": [
+        { "label": "Origination", "amount": 1875 },
+        { "label": "Underwriting", "amount": 1050 },
+        { "label": "Processing", "amount": 735 }
+      ],
+      "footnotes": [
+        "Points are prepaid interest and may lower the note rate.",
+        "Funding-fee treatment, escrow reserves, and third-party settlement charges may vary."
+      ],
+      "assumptions": [
+        "Provider availability may depend on borrower eligibility and military-service documentation.",
+        "Final pricing may change after borrower, property, and lender review."
+      ]
+    }
+  },
+  "paymentAssumptionTemplates": {
+    "purchaseStandard": { "homeownersInsurance": 145, "propertyTax": 410, "hoaDues": 0, "mortgageInsurance": 0 },
+    "purchaseFha": { "homeownersInsurance": 145, "propertyTax": 410, "hoaDues": 0, "mortgageInsurance": 218 },
+    "purchaseVa": { "homeownersInsurance": 145, "propertyTax": 410, "hoaDues": 0, "mortgageInsurance": 0 },
+    "refinanceStandard": { "homeownersInsurance": 160, "propertyTax": 360, "hoaDues": 0, "mortgageInsurance": 0 },
+    "refinanceFha": { "homeownersInsurance": 160, "propertyTax": 360, "hoaDues": 0, "mortgageInsurance": 196 },
+    "refinanceVa": { "homeownersInsurance": 160, "propertyTax": 360, "hoaDues": 0, "mortgageInsurance": 0 }
+  },
+  "reviewTemplates": {
+    "companyPremier": {
+      "source": "Sample marketplace reviews shown for UI comparison only.",
+      "distribution": { "5": 141, "4": 29, "3": 10, "2": 3, "1": 1 },
+      "items": [
+        { "author": "Taylor B.", "rating": 5, "title": "Clear comparison", "body": "The sample estimate made it easy to compare costs and payment assumptions in one place.", "date": "2026-06-14", "attributes": ["Responsive", "Clear fees"] },
+        { "author": "Jordan M.", "rating": 4, "title": "Helpful fee breakout", "body": "The details panel explained points and upfront costs without making the quote feel final.", "date": "2026-05-02", "attributes": ["Transparent", "Easy to compare"] }
+      ]
+    },
+    "companyStrong": {
+      "source": "Sample marketplace reviews shown for UI comparison only.",
+      "distribution": { "5": 103, "4": 31, "3": 11, "2": 2, "1": 1 },
+      "items": [
+        { "author": "Morgan S.", "rating": 5, "title": "Useful side-by-side view", "body": "Seeing the payment assumptions next to the fees helped me frame questions for a lender.", "date": "2026-06-01", "attributes": ["Easy to compare", "Helpful payment view"] },
+        { "author": "Chris P.", "rating": 4, "title": "Good sample context", "body": "The scenario summary stayed readable while I switched providers and sort orders.", "date": "2026-04-22", "attributes": ["Scenario clarity", "Smooth sorting"] }
+      ]
+    },
+    "loanOfficerPremier": {
+      "source": "Sample marketplace reviews shown for UI comparison only.",
+      "distribution": { "5": 87, "4": 21, "3": 7, "2": 1, "1": 0 },
+      "items": [
+        { "author": "Avery L.", "rating": 5, "title": "Straight answers", "body": "This fixture profile reads like someone who would explain tradeoffs clearly before the next step.", "date": "2026-05-18", "attributes": ["Clear explanations", "Low pressure"] },
+        { "author": "Riley K.", "rating": 4, "title": "Helpful sample handoff", "body": "The handoff summary preserved the key numbers I would want to review again.", "date": "2026-03-30", "attributes": ["Organized", "Good follow-through"] }
+      ]
+    },
+    "loanOfficerStrong": {
+      "source": "Sample marketplace reviews shown for UI comparison only.",
+      "distribution": { "5": 64, "4": 19, "3": 6, "2": 1, "1": 0 },
+      "items": [
+        { "author": "Devon C.", "rating": 5, "title": "Easy to compare", "body": "The fixture result balanced cost fields with a realistic payment panel.", "date": "2026-05-10", "attributes": ["Balanced detail", "Easy to compare"] },
+        { "author": "Parker H.", "rating": 4, "title": "Good fit notes", "body": "The sample terms gave me enough context to continue without overselling the result.", "date": "2026-02-27", "attributes": ["Useful context", "Approachable"] }
+      ]
+    }
+  },
+  "offers": [
+    { "id": "company-harbor-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Harborline Home Lending", "profileRoute": null, "nmlsDisplay": "NMLS 100001", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 5.875, "apr": 6.112, "points": 1.0, "principalAndInterest": 2226, "upfrontCost": 7340, "eightYearCost": 226944, "rating": 4.8, "reviewCount": 184, "prequalKey": "fixture-harbor-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyPremier" },
+    { "id": "company-cypress-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Cypress Point Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100002", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 5.92, "apr": 6.16, "points": 0.875, "principalAndInterest": 2238, "upfrontCost": 7460, "eightYearCost": 228112, "rating": 4.7, "reviewCount": 162, "prequalKey": "fixture-cypress-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyPremier" },
+    { "id": "company-northstar-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Northstar Home Finance", "profileRoute": null, "nmlsDisplay": "NMLS 100003", "term": 30, "loanFamily": "fha", "productLabel": "FHA 30-year purchase", "rate": 5.98, "apr": 6.21, "points": 0.75, "principalAndInterest": 2253, "upfrontCost": 7585, "eightYearCost": 229488, "rating": 4.7, "reviewCount": 151, "prequalKey": "fixture-northstar-purchase", "detailsKey": "purchaseFha", "paymentAssumptionsKey": "purchaseFha", "reviewsKey": "companyStrong" },
+    { "id": "company-juniper-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Juniper Rate Co.", "profileRoute": null, "nmlsDisplay": "NMLS 100004", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.03, "apr": 6.27, "points": 0.625, "principalAndInterest": 2267, "upfrontCost": 7695, "eightYearCost": 230856, "rating": 4.6, "reviewCount": 147, "prequalKey": "fixture-juniper-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-summit-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Summit Harbor Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100005", "term": 30, "loanFamily": "va", "productLabel": "VA 30-year purchase", "rate": 6.08, "apr": 6.32, "points": 0.5, "principalAndInterest": 2282, "upfrontCost": 7810, "eightYearCost": 232224, "rating": 4.6, "reviewCount": 139, "prequalKey": "fixture-summit-purchase", "detailsKey": "purchaseVa", "paymentAssumptionsKey": "purchaseVa", "reviewsKey": "companyStrong" },
+    { "id": "company-meridian-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Meridian Bay Lending", "profileRoute": null, "nmlsDisplay": "NMLS 100006", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.12, "apr": 6.37, "points": 0.375, "principalAndInterest": 2294, "upfrontCost": 7935, "eightYearCost": 233584, "rating": 4.5, "reviewCount": 132, "prequalKey": "fixture-meridian-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-redwood-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Redwood Trail Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100007", "term": 30, "loanFamily": "fha", "productLabel": "FHA 30-year purchase", "rate": 6.18, "apr": 6.43, "points": 0.25, "principalAndInterest": 2309, "upfrontCost": 8070, "eightYearCost": 234960, "rating": 4.5, "reviewCount": 128, "prequalKey": "fixture-redwood-purchase", "detailsKey": "purchaseFha", "paymentAssumptionsKey": "purchaseFha", "reviewsKey": "companyStrong" },
+    { "id": "company-silver-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Silver Oak Funding", "profileRoute": null, "nmlsDisplay": "NMLS 100008", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.22, "apr": 6.48, "points": 0.125, "principalAndInterest": 2321, "upfrontCost": 8195, "eightYearCost": 236320, "rating": 4.4, "reviewCount": 121, "prequalKey": "fixture-silver-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-blue-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Blue Mesa Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100009", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.27, "apr": 6.53, "points": 0.0, "principalAndInterest": 2336, "upfrontCost": 8335, "eightYearCost": 237696, "rating": 4.4, "reviewCount": 118, "prequalKey": "fixture-blue-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-lighthouse-purchase-30", "resultType": "company", "mortgageType": "purchase", "displayName": "Lighthouse Equity Co.", "profileRoute": null, "nmlsDisplay": "NMLS 100010", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.33, "apr": 6.6, "points": 0.0, "principalAndInterest": 2352, "upfrontCost": 8480, "eightYearCost": 239120, "rating": 4.3, "reviewCount": 109, "prequalKey": "fixture-lighthouse-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-harbor-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Harborline Home Lending", "profileRoute": null, "nmlsDisplay": "NMLS 100011", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.74, "apr": 5.98, "points": 0.875, "principalAndInterest": 2978, "upfrontCost": 6125, "eightYearCost": 193412, "rating": 4.8, "reviewCount": 177, "prequalKey": "fixture-harbor-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyPremier" },
+    { "id": "company-cypress-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Cypress Point Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100012", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.79, "apr": 6.04, "points": 0.75, "principalAndInterest": 2991, "upfrontCost": 6235, "eightYearCost": 194568, "rating": 4.7, "reviewCount": 168, "prequalKey": "fixture-cypress-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyPremier" },
+    { "id": "company-northstar-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Northstar Home Finance", "profileRoute": null, "nmlsDisplay": "NMLS 100013", "term": 30, "loanFamily": "fha", "productLabel": "FHA streamline refinance", "rate": 5.84, "apr": 6.09, "points": 0.625, "principalAndInterest": 3005, "upfrontCost": 6355, "eightYearCost": 195728, "rating": 4.7, "reviewCount": 159, "prequalKey": "fixture-northstar-refinance", "detailsKey": "refinanceFha", "paymentAssumptionsKey": "refinanceFha", "reviewsKey": "companyStrong" },
+    { "id": "company-juniper-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Juniper Rate Co.", "profileRoute": null, "nmlsDisplay": "NMLS 100014", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.9, "apr": 6.15, "points": 0.5, "principalAndInterest": 3019, "upfrontCost": 6480, "eightYearCost": 196904, "rating": 4.6, "reviewCount": 150, "prequalKey": "fixture-juniper-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-summit-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Summit Harbor Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100015", "term": 30, "loanFamily": "va", "productLabel": "VA IRRRL refinance", "rate": 5.95, "apr": 6.2, "points": 0.375, "principalAndInterest": 3033, "upfrontCost": 6595, "eightYearCost": 198072, "rating": 4.6, "reviewCount": 144, "prequalKey": "fixture-summit-refinance", "detailsKey": "refinanceVa", "paymentAssumptionsKey": "refinanceVa", "reviewsKey": "companyStrong" },
+    { "id": "company-meridian-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Meridian Bay Lending", "profileRoute": null, "nmlsDisplay": "NMLS 100016", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.01, "apr": 6.27, "points": 0.25, "principalAndInterest": 3048, "upfrontCost": 6710, "eightYearCost": 199256, "rating": 4.5, "reviewCount": 136, "prequalKey": "fixture-meridian-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-redwood-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Redwood Trail Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100017", "term": 30, "loanFamily": "fha", "productLabel": "FHA cash-out refinance", "rate": 6.07, "apr": 6.33, "points": 0.125, "principalAndInterest": 3063, "upfrontCost": 6835, "eightYearCost": 200448, "rating": 4.5, "reviewCount": 131, "prequalKey": "fixture-redwood-refinance", "detailsKey": "refinanceFha", "paymentAssumptionsKey": "refinanceFha", "reviewsKey": "companyStrong" },
+    { "id": "company-silver-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Silver Oak Funding", "profileRoute": null, "nmlsDisplay": "NMLS 100018", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.12, "apr": 6.39, "points": 0.0, "principalAndInterest": 3077, "upfrontCost": 6960, "eightYearCost": 201664, "rating": 4.4, "reviewCount": 124, "prequalKey": "fixture-silver-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-blue-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Blue Mesa Mortgage", "profileRoute": null, "nmlsDisplay": "NMLS 100019", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.18, "apr": 6.45, "points": 0.0, "principalAndInterest": 3092, "upfrontCost": 7095, "eightYearCost": 202872, "rating": 4.4, "reviewCount": 119, "prequalKey": "fixture-blue-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyStrong" },
+    { "id": "company-lighthouse-refinance-30", "resultType": "company", "mortgageType": "refinance", "displayName": "Lighthouse Equity Co.", "profileRoute": null, "nmlsDisplay": "NMLS 100020", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.24, "apr": 6.52, "points": 0.0, "principalAndInterest": 3108, "upfrontCost": 7230, "eightYearCost": 204112, "rating": 4.3, "reviewCount": 111, "prequalKey": "fixture-lighthouse-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "companyStrong" },
+    { "id": "loan-officer-ava-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Ava Martinez", "sponsoringCompany": "Summit Harbor Mortgage", "profileRoute": "/loan-officers/ava-martinez", "nmlsDisplay": "NMLS 200001", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 5.88, "apr": 6.1, "points": 0.875, "principalAndInterest": 2229, "upfrontCost": 7295, "eightYearCost": 226488, "rating": 4.9, "reviewCount": 116, "prequalKey": "fixture-ava-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerPremier" },
+    { "id": "loan-officer-marcus-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Marcus Reed", "sponsoringCompany": "Harborline Home Lending", "profileRoute": "/loan-officers/marcus-reed", "nmlsDisplay": "NMLS 200002", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 5.93, "apr": 6.15, "points": 0.75, "principalAndInterest": 2241, "upfrontCost": 7410, "eightYearCost": 227736, "rating": 4.8, "reviewCount": 102, "prequalKey": "fixture-marcus-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerPremier" },
+    { "id": "loan-officer-priya-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Priya Shah", "sponsoringCompany": "Northstar Home Finance", "profileRoute": "/loan-officers/priya-shah", "nmlsDisplay": "NMLS 200003", "term": 30, "loanFamily": "fha", "productLabel": "FHA 30-year purchase", "rate": 5.99, "apr": 6.22, "points": 0.625, "principalAndInterest": 2255, "upfrontCost": 7530, "eightYearCost": 229008, "rating": 4.8, "reviewCount": 96, "prequalKey": "fixture-priya-purchase", "detailsKey": "purchaseFha", "paymentAssumptionsKey": "purchaseFha", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-ethan-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Ethan Brooks", "sponsoringCompany": "Juniper Rate Co.", "profileRoute": "/loan-officers/ethan-brooks", "nmlsDisplay": "NMLS 200004", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.04, "apr": 6.28, "points": 0.5, "principalAndInterest": 2268, "upfrontCost": 7640, "eightYearCost": 230264, "rating": 4.7, "reviewCount": 92, "prequalKey": "fixture-ethan-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-sofia-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Sofia Nguyen", "sponsoringCompany": "Cypress Point Mortgage", "profileRoute": "/loan-officers/sofia-nguyen", "nmlsDisplay": "NMLS 200005", "term": 30, "loanFamily": "va", "productLabel": "VA 30-year purchase", "rate": 6.09, "apr": 6.33, "points": 0.375, "principalAndInterest": 2283, "upfrontCost": 7750, "eightYearCost": 231544, "rating": 4.7, "reviewCount": 89, "prequalKey": "fixture-sofia-purchase", "detailsKey": "purchaseVa", "paymentAssumptionsKey": "purchaseVa", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-caleb-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Caleb Turner", "sponsoringCompany": "Meridian Bay Lending", "profileRoute": "/loan-officers/caleb-turner", "nmlsDisplay": "NMLS 200006", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.14, "apr": 6.38, "points": 0.25, "principalAndInterest": 2297, "upfrontCost": 7875, "eightYearCost": 232824, "rating": 4.6, "reviewCount": 85, "prequalKey": "fixture-caleb-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-naomi-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Naomi Patel", "sponsoringCompany": "Redwood Trail Mortgage", "profileRoute": "/loan-officers/naomi-patel", "nmlsDisplay": "NMLS 200007", "term": 30, "loanFamily": "fha", "productLabel": "FHA 30-year purchase", "rate": 6.19, "apr": 6.44, "points": 0.125, "principalAndInterest": 2310, "upfrontCost": 7990, "eightYearCost": 234104, "rating": 4.6, "reviewCount": 81, "prequalKey": "fixture-naomi-purchase", "detailsKey": "purchaseFha", "paymentAssumptionsKey": "purchaseFha", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-jordan-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Jordan Kim", "sponsoringCompany": "Silver Oak Funding", "profileRoute": "/loan-officers/jordan-kim", "nmlsDisplay": "NMLS 200008", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.24, "apr": 6.49, "points": 0.0, "principalAndInterest": 2324, "upfrontCost": 8115, "eightYearCost": 235384, "rating": 4.5, "reviewCount": 79, "prequalKey": "fixture-jordan-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-leah-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Leah Foster", "sponsoringCompany": "Blue Mesa Mortgage", "profileRoute": "/loan-officers/leah-foster", "nmlsDisplay": "NMLS 200009", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.29, "apr": 6.55, "points": 0.0, "principalAndInterest": 2338, "upfrontCost": 8245, "eightYearCost": 236672, "rating": 4.5, "reviewCount": 76, "prequalKey": "fixture-leah-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-owen-purchase-30", "resultType": "loanOfficer", "mortgageType": "purchase", "displayName": "Owen Blake", "sponsoringCompany": "Lighthouse Equity Co.", "profileRoute": "/loan-officers/owen-blake", "nmlsDisplay": "NMLS 200010", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed purchase", "rate": 6.35, "apr": 6.62, "points": 0.0, "principalAndInterest": 2354, "upfrontCost": 8380, "eightYearCost": 237968, "rating": 4.4, "reviewCount": 72, "prequalKey": "fixture-owen-purchase", "detailsKey": "purchaseStandard", "paymentAssumptionsKey": "purchaseStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-camila-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Camila Torres", "sponsoringCompany": "Harborline Home Lending", "profileRoute": "/loan-officers/camila-torres", "nmlsDisplay": "NMLS 200011", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.73, "apr": 5.96, "points": 0.75, "principalAndInterest": 2976, "upfrontCost": 6085, "eightYearCost": 192968, "rating": 4.9, "reviewCount": 108, "prequalKey": "fixture-camila-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerPremier" },
+    { "id": "loan-officer-daniel-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Daniel Price", "sponsoringCompany": "Cypress Point Mortgage", "profileRoute": "/loan-officers/daniel-price", "nmlsDisplay": "NMLS 200012", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.78, "apr": 6.01, "points": 0.625, "principalAndInterest": 2989, "upfrontCost": 6200, "eightYearCost": 194128, "rating": 4.8, "reviewCount": 102, "prequalKey": "fixture-daniel-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerPremier" },
+    { "id": "loan-officer-mia-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Mia Alvarez", "sponsoringCompany": "Northstar Home Finance", "profileRoute": "/loan-officers/mia-alvarez", "nmlsDisplay": "NMLS 200013", "term": 30, "loanFamily": "fha", "productLabel": "FHA streamline refinance", "rate": 5.83, "apr": 6.07, "points": 0.5, "principalAndInterest": 3003, "upfrontCost": 6325, "eightYearCost": 195304, "rating": 4.8, "reviewCount": 97, "prequalKey": "fixture-mia-refinance", "detailsKey": "refinanceFha", "paymentAssumptionsKey": "refinanceFha", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-grace-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Grace Morgan", "sponsoringCompany": "Juniper Rate Co.", "profileRoute": "/loan-officers/grace-morgan", "nmlsDisplay": "NMLS 200014", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.89, "apr": 6.13, "points": 0.375, "principalAndInterest": 3018, "upfrontCost": 6440, "eightYearCost": 196472, "rating": 4.7, "reviewCount": 93, "prequalKey": "fixture-grace-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-nolan-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Nolan Carter", "sponsoringCompany": "Summit Harbor Mortgage", "profileRoute": "/loan-officers/nolan-carter", "nmlsDisplay": "NMLS 200015", "term": 30, "loanFamily": "va", "productLabel": "VA IRRRL refinance", "rate": 5.94, "apr": 6.18, "points": 0.25, "principalAndInterest": 3031, "upfrontCost": 6555, "eightYearCost": 197648, "rating": 4.7, "reviewCount": 88, "prequalKey": "fixture-nolan-refinance", "detailsKey": "refinanceVa", "paymentAssumptionsKey": "refinanceVa", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-harper-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Harper Ellis", "sponsoringCompany": "Meridian Bay Lending", "profileRoute": "/loan-officers/harper-ellis", "nmlsDisplay": "NMLS 200016", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 5.99, "apr": 6.24, "points": 0.125, "principalAndInterest": 3045, "upfrontCost": 6670, "eightYearCost": 198824, "rating": 4.6, "reviewCount": 84, "prequalKey": "fixture-harper-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-ava-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Ava Martinez", "sponsoringCompany": "Redwood Trail Mortgage", "profileRoute": "/loan-officers/ava-martinez", "nmlsDisplay": "NMLS 200017", "term": 30, "loanFamily": "fha", "productLabel": "FHA cash-out refinance", "rate": 6.05, "apr": 6.3, "points": 0.0, "principalAndInterest": 3059, "upfrontCost": 6795, "eightYearCost": 200024, "rating": 4.6, "reviewCount": 80, "prequalKey": "fixture-ava-refinance", "detailsKey": "refinanceFha", "paymentAssumptionsKey": "refinanceFha", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-priya-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Priya Shah", "sponsoringCompany": "Silver Oak Funding", "profileRoute": "/loan-officers/priya-shah", "nmlsDisplay": "NMLS 200018", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.1, "apr": 6.36, "points": 0.0, "principalAndInterest": 3073, "upfrontCost": 6920, "eightYearCost": 201216, "rating": 4.5, "reviewCount": 77, "prequalKey": "fixture-priya-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-sofia-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Sofia Nguyen", "sponsoringCompany": "Blue Mesa Mortgage", "profileRoute": "/loan-officers/sofia-nguyen", "nmlsDisplay": "NMLS 200019", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.16, "apr": 6.42, "points": 0.0, "principalAndInterest": 3088, "upfrontCost": 7050, "eightYearCost": 202424, "rating": 4.5, "reviewCount": 73, "prequalKey": "fixture-sofia-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerStrong" },
+    { "id": "loan-officer-jordan-refinance-30", "resultType": "loanOfficer", "mortgageType": "refinance", "displayName": "Jordan Kim", "sponsoringCompany": "Lighthouse Equity Co.", "profileRoute": "/loan-officers/jordan-kim", "nmlsDisplay": "NMLS 200020", "term": 30, "loanFamily": "conventional", "productLabel": "30-year fixed refinance", "rate": 6.21, "apr": 6.48, "points": 0.0, "principalAndInterest": 3102, "upfrontCost": 7185, "eightYearCost": 203648, "rating": 4.4, "reviewCount": 70, "prequalKey": "fixture-jordan-refinance", "detailsKey": "refinanceStandard", "paymentAssumptionsKey": "refinanceStandard", "reviewsKey": "loanOfficerStrong" }
+  ]
+}
