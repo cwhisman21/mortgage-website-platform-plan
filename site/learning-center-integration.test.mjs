@@ -4,12 +4,18 @@ import fs from "node:fs";
 
 const source = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
-const start = source.indexOf("function learningDiscovery(");
-const end = source.indexOf("function blogTopicPage(");
-const learningSource = source.slice(start, end);
+const homeStart = source.indexOf("function learningHome(");
+const homeEnd = source.indexOf("function blogTopicPage(");
+const helpersStart = source.indexOf("function learningDiscovery(");
+const helpersEnd = source.indexOf("function calculatorPage(");
+const learningSource = `${source.slice(homeStart, homeEnd)}\n${source.slice(
+  helpersStart,
+  helpersEnd,
+)}`;
 
 test("Learning Center renders one search form before canonical topic links", () => {
-  assert.ok(start >= 0, "learningDiscovery helper is missing");
+  assert.ok(homeStart >= 0, "learningHome renderer is missing");
+  assert.ok(helpersStart >= 0, "learningDiscovery helper is missing");
   assert.equal((learningSource.match(/data-search-form/g) || []).length, 1);
   assert.ok(
     learningSource.indexOf("data-search-form") <
