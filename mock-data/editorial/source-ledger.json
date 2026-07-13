@@ -1,0 +1,313 @@
+{
+  "version": "snap-editorial-source-ledger-v1",
+  "sources": [
+    {
+      "id": "freddie-mac-pmms-2026-07-09",
+      "publisher": "Freddie Mac",
+      "title": "Primary Mortgage Market Survey",
+      "url": "https://www.freddiemac.com/pmms",
+      "dataPeriod": "Week ending 2026-07-09",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States national conventional benchmark",
+      "claimSupported": "National 30-year and 15-year fixed-rate benchmark context, not a personalized or local quote.",
+      "authoritative": true
+    },
+    {
+      "id": "fhfa-hpi-june-2026",
+      "publisher": "Federal Housing Finance Agency",
+      "title": "FHFA House Price Index Monthly Report, June 2026",
+      "url": "https://www.fhfa.gov/document/d/hpi/fhfa-hpi-monthly-june-2026",
+      "dataPeriod": "Released 2026-06-30; monthly data through April 2026",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "FHFA HPI geographies including state, MSA, county, ZIP Code, and tract where available",
+      "claimSupported": "Dated home-price trend context that must retain its published geography.",
+      "authoritative": true
+    },
+    {
+      "id": "fhfa-conforming-loan-limits-2026",
+      "publisher": "Federal Housing Finance Agency",
+      "title": "FHFA Announces Conforming Loan Limit Values for 2026",
+      "url": "https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-values-for-2026",
+      "dataPeriod": "Calendar year 2026; released 2025-11-25",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States county and county-equivalent limits",
+      "claimSupported": "2026 conforming baseline and high-cost loan-limit comparisons.",
+      "authoritative": true
+    },
+    {
+      "id": "hud-fha-loan-limits-2026",
+      "publisher": "U.S. Department of Housing and Urban Development",
+      "title": "FHA Mortgage Limits Lookup",
+      "url": "https://entp.hud.gov/idapp/html/hicostlook.cfm",
+      "dataPeriod": "Calendar year 2026",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "County and metropolitan statistical area",
+      "claimSupported": "FHA Forward loan limits that must be checked by county or MSA.",
+      "authoritative": true
+    },
+    {
+      "id": "va-home-loans",
+      "publisher": "U.S. Department of Veterans Affairs",
+      "title": "VA Home Loans",
+      "url": "https://www.benefits.va.gov/homeloans/",
+      "dataPeriod": "Program guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States federal VA loan program",
+      "claimSupported": "VA guaranty, occupancy, Certificate of Eligibility, funding-fee, and program-path context.",
+      "authoritative": true
+    },
+    {
+      "id": "cfpb-owning-a-home",
+      "publisher": "Consumer Financial Protection Bureau",
+      "title": "Owning a Home",
+      "url": "https://www.consumerfinance.gov/owning-a-home/",
+      "dataPeriod": "Page last modified 2026-06-16",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States consumer mortgage education",
+      "claimSupported": "Home-shopping and mortgage-comparison education.",
+      "authoritative": true
+    },
+    {
+      "id": "cfpb-loan-estimate",
+      "publisher": "Consumer Financial Protection Bureau",
+      "title": "Loan Estimate",
+      "url": "https://www.consumerfinance.gov/owning-a-home/loan-estimate/",
+      "dataPeriod": "Consumer guidance active 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States consumer mortgage education",
+      "claimSupported": "Loan Estimate payment, APR, closing-cost, prepaid, escrow, and cash-to-close comparisons.",
+      "authoritative": true
+    },
+    {
+      "id": "cfpb-mortgage-key-terms",
+      "publisher": "Consumer Financial Protection Bureau",
+      "title": "Mortgage Key Terms",
+      "url": "https://www.consumerfinance.gov/consumer-tools/mortgages/answers/key-terms/",
+      "dataPeriod": "Consumer guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States consumer mortgage education",
+      "claimSupported": "Plain-language definitions for APR, ARM, amortization, income, and Closing Disclosure.",
+      "authoritative": true
+    },
+    {
+      "id": "cfpb-jumbo-loan",
+      "publisher": "Consumer Financial Protection Bureau",
+      "title": "What is a jumbo loan?",
+      "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-jumbo-loan-en-116/",
+      "dataPeriod": "Last reviewed 2024-01-12",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States consumer mortgage education",
+      "claimSupported": "General jumbo-loan definition; current numeric limits come from FHFA.",
+      "authoritative": true
+    },
+    {
+      "id": "bls-laus-may-2026",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "title": "Local Area Unemployment Statistics",
+      "url": "https://www.bls.gov/lau/",
+      "dataPeriod": "May 2026 release cycle",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "State and metropolitan labor markets",
+      "claimSupported": "Dated labor-market context, not a prediction of an individual borrower's eligibility.",
+      "authoritative": true
+    },
+    {
+      "id": "texas-comptroller-property-tax",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "title": "Property Tax",
+      "url": "https://comptroller.texas.gov/taxes/property-tax/",
+      "dataPeriod": "Guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Texas",
+      "claimSupported": "Texas has no state property tax; local taxing units set rates and bills.",
+      "authoritative": true
+    },
+    {
+      "id": "california-doi-residential-insurance",
+      "publisher": "California Department of Insurance",
+      "title": "Residential Insurance",
+      "url": "https://www.insurance.ca.gov/01-consumers/105-type/5-residential/",
+      "dataPeriod": "Guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "California",
+      "claimSupported": "Residential insurance shopping, FAIR Plan last-resort, and difference-in-conditions context.",
+      "authoritative": true
+    },
+    {
+      "id": "colorado-property-taxation",
+      "publisher": "Colorado Division of Property Taxation",
+      "title": "Property Taxation",
+      "url": "https://cdola.colorado.gov/property-taxation",
+      "dataPeriod": "Guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Colorado",
+      "claimSupported": "Colorado property-tax administration and assessment guidance.",
+      "authoritative": true
+    },
+    {
+      "id": "florida-property-tax",
+      "publisher": "Florida Department of Revenue",
+      "title": "Property Tax",
+      "url": "https://floridarevenue.com/property/Pages/default.aspx",
+      "dataPeriod": "Guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Florida",
+      "claimSupported": "Florida property-tax administration and homestead framing.",
+      "authoritative": true
+    },
+    {
+      "id": "fema-floodsmart",
+      "publisher": "Federal Emergency Management Agency / National Flood Insurance Program",
+      "title": "FloodSmart",
+      "url": "https://www.floodsmart.gov/",
+      "dataPeriod": "Consumer guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States flood-insurance education",
+      "claimSupported": "Flood coverage limits in typical homeowners policies and flood-risk-map context.",
+      "authoritative": true
+    },
+    {
+      "id": "naic-homeowners-insurance",
+      "publisher": "National Association of Insurance Commissioners",
+      "title": "Homeowners Insurance",
+      "url": "https://content.naic.org/consumer/homeowners-insurance.htm",
+      "dataPeriod": "Consumer guidance verified 2026-07-13",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "United States insurance consumer education",
+      "claimSupported": "General homeowners-insurance coverage structure and state-department lookup guidance.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-austin-tx",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Austin city, Texas",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:05000&in=state:48",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Austin city/place, Texas",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-dallas-tx",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Dallas city, Texas",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:19000&in=state:48",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Dallas city/place, Texas",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-houston-tx",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Houston city, Texas",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:35000&in=state:48",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Houston city/place, Texas",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-irvine-ca",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Irvine city, California",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:36770&in=state:06",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Irvine city/place, California",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-san-diego-ca",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, San Diego city, California",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:66000&in=state:06",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "San Diego city/place, California",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-sacramento-ca",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Sacramento city, California",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:64000&in=state:06",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Sacramento city/place, California",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-denver-co",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Denver city, Colorado",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:20000&in=state:08",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Denver city/place, Colorado",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-colorado-springs-co",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Colorado Springs city, Colorado",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:16000&in=state:08",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Colorado Springs city/place, Colorado",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-boulder-co",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Boulder city, Colorado",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:07850&in=state:08",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Boulder city/place, Colorado",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-tampa-fl",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Tampa city, Florida",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:71000&in=state:12",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Tampa city/place, Florida",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-orlando-fl",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Orlando city, Florida",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:53000&in=state:12",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Orlando city/place, Florida",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    },
+    {
+      "id": "census-acs-2024-miami-fl",
+      "publisher": "U.S. Census Bureau",
+      "title": "2024 ACS 5-Year Data, Miami city, Florida",
+      "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:45000&in=state:12",
+      "dataPeriod": "2024 ACS 5-year estimate",
+      "accessedAt": "2026-07-13",
+      "geographicScope": "Miami city/place, Florida",
+      "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "authoritative": true
+    }
+  ]
+}
