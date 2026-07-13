@@ -47,6 +47,8 @@ function normalizeTopicHub(hub) {
   return {
     id: hub.id,
     slug: hub.slug,
+    route: hub.route,
+    heroSummary: hub.heroSummary,
     beat: hub.beat,
     contributorId: hub.contributorId,
     public: hub.public === true,
