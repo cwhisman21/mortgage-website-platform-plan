@@ -26,6 +26,7 @@ export function buildLearningCenterModel(seed) {
   return {
     home,
     tags,
+    searchItems: [...tags, ...articles],
     topicCards: tags.filter((page) => page.id !== EDITORIAL_TEAM_ID),
     featuredArticles,
     additionalArticles: articles

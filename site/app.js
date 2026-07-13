@@ -8,6 +8,7 @@ import {
 } from "/site/market-charts.mjs";
 import { renderLocationsHero } from "/site/locations-hero.mjs";
 import { renderCampaignHero } from "/site/campaign-hero.mjs";
+import { buildLearningCenterModel } from "/site/learning-center.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
@@ -1449,36 +1450,88 @@ function humanStatus(status) {
 }
 
 function learningHome() {
-  const topics = data.blogPages.filter((page) => page.route !== "/learning-center");
-  const articles = first(data.articles, 6);
+  const model = buildLearningCenterModel(data);
+  const featuredArticles = model.featuredArticles.length
+    ? section(
+        "Featured articles",
+        {
+          label: "Related articles",
+          text: "Articles link back to products, locations, calculators, experts, and disclosures."
+        },
+        `<div class="grid three learning-featured-grid">${model.featuredArticles.map(learningArticleCard).join("")}</div>`,
+        "compact learning-featured-section"
+      )
+    : "";
+  const topicCards = model.topicCards.length
+    ? section(
+        "Topic hubs",
+        {
+          label: "Categories",
+          text: "Browse mortgage guides by the decision you are working through."
+        },
+        `<div class="grid four learning-topic-grid">${model.topicCards.map(learningTopicCard).join("")}</div>`,
+        "compact learning-topic-section"
+      )
+    : "";
+  const calculators = model.calculators.length
+    ? section(
+        "Calculators",
+        {
+          label: "Planning tools",
+          text: "Estimate payment, affordability, refinance, and rent versus buy."
+        },
+        `<div class="grid four learning-calculator-grid">${model.calculators.map(learningCalculatorCard).join("")}</div>`,
+        "compact learning-calculator-section"
+      )
+    : "";
+  const additionalArticles = model.additionalArticles.length
+    ? section(
+        "Helpful next reads",
+        {
+          label: "Learning center",
+          text: "Read guides that connect market questions, loan options, calculators, and licensed guidance."
+        },
+        `<div class="grid three learning-article-grid">${model.additionalArticles.map(learningArticleCard).join("")}</div>`,
+        "compact learning-article-section"
+      )
+    : "";
+  const loanPaths = model.loanPaths.length
+    ? section(
+        "Loan paths",
+        {
+          label: "Products",
+          text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby."
+        },
+        `<div class="grid four learning-product-grid">${model.loanPaths.map(learningLoanPathCard).join("")}</div>`,
+        "compact learning-product-section"
+      )
+    : "";
+
   return pageShell(`
-    ${hero({
-      eyebrow: "Learning center",
-      title: "Mortgage education connected to local decisions.",
-      lead: "Read market updates, product explainers, tax and insurance guides, calculator walkthroughs, and first-time buyer resources.",
-      actions: `<a class="button" href="${route("/learning-center/local-market-updates")}">Market updates</a><a class="button secondary" href="${route("/learning-center/buying-a-home")}">Buying guides</a>`,
-      panel: `<aside class="hero-panel"><h2>Search learning</h2><form class="search-form" data-search-form><input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." /><button class="button" type="submit">Search</button></form></aside>`
-    })}
-    ${editorialSection({
-      label: "Editorial promise",
-      title: "The learning center explains decisions, not just definitions.",
-      intro: "Mortgage content earns trust when it is organized around borrower questions and connected to products, markets, tools, and people.",
-      paragraphs: [
-        "Articles help borrowers understand local markets, product tradeoffs, payment assumptions, taxes, insurance, and the questions to ask before they act.",
-        "Every article has a job: explain a product, update a market, prepare for a calculator, or make a licensed conversation more useful.",
-        "Credibility is part of the reading experience. Articles show author, editor, reviewer, update date, source list, related tools, and relevant disclosures."
-      ],
-      sideTitle: "What you can explore",
-      sideItems: [
-        "Mortgage topics and guides",
-        "Source dates and guide details",
-        "Current market references",
-        "Related products and calculators",
-        "Local market links"
-      ]
-    })}
-    ${section("Topic hubs", { label: "Categories", text: "Browse mortgage guides by the decision you are working through." }, `<div class="grid four">${topics.map((topic, index) => card({ title: topic.name, text: topic.purpose, href: topic.route, iconName: "guide", accent: accentColors[index % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`)}
-    ${section("Featured articles", { label: "Related articles", text: "Articles link back to products, locations, calculators, experts, and disclosures." }, `<div class="grid three">${articles.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`, "compact")}
+    <div class="learning-center-page">
+      ${hero({
+        eyebrow: "Learning center",
+        title: "Mortgage education connected to local decisions.",
+        lead: "Read market updates, product explainers, tax and insurance guides, calculator walkthroughs, and first-time buyer resources.",
+        actions: `<a class="button" href="${route("/learning-center/local-market-updates")}">Market updates</a><a class="button secondary" href="${route("/learning-center/buying-a-home")}">Buying guides</a>`,
+        panel: `<aside class="hero-panel visual-panel learning-hero-panel"><img src="${ASSETS.mortgage}" alt="" /><h2>What you can explore</h2><ul><li>Mortgage topics and guides</li><li>Source dates and guide details</li><li>Current market references</li><li>Related products and calculators</li><li>Local market links</li></ul></aside>`
+      })}
+      ${learningDiscovery(model)}
+      ${section(
+        CTA_TYPES.prequal.title,
+        { label: CTA_TYPES.prequal.eyebrow, text: CTA_TYPES.prequal.text },
+        `<div class="learning-inline-cta">${ctaButton("prequal")}</div>`,
+        "compact learning-prequal-section"
+      )}
+      ${featuredArticles}
+      ${topicCards}
+      ${calculators}
+      ${additionalArticles}
+      ${loanPaths}
+      <section class="section compact learning-guidance-section" aria-label="Mortgage guidance">
+        ${contextualCta(CTA_TYPES.leadForm.title, CTA_TYPES.leadForm.text, ["leadForm", "loContact"])}
+      </section>
+    </div>
   `);
 }
 
@@ -1586,6 +1639,64 @@ function articlePage(article) {
           <h2>What to compare next</h2>
           <p>Use the related cards below to open a product guide, city market page, calculator, or loan officer profile connected to this topic.</p>
         </article>
+function learningDiscovery(model) {
+  return `
+    <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
+      <form class="learning-search search-form" data-search-form data-search-scope="learning">
+        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
+        <button class="button" type="submit">Search</button>
+      </form>
+      <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
+        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
+      </nav>
+    </section>
+  `;
+}
+
+function learningArticleCard(article, index) {
+  return card({
+    title: article.title,
+    text: humanStatus(article.reviewStatus),
+    href: article.route,
+    iconName: "article",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Read"
+  });
+}
+
+function learningTopicCard(topic, index) {
+  return card({
+    title: topic.name,
+    text: topic.purpose,
+    href: topic.route,
+    iconName: "guide",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Open topic"
+  });
+}
+
+function learningCalculatorCard(calculator, index) {
+  return card({
+    title: calculator.name,
+    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
+    href: calculator.route,
+    iconName: "calculator",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Calculate"
+  });
+}
+
+function learningLoanPathCard(product, index) {
+  return card({
+    title: product.name,
+    text: product.borrowerGoal,
+    href: product.route,
+    iconName: index % 2 ? "rates" : "home",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "View guide"
+  });
+}
+
         <aside class="side-stack">
           ${contextualCta("Review your scenario", "Bring the market, product, and payment questions into one licensed conversation.", ["leadForm", "loContact", "watchlist"])}
           ${sourceNote(["fhfaHpi", "freddiePmms", "regZ"], "Article sources")}
@@ -2385,15 +2496,17 @@ function wireInteractions() {
       event.preventDefault();
       const query = new FormData(form).get("query")?.toString().trim().toLowerCase();
       if (!query) return;
-      const allItems = [
-        ...data.states,
-        ...data.cities,
-        ...data.products,
-        ...data.blogPages,
-        ...data.articles,
-        ...data.loanOfficers,
-        ...data.branches
-      ];
+      const allItems = form.getAttribute("data-search-scope") === "learning"
+        ? buildLearningCenterModel(data).searchItems
+        : [
+            ...data.states,
+            ...data.cities,
+            ...data.products,
+            ...data.blogPages,
+            ...data.articles,
+            ...data.loanOfficers,
+            ...data.branches
+          ];
       const match = allItems.find((item) => `${item.name || item.title} ${item.stateNarrative || ""} ${item.marketPositioning || ""} ${item.purpose || ""} ${item.borrowerGoal || ""}`.toLowerCase().includes(query));
       navigate(route(match?.route || "/learning-center/search"));
     });

@@ -2639,3 +2639,351 @@ tr:last-child td {
     padding: 24px;
   }
 }
+/* Learning Center home */
+.learning-center-page {
+  padding-bottom: 24px;
+  background:
+    linear-gradient(180deg, #f3f8ff 0, #fff 540px),
+    var(--surface);
+}
+
+.learning-center-page .hero-band {
+  border-bottom: 0;
+  background:
+    radial-gradient(circle at 78% 48%, rgba(11, 85, 255, 0.16), transparent 25%),
+    linear-gradient(110deg, rgba(255, 255, 255, 0.98), rgba(231, 244, 255, 0.94) 58%, rgba(229, 250, 244, 0.82)),
+    var(--blue);
+}
+
+.learning-center-page .hero-band::after {
+  height: 5px;
+}
+
+.learning-center-page .hero-inner {
+  min-height: 390px;
+  padding-block: 58px 66px;
+}
+
+.learning-center-page .hero-copy h1 {
+  max-width: 720px;
+}
+
+.learning-center-page .learning-hero-panel {
+  position: relative;
+  min-height: 272px;
+  padding-left: 160px;
+  overflow: hidden;
+}
+
+.learning-center-page .learning-hero-panel img {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  width: 112px;
+  max-width: none;
+  margin: 0;
+  filter: drop-shadow(0 16px 24px rgba(11, 85, 255, 0.2));
+}
+
+.learning-center-page .learning-hero-panel ul {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-center-page .learning-hero-panel li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.learning-center-page .learning-hero-panel li::before {
+  content: "";
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--snap-teal);
+}
+
+.learning-center-page .learning-discovery {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: 16px;
+  margin-top: -28px;
+  padding: 22px 24px 24px;
+  border: 1px solid #d3e0ef;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 24px 54px rgba(16, 37, 74, 0.13);
+  backdrop-filter: blur(12px);
+}
+
+.learning-center-page .learning-search {
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  margin: 0;
+}
+
+.learning-center-page .learning-search input {
+  min-height: 50px;
+  padding-inline: 16px;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.learning-center-page .learning-search .button {
+  min-height: 50px;
+  padding-inline: 24px;
+}
+
+.learning-center-page .learning-topic-tags {
+  justify-content: center;
+}
+
+.learning-center-page .learning-topic-tags .tag {
+  min-height: 36px;
+  padding-inline: 14px;
+  border-color: #c9d9ee;
+  background: #fbfdff;
+  color: var(--snap-blue);
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.learning-center-page .learning-topic-tags .tag:hover,
+.learning-center-page .learning-topic-tags .tag:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--snap-blue);
+  background: var(--blue);
+  outline: 3px solid rgba(11, 85, 255, 0.18);
+  outline-offset: 2px;
+}
+
+.learning-center-page .section.compact {
+  padding-top: 34px;
+  padding-bottom: 34px;
+}
+
+.learning-center-page .section-header {
+  margin-bottom: 20px;
+}
+
+.learning-center-page .section-header h2 {
+  font-size: clamp(30px, 3.2vw, 40px);
+}
+
+.learning-center-page .card {
+  height: 100%;
+  min-height: 190px;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.learning-center-page .card h3 {
+  font-size: 22px;
+}
+
+.learning-center-page .learning-prequal-section,
+.learning-center-page .learning-guidance-section {
+  width: min(var(--content), calc(100vw - 32px));
+  margin-top: 28px;
+  padding: 28px 30px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(17, 191, 179, 0.28), transparent 28%),
+    linear-gradient(115deg, #072e76, #086bcb);
+  box-shadow: 0 22px 48px rgba(7, 54, 125, 0.24);
+}
+
+.learning-center-page .learning-prequal-section .section-header,
+.learning-center-page .learning-guidance-section .section-header {
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.learning-center-page .learning-prequal-section .eyebrow,
+.learning-center-page .learning-prequal-section h2,
+.learning-center-page .learning-guidance-section .eyebrow,
+.learning-center-page .learning-guidance-section h2 {
+  color: #fff;
+}
+
+.learning-center-page .learning-prequal-section .section-header p,
+.learning-center-page .learning-guidance-section .section-header p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.learning-center-page .learning-inline-cta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.learning-center-page .learning-inline-cta .button {
+  border-color: #fff;
+  background: #fff;
+  color: var(--navy);
+}
+
+.learning-center-page .learning-featured-grid .card {
+  min-height: 260px;
+  align-content: end;
+  padding-top: 96px;
+  background:
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--card-accent) 24%, #fff) 0 54px, transparent 55px),
+    linear-gradient(145deg, color-mix(in srgb, var(--card-accent) 12%, #fff), #fff 56%);
+}
+
+.learning-center-page .learning-featured-grid .icon {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.learning-center-page .learning-topic-grid .card,
+.learning-center-page .learning-calculator-grid .card {
+  min-height: 176px;
+}
+
+.learning-center-page .learning-calculator-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.learning-center-page .learning-calculator-grid .card {
+  padding: 18px;
+}
+
+.learning-center-page .learning-calculator-grid .card h3 {
+  font-size: 19px;
+}
+
+.learning-center-page .learning-product-grid .card {
+  min-height: 220px;
+  align-content: end;
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--card-accent) 70%, transparent) 0 58px, transparent 59px),
+    linear-gradient(145deg, #123f73, #071d38);
+  color: #fff;
+  box-shadow: 0 18px 38px rgba(7, 29, 56, 0.2);
+}
+
+.learning-center-page .learning-product-grid .card p,
+.learning-center-page .learning-product-grid .card .text-link {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.learning-center-page .learning-product-grid .icon {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.learning-center-page .learning-guidance-section .cta-panel {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 1040px) {
+  .learning-center-page .learning-hero-panel {
+    min-height: 0;
+    padding-left: 148px;
+  }
+
+  .learning-center-page .learning-calculator-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .learning-center-page .hero-inner {
+    min-height: 0;
+  }
+
+  .learning-center-page .learning-hero-panel {
+    padding: 22px;
+  }
+
+  .learning-center-page .learning-hero-panel img {
+    position: static;
+    width: 96px;
+    margin-bottom: 14px;
+  }
+
+  .learning-center-page .learning-discovery {
+    width: min(calc(100vw - 24px), var(--content));
+    margin-top: -14px;
+    padding: 18px;
+  }
+
+  .learning-center-page .learning-search {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-center-page .learning-topic-tags {
+    justify-content: flex-start;
+  }
+
+  .learning-center-page .learning-topic-tags .tag {
+    max-width: 100%;
+  }
+
+  .learning-center-page .learning-prequal-section,
+  .learning-center-page .learning-guidance-section {
+    width: min(calc(100vw - 24px), var(--content));
+    padding: 22px 18px;
+  }
+
+  .learning-center-page .learning-inline-cta,
+  .learning-center-page .learning-inline-cta .button {
+    width: 100%;
+  }
+
+  .learning-center-page .learning-calculator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Keep Learning Center page treatments after the shared design-system layer. */
+[data-design-system="snap-figma-v1"] .learning-center-page .learning-hero-panel {
+  padding: 24px 24px 24px 160px;
+}
+
+[data-design-system="snap-figma-v1"] .learning-center-page .learning-prequal-section.section.compact,
+[data-design-system="snap-figma-v1"] .learning-center-page .learning-guidance-section.section.compact {
+  padding: 28px 30px;
+}
+
+[data-design-system="snap-figma-v1"] .learning-center-page .learning-guidance-section .cta-panel {
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+@media (max-width: 760px) {
+  [data-design-system="snap-figma-v1"] .learning-center-page .learning-hero-panel {
+    padding: 22px;
+  }
+
+  [data-design-system="snap-figma-v1"] .learning-center-page .learning-prequal-section.section.compact,
+  [data-design-system="snap-figma-v1"] .learning-center-page .learning-guidance-section.section.compact {
+    padding: 22px 18px;
+  }
+}

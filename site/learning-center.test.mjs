@@ -77,6 +77,20 @@ test("builds navigation tags from every canonical topic", () => {
   ]);
 });
 
+test("limits Learning Center search to canonical topics and articles", () => {
+  const model = buildLearningCenterModel({
+    ...seed,
+    states: [{ id: "state-al", name: "Alabama" }],
+  });
+
+  assert.deepEqual(model.searchItems.map(({ id }) => id), [
+    "blog-buying-a-home",
+    "blog-editorial-team",
+    "article-featured",
+    "article-next",
+  ]);
+});
+
 test("keeps Editorial Team out of the borrower topic-card grid", () => {
   const model = buildLearningCenterModel(seed);
 
