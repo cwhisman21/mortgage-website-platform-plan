@@ -101,6 +101,36 @@ test("synchronizes down payment dollars and percent in both directions", async (
   assert.equal(byAmount.downPaymentPercent, 15);
 });
 
+test("supports valid zero-dollar and zero-percent purchase down payments", async () => {
+  const {
+    MARKETPLACE_DEFAULTS,
+    resolveScenarioContext,
+    updateDownPayment,
+    validateScenario,
+  } = await loadMarketplaceModule();
+  const scenario = {
+    ...MARKETPLACE_DEFAULTS,
+    mortgageType: "purchase",
+    purchasePrice: 500000,
+    downPaymentAmount: 0,
+    downPaymentPercent: 0,
+  };
+
+  const resolved = resolveScenarioContext({
+    url: new URLSearchParams("purchasePrice=500000&downPaymentAmount=0&downPaymentPercent=0"),
+    defaults: MARKETPLACE_DEFAULTS,
+  });
+  const byAmount = updateDownPayment(scenario, { downPaymentAmount: 0 });
+  const validation = validateScenario(scenario);
+
+  assert.equal(resolved.downPaymentAmount, 0);
+  assert.equal(resolved.downPaymentPercent, 0);
+  assert.equal(byAmount.downPaymentAmount, 0);
+  assert.equal(byAmount.downPaymentPercent, 0);
+  assert.equal(validation.valid, true);
+  assert.equal("downPaymentAmount" in validation.errors, false);
+});
+
 test("flags impossible purchase and refinance amounts", async () => {
   const { validateScenario } = await loadMarketplaceModule();
 
@@ -133,13 +163,18 @@ test("flags impossible purchase and refinance amounts", async () => {
   assert.match(refinance.errors.loanBalance, /cannot exceed property value/i);
 });
 
-test("normalizes the fixture contract and rejects invalid schema variants", async () => {
+test("normalizes the fixture contract", async () => {
   const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
   const fixture = normalizeMarketplaceFixture(loadFixture());
 
   assert.equal(fixture.version, "snap-rates-marketplace-v1");
   assert.equal(fixture.offers.length, 40);
   assert.ok(fixture.disclosure.includes("These sample offers illustrate"));
+});
+
+test("rejects duplicate offer ids in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
 
   assert.throws(
     () =>
@@ -147,10 +182,128 @@ test("normalizes the fixture contract and rejects invalid schema variants", asyn
         ...fixture,
         offers: [
           fixture.offers[0],
-          { ...fixture.offers[0], resultType: "broker", prequalKey: "" },
+          { ...fixture.offers[0] },
         ],
       }),
-    /duplicate|result type|prequalification key/i,
+    /duplicate/i,
+  );
+});
+
+test("rejects invalid result types in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...fixture,
+        offers: [{ ...fixture.offers[0], id: "company-harbor-purchase-30-copy", resultType: "broker" }],
+      }),
+    /result type/i,
+  );
+});
+
+test("rejects missing prequalification keys in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...fixture,
+        offers: [{ ...fixture.offers[0], id: "company-harbor-purchase-30-copy", prequalKey: "" }],
+      }),
+    /prequalification key/i,
+  );
+});
+
+test("rejects invalid headline financial values in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...fixture,
+        offers: [{ ...fixture.offers[0], id: "company-harbor-purchase-30-copy", upfrontCost: -1 }],
+      }),
+    /finite nonnegative/i,
+  );
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...fixture,
+        offers: [{ ...fixture.offers[0], id: "company-harbor-purchase-30-copy", rate: Number.NaN }],
+      }),
+    /finite nonnegative/i,
+  );
+});
+
+test("rejects invalid nested fee-line amounts in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const rawFixture = loadFixture();
+
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...rawFixture,
+        detailsTemplates: {
+          ...rawFixture.detailsTemplates,
+          purchaseStandard: {
+            ...rawFixture.detailsTemplates.purchaseStandard,
+            feeLines: [{ label: "Origination", amount: -25 }],
+          },
+        },
+      }),
+    /fee line/i,
+  );
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...rawFixture,
+        detailsTemplates: {
+          ...rawFixture.detailsTemplates,
+          purchaseStandard: {
+            ...rawFixture.detailsTemplates.purchaseStandard,
+            feeLines: [{ label: "Origination", amount: "NaN" }],
+          },
+        },
+      }),
+    /fee line/i,
+  );
+});
+
+test("rejects invalid nested payment assumptions in the fixture schema", async () => {
+  const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const rawFixture = loadFixture();
+
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...rawFixture,
+        paymentAssumptionTemplates: {
+          ...rawFixture.paymentAssumptionTemplates,
+          purchaseStandard: {
+            ...rawFixture.paymentAssumptionTemplates.purchaseStandard,
+            homeownersInsurance: -10,
+          },
+        },
+      }),
+    /payment assumption/i,
+  );
+  assert.throws(
+    () =>
+      normalizeMarketplaceFixture({
+        ...rawFixture,
+        paymentAssumptionTemplates: {
+          ...rawFixture.paymentAssumptionTemplates,
+          purchaseStandard: {
+            ...rawFixture.paymentAssumptionTemplates.purchaseStandard,
+            propertyTax: "oops",
+          },
+        },
+      }),
+    /payment assumption/i,
   );
 });
 

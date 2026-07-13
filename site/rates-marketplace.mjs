@@ -129,6 +129,11 @@ function parsePositiveInt(value) {
   return Number.isInteger(normalized) && normalized > 0 ? normalized : undefined;
 }
 
+function parseNonNegativeInt(value) {
+  const normalized = parseCurrency(value);
+  return Number.isInteger(normalized) && normalized >= 0 ? normalized : undefined;
+}
+
 function parseZip(value) {
   if (typeof value !== "string") return undefined;
   return /^\d{5}$/.test(value) ? value : undefined;
@@ -158,10 +163,11 @@ function parseField(field, value) {
     case "cashOut":
       return parseBoolean(value);
     case "purchasePrice":
-    case "downPaymentAmount":
     case "propertyValue":
     case "loanBalance":
       return parsePositiveInt(value);
+    case "downPaymentAmount":
+      return parseNonNegativeInt(value);
     case "downPaymentPercent": {
       const percent = parsePercentage(value);
       return percent != null && percent >= 0 && percent <= 100 ? percent : undefined;
@@ -220,6 +226,12 @@ function assertFiniteNonNegative(value, label) {
   }
 }
 
+function normalizeNonNegativeNumber(value, label) {
+  const normalized = Number(value);
+  assertFiniteNonNegative(normalized, label);
+  return normalized;
+}
+
 function materializeTemplateRecord(record, templates, fallbackKey) {
   if (record && typeof record === "object") {
     return clone(record);
@@ -272,15 +284,18 @@ function normalizeOffer(rawOffer, templates = {}) {
 
   offer.details =
     materializeTemplateRecord(offer.details, templates.detailsTemplates, offer.detailsKey) || {
-    summary: "",
-    feeLines: [],
-    footnotes: [],
-    assumptions: [],
-  };
+      summary: "",
+      feeLines: [],
+      footnotes: [],
+      assumptions: [],
+    };
   offer.details.feeLines = Array.isArray(offer.details.feeLines)
-    ? offer.details.feeLines.map((line) => ({
+    ? offer.details.feeLines.map((line, index) => ({
         label: line.label,
-        amount: Number(line.amount) || 0,
+        amount: normalizeNonNegativeNumber(
+          line.amount,
+          `Marketplace offer ${offer.id} fee line ${index + 1} amount`,
+        ),
       }))
     : [];
   offer.details.footnotes = Array.isArray(offer.details.footnotes)
@@ -297,10 +312,22 @@ function normalizeOffer(rawOffer, templates = {}) {
       offer.paymentAssumptionsKey,
     ) || {};
   offer.paymentAssumptions = {
-    homeownersInsurance: Number(paymentAssumptions.homeownersInsurance) || 0,
-    propertyTax: Number(paymentAssumptions.propertyTax) || 0,
-    hoaDues: Number(paymentAssumptions.hoaDues) || 0,
-    mortgageInsurance: Number(paymentAssumptions.mortgageInsurance) || 0,
+    homeownersInsurance: normalizeNonNegativeNumber(
+      paymentAssumptions.homeownersInsurance ?? 0,
+      `Marketplace offer ${offer.id} payment assumption homeownersInsurance`,
+    ),
+    propertyTax: normalizeNonNegativeNumber(
+      paymentAssumptions.propertyTax ?? 0,
+      `Marketplace offer ${offer.id} payment assumption propertyTax`,
+    ),
+    hoaDues: normalizeNonNegativeNumber(
+      paymentAssumptions.hoaDues ?? 0,
+      `Marketplace offer ${offer.id} payment assumption hoaDues`,
+    ),
+    mortgageInsurance: normalizeNonNegativeNumber(
+      paymentAssumptions.mortgageInsurance ?? 0,
+      `Marketplace offer ${offer.id} payment assumption mortgageInsurance`,
+    ),
   };
 
   const reviewTemplate =
@@ -428,7 +455,7 @@ export function validateScenario(scenario = {}) {
     if (!parsePositiveInt(scenario.purchasePrice)) {
       errors.purchasePrice = "Enter a purchase price greater than zero.";
     }
-    if (parsePositiveInt(scenario.downPaymentAmount) == null) {
+    if (parseNonNegativeInt(scenario.downPaymentAmount) == null) {
       errors.downPaymentAmount = "Enter a down payment amount greater than or equal to zero.";
     }
     if (parseField("downPaymentPercent", scenario.downPaymentPercent) == null) {
@@ -436,7 +463,7 @@ export function validateScenario(scenario = {}) {
     }
     if (
       parsePositiveInt(scenario.purchasePrice) != null &&
-      parsePositiveInt(scenario.downPaymentAmount) != null &&
+      parseNonNegativeInt(scenario.downPaymentAmount) != null &&
       scenario.downPaymentAmount > scenario.purchasePrice
     ) {
       errors.downPaymentAmount = "Down payment amount cannot exceed purchase price.";
@@ -480,7 +507,7 @@ export function updateDownPayment(scenario = {}, change = {}) {
   }
 
   if (change.downPaymentAmount != null) {
-    const downPaymentAmount = parsePositiveInt(change.downPaymentAmount);
+    const downPaymentAmount = parseNonNegativeInt(change.downPaymentAmount);
     if (downPaymentAmount == null) return { ...scenario };
     return {
       ...scenario,
