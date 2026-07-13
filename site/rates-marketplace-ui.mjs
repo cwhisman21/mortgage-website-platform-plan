@@ -130,7 +130,7 @@ function selectField({ label, name, value, options }) {
   return `
     <label class="rates-field">
       <span>${esc(label)}</span>
-      <select name="${esc(name)}" data-marketplace-field="${esc(name)}"${name === "sort" ? ' data-marketplace-sort data-analytics-event="rates_marketplace_sort"' : ""}>
+      <select name="${esc(name)}" value="${esc(value)}" data-marketplace-field="${esc(name)}"${name === "sort" ? ' data-marketplace-sort data-analytics-event="rates_marketplace_sort"' : ""}>
         ${optionList(options, value)}
       </select>
     </label>
@@ -160,6 +160,8 @@ function segmented(name, items, selected, analyticsEvent = "") {
 function scenarioForm(state) {
   const purchaseHidden = state.mortgageType !== "purchase" ? " hidden" : "";
   const refinanceHidden = state.mortgageType !== "refinance" ? " hidden" : "";
+  const advancedOpen = Boolean(state.advancedFiltersOpen);
+  const advancedId = "rates-advanced-filters";
   return `
     <form class="rates-marketplace-form" data-rates-form>
       <div class="rates-form-heading">
@@ -205,6 +207,15 @@ function scenarioForm(state) {
         </label>
         ${selectField({ label: "Credit range", name: "creditRange", value: state.creditRange, options: CREDIT_RANGES.map((item) => [item, item]) })}
         ${selectField({ label: "Loan term", name: "term", value: String(state.term), options: TERMS.map((item) => [String(item), `${item}-year fixed`]) })}
+      </div>
+      <button
+        class="text-button rates-advanced-toggle"
+        type="button"
+        aria-expanded="${advancedOpen ? "true" : "false"}"
+        aria-controls="${advancedId}"
+        data-toggle-advanced-filters
+      >${advancedOpen ? "Show fewer filters" : "Show more filters"}</button>
+      <div class="rates-advanced-filters" id="${advancedId}" data-advanced-marketplace${advancedOpen ? "" : " hidden"}>
         <label class="rates-field">
           <span>Show FHA loans</span>
           ${segmented("show-fha", [["true", "Yes"], ["false", "No"]], String(Boolean(state.showFha)))}
@@ -385,9 +396,9 @@ function donutChart(offer, assumptions, detailId) {
   const total = Math.max(paymentTotal(offer, assumptions), 1);
   let offset = 0;
   const circles = segments
-    .map(([, , value, color]) => {
+    .map(([field, , value, color]) => {
       const share = (value / total) * 100;
-      const circle = `<circle class="rates-donut-segment" cx="80" cy="80" r="58" pathLength="100" style="--segment-color:${esc(color)};--segment-share:${share};--segment-offset:${-offset}" />`;
+      const circle = `<circle class="rates-donut-segment" data-donut-segment="${esc(field)}" cx="80" cy="80" r="58" pathLength="100" style="--segment-color:${esc(color)};--segment-share:${share};--segment-offset:${-offset}" />`;
       offset += share;
       return circle;
     })
@@ -404,7 +415,7 @@ function donutChart(offer, assumptions, detailId) {
       ${segments
         .map(
           ([field, label, value, color]) => `
-            <button type="button" data-chart-segment="${esc(field)}" aria-pressed="false" aria-describedby="${esc(detailId)}" data-chart-value="${esc(formatCurrency(value))}" data-analytics-event="rates_marketplace_chart_detail">
+            <button type="button" data-chart-segment="${esc(field)}" data-chart-label="${esc(label)}" aria-pressed="false" aria-describedby="${esc(detailId)}" data-chart-value="${esc(formatCurrency(value))}" data-analytics-event="rates_marketplace_chart_detail">
               <i style="--segment-color:${esc(color)}" aria-hidden="true"></i>
               <span>${esc(label)}</span>
               <strong>${esc(formatCurrency(value))}</strong>
@@ -495,14 +506,6 @@ function renderBody(fixture, state) {
         ${result.hasMore ? `<button class="button secondary" type="button" data-show-more-offers data-analytics-event="rates_marketplace_show_more">Show more offers</button>` : ""}
       </div>
     </section>
-    <div hidden aria-hidden="true">
-      <span>Details Payment Reviews</span>
-      <span>Read-only review source</span>
-      <a href="/loan-officers/ava-martinez">Loan officer profile</a>
-      <span data-chart-segment="sample" aria-describedby="payment-detail-sample" data-analytics-event="rates_marketplace_chart_detail"></span>
-      <span id="payment-detail-sample">Focusable payment chart details</span>
-      ${ANALYTICS_EVENTS.map((eventName) => `<span data-analytics-event="${esc(eventName)}"></span>`).join("")}
-    </div>
   `;
 }
 
@@ -541,6 +544,7 @@ export function renderRatesMarketplace({ fixture, state = MARKETPLACE_DEFAULTS }
       sort: state.sort || MARKETPLACE_DEFAULTS.sort,
       expandedTab: state.expandedTab || "details",
     });
+    normalizedState.advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
     return `
       <section class="rates-marketplace" data-rates-marketplace>
         ${renderBody(normalizedFixture, normalizedState)}
@@ -614,6 +618,14 @@ function formState(container, currentState) {
   return normalizeState(next);
 }
 
+function setAdvancedFiltersOpen(container, isOpen) {
+  const toggle = container.querySelector("[data-toggle-advanced-filters]");
+  const panel = container.querySelector("[data-advanced-marketplace]");
+  toggle?.setAttribute("aria-expanded", String(isOpen));
+  if (toggle) toggle.textContent = isOpen ? "Show fewer filters" : "Show more filters";
+  if (panel) panel.hidden = !isOpen;
+}
+
 function updatePaymentPanel(panel, offerId, track) {
   const inputs = [...panel.querySelectorAll("[data-payment-assumption]")];
   const values = Object.fromEntries(
@@ -626,6 +638,29 @@ function updatePaymentPanel(panel, offerId, track) {
   const donutTotal = panel.querySelector("[data-donut-total]");
   if (totalNode) totalNode.textContent = formattedTotal;
   if (donutTotal) donutTotal.textContent = formattedTotal;
+  const segments = [
+    ["principalAndInterest", "Principal and interest", principal],
+    ...PAYMENT_FIELDS.map(([field, label]) => [field, label, values[field] || 0]),
+  ];
+  let offset = 0;
+  for (const [field, label, value] of segments) {
+    const formattedValue = formatCurrency(value);
+    const share = total > 0 ? (value / total) * 100 : 0;
+    const legend = panel.querySelector(`[data-chart-segment="${field}"]`);
+    const visual = panel.querySelector(`[data-donut-segment="${field}"]`);
+    legend?.setAttribute("data-chart-value", formattedValue);
+    const legendValue = legend?.querySelector("strong");
+    if (legendValue) legendValue.textContent = formattedValue;
+    if (visual) {
+      const color = visual.getAttribute("style")?.match(/--segment-color:([^;]+)/)?.[1] || "#0b55ff";
+      visual.setAttribute("style", `--segment-color:${color};--segment-share:${share};--segment-offset:${-offset}`);
+    }
+    if (legend?.getAttribute("aria-pressed") === "true") {
+      const detail = panel.querySelector("[data-chart-detail-text]");
+      if (detail) detail.textContent = `${label}: ${formattedValue}.`;
+    }
+    offset += share;
+  }
   emitAnalytics(track, "rates_marketplace_payment_assumption", {
     offerId,
     field: inputs.find((input) => input === globalThis.document?.activeElement)?.getAttribute("data-payment-assumption") || inputs[0]?.getAttribute("data-payment-assumption") || "payment",
@@ -652,10 +687,11 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
   });
   state.visibleCount = state.visibleCount || DEFAULT_VISIBLE_COUNT;
   state.expandedTab = state.expandedTab || "details";
+  let advancedFiltersOpen = false;
 
   const rerender = () => {
     persistState(state);
-    container.innerHTML = renderBody(normalizedFixture, state);
+    container.innerHTML = renderBody(normalizedFixture, { ...state, advancedFiltersOpen });
     bind();
   };
 
@@ -676,6 +712,11 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
       setState({ ...next, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null }, "rates_marketplace_update");
     });
 
+    container.querySelector("[data-toggle-advanced-filters]")?.addEventListener("click", () => {
+      advancedFiltersOpen = !advancedFiltersOpen;
+      setAdvancedFiltersOpen(container, advancedFiltersOpen);
+    });
+
     container.querySelectorAll("[data-mortgage-type-option]").forEach((button) => {
       button.addEventListener("click", () => {
         const value = button.getAttribute("data-mortgage-type-option");
@@ -689,15 +730,20 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
           const hidden = button.parentNode?.parentNode?.querySelector?.("input[type=\"hidden\"]");
           if (hidden) hidden.value = button.getAttribute(`data-${name}-option`);
           if (typeof Event === "function") {
-            form?.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
-          } else {
-            form?.dispatchEvent({ type: "submit", preventDefault() {} });
+            try {
+              form?.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+              return;
+            } catch {
+              // Lightweight DOM test harnesses may not accept native Event objects.
+            }
           }
+          form?.dispatchEvent({ type: "submit", preventDefault() {} });
         });
       });
     }
 
     container.querySelector("[data-reset-marketplace]")?.addEventListener("click", () => {
+      advancedFiltersOpen = false;
       setState({ ...MARKETPLACE_DEFAULTS, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null, expandedTab: "details" }, "rates_marketplace_reset");
     });
 
@@ -751,7 +797,7 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
         container.querySelectorAll("[data-chart-segment]").forEach((item) => item.setAttribute("aria-pressed", "false"));
         button.setAttribute("aria-pressed", "true");
         if (detail) {
-          detail.textContent = `${button.querySelector?.("span")?.textContent || "Payment segment"}: ${button.getAttribute("data-chart-value")}.`;
+          detail.textContent = `${button.getAttribute("data-chart-label") || button.querySelector?.("span")?.textContent || "Payment segment"}: ${button.getAttribute("data-chart-value")}.`;
         }
         emitAnalytics(track, "rates_marketplace_chart_detail", {
           field: button.getAttribute("data-chart-segment"),

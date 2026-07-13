@@ -191,6 +191,10 @@ function allDescendants(root) {
 
 function matchesSelector(element, selector) {
   const normalized = selector.trim();
+  const classMatch = normalized.match(/^\.([a-zA-Z0-9_-]+)$/);
+  if (classMatch) {
+    return (element.getAttribute("class") || "").split(/\s+/).includes(classMatch[1]);
+  }
   const dataMatch = normalized.match(/^\[([^=\]]+)(?:=(?:"([^"]*)"|'([^']*)'|([^\]]+)))?\]$/);
   if (dataMatch) {
     const [, name, doubleValue, singleValue, bareValue] = dataMatch;
@@ -251,10 +255,38 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
   const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
   const { renderRatesMarketplace } = await loadUiModule();
   const fixture = normalizeMarketplaceFixture(loadFixture());
+  const loanOfficerOffer = fixture.offers.find((offer) => offer.resultType === "loanOfficer" && offer.mortgageType === "purchase");
+  const companyOffer = fixture.offers.find((offer) => offer.resultType === "company" && offer.mortgageType === "purchase");
   const html = renderRatesMarketplace({
     fixture,
     state: MARKETPLACE_DEFAULTS,
   });
+  const paymentHtml = renderRatesMarketplace({
+    fixture,
+    state: {
+      ...MARKETPLACE_DEFAULTS,
+      expandedOfferId: companyOffer.id,
+      expandedTab: "payment",
+    },
+  });
+  const reviewsHtml = renderRatesMarketplace({
+    fixture,
+    state: {
+      ...MARKETPLACE_DEFAULTS,
+      expandedOfferId: companyOffer.id,
+      expandedTab: "reviews",
+    },
+  });
+  const loanOfficerHtml = renderRatesMarketplace({
+    fixture,
+    state: {
+      ...MARKETPLACE_DEFAULTS,
+      resultType: "loanOfficer",
+      expandedOfferId: loanOfficerOffer.id,
+      expandedTab: "details",
+    },
+  });
+  const combinedHtml = `${html}\n${paymentHtml}\n${reviewsHtml}\n${loanOfficerHtml}`;
   const text = textFromHtml(html);
 
   assert.match(html, /data-rates-marketplace/);
@@ -280,14 +312,15 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
   assert.match(text, /These sample offers illustrate/);
   assert.equal((html.match(/data-offer-id=/g) || []).length, 8);
   assert.match(text, /Show more offers/);
-  assert.match(text, /Details/);
-  assert.match(text, /Payment/);
-  assert.match(text, /Reviews/);
-  assert.match(text, /Read-only review source/);
+  assert.doesNotMatch(html, /<div hidden aria-hidden="true">/);
+  assert.match(textFromHtml(loanOfficerHtml), /Details/);
+  assert.match(textFromHtml(loanOfficerHtml), /Payment/);
+  assert.match(textFromHtml(loanOfficerHtml), /Reviews/);
+  assert.match(textFromHtml(reviewsHtml), /Read-only review source/);
   assert.equal(html.includes('href="/companies/'), false);
-  assert.match(html, /href="\/loan-officers\/ava-martinez"/);
-  assert.match(html, /data-chart-segment/);
-  assert.match(html, /aria-describedby="[^"]*payment-detail/);
+  assert.match(loanOfficerHtml, new RegExp(`href="${loanOfficerOffer.profileRoute}"`));
+  assert.match(paymentHtml, /data-chart-segment/);
+  assert.match(paymentHtml, /aria-describedby="[^"]*payment-detail/);
   for (const eventName of [
     "rates_marketplace_update",
     "rates_marketplace_reset",
@@ -300,8 +333,40 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     "rates_marketplace_chart_detail",
     "rates_marketplace_prequal",
   ]) {
-    assert.match(html, new RegExp(`data-analytics-event="${eventName}"`));
+    assert.match(combinedHtml, new RegExp(`data-analytics-event="${eventName}"`));
   }
+});
+
+test("keeps marketplace stylesheet selectors aligned with rendered offer markup", async () => {
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const offer = fixture.offers.find((item) => item.resultType === "company" && item.mortgageType === "purchase");
+  const html = renderRatesMarketplace({
+    fixture,
+    state: {
+      ...MARKETPLACE_DEFAULTS,
+      expandedOfferId: offer.id,
+      expandedTab: "payment",
+    },
+  });
+  const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+
+  for (const className of [
+    "rates-offer",
+    "rates-offer-row",
+    "rates-offer-profile",
+    "rates-expanded-panel",
+    "rates-tabs",
+    "rates-payment-panel",
+    "rates-donut",
+    "rates-chart-legend",
+  ]) {
+    assert.match(html, new RegExp(`class="[^"]*${className}`), `${className} is rendered`);
+    assert.match(styles, new RegExp(`\\.${className}(?:[\\s.#:[,{>]|$)`), `${className} is styled`);
+  }
+
+  assert.doesNotMatch(styles, /\.rates-offer-card|\.rates-offer-main|\.rates-payment-chart/);
 });
 
 test("wires result type, sort, show-more, expansion, tabs, payment edits, chart details, persistence, and analytics", async () => {
@@ -328,6 +393,23 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   const marketplace = root.querySelector("[data-rates-marketplace]");
   assert.ok(marketplace);
   assert.equal(marketplace.querySelectorAll("[data-offer-id]").length, 8);
+
+  const advancedToggle = marketplace.querySelector("[data-toggle-advanced-filters]");
+  const advancedPanel = marketplace.querySelector("[data-advanced-marketplace]");
+  assert.ok(advancedToggle);
+  assert.ok(advancedPanel);
+  assert.equal(advancedToggle.getAttribute("aria-expanded"), "false");
+  assert.equal(advancedPanel.hidden, true);
+  advancedToggle.click();
+  assert.equal(advancedToggle.getAttribute("aria-expanded"), "true");
+  assert.equal(advancedPanel.hidden, false);
+  const dti = marketplace.querySelector('[name="dti"]');
+  dti.value = "40plus";
+  marketplace.querySelector('[data-show-fha-option="false"]').click();
+  assert.equal(marketplace.querySelector('[name="dti"]').value, "40plus");
+  assert.equal(marketplace.querySelector("[data-toggle-advanced-filters]").getAttribute("aria-expanded"), "true");
+  marketplace.querySelector('[data-show-fha-option="true"]').click();
+  assert.equal(marketplace.querySelector('[name="dti"]').value, "40plus");
 
   marketplace.querySelector('[data-result-type-option="loanOfficer"]').click();
   assert.match(textFromHtml(marketplace.innerHTML), /Ava Martinez/);
@@ -357,14 +439,41 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   const insurance = marketplace.querySelector('[data-payment-assumption="homeownersInsurance"]');
   insurance.value = "245";
   insurance.dispatchEvent(new TestEvent("input", { bubbles: true }));
+  const tax = marketplace.querySelector('[data-payment-assumption="propertyTax"]');
+  tax.value = "555";
+  tax.dispatchEvent(new TestEvent("input", { bubbles: true }));
+  const hoa = marketplace.querySelector('[data-payment-assumption="hoaDues"]');
+  hoa.value = "88";
+  hoa.dispatchEvent(new TestEvent("input", { bubbles: true }));
+  const mortgageInsurance = marketplace.querySelector('[data-payment-assumption="mortgageInsurance"]');
+  mortgageInsurance.value = "77";
+  mortgageInsurance.dispatchEvent(new TestEvent("input", { bubbles: true }));
   const totalAfter = marketplace.querySelector("[data-payment-total]").textContent;
   assert.notEqual(totalBefore, totalAfter);
   assert.equal(tracked.at(-1).name, "rates_marketplace_payment_assumption");
   assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["field", "offerId"]);
 
-  const chartControl = marketplace.querySelector("[data-chart-segment]");
-  chartControl.dispatchEvent(new TestKeyboardEvent("keydown", { key: "Enter", bubbles: true }));
-  assert.equal(chartControl.getAttribute("aria-pressed"), "true");
+  for (const [field, value] of [
+    ["homeownersInsurance", "$245"],
+    ["propertyTax", "$555"],
+    ["hoaDues", "$88"],
+    ["mortgageInsurance", "$77"],
+  ]) {
+    const legend = marketplace.querySelector(`[data-chart-segment="${field}"]`);
+    const visual = marketplace.querySelector(`[data-donut-segment="${field}"]`);
+    assert.equal(legend.getAttribute("data-chart-value"), value);
+    assert.equal(legend.querySelector("strong").textContent, value);
+    assert.match(visual.getAttribute("style"), /--segment-share:[1-9]/);
+  }
+
+  const taxControl = marketplace.querySelector('[data-chart-segment="propertyTax"]');
+  taxControl.click();
+  assert.equal(taxControl.getAttribute("aria-pressed"), "true");
+  assert.match(marketplace.querySelector("[data-chart-detail-text]").textContent, /Property tax: \$555/);
+  const miControl = marketplace.querySelector('[data-chart-segment="mortgageInsurance"]');
+  miControl.dispatchEvent(new TestKeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+  assert.equal(miControl.getAttribute("aria-pressed"), "true");
+  assert.match(marketplace.querySelector("[data-chart-detail-text]").textContent, /PMI \/ MI: \$77/);
   assert.equal(tracked.at(-1).name, "rates_marketplace_chart_detail");
 
   marketplace.querySelector("[data-prequal-offer]").click();
