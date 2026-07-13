@@ -477,8 +477,10 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   assert.equal(tracked.at(-1).name, "rates_marketplace_chart_detail");
 
   marketplace.querySelector("[data-prequal-offer]").click();
-  assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["offerId", "resultType"]);
+  assert.equal(tracked.at(-1).name, "rates_provider_next");
+  assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["offerId", "resultType", "sort", "tab", "visibleCount"]);
   assert.equal(navigated.length, 1);
+  assert.match(navigated[0], /^\/prequal\/start\?/);
 
   const cached = JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState"));
   assert.equal(cached.resultType, "loanOfficer");

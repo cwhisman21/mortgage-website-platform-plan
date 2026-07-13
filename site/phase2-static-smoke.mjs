@@ -43,7 +43,7 @@ const collectionNames = [
   "directoryPages"
 ];
 
-const routes = new Set(["/", "/locations", "/loan-options", "/loan-officers", "/branches"]);
+const routes = new Set(["/", "/locations", "/loan-options", "/loan-officers", "/branches", "/prequal/start"]);
 const routeOwners = new Map();
 const idOwners = new Map();
 
@@ -152,6 +152,13 @@ const removedRoutes = [
   "/contact/request-guidance"
 ];
 
+function referencesRemovedRoute(source, removedRoute) {
+  if (removedRoute === "/prequal") {
+    return /\/prequal(?!\/start)(?=["'#?`\s<])/g.test(source);
+  }
+  return source.includes(removedRoute);
+}
+
 const siteFiles = [
   ["site/app.js", appSource],
   ["site/styles.css", stylesSource],
@@ -161,7 +168,7 @@ const siteFiles = [
 
 for (const [file, source] of siteFiles) {
   for (const removedRoute of removedRoutes) {
-    if (source.includes(removedRoute)) fail(`${file} still references removed route ${removedRoute}`);
+    if (referencesRemovedRoute(source, removedRoute)) fail(`${file} still references removed route ${removedRoute}`);
   }
 }
 
@@ -208,6 +215,9 @@ for (const required of ["data-article-modal", 'aria-modal="true"', "data-article
 if (!/window\.history\.pushState\([^)]*articleModal/.test(appSource)) fail("article modal does not update history state");
 if (!/\.article-modal-backdrop\[hidden\]/.test(stylesSource)) fail("article modal hidden-state CSS missing");
 if (!/site\/news-renderer\.mjs/.test(appSource)) fail("site/app.js does not use the shared article renderer");
+if (!/function prequalHandoffPage\(/.test(appSource)) fail("prequal handoff renderer missing");
+if (!/function returnToRatesUrl\(/.test(appSource)) fail("prequal handoff return URL helper missing");
+if (!/built\.routes\.set\(\"\/prequal\/start\"/.test(appSource)) fail("prequal handoff route is not registered");
 if (!/rel=\"canonical\"/.test(indexSource)) fail("site/index.html missing canonical metadata shell");
 if (!/\"rewrites\"/.test(read("vercel.json"))) fail("vercel.json missing SPA route rewrites");
 

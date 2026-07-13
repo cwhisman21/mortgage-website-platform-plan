@@ -601,6 +601,19 @@ function emitAnalytics(track, name, payload = {}) {
   }
 }
 
+function buildPrequalHandoffUrl(handoff) {
+  const params = new URLSearchParams();
+  if (handoff?.offerId) params.set("offerId", handoff.offerId);
+  const serialized = JSON.parse(serializeMarketplaceState(handoff?.scenario || {}));
+  Object.entries(serialized).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      params.set(key, String(value));
+    }
+  });
+  const query = params.toString();
+  return query ? `/prequal/start?${query}` : "/prequal/start";
+}
+
 function formState(container, currentState) {
   const next = { ...currentState };
   container.querySelectorAll("[data-marketplace-field]").forEach((field) => {
@@ -817,12 +830,15 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
         const offerId = button.getAttribute("data-prequal-offer");
         const adapter = createFixtureMarketplaceAdapter(normalizedFixture);
         const handoff = adapter.createPrequalHandoff({ offerId, scenario: state });
-        emitAnalytics(track, "rates_marketplace_prequal", {
+        emitAnalytics(track, "rates_provider_next", {
           offerId,
           resultType: handoff?.resultType || state.resultType,
+          sort: handoff?.scenario?.sort || state.sort,
+          tab: handoff?.scenario?.expandedTab || state.expandedTab,
+          visibleCount: handoff?.scenario?.visibleCount || state.visibleCount,
         });
         if (typeof navigate === "function") {
-          navigate(handoff?.profileRoute || "/loan-officers");
+          navigate(buildPrequalHandoffUrl(handoff));
         }
       });
     });
