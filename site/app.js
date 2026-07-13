@@ -1535,6 +1535,64 @@ function learningHome() {
   `);
 }
 
+function learningDiscovery(model) {
+  return `
+    <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
+      <form class="learning-search search-form" data-search-form data-search-scope="learning">
+        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
+        <button class="button" type="submit">Search</button>
+      </form>
+      <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
+        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
+      </nav>
+    </section>
+  `;
+}
+
+function learningArticleCard(article, index) {
+  return card({
+    title: article.title,
+    text: humanStatus(article.reviewStatus),
+    href: article.route,
+    iconName: "article",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Read"
+  });
+}
+
+function learningTopicCard(topic, index) {
+  return card({
+    title: topic.name,
+    text: topic.purpose,
+    href: topic.route,
+    iconName: "guide",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Open topic"
+  });
+}
+
+function learningCalculatorCard(calculator, index) {
+  return card({
+    title: calculator.name,
+    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
+    href: calculator.route,
+    iconName: "calculator",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Calculate"
+  });
+}
+
+function learningLoanPathCard(product, index) {
+  return card({
+    title: product.name,
+    text: product.borrowerGoal,
+    href: product.route,
+    iconName: index % 2 ? "rates" : "home",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "View guide"
+  });
+}
+
 function blogTopicPage(topic) {
   if (topic.route === "/learning-center") return learningHome();
   const articles = byIds(topic.featuredArticleIds, maps.articles);
@@ -1639,64 +1697,6 @@ function articlePage(article) {
           <h2>What to compare next</h2>
           <p>Use the related cards below to open a product guide, city market page, calculator, or loan officer profile connected to this topic.</p>
         </article>
-function learningDiscovery(model) {
-  return `
-    <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
-      <form class="learning-search search-form" data-search-form data-search-scope="learning">
-        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
-        <button class="button" type="submit">Search</button>
-      </form>
-      <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
-        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
-      </nav>
-    </section>
-  `;
-}
-
-function learningArticleCard(article, index) {
-  return card({
-    title: article.title,
-    text: humanStatus(article.reviewStatus),
-    href: article.route,
-    iconName: "article",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Read"
-  });
-}
-
-function learningTopicCard(topic, index) {
-  return card({
-    title: topic.name,
-    text: topic.purpose,
-    href: topic.route,
-    iconName: "guide",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Open topic"
-  });
-}
-
-function learningCalculatorCard(calculator, index) {
-  return card({
-    title: calculator.name,
-    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
-    href: calculator.route,
-    iconName: "calculator",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Calculate"
-  });
-}
-
-function learningLoanPathCard(product, index) {
-  return card({
-    title: product.name,
-    text: product.borrowerGoal,
-    href: product.route,
-    iconName: index % 2 ? "rates" : "home",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "View guide"
-  });
-}
-
         <aside class="side-stack">
           ${contextualCta("Review your scenario", "Bring the market, product, and payment questions into one licensed conversation.", ["leadForm", "loContact", "watchlist"])}
           ${sourceNote(["fhfaHpi", "freddiePmms", "regZ"], "Article sources")}

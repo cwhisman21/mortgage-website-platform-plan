@@ -5,13 +5,10 @@ import fs from "node:fs";
 const source = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 const homeStart = source.indexOf("function learningHome(");
-const homeEnd = source.indexOf("function blogTopicPage(");
 const helpersStart = source.indexOf("function learningDiscovery(");
-const helpersEnd = source.indexOf("function calculatorPage(");
-const learningSource = `${source.slice(homeStart, homeEnd)}\n${source.slice(
-  helpersStart,
-  helpersEnd,
-)}`;
+const topicStart = source.indexOf("function blogTopicPage(");
+const articleStart = source.indexOf("function articlePage(");
+const learningSource = source.slice(homeStart, topicStart);
 
 test("Learning Center renders one search form before canonical topic links", () => {
   assert.ok(homeStart >= 0, "learningHome renderer is missing");
@@ -38,6 +35,14 @@ test("Learning Center uses the canonical model and shared CTA helpers", () => {
 test("Learning Center keeps the shared shell", () => {
   assert.match(learningSource, /return pageShell\(`/);
   assert.doesNotMatch(learningSource, /<header|<footer/);
+});
+
+test("Learning Center helpers remain top-level before article renderers", () => {
+  assert.ok(
+    helpersStart < topicStart,
+    "Learning Center helpers must not be embedded in an article template",
+  );
+  assert.ok(topicStart < articleStart, "topic renderer must precede article renderer");
 });
 
 test("Learning Center renders the guidance CTA copy once", () => {
