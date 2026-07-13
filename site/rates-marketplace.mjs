@@ -599,6 +599,17 @@ export function serializeMarketplaceState(state = {}) {
 }
 
 export function parseMarketplaceState(value) {
+  if (value instanceof URLSearchParams || typeof value?.get === "function") {
+    const sanitized = {};
+    for (const field of STATE_FIELD_ORDER) {
+      if (PRIVATE_FIELD_DENYLIST.has(field)) continue;
+      const parsed = parseField(field, getSourceValue(value, field));
+      if (parsed !== undefined) {
+        sanitized[field] = parsed;
+      }
+    }
+    return sanitized;
+  }
   let parsedValue = value;
   if (typeof value === "string") {
     try {

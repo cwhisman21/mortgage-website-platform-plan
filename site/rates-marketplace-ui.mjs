@@ -9,6 +9,7 @@ import {
   updateDownPayment,
   validateScenario,
 } from "./rates-marketplace.mjs";
+import { buildPrequalHandoffUrl } from "./prequal-handoff.mjs";
 
 const CACHE_KEY = "snapRatesMarketplaceState";
 const DEFAULT_VISIBLE_COUNT = 8;
@@ -63,7 +64,7 @@ const ANALYTICS_EVENTS = [
   "rates_marketplace_tab",
   "rates_marketplace_payment_assumption",
   "rates_marketplace_chart_detail",
-  "rates_marketplace_prequal",
+  "rates_provider_next",
 ];
 
 function esc(value) {
@@ -320,7 +321,7 @@ function offerRow(offer, state) {
         ${offerMetric("8-year cost", formatCurrency(offer.eightYearCost))}
         ${offerMetric("Rating", `${offer.rating} / 5`, false)}
         <div class="rates-offer-actions">
-          <button class="button" type="button" data-prequal-offer="${esc(offer.id)}" data-analytics-event="rates_marketplace_prequal">Next</button>
+          <button class="button" type="button" data-prequal-offer="${esc(offer.id)}" data-analytics-event="rates_provider_next">Next</button>
           <button class="text-button" type="button" data-offer-details="${esc(offer.id)}" aria-expanded="${expanded ? "true" : "false"}" data-analytics-event="rates_marketplace_expand_offer">${expanded ? "Hide details" : "Show details"}</button>
         </div>
       </div>
@@ -599,19 +600,6 @@ function emitAnalytics(track, name, payload = {}) {
   } catch {
     // Analytics is deliberately optional.
   }
-}
-
-function buildPrequalHandoffUrl(handoff) {
-  const params = new URLSearchParams();
-  if (handoff?.offerId) params.set("offerId", handoff.offerId);
-  const serialized = JSON.parse(serializeMarketplaceState(handoff?.scenario || {}));
-  Object.entries(serialized).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      params.set(key, String(value));
-    }
-  });
-  const query = params.toString();
-  return query ? `/prequal/start?${query}` : "/prequal/start";
 }
 
 function formState(container, currentState) {

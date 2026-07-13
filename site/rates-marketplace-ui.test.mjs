@@ -331,7 +331,7 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     "rates_marketplace_tab",
     "rates_marketplace_payment_assumption",
     "rates_marketplace_chart_detail",
-    "rates_marketplace_prequal",
+    "rates_provider_next",
   ]) {
     assert.match(combinedHtml, new RegExp(`data-analytics-event="${eventName}"`));
   }

@@ -2,10 +2,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
-const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
-
-async function loadUiModule() {
-  return import("./rates-marketplace-ui.mjs");
+async function loadHandoffModule() {
+  return import("./prequal-handoff.mjs");
 }
 
 async function loadMarketplaceModule() {
@@ -20,311 +18,195 @@ function loadFixture() {
   return JSON.parse(source);
 }
 
-function extractFunctionSource(source, name) {
-  const start = source.indexOf(`function ${name}(`);
-  if (start === -1) return "";
-  let depth = 0;
-  let started = false;
-  for (let index = start; index < source.length; index += 1) {
-    const char = source[index];
-    if (char === "{") {
-      depth += 1;
-      started = true;
-    } else if (char === "}") {
-      depth -= 1;
-      if (started && depth === 0) {
-        return source.slice(start, index + 1);
-      }
-    }
-  }
-  return "";
-}
+test("builds a handoff request from explicit query state without cache dependence", async () => {
+  const { buildPrequalHandoffRequest } = await loadHandoffModule();
 
-class TestElement {
-  constructor(tagName = "div") {
-    this.tagName = tagName.toUpperCase();
-    this.children = [];
-    this.parentNode = null;
-    this.attributes = new Map();
-    this.eventListeners = new Map();
-    this.value = "";
-    this.checked = false;
-    this.hidden = false;
-    this.disabled = false;
-    this.dataset = {};
-    this._innerHTML = "";
-    this.textContent = "";
-  }
+  const request = buildPrequalHandoffRequest({
+    search: new URLSearchParams(
+      "offerId=loan-officer-ava-purchase-30&mortgageType=purchase&zip=02108&resultType=loanOfficer&sort=highestRating&showFha=false&showVa=true&points=0-1&propertyType=condo&occupancy=secondary&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
+    ),
+    cachedState: {},
+  });
 
-  set innerHTML(value) {
-    this._innerHTML = String(value ?? "");
-    this.children = parseHtml(this._innerHTML, this);
-  }
-
-  get innerHTML() {
-    return this._innerHTML;
-  }
-
-  setAttribute(name, value = "") {
-    const stringValue = String(value);
-    this.attributes.set(name, stringValue);
-    if (name === "value") this.value = stringValue;
-    if (name === "checked") this.checked = true;
-    if (name === "hidden") this.hidden = true;
-    if (name === "disabled") this.disabled = true;
-    if (name === "class") this.className = stringValue;
-    if (name.startsWith("data-")) {
-      this.dataset[toDatasetKey(name.slice(5))] = stringValue;
-    }
-  }
-
-  getAttribute(name) {
-    return this.attributes.has(name) ? this.attributes.get(name) : null;
-  }
-
-  hasAttribute(name) {
-    return this.attributes.has(name);
-  }
-
-  removeAttribute(name) {
-    this.attributes.delete(name);
-    if (name === "hidden") this.hidden = false;
-    if (name === "disabled") this.disabled = false;
-  }
-
-  addEventListener(type, listener) {
-    const listeners = this.eventListeners.get(type) || [];
-    listeners.push(listener);
-    this.eventListeners.set(type, listeners);
-  }
-
-  dispatchEvent(event) {
-    event.target ||= this;
-    event.currentTarget = this;
-    for (const listener of this.eventListeners.get(event.type) || []) {
-      listener.call(this, event);
-    }
-    return !event.defaultPrevented;
-  }
-
-  click() {
-    this.dispatchEvent(new TestEvent("click", { bubbles: true }));
-  }
-
-  focus() {
-    globalThis.document.activeElement = this;
-    this.dispatchEvent(new TestEvent("focus"));
-  }
-
-  querySelector(selector) {
-    return this.querySelectorAll(selector)[0] || null;
-  }
-
-  querySelectorAll(selector) {
-    const selectors = selector.split(",").map((part) => part.trim()).filter(Boolean);
-    const descendants = allDescendants(this);
-    return descendants.filter((element) => selectors.some((part) => matchesSelector(element, part)));
-  }
-}
-
-class TestEvent {
-  constructor(type, options = {}) {
-    this.type = type;
-    this.bubbles = Boolean(options.bubbles);
-    this.key = options.key;
-    this.defaultPrevented = false;
-    this.target = options.target || null;
-    this.currentTarget = null;
-  }
-
-  preventDefault() {
-    this.defaultPrevented = true;
-  }
-}
-
-function toDatasetKey(name) {
-  return name.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
-}
-
-function parseAttributes(raw) {
-  const attributes = [];
-  const pattern = /([^\s=]+)(?:=(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g;
-  let match;
-  while ((match = pattern.exec(raw))) {
-    attributes.push([match[1], match[2] ?? match[3] ?? match[4] ?? ""]);
-  }
-  return attributes;
-}
-
-function parseHtml(html, root) {
-  const stack = [root];
-  const nodes = [];
-  const pattern = /<\/?([a-zA-Z0-9-]+)([^>]*)>/g;
-  let match;
-  while ((match = pattern.exec(html))) {
-    const [source, tagName, rawAttributes] = match;
-    if (source.startsWith("</")) {
-      if (stack.length > 1) stack.pop();
-      continue;
-    }
-    const element = new TestElement(tagName);
-    for (const [name, value] of parseAttributes(rawAttributes)) {
-      element.setAttribute(name, value);
-    }
-    const parent = stack[stack.length - 1];
-    element.parentNode = parent;
-    parent.children.push(element);
-    nodes.push(element);
-    if (!source.endsWith("/>") && !["input", "br", "hr", "img", "meta", "link"].includes(tagName.toLowerCase())) {
-      stack.push(element);
-    }
-  }
-  return nodes.filter((node) => node.parentNode === root);
-}
-
-function allDescendants(root) {
-  const output = [];
-  const visit = (node) => {
-    for (const child of node.children) {
-      output.push(child);
-      visit(child);
-    }
-  };
-  visit(root);
-  return output;
-}
-
-function matchesSelector(element, selector) {
-  const normalized = selector.trim();
-  const classMatch = normalized.match(/^\.([a-zA-Z0-9_-]+)$/);
-  if (classMatch) {
-    return (element.getAttribute("class") || "").split(/\s+/).includes(classMatch[1]);
-  }
-  const dataMatch = normalized.match(/^\[([^=\]]+)(?:=(?:"([^"]*)"|'([^']*)'|([^\]]+)))?\]$/);
-  if (dataMatch) {
-    const [, name, doubleValue, singleValue, bareValue] = dataMatch;
-    const expected = doubleValue ?? singleValue ?? bareValue;
-    if (!element.hasAttribute(name)) return false;
-    return expected == null || element.getAttribute(name) === expected;
-  }
-  const tagAttrMatch = normalized.match(/^([a-zA-Z0-9-]+)(\[.+\])$/);
-  if (tagAttrMatch) {
-    return element.tagName.toLowerCase() === tagAttrMatch[1].toLowerCase() && matchesSelector(element, tagAttrMatch[2]);
-  }
-  return element.tagName.toLowerCase() === normalized.toLowerCase();
-}
-
-function installDom() {
-  const listeners = new Map();
-  const documentElement = new TestElement("html");
-  const document = {
-    activeElement: null,
-    documentElement,
-    createElement(tagName) {
-      return new TestElement(tagName);
-    },
-    addEventListener(type, listener) {
-      const typeListeners = listeners.get(type) || [];
-      typeListeners.push(listener);
-      listeners.set(type, typeListeners);
-    },
-    dispatchEvent(event) {
-      for (const listener of listeners.get(event.type) || []) listener.call(document, event);
-      return !event.defaultPrevented;
-    },
-  };
-  const storage = new Map();
-  globalThis.document = document;
-  globalThis.localStorage = {
-    getItem(key) {
-      return storage.has(key) ? storage.get(key) : null;
-    },
-    setItem(key, value) {
-      storage.set(key, String(value));
-    },
-    removeItem(key) {
-      storage.delete(key);
-    },
-  };
-  globalThis.window = {
-    dispatchEvent(event) {
-      return document.dispatchEvent(event);
-    },
-  };
-}
-
-test("registers a dedicated prequal handoff route with borrower-ready content and recovery copy", () => {
-  const handoffSource = extractFunctionSource(appSource, "prequalHandoffPage");
-  const returnSource = extractFunctionSource(appSource, "returnToRatesUrl");
-
-  assert.match(appSource, /\/prequal\/start/);
-  assert.ok(handoffSource, "prequalHandoffPage should exist");
-  assert.ok(returnSource, "returnToRatesUrl should exist");
-  assert.match(handoffSource, /Your selected option is ready to continue/);
-  assert.match(handoffSource, /Return to rate results/);
-  assert.match(handoffSource, /We could not reopen that selected option/);
-  assert.match(handoffSource, /No name, email, or phone number has been requested on this comparison page\./);
-  assert.match(handoffSource, /NMLS/i);
-  assert.doesNotMatch(handoffSource, /<form|<input|upload|eligib|approv|underwrit|lock/i);
+  assert.equal(request.offerId, "loan-officer-ava-purchase-30");
+  assert.equal(request.scenario.mortgageType, "purchase");
+  assert.equal(request.scenario.zip, "02108");
+  assert.equal(request.scenario.resultType, "loanOfficer");
+  assert.equal(request.scenario.sort, "highestRating");
+  assert.equal(request.scenario.showFha, false);
+  assert.equal(request.scenario.showVa, true);
+  assert.equal(request.scenario.points, "0-1");
+  assert.equal(request.scenario.propertyType, "condo");
+  assert.equal(request.scenario.occupancy, "secondary");
+  assert.equal(request.scenario.visibleCount, 16);
+  assert.equal(request.scenario.expandedOfferId, "loan-officer-ava-purchase-30");
+  assert.equal(request.scenario.expandedTab, "payment");
+  assert.equal("email" in request.scenario, false);
+  assert.equal("token" in request.scenario, false);
+  assert.equal("bogus" in request.scenario, false);
 });
 
-test("marketplace next emits the approved event and navigates to a restorable prequal handoff URL", async () => {
-  installDom();
-  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
-  const { renderRatesMarketplace, wireRatesMarketplace } = await loadUiModule();
-  const fixture = normalizeMarketplaceFixture(loadFixture());
-  const root = new TestElement("main");
-  const tracked = [];
-  const navigated = [];
+test("creates known-offer and unknown-offer handoff views plus restorable return URLs", async () => {
+  const { createPrequalHandoffView, renderPrequalHandoffMarkup, returnToRatesUrl } =
+    await loadHandoffModule();
+  const { createFixtureMarketplaceAdapter, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
 
-  root.innerHTML = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
-  wireRatesMarketplace(root, {
-    fixture,
-    accountContext: {},
-    navigate(path, options) {
-      navigated.push({ path, options });
+  const knownView = createPrequalHandoffView({
+    adapter,
+    request: {
+      offerId: "company-harbor-purchase-30",
+      scenario: {
+        mortgageType: "purchase",
+        zip: "02108",
+        purchasePrice: 775000,
+        downPaymentAmount: 116250,
+        downPaymentPercent: 15,
+        creditRange: "740-779",
+        term: 15,
+        occupancy: "secondary",
+        showFha: false,
+        showVa: true,
+        dti: "40plus",
+        points: "0-1",
+        propertyType: "condo",
+        sort: "highestRating",
+        resultType: "loanOfficer",
+        visibleCount: 16,
+        expandedOfferId: "company-harbor-purchase-30",
+        expandedTab: "payment",
+      },
     },
-    track(name, payload) {
-      tracked.push({ name, payload });
+  });
+  const unknownView = createPrequalHandoffView({
+    adapter,
+    request: {
+      offerId: "missing-offer",
+      scenario: {
+        mortgageType: "refinance",
+        zip: "33602",
+        propertyValue: 880000,
+        loanBalance: 510000,
+        cashOut: true,
+        creditRange: "780+",
+        term: 30,
+        occupancy: "primary",
+        showFha: true,
+        showVa: false,
+        dti: "below40",
+        points: "all",
+        propertyType: "singleFamily",
+        sort: "lowestApr",
+        resultType: "company",
+        visibleCount: 8,
+        expandedOfferId: "missing-offer",
+        expandedTab: "reviews",
+      },
     },
   });
 
-  root.querySelector('[data-result-type-option="loanOfficer"]').click();
-  const sort = root.querySelector("[data-marketplace-sort]");
-  sort.value = "highestRating";
-  sort.dispatchEvent(new TestEvent("change", { bubbles: true }));
-  root.querySelector("[data-show-more-offers]").click();
+  assert.equal(knownView.status, "known");
+  assert.equal(knownView.providerName, "Harborline Home Lending");
+  assert.equal(knownView.productLabel, "30-year fixed purchase");
+  assert.match(knownView.scenarioSummary, /02108/);
+  assert.equal(knownView.scenarioRows[0][1], "Purchase");
+  assert.equal(returnToRatesUrl(knownView), "/rates?mortgageType=purchase&zip=02108&creditRange=740-779&term=15&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&purchasePrice=775000&downPaymentAmount=116250&downPaymentPercent=15&sort=highestRating&resultType=loanOfficer&visibleCount=16&expandedOfferId=company-harbor-purchase-30&expandedTab=payment");
 
-  const firstDetails = root.querySelector("[data-offer-details]");
-  const expandedOfferId = firstDetails.getAttribute("data-offer-details");
-  firstDetails.click();
-  root.querySelector('[data-offer-tab="payment"]').click();
+  assert.equal(unknownView.status, "recovery");
+  assert.match(unknownView.recoveryTitle, /Return to your saved rate results/);
+  assert.match(unknownView.recoveryBody, /We could not reopen that selected option/);
+  assert.equal(unknownView.scenarioRows[0][1], "Refinance");
+  assert.equal(returnToRatesUrl(unknownView), "/rates?mortgageType=refinance&zip=33602&creditRange=780%2B&term=30&showFha=true&showVa=false&dti=below40&points=all&propertyType=singleFamily&occupancy=primary&propertyValue=880000&loanBalance=510000&cashOut=true&sort=lowestApr&resultType=company&visibleCount=8&expandedOfferId=missing-offer&expandedTab=reviews");
+  const recoveryHtml = renderPrequalHandoffMarkup(unknownView);
+  assert.match(recoveryHtml, /We could not reopen that selected option/);
+  assert.match(recoveryHtml, /href="\/rates\?/);
+  assert.doesNotMatch(recoveryHtml, /<form|<input|data-provider-start|upload|eligib|approv|underwrit|decision|lock/i);
+});
 
-  const nextButton = root.querySelector(`[data-prequal-offer="${expandedOfferId}"]`);
-  nextButton.click();
+test("renders borrower-safe handoff markup without forms or decision language", async () => {
+  const { createPrequalHandoffView, renderPrequalHandoffMarkup } = await loadHandoffModule();
+  const { createFixtureMarketplaceAdapter, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
+  const view = createPrequalHandoffView({
+    adapter,
+    request: {
+      offerId: "loan-officer-ava-purchase-30",
+      scenario: {
+        mortgageType: "purchase",
+        zip: "92109",
+        purchasePrice: 1060000,
+        downPaymentAmount: 212000,
+        downPaymentPercent: 20,
+        creditRange: "780+",
+        term: 30,
+        occupancy: "primary",
+        showFha: true,
+        showVa: true,
+        dti: "below40",
+        points: "all",
+        propertyType: "singleFamily",
+        sort: "highestRating",
+        resultType: "loanOfficer",
+        visibleCount: 16,
+        expandedOfferId: "loan-officer-ava-purchase-30",
+        expandedTab: "payment",
+      },
+    },
+  });
 
-  assert.equal(tracked.at(-1).name, "rates_provider_next");
-  assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["offerId", "resultType", "sort", "tab", "visibleCount"]);
+  const html = renderPrequalHandoffMarkup(view);
 
-  assert.equal(navigated.length, 1);
-  const [{ path }] = navigated;
-  const url = new URL(path, "https://snap.test");
-  assert.equal(url.pathname, "/prequal/start");
-  assert.equal(url.searchParams.get("offerId"), expandedOfferId);
-  assert.equal(url.searchParams.get("resultType"), "loanOfficer");
-  assert.equal(url.searchParams.get("sort"), "highestRating");
-  assert.equal(url.searchParams.get("visibleCount"), "16");
-  assert.equal(url.searchParams.get("expandedOfferId"), expandedOfferId);
-  assert.equal(url.searchParams.get("expandedTab"), "payment");
-  assert.equal(url.searchParams.get("zip"), "92109");
-  assert.equal(url.searchParams.get("email"), null);
-  assert.equal(url.searchParams.get("token"), null);
-  assert.equal(url.searchParams.get("annualIncome"), null);
+  assert.match(html, /Your selected option is ready to continue/);
+  assert.match(html, /Continue with Ava Martinez/);
+  assert.match(html, /NMLS 200001/);
+  assert.match(html, /No name, email, or phone number has been requested on this comparison page\./);
+  assert.match(html, /Return to rate results/);
+  assert.doesNotMatch(html, /<form|<input|upload|eligib|approv|underwrit|decision|lock/i);
+});
 
-  const cached = JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState"));
-  assert.equal(cached.resultType, "loanOfficer");
-  assert.equal(cached.sort, "highestRating");
-  assert.equal(cached.visibleCount, 16);
-  assert.equal(cached.expandedOfferId, expandedOfferId);
-  assert.equal(cached.expandedTab, "payment");
+test("round-trips the complete comparison view through URL values alone", async () => {
+  const {
+    buildPrequalHandoffRequest,
+    buildPrequalHandoffUrl,
+    createPrequalHandoffView,
+    returnToRatesUrl,
+  } = await loadHandoffModule();
+  const { createFixtureMarketplaceAdapter, normalizeMarketplaceFixture, parseMarketplaceState } =
+    await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
+  const scenario = {
+    mortgageType: "purchase",
+    zip: "02108",
+    creditRange: "740-779",
+    term: 15,
+    showFha: false,
+    showVa: true,
+    dti: "40plus",
+    points: "0-1",
+    propertyType: "condo",
+    occupancy: "secondary",
+    purchasePrice: 775000,
+    downPaymentAmount: 116250,
+    downPaymentPercent: 15,
+    sort: "highestRating",
+    resultType: "loanOfficer",
+    visibleCount: 16,
+    expandedOfferId: "company-harbor-purchase-30",
+    expandedTab: "payment",
+  };
+
+  const handoffUrl = buildPrequalHandoffUrl({
+    offerId: "company-harbor-purchase-30",
+    scenario: { ...scenario, email: "hidden@example.com", token: "secret" },
+  });
+  const handoffSearch = new URL(handoffUrl, "https://snap.test").searchParams;
+  const request = buildPrequalHandoffRequest({ search: handoffSearch });
+  const view = createPrequalHandoffView({ adapter, request });
+  const returnSearch = new URL(returnToRatesUrl(view), "https://snap.test").searchParams;
+
+  assert.equal(request.offerId, "company-harbor-purchase-30");
+  assert.deepEqual(request.scenario, scenario);
+  assert.deepEqual(parseMarketplaceState(returnSearch), scenario);
+  assert.equal(handoffSearch.get("email"), null);
+  assert.equal(handoffSearch.get("token"), null);
 });

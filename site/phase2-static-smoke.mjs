@@ -215,8 +215,12 @@ for (const required of ["data-article-modal", 'aria-modal="true"', "data-article
 if (!/window\.history\.pushState\([^)]*articleModal/.test(appSource)) fail("article modal does not update history state");
 if (!/\.article-modal-backdrop\[hidden\]/.test(stylesSource)) fail("article modal hidden-state CSS missing");
 if (!/site\/news-renderer\.mjs/.test(appSource)) fail("site/app.js does not use the shared article renderer");
-if (!/function prequalHandoffPage\(/.test(appSource)) fail("prequal handoff renderer missing");
-if (!/function returnToRatesUrl\(/.test(appSource)) fail("prequal handoff return URL helper missing");
+if (!/function prequalHandoffPage\(/.test(appSource)) fail("prequal handoff page integration missing");
+if (!/renderPrequalHandoffMarkup\(view\)/.test(appSource)) fail("prequal handoff page does not use the pure renderer");
+if (!/createPrequalHandoffView\(\{ adapter, request \}\)/.test(appSource)) fail("prequal handoff page does not use the pure view model");
+if (/function (?:prequalHandoffRequest|returnToRatesUrl|prequalScenarioRows|prequalScenarioMarkup)\(/.test(appSource)) {
+  fail("site/app.js duplicates pure prequal handoff behavior");
+}
 if (!/built\.routes\.set\(\"\/prequal\/start\"/.test(appSource)) fail("prequal handoff route is not registered");
 if (!/rel=\"canonical\"/.test(indexSource)) fail("site/index.html missing canonical metadata shell");
 if (!/\"rewrites\"/.test(read("vercel.json"))) fail("vercel.json missing SPA route rewrites");

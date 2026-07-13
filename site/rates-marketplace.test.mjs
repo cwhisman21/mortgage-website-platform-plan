@@ -426,6 +426,37 @@ test("serializes approved state only and parses cache without private fields", a
   assert.equal("geolocation" in parsed, false);
 });
 
+test("parses explicit URL query state without local storage and ignores private or unknown query fields", async () => {
+  const { parseMarketplaceState } = await loadMarketplaceModule();
+
+  const parsed = parseMarketplaceState(
+    new URLSearchParams(
+      "mortgageType=refinance&zip=33602&creditRange=740-779&term=15&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&propertyValue=880000&loanBalance=510000&cashOut=true&sort=highestRating&resultType=loanOfficer&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
+    ),
+  );
+
+  assert.deepEqual(parsed, {
+    mortgageType: "refinance",
+    zip: "33602",
+    creditRange: "740-779",
+    term: 15,
+    showFha: false,
+    showVa: true,
+    dti: "40plus",
+    points: "0-1",
+    propertyType: "condo",
+    occupancy: "secondary",
+    propertyValue: 880000,
+    loanBalance: 510000,
+    cashOut: true,
+    sort: "highestRating",
+    resultType: "loanOfficer",
+    visibleCount: 16,
+    expandedOfferId: "loan-officer-ava-purchase-30",
+    expandedTab: "payment",
+  });
+});
+
 test("summarizes scenarios and builds fixture-only offer, reviews, and prequal handoff records", async () => {
   const {
     createFixtureMarketplaceAdapter,
