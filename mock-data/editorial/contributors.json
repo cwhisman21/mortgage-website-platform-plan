@@ -1,0 +1,125 @@
+{
+  "version": "snap-editorial-contributors-v1",
+  "contributors": [
+    {
+      "id": "contributor-rowan-hale",
+      "slug": "rowan-hale",
+      "name": "Rowan Hale",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Rates and economy",
+      "shortBio": "Rowan covers mortgage-rate context, inflation signals, and financing conditions so borrowers can compare payment scenarios with clearer timing.",
+      "bio": "Rowan covers mortgage-rate context, inflation signals, and financing conditions for Snap Mortgage readers. This coverage helps borrowers understand why rate movement, APR, points, and payment assumptions can change the next mortgage comparison.",
+      "topics": [
+        "Mortgage-rate movement",
+        "APR and points context",
+        "Inflation and economic signals",
+        "Payment sensitivity"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/rowan-hale.jpg",
+        "alt": "Rowan Hale, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/rowan-hale"
+    },
+    {
+      "id": "contributor-maya-brooks",
+      "slug": "maya-brooks",
+      "name": "Maya Brooks",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Local markets",
+      "shortBio": "Maya covers city and state market conditions so borrowers can connect prices, inventory, taxes, and insurance to mortgage planning.",
+      "bio": "Maya covers city and state market conditions for Snap Mortgage readers. This coverage helps borrowers compare local home values, inventory, taxes, insurance, and affordability before choosing a product path or next question.",
+      "topics": [
+        "City market updates",
+        "State housing context",
+        "Property tax and insurance factors",
+        "Local affordability"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/maya-brooks.jpg",
+        "alt": "Maya Brooks, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/maya-brooks"
+    },
+    {
+      "id": "contributor-jordan-avery",
+      "slug": "jordan-avery",
+      "name": "Jordan Avery",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Home buying",
+      "shortBio": "Jordan covers buyer preparation, down payment choices, and offer-readiness topics that help borrowers compare purchase paths.",
+      "bio": "Jordan covers buyer preparation, down payment choices, and purchase-readiness topics for Snap Mortgage readers. This coverage helps borrowers compare payment, cash-to-close, timing, and local-market questions before moving toward a reviewed scenario.",
+      "topics": [
+        "First-time buyer planning",
+        "Down payment decisions",
+        "Purchase readiness",
+        "Move-up buyer timing"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/jordan-avery.jpg",
+        "alt": "Jordan Avery, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/jordan-avery"
+    },
+    {
+      "id": "contributor-elena-park",
+      "slug": "elena-park",
+      "name": "Elena Park",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Refinancing and equity",
+      "shortBio": "Elena covers refinance, cash-out, and home-equity decisions so homeowners can compare tradeoffs before changing a loan.",
+      "bio": "Elena covers refinance, cash-out, and home-equity decisions for Snap Mortgage readers. This coverage helps homeowners compare payment changes, closing costs, breakeven timing, equity access, and term tradeoffs.",
+      "topics": [
+        "Refinance planning",
+        "Cash-out refinance",
+        "Home equity options",
+        "Breakeven comparisons"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/elena-park.jpg",
+        "alt": "Elena Park, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/elena-park"
+    },
+    {
+      "id": "contributor-marcus-lane",
+      "slug": "marcus-lane",
+      "name": "Marcus Lane",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Loan programs",
+      "shortBio": "Marcus covers FHA, VA, conventional, jumbo, and other program comparisons that help borrowers understand fit and tradeoffs.",
+      "bio": "Marcus covers mortgage program comparisons for Snap Mortgage readers. This coverage helps borrowers understand how FHA, VA, conventional, jumbo, and other loan paths differ by down payment, property, occupancy, and documentation questions.",
+      "topics": [
+        "FHA loans",
+        "VA loans",
+        "Conventional loans",
+        "Jumbo loan planning"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/marcus-lane.jpg",
+        "alt": "Marcus Lane, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/marcus-lane"
+    },
+    {
+      "id": "contributor-priya-bennett",
+      "slug": "priya-bennett",
+      "name": "Priya Bennett",
+      "title": "Snap Mortgage Editorial Contributor",
+      "beat": "Mortgage data",
+      "shortBio": "Priya covers mortgage data, chart interpretation, and source methodology so borrowers can see what a metric can and cannot explain.",
+      "bio": "Priya covers mortgage data, chart interpretation, and source methodology for Snap Mortgage readers. This coverage helps borrowers understand data dates, assumptions, affordability measures, and the limits of broad market indicators.",
+      "topics": [
+        "Mortgage data sources",
+        "Chart interpretation",
+        "Affordability metrics",
+        "Source methodology"
+      ],
+      "portrait": {
+        "src": "/site/assets/contributors/priya-bennett.jpg",
+        "alt": "Priya Bennett, Snap Mortgage editorial contributor"
+      },
+      "route": "/learning-center/authors/priya-bennett"
+    }
+  ]
+}

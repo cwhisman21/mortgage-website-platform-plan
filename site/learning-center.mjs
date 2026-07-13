@@ -9,7 +9,7 @@ const LOAN_PATH_IDS = [
 
 const byId = (items = []) => new Map(items.map((item) => [item.id, item]));
 
-export function buildLearningCenterModel(seed) {
+export function buildLearningCenterModel(seed, editorialContent = {}) {
   const blogPages = seed.blogPages || [];
   const articles = seed.articles || [];
   const products = seed.products || [];
@@ -34,5 +34,7 @@ export function buildLearningCenterModel(seed) {
       .slice(0, 3),
     calculators: seed.calculators || [],
     loanPaths: LOAN_PATH_IDS.map((id) => productMap.get(id)).filter(Boolean),
+    contributors: editorialContent.contributors || [],
+    authorRoutes: editorialContent.authorRoutes || [],
   };
 }

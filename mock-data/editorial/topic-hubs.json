@@ -1,0 +1,81 @@
+{
+  "version": "snap-editorial-topic-hubs-v1",
+  "topicHubs": [
+    {
+      "id": "topic-hub-rates-economy",
+      "slug": "rates-economy",
+      "beat": "Rates and economy",
+      "contributorId": "contributor-rowan-hale",
+      "public": false,
+      "articleIds": []
+    },
+    {
+      "id": "topic-hub-local-markets",
+      "slug": "local-markets",
+      "beat": "Local markets",
+      "contributorId": "contributor-maya-brooks",
+      "public": false,
+      "articleIds": [
+        "article-austin-market-update",
+        "article-sacramento-market-update",
+        "article-denver-market-update",
+        "article-texas-tax-guide",
+        "article-california-insurance-guide",
+        "article-colorado-tax-guide",
+        "article-florida-insurance-guide"
+      ]
+    },
+    {
+      "id": "topic-hub-home-buying",
+      "slug": "home-buying",
+      "beat": "Home buying",
+      "contributorId": "contributor-jordan-avery",
+      "public": false,
+      "articleIds": [
+        "article-orlando-market-update",
+        "article-first-time-buyer",
+        "article-move-up-buyer"
+      ]
+    },
+    {
+      "id": "topic-hub-refinancing-equity",
+      "slug": "refinancing-equity",
+      "beat": "Refinancing and equity",
+      "contributorId": "contributor-elena-park",
+      "public": false,
+      "articleIds": [
+        "article-houston-market-update",
+        "article-tampa-market-update",
+        "article-refinance-basics",
+        "article-home-equity-guide",
+        "article-cash-out-guide"
+      ]
+    },
+    {
+      "id": "topic-hub-loan-programs",
+      "slug": "loan-programs",
+      "beat": "Loan programs",
+      "contributorId": "contributor-marcus-lane",
+      "public": false,
+      "articleIds": [
+        "article-dallas-market-update",
+        "article-irvine-market-update",
+        "article-san-diego-market-update",
+        "article-colorado-springs-market-update",
+        "article-boulder-market-update",
+        "article-miami-market-update",
+        "article-fha-basics",
+        "article-va-basics",
+        "article-jumbo-basics"
+      ]
+    },
+    {
+      "id": "topic-hub-mortgage-data",
+      "slug": "mortgage-data",
+      "beat": "Mortgage data",
+      "contributorId": "contributor-priya-bennett",
+      "public": false,
+      "articleIds": []
+    }
+  ]
+}

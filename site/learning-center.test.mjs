@@ -121,3 +121,28 @@ test("preserves calculators and selects the four approved loan paths in approved
     "product-va",
   ]);
 });
+
+test("includes contributor directory data and author routes without adding topic cards", () => {
+  const editorialContent = {
+    contributors: [
+      {
+        id: "contributor-rowan-hale",
+        name: "Rowan Hale",
+        route: "/learning-center/authors/rowan-hale",
+      },
+    ],
+    authorRoutes: [
+      {
+        route: "/learning-center/authors/rowan-hale",
+        type: "contributor",
+        item: { id: "contributor-rowan-hale" },
+      },
+    ],
+  };
+
+  const model = buildLearningCenterModel(seed, editorialContent);
+
+  assert.deepEqual(model.contributors.map(({ id }) => id), ["contributor-rowan-hale"]);
+  assert.deepEqual(model.authorRoutes.map(({ route }) => route), ["/learning-center/authors/rowan-hale"]);
+  assert.deepEqual(model.topicCards.map(({ id }) => id), ["blog-buying-a-home"]);
+});
