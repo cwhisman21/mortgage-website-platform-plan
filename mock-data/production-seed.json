@@ -16,8 +16,8 @@
     "locationProductModules": 836,
     "blogPages": 10,
     "articles": 24,
-    "calculators": 4,
-    "directoryPages": 5,
+    "calculators": 5,
+    "directoryPages": 6,
     "ctaRules": 20,
     "complianceDisclosures": 10
   },
@@ -37850,7 +37850,8 @@
       "relatedCalculatorIds": [
         "calc-payment",
         "calc-affordability",
-        "calc-rent-vs-buy"
+        "calc-rent-vs-buy",
+        "calc-down-payment"
       ]
     },
     {
@@ -37870,7 +37871,8 @@
       "borrowerGoal": "Lower down payment purchase",
       "relatedCalculatorIds": [
         "calc-payment",
-        "calc-affordability"
+        "calc-affordability",
+        "calc-down-payment"
       ]
     },
     {
@@ -37880,7 +37882,9 @@
       "borrowerGoal": "Military or veteran home financing",
       "relatedCalculatorIds": [
         "calc-payment",
-        "calc-affordability"
+        "calc-affordability",
+        "calc-refinance",
+        "calc-down-payment"
       ]
     },
     {
@@ -37890,7 +37894,8 @@
       "borrowerGoal": "Standard purchase or refinance",
       "relatedCalculatorIds": [
         "calc-payment",
-        "calc-affordability"
+        "calc-affordability",
+        "calc-down-payment"
       ]
     },
     {
@@ -46847,6 +46852,18 @@
         "timeline",
         "downPayment"
       ]
+    },
+    {
+      "id": "calc-down-payment",
+      "name": "Down Payment Calculator",
+      "route": "/calculators/down-payment",
+      "captures": [
+        "price",
+        "program",
+        "cashAvailable",
+        "closingCosts",
+        "mortgageInsurance"
+      ]
     }
   ],
   "directoryPages": [
@@ -46903,6 +46920,16 @@
         "keyword",
         "borrowerGoal",
         "product"
+      ]
+    },
+    {
+      "id": "directory-calculators",
+      "name": "Mortgage Calculators",
+      "route": "/calculators",
+      "filters": [
+        "calculator",
+        "product",
+        "borrowerGoal"
       ]
     }
   ],

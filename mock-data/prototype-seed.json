@@ -16,8 +16,8 @@
     "locationProductModules": 16,
     "blogPages": 10,
     "articles": 24,
-    "calculators": 4,
-    "directoryPages": 5,
+    "calculators": 5,
+    "directoryPages": 6,
     "ctaRules": 20,
     "complianceDisclosures": 10
   },
@@ -595,7 +595,7 @@
       "name": "Home Purchase Loans",
       "route": "/buy",
       "borrowerGoal": "Buy a home",
-      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-rent-vs-buy"]
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-rent-vs-buy", "calc-down-payment"]
     },
     {
       "id": "product-refinance",
@@ -609,21 +609,21 @@
       "name": "FHA Loans",
       "route": "/loan-options/fha-loans",
       "borrowerGoal": "Lower down payment purchase",
-      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-down-payment"]
     },
     {
       "id": "product-va",
       "name": "VA Loans",
       "route": "/loan-options/va-loans",
       "borrowerGoal": "Military or veteran home financing",
-      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-refinance", "calc-down-payment"]
     },
     {
       "id": "product-conventional",
       "name": "Conventional Loans",
       "route": "/loan-options/conventional-loans",
       "borrowerGoal": "Standard purchase or refinance",
-      "relatedCalculatorIds": ["calc-payment", "calc-affordability"]
+      "relatedCalculatorIds": ["calc-payment", "calc-affordability", "calc-down-payment"]
     },
     {
       "id": "product-jumbo",
@@ -1150,6 +1150,12 @@
       "name": "Rent vs Buy Calculator",
       "route": "/calculators/rent-vs-buy",
       "captures": ["rent", "targetCity", "price", "timeline", "downPayment"]
+    },
+    {
+      "id": "calc-down-payment",
+      "name": "Down Payment Calculator",
+      "route": "/calculators/down-payment",
+      "captures": ["price", "program", "cashAvailable", "closingCosts", "mortgageInsurance"]
     }
   ],
   "directoryPages": [
@@ -1182,6 +1188,12 @@
       "name": "Loan Options",
       "route": "/loan-options",
       "filters": ["keyword", "borrowerGoal", "product"]
+    },
+    {
+      "id": "directory-calculators",
+      "name": "Mortgage Calculators",
+      "route": "/calculators",
+      "filters": ["calculator", "product", "borrowerGoal"]
     }
   ],
   "ctaRules": [

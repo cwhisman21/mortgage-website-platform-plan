@@ -2,7 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
-const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
+const publicTemplateSources = [
+  ["app.js", fs.readFileSync(new URL("./app.js", import.meta.url), "utf8")],
+  ["rates-marketplace-ui.mjs", fs.readFileSync(new URL("./rates-marketplace-ui.mjs", import.meta.url), "utf8")]
+];
 
 test("public templates do not expose internal planning or review labels", () => {
   const forbiddenVisiblePhrases = [
@@ -29,7 +32,9 @@ test("public templates do not expose internal planning or review labels", () => 
     "would open next",
   ];
 
-  for (const phrase of forbiddenVisiblePhrases) {
-    assert.equal(appSource.includes(phrase), false, `public template contains ${phrase}`);
+  for (const [fileName, source] of publicTemplateSources) {
+    for (const phrase of forbiddenVisiblePhrases) {
+      assert.equal(source.includes(phrase), false, `${fileName} contains ${phrase}`);
+    }
   }
 });

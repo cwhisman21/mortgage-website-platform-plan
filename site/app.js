@@ -9,11 +9,25 @@ import {
 import { renderLocationsHero } from "/site/locations-hero.mjs";
 import { renderCampaignHero } from "/site/campaign-hero.mjs";
 import { buildLearningCenterModel } from "/site/learning-center.mjs";
+import {
+  applyArticleAuthorIds,
+  articlesForContributor,
+  normalizeEditorialContent,
+  renderBylineModel,
+  silhouetteDataUri,
+} from "/site/editorial-content.mjs";
+import { renderRatesMarketplace, wireRatesMarketplace } from "/site/rates-marketplace-ui.mjs";
+import { createFixtureMarketplaceAdapter } from "/site/rates-marketplace.mjs";
+import { buildPrequalHandoffRequest, createPrequalHandoffView, renderPrequalHandoffMarkup } from "/site/prequal-handoff.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
 const NEWS_MEDIA_URL = "/mock-data/location-news-media-manifest.json";
 const MARKET_CHART_FIXTURES_URL = "/mock-data/market-chart-fixtures.json";
+const RATES_MARKETPLACE_FIXTURE_URL = "/mock-data/rates-marketplace-fixtures.json";
+const CONTRIBUTORS_URL = "/mock-data/editorial/contributors.json";
+const TOPIC_HUBS_URL = "/mock-data/editorial/topic-hubs.json";
+const EDITORIAL_CONTENT_URL = "/mock-data/editorial-content.json";
 const app = document.getElementById("app");
 wireMarketChartInteractions(app);
 
@@ -22,6 +36,8 @@ let maps;
 let newsIndex = { articles: [] };
 let mediaManifest = { media: [] };
 let marketChartFixtures = { sources: [], charts: [], snapshotSources: [] };
+let ratesMarketplaceFixture = null;
+let editorialContent = normalizeEditorialContent();
 const articleBundlePromises = new Map();
 let articleModalReturnFocus = null;
 let articleModalOrigin = null;
@@ -332,7 +348,7 @@ function icon(name) {
   return `<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">${paths[name] || paths.home}</svg></span>`;
 }
 
-function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManifest = { media: [] }) {
+function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManifest = { media: [] }, editorialContent = {}) {
   const built = {
     states: mapById(seed.states),
     cities: mapById(seed.cities),
@@ -347,6 +363,8 @@ function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManife
     directories: mapById(seed.directoryPages),
     newsArticles: mapById(compactNewsIndex.articles),
     newsMedia: mapById(compactMediaManifest.media || compactMediaManifest.assets),
+    contributors: mapById(editorialContent.contributors),
+    contributorsBySlug: Object.fromEntries((editorialContent.contributors || []).map((contributor) => [contributor.slug, contributor])),
     newsByLocation: {},
     modulesByParent: {},
     ctaRules: seed.ctaRules || [],
@@ -389,17 +407,41 @@ function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManife
     item: seed.directoryPages.find((page) => page.route === "/locations")
   });
 
+  (editorialContent.authorRoutes || []).forEach((authorRoute) => {
+    built.routes.set(normalizeRoute(authorRoute.route), authorRoute);
+  });
+  built.routes.set("/prequal/start", {
+    type: "prequalHandoff",
+    item: { route: "/prequal/start" }
+  });
   return built;
 }
 
 function currentPath() {
-  return normalizeRoute(decodeURI(window.location.pathname || "/"));
+  const pathname = decodeURI(window.location.pathname || "/");
+  if (pathname === "/site" || pathname === "/site/index.html") return "/";
+  return normalizeRoute(pathname);
 }
 
 function navigate(path, { replace = false, state = {} } = {}) {
   const method = replace ? "replaceState" : "pushState";
   window.history[method](state, "", path);
   render();
+}
+
+function trackPublicEvent(name, payload = {}) {
+  const allowedPayloadKeys = ["field", "offerId", "resultType", "sort", "tab", "visibleCount", "contributorId"];
+  const safePayload = {};
+  for (const key of allowedPayloadKeys) {
+    if (payload[key] === undefined) continue;
+    safePayload[key] = String(payload[key]).slice(0, 80);
+  }
+  window.dispatchEvent(new CustomEvent("snap-public-analytics", {
+    detail: {
+      name: String(name || "").slice(0, 80),
+      payload: safePayload
+    }
+  }));
 }
 
 function navLink(path, label) {
@@ -462,7 +504,7 @@ function header() {
           ${navLink("/buy", "Buy")}
           ${navLink("/refinance", "Refinance")}
           ${navLink("/loan-options", "Loan Options")}
-          ${navLink("/calculators/mortgage-payment", "Calculators")}
+          ${navLink("/calculators", "Calculators")}
           ${navLink("/learning-center", "Learning")}
           ${navLink("/loan-officers", "Experts")}
         </nav>
@@ -492,7 +534,7 @@ function footer() {
         </div>
         <div>
           <h3>Tools</h3>
-          <a href="${route("/calculators/mortgage-payment")}">Payment calculator</a>
+          <a href="${route("/calculators")}">Calculators</a>
           <a href="${route("/calculators/affordability")}">Affordability</a>
           <a href="${route("/calculators/refinance")}">Refinance</a>
           <button type="button" data-cta-action="compareOffer">Compare an offer</button>
@@ -632,18 +674,342 @@ function calculatedScenarioChart(calculatorId, title, summary, points, { chartTy
   const fixture = chartFixtureFor(marketChartFixtures, "calculator.payment_breakdown", calculatorId);
   if (!fixture) return "";
   const cleanPoints = points.map((point) => ({ label: point.label, value: Math.max(0, Math.round(Number(point.value) || 0)) }));
-  return renderChartFigure({
-    ...fixture,
-    title,
-    summary,
-    dataMode: "input_estimate",
-    chartType,
-    points: cleanPoints,
-    table: {
-      headers: ["Scenario measure", valueHeader],
-      rows: cleanPoints.map((point) => [point.label, currency(point.value)]),
-    },
+  const headers = ["Scenario measure", valueHeader];
+  const rows = cleanPoints.map((point) => [point.label, currency(point.value)]);
+  return `<div class="calculator-data-table">
+    <div>
+      <strong>${esc(title)}</strong>
+      <p>${esc(summary)}</p>
+    </div>
+    ${table(headers, rows)}
+  </div>`;
+}
+
+function downPaymentReadinessBar({ required, available, productLabel = "Selected product", minDown = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = required }) {
+  const cleanRequired = Math.max(0, Math.round(Number(required) || 0));
+  const cleanAvailable = Math.max(0, Math.round(Number(available) || 0));
+  const cleanBaseRequired = Math.max(cleanRequired, Math.round(Number(baseRequired) || cleanRequired));
+  const cleanMinDown = Math.max(0, Math.round(Number(minDown) || 0));
+  const cleanClosing = Math.max(0, Math.round(Number(closingCosts) || 0));
+  const cleanDpa = Math.max(0, Math.round(Number(dpaAssistance) || 0));
+  const max = Math.max(cleanAvailable, cleanBaseRequired, cleanRequired, 1);
+  const availableWidth = Math.max((cleanAvailable / max) * 100, cleanAvailable > 0 ? 3 : 0);
+  const neededWidth = Math.max((cleanRequired / max) * 100, cleanRequired > 0 ? 3 : 0);
+  const status = cleanAvailable >= cleanRequired ? "Cash available meets this dummy estimate." : `${currency(cleanRequired - cleanAvailable)} estimated gap after product assumptions.`;
+  return `<div class="calculator-horizontal-chart">
+    <div class="comparison-chart-header">
+      <strong>Cash available vs. cash needed</strong>
+      <p>${esc(productLabel)} estimate includes minimum down payment and 4% closing costs. DPA is applied only when selected and product-eligible.</p>
+    </div>
+    <div class="down-payment-bars" role="img" aria-label="Cash available ${currency(cleanAvailable)} compared with cash needed ${currency(cleanRequired)}">
+      <div class="down-payment-bar-row have">
+        <div><span>You have</span><strong>${currency(cleanAvailable)}</strong></div>
+        <div class="down-payment-bar-track"><i style="--bar-width:${availableWidth}%"></i></div>
+      </div>
+      <div class="down-payment-bar-row need">
+        <div><span>You need</span><strong>${currency(cleanRequired)}</strong></div>
+        <div class="down-payment-bar-track"><i style="--bar-width:${neededWidth}%"></i></div>
+      </div>
+    </div>
+    <div class="down-payment-formula">
+      <span>Minimum down <strong>${currency(cleanMinDown)}</strong></span>
+      <span>Closing costs (4%) <strong>${currency(cleanClosing)}</strong></span>
+      ${cleanDpa ? `<span>DPA estimate <strong>-${currency(cleanDpa)}</strong></span>` : ""}
+    </div>
+    <p class="chart-status-note">${esc(status)}</p>
+  </div>`;
+}
+
+function twoBarComparison({ title, summary, leftLabel, leftValue, rightLabel, rightValue }) {
+  const max = Math.max(Number(leftValue) || 0, Number(rightValue) || 0, 1);
+  return `<div class="calculator-two-bar">
+    <div class="comparison-chart-header">
+      <strong>${esc(title)}</strong>
+      <p>${esc(summary)}</p>
+    </div>
+    ${[
+      { label: leftLabel, value: leftValue, color: "#2478bd" },
+      { label: rightLabel, value: rightValue, color: "#78c257" }
+    ].map((bar) => `<div class="comparison-bar-row">
+      <div><span>${esc(bar.label)}</span><strong>${currency(bar.value)}</strong></div>
+      <div class="comparison-bar-track"><i style="--bar-color:${bar.color};--bar-width:${Math.max((bar.value / max) * 100, bar.value > 0 ? 3 : 0)}%"></i></div>
+    </div>`).join("")}
+  </div>`;
+}
+
+function uploadMortgageStatementCta() {
+  return `<div class="upload-statement-cta">
+    <div>
+      <strong>Have the current mortgage statement?</strong>
+      <p>Upload it to prefill payoff, escrow, insurance, and MI details when the live integration is connected.</p>
+    </div>
+    <button class="button secondary" type="button" data-cta-action="prequal">Upload Mortgage Statement</button>
+  </div>`;
+}
+
+function amortizationPanel({ principal, monthlyRate, months, startYear = 2026 }) {
+  const years = Math.max(Math.round(months / 12), 1);
+  const sampleYears = Array.from({ length: Math.min(years, 8) + 1 }, (_, index) => Math.round((years * index) / Math.min(years, 8)));
+  const rows = sampleYears.map((year) => {
+    const elapsed = Math.min(year * 12, months);
+    const balance = loanBalanceAfterMonths(principal, monthlyRate, months, elapsed);
+    const paid = Math.max(principal - balance, 0);
+    return { year: startYear + year, balance, paid };
   });
+  const max = Math.max(...rows.flatMap((row) => [row.balance, row.paid]), 1);
+  const points = (key) => rows.map((row, index) => {
+    const x = 34 + (index * (520 - 68)) / Math.max(rows.length - 1, 1);
+    const y = 210 - 30 - (row[key] / max) * 150;
+    return `${Math.round(x)},${Math.round(y)}`;
+  }).join(" ");
+  return `<div class="calculator-amortization-panel">
+    <div class="comparison-chart-header">
+      <strong>Amortization for mortgage loan</strong>
+      <p>Principal paid grows as the remaining balance declines over the selected term.</p>
+    </div>
+    <svg viewBox="0 0 520 230" role="img" aria-label="Amortization chart showing principal paid and remaining balance">
+      <path class="comparison-grid" d="M34 45H486M34 90H486M34 135H486" />
+      <path class="comparison-axis" d="M34 180H486" />
+      <polygon class="equity-area" points="34,180 ${points("paid")} 486,180" />
+      <polyline class="comparison-line buy-line" points="${points("paid")}" />
+      <polyline class="comparison-line rent-line" points="${points("balance")}" />
+      <text x="34" y="202">${startYear}</text>
+      <text x="430" y="202">${startYear + years}</text>
+    </svg>
+    <div class="comparison-legend">
+      <span><i class="buy-key"></i>Principal paid <strong>${currency(rows.at(-1)?.paid)}</strong></span>
+      <span><i class="rent-key"></i>Remaining balance <strong>${currency(rows.at(-1)?.balance)}</strong></span>
+    </div>
+  </div>`;
+}
+
+function schedulePanel({ principal, monthlyRate, months, startYear = 2026 }) {
+  const years = Math.min(Math.ceil(months / 12), 10);
+  const payment = monthlyRate > 0
+    ? (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1)
+    : principal / months;
+  const rows = Array.from({ length: years }, (_, index) => {
+    const elapsedStart = index * 12;
+    const elapsedEnd = Math.min((index + 1) * 12, months);
+    const startBalance = loanBalanceAfterMonths(principal, monthlyRate, months, elapsedStart);
+    const endBalance = loanBalanceAfterMonths(principal, monthlyRate, months, elapsedEnd);
+    const principalPaid = Math.max(startBalance - endBalance, 0);
+    const interestPaid = Math.max(payment * (elapsedEnd - elapsedStart) - principalPaid, 0);
+    return [String(startYear + index), currency(principalPaid), currency(interestPaid), currency(endBalance)];
+  });
+  return `<div class="calculator-schedule-panel">${table(["Year", "Principal", "Interest", "Remaining balance"], rows)}</div>`;
+}
+
+function calculatorTabbedPanel({ kind, chartHtml, amortizationHtml = "", scheduleHtml = "" }) {
+  const id = `calc-tabs-${kind}`;
+  const panelCount = [chartHtml, amortizationHtml, scheduleHtml].filter(Boolean).length;
+  return `<div class="calculator-tabs" style="--tab-count:${panelCount}">
+    <input id="${id}-chart" name="${id}" type="radio" checked />
+    ${amortizationHtml ? `<input id="${id}-amortization" name="${id}" type="radio" />` : ""}
+    ${scheduleHtml ? `<input id="${id}-schedule" name="${id}" type="radio" />` : ""}
+    <div class="calculator-tab-list">
+      <label for="${id}-chart">Chart</label>
+      ${amortizationHtml ? `<label for="${id}-amortization">Amortization</label>` : ""}
+      ${scheduleHtml ? `<label for="${id}-schedule">Schedule</label>` : ""}
+    </div>
+    <div class="calculator-tab-panel chart-panel">${chartHtml}</div>
+    ${amortizationHtml ? `<div class="calculator-tab-panel amortization-panel">${amortizationHtml}</div>` : ""}
+    ${scheduleHtml ? `<div class="calculator-tab-panel schedule-panel">${scheduleHtml}</div>` : ""}
+  </div>`;
+}
+
+function loanBalanceAfterMonths(principal, monthlyRate, totalMonths, elapsedMonths) {
+  if (principal <= 0) return 0;
+  if (monthlyRate <= 0) return Math.max(principal * (1 - elapsedMonths / totalMonths), 0);
+  const payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
+  const balance = principal * Math.pow(1 + monthlyRate, elapsedMonths) - payment * ((Math.pow(1 + monthlyRate, elapsedMonths) - 1) / monthlyRate);
+  return Math.max(balance, 0);
+}
+
+function rentBuyLineComparison({ rent, buyPayment, rentGrowth, timeline, price, down, annualRate, termYears }) {
+  const years = Math.max(Math.round(Number(timeline) || 1), 1);
+  const steps = Math.min(Math.max(years, 2), 8);
+  const monthlyRate = (Number(annualRate) || 0) / 100 / 12;
+  const totalMonths = Math.max((Number(termYears) || 30) * 12, 1);
+  const originalBalance = Math.max((Number(price) || 0) - (Number(down) || 0), 0);
+  const appreciationRate = 0.03;
+  const series = Array.from({ length: steps + 1 }, (_, index) => {
+    const year = Math.round((years * index) / steps);
+    const homeValue = (Number(price) || 0) * Math.pow(1 + appreciationRate, year);
+    const balance = loanBalanceAfterMonths(originalBalance, monthlyRate, totalMonths, year * 12);
+    return {
+      year,
+      rent: rent * Math.pow(1 + rentGrowth, year),
+      buy: buyPayment,
+      equity: Math.max(homeValue - balance, 0)
+    };
+  });
+  const values = series.flatMap((point) => [point.rent, point.buy]).map((value) => Number(value) || 0);
+  const min = Math.min(...values, 0);
+  const max = Math.max(...values, 1);
+  const span = max - min || 1;
+  const width = 620;
+  const height = 250;
+  const padX = 42;
+  const padY = 34;
+  const xy = (value, index) => {
+    const x = padX + (index * (width - padX * 2)) / Math.max(series.length - 1, 1);
+    const y = height - padY - ((value - min) / span) * (height - padY * 2);
+    return `${Math.round(x)},${Math.round(y)}`;
+  };
+  const rentPoints = series.map((point, index) => xy(point.rent, index)).join(" ");
+  const buyPoints = series.map((point, index) => xy(point.buy, index)).join(" ");
+  const last = series[series.length - 1];
+  const equityValues = series.map((point) => point.equity);
+  const equityMax = Math.max(...equityValues, 1);
+  const equityY = (value) => height - padY - (value / equityMax) * (height - padY * 2);
+  const equityPoints = series.map((point, index) => {
+    const x = padX + (index * (width - padX * 2)) / Math.max(series.length - 1, 1);
+    return `${Math.round(x)},${Math.round(equityY(point.equity))}`;
+  }).join(" ");
+  const equityArea = `${padX},${height - padY} ${equityPoints} ${width - padX},${height - padY}`;
+  const comparisonYears = [5, 10, 15, 20, 25, 30];
+  const selectedYear = comparisonYears.includes(years) ? years : 10;
+  const comparisonPanels = comparisonYears.map((year) => {
+    const projectedRent = rent * Math.pow(1 + rentGrowth, year);
+    const homeValue = (Number(price) || 0) * Math.pow(1 + appreciationRate, year);
+    const balance = loanBalanceAfterMonths(originalBalance, monthlyRate, totalMonths, year * 12);
+    const equity = Math.max(homeValue - balance, 0);
+    const cumulativeRent = rentGrowth > 0
+      ? rent * 12 * ((Math.pow(1 + rentGrowth, year) - 1) / rentGrowth)
+      : rent * 12 * year;
+    return `<div class="rent-buy-year-panel${year === selectedYear ? " active" : ""}" data-rent-buy-year-panel="${year}">
+      ${twoBarComparison({
+        title: `${year}-year monthly comparison`,
+        summary: "Projected rent is compared with the estimated ownership payment at the selected horizon.",
+        leftLabel: "Projected rent",
+        leftValue: projectedRent,
+        rightLabel: "Estimated buy payment",
+        rightValue: buyPayment,
+      })}
+      <div class="rent-buy-equity-snapshot">
+        <span>Estimated equity accumulated</span>
+        <strong>${currency(equity)}</strong>
+        <small>Compared with about ${currency(cumulativeRent)} in cumulative rent paid over ${year} years.</small>
+      </div>
+    </div>`;
+  }).join("");
+  return `<div class="calculator-analysis-tabs" data-analysis-tabs>
+    <div class="calculator-analysis-tab-list" role="tablist" aria-label="Rent versus buy analysis views">
+      <button class="active" type="button" data-analysis-tab="timeline">Timeline</button>
+      <button type="button" data-analysis-tab="comparison">Compare horizon</button>
+    </div>
+    <div class="calculator-analysis-panel active" data-analysis-panel="timeline">
+      <div class="calculator-comparison-chart">
+    <div class="comparison-chart-header">
+      <strong>Rent vs buy over time</strong>
+      <p>Projected rent uses the rent-growth assumption. Buy payment is held flat for this planning view.</p>
+    </div>
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Projected rent compared with estimated buy payment over ${years} years">
+      <path class="comparison-axis" d="M${padX} ${height - padY}H${width - padX}" />
+      <polyline class="comparison-line rent-line" points="${rentPoints}" />
+      <polyline class="comparison-line buy-line" points="${buyPoints}" />
+      ${series.map((point, index) => {
+        const [rx, ry] = xy(point.rent, index).split(",");
+        const [bx, by] = xy(point.buy, index).split(",");
+        return `<circle class="comparison-dot rent-dot" cx="${rx}" cy="${ry}" r="4"><title>Year ${point.year} rent: ${currency(point.rent)}</title></circle><circle class="comparison-dot buy-dot" cx="${bx}" cy="${by}" r="4"><title>Year ${point.year} buy payment: ${currency(point.buy)}</title></circle>`;
+      }).join("")}
+      <text x="${padX}" y="${height - 8}">Today</text>
+      <text x="${width - padX - 54}" y="${height - 8}">Year ${years}</text>
+    </svg>
+    <div class="comparison-legend">
+      <span><i class="rent-key"></i>Rent path <strong>${currency(rent)} &rarr; ${currency(last.rent)}</strong></span>
+      <span><i class="buy-key"></i>Estimated buy payment <strong>${currency(buyPayment)}</strong></span>
+    </div>
+    <div class="comparison-chart-header equity-header">
+      <strong>Estimated equity accumulated</strong>
+      <p>Planning estimate uses down payment, scheduled principal paydown, and a 3% annual home-value growth assumption.</p>
+    </div>
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Estimated home equity accumulated over ${years} years">
+      <path class="comparison-axis" d="M${padX} ${height - padY}H${width - padX}" />
+      <polygon class="equity-area" points="${equityArea}" />
+      <polyline class="comparison-line equity-line" points="${equityPoints}" />
+      ${series.map((point, index) => {
+        const [x, y] = equityPoints.split(" ")[index].split(",");
+        return `<circle class="comparison-dot equity-dot" cx="${x}" cy="${y}" r="4"><title>Year ${point.year} estimated equity: ${currency(point.equity)}</title></circle>`;
+      }).join("")}
+      <text x="${padX}" y="${height - 8}">Today</text>
+      <text x="${width - padX - 54}" y="${height - 8}">Year ${years}</text>
+    </svg>
+    <div class="comparison-legend">
+      <span><i class="equity-key"></i>Estimated equity <strong>${currency(series[0].equity)} &rarr; ${currency(last.equity)}</strong></span>
+    </div>
+      </div>
+    </div>
+    <div class="calculator-analysis-panel" data-analysis-panel="comparison">
+      <div class="rent-buy-year-tabs">
+      <div class="comparison-chart-header">
+        <strong>Horizon comparison</strong>
+        <p>Select a time horizon to compare the monthly payment view and the expected equity position.</p>
+      </div>
+      <div class="rent-buy-year-buttons" role="tablist" aria-label="Rent versus buy horizon">
+        ${comparisonYears.map((year) => `<button class="${year === selectedYear ? "active" : ""}" type="button" data-rent-buy-year="${year}">${year} years</button>`).join("")}
+      </div>
+      ${comparisonPanels}
+      </div>
+    </div>
+  </div>`;
+}
+
+function calculatorResultVisual({ title, payment, points, kind, metricLabel, note, principal = 0, monthlyRate = 0, months = 360, availableCash = 0, productLabel = "Selected product", minDown = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = payment }) {
+  if (kind === "payment") {
+    return calculatorTabbedPanel({
+      kind,
+      chartHtml: resultDonutMarkup({ title, payment, points, kind, metricLabel }),
+      amortizationHtml: amortizationPanel({ principal, monthlyRate, months }),
+      scheduleHtml: schedulePanel({ principal, monthlyRate, months }),
+    });
+  }
+  if (kind === "downPayment") {
+    return downPaymentReadinessBar({ required: payment, available: availableCash, productLabel, minDown, closingCosts, dpaAssistance, baseRequired });
+  }
+  return `<div class="calculator-result-summary">
+    <span>${esc(metricLabel)}</span>
+    <strong>${currency(payment)}</strong>
+    <p>${esc(note)}</p>
+  </div>`;
+}
+
+function resultDonutMarkup({ title, payment, points, kind, metricLabel }) {
+  const colors = ["#78c257", "#2478bd", "#f5a400", "#11bfb3", "#dc475c"];
+  const cleanPoints = points
+    .map((point, index) => ({
+      label: point.label,
+      value: Math.max(0, Math.round(Number(point.value) || 0)),
+      color: colors[index % colors.length],
+    }))
+    .filter((point) => point.value > 0);
+  const total = cleanPoints.reduce((sum, point) => sum + point.value, 0);
+  let cursor = 0;
+  const segments = total > 0 ? cleanPoints.map((point) => {
+    const rawShare = (point.value / total) * 100;
+    const share = Math.max(rawShare - 0.85, 0.75);
+    const offset = -cursor;
+    cursor += rawShare;
+    return `<circle class="calculator-donut-segment" cx="60" cy="60" r="48" pathLength="100" style="--segment-color:${point.color};--segment-share:${share};--segment-offset:${offset};" />`;
+  }).join("") : "";
+  return `<div class="calculator-donut-card">
+    <label class="calculator-accessibility-toggle"><input type="checkbox" /> Enable color patterns for accessibility</label>
+    <div class="calculator-donut" role="img" aria-label="${esc(title)} ${currency(payment)}. ${cleanPoints.map((point) => `${point.label}: ${currency(point.value)}`).join(". ")}">
+      <svg class="calculator-donut-svg" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="calculator-donut-track" cx="60" cy="60" r="48" pathLength="100" />
+        ${segments}
+      </svg>
+      <div class="calculator-donut-center">
+        <span>${esc(metricLabel)}</span>
+        <strong>${currency(payment)}</strong>
+      </div>
+    </div>
+    <div class="calculator-donut-cta">
+      <strong>Hoping for a lower monthly payment?</strong>
+      <button class="button estimate-button" type="button" data-cta-action="prequal">Start Your Auto-Prequal &rsaquo;</button>
+    </div>
+  </div>`;
 }
 
 function disclosureFor(pageType, title = "Disclosure notes") {
@@ -1170,6 +1536,7 @@ function ratesPage() {
       actions: `<a class="button" href="${routeWithAnchor("/rates", "rate-table")}">View rate table</a>${ctaButton("rateReview", { variant: "secondary" })}`,
       panel: `<aside class="hero-panel visual-panel"><img src="${ASSETS.mortgage}" alt="" /><h2>Personalize the scenario</h2><p>Loan purpose, state, credit profile, down payment, loan amount, occupancy, and property type can all affect pricing.</p><form class="quote-form"><label>Loan purpose<select><option>Purchase</option><option>Refinance</option><option>Cash-out refinance</option></select></label><label>State<select>${data.states.map((state) => `<option>${esc(state.name)}</option>`).join("")}</select></label><label>Credit range<select><option>740+</option><option>700-739</option><option>660-699</option></select></label>${ctaButton("rateReview")}</form></aside>`
     })}
+    ${renderRatesMarketplace({ fixture: ratesMarketplaceFixture })}
     ${editorialSection({
       label: "Before you compare",
       title: "Know what is included before you compare rates.",
@@ -1449,8 +1816,94 @@ function humanStatus(status) {
   return labels[status] || status;
 }
 
+function learningDiscovery(model) {
+  return `
+    <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
+      <form class="learning-search search-form" data-search-form data-search-scope="learning">
+        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
+        <button class="button" type="submit">Search</button>
+      </form>
+      <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
+        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
+      </nav>
+    </section>
+  `;
+}
+
+function renderContributorByline(article, { compact = false } = {}) {
+  const byline = renderBylineModel(article, editorialContent.contributors);
+  const marketUpdate = String(article.type || "").includes("market");
+  const dateLabel = byline.dateLabel
+    ? marketUpdate
+      ? byline.dateLabel.replace(/^Published|^Updated/, "As of")
+      : byline.dateLabel.replace(/^Updated/, "Last updated")
+    : "Updated July 2026";
+  const authorName = byline.href
+    ? `<a class="article-byline-name" href="${route(byline.href)}">${esc(byline.name)}</a>`
+    : `<span class="article-byline-name article-byline-fallback">${esc(byline.name)}</span>`;
+  const className = compact ? "article-card-byline editorial-byline compact" : "article-byline editorial-byline";
+
+  return `
+    <div class="${className}" data-editorial-byline>
+      <img src="${esc(byline.portraitSrc)}" alt="${esc(byline.portraitAlt)}" loading="lazy" decoding="async" data-contributor-portrait />
+      <div class="article-byline-copy">
+        ${authorName}
+        ${compact ? "" : `<span class="article-byline-title">${esc(byline.title)}</span>`}
+        <time>${esc(dateLabel)}</time>
+      </div>
+    </div>
+  `;
+}
+
+function learningArticleCard(article, index) {
+  const beat = maps.contributors[article.authorId]?.beat || String(article.type || "Mortgage guide").replaceAll("_", " ");
+  return `
+    <article class="card learning-article-card editorial-article-card" style="--card-accent:${accentColors[index % accentColors.length]}">
+      <a class="editorial-article-visual" href="${route(article.route)}" aria-label="Read ${esc(article.title)}">${icon("rates")}</a>
+      <p class="editorial-card-label">${esc(beat)}</p>
+      <h3><a href="${route(article.route)}">${esc(article.title)}</a></h3>
+      <p class="editorial-card-meta">6 min read <span aria-hidden="true">|</span> ${esc(beat)}</p>
+      ${renderContributorByline(article, { compact: true })}
+      <a class="text-link editorial-card-link" href="${route(article.route)}">Read more <span aria-hidden="true">&rarr;</span></a>
+    </article>
+  `;
+}
+
+function learningTopicCard(topic, index) {
+  return card({
+    title: topic.name,
+    text: topic.purpose,
+    href: topic.route,
+    iconName: "guide",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Open topic"
+  });
+}
+
+function learningCalculatorCard(calculator, index) {
+  return card({
+    title: calculator.name,
+    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
+    href: calculator.route,
+    iconName: "calculator",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "Calculate"
+  });
+}
+
+function learningLoanPathCard(product, index) {
+  return card({
+    title: product.name,
+    text: product.borrowerGoal,
+    href: product.route,
+    iconName: index % 2 ? "rates" : "home",
+    accent: accentColors[index % accentColors.length],
+    linkLabel: "View guide"
+  });
+}
+
 function learningHome() {
-  const model = buildLearningCenterModel(data);
+  const model = buildLearningCenterModel(data, editorialContent);
   const featuredArticles = model.featuredArticles.length
     ? section(
         "Featured articles",
@@ -1535,99 +1988,106 @@ function learningHome() {
   `);
 }
 
-function learningDiscovery(model) {
-  return `
-    <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
-      <form class="learning-search search-form" data-search-form data-search-scope="learning">
-        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
-        <button class="button" type="submit">Search</button>
-      </form>
-      <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
-        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
-      </nav>
-    </section>
-  `;
+function editorialTeamPage(topic) {
+  const directoryCards = editorialContent.contributors.map((contributor) => `
+    <a class="contributor-directory-card editorial-contributor-card" href="${route(contributor.route)}">
+      <img src="${esc(contributor.portrait.src)}" alt="${esc(contributor.portrait.alt)}" loading="lazy" decoding="async" data-contributor-portrait />
+      <div class="contributor-directory-card-copy">
+        <p class="contributor-beat">${esc(contributor.beat)}</p>
+        <h2>${esc(contributor.name)}</h2>
+        <p class="contributor-title">${esc(contributor.title)}</p>
+        <p>${esc(contributor.shortBio)}</p>
+        <span class="text-link">View contributor profile</span>
+      </div>
+    </a>
+  `).join("");
+  const principles = [
+    ["Start with the decision", "Each guide begins with the question a borrower is trying to answer, then organizes the facts around that choice."],
+    ["Show the source and date", "Market reporting identifies when the information was current and links the data source directly below each chart."],
+    ["Explain the tradeoffs", "Rates, payments, fees, loan programs, and local conditions are presented as options to compare, not promises."]
+  ];
+
+  return pageShell(`
+    <div class="editorial-directory-page editorial-contributors-page" data-contributor-directory>
+      <section class="contributor-directory-hero">
+        <div>
+          <p class="eyebrow">Editorial team</p>
+          <h1>Meet the contributors behind Snap Mortgage guidance</h1>
+          <p>Explore mortgage education, market context, loan-program explanations, and practical decision tools from a focused editorial team.</p>
+        </div>
+      </section>
+      <div class="contributor-directory-content">
+        <section class="contributor-directory-grid" aria-label="Snap Mortgage editorial contributors">${directoryCards}</section>
+        <section class="editorial-guidance-principles" aria-labelledby="editorial-guidance-title">
+          <h2 id="editorial-guidance-title">How Snap Mortgage guidance is built</h2>
+          <div>${principles.map(([title, text]) => `<article><h3>${esc(title)}</h3><p>${esc(text)}</p></article>`).join("")}</div>
+        </section>
+        <section class="editorial-recent-guidance" aria-labelledby="recent-guidance-title">
+          <h2 id="recent-guidance-title">Recent guidance</h2>
+          <div class="editorial-article-grid">${first(data.articles, 3).map(learningArticleCard).join("")}</div>
+        </section>
+      </div>
+    </div>
+  `);
 }
 
-function learningArticleCard(article, index) {
-  return card({
-    title: article.title,
-    text: humanStatus(article.reviewStatus),
-    href: article.route,
-    iconName: "article",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Read"
-  });
-}
+function contributorProfilePage(contributor) {
+  const relatedArticles = articlesForContributor(editorialContent, data.articles, contributor.id);
+  const archive = relatedArticles.length
+    ? `<div class="editorial-article-grid">${first(relatedArticles, 6).map(learningArticleCard).join("")}</div>`
+    : `<p class="contributor-empty-archive">Guidance from ${esc(contributor.name)} will appear here as it is published.</p>`;
 
-function learningTopicCard(topic, index) {
-  return card({
-    title: topic.name,
-    text: topic.purpose,
-    href: topic.route,
-    iconName: "guide",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Open topic"
-  });
-}
-
-function learningCalculatorCard(calculator, index) {
-  return card({
-    title: calculator.name,
-    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
-    href: calculator.route,
-    iconName: "calculator",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "Calculate"
-  });
-}
-
-function learningLoanPathCard(product, index) {
-  return card({
-    title: product.name,
-    text: product.borrowerGoal,
-    href: product.route,
-    iconName: index % 2 ? "rates" : "home",
-    accent: accentColors[index % accentColors.length],
-    linkLabel: "View guide"
-  });
+  return pageShell(`
+    <div class="contributor-profile-page" data-contributor-profile="${esc(contributor.id)}">
+      <section class="contributor-profile-hero contributor-profile-band">
+        <div class="contributor-profile-hero-inner contributor-profile-header">
+          <img class="contributor-profile-portrait" src="${esc(contributor.portrait.src)}" alt="${esc(contributor.portrait.alt)}" loading="eager" decoding="async" data-contributor-portrait />
+          <div class="contributor-profile-heading">
+            <p class="contributor-beat">${esc(contributor.beat)}</p>
+            <h1>${esc(contributor.name)}</h1>
+            <p class="contributor-profile-title">${esc(contributor.title)}</p>
+            <p class="contributor-profile-bio">${esc(contributor.bio)}</p>
+            <a class="text-link" href="#contributor-articles">Browse ${esc(contributor.name)}'s articles</a>
+          </div>
+        </div>
+      </section>
+      <section class="contributor-profile-content" id="contributor-articles" aria-labelledby="contributor-articles-title">
+        <h2 id="contributor-articles-title">Articles by ${esc(contributor.name)}</h2>
+        ${archive}
+        <div class="contributor-topics">
+          <h2>Topics ${esc(contributor.name)} covers</h2>
+          <p>${contributor.topics.map(esc).join(" <span aria-hidden=\"true\">&middot;</span> ")}</p>
+        </div>
+      </section>
+    </div>
+  `);
 }
 
 function blogTopicPage(topic) {
   if (topic.route === "/learning-center") return learningHome();
+  if (topic.route === "/learning-center/editorial-team") return editorialTeamPage(topic);
   const articles = byIds(topic.featuredArticleIds, maps.articles);
   const feed = articles.length ? articles : first(data.articles, 6);
-  const isEditorialTeam = topic.route === "/learning-center/editorial-team";
   return pageShell(`
     ${breadcrumb(["Learning Center", topic.name], ["/learning-center", topic.route])}
     ${hero({
-      eyebrow: isEditorialTeam ? "About our guides" : "Topic hub",
+      eyebrow: "Topic hub",
       title: topic.name,
       lead: topic.purpose,
       actions: `<a class="button" href="${route("/loan-officers")}">Get guidance</a><a class="button secondary" href="${route("/learning-center")}">All topics</a>`,
-      panel: `<aside class="hero-panel"><h2>${isEditorialTeam ? "How we keep guides useful" : "Browse this topic"}</h2><p>${isEditorialTeam ? "See source dates, update notes, and the links that help you move from education into a mortgage decision." : "Browse by state, city, product, and borrower goal."}</p></aside>`
+      panel: `<aside class="hero-panel"><h2>Browse this topic</h2><p>Browse by state, city, product, and borrower goal.</p></aside>`
     })}
     ${editorialSection({
-      label: isEditorialTeam ? "About this content" : "Topic overview",
-      title: isEditorialTeam ? "Mortgage guides built for clearer comparisons." : `${topic.name} content moves readers toward a clearer mortgage decision.`,
-      intro: isEditorialTeam ? "Use source dates, update notes, and related tools to understand what a guide can help you compare." : `Start with the ${topic.name.toLowerCase()} overview, then choose an article, calculator, product guide, or local market.`,
-      paragraphs: isEditorialTeam ? [
-        "Mortgage decisions can turn on a source date, an assumption, or a local cost that does not fit into a headline. Our guides keep those details close to the information they explain.",
-        "Use a guide to compare rates, APR, payment, taxes, insurance, loan options, and local market questions. Move to a calculator or licensed conversation when the answer depends on your own facts.",
-        "Sources, reference dates, and related tools make it easier to decide what to read next and what to verify for a specific home or loan."
-      ] : [
+      label: "Topic overview",
+      title: `${topic.name} content moves readers toward a clearer mortgage decision.`,
+      intro: `Start with the ${topic.name.toLowerCase()} overview, then choose an article, calculator, product guide, or local market.`,
+      paragraphs: [
         `A ${topic.name.toLowerCase()} hub makes the topic easier to navigate by grouping beginner education, product comparisons, local market details, and high-intent next steps.`,
         "Mortgage rules, pricing, and eligibility vary, so the topic overview points readers toward scenario review rather than one universal answer.",
         "The next step stays clear: product guide, calculator, city market view, article, or licensed expert."
       ],
-      sideTitle: isEditorialTeam ? "What you will find" : "Explore by topic",
-      sideItems: isEditorialTeam ? [
-        "Source names and reference dates",
-        "Clear mortgage assumptions",
-        "Related calculators and guides",
-        "Local market links",
-        "Licensed next steps"
-      ] : [
+      sideTitle: "Explore by topic",
+      sideItems: [
         "Topic overview",
         "Featured articles",
         "Related tools",
@@ -1635,12 +2095,8 @@ function blogTopicPage(topic) {
         "Local market links"
       ]
     })}
-    ${section("Featured mortgage guides", { label: "Mortgage education", text: "Browse dated guides and follow the related paths when a topic needs a more specific answer." }, `<div class="grid two">${feed.map((article, index) => card({ title: article.title, text: humanStatus(article.reviewStatus), href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`)}
-    ${section(isEditorialTeam ? "How our guides stay current" : "Related paths", { label: isEditorialTeam ? "Guide details" : "Helpful links", text: isEditorialTeam ? "Each guide puts useful source details and next steps close to the mortgage question it explains." : "Keep moving into locations, products, calculators, and experts." }, isEditorialTeam ? table(["What you see", "Why it helps"], [
-      ["Source names and reference dates", "See where the public information came from and when it was published."],
-      ["Clear assumptions and limitations", "Know what a broad market figure can explain before using it in your own decision."],
-      ["Related locations, products, and calculators", "Keep the next comparison close to the question you are working through."]
-    ]) : `<div class="grid three">${first(data.products, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
+    ${section("Featured mortgage guides", { label: "Mortgage education", text: "Browse dated guides and follow the related paths when a topic needs a more specific answer." }, `<div class="grid two learning-article-grid">${feed.map(learningArticleCard).join("")}</div>`)}
+    ${section("Related paths", { label: "Helpful links", text: "Keep moving into locations, products, calculators, and experts." }, `<div class="grid three">${first(data.products, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
   `);
 }
 
@@ -1659,6 +2115,7 @@ function articlePage(article) {
       actions: `${ctaButton("leadForm")}${products[0]?.route ? `<a class="button secondary" href="${route(products[0].route)}">Related product</a>` : `<a class="button secondary" href="${route("/loan-options")}">Related product</a>`}`,
       panel: `<aside class="hero-panel"><h2>Guide details</h2><p>Updated July 2026. Sources and related tools are included below.</p><div class="tag-row"><span class="tag">Sources</span><span class="tag">Related tools</span><span class="tag">Mortgage questions</span></div></aside>`
     })}
+    <div class="article-byline-wrap">${renderContributorByline(article)}</div>
     ${editorialSection({
       label: "Mortgage decision guide",
       title: "Read this with the market, product, and next step in view.",
@@ -1827,103 +2284,337 @@ function branchPage(branch) {
   `);
 }
 
-function calculatorPage(calc) {
-  const presets = {
-    "calc-payment": {
-      kind: "payment",
-      title: "Payment scenario",
-      fields: [
-        ["Purchase price", "price", "numeric", "515000"],
-        ["Down payment", "down", "numeric", "25750"],
-        ["Interest rate", "rate", "decimal", "6.75"],
-        ["Annual tax", "tax", "numeric", "9300"],
-        ["Annual insurance", "insurance", "numeric", "2200"]
-      ]
-    },
-    "calc-affordability": {
-      kind: "affordability",
-      title: "Affordability scenario",
-      fields: [
-        ["Annual income", "income", "numeric", "145000"],
-        ["Monthly debts", "debts", "numeric", "650"],
-        ["Down payment", "down", "numeric", "35000"],
-        ["Interest rate", "rate", "decimal", "6.75"],
-        ["Annual tax and insurance", "taxInsurance", "numeric", "11500"]
-      ]
-    },
-    "calc-refinance": {
-      kind: "refinance",
-      title: "Refinance scenario",
-      fields: [
-        ["Current payment", "currentPayment", "numeric", "3650"],
-        ["Loan balance", "balance", "numeric", "428000"],
-        ["New interest rate", "rate", "decimal", "6.25"],
-        ["Closing costs", "closingCosts", "numeric", "6200"],
-        ["New term years", "termYears", "numeric", "30"]
-      ]
-    },
-    "calc-rent-vs-buy": {
-      kind: "rentBuy",
-      title: "Rent vs buy scenario",
-      fields: [
-        ["Monthly rent", "rent", "numeric", "2650"],
-        ["Target home price", "price", "numeric", "515000"],
-        ["Down payment", "down", "numeric", "25750"],
-        ["Interest rate", "rate", "decimal", "6.75"],
-        ["Time horizon years", "timeline", "numeric", "7"]
-      ]
-    }
-  };
-  const preset = presets[calc.id] || presets["calc-payment"];
-  const relatedProducts = data.products.filter((product) => (product.relatedCalculatorIds || []).includes(calc.id)).slice(0, 4);
+const calculatorProductModules = {
+  conventional: {
+    label: "Conventional",
+    shortLabel: "Conv.",
+    status: "Available",
+    className: "available",
+    minDownRate: 0.03,
+    miLabel: "PMI",
+    rule: "Conforming limit, LTV, and PMI assumptions apply.",
+    notes: ["PMI appears above 80% LTV.", "Scenarios above the dummy conforming limit move to needs review."]
+  },
+  fha: {
+    label: "FHA",
+    shortLabel: "FHA",
+    status: "Needs review",
+    className: "review",
+    minDownRate: 0.035,
+    upfrontFeeRate: 0.0175,
+    annualMiRate: 0.0055,
+    miLabel: "FHA MIP",
+    rule: "HUD county limit, UFMIP, annual MIP, and minimum down payment assumptions apply.",
+    notes: ["Dummy FHA limit is checked against base loan amount.", "UFMIP is shown as financed for planning."]
+  },
+  va: {
+    label: "VA",
+    shortLabel: "VA",
+    status: "Check eligibility",
+    className: "eligible",
+    minDownRate: 0,
+    upfrontFeeRate: 0.0215,
+    annualMiRate: 0,
+    miLabel: "Funding fee",
+    rule: "VA eligibility, occupancy, entitlement, and funding-fee assumptions apply.",
+    notes: ["No monthly mortgage insurance is shown.", "Funding fee can change by use type, down payment, service category, and exemption."]
+  },
+  usda: {
+    label: "USDA",
+    shortLabel: "USDA",
+    status: "Location gated",
+    className: "limited",
+    minDownRate: 0,
+    upfrontFeeRate: 0.01,
+    annualMiRate: 0.0035,
+    miLabel: "Guarantee fee",
+    rule: "Location, income, 30-year term, upfront guarantee fee, and annual fee assumptions apply.",
+    notes: ["Dummy ZIP data controls availability for now.", "Income and property eligibility must be verified."]
+  }
+};
+
+const calculatorPresets = {
+  "calc-payment": {
+    kind: "payment",
+    title: "Payment scenario",
+    resultTitle: "Estimated monthly payment",
+    primaryMetricLabel: "Monthly payment",
+    primaryProgram: "conventional",
+    fields: [
+      ["Purchase price", "price", "numeric", "515000"],
+      ["Down payment", "down", "numeric", "25750"],
+      ["Interest rate", "rate", "decimal", "6.75"],
+      ["Annual tax", "tax", "numeric", "9300"],
+      ["Annual insurance", "insurance", "numeric", "2200"],
+      ["HOA dues", "hoa", "numeric", "125"],
+      ["Term years", "termYears", "numeric", "30"],
+      ["ZIP code", "zip", "numeric", "78704"]
+    ],
+    explainer: "Estimate principal, interest, taxes, insurance, HOA, and product-specific mortgage insurance or funding fees."
+  },
+  "calc-affordability": {
+    kind: "affordability",
+    title: "Affordability scenario",
+    resultTitle: "Estimated target payment",
+    primaryMetricLabel: "Target payment",
+    primaryProgram: "fha",
+    fields: [
+      ["Annual income", "income", "numeric", "145000"],
+      ["Monthly debts", "debts", "numeric", "650"],
+      ["Cash available", "down", "numeric", "35000"],
+      ["Interest rate", "rate", "decimal", "6.75"],
+      ["Annual tax and insurance", "taxInsurance", "numeric", "11500"],
+      ["Term years", "termYears", "numeric", "30"],
+      ["ZIP code", "zip", "numeric", "78704"]
+    ],
+    explainer: "Start from income, debts, cash available, and location costs, then show which product guardrails may constrain the result."
+  },
+  "calc-refinance": {
+    kind: "refinance",
+    title: "Refinance scenario",
+    resultTitle: "Estimated refinance payment",
+    primaryMetricLabel: "New payment",
+    primaryProgram: "va",
+    fields: [
+      ["Current payment", "currentPayment", "numeric", "3650"],
+      ["Loan balance", "balance", "numeric", "428000"],
+      ["Home value", "price", "numeric", "560000"],
+      ["Refinance type", "refinanceType", "text", "VA streamline / IRRRL style"],
+      ["New interest rate", "rate", "decimal", "6.25"],
+      ["Closing costs", "closingCosts", "numeric", "6200"],
+      ["Current property tax / mo", "currentTax", "numeric", "280"],
+      ["Current insurance / mo", "currentInsurance", "numeric", "110"],
+      ["Current MI / mo", "currentMi", "numeric", "0"],
+      ["New property tax / mo", "newTax", "numeric", "280"],
+      ["New insurance / mo", "newInsurance", "numeric", "110"],
+      ["New MI / mo", "newMi", "numeric", "0"],
+      ["New term years", "termYears", "numeric", "30"],
+      ["ZIP code", "zip", "numeric", "78704"]
+    ],
+    explainer: "Compare current payment, new payment, closing costs, break-even timing, and refinance-specific product rules."
+  },
+  "calc-rent-vs-buy": {
+    kind: "rentBuy",
+    title: "Rent vs buy scenario",
+    resultTitle: "Estimated buy payment",
+    primaryMetricLabel: "Buy payment",
+    primaryProgram: "conventional",
+    fields: [
+      ["Monthly rent", "rent", "numeric", "2650"],
+      ["Target home price", "price", "numeric", "515000"],
+      ["Down payment", "down", "numeric", "25750"],
+      ["Interest rate", "rate", "decimal", "6.75"],
+      ["Time horizon years", "timeline", "numeric", "7"],
+      ["Annual rent increase %", "rentGrowth", "decimal", "3.5"],
+      ["ZIP code", "zip", "numeric", "78704"]
+    ],
+    explainer: "Compare rent, ownership payment, estimated equity, transaction costs, and time horizon."
+  },
+  "calc-down-payment": {
+    kind: "downPayment",
+    title: "Down payment scenario",
+    resultTitle: "Estimated cash needed",
+    primaryMetricLabel: "Cash needed",
+    primaryProgram: "fha",
+    fields: [
+      ["Target home price", "price", "numeric", "515000"],
+      ["Cash available", "down", "numeric", "35000"],
+      ["Apply DPA", "applyDpa", "checkbox", "false"],
+      ["Interest rate", "rate", "decimal", "6.75"],
+      ["Annual tax", "tax", "numeric", "9300"],
+      ["Annual insurance", "insurance", "numeric", "2200"],
+      ["ZIP code", "zip", "numeric", "78704"]
+    ],
+    explainer: "Estimate minimum down payment, cash-to-close, and the payment effect of changing the selected product."
+  }
+};
+
+function calculatorHubCard(calculator, index) {
+  const preset = calculatorPresets[calculator.id] || calculatorPresets["calc-payment"];
+  return `<a class="calculator-hub-card" href="${route(calculator.route)}">
+    <span class="icon-bubble" style="--accent:${accentColors[index % accentColors.length]}">${icon("calculator")}</span>
+    <span class="calculator-hub-card-copy">
+      <strong>${esc(calculator.name)}</strong>
+      <small>${esc(preset.explainer)}</small>
+      <em>${esc(calculator.captures.slice(0, 5).join(" • "))}</em>
+    </span>
+  </a>`;
+}
+
+function calculatorsHubPage(directory) {
   return pageShell(`
-    ${breadcrumb(["Calculators", calc.name], ["/calculators/mortgage-payment", calc.route])}
-    ${hero({
-      eyebrow: "Calculator",
-      title: calc.name,
-      lead: "Model a mortgage scenario with assumptions visible, then move into products, locations, or licensed review.",
-      actions: `<a class="button" href="${routeWithAnchor(calc.route, "calculator")}">Use calculator</a>${ctaButton("watchlist", { variant: "secondary", label: "Save scenario" })}`,
-      panel: `<aside class="hero-panel"><h2>Inputs</h2><div class="tag-row">${calc.captures.map((capture) => `<span class="tag">${esc(capture)}</span>`).join("")}</div></aside>`
-    })}
-    ${editorialSection({
-      label: "Calculator guidance",
-      title: `${calc.name} keeps the estimate and the assumptions together.`,
-      intro: "A mortgage calculator is more useful when it teaches the borrower what the inputs mean and where the estimate stops.",
-      paragraphs: [
-        `${calc.name} helps borrowers test a scenario before comparing products or contacting a loan officer. The result is most useful when the inputs remain visible near the number.`,
-        "Taxes, insurance, mortgage insurance, HOA dues, closing costs, points, APR, and product rules can materially change the outcome.",
-        "Calculator results connect to local markets because the same purchase price can carry different tax and insurance assumptions in different cities."
-      ],
-      sideTitle: "Calculator explains",
-      sideItems: [
-        "What each input means",
-        "What the estimate includes",
-        "What the estimate excludes",
-        "Why actual terms can change",
-        "What to do after calculating"
-      ]
-    })}
+    ${breadcrumb(["Calculators"], ["/calculators"])}
+    <section class="section calculator-hub-hero">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Calculators</span>
+          <h1>${esc(directory?.name || "Mortgage calculators")}</h1>
+          <p>Choose a calculator, enter visible assumptions, and compare product-aware estimates before a licensed review.</p>
+        </div>
+      </div>
+      <div class="calculator-hub-grid">
+        ${data.calculators.map((calculator, index) => calculatorHubCard(calculator, index)).join("")}
+      </div>
+    </section>
+  `);
+}
+
+function relatedCalculatorCards(activeId) {
+  return data.calculators
+    .filter((calculator) => calculator.id !== activeId)
+    .slice(0, 4)
+    .map((calculator, index) => card({
+      title: calculator.name,
+      text: (calculatorPresets[calculator.id] || calculatorPresets["calc-payment"]).explainer,
+      href: calculator.route,
+      iconName: "calculator",
+      accent: accentColors[index % accentColors.length],
+      linkLabel: "Compare scenario"
+    }))
+    .join("");
+}
+
+function productToggleGroup(preset) {
+  const enabledPrograms = preset.lockedPrograms || Object.keys(calculatorProductModules);
+  return Object.entries(calculatorProductModules).map(([key, product]) => {
+    const isEnabled = enabledPrograms.includes(key);
+    const isActive = key === preset.primaryProgram;
+    return `<label class="product-toggle ${product.className}${isActive ? " active" : ""}${isEnabled ? "" : " disabled"}">
+      <input type="radio" name="program" value="${esc(key)}"${isActive ? " checked" : ""}${isEnabled ? "" : " disabled"} />
+      <span>${esc(product.shortLabel)}</span>
+      <small>${esc(isEnabled ? product.status : "Unavailable")}</small>
+    </label>`;
+  }).join("");
+}
+
+const calculatorCurrencyFields = new Set(["price", "down", "tax", "insurance", "hoa", "income", "debts", "taxInsurance", "currentPayment", "balance", "closingCosts", "rent", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi"]);
+const calculatorPercentFields = new Set(["rate", "rentGrowth"]);
+const calculatorSliderFields = new Set(["price", "down", "income", "balance", "currentPayment", "rent"]);
+const calculatorAdvancedFieldsByKind = {
+  payment: new Set(["tax", "insurance", "hoa", "termYears", "zip"]),
+  affordability: new Set(["taxInsurance", "termYears", "zip"]),
+  refinance: new Set(["refinanceType", "closingCosts", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi", "termYears", "zip"]),
+  rentBuy: new Set(["timeline", "rentGrowth", "zip"]),
+  downPayment: new Set(["rate", "tax", "insurance", "zip"])
+};
+const calculatorRangeDefaults = {
+  price: [50000, 1500000, 5000],
+  down: [0, 500000, 1000],
+  rate: [0, 12, 0.125],
+  tax: [0, 30000, 250],
+  insurance: [0, 10000, 100],
+  hoa: [0, 1500, 25],
+  termYears: [10, 30, 5],
+  income: [25000, 400000, 5000],
+  debts: [0, 5000, 50],
+  taxInsurance: [0, 40000, 250],
+  currentPayment: [0, 10000, 50],
+  balance: [25000, 1500000, 5000],
+  closingCosts: [0, 50000, 250],
+  rent: [500, 10000, 50],
+  timeline: [1, 30, 1],
+  rentGrowth: [0, 10, 0.25]
+};
+
+function calculatorRangeConfig(name, value) {
+  if (!calculatorSliderFields.has(name)) return null;
+  const numericValue = Number(value) || 0;
+  const fallbackMax = Math.max(numericValue * 2, 100);
+  const [min, max, step] = calculatorRangeDefaults[name] || [0, fallbackMax, 1];
+  return { min, max: Math.max(max, numericValue), step };
+}
+
+function calculatorInputField([label, name, mode, value], fields = []) {
+  const id = `calculator-${name}`;
+  if (mode === "checkbox") {
+    return `<div class="calculator-input-row checkbox-row${name === "applyDpa" ? " dpa-option" : ""}"${name === "applyDpa" ? " data-dpa-option" : ""}>
+      <label class="calculator-checkbox-control" for="${esc(id)}">
+        <input id="${esc(id)}" name="${esc(name)}" type="checkbox" value="yes" data-calculator-input="${esc(name)}" />
+        <span>${esc(label)}</span>
+      </label>
+      ${name === "applyDpa" ? `<p>Down payment assistance can help eligible borrowers cover some upfront cash through grants, forgivable seconds, deferred-payment seconds, or repayable assistance. Availability depends on program, income, location, property, occupancy, and lender review.</p>` : ""}
+    </div>`;
+  }
+  const range = mode === "text" ? null : calculatorRangeConfig(name, value);
+  const prefix = calculatorCurrencyFields.has(name) ? "$" : "";
+  const suffix = calculatorPercentFields.has(name) ? "%" : "";
+  const priceField = fields.find(([, fieldName]) => fieldName === "price");
+  const priceValue = Number(priceField?.[3]) || 0;
+  const downPercent = name === "down" && priceValue > 0 ? Math.round(((Number(value) || 0) / priceValue) * 1000) / 10 : null;
+  const valueBox = `<div class="calculator-value-box">
+    ${prefix ? `<span>${prefix}</span>` : ""}
+    <input id="${esc(id)}" name="${esc(name)}" inputmode="${esc(mode)}" value="${esc(value)}" data-calculator-input="${esc(name)}" />
+    ${suffix ? `<span>${suffix}</span>` : ""}
+  </div>`;
+  return `<div class="calculator-input-row${range ? " has-slider" : ""}">
+    <div class="calculator-input-topline">
+      <label for="${esc(id)}">${esc(label)}</label>
+      ${downPercent === null ? valueBox : `<div class="calculator-value-pair">${valueBox}<div class="calculator-value-box percent-box"><input name="downPercent" inputmode="decimal" value="${esc(downPercent)}" data-down-percent /><span>%</span></div></div>`}
+    </div>
+    ${range ? `<div class="calculator-slider-wrap">
+      <input class="calculator-slider" type="range" min="${range.min}" max="${range.max}" step="${range.step}" value="${esc(value)}" data-calculator-slider="${esc(name)}" aria-label="${esc(label)} slider" />
+      <span class="slider-grip" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>` : ""}
+  </div>`;
+}
+
+function calculatorFieldsMarkup(preset) {
+  const advancedNames = calculatorAdvancedFieldsByKind[preset.kind] || new Set();
+  const primaryFields = preset.fields.filter(([, name]) => !advancedNames.has(name));
+  const advancedFields = preset.fields.filter(([, name]) => advancedNames.has(name));
+  return `
+    <div class="calculator-fields primary-fields">
+      ${primaryFields.map((field) => calculatorInputField(field, preset.fields)).join("")}
+    </div>
+    ${advancedFields.length ? `<details class="calculator-advanced">
+      <summary>Advanced settings <span aria-hidden="true">⌄</span></summary>
+      <div class="calculator-fields advanced-fields">
+        ${advancedFields.map((field) => calculatorInputField(field, preset.fields)).join("")}
+      </div>
+    </details>` : ""}
+  `;
+}
+
+function calculatorPage(calc) {
+  const preset = calculatorPresets[calc.id] || calculatorPresets["calc-payment"];
+  return pageShell(`
+    <section class="section calculator-page-intro">
+      ${breadcrumb(["Calculators", calc.name], ["/calculators", calc.route])}
+      <span class="eyebrow">Calculator</span>
+      <h1>${esc(calc.name)}</h1>
+      <p>${esc(preset.explainer)}</p>
+    </section>
     <section class="section" id="calculator">
-      <div class="content-layout">
-        <form class="panel calculator-form" data-calculator-form data-calculator-id="${esc(calc.id)}" data-calculator-kind="${preset.kind}">
-          <h2>${esc(preset.title)}</h2>
-          ${preset.fields.map(([label, name, mode, value]) => `<label>${esc(label)}<input name="${esc(name)}" inputmode="${esc(mode)}" value="${esc(value)}" /></label>`).join("")}
-          <button class="button" type="submit">Calculate</button>
+      <div class="calculator-workspace">
+        <form class="panel calculator-form product-calculator-form" data-calculator-form data-calculator-id="${esc(calc.id)}" data-calculator-kind="${preset.kind}">
+          <div class="calculator-form-header">
+            <div>
+              <span class="eyebrow">Product-aware estimate</span>
+              <h2>${esc(preset.title)}</h2>
+            </div>
+            <span class="estimate-badge">Dummy data</span>
+          </div>
+          <fieldset class="product-toggle-group">
+            <legend>Product program</legend>
+          ${productToggleGroup(preset)}
+          </fieldset>
+          ${calculatorFieldsMarkup(preset)}
         </form>
         <aside class="side-stack">
-          <div class="panel" data-calculator-result><h2>Estimated payment</h2><p>Enter a scenario to calculate a monthly estimate.</p>${marketChart("calculator.payment_breakdown", calc.id)}</div>
+          <div class="panel calculator-result-panel" data-calculator-result>
+            <h2>${esc(preset.resultTitle)}</h2>
+            <p>Enter a scenario to calculate a product-aware estimate.</p>
+            <div class="calculator-placeholder-result">
+              <strong>${esc(calculatorProductModules[preset.primaryProgram].label)}</strong>
+              <span>${esc(calculatorProductModules[preset.primaryProgram].rule)}</span>
+            </div>
+            ${marketChart("calculator.payment_breakdown", calc.id)}
+          </div>
           ${disclosureFor("calculator", "Calculator disclosure")}
         </aside>
       </div>
     </section>
-    ${section("How to interpret the result", { label: "Estimate literacy", text: "The calculator turns a number into useful next steps." }, insightBand([
-      { label: "Payment", value: "Estimate", text: "Use the result to compare scenarios, not as a lender quote or approval." },
-      { label: "Inputs", value: "Assumptions", text: "Changing rate, taxes, insurance, down payment, or term can move the result quickly." },
-      { label: "Local factors", value: "Location", text: "City and state views help explain tax and insurance differences." },
-      { label: "Next step", value: "Review", text: "A licensed loan officer can discuss options that may fit the user's facts." }
-    ]), "modern-band")}
-    ${section("Save or review the scenario", { label: "Next steps", text: "Keep the estimate connected to rate, product, and loan officer review." }, ctaDeck(["watchlist", "rateReview", "prequal", "loContact"], "Use the estimate as a conversation starter.", "Save the scenario, request rate review, start prequalification, or contact a licensed expert."), "compact")}
-    ${section("Related loan paths", { label: "Next steps", text: "Calculator results route into relevant products, markets, and experts." }, `<div class="grid four">${relatedProducts.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).join("")}</div>`, "compact")}
+    ${section("Related calculators", { label: "More tools", text: "Compare another borrower question with the same visible-assumption approach." }, `<div class="grid four">${relatedCalculatorCards(calc.id)}</div>`, "compact")}
   `);
 }
 
@@ -2103,16 +2794,20 @@ function navigateFromArticleModal(path) {
   render();
 }
 
+const snapMortgagePublisher = { "@type": "Organization", name: "Snap Mortgage" };
+
 function setDocumentMeta(found, path) {
   const item = found?.item || {};
   const titles = {
     home: "Snap Mortgage | Local Mortgage Intelligence",
     locations: "Locations | Snap Mortgage Market Guides",
     rates: "Mortgage Rates, APR Details, and Review Options | Snap Mortgage",
+    prequalHandoff: "Provider Prequal Handoff | Snap Mortgage",
     state: `${item.name} Mortgage Guide | Snap Mortgage`,
     city: `${item.name}, ${maps.states[item.stateId]?.abbr || ""} Mortgage Market | Snap Mortgage`,
     product: `${item.name} Guide | Snap Mortgage`,
     blog: `${item.name} | Snap Mortgage Learning Center`,
+    contributor: `${item.name} | Snap Mortgage Learning Center`,
     article: `${item.title} | Snap Mortgage`,
     newsArticle: `${item.title} | Snap Mortgage`,
     loanOfficer: `${item.name} | Snap Mortgage Loan Officer`,
@@ -2122,10 +2817,11 @@ function setDocumentMeta(found, path) {
   };
   const descriptions = {
     home: "Compare rates, local markets, loan options, calculators, account save actions, and licensed mortgage guidance.",
-    rates: "Review public mortgage-rate benchmarks, APR details, rate-review options, and offer-comparison questions."
+    rates: "Review public mortgage-rate benchmarks, APR details, rate-review options, and offer-comparison questions.",
+    prequalHandoff: "Carry a selected provider and saved rate-comparison details into the connected Snap prequalification path."
   };
   const title = titles[found?.type] || "Snap Mortgage";
-  const description = descriptions[found?.type] || item.metaDescription || item.dek || item.marketPositioning || item.stateNarrative || item.purpose || item.borrowerGoal || "Snap Mortgage local mortgage intelligence, calculators, rate details, loan options, experts, branches, and account save actions.";
+  const description = descriptions[found?.type] || item.metaDescription || item.dek || item.bio || item.marketPositioning || item.stateNarrative || item.purpose || item.borrowerGoal || "Snap Mortgage local mortgage intelligence, calculators, rate details, loan options, experts, branches, and account save actions.";
   const canonical = new URL(path || "/", window.location.origin).toString();
   const image = maps?.newsMedia?.[item.imageId]?.imageUrl || maps?.newsMedia?.[item.imageId]?.localPath || "";
   document.title = title.replace(/\s+/g, " ").trim();
@@ -2137,7 +2833,7 @@ function setDocumentMeta(found, path) {
   document.querySelector('meta[property="og:image"]')?.setAttribute("content", image ? new URL(image, window.location.origin).toString() : "");
   document.querySelector('meta[name="twitter:card"]')?.setAttribute("content", image ? "summary_large_image" : "summary");
   const jsonLd = document.querySelector("[data-document-jsonld]");
-  if (jsonLd) jsonLd.textContent = found?.type === "newsArticle" ? JSON.stringify({
+  if (jsonLd) jsonLd.textContent = ["article", "newsArticle"].includes(found?.type) ? JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
     headline: item.title,
@@ -2145,7 +2841,9 @@ function setDocumentMeta(found, path) {
     datePublished: item.publishedAt,
     dateModified: item.updatedAt || item.publishedAt,
     mainEntityOfPage: canonical,
-    image: image ? new URL(image, window.location.origin).toString() : undefined
+    image: image ? new URL(image, window.location.origin).toString() : undefined,
+    author: snapMortgagePublisher,
+    publisher: snapMortgagePublisher
   }).replace(/</g, "\\u003c") : "";
 }
 
@@ -2161,6 +2859,16 @@ function notFoundPage(path) {
   `);
 }
 
+function prequalHandoffPage() {
+  const request = buildPrequalHandoffRequest({
+    search: window.location.search,
+    cachedState: localStorage.getItem("snapRatesMarketplaceState") || "{}"
+  });
+  const adapter = ratesMarketplaceFixture ? createFixtureMarketplaceAdapter(ratesMarketplaceFixture) : null;
+  const view = createPrequalHandoffView({ adapter, request });
+  return pageShell(renderPrequalHandoffMarkup(view));
+}
+
 function render() {
   const path = currentPath();
   const found = maps.routes.get(path);
@@ -2169,21 +2877,30 @@ function render() {
   else if (found.type === "home") html = homePage();
   else if (found.type === "locations") html = locationsPage();
   else if (found.type === "rates") html = ratesPage();
+  else if (found.type === "prequalHandoff") html = prequalHandoffPage();
   else if (found.type === "state") html = statePage(found.item);
   else if (found.type === "city") html = cityPage(found.item);
   else if (found.type === "product") html = productPage(found.item);
   else if (found.type === "blog") html = blogTopicPage(found.item);
   else if (found.type === "article") html = articlePage(found.item);
+  else if (found.type === "contributor") html = contributorProfilePage(found.item);
   else if (found.type === "newsArticle") html = newsArticlePage(found.item);
   else if (found.type === "loanOfficer") html = loanOfficerPage(found.item);
   else if (found.type === "branch") html = branchPage(found.item);
   else if (found.type === "calculator") html = calculatorPage(found.item);
+  else if (found.type === "directory" && found.item.route === "/calculators") html = calculatorsHubPage(found.item);
   else if (found.type === "directory") html = directoryPage(found.item);
 
   setDocumentMeta(found, path);
   app.innerHTML = html;
   document.body.classList.remove("no-scroll");
   wireInteractions();
+  if (found?.type === "contributor") {
+    trackPublicEvent("contributor_profile_view", { contributorId: found.item.id });
+  } else if (found?.type === "blog" && found.item.route === "/learning-center/editorial-team") {
+    trackPublicEvent("contributor_directory_view");
+  }
+  window.initSnapSlotHero?.();
   flushPendingSave();
   requestAnimationFrame(scrollToCurrentAnchor);
   if (found?.type === "newsArticle") void hydrateDirectArticle(found.item);
@@ -2424,6 +3141,12 @@ function handlePopstate(event) {
 }
 
 function wireInteractions() {
+  document.querySelectorAll("[data-contributor-portrait]").forEach((portrait) => {
+    portrait.addEventListener("error", () => {
+      if (portrait.getAttribute("src") !== silhouetteDataUri) portrait.setAttribute("src", silhouetteDataUri);
+    }, { once: true });
+  });
+
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-nav]");
   toggle?.addEventListener("click", () => {
@@ -2457,6 +3180,13 @@ function wireInteractions() {
   document.removeEventListener("keydown", handleDocumentKeydown);
   document.addEventListener("keydown", handleDocumentKeydown);
 
+  wireRatesMarketplace(app, {
+    fixture: ratesMarketplaceFixture,
+    accountContext: sessionState,
+    navigate,
+    track: trackPublicEvent
+  });
+
   document.querySelectorAll("[data-auth-action]").forEach((button) => {
     button.addEventListener("click", () => {
       closeAccountMenu({ restoreFocus: false });
@@ -2487,6 +3217,17 @@ function wireInteractions() {
     });
   });
 
+  document.querySelectorAll("[data-provider-start]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openModal({
+        eyebrow: "Snap prequal",
+        title: `Continue with ${button.getAttribute("data-provider-name") || "your selected provider"}`,
+        body: "Snap is ready to carry your selected provider and saved comparison details into the connected prequalification path.",
+        actions: [{ label: "Continue", onClick: closeModal }]
+      });
+    });
+  });
+
   document.querySelectorAll("[data-save-action]").forEach((button) => {
     button.addEventListener("click", () => saveToAccount(button, button.getAttribute("data-save-label") || "Saved item"));
   });
@@ -2513,36 +3254,158 @@ function wireInteractions() {
   });
 
   const calcForm = document.querySelector("[data-calculator-form]");
+  let calculatorFrame = 0;
+  const scheduleCalculatorUpdate = () => {
+    if (!calcForm) return;
+    window.cancelAnimationFrame(calculatorFrame);
+    calculatorFrame = window.requestAnimationFrame(() => calcForm.requestSubmit());
+  };
+  calcForm?.querySelectorAll("[data-calculator-slider]").forEach((slider) => {
+    const name = slider.getAttribute("data-calculator-slider");
+    const input = name ? [...calcForm.querySelectorAll("[data-calculator-input]")].find((field) => field.getAttribute("data-calculator-input") === name) : null;
+    const syncSliderProgress = () => {
+      const min = Number(slider.min) || 0;
+      const max = Number(slider.max) || 100;
+      const value = Number(slider.value) || 0;
+      const percent = max > min ? ((value - min) / (max - min)) * 100 : 0;
+      slider.style.setProperty("--slider-progress", `${Math.max(0, Math.min(percent, 100))}%`);
+    };
+    syncSliderProgress();
+    slider.addEventListener("input", () => {
+      if (input) input.value = slider.value;
+      syncSliderProgress();
+      scheduleCalculatorUpdate();
+    });
+    input?.addEventListener("input", () => {
+      const value = Number(input.value);
+      if (Number.isFinite(value)) {
+        slider.value = String(Math.max(Number(slider.min), Math.min(Number(slider.max), value)));
+        syncSliderProgress();
+        scheduleCalculatorUpdate();
+      }
+    });
+  });
+  const downInput = calcForm?.querySelector('[data-calculator-input="down"]');
+  const priceInput = calcForm?.querySelector('[data-calculator-input="price"]');
+  const downPercentInput = calcForm?.querySelector("[data-down-percent]");
+  const downSlider = calcForm?.querySelector('[data-calculator-slider="down"]');
+  const priceSlider = calcForm?.querySelector('[data-calculator-slider="price"]');
+  const setSliderProgress = (slider) => {
+    if (!slider) return;
+    const min = Number(slider.min) || 0;
+    const max = Number(slider.max) || 100;
+    const value = Number(slider.value) || 0;
+    const percent = max > min ? ((value - min) / (max - min)) * 100 : 0;
+    slider.style.setProperty("--slider-progress", `${Math.max(0, Math.min(percent, 100))}%`);
+  };
+  const syncDownPercentFromAmount = () => {
+    if (!downInput || !priceInput || !downPercentInput) return;
+    const price = Number(priceInput.value) || 0;
+    const down = Number(downInput.value) || 0;
+    downPercentInput.value = price > 0 ? String(Math.round((down / price) * 1000) / 10) : "0";
+  };
+  const syncDownAmountFromPercent = () => {
+    if (!downInput || !priceInput || !downPercentInput) return;
+    const price = Number(priceInput.value) || 0;
+    const percent = Number(downPercentInput.value) || 0;
+    const nextDown = Math.max(0, Math.round(price * percent / 100));
+    downInput.value = String(nextDown);
+    if (downSlider) {
+      downSlider.value = String(Math.max(Number(downSlider.min), Math.min(Number(downSlider.max), nextDown)));
+      setSliderProgress(downSlider);
+    }
+  };
+  downInput?.addEventListener("input", syncDownPercentFromAmount);
+  priceInput?.addEventListener("input", syncDownPercentFromAmount);
+  downSlider?.addEventListener("input", syncDownPercentFromAmount);
+  priceSlider?.addEventListener("input", syncDownPercentFromAmount);
+  downPercentInput?.addEventListener("input", () => {
+    syncDownAmountFromPercent();
+    scheduleCalculatorUpdate();
+  });
+  syncDownPercentFromAmount();
+  calcForm?.querySelectorAll("[data-calculator-input]").forEach((input) => {
+    input.addEventListener("input", scheduleCalculatorUpdate);
+  });
+  const updateDpaVisibility = () => {
+    const dpaOption = calcForm?.querySelector("[data-dpa-option]");
+    if (!dpaOption) return;
+    const selected = calcForm.querySelector('input[name="program"]:checked')?.value || "";
+    const checkbox = dpaOption.querySelector('input[type="checkbox"]');
+    const isEligible = ["conventional", "fha"].includes(selected);
+    dpaOption.hidden = !isEligible;
+    dpaOption.classList.toggle("disabled", !isEligible);
+    if (checkbox) {
+      checkbox.disabled = !isEligible;
+      if (!isEligible) checkbox.checked = false;
+    }
+  };
+  updateDpaVisibility();
+  calcForm?.querySelectorAll('input[name="program"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      calcForm.querySelectorAll(".product-toggle").forEach((toggle) => toggle.classList.remove("active"));
+      input.closest(".product-toggle")?.classList.add("active");
+      updateDpaVisibility();
+      scheduleCalculatorUpdate();
+    });
+  });
   calcForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const form = new FormData(calcForm);
     const kind = calcForm.dataset.calculatorKind || "payment";
+    const selectedProgram = form.get("program")?.toString() || "conventional";
+    const product = calculatorProductModules[selectedProgram] || calculatorProductModules.conventional;
     const price = Number(form.get("price")) || 0;
     const down = Number(form.get("down")) || 0;
-    const rate = (Number(form.get("rate")) || 0) / 100 / 12;
+    const annualRate = Number(form.get("rate")) || 0;
+    const rate = annualRate / 100 / 12;
     const tax = ((Number(form.get("tax")) || 0) + (Number(form.get("taxInsurance")) || 0)) / 12;
     const insurance = (Number(form.get("insurance")) || 0) / 12;
-    const principal = Math.max(price - down, 0);
+    const hoa = Number(form.get("hoa")) || 0;
     const months = Math.max((Number(form.get("termYears")) || 30) * 12, 1);
+    const rawPrincipal = Math.max(price - down, 0);
+    const upfrontFee = rawPrincipal * (product.upfrontFeeRate || 0);
+    const principal = rawPrincipal + upfrontFee;
     const pi = rate > 0 ? (principal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : principal / months;
+    const ltv = price > 0 ? rawPrincipal / price : 0;
+    const monthlyMi = selectedProgram === "conventional" && ltv > 0.8
+      ? rawPrincipal * 0.0046 / 12
+      : rawPrincipal * (product.annualMiRate || 0) / 12;
+    const minDown = price * (product.minDownRate || 0);
+    const dummyConformingLimit = 806500;
+    const dummyFhaLimit = 524225;
+    const zip = form.get("zip")?.toString() || "";
+    const isUsdaEligibleZip = ["37601", "72712", "65201"].includes(zip);
+    const guardrails = [];
+    if (down + 1 < minDown) guardrails.push(`Minimum down payment shown for ${product.label}: $${Math.round(minDown).toLocaleString()}.`);
+    if (selectedProgram === "conventional" && rawPrincipal > dummyConformingLimit) guardrails.push("Loan amount is above the dummy conforming limit; route to jumbo/conforming review.");
+    if (selectedProgram === "fha" && rawPrincipal > dummyFhaLimit) guardrails.push("Base loan amount is above the dummy FHA county limit; needs HUD limit review.");
+    if (selectedProgram === "va") guardrails.push("VA output requires eligibility, occupancy, entitlement, and funding-fee exemption review.");
+    if (selectedProgram === "usda" && !isUsdaEligibleZip) guardrails.push("USDA is location/income gated in dummy data for this ZIP.");
     let title = "Estimated payment";
-    let payment = pi + tax + insurance;
-    let note = "Includes principal, interest, taxes, and insurance based on the visible inputs.";
+    let payment = pi + tax + insurance + hoa + monthlyMi;
+    let note = `Uses ${product.label} assumptions. Includes principal, interest, taxes, insurance, HOA, and ${product.miLabel}.`;
     let chartTitle = "Monthly estimate breakdown";
     let chartSummary = "This chart updates from the inputs shown in the calculator.";
     let chartPoints = [
       { label: "Principal and interest", value: pi },
       { label: "Taxes", value: tax },
       { label: "Insurance", value: insurance },
+      { label: "HOA", value: hoa },
+      { label: product.miLabel, value: monthlyMi },
     ];
     let chartOptions = {};
+    let secondaryMetricLabel = "Cash to close";
+    let secondaryMetricValue = Math.max(down + (Number(form.get("closingCosts")) || price * 0.018), minDown);
+    let comparisonVisual = "";
 
     if (kind === "affordability") {
       const monthlyIncome = (Number(form.get("income")) || 0) / 12;
       const debts = Number(form.get("debts")) || 0;
-      payment = Math.max(monthlyIncome * 0.36 - debts, 0);
+      const dtiCap = selectedProgram === "fha" ? 0.43 : selectedProgram === "va" ? 0.41 : selectedProgram === "usda" ? 0.39 : 0.36;
+      payment = Math.max(monthlyIncome * dtiCap - debts, 0);
       title = "Estimated target payment";
-      note = "Uses a simple 36% debt-to-income planning assumption before lender review.";
+      note = `Uses a simple ${Math.round(dtiCap * 100)}% ${product.label} debt-to-income planning assumption before lender review.`;
       chartTitle = "Monthly affordability budget";
       chartSummary = "This planning view separates the target housing amount from the income and debt inputs shown above.";
       chartPoints = [
@@ -2551,47 +3414,104 @@ function wireInteractions() {
         { label: "Remaining gross income", value: Math.max(monthlyIncome - debts - payment, 0) },
       ];
       chartOptions = { valueHeader: "Monthly budget" };
+      secondaryMetricLabel = "Cash available";
+      secondaryMetricValue = down;
     } else if (kind === "refinance") {
       const balance = Number(form.get("balance")) || 0;
-      const refinancePi = rate > 0 ? (balance * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : balance / months;
+      const refiUpfrontFee = balance * (product.upfrontFeeRate || 0);
+      const refinancePrincipal = balance + refiUpfrontFee;
+      const refinancePi = rate > 0 ? (refinancePrincipal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : refinancePrincipal / months;
       const currentPayment = Number(form.get("currentPayment")) || 0;
       const closingCosts = Number(form.get("closingCosts")) || 0;
-      const savings = currentPayment - refinancePi;
-      payment = refinancePi;
+      const currentEscrow = (Number(form.get("currentTax")) || 0) + (Number(form.get("currentInsurance")) || 0) + (Number(form.get("currentMi")) || 0);
+      const newEscrow = (Number(form.get("newTax")) || 0) + (Number(form.get("newInsurance")) || 0) + (Number(form.get("newMi")) || 0);
+      const refinanceType = form.get("refinanceType")?.toString() || "standard refinance";
+      const currentTotal = currentPayment + currentEscrow;
+      const newTotal = refinancePi + newEscrow;
+      const savings = currentTotal - newTotal;
+      payment = newTotal;
       title = "Estimated new payment";
-      note = savings > 0 ? `Approximate monthly payment change: $${Math.round(savings).toLocaleString()} lower. Estimated breakeven: ${Math.max(Math.ceil(closingCosts / savings), 1)} months.` : "This scenario does not show a lower monthly principal-and-interest payment.";
+      note = savings > 0 ? `${product.label} ${refinanceType} module shows an approximate $${Math.round(savings).toLocaleString()} monthly reduction. Estimated breakeven: ${Math.max(Math.ceil(closingCosts / savings), 1)} months.` : `${product.label} ${refinanceType} module does not show a lower total monthly payment with current dummy inputs.`;
       chartTitle = "Refinance payment comparison";
-      chartSummary = "Compare the current payment and new principal-and-interest estimate using the inputs shown.";
+      chartSummary = "Compare current and new mortgage payments with taxes, insurance, and MI assumptions included from Advanced settings.";
       chartPoints = [
-        { label: "Current payment", value: currentPayment },
-        { label: "New principal and interest", value: refinancePi },
+        { label: "Current mortgage", value: currentTotal },
+        { label: "New mortgage", value: newTotal },
         { label: savings >= 0 ? "Estimated monthly reduction" : "Estimated monthly increase", value: Math.abs(savings) },
       ];
       chartOptions = { chartType: "bar", valueHeader: "Monthly amount" };
+      comparisonVisual = `${twoBarComparison({
+        title: "Current vs new mortgage",
+        summary: "Two-bar comparison including principal and interest plus tax, insurance, and MI assumptions.",
+        leftLabel: "Current mortgage",
+        leftValue: currentTotal,
+        rightLabel: "New mortgage",
+        rightValue: newTotal,
+      })}${uploadMortgageStatementCta()}`;
+      secondaryMetricLabel = "Closing costs";
+      secondaryMetricValue = closingCosts;
     } else if (kind === "rentBuy") {
       const rent = Number(form.get("rent")) || 0;
       const timeline = Number(form.get("timeline")) || 1;
+      const rentGrowth = (Number(form.get("rentGrowth")) || 0) / 100;
+      const futureRent = rent * Math.pow(1 + rentGrowth, timeline);
       title = "Estimated buy payment";
-      note = `Compare against $${Math.round(rent).toLocaleString()} rent over a ${timeline}-year planning horizon.`;
+      note = `Compare ${product.label} ownership assumptions against $${Math.round(rent).toLocaleString()} rent today and about $${Math.round(futureRent).toLocaleString()} after ${timeline} years.`;
       chartTitle = "Rent and buy payment comparison";
       chartSummary = "Compare the monthly rent and estimated purchase payment from the inputs shown.";
       chartPoints = [
         { label: "Monthly rent", value: rent },
         { label: "Estimated buy payment", value: payment },
+        { label: "Future rent", value: futureRent },
       ];
       chartOptions = { chartType: "bar", valueHeader: "Monthly amount" };
+      comparisonVisual = rentBuyLineComparison({ rent, buyPayment: payment, rentGrowth, timeline, price, down, annualRate, termYears: Number(form.get("termYears")) || 30 });
+      secondaryMetricLabel = "Time horizon";
+      secondaryMetricValue = timeline;
+    } else if (kind === "downPayment") {
+      title = "Estimated cash needed";
+      const closingCostEstimate = price * 0.04;
+      const dpaEligible = ["conventional", "fha"].includes(selectedProgram);
+      const applyDpa = dpaEligible && form.get("applyDpa") === "yes";
+      const dpaAssistance = applyDpa
+        ? Math.min(minDown + closingCostEstimate, selectedProgram === "fha" ? price * 0.035 : price * 0.03)
+        : 0;
+      const baseCashNeeded = minDown + closingCostEstimate;
+      payment = Math.max(baseCashNeeded - dpaAssistance, 0);
+      note = `${product.label} module estimates minimum down payment plus 4% closing costs${applyDpa ? " after a dummy DPA offset" : ""}. Monthly payment estimate: $${Math.round(pi + tax + insurance + monthlyMi).toLocaleString()}.`;
+      chartTitle = "Cash needed by component";
+      chartSummary = "Estimate product-dependent cash needed before lender, property, and assistance-program review.";
+      chartPoints = [
+        { label: "Minimum down payment", value: minDown },
+        { label: "Closing costs (4%)", value: closingCostEstimate },
+        { label: "DPA estimate", value: dpaAssistance },
+      ];
+      chartOptions = { chartType: "bar", valueHeader: "Estimated cash" };
+      secondaryMetricLabel = "Cash available";
+      secondaryMetricValue = down;
+      comparisonVisual = "";
+      var downPaymentVisualMeta = {
+        productLabel: product.label,
+        minDown,
+        closingCosts: closingCostEstimate,
+        dpaAssistance,
+        baseRequired: baseCashNeeded,
+      };
     }
     const result = document.querySelector("[data-calculator-result]");
     if (result) {
+      const guardrailMarkup = guardrails.length
+        ? `<div class="guardrail-list"><h3>Product guardrails</h3><ul>${guardrails.map((item) => `<li>${esc(item)}</li>`).join("")}</ul></div>`
+        : `<div class="guardrail-list ok"><h3>Product guardrails</h3><p>No dummy rule conflicts for the visible scenario. Final review still required.</p></div>`;
       result.innerHTML = `
         <h2>${esc(title)}</h2>
-        <div class="metric"><span>Monthly amount</span><strong>$${Math.round(payment).toLocaleString()}</strong><p>${esc(note)}</p></div>
+        ${calculatorResultVisual({ title, payment, points: chartPoints, kind, metricLabel: kind === "downPayment" ? "Estimated cash needed" : title, note, principal, monthlyRate: rate, months, availableCash: down, ...(downPaymentVisualMeta || {}) })}
+        ${comparisonVisual}
+        <div class="product-status ${esc(product.className)}"><strong>${esc(product.label)}: ${esc(product.status)}</strong><span>${esc(product.notes.join(" "))}</span></div>
+        ${guardrailMarkup}
         ${calculatedScenarioChart(calcForm.dataset.calculatorId || "calc-payment", chartTitle, chartSummary, chartPoints, chartOptions)}
-        <div class="cta-inline-actions">
-          ${ctaButton("loContact", { label: "Discuss these numbers" })}
-          ${ctaButton("watchlist", { variant: "secondary", label: "Save scenario" })}
-        </div>
       `;
+      wireRentBuyComparisonTabs(result);
       result.querySelectorAll("[data-cta-action]").forEach((button) => {
         button.addEventListener("click", () => {
           closeAccountMenu({ restoreFocus: false });
@@ -2603,6 +3523,7 @@ function wireInteractions() {
       });
     }
   });
+  if (calcForm) calcForm.requestSubmit();
 
   wireDirectoryFilters();
   document.querySelectorAll("[data-news-carousel]").forEach((button) => {
@@ -2638,6 +3559,35 @@ function wireDirectoryFilters() {
   input?.addEventListener("input", applyFilter);
 }
 
+function wireRentBuyComparisonTabs(root = document) {
+  const analysisGroups = Array.from(root.querySelectorAll("[data-analysis-tabs]"));
+  analysisGroups.forEach((group) => {
+    const viewButtons = Array.from(group.querySelectorAll("[data-analysis-tab]"));
+    const viewPanels = Array.from(group.querySelectorAll("[data-analysis-panel]"));
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = button.getAttribute("data-analysis-tab");
+        viewButtons.forEach((item) => item.classList.toggle("active", item === button));
+        viewPanels.forEach((panel) => {
+          panel.classList.toggle("active", panel.getAttribute("data-analysis-panel") === view);
+        });
+      });
+    });
+  });
+  const buttons = Array.from(root.querySelectorAll("[data-rent-buy-year]"));
+  if (!buttons.length) return;
+  const panels = Array.from(root.querySelectorAll("[data-rent-buy-year-panel]"));
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const year = button.getAttribute("data-rent-buy-year");
+      buttons.forEach((item) => item.classList.toggle("active", item === button));
+      panels.forEach((panel) => {
+        panel.classList.toggle("active", panel.getAttribute("data-rent-buy-year-panel") === year);
+      });
+    });
+  });
+}
+
 function scrollToCurrentAnchor() {
   const anchor = currentAnchor();
   if (!anchor) {
@@ -2654,18 +3604,27 @@ function scrollToCurrentAnchor() {
 
 async function boot() {
   try {
-    const [response, optionalNews, optionalMedia, optionalMarketCharts] = await Promise.all([
+    const [response, optionalNews, optionalMedia, optionalMarketCharts, optionalRatesMarketplace, optionalContributors, optionalTopicHubs] = await Promise.all([
       fetch(DATA_URL),
       fetchOptionalJson(NEWS_INDEX_URL),
       fetchOptionalJson(NEWS_MEDIA_URL),
-      fetchOptionalJson(MARKET_CHART_FIXTURES_URL)
+      fetchOptionalJson(MARKET_CHART_FIXTURES_URL),
+      fetchOptionalJson(RATES_MARKETPLACE_FIXTURE_URL),
+      fetchOptionalJson(CONTRIBUTORS_URL),
+      fetchOptionalJson(TOPIC_HUBS_URL)
     ]);
     if (!response.ok) throw new Error("Site data could not be loaded.");
-    data = await response.json();
+    const loadedData = await response.json();
+    editorialContent = loadOptionalEditorialContent(optionalContributors, optionalTopicHubs);
+    data = {
+      ...loadedData,
+      articles: applyArticleAuthorIds(editorialContent, loadedData.articles)
+    };
     newsIndex = optionalNews || { articles: [] };
     mediaManifest = optionalMedia || { media: [] };
     marketChartFixtures = loadOptionalMarketChartFixtures(optionalMarketCharts);
-    maps = buildMaps(data, newsIndex, mediaManifest);
+    ratesMarketplaceFixture = optionalRatesMarketplace;
+    maps = buildMaps(data, newsIndex, mediaManifest, editorialContent);
     loadSessionState();
     render();
     window.addEventListener("popstate", handlePopstate);
@@ -2687,6 +3646,17 @@ async function fetchOptionalJson(url) {
     return response.ok ? response.json() : null;
   } catch {
     return null;
+  }
+}
+
+function loadOptionalEditorialContent(contributorsRaw, topicHubsRaw) {
+  try {
+    return normalizeEditorialContent({
+      contributors: contributorsRaw,
+      topicHubs: topicHubsRaw
+    });
+  } catch {
+    return normalizeEditorialContent();
   }
 }
 

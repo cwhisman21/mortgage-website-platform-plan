@@ -1,5 +1,5 @@
 {
-  "version": "snap-editorial-topic-hubs-v1",
+  "version": "snap-editorial-topic-hubs-v2",
   "topicHubs": [
     {
       "id": "topic-hub-rates-economy",
@@ -76,6 +76,564 @@
       "contributorId": "contributor-priya-bennett",
       "public": false,
       "articleIds": []
+    },
+    {
+      "id": "blog-local-market-updates",
+      "slug": "local-market-updates",
+      "name": "Local Market Updates",
+      "route": "/learning-center/local-market-updates",
+      "topic": "local_market_updates",
+      "public": true,
+      "contributorId": "contributor-maya-brooks",
+      "contributorIds": [
+        "contributor-maya-brooks",
+        "contributor-priya-bennett"
+      ],
+      "heroSummary": "Follow dated housing evidence for the places you are considering, then connect prices, supply, taxes, insurance, and financing conditions to your own monthly budget.",
+      "overviewParagraphs": [
+        "A local headline is only a starting point. The useful questions are when the data was measured, which geography it covers, and whether it describes asking prices, closed sales, inventory, or a broader economic signal.",
+        "Use these updates to narrow the facts worth checking before you make an offer or revisit a loan. A citywide trend cannot predict one property, so compare current listings, property-specific costs, and a reviewed financing scenario before acting."
+      ],
+      "whyItMatters": "The same loan amount can feel very different across markets once property taxes, homeowners insurance, association dues, inventory, and price movement enter the payment. Dated local evidence helps you identify which assumptions need a fresh check.",
+      "startHere": [
+        {
+          "title": "Choose the place",
+          "text": "Begin with the city or state that matches your search instead of relying on a national average.",
+          "linkId": "directory-locations"
+        },
+        {
+          "title": "Check the evidence date",
+          "text": "Read the as-of date and source before carrying a market figure into your budget.",
+          "linkId": "article-austin-market-update"
+        },
+        {
+          "title": "Rebuild the payment",
+          "text": "Test the home price and local ownership costs together, then leave room for property-specific changes.",
+          "linkId": "calc-payment"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Price and supply",
+          "text": "Separate list-price movement from closed-sale evidence, and read inventory or time-on-market measures in their stated period."
+        },
+        {
+          "title": "Local ownership costs",
+          "text": "Check taxes, insurance, association dues, and assessments for the actual property and jurisdiction."
+        },
+        {
+          "title": "Financing context",
+          "text": "Compare rate, APR, cash to close, and payment assumptions for your scenario rather than treating a market trend as a loan quote."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-austin-market-update",
+        "article-irvine-market-update",
+        "article-tampa-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Put the market in context",
+        "title": "Check the places on your shortlist.",
+        "text": "Open a city or state page to compare current local context, nearby loan officers, and the costs that may shape your payment.",
+        "label": "Browse locations",
+        "href": "/locations"
+      }
+    },
+    {
+      "id": "blog-buying-a-home",
+      "slug": "buying-a-home",
+      "name": "Buying a Home",
+      "route": "/learning-center/buying-a-home",
+      "topic": "buying",
+      "public": true,
+      "contributorId": "contributor-jordan-avery",
+      "contributorIds": [
+        "contributor-jordan-avery"
+      ],
+      "heroSummary": "Build a purchase plan around the full monthly cost, cash needed at closing, and the steps between early budgeting and a property-specific loan review.",
+      "overviewParagraphs": [
+        "A comfortable home price starts with more than principal and interest. Property taxes, homeowners insurance, mortgage insurance when applicable, association dues, maintenance, closing costs, and reserves can all affect the amount you are ready to spend.",
+        "Move in sequence: set a budget range, compare loan paths, organize documents, study the local market, and revisit the numbers when a real property enters the picture. Early estimates are planning tools, not final loan terms."
+      ],
+      "whyItMatters": "Purchase decisions combine a long-term loan with an immediate cash commitment and a property that has its own costs. A clear sequence helps you avoid using the listing price or headline rate as the whole affordability answer.",
+      "startHere": [
+        {
+          "title": "Set a workable range",
+          "text": "Estimate a monthly housing budget alongside your other goals and recurring obligations.",
+          "linkId": "calc-affordability"
+        },
+        {
+          "title": "Count cash beyond the down payment",
+          "text": "Plan for closing costs, prepaid items, moving expenses, and reserves before deciding how much to put down.",
+          "linkId": "calc-down-payment"
+        },
+        {
+          "title": "Prepare for local decisions",
+          "text": "Use a buyer checklist to connect your financing plan with property and market questions.",
+          "linkId": "article-first-time-buyer"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Monthly comfort",
+          "text": "Compare the full estimated housing payment with the room you want for savings, repairs, and other priorities."
+        },
+        {
+          "title": "Upfront cash",
+          "text": "Review down payment, closing costs, prepaid taxes and insurance, deposits, and the reserves you want to keep."
+        },
+        {
+          "title": "Loan path",
+          "text": "Compare program rules, mortgage insurance, rate and APR, term, property fit, and documentation rather than choosing on one feature."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-first-time-buyer",
+        "article-move-up-buyer",
+        "article-fha-basics"
+      ],
+      "closingCta": {
+        "eyebrow": "Test your budget",
+        "title": "Turn a price range into a monthly plan.",
+        "text": "Use the affordability calculator to explore a starting range, then update the estimate when taxes, insurance, and a specific property are known.",
+        "label": "Estimate affordability",
+        "href": "/calculators/affordability"
+      }
+    },
+    {
+      "id": "blog-refinance",
+      "slug": "refinance",
+      "name": "Refinance",
+      "route": "/learning-center/refinance",
+      "topic": "refinance",
+      "public": true,
+      "contributorId": "contributor-elena-park",
+      "contributorIds": [
+        "contributor-elena-park"
+      ],
+      "heroSummary": "Compare a proposed refinance with the loan you have now, including closing costs, breakeven timing, term changes, and total interest over the period you expect to keep the loan.",
+      "overviewParagraphs": [
+        "A lower rate or monthly payment does not settle the decision. Refinancing replaces the current loan, so the new balance, APR, fees, term, mortgage insurance, cash received, and time needed to recover costs all belong in the comparison.",
+        "Start with a goal such as changing payment structure, shortening the term, or accessing equity. Then compare the current and proposed loans over the same time horizon. Actual options depend on borrower, property, equity, and market details."
+      ],
+      "whyItMatters": "Resetting a loan can improve one part of the budget while increasing another cost or extending repayment. Looking at both near-term cash flow and longer-term cost makes the tradeoff visible.",
+      "startHere": [
+        {
+          "title": "Name the goal",
+          "text": "Be specific about whether you want a different payment, term, rate structure, or amount of cash from equity.",
+          "linkId": "article-refinance-basics"
+        },
+        {
+          "title": "Build the side-by-side",
+          "text": "Compare the current loan and proposed loan using the same time period and complete cost assumptions.",
+          "linkId": "calc-refinance"
+        },
+        {
+          "title": "Check the recovery period",
+          "text": "Estimate how long monthly savings, if any, would take to offset closing costs and fees.",
+          "linkId": "product-refinance"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Payment change",
+          "text": "Separate principal and interest from taxes, insurance, association dues, and mortgage insurance that may also change."
+        },
+        {
+          "title": "Cost to refinance",
+          "text": "Review lender charges, third-party costs, points or credits, prepaid items, and any amount added to the new balance."
+        },
+        {
+          "title": "Time and total cost",
+          "text": "Consider breakeven timing, the new payoff schedule, and interest paid during the years you expect to keep the loan."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-refinance-basics",
+        "article-cash-out-guide",
+        "article-houston-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Compare both loans",
+        "title": "See where a refinance may change the math.",
+        "text": "Enter your current loan and a proposed scenario to compare estimated payment, costs, and breakeven timing before requesting personalized terms.",
+        "label": "Compare refinance scenarios",
+        "href": "/calculators/refinance"
+      }
+    },
+    {
+      "id": "blog-fha-loans",
+      "slug": "fha-loans",
+      "name": "FHA Loans",
+      "route": "/learning-center/fha-loans",
+      "topic": "fha",
+      "public": true,
+      "contributorId": "contributor-marcus-lane",
+      "contributorIds": [
+        "contributor-marcus-lane"
+      ],
+      "heroSummary": "Understand how FHA-insured financing approaches down payment, mortgage insurance, property review, and borrower qualification before comparing it with conventional options.",
+      "overviewParagraphs": [
+        "FHA loans are made by approved lenders and insured by the Federal Housing Administration. That insurance shapes program rules and mortgage insurance costs; it does not mean the government is promising approval or lending directly to the borrower.",
+        "The right comparison includes the full payment, cash to close, mortgage insurance over time, property requirements, and the lender's review of income, credit, debts, and funds. Limits and program details can vary by property location and loan scenario."
+      ],
+      "whyItMatters": "FHA financing may open a useful purchase path, but down payment alone does not show its total cost or fit. Mortgage insurance, property condition, loan limits, and future plans can change the result.",
+      "startHere": [
+        {
+          "title": "Understand the structure",
+          "text": "Review how FHA insurance, lender underwriting, occupancy, and property requirements work together.",
+          "linkId": "article-fha-basics"
+        },
+        {
+          "title": "Estimate the whole payment",
+          "text": "Include principal, interest, taxes, homeowners insurance, and applicable mortgage insurance in the budget.",
+          "linkId": "calc-payment"
+        },
+        {
+          "title": "Compare another path",
+          "text": "Put FHA and conventional scenarios side by side using terms available for the same property and borrower facts.",
+          "linkId": "product-conventional"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Cash to close",
+          "text": "Compare down payment, closing costs, prepaid items, seller contributions when permitted, and reserves."
+        },
+        {
+          "title": "Mortgage insurance",
+          "text": "Review upfront and ongoing FHA mortgage insurance alongside any mortgage insurance in a conventional scenario."
+        },
+        {
+          "title": "Property and timeline",
+          "text": "Ask how appraisal and property standards, documentation, loan limits, and closing timing apply to the home."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-fha-basics",
+        "article-first-time-buyer",
+        "article-orlando-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Review program fit",
+        "title": "Compare FHA with the alternatives available to you.",
+        "text": "See the FHA loan overview, then ask a licensed loan officer to compare complete scenarios for your property, budget, and timeline.",
+        "label": "Explore FHA loans",
+        "href": "/loan-options/fha-loans"
+      }
+    },
+    {
+      "id": "blog-va-loans",
+      "slug": "va-loans",
+      "name": "VA Loans",
+      "route": "/learning-center/va-loans",
+      "topic": "va",
+      "public": true,
+      "contributorId": "contributor-marcus-lane",
+      "contributorIds": [
+        "contributor-marcus-lane"
+      ],
+      "heroSummary": "See how VA-backed financing connects eligibility, entitlement, the funding fee, property standards, and lender review for an eligible service member, veteran, or surviving spouse.",
+      "overviewParagraphs": [
+        "The VA home loan benefit can support purchase or refinance financing through private lenders, subject to VA rules and lender review. Eligibility and entitlement are important starting points, but the property, occupancy, income, debts, credit, and loan terms still matter.",
+        "A useful VA comparison looks beyond the down payment. Review the funding fee or any applicable exemption, closing costs, rate and APR, seller concessions, property process, and how much cash you want to keep after closing."
+      ],
+      "whyItMatters": "A strong benefit can still be misunderstood when entitlement, fees, property requirements, and lender overlays are collapsed into one promise. Separating those pieces helps borrowers ask better questions without assuming approval or a particular term.",
+      "startHere": [
+        {
+          "title": "Confirm the benefit basics",
+          "text": "Review eligibility, Certificate of Eligibility, entitlement, occupancy, and the lender's role in the process.",
+          "linkId": "article-va-basics"
+        },
+        {
+          "title": "Account for fees and exemptions",
+          "text": "Ask how the VA funding fee, any documented exemption, and other closing costs affect cash and loan amount.",
+          "linkId": "product-va"
+        },
+        {
+          "title": "Connect the loan to the market",
+          "text": "Consider property condition, appraisal timing, and local competition when planning an offer.",
+          "linkId": "article-colorado-springs-market-update"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Benefit use",
+          "text": "Clarify eligibility, available entitlement, prior VA loan use, and occupancy before estimating a scenario."
+        },
+        {
+          "title": "Upfront structure",
+          "text": "Compare down payment choices, funding fee treatment, closing costs, seller-paid items, and retained reserves."
+        },
+        {
+          "title": "Offer and property process",
+          "text": "Plan for appraisal, property requirements, contract timing, and lender documentation without treating them as automatic barriers."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-va-basics",
+        "article-san-diego-market-update",
+        "article-colorado-springs-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Use the benefit deliberately",
+        "title": "Bring your entitlement and purchase questions together.",
+        "text": "Review the VA loan path and discuss your Certificate of Eligibility, property, costs, and timing with a licensed loan officer.",
+        "label": "Review VA loan options",
+        "href": "/loan-options/va-loans"
+      }
+    },
+    {
+      "id": "blog-jumbo-loans",
+      "slug": "jumbo-loans",
+      "name": "Jumbo Loans",
+      "route": "/learning-center/jumbo-loans",
+      "topic": "jumbo",
+      "public": true,
+      "contributorId": "contributor-marcus-lane",
+      "contributorIds": [
+        "contributor-marcus-lane"
+      ],
+      "heroSummary": "Prepare for a larger mortgage by checking the applicable conforming-loan boundary, lender-specific documentation, reserves, valuation, and pricing as one connected decision.",
+      "overviewParagraphs": [
+        "A jumbo loan generally falls above the conforming loan limit that applies to the property and year. Because it is outside standard conforming boundaries, approval standards, reserve expectations, pricing, and documentation can vary meaningfully by lender and scenario.",
+        "Start early when income is complex, assets are spread across accounts, or the property is unusual. Compare rate and APR with points, fees, reserve requirements, down payment, appraisal needs, and the flexibility you want after closing."
+      ],
+      "whyItMatters": "At a larger loan amount, small differences in rate, points, fees, and cash allocation can have a substantial effect. Lender variation also makes a complete, same-scenario comparison more useful than a single advertised rate.",
+      "startHere": [
+        {
+          "title": "Check the boundary",
+          "text": "Confirm the current conforming limit for the property's county and the loan amount you expect to request.",
+          "linkId": "article-jumbo-basics"
+        },
+        {
+          "title": "Map funds and documentation",
+          "text": "Organize income, assets, liabilities, ownership interests, and post-closing reserve questions before shopping terms.",
+          "linkId": "product-jumbo"
+        },
+        {
+          "title": "Stress-test the payment",
+          "text": "Model taxes, insurance, association dues, and a range of financing assumptions for the specific property.",
+          "linkId": "calc-payment"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Liquidity after closing",
+          "text": "Compare down payment and reserve expectations with the cash and investments you want to preserve."
+        },
+        {
+          "title": "Documentation fit",
+          "text": "Ask how each lender evaluates income, assets, business ownership, large deposits, and complex property types."
+        },
+        {
+          "title": "Price and structure",
+          "text": "Review rate, APR, points, lender credits, fees, term, and adjustable or fixed features on matching scenarios."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-jumbo-basics",
+        "article-irvine-market-update",
+        "article-boulder-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Prepare the larger scenario",
+        "title": "Compare jumbo terms with your liquidity in view.",
+        "text": "Explore jumbo financing, then review lender-specific documentation, reserves, valuation, and complete loan costs for the property.",
+        "label": "Explore jumbo loans",
+        "href": "/loan-options/jumbo-loans"
+      }
+    },
+    {
+      "id": "blog-home-equity",
+      "slug": "home-equity",
+      "name": "Home Equity",
+      "route": "/learning-center/home-equity",
+      "topic": "home_equity",
+      "public": true,
+      "contributorId": "contributor-elena-park",
+      "contributorIds": [
+        "contributor-elena-park"
+      ],
+      "heroSummary": "Compare ways to borrow against home equity without losing sight of the house as collateral, the existing first mortgage, changing payments, fees, and total repayment cost.",
+      "overviewParagraphs": [
+        "A HELOC, home equity loan, and cash-out refinance can all turn equity into borrowed funds, but they do it differently. The rate structure, draw access, repayment schedule, closing costs, lien position, and effect on the existing mortgage shape which questions matter.",
+        "Begin with the amount and timing of the need, then compare only realistic scenarios. Equity estimates can change with valuation, and available terms depend on the property, existing liens, borrower finances, lender requirements, and market conditions."
+      ],
+      "whyItMatters": "Equity is not the same as spendable cash. Using it creates debt secured by the home, so payment volatility, repayment timing, fees, and the consequences of replacing a favorable first mortgage deserve close attention.",
+      "startHere": [
+        {
+          "title": "Define the borrowing need",
+          "text": "Write down the amount, timing, whether funds are needed once or over time, and how repayment fits the budget.",
+          "linkId": "article-home-equity-guide"
+        },
+        {
+          "title": "Protect the first-mortgage comparison",
+          "text": "Record the current rate, balance, term, payment, and remaining years before considering cash-out refinancing.",
+          "linkId": "article-cash-out-guide"
+        },
+        {
+          "title": "Review the secured-debt terms",
+          "text": "Compare rate type, draw and repayment periods, fees, minimum payments, and how the balance can change.",
+          "linkId": "product-home-equity"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "HELOC",
+          "text": "Reusable access may fit staged expenses, but variable rates and draw-to-repayment changes can make future payments less predictable."
+        },
+        {
+          "title": "Home equity loan",
+          "text": "A separate lump-sum loan may offer a defined repayment schedule while adding another payment and lien."
+        },
+        {
+          "title": "Cash-out refinance",
+          "text": "One new first mortgage can simplify the loan structure but changes the rate, term, costs, and payment on the full refinanced balance."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-home-equity-guide",
+        "article-cash-out-guide",
+        "article-tampa-market-update"
+      ],
+      "closingCta": {
+        "eyebrow": "Compare secured borrowing",
+        "title": "Match the way you borrow to the way you will repay.",
+        "text": "Review home equity options side by side, including the existing mortgage, rate structure, payment changes, fees, and total debt.",
+        "label": "Compare home equity options",
+        "href": "/home-equity"
+      }
+    },
+    {
+      "id": "blog-taxes-insurance",
+      "slug": "taxes-insurance",
+      "name": "Taxes & Insurance",
+      "route": "/learning-center/taxes-insurance",
+      "topic": "taxes_insurance",
+      "public": true,
+      "contributorId": "contributor-maya-brooks",
+      "contributorIds": [
+        "contributor-maya-brooks",
+        "contributor-priya-bennett"
+      ],
+      "heroSummary": "Estimate property taxes and homeowners insurance with the right jurisdiction, property details, and source date so the non-loan part of the payment is not an afterthought.",
+      "overviewParagraphs": [
+        "Taxes and insurance can materially change the cost of owning two similarly priced homes. Tax assessments, exemptions, local levies, coverage needs, deductibles, insurer pricing, flood or hazard exposure, and association requirements can all be property-specific.",
+        "Use broad estimates to screen a budget, then replace them with information from the relevant tax authority, insurance professionals, property records, and transaction documents. An escrow account collects certain costs with the mortgage payment; it does not fix the underlying bill."
+      ],
+      "whyItMatters": "A principal-and-interest estimate can look affordable while leaving out ownership costs that change by address and over time. Checking them early produces a more durable payment range and fewer surprises before closing.",
+      "startHere": [
+        {
+          "title": "Identify the taxing authority",
+          "text": "Confirm the county, city, school, and other jurisdictions that may affect the property rather than applying a statewide average.",
+          "linkId": "article-texas-tax-guide"
+        },
+        {
+          "title": "Request property-specific insurance information",
+          "text": "Discuss coverage, deductibles, exclusions, hazards, and lender requirements for the actual home.",
+          "linkId": "article-florida-insurance-guide"
+        },
+        {
+          "title": "Update the monthly estimate",
+          "text": "Convert the best available annual figures into the payment plan and keep a cushion for changes.",
+          "linkId": "calc-payment"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Property tax estimate",
+          "text": "Check assessed value, local rates, exemptions, reassessment timing, special assessments, and the authority's effective date."
+        },
+        {
+          "title": "Insurance estimate",
+          "text": "Compare coverage limits, deductibles, exclusions, required endorsements, separate policies, and quote assumptions."
+        },
+        {
+          "title": "Escrow and cash planning",
+          "text": "Understand monthly collection, initial escrow deposits, prepaid items, later analysis, and the possibility of a shortage or surplus."
+        }
+      ],
+      "featuredLinkIds": [
+        "article-texas-tax-guide",
+        "article-california-insurance-guide",
+        "article-florida-insurance-guide"
+      ],
+      "closingCta": {
+        "eyebrow": "Complete the payment picture",
+        "title": "Replace broad estimates with property-specific costs.",
+        "text": "Add the latest tax and insurance information you can obtain to the mortgage payment calculator and revisit it before making a final decision.",
+        "label": "Build a fuller payment",
+        "href": "/calculators/mortgage-payment"
+      }
+    },
+    {
+      "id": "blog-editorial-team",
+      "slug": "editorial-team",
+      "name": "Editorial Team",
+      "route": "/learning-center/editorial-team",
+      "topic": "editorial_trust",
+      "public": true,
+      "contributorIds": [
+        "contributor-rowan-hale",
+        "contributor-maya-brooks",
+        "contributor-jordan-avery",
+        "contributor-elena-park",
+        "contributor-marcus-lane",
+        "contributor-priya-bennett"
+      ],
+      "heroSummary": "Meet the contributors who organize Snap Mortgage coverage around rates, local markets, home buying, refinancing and equity, loan programs, and mortgage data.",
+      "overviewParagraphs": [
+        "Each contributor has a defined coverage area so readers can move from a broad mortgage question to related guides, market updates, and source context. Profiles describe coverage only and do not present contributors as licensed loan officers or personalized advisers.",
+        "Article bylines and dates show who shaped the coverage and when it was published or updated. For a decision that depends on your finances, property, eligibility, or available terms, use the education as a starting point and speak with an appropriately licensed professional."
+      ],
+      "whyItMatters": "Mortgage education is easier to evaluate when the coverage focus, date, assumptions, and source context are visible. Contributor pages give readers a consistent way to find more work on the same kind of decision.",
+      "startHere": [
+        {
+          "title": "Follow a coverage area",
+          "text": "Choose the contributor whose beat matches the question you are trying to answer.",
+          "linkId": "contributor-rowan-hale"
+        },
+        {
+          "title": "Read the date and scope",
+          "text": "Check whether a piece is a dated market update or an evergreen guide, and note the geography and assumptions it covers.",
+          "linkId": "contributor-maya-brooks"
+        },
+        {
+          "title": "Move from education to your facts",
+          "text": "Use related calculators, product pages, and licensed guidance when the answer depends on a specific borrower or property.",
+          "linkId": "directory-loan-officers"
+        }
+      ],
+      "comparisonPoints": [
+        {
+          "title": "Coverage focus",
+          "text": "Contributor beats distinguish market reporting, buyer education, refinance and equity guidance, loan programs, rates, and data interpretation."
+        },
+        {
+          "title": "Source context",
+          "text": "Guides identify the public information, reference dates, geography, and assumptions needed to understand factual claims."
+        },
+        {
+          "title": "Decision boundary",
+          "text": "General education explains questions and tradeoffs; licensed and property-specific review is needed for personalized loan options."
+        }
+      ],
+      "featuredLinkIds": [
+        "contributor-rowan-hale",
+        "contributor-maya-brooks",
+        "contributor-jordan-avery",
+        "contributor-elena-park",
+        "contributor-marcus-lane",
+        "contributor-priya-bennett"
+      ],
+      "closingCta": {
+        "eyebrow": "Find the right coverage",
+        "title": "Browse mortgage guidance by contributor.",
+        "text": "Open a contributor profile to see that person's coverage focus and related articles across the Learning Center.",
+        "label": "Search the Learning Center",
+        "href": "/learning-center/search"
+      }
     }
   ]
 }

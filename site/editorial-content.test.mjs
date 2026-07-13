@@ -82,7 +82,7 @@ test("creates profile route records for every contributor", () => {
   );
 });
 
-test("keeps topic hubs structural without public unfinished copy", () => {
+test("normalizes structural contributor hubs and public Learning Center hubs", () => {
   const content = normalizeEditorialContent({
     contributors: contributorsRaw,
     topicHubs: topicHubsRaw,
@@ -97,10 +97,24 @@ test("keeps topic hubs structural without public unfinished copy", () => {
       "topic-hub-refinancing-equity",
       "topic-hub-loan-programs",
       "topic-hub-mortgage-data",
+      "blog-local-market-updates",
+      "blog-buying-a-home",
+      "blog-refinance",
+      "blog-fha-loans",
+      "blog-va-loans",
+      "blog-jumbo-loans",
+      "blog-home-equity",
+      "blog-taxes-insurance",
+      "blog-editorial-team",
     ],
   );
-  for (const hub of content.topicHubs) {
+  for (const hub of content.topicHubs.slice(0, 6)) {
     assert.equal(hub.public, false);
+    assert.equal(Object.hasOwn(hub, "body"), false);
+    assert.equal(Object.hasOwn(hub, "heroCopy"), false);
+  }
+  for (const hub of content.topicHubs.slice(6)) {
+    assert.equal(hub.public, true);
     assert.equal(Object.hasOwn(hub, "body"), false);
     assert.equal(Object.hasOwn(hub, "heroCopy"), false);
   }

@@ -8,7 +8,7 @@ const homeStart = source.indexOf("function learningHome(");
 const helpersStart = source.indexOf("function learningDiscovery(");
 const topicStart = source.indexOf("function blogTopicPage(");
 const articleStart = source.indexOf("function articlePage(");
-const learningSource = source.slice(homeStart, topicStart);
+const learningSource = source.slice(helpersStart, topicStart);
 
 test("Learning Center renders one search form before canonical topic links", () => {
   assert.ok(homeStart >= 0, "learningHome renderer is missing");
@@ -23,7 +23,7 @@ test("Learning Center renders one search form before canonical topic links", () 
 });
 
 test("Learning Center uses the canonical model and shared CTA helpers", () => {
-  assert.match(learningSource, /buildLearningCenterModel\(data\)/);
+  assert.match(learningSource, /buildLearningCenterModel\(data, editorialContent\)/);
   assert.match(learningSource, /ctaButton\("prequal"/);
   assert.match(learningSource, /contextualCta\(/);
   assert.doesNotMatch(

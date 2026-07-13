@@ -4,6 +4,7 @@ import fs from "node:fs";
 
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const fixtures = JSON.parse(fs.readFileSync(new URL("../mock-data/market-chart-fixtures.json", import.meta.url), "utf8"));
+const productionSeed = JSON.parse(fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"));
 
 test("market chart fixtures cover the approved public surfaces", () => {
   const count = (scope) => fixtures.charts.filter((chart) => chart.scope === scope).length;
@@ -12,7 +13,7 @@ test("market chart fixtures cover the approved public surfaces", () => {
   assert.ok(count("state") >= 102);
   assert.ok(count("city") >= 1474);
   assert.equal(count("product"), 8);
-  assert.equal(count("calculator"), 4);
+  assert.equal(count("calculator"), productionSeed.recommendedCounts.calculators);
   assert.equal(count("article"), 24);
 });
 

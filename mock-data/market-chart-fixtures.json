@@ -113356,6 +113356,54 @@
       }
     },
     {
+      "chartId": "calculator.payment_breakdown",
+      "entityId": "calc-down-payment",
+      "scope": "calculator",
+      "title": "Down Payment Calculator estimate breakdown",
+      "summary": "The calculator updates this estimate when you change the inputs shown on the page.",
+      "chartType": "payment",
+      "unit": "Monthly payment",
+      "frequency": "Calculated from current inputs",
+      "sourceId": "calculator-assumptions",
+      "asOf": "July 2026",
+      "integrationKey": "calculator.breakdown",
+      "dataMode": "planning_illustration",
+      "points": [
+        {
+          "label": "Principal and interest",
+          "value": 2094
+        },
+        {
+          "label": "Taxes",
+          "value": 508
+        },
+        {
+          "label": "Insurance",
+          "value": 389
+        }
+      ],
+      "table": {
+        "headers": [
+          "Payment component",
+          "Monthly estimate"
+        ],
+        "rows": [
+          [
+            "Principal and interest",
+            "$2,094"
+          ],
+          [
+            "Taxes",
+            "$508"
+          ],
+          [
+            "Insurance",
+            "$389"
+          ]
+        ]
+      }
+    },
+    {
       "chartId": "article.evidence",
       "entityId": "article-austin-market-update",
       "scope": "article",
