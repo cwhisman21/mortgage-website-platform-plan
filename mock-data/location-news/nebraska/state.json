@@ -318,8 +318,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-ne-state-labor-market",
@@ -706,8 +706,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-ne-state-housing-costs",
@@ -1238,8 +1238,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-ne-state-loan-limit-landscape",
@@ -1666,8 +1666,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     }
   ]
 }

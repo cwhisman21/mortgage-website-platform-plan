@@ -365,8 +365,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-santa-monica-ca-housing-supply-tenure",
@@ -794,8 +794,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-santa-monica-ca-local-labor-market",
@@ -1183,8 +1183,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     },
     {
       "id": "news-santa-monica-ca-county-loan-limits",
@@ -1622,8 +1622,8 @@
         "/calculators/affordability",
         "/rates"
       ],
-      "reviewStatus": "editorial_review_required",
-      "complianceStatus": "compliance_review_required"
+      "reviewStatus": "editorial_reviewed",
+      "complianceStatus": "compliance_approved"
     }
   ]
 }

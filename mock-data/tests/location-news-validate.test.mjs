@@ -19,6 +19,11 @@ test("accepts a complete evidence-backed article", () => {
   assert.doesNotThrow(() => validateArticle({ ...validArticleFixture, authorId: validAuthorId }));
 });
 
+test("rejects an article that has not cleared publication review", () => {
+  const article = { ...structuredClone(validArticleFixture), reviewStatus: "editorial_review_required" };
+  assert.throws(() => validateArticle(article), /not approved for publication/i);
+});
+
 test("rejects an article without an authorId", () => {
   const article = structuredClone(validArticleFixture);
   delete article.authorId;

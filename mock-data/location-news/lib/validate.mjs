@@ -51,7 +51,7 @@ export function validateArticle(article) {
   if (!CONTRIBUTOR_IDS.has(article.authorId)) throw new Error(`${article.id} has unknown contributor authorId ${article.authorId}`);
   if (!/^\/learning-center\/market-news\/[a-z0-9-]+$/.test(article.route)) throw new Error(`${article.id} has invalid route`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(article.publishedAt) || !/^\d{4}-\d{2}-\d{2}$/.test(article.updatedAt)) throw new Error(`${article.id} has invalid dates`);
-  if (article.reviewStatus !== "editorial_review_required" || article.complianceStatus !== "compliance_review_required") throw new Error(`${article.id} missing review gates`);
+  if (article.reviewStatus !== "editorial_reviewed" || article.complianceStatus !== "compliance_approved") throw new Error(`${article.id} is not approved for publication`);
   if (!Array.isArray(article.sections) || article.sections.length < 5) throw new Error(`${article.id} requires substantive sections`);
   const words = wordCount(article);
   if (words < 600 || words > 900) throw new Error(`${article.id} body word count ${words} is outside 600-900`);

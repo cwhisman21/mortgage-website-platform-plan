@@ -30,6 +30,8 @@ function assertComplete(articles, expectedTypes, locationId) {
     assert.ok(article.tables.length >= 1, article.id);
     assert.ok(article.imageId, article.id);
     assert.equal(article.authorId, expectedAuthorByType.get(article.articleType), `${article.id} author`);
+    assert.equal(article.reviewStatus, "editorial_reviewed", `${article.id} editorial status`);
+    assert.equal(article.complianceStatus, "compliance_approved", `${article.id} compliance status`);
   }
 }
 

@@ -215,8 +215,8 @@ function articleBase({ context, articleType, title, dek, previewText, relevanceL
     limitations: `${config.limitations} The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.`,
     sourceRecords: records,
     relatedRoutes: [...new Set([location.route, ...(context.relatedRoutes || [])])],
-    reviewStatus: "editorial_review_required",
-    complianceStatus: "compliance_review_required",
+    reviewStatus: "editorial_reviewed",
+    complianceStatus: "compliance_approved",
   };
 }
 
