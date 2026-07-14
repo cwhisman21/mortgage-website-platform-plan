@@ -32,6 +32,7 @@
 ## File Structure
 
 - `mock-data/tag-registry.json`: generated canonical public tag records, route assignments, redirect history, related-tag relationships, and competing-page review records.
+- `mock-data/public-tag-registry.json`: slim browser-safe projection of public tag fields and route assignments; it contains no competing-page review inventory or internal audit data.
 - `mock-data/search-index.json`: generated compact discovery records without article bodies or internal evidence.
 - `mock-data/build-tagged-content-search.mjs`: deterministic canonical-source reader, extraction/assignment rules, validation, and JSON writer.
 - `mock-data/tagged-content-search.test.mjs`: generator, assignment, registry, duplicate, forbidden-copy, and compact-index tests.
@@ -55,15 +56,17 @@
 - Create: `mock-data/build-tagged-content-search.mjs`
 - Create: `mock-data/tagged-content-search.test.mjs`
 - Create: `mock-data/tag-registry.json`
+- Create: `mock-data/public-tag-registry.json`
 - Create: `mock-data/search-index.json`
 
 **Interfaces:**
 - Consumes: `production-seed.json`, `editorial-content.json`, `location-news-index.json`, and existing route fields without mutating those sources.
-- Produces: `buildTaggedContentSearch(inputs, options) -> { registry, searchIndex }`, `validateTagRegistry(registry)`, `validateSearchIndex(searchIndex, registry)`, and deterministic JSON artifacts.
+- Produces: `buildTaggedContentSearch(inputs, options) -> { registry, publicTagRegistry, searchIndex }`, `buildPublicTagRegistry(registry)`, `validateTagRegistry(registry)`, `validatePublicTagRegistry(publicTagRegistry)`, `validateSearchIndex(searchIndex, registry)`, and deterministic JSON artifacts.
 - Registry shape: `{ version: 1, updatedAt: "YYYY-MM-DD", tags: TagRecord[], assignments: RouteAssignment[] }`.
 - `TagRecord`: `{ id, displayName, slug, type, description, sourceRoutes, relatedTagIds, canonicalRoute, createdAt, reviewedAt, updatedAt, redirectSlugs, competingPageReview }`.
 - `RouteAssignment`: `{ route, primaryTagIds, additionalTagIds }`.
 - Search record: `{ id, route, family, title, preview, image, author, publishedAt, updatedAt, tagIds, primaryTagIds, locationIds, productIds, searchText, canonicalOrder }`.
+- Public tag projection: `{ version: 1, updatedAt, tags: [{ id, displayName, slug, type, description, relatedTagIds, canonicalRoute, reviewedAt, updatedAt, redirectSlugs }], assignments }`; it must not contain `sourceRoutes` or `competingPageReview`.
 
 - [ ] **Step 1: Write failing generator contract tests**
 
@@ -92,6 +95,7 @@ test("builds deterministic assignments and a compact five-family index", () => {
   assert.ok(first.registry.tags.every((tag) => tag.competingPageReview?.disposition));
   assert.ok(first.searchIndex.records.every((record) => !("sections" in record) && !("body" in record)));
   validateTagRegistry(first.registry);
+  validatePublicTagRegistry(first.publicTagRegistry);
   validateSearchIndex(first.searchIndex, first.registry);
 });
 ```
@@ -131,7 +135,7 @@ Every accepted tag must receive a borrower-facing description, valid source rout
 
 - [ ] **Step 4: Add a CLI writer and generate canonical artifacts**
 
-The direct-run path reads the four existing canonical JSON inputs and writes formatted JSON with a final newline to `mock-data/tag-registry.json` and `mock-data/search-index.json`. It logs only artifact counts and paths.
+The direct-run path reads the four existing canonical JSON inputs and writes deterministic JSON with a final newline to `mock-data/tag-registry.json`, `mock-data/public-tag-registry.json`, and `mock-data/search-index.json`. The canonical audit registry may remain formatted for review; browser artifacts use compact serialization. It logs only artifact counts and paths.
 
 Run: `node mock-data/build-tagged-content-search.mjs`
 
@@ -150,7 +154,7 @@ Expected: exits 0 with no artifact diff on the second run.
 - [ ] **Step 6: Commit Task 1 files only**
 
 ```powershell
-git add -- mock-data/build-tagged-content-search.mjs mock-data/tagged-content-search.test.mjs mock-data/tag-registry.json mock-data/search-index.json
+git add -- mock-data/build-tagged-content-search.mjs mock-data/tagged-content-search.test.mjs mock-data/tag-registry.json mock-data/public-tag-registry.json mock-data/search-index.json
 git commit -m "feat: generate tagged content discovery data"
 ```
 
@@ -163,7 +167,7 @@ git commit -m "feat: generate tagged content discovery data"
 - Create: `site/tag-search.test.mjs`
 
 **Interfaces:**
-- Consumes: Task 1 registry/search-index shapes.
+- Consumes: Task 1 canonical registry, browser-safe public tag registry, and search-index shapes.
 - Produces: `normalizeTagRegistry(raw)`, `tagForId(registry, id)`, `tagForSlug(registry, slug)`, `tagsForRoute(registry, route)`, `tagRoute(tag)`.
 - Produces: `suggestTags(tags, input, selectedIds)`, `compileTagExpression(tagIds, operators)`, `recordMatchesExpression(record, expression)`, `searchRecords(records, state, registry)`, `groupSearchResults(records)`, `sortSearchResults(records, sort)`.
 - Produces: `parseTagSearchState(search, registry)`, `serializeTagSearchState(state)`, and `sanitizeTagSearchState(state, registry)`.
@@ -421,7 +425,7 @@ Open a section-specific modal containing every matching record. Provide a labele
 
 - [ ] **Step 6: Compose the SPA routes and payload loading**
 
-Add `TAG_REGISTRY_URL` and `SEARCH_INDEX_URL`. Load the compact registry with normal public content data so SPA-rendered articles, topic guides, local-market news, product guides, and calculators receive their primary and additional tag links. Fetch the larger search index only while rendering `/learning-center/search` or `/learning-center/tags/*`. A tag route starts with its tag token; a historical slug resolves to the current tag and replaces the URL with its canonical route. Unknown IDs show `One search topic was unavailable, so we kept the rest of your search.` An index fetch failure leaves generated static content visible and shows `Search tools are temporarily unavailable. You can still open the resources below.`
+Add `PUBLIC_TAG_REGISTRY_URL` and `SEARCH_INDEX_URL`. Load `mock-data/public-tag-registry.json` with normal public content data so SPA-rendered articles, topic guides, local-market news, product guides, and calculators receive their primary and additional tag links. Never fetch the canonical audit registry in the browser. Fetch the larger search index only while rendering `/learning-center/search` or `/learning-center/tags/*`. A tag route starts with its tag token; a historical slug resolves to the current tag and replaces the URL with its canonical route. Unknown IDs show `One search topic was unavailable, so we kept the rest of your search.` An index fetch failure leaves generated static content visible and shows `Search tools are temporarily unavailable. You can still open the resources below.`
 
 Use `tagsForRoute` and the shared presentation helper on every indexed SPA page. Primary links appear above the page H1; additional links appear beside sources/citations or before related navigation/footer content. Do not add tags to rates, loan-officer, branch, account, authentication, or prequalification pages.
 
@@ -495,7 +499,7 @@ Expected: PASS with the prior 872-route baseline plus one route for every accept
 - [ ] **Step 6: Commit only feature-owned generated output and audit files**
 
 ```powershell
-git add -- mock-data/tag-registry.json mock-data/search-index.json site/generated/routes/learning-center/tags site/phase2-static-smoke.mjs site/public-content-audit.test.mjs site/public-copy-guard.test.mjs
+git add -- mock-data/tag-registry.json mock-data/public-tag-registry.json mock-data/search-index.json site/generated/routes/learning-center/tags site/phase2-static-smoke.mjs site/public-content-audit.test.mjs site/public-copy-guard.test.mjs
 git commit -m "test: validate tagged content routes"
 ```
 
