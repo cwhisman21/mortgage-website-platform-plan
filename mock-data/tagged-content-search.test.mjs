@@ -5,6 +5,7 @@ import fs from "node:fs";
 import {
   buildPublicTagRegistry,
   buildTaggedContentSearch,
+  LOCATION_NEWS_TOPIC_TAGS,
   validatePublicTagRegistry,
   validateSearchIndex,
   validateTagRegistry,
@@ -49,6 +50,7 @@ test("builds deterministic assignments and a compact five-family index", () => {
   const second = buildTaggedContentSearch(fixtureInputs, { updatedAt: "2026-07-14" });
 
   assert.deepEqual(first, second);
+  assert.ok(first.publicTagRegistry);
   assert.deepEqual(new Set(first.searchIndex.records.map(({ family }) => family)), new Set([
     "articles", "topic-guides", "local-market-news", "product-guides", "calculators",
   ]));
@@ -143,9 +145,10 @@ test("rejects duplicate canonical record IDs and routes", () => {
 });
 
 test("builds a browser-safe public registry projection within corpus payload budgets", () => {
-  const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  const { registry, publicTagRegistry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
   const publicRegistry = buildPublicTagRegistry(registry);
 
+  assert.deepEqual(publicTagRegistry, publicRegistry);
   validatePublicTagRegistry(publicRegistry);
   assert.ok(publicRegistry.tags.every((tag) => !Object.hasOwn(tag, "sourceRoutes") && !Object.hasOwn(tag, "competingPageReview")));
   assert.ok(!JSON.stringify(publicRegistry).match(/competingPageReview|sourceRoutes|KEEP DISTINCT|borrowerQuestion/));
@@ -154,4 +157,50 @@ test("builds a browser-safe public registry projection within corpus payload bud
   assert.deepEqual(Object.keys(searchIndex.records[0]).sort(), [
     "author", "canonicalOrder", "family", "id", "image", "locationIds", "preview", "primaryTagIds", "productIds", "publishedAt", "route", "tagIds", "title", "updatedAt",
   ]);
+  assert.deepEqual(Object.keys(publicRegistry.tags[0]).sort(), [
+    "canonicalRoute", "description", "displayName", "id", "redirectSlugs", "relatedTagIds", "reviewedAt", "slug", "type", "updatedAt",
+  ]);
+});
+
+test("matches short program names as complete title tokens", () => {
+  const inputs = structuredClone(fixtureInputs);
+  inputs.productionSeed.products.push({ id: "product-va", name: "VA Loans", route: "/loan-options/va-loans", borrowerGoal: "Buy a home" });
+  inputs.editorialContent.articles.push({
+    id: "article-nevada-values", title: "Home values in Nevada", route: "/learning-center/nevada-home-values",
+    summary: "Nevada home values can frame a market question without determining a specific property value.",
+    publishedAt: "2026-07-10", updatedAt: "2026-07-10",
+  });
+  const { searchIndex } = buildTaggedContentSearch(inputs, { updatedAt: "2026-07-14" });
+  const record = searchIndex.records.find(({ id }) => id === "article-nevada-values");
+
+  assert.ok(record.tagIds.includes("tag-market-topic-home-values"));
+  assert.ok(!record.tagIds.includes("tag-loan-program-va-loans"));
+});
+
+test("maps every local-news topic through the controlled topic registry before relationship products", () => {
+  const inputs = readCanonicalInputs();
+  const { registry, searchIndex } = buildTaggedContentSearch(inputs, { updatedAt: "2026-07-14" });
+  const sourceById = new Map(inputs.locationNewsIndex.articles.map((article) => [article.id, article]));
+  const tagById = new Map(registry.tags.map((tag) => [tag.id, tag]));
+  const expectedTopicIds = [
+    "affordability", "borrower-planning", "conventional", "employment", "fha", "home-price-index", "home-values", "housing-supply", "jumbo", "labor-market", "loan-limits", "owner-costs", "rent", "state-counties", "state-housing", "state-market", "tenure",
+  ];
+
+  assert.deepEqual(Object.keys(LOCATION_NEWS_TOPIC_TAGS).sort(), expectedTopicIds);
+  for (const record of searchIndex.records.filter(({ family }) => family === "local-market-news")) {
+    const source = sourceById.get(record.id);
+    const mappedTopicIds = source.topicIds.map((topicId) => LOCATION_NEWS_TOPIC_TAGS[topicId].id);
+    assert.ok(record.primaryTagIds.some((id) => ["city", "state"].includes(tagById.get(id).type)), `${record.id} lacks a primary location tag`);
+    assert.ok(record.primaryTagIds.some((id) => mappedTopicIds.includes(id)), `${record.id} lacks a primary controlled topic tag`);
+    assert.ok(record.primaryTagIds.filter((id) => tagById.get(id).type === "loan-program").every((id) => mappedTopicIds.includes(id)), `${record.id} promotes a relationship-only loan program`);
+  }
+});
+
+test("excludes team navigation labels from taxonomy and keeps non-direct reviews distinct", () => {
+  const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  assert.ok(!registry.tags.some(({ displayName }) => displayName === "Mortgage Guidance"));
+  assert.ok(!searchIndex.records.some(({ id }) => id === "blog-editorial-team"));
+  const nonDirect = registry.tags.flatMap((tag) => tag.competingPageReview.routes).filter(({ relationship }) => relationship !== "DIRECT");
+  assert.ok(nonDirect.length > 0);
+  assert.ok(nonDirect.every(({ disposition, rationale }) => disposition === "KEEP DISTINCT" && rationale.length > 0));
 });

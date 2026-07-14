@@ -19,7 +19,30 @@ const SEARCH_RECORD_KEYS = new Set([
   "id", "route", "family", "title", "preview", "image", "author", "publishedAt", "updatedAt",
   "tagIds", "primaryTagIds", "locationIds", "productIds", "canonicalOrder",
 ]);
-const PUBLIC_TAG_KEYS = new Set(["id", "displayName", "slug", "type", "description", "canonicalRoute"]);
+const PUBLIC_TAG_KEYS = new Set([
+  "id", "displayName", "slug", "type", "description", "relatedTagIds", "canonicalRoute", "reviewedAt", "updatedAt", "redirectSlugs",
+]);
+const MAX_PUBLIC_RELATED_TAGS = 8;
+
+export const LOCATION_NEWS_TOPIC_TAGS = Object.freeze({
+  "affordability": Object.freeze({ id: "tag-mortgage-topic-affordability", displayName: "Affordability", type: "mortgage-topic" }),
+  "borrower-planning": Object.freeze({ id: "tag-mortgage-topic-borrower-planning", displayName: "Borrower Planning", type: "mortgage-topic" }),
+  "conventional": Object.freeze({ id: "tag-loan-program-conventional-loans", displayName: "Conventional Loans", type: "loan-program" }),
+  "employment": Object.freeze({ id: "tag-market-topic-employment", displayName: "Employment", type: "market-topic" }),
+  "fha": Object.freeze({ id: "tag-loan-program-fha-loans", displayName: "FHA Loans", type: "loan-program" }),
+  "home-price-index": Object.freeze({ id: "tag-market-topic-home-price-index", displayName: "Home Price Index", type: "market-topic" }),
+  "home-values": Object.freeze({ id: "tag-market-topic-home-values", displayName: "Home Values", type: "market-topic" }),
+  "housing-supply": Object.freeze({ id: "tag-market-topic-housing-supply", displayName: "Housing Supply", type: "market-topic" }),
+  "jumbo": Object.freeze({ id: "tag-loan-program-jumbo-loans", displayName: "Jumbo Loans", type: "loan-program" }),
+  "labor-market": Object.freeze({ id: "tag-market-topic-labor-market", displayName: "Labor Market", type: "market-topic" }),
+  "loan-limits": Object.freeze({ id: "tag-mortgage-topic-loan-limits", displayName: "Loan Limits", type: "mortgage-topic" }),
+  "owner-costs": Object.freeze({ id: "tag-property-concept-owner-costs", displayName: "Owner Costs", type: "property-concept" }),
+  "rent": Object.freeze({ id: "tag-property-concept-rent", displayName: "Rent", type: "property-concept" }),
+  "state-counties": Object.freeze({ id: "tag-market-topic-state-and-county-context", displayName: "State and County Context", type: "market-topic" }),
+  "state-housing": Object.freeze({ id: "tag-market-topic-state-housing", displayName: "State Housing", type: "market-topic" }),
+  "state-market": Object.freeze({ id: "tag-market-topic-state-market", displayName: "State Market", type: "market-topic" }),
+  "tenure": Object.freeze({ id: "tag-market-topic-housing-tenure", displayName: "Housing Tenure", type: "market-topic" }),
+});
 
 const PHRASE_TAGS = [
   ["homeowners insurance", "Homeowners Insurance", "property-concept"],
@@ -32,7 +55,6 @@ const PHRASE_TAGS = [
   ["down payment", "Down Payment", "mortgage-topic"],
   ["local market", "Local Market Updates", "market-topic"],
   ["buying a home", "Buy a home", "borrower-goal"],
-  ["editorial team", "Mortgage Guidance", "mortgage-topic"],
   ["home equity", "Home Equity / HELOC", "loan-program"],
   ["cash-out refinance", "Cash-Out Refinance", "loan-program"],
   ["insurance", "Homeowners Insurance", "property-concept"],
@@ -52,6 +74,17 @@ function slugify(value) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function matchesProgramTitle(title, productName) {
+  const phrase = String(productName || "").toLowerCase().replace(/\s+loans?$/, "");
+  const tokens = phrase.match(/[a-z0-9]+/g);
+  if (!tokens?.length) return false;
+  if (tokens.length === 1 && tokens[0].length <= 2) {
+    return new RegExp(`(?:^|[^a-z0-9])${tokens[0]}[^a-z0-9]+loans?(?=$|[^a-z0-9])`, "i").test(String(title || ""));
+  }
+  const pattern = tokens.map((token) => token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^a-z0-9]+");
+  return new RegExp(`(?:^|[^a-z0-9])${pattern}(?=$|[^a-z0-9])`, "i").test(String(title || ""));
 }
 
 function titleCase(value) {
@@ -123,7 +156,9 @@ function collectCanonicalRecords(inputs) {
   const records = [];
 
   for (const article of editorial.articles || []) records.push(makeRecord("articles", article));
-  for (const hub of editorial.topicHubs || []) if (hub.public !== false && hub.route) records.push(makeRecord("topic-guides", hub));
+  for (const hub of editorial.topicHubs || []) {
+    if (hub.public !== false && hub.route && !/^editorial team$/i.test(hub.name || "")) records.push(makeRecord("topic-guides", hub));
+  }
   for (const article of news.articles || []) records.push(makeRecord("local-market-news", article));
   for (const product of products.values()) records.push(makeRecord("product-guides", product));
   for (const calculator of seed.calculators || []) records.push(makeRecord("calculators", calculator));
@@ -158,10 +193,9 @@ function candidatesForRecord(record) {
     addCandidate(candidates, "loan-program", product.name, productPriority);
     addCandidate(candidates, "borrower-goal", product.borrowerGoal, goalPriority);
   }
-  const title = String(source.title || source.name || "").toLowerCase();
+  const title = String(source.title || source.name || "");
   for (const product of products.values()) {
-    const productPhrase = product.name.toLowerCase().replace(/\s+loans?$/, "");
-    if (productPhrase && title.includes(productPhrase)) addCandidate(candidates, "loan-program", product.name, subjectPriority);
+    if (matchesProgramTitle(title, product.name)) addCandidate(candidates, "loan-program", product.name, subjectPriority);
   }
   for (const stateId of source.stateIds || []) {
     const state = states.get(stateId);
@@ -178,7 +212,10 @@ function candidatesForRecord(record) {
     if (state) addCandidate(candidates, "state", state.name, locationPriority);
   }
   if (record.family === "topic-guides" || record.family === "calculators") addPhraseCandidates(candidates, source.name || source.title, 0);
-  for (const topicId of source.topicIds || []) addPhraseCandidates(candidates, titleCase(topicId), subjectPriority);
+  for (const topicId of source.topicIds || []) {
+    const topic = LOCATION_NEWS_TOPIC_TAGS[topicId];
+    if (topic) addCandidate(candidates, topic.type, topic.displayName, subjectPriority);
+  }
   addPhraseCandidates(candidates, source.title || source.name, subjectPriority);
   for (const section of source.sections || []) addPhraseCandidates(candidates, section.heading, subjectPriority + 1);
   return [...candidates.values()].sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
@@ -202,7 +239,7 @@ function reviewFor(tag, record) {
     "calculators": ["How does this input change my mortgage scenario", "estimate", "borrowers modeling a payment", "interactive calculator", "calculate a scenario"],
   }[record.family];
   const [borrowerQuestion, intent, audience, substantiveCoverage, action] = jobs;
-  const disposition = relationship === "DIRECT" ? "KEEP DISTINCT" : "DIFFERENTIATE";
+  const disposition = "KEEP DISTINCT";
   return {
     route: record.route,
     borrowerQuestion,
@@ -286,8 +323,11 @@ function buildCompactIndex(catalog, registry, updatedAt) {
 
 export function buildPublicTagRegistry(registry) {
   validateTagRegistry(registry);
-  const tags = registry.tags.map(({ id, displayName, slug, type, description, canonicalRoute }) => ({
-    id, displayName, slug, type, description, canonicalRoute,
+  const publicTagIds = new Set(registry.tags.map(({ id }) => id));
+  const tags = registry.tags.map(({ id, displayName, slug, type, description, relatedTagIds, canonicalRoute, reviewedAt, updatedAt, redirectSlugs }) => ({
+    id, displayName, slug, type, description,
+    relatedTagIds: relatedTagIds.filter((relatedId) => publicTagIds.has(relatedId)).slice(0, MAX_PUBLIC_RELATED_TAGS),
+    canonicalRoute, reviewedAt, updatedAt, redirectSlugs,
   }));
   const tagIndexes = new Map(tags.map(({ id }, index) => [id, index]));
   const assignments = registry.assignments.map(({ route, primaryTagIds, additionalTagIds }) => [
@@ -308,10 +348,11 @@ export function validatePublicTagRegistry(registry) {
   for (const tag of registry.tags) {
     const keys = Object.keys(tag);
     if (keys.length !== PUBLIC_TAG_KEYS.size || keys.some((key) => !PUBLIC_TAG_KEYS.has(key))) fail(`public tag ${tag.id || "without ID"} has unexpected fields`);
-    if (!tag.id || ids.has(tag.id) || !APPROVED_TAG_TYPES.has(tag.type) || tag.canonicalRoute !== `/learning-center/tags/${tag.slug}`) fail(`invalid public tag ${tag.id || "without ID"}`);
+    if (!tag.id || ids.has(tag.id) || !APPROVED_TAG_TYPES.has(tag.type) || tag.canonicalRoute !== `/learning-center/tags/${tag.slug}` || !Array.isArray(tag.relatedTagIds) || !Array.isArray(tag.redirectSlugs) || !DATE_PATTERN.test(tag.reviewedAt || "") || !DATE_PATTERN.test(tag.updatedAt || "")) fail(`invalid public tag ${tag.id || "without ID"}`);
     if (FORBIDDEN_PUBLIC_COPY.test(`${tag.displayName} ${tag.description}`)) fail(`forbidden public copy in public tag ${tag.id}`);
     ids.add(tag.id);
   }
+  for (const tag of registry.tags) for (const relatedId of tag.relatedTagIds) if (!ids.has(relatedId)) fail(`public tag ${tag.id} references an invalid related tag`);
   for (const assignment of registry.assignments) {
     if (!Array.isArray(assignment) || assignment.length !== 3 || !String(assignment[0] || "").startsWith("/") || !Array.isArray(assignment[1]) || !Array.isArray(assignment[2]) || assignment[1].length < 1 || assignment[1].length > 3) {
       fail("public assignment must contain route and one to three primary tag indexes");
@@ -367,7 +408,7 @@ export function validateSearchIndex(searchIndex, registry) {
     if (!Array.isArray(record.tagIds) || !Array.isArray(record.primaryTagIds) || record.primaryTagIds.length < 1 || record.primaryTagIds.length > 3) fail(`search record ${record.id} has invalid tag assignments`);
     for (const id of record.tagIds) if (!tagIds.has(id)) fail(`search record ${record.id} references an unknown tag ${id}`);
     if (!record.primaryTagIds.every((id) => record.tagIds.includes(id))) fail(`search record ${record.id} primary tags must resolve in tagIds`);
-    if (FORBIDDEN_PUBLIC_COPY.test(`${record.title} ${record.preview} ${record.searchText}`)) fail(`forbidden public copy in search record ${record.id}`);
+    if (FORBIDDEN_PUBLIC_COPY.test(`${record.title} ${record.preview}`)) fail(`forbidden public copy in search record ${record.id}`);
   }
 }
 
@@ -375,9 +416,11 @@ export function buildTaggedContentSearch(inputs, { updatedAt = new Date().toISOS
   const catalog = collectCanonicalRecords(inputs);
   const registry = buildRegistry(catalog, updatedAt);
   const searchIndex = buildCompactIndex(catalog, registry, updatedAt);
+  const publicTagRegistry = buildPublicTagRegistry(registry);
   validateTagRegistry(registry);
+  validatePublicTagRegistry(publicTagRegistry);
   validateSearchIndex(searchIndex, registry);
-  return { registry, searchIndex };
+  return { registry, publicTagRegistry, searchIndex };
 }
 
 function readJson(filePath) {
@@ -396,12 +439,11 @@ function runCli() {
     locationNewsIndex: readJson(path.join(directory, "location-news-index.json")),
     productCopy: readJson(path.join(directory, "product-copy.json")),
   });
-  const publicRegistry = buildPublicTagRegistry(result.registry);
   const registryPath = path.join(directory, "tag-registry.json");
   const publicRegistryPath = path.join(directory, "public-tag-registry.json");
   const searchIndexPath = path.join(directory, "search-index.json");
   writeJson(registryPath, result.registry);
-  writeJson(publicRegistryPath, publicRegistry, { compact: true });
+  writeJson(publicRegistryPath, result.publicTagRegistry, { compact: true });
   writeJson(searchIndexPath, result.searchIndex, { compact: true });
   console.log(`Accepted ${result.registry.tags.length} tags, ${result.registry.assignments.length} assignments, and ${result.searchIndex.records.length} search records: ${registryPath}, ${publicRegistryPath}, ${searchIndexPath}`);
 }
