@@ -65,7 +65,7 @@
 - Registry shape: `{ version: 1, updatedAt: "YYYY-MM-DD", tags: TagRecord[], assignments: RouteAssignment[] }`.
 - `TagRecord`: `{ id, displayName, slug, type, description, sourceRoutes, relatedTagIds, canonicalRoute, createdAt, reviewedAt, updatedAt, redirectSlugs, competingPageReview }`.
 - `RouteAssignment`: `{ route, primaryTagIds, additionalTagIds }`.
-- Search record: `{ id, route, family, title, preview, image, author, publishedAt, updatedAt, tagIds, primaryTagIds, locationIds, productIds, searchText, canonicalOrder }`.
+- Search record: `{ id, route, family, title, preview, image, author, publishedAt, updatedAt, tagIds, primaryTagIds, locationIds, productIds, canonicalOrder }`.
 - Public tag projection: `{ version: 1, updatedAt, tags: [{ id, displayName, slug, type, description, relatedTagIds, canonicalRoute, reviewedAt, updatedAt, redirectSlugs }], assignments }`; it must not contain `sourceRoutes` or `competingPageReview`.
 
 - [ ] **Step 1: Write failing generator contract tests**
@@ -201,7 +201,7 @@ Expected: FAIL because the three focused modules do not exist.
 
 - [ ] **Step 3: Implement registry and query helpers**
 
-Use an `OR`-group array of `AND` terms. Free text scores only records that already satisfy the tag expression. Score title tokens before preview, registered tag names, location/product relationships, and compact `searchText`; use `canonicalOrder` as the final tie-breaker.
+Use an `OR`-group array of `AND` terms. Free text scores only records that already satisfy the tag expression. Score title tokens before preview, registered tag names, and location/product relationships; use `canonicalOrder` as the final tie-breaker. Do not introduce a duplicate aggregate text field into the browser index.
 
 ```js
 export function compileTagExpression(tagIds = [], operators = []) {
