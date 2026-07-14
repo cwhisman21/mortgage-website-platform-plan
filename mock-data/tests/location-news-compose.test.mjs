@@ -2,7 +2,28 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { composeCityArticles, composeStateArticles } from "../location-news/lib/compose.mjs";
-import { cityFixture, stateFixture } from "./fixtures/location-news-fixtures.mjs";
+import { cityFixture as baseCityFixture, stateFixture as baseStateFixture } from "./fixtures/location-news-fixtures.mjs";
+
+function productionIntegrityFixture(fixture, localRoute, localLabel) {
+  const context = structuredClone(fixture);
+  for (const census of Object.values(context.census)) {
+    if (census?.metrics?.medianOwnerCostWithMortgage) {
+      census.metrics.medianOwnerCostWithMortgage.variableOrSeriesId = "B25088_002E";
+    }
+  }
+  context.relatedRoutes = [
+    { route: localRoute, label: localLabel },
+    { route: "/loan-options", label: "Loan options" },
+    { route: "/loan-options/conventional-loans", label: "Conventional loans" },
+    { route: "/loan-options/fha-loans", label: "FHA loans" },
+    { route: "/calculators/affordability", label: "Affordability calculator" },
+    { route: "/rates", label: "Mortgage rates" },
+  ];
+  return context;
+}
+
+const cityFixture = productionIntegrityFixture(baseCityFixture, "/locations/texas", "Texas mortgage and housing guide");
+const stateFixture = productionIntegrityFixture(baseStateFixture, "/locations/texas/austin", "Austin mortgage and housing guide");
 
 const expectedAuthorByType = new Map([
   ["affordability_home_values", "contributor-maya-brooks"],

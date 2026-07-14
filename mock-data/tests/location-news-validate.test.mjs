@@ -3,7 +3,18 @@ import assert from "node:assert/strict";
 
 import { composeCityArticles } from "../location-news/lib/compose.mjs";
 import { numericClaims, validateArticle, validateCorpus } from "../location-news/lib/validate.mjs";
-import { cityFixture } from "./fixtures/location-news-fixtures.mjs";
+import { cityFixture as baseCityFixture } from "./fixtures/location-news-fixtures.mjs";
+
+const cityFixture = structuredClone(baseCityFixture);
+cityFixture.census.current.metrics.medianOwnerCostWithMortgage.variableOrSeriesId = "B25088_002E";
+cityFixture.relatedRoutes = [
+  { route: "/locations/texas", label: "Texas mortgage and housing guide" },
+  { route: "/loan-options", label: "Loan options" },
+  { route: "/loan-options/conventional-loans", label: "Conventional loans" },
+  { route: "/loan-options/fha-loans", label: "FHA loans" },
+  { route: "/calculators/affordability", label: "Affordability calculator" },
+  { route: "/rates", label: "Mortgage rates" },
+];
 
 const validArticleFixture = composeCityArticles(cityFixture)[0];
 const validAuthorId = "contributor-maya-brooks";
