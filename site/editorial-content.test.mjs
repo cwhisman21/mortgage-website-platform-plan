@@ -4,7 +4,9 @@ import fs from "node:fs";
 import {
   articlesForContributor,
   contributorById,
+  mergeEditorialArticles,
   normalizeEditorialContent,
+  normalizeEditorialContentWithFallback,
   renderBylineModel,
   resolveArticleAuthor,
   applyArticleAuthorIds,
@@ -154,6 +156,81 @@ test("applies structural article ownership without editing base article records"
   assert.equal(Object.hasOwn(baseArticles[0], "authorId"), false);
 });
 
+test("merges canonical article overlays before applying fallback ownership", () => {
+  const content = normalizeEditorialContent({
+    contributors: contributorsRaw,
+    topicHubs: topicHubsRaw,
+  });
+  const baseArticles = [
+    {
+      id: "article-dallas-market-update",
+      title: "Base Dallas title",
+      route: "/learning-center/dallas-market-update",
+      cityIds: ["city-dallas-tx"],
+    },
+    {
+      id: "article-texas-tax-guide",
+      title: "Base tax title",
+      route: "/learning-center/texas-tax-guide",
+    },
+  ];
+  const overlay = {
+    articles: [
+      {
+        id: "article-dallas-market-update",
+        title: "Canonical Dallas title",
+        authorId: "contributor-jordan-avery",
+        publishedAt: "2026-07-13",
+        summary: "Canonical borrower-facing summary.",
+        sections: [{ heading: "Payment context", body: "Canonical article body." }],
+      },
+    ],
+  };
+
+  const merged = mergeEditorialArticles(baseArticles, overlay);
+  const enriched = applyArticleAuthorIds(content, merged);
+
+  assert.deepEqual(enriched[0], {
+    ...baseArticles[0],
+    ...overlay.articles[0],
+  });
+  assert.equal(enriched[0].authorId, "contributor-jordan-avery");
+  assert.equal(enriched[0].publishedAt, "2026-07-13");
+  assert.equal(enriched[0].summary, "Canonical borrower-facing summary.");
+  assert.deepEqual(enriched[0].sections, overlay.articles[0].sections);
+  assert.equal(enriched[1].authorId, "contributor-maya-brooks");
+  assert.equal(baseArticles[0].title, "Base Dallas title");
+  assert.equal(Object.hasOwn(baseArticles[0], "authorId"), false);
+});
+
+test("ignores missing or malformed article overlays", () => {
+  const baseArticles = [{ id: "article-a", title: "Base title" }];
+
+  assert.deepEqual(mergeEditorialArticles(baseArticles, null), baseArticles);
+  assert.deepEqual(mergeEditorialArticles(baseArticles, { articles: "invalid" }), baseArticles);
+  assert.notEqual(mergeEditorialArticles(baseArticles, null)[0], baseArticles[0]);
+});
+
+test("falls back to standalone registries when the compiled bundle is missing or invalid", () => {
+  const fallbackRaw = {
+    contributors: contributorsRaw,
+    topicHubs: topicHubsRaw,
+  };
+
+  const missing = normalizeEditorialContentWithFallback(null, fallbackRaw);
+  const invalid = normalizeEditorialContentWithFallback(
+    {
+      contributors: [contributorsRaw.contributors[0], contributorsRaw.contributors[0]],
+      topicHubs: topicHubsRaw,
+    },
+    fallbackRaw,
+  );
+
+  assert.deepEqual(missing.contributors.map(({ id }) => id), expectedRoster.map(([id]) => id));
+  assert.deepEqual(invalid.contributors.map(({ id }) => id), expectedRoster.map(([id]) => id));
+  assert.equal(invalid.topicHubs.length, topicHubsRaw.topicHubs.length);
+});
+
 test("resolves bylines with linked contributors and safe Snap fallback", () => {
   const content = normalizeEditorialContent(contributorsRaw);
   const article = {
@@ -178,10 +255,43 @@ test("resolves bylines with linked contributors and safe Snap fallback", () => {
 
   const fallback = renderBylineModel({ id: "missing", publishedAt: "2026-07-10" }, content.contributors);
   assert.equal(fallback.name, "Snap Mortgage");
-  assert.equal(fallback.title, "Editorial publishing responsibility");
+  assert.equal(fallback.title, "Published by Snap Mortgage");
   assert.equal(fallback.href, "");
   assert.match(fallback.portraitSrc, /^data:image\/svg\+xml/);
   assert.equal(fallback.portraitAlt, "Snap Mortgage editorial attribution");
   assert.equal(fallback.dateLabel, "Published Jul 10, 2026");
   assert.equal(fallback.isFallback, true);
+});
+
+test("keeps missing and invalid article dates undisclosed", () => {
+  const content = normalizeEditorialContent(contributorsRaw);
+
+  assert.equal(renderBylineModel({ id: "undated" }, content.contributors).dateLabel, "");
+  assert.equal(
+    renderBylineModel({ id: "invalid", updatedAt: "not-a-date" }, content.contributors).dateLabel,
+    "",
+  );
+});
+
+test("uses explicit market asOf dates without relabeling publication dates", () => {
+  const content = normalizeEditorialContent(contributorsRaw);
+  const marketArticle = {
+    id: "market-update",
+    type: "local_market_update",
+    authorId: "contributor-maya-brooks",
+    asOf: "2026-07-09",
+    publishedAt: "2026-07-13",
+  };
+
+  assert.equal(
+    renderBylineModel(marketArticle, content.contributors).dateLabel,
+    "As of Jul 9, 2026",
+  );
+  assert.equal(
+    renderBylineModel(
+      { ...marketArticle, asOf: undefined },
+      content.contributors,
+    ).dateLabel,
+    "Published Jul 13, 2026",
+  );
 });

@@ -6,6 +6,7 @@ import { numericClaims, validateArticle, validateCorpus } from "../location-news
 import { cityFixture } from "./fixtures/location-news-fixtures.mjs";
 
 const validArticleFixture = composeCityArticles(cityFixture)[0];
+const validAuthorId = "contributor-maya-brooks";
 
 test("extracts complete currency and percentage claims without overlapping fragments", () => {
   assert.deepEqual(
@@ -15,7 +16,18 @@ test("extracts complete currency and percentage claims without overlapping fragm
 });
 
 test("accepts a complete evidence-backed article", () => {
-  assert.doesNotThrow(() => validateArticle(validArticleFixture));
+  assert.doesNotThrow(() => validateArticle({ ...validArticleFixture, authorId: validAuthorId }));
+});
+
+test("rejects an article without an authorId", () => {
+  const article = structuredClone(validArticleFixture);
+  delete article.authorId;
+  assert.throws(() => validateArticle(article), /authorId/i);
+});
+
+test("rejects an authorId that is not in the contributor registry", () => {
+  const article = { ...structuredClone(validArticleFixture), authorId: "contributor-unknown" };
+  assert.throws(() => validateArticle(article), /authorId|contributor registry|unknown contributor/i);
 });
 
 test("rejects unsupported numbers", () => {

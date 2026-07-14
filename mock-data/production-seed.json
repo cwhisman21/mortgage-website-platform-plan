@@ -46311,6 +46311,7 @@
       "route": "/learning-center/local-market-updates",
       "topic": "local_market_updates",
       "purpose": "Index for city and state market update articles.",
+      "metaDescription": "Learn how to compare dated housing measures, local costs, and property-level limits before using market headlines in a mortgage decision.",
       "featuredArticleIds": [
         "article-austin-market-update",
         "article-irvine-market-update",
@@ -46323,6 +46324,7 @@
       "route": "/learning-center/buying-a-home",
       "topic": "buying",
       "purpose": "Buyer education hub and first-time buyer path.",
+      "metaDescription": "Plan a home purchase from budget and cash to close through the offer, underwriting, property review, and final closing documents.",
       "featuredArticleIds": [
         "article-first-time-buyer",
         "article-move-up-buyer",
@@ -46335,6 +46337,7 @@
       "route": "/learning-center/refinance",
       "topic": "refinance",
       "purpose": "Refinance article hub.",
+      "metaDescription": "Compare refinance goals, closing costs, payment changes, term resets, cost recovery, and total interest before requesting loan terms.",
       "featuredArticleIds": [
         "article-refinance-basics",
         "article-cash-out-guide",
@@ -46347,6 +46350,7 @@
       "route": "/learning-center/fha-loans",
       "topic": "fha",
       "purpose": "FHA article hub.",
+      "metaDescription": "Understand FHA lender review, mortgage insurance, county limits, occupancy, property standards, costs, and conventional alternatives.",
       "featuredArticleIds": [
         "article-fha-basics",
         "article-first-time-buyer",
@@ -46359,6 +46363,7 @@
       "route": "/learning-center/va-loans",
       "topic": "va",
       "purpose": "VA article hub.",
+      "metaDescription": "Review VA eligibility, the Certificate of Eligibility, entitlement, funding fees, occupancy, appraisal, and lender-specific requirements.",
       "featuredArticleIds": [
         "article-va-basics",
         "article-san-diego-market-update",
@@ -46371,6 +46376,7 @@
       "route": "/learning-center/jumbo-loans",
       "topic": "jumbo",
       "purpose": "Jumbo and high-cost market article hub.",
+      "metaDescription": "Compare jumbo loan thresholds, lender-specific underwriting, reserves, documentation, property review, pricing, and conforming alternatives.",
       "featuredArticleIds": [
         "article-jumbo-basics",
         "article-irvine-market-update",
@@ -46383,6 +46389,7 @@
       "route": "/learning-center/home-equity",
       "topic": "home_equity",
       "purpose": "HELOC, cash-out, and equity education hub.",
+      "metaDescription": "Compare HELOCs, home-equity loans, and cash-out refinancing by rate structure, repayment, closing costs, lien risk, and total borrowing cost.",
       "featuredArticleIds": [
         "article-home-equity-guide",
         "article-cash-out-guide",
@@ -46395,6 +46402,7 @@
       "route": "/learning-center/taxes-insurance",
       "topic": "taxes_insurance",
       "purpose": "Tax, insurance, and affordability context hub.",
+      "metaDescription": "Understand how assessment, reassessment, exemptions, escrow, insurance availability, and local costs can change a complete housing payment.",
       "featuredArticleIds": [
         "article-texas-tax-guide",
         "article-california-insurance-guide",
@@ -46407,13 +46415,14 @@
       "route": "/learning-center/editorial-team",
       "topic": "editorial_trust",
       "purpose": "Author, reviewer, source policy, and review workflow page.",
+      "metaDescription": "Meet the contributors behind Snap Mortgage and review the sourcing, freshness, corrections, and compliance standards applied to borrower guidance.",
       "featuredArticleIds": []
     }
   ],
   "articles": [
     {
       "id": "article-austin-market-update",
-      "title": "Austin mortgage market update: payments, inventory, and buyer leverage",
+      "title": "Austin mortgage market update: payments, price trends, and offer planning",
       "route": "/learning-center/austin-mortgage-market-update",
       "type": "local_market_update",
       "stateIds": [
@@ -46498,7 +46507,7 @@
     },
     {
       "id": "article-sacramento-market-update",
-      "title": "Sacramento move-up buyer update: price and inventory context",
+      "title": "Sacramento move-up buyer update: price and payment context",
       "route": "/learning-center/sacramento-move-up-market-update",
       "type": "local_market_update",
       "stateIds": [
@@ -46532,7 +46541,7 @@
     },
     {
       "id": "article-colorado-springs-market-update",
-      "title": "Colorado Springs VA buyer update: inventory and payment context",
+      "title": "Colorado Springs VA buyer update: payment and planning context",
       "route": "/learning-center/colorado-springs-va-market-update",
       "type": "local_market_update",
       "stateIds": [
@@ -46583,7 +46592,7 @@
     },
     {
       "id": "article-orlando-market-update",
-      "title": "Orlando first-time buyer update: payment and inventory trends",
+      "title": "Orlando first-time buyer update: payment and housing-cost context",
       "route": "/learning-center/orlando-first-time-buyer-market-update",
       "type": "local_market_update",
       "stateIds": [
@@ -46611,7 +46620,7 @@
       ],
       "productIds": [
         "product-jumbo",
-        "product-refinance"
+        "product-purchase"
       ],
       "reviewStatus": "compliance_review_required"
     },
@@ -46705,7 +46714,7 @@
     },
     {
       "id": "article-va-basics",
-      "title": "VA loan basics for eligible military borrowers",
+      "title": "VA loan basics for eligible Veterans, service members, and surviving spouses",
       "route": "/learning-center/va-loan-basics",
       "type": "product_explainer",
       "stateIds": [],

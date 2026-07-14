@@ -9,6 +9,7 @@ import { sha256File, slugify, writeJsonAtomic, writeTextAtomic } from "./locatio
 import { loadLoanAndHpiEvidence } from "./location-news/lib/loan-limits.mjs";
 import { createVerifiedMediaManifest, loadMediaLibrary, materializeMediaAssets } from "./location-news/lib/media.mjs";
 import { validateArticle, validateCorpus } from "./location-news/lib/validate.mjs";
+import { authorIdForLocationNews } from "./location-news/lib/author-assignment.mjs";
 import { DEFAULT_SITE_ORIGIN, renderArticleDocument, renderRobots, renderSitemap } from "../site/location-news-static.mjs";
 
 const mockDataDir = path.dirname(fileURLToPath(import.meta.url));
@@ -34,7 +35,171 @@ function parseArgs(argv) {
     refreshMedia: values.has("refresh-media"),
     locationId: values.get("location-id") ? String(values.get("location-id")) : null,
     censusSummaryFile: values.get("census-summary-file") ? path.resolve(String(values.get("census-summary-file"))) : null,
+    attributionOnly: values.has("attribution-only"),
+    repoRoot: path.resolve(String(values.get("repo-root") || repoRoot)),
   };
+}
+
+function resolveAllowlistedPath(root, relativePath, requiredPrefix, label) {
+  const normalized = String(relativePath || "").replaceAll("\\", "/");
+  if (!normalized.startsWith(requiredPrefix) || normalized.startsWith("/") || normalized.includes("../")) {
+    throw new Error(`Unsafe ${label} ${relativePath}`);
+  }
+  const resolvedRoot = path.resolve(root);
+  const resolvedPath = path.resolve(resolvedRoot, ...normalized.split("/"));
+  const relative = path.relative(resolvedRoot, resolvedPath);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`Unsafe ${label} ${relativePath}`);
+  }
+  return resolvedPath;
+}
+
+async function writeJsonIfChanged(filePath, value) {
+  const next = `${JSON.stringify(value, null, 2)}\n`;
+  const current = await fs.readFile(filePath, "utf8").catch(() => null);
+  if (current === next) return false;
+  await writeJsonAtomic(filePath, value);
+  return true;
+}
+
+async function writeTextIfChanged(filePath, value) {
+  const next = String(value);
+  const current = await fs.readFile(filePath, "utf8").catch(() => null);
+  if (current === next) return false;
+  await writeTextAtomic(filePath, next);
+  return true;
+}
+
+function sitemapOrigin(sitemap) {
+  const firstLocation = String(sitemap || "").match(/<loc>([^<]+)<\/loc>/i)?.[1];
+  try {
+    return firstLocation ? new URL(firstLocation).origin : DEFAULT_SITE_ORIGIN;
+  } catch {
+    return DEFAULT_SITE_ORIGIN;
+  }
+}
+
+function addContributorRoutesToSitemap(sitemap, contributors, siteOrigin) {
+  const source = String(sitemap || "");
+  const missingEntries = contributors
+    .map((contributor) => new URL(contributor.route, siteOrigin).toString())
+    .filter((absoluteRoute) => !source.includes(`<loc>${absoluteRoute}</loc>`))
+    .map((absoluteRoute) => `  <url><loc>${absoluteRoute}</loc></url>`);
+  if (!missingEntries.length) return source;
+
+  const closingIndex = source.lastIndexOf("</urlset>");
+  if (closingIndex < 0) throw new Error("Sitemap is missing </urlset>");
+  const before = source.slice(0, closingIndex);
+  const after = source.slice(closingIndex);
+  return `${before}${before.endsWith("\n") ? "" : "\n"}${missingEntries.join("\n")}\n${after}`;
+}
+
+async function runAttributionOnly({ repoRoot: requestedRepoRoot }) {
+  const root = path.resolve(requestedRepoRoot);
+  const attributionPaths = {
+    index: path.join(root, "mock-data", "location-news-index.json"),
+    contributors: path.join(root, "mock-data", "editorial", "contributors.json"),
+    media: path.join(root, "mock-data", "location-news-media-manifest.json"),
+    sitemap: path.join(root, "site", "sitemap.xml"),
+  };
+  const [indexDocument, contributorDocument, mediaDocument, sitemapSource] = await Promise.all([
+    fs.readFile(attributionPaths.index, "utf8").then(JSON.parse),
+    fs.readFile(attributionPaths.contributors, "utf8").then(JSON.parse),
+    fs.readFile(attributionPaths.media, "utf8").then(JSON.parse),
+    fs.readFile(attributionPaths.sitemap, "utf8"),
+  ]);
+  const indexArticles = Array.isArray(indexDocument.articles) ? indexDocument.articles : [];
+  const contributors = Array.isArray(contributorDocument.contributors) ? contributorDocument.contributors : [];
+  if (!indexArticles.length) throw new Error("Location-news index has no articles");
+  if (contributors.length !== 6) throw new Error(`Contributor registry has ${contributors.length} records; expected 6`);
+
+  const contributorsById = new Map(contributors.map((contributor) => [contributor.id, contributor]));
+  const mediaById = Object.fromEntries(
+    (mediaDocument.assets || mediaDocument.media || []).map((asset) => [asset.id, asset]),
+  );
+  const indexById = new Map();
+  for (const article of indexArticles) {
+    if (indexById.has(article.id)) throw new Error(`Duplicate compact article id ${article.id}`);
+    indexById.set(article.id, article);
+  }
+
+  const contentPaths = [...new Set(indexArticles.map((article) => article.contentPath))];
+  if (root === repoRoot && contentPaths.length !== 788) {
+    throw new Error(`Attribution-only backfill expected 788 referenced bundles; found ${contentPaths.length}`);
+  }
+
+  const authorByArticleId = new Map();
+  const staticArticles = [];
+  let bundleWriteCount = 0;
+  for (const contentPath of contentPaths) {
+    const bundlePath = resolveAllowlistedPath(root, contentPath, "mock-data/location-news/", "content path");
+    const bundle = JSON.parse(await fs.readFile(bundlePath, "utf8"));
+    const articles = Array.isArray(bundle.articles) ? bundle.articles : [];
+    const expectedCompactArticles = indexArticles.filter((article) => article.contentPath === contentPath);
+    if (articles.length !== expectedCompactArticles.length) {
+      throw new Error(`${contentPath} article count does not match the compact index`);
+    }
+
+    let changed = false;
+    const updatedArticles = articles.map((article) => {
+      const compactArticle = indexById.get(article.id);
+      if (!compactArticle || compactArticle.contentPath !== contentPath) {
+        throw new Error(`${contentPath} contains unreferenced article ${article.id}`);
+      }
+      const authorId = authorIdForLocationNews(article);
+      const author = contributorsById.get(authorId);
+      if (!author) throw new Error(`${article.id} maps to unknown contributor ${authorId}`);
+      authorByArticleId.set(article.id, authorId);
+      const updatedArticle = article.authorId === authorId ? article : { ...article, authorId };
+      changed ||= updatedArticle !== article;
+      staticArticles.push({ article: updatedArticle, compactArticle, author });
+      return updatedArticle;
+    });
+    if (changed) {
+      bundleWriteCount += Number(await writeJsonIfChanged(bundlePath, { ...bundle, articles: updatedArticles }));
+    }
+  }
+
+  if (authorByArticleId.size !== indexArticles.length) {
+    throw new Error(`Attributed ${authorByArticleId.size} articles; expected ${indexArticles.length}`);
+  }
+  const updatedIndexArticles = indexArticles.map((article) => {
+    const authorId = authorByArticleId.get(article.id);
+    return article.authorId === authorId ? article : { ...article, authorId };
+  });
+  const indexWriteCount = Number(await writeJsonIfChanged(attributionPaths.index, {
+    ...indexDocument,
+    articles: updatedIndexArticles,
+  }));
+
+  const origin = sitemapOrigin(sitemapSource);
+  let staticWriteCount = 0;
+  for (const { article, compactArticle, author } of staticArticles) {
+    const outputPath = resolveAllowlistedPath(
+      root,
+      compactArticle.standalonePath,
+      "site/generated/learning-center/market-news/",
+      "standalone path",
+    );
+    staticWriteCount += Number(await writeTextIfChanged(
+      outputPath,
+      renderArticleDocument(article, mediaById[article.imageId], { siteOrigin: origin, author }),
+    ));
+  }
+
+  const sitemapWriteCount = Number(await writeTextIfChanged(
+    attributionPaths.sitemap,
+    addContributorRoutesToSitemap(sitemapSource, contributors, origin),
+  ));
+  console.log(JSON.stringify({
+    mode: "attribution-only",
+    bundlesReferenced: contentPaths.length,
+    articlesAttributed: authorByArticleId.size,
+    bundleWriteCount,
+    indexWriteCount,
+    staticWriteCount,
+    sitemapWriteCount,
+  }));
 }
 
 function stateSlugFor(location, statesById) {
@@ -60,9 +225,14 @@ function compactIndexItem(article, contentPath) {
     locationId: article.locationId,
     locationType: article.locationType,
     articleType: article.articleType,
+    authorId: article.authorId,
     title: article.title,
     dek: article.dek,
     previewText: article.previewText,
+    localContext: (article.sections || [])
+      .flatMap((section) => section.body || section.paragraphs || [])
+      .filter(Boolean)
+      .slice(0, 2),
     metaDescription: article.metaDescription,
     publishedAt: article.publishedAt,
     updatedAt: article.updatedAt,
@@ -144,7 +314,7 @@ async function sourceRecordsWithChecksums(sourceGroups) {
   return output;
 }
 
-function publicRoutes(seed, articles) {
+function publicRoutes(seed, articles, contributors = []) {
   const collections = [
     seed.siteEntryPages,
     seed.states,
@@ -161,27 +331,33 @@ function publicRoutes(seed, articles) {
   return [...new Set([
     "/",
     "/locations",
+    "/prequal/start",
     ...collections.flatMap((collection) => (collection || []).map((item) => item.route).filter(Boolean)),
+    ...contributors.map((contributor) => contributor.route).filter(Boolean),
     ...articles.map((article) => article.route),
   ])].sort();
 }
 
-async function publishStaticArticles({ seed, articles, indexItems, mediaById, sitemapArticles = articles }) {
+async function publishStaticArticles({ seed, articles, indexItems, mediaById, contributors = [], sitemapArticles = articles }) {
   const indexByArticleId = new Map(indexItems.map((item) => [item.id, item]));
+  const contributorsById = new Map(contributors.map((contributor) => [contributor.id, contributor]));
   for (const article of articles) {
     const indexItem = indexByArticleId.get(article.id);
     if (!indexItem?.standalonePath) throw new Error(`Missing standalone path for ${article.id}`);
     const outputPath = path.resolve(repoRoot, indexItem.standalonePath);
     await writeTextAtomic(
       outputPath,
-      renderArticleDocument(article, mediaById[article.imageId], { siteOrigin: DEFAULT_SITE_ORIGIN }),
+      renderArticleDocument(article, mediaById[article.imageId], {
+        siteOrigin: DEFAULT_SITE_ORIGIN,
+        author: contributorsById.get(article.authorId),
+      }),
     );
   }
 
   const lastmodByRoute = Object.fromEntries(sitemapArticles.map((article) => [article.route, article.updatedAt || article.publishedAt]));
   await writeTextAtomic(
     path.join(repoRoot, "site", "sitemap.xml"),
-    renderSitemap(publicRoutes(seed, sitemapArticles), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
+    renderSitemap(publicRoutes(seed, sitemapArticles, contributors), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
   );
   await writeTextAtomic(
     path.join(repoRoot, "site", "robots.txt"),
@@ -191,8 +367,14 @@ async function publishStaticArticles({ seed, articles, indexItems, mediaById, si
 
 async function main() {
   const options = parseArgs(process.argv);
+  if (options.attributionOnly) {
+    await runAttributionOnly(options);
+    return;
+  }
   if (!Number.isInteger(options.batchSize) || options.batchSize < 1) throw new Error("--batch-size must be a positive integer");
   const seed = JSON.parse(await fs.readFile(seedPath, "utf8"));
+  const contributorDocument = JSON.parse(await fs.readFile(path.join(mockDataDir, "editorial", "contributors.json"), "utf8"));
+  const contributors = contributorDocument.contributors || [];
   const statesById = new Map(seed.states.map((state) => [state.id, state]));
   const allLocations = [...seed.states, ...seed.cities];
   const selectedLocations = options.locationId ? allLocations.filter((location) => location.id === options.locationId) : allLocations;
@@ -302,7 +484,7 @@ async function main() {
     await writeJsonAtomic(indexPath, generatedIndex);
     await writeJsonAtomic(sourceManifestPath, generatedSourceManifest);
     await writeJsonAtomic(seedPath, seed);
-    await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById });
+    await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById, contributors });
   } else {
     const locationId = selectedLocations[0].id;
     const retained = existingIndex.articles.filter((article) => article.locationId !== locationId);
@@ -353,6 +535,7 @@ async function main() {
       articles: corpus,
       indexItems,
       mediaById: media.assetsById,
+      contributors,
       sitemapArticles: mergedArticles,
     });
   }

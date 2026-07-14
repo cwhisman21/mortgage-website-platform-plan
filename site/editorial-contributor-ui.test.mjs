@@ -1,111 +1,177 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
+import {
+  applyArticleAuthorIds,
+  mergeEditorialArticles,
+  normalizeEditorialContent,
+  renderContributorArchiveMarkup,
+  renderContributorBylineMarkup,
+} from "./editorial-content.mjs";
 
 const source = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
-const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
-const contributors = JSON.parse(
+const contributorsRaw = JSON.parse(
   fs.readFileSync(new URL("../mock-data/editorial/contributors.json", import.meta.url), "utf8"),
-).contributors;
+);
+const topicHubsRaw = JSON.parse(
+  fs.readFileSync(new URL("../mock-data/editorial/topic-hubs.json", import.meta.url), "utf8"),
+);
+const compiledRaw = JSON.parse(
+  fs.readFileSync(new URL("../mock-data/editorial-content.json", import.meta.url), "utf8"),
+);
+const productionSeed = JSON.parse(
+  fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"),
+);
 
-test("boot safely loads editorial registries, applies ownership, and registers every author route", () => {
-  assert.match(
-    source,
-    /import\s*\{[\s\S]*applyArticleAuthorIds[\s\S]*normalizeEditorialContent[\s\S]*\}\s*from "\/site\/editorial-content\.mjs"/,
+const editorialContent = normalizeEditorialContent({
+  contributors: contributorsRaw,
+  topicHubs: topicHubsRaw,
+});
+
+function count(markup, fragment) {
+  return markup.split(fragment).length - 1;
+}
+
+test("boot fetches the compiled bundle and merges it before fallback ownership", () => {
+  const bootStart = source.indexOf("async function boot(");
+  const bootEnd = source.indexOf("async function fetchOptionalJson(", bootStart);
+  const bootSource = source.slice(bootStart, bootEnd);
+
+  assert.ok(bootStart >= 0 && bootEnd > bootStart, "boot function is missing");
+  assert.ok(bootSource.includes("fetchOptionalJson(EDITORIAL_CONTENT_URL)"));
+  assert.ok(bootSource.includes("mergeEditorialArticles("));
+  assert.ok(
+    bootSource.indexOf("mergeEditorialArticles(") < bootSource.indexOf("applyArticleAuthorIds("),
+    "canonical overlays must merge before structural author fallbacks",
   );
-  assert.match(source, /const CONTRIBUTORS_URL = "\/mock-data\/editorial\/contributors\.json"/);
-  assert.match(source, /const TOPIC_HUBS_URL = "\/mock-data\/editorial\/topic-hubs\.json"/);
-  assert.match(source, /fetchOptionalJson\(CONTRIBUTORS_URL\)/);
-  assert.match(source, /fetchOptionalJson\(TOPIC_HUBS_URL\)/);
-  assert.match(source, /function loadOptionalEditorialContent\(/);
-  assert.match(source, /applyArticleAuthorIds\(editorialContent, loadedData\.articles\)/);
-  assert.match(source, /contributors:\s*mapById\(editorialContent\.contributors\)/);
-  assert.match(source, /contributorsBySlug:/);
-  assert.match(source, /editorialContent\.authorRoutes[\s\S]*built\.routes\.set/);
 
-  for (const contributor of contributors) {
-    assert.equal(
-      contributor.route,
-      `/learning-center/authors/${contributor.slug}`,
-      `${contributor.name} must keep the approved author route`,
-    );
+  const merged = mergeEditorialArticles(productionSeed.articles, compiledRaw);
+  const enriched = applyArticleAuthorIds(editorialContent, merged);
+  const dallas = enriched.find(({ id }) => id === "article-dallas-market-update");
+  const texasTax = enriched.find(({ id }) => id === "article-texas-tax-guide");
+
+  assert.equal(dallas.authorId, "contributor-jordan-avery");
+  assert.equal(dallas.publishedAt, "2026-07-13");
+  assert.ok(dallas.sections.length >= 3);
+  assert.equal(texasTax.authorId, "contributor-priya-bennett");
+});
+
+test("contributor archives render every authorId-assigned article", () => {
+  const contributor = editorialContent.contributors.find(
+    ({ id }) => id === "contributor-marcus-lane",
+  );
+  const assigned = Array.from({ length: 9 }, (_, index) => ({
+    id: `article-${index + 1}`,
+    authorId: contributor.id,
+    title: `Article ${index + 1}`,
+  }));
+  const articles = [
+    ...assigned,
+    { id: "article-other", authorId: "contributor-maya-brooks", title: "Other" },
+  ];
+
+  const markup = renderContributorArchiveMarkup(
+    editorialContent,
+    articles,
+    contributor,
+    (article) => `<article data-article-id="${article.id}">${article.title}</article>`,
+  );
+
+  assert.equal(count(markup, "data-article-id="), assigned.length);
+  for (const article of assigned) assert.ok(markup.includes(article.id));
+  assert.doesNotMatch(markup, /article-other/);
+});
+
+test("linked contributor bylines use one profile link for portrait, name, and real date", () => {
+  const article = {
+    id: "article-rates",
+    type: "guide",
+    authorId: "contributor-rowan-hale",
+    updatedAt: "2026-07-13",
+  };
+
+  for (const compact of [true, false]) {
+    const markup = renderContributorBylineMarkup(article, editorialContent.contributors, {
+      compact,
+      routeHref: (href) => `#${href}`,
+    });
+
+    assert.equal(count(markup, "<a "), 1);
+    assert.equal(count(markup, "</a>"), 1);
+    assert.match(markup, /href="#\/learning-center\/authors\/rowan-hale"/);
+    assert.match(markup, /<a [^>]*>[\s\S]*<img [^>]*rowan-hale\.jpg[\s\S]*Rowan Hale[\s\S]*<time>Last updated Jul 13, 2026<\/time>[\s\S]*<\/a>/);
   }
 });
 
-test("the Editorial Team route renders the approved six-card contributor directory", () => {
-  assert.match(source, /function editorialTeamPage\(topic\)/);
-  assert.match(
-    source,
-    /editorialContent\.contributors\.map\(\(contributor\) =>[\s\S]*contributor-directory-card/,
-  );
-  assert.match(source, /contributor\.portrait\.src/);
-  assert.match(source, /contributor\.portrait\.alt/);
-  assert.match(source, /contributor\.name/);
-  assert.match(source, /contributor\.beat/);
-  assert.match(source, /contributor\.shortBio/);
-  assert.match(
-    source,
-    /if \(topic\.route === "\/learning-center\/editorial-team"\) return editorialTeamPage\(topic\)/,
-  );
-  assert.doesNotMatch(source, /const isEditorialTeam =/);
-  assert.equal(contributors.length, 6);
+test("date-only contributor bylines stay on the same calendar day east of UTC", () => {
+  const moduleUrl = new URL("./editorial-content.mjs", import.meta.url).href;
+  const script = `
+    import { renderContributorBylineMarkup } from ${JSON.stringify(moduleUrl)};
+    const article = { authorId: "contributor-test", publishedAt: "2026-07-10" };
+    const contributors = [{ id: "contributor-test", name: "Test Author", title: "Contributor", route: "/learning-center/authors/test-author", portrait: { src: "/site/assets/contributors/test-author.jpg", alt: "Test Author" } }];
+    process.stdout.write(renderContributorBylineMarkup(article, contributors));
+  `;
+  const result = spawnSync(process.execPath, ["--input-type=module", "--eval", script], {
+    encoding: "utf8",
+    env: { ...process.env, TZ: "Asia/Tokyo" },
+  });
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /Published Jul 10, 2026/);
+  assert.doesNotMatch(result.stdout, /Jul 9, 2026/);
 });
 
-test("contributor routes render profile fields and an authorId-derived article archive", () => {
-  assert.match(source, /function contributorProfilePage\(contributor\)/);
-  assert.match(
-    source,
-    /articlesForContributor\(editorialContent, data\.articles, contributor\.id\)/,
+test("contributor bylines reject unsafe profile and portrait URLs", () => {
+  const markup = renderContributorBylineMarkup(
+    { authorId: "contributor-hostile", publishedAt: "2026-07-10" },
+    [{
+      id: "contributor-hostile",
+      name: "Hostile Author",
+      title: "Contributor",
+      route: "javascript:alert(1)",
+      portrait: { src: "javascript:alert(2)", alt: "Hostile Author" },
+    }],
   );
-  assert.match(source, /contributor\.portrait\.src/);
-  assert.match(source, /contributor\.title/);
-  assert.match(source, /contributor\.beat/);
-  assert.match(source, /contributor\.bio/);
-  assert.match(source, /contributor\.topics\.map/);
-  assert.match(source, /const archive = relatedArticles\.length/);
-  assert.match(source, /found\.type === "contributor"\) html = contributorProfilePage\(found\.item\)/);
-  assert.match(source, /buildLearningCenterModel\(data, editorialContent\)/);
+
+  assert.doesNotMatch(markup, /javascript:/i);
+  assert.doesNotMatch(markup, /<a\b/i);
+  assert.match(markup, /data:image\/svg\+xml/);
 });
 
-test("Learning Center cards and articles render portrait, author, and date bylines", () => {
-  assert.match(source, /function renderContributorByline\(article, \{ compact = false \} = \{\}\)/);
-  assert.match(
-    source,
-    /const byline = renderBylineModel\(article, editorialContent\.contributors\)/,
+test("Snap Mortgage fallback markup stays fully unlinked and never invents a date", () => {
+  const markup = renderContributorBylineMarkup(
+    { id: "article-unassigned" },
+    editorialContent.contributors,
   );
-  assert.match(source, /byline\.portraitSrc/);
-  assert.match(source, /byline\.portraitAlt/);
-  assert.match(source, /byline\.name/);
-  assert.match(source, /const dateLabel =/);
-  assert.match(source, /<time>\$\{esc\(dateLabel\)\}<\/time>/);
-  assert.match(source, /byline\.href\s*\?/);
-  assert.match(source, /renderContributorByline\(article, \{ compact: true \}\)/);
-  assert.match(source, /renderContributorByline\(article\)/);
+
+  assert.equal(count(markup, "<a "), 0);
+  assert.equal(count(markup, "<time>"), 0);
+  assert.match(markup, /Snap Mortgage/);
+  assert.match(markup, /Published by Snap Mortgage/);
+  assert.doesNotMatch(markup, /Updated July 2026/);
 });
 
-test("article schema keeps Snap Mortgage responsible without person or credential markup", () => {
-  assert.match(source, /"@type": "Organization",\s*name: "Snap Mortgage"/);
-  assert.match(source, /publisher: snapMortgagePublisher/);
-  assert.match(source, /author: snapMortgagePublisher/);
-  assert.doesNotMatch(source, /"@type": "Person"/);
-  assert.doesNotMatch(source, /reviewed[- ]by/i);
-  assert.doesNotMatch(source, /credentialSchema|personLicenseSchema/);
-});
-
-test("contributor directory, profiles, and bylines have scoped responsive styles", () => {
-  for (const selector of [
-    ".editorial-directory-page",
-    ".contributor-directory-grid",
-    ".contributor-directory-card",
-    ".contributor-profile-page",
-    ".contributor-profile-hero",
-    ".article-byline",
-    ".article-card-byline",
-  ]) {
-    assert.ok(styles.includes(selector), `missing ${selector}`);
-  }
-  assert.match(
-    styles,
-    /@media \(max-width: 760px\)[\s\S]*\.contributor-directory-grid[\s\S]*\.contributor-profile-hero/,
+test("market bylines expose a trusted as-of date and omit it when absent", () => {
+  const dated = renderContributorBylineMarkup(
+    {
+      id: "article-market",
+      type: "local_market_update",
+      authorId: "contributor-maya-brooks",
+      asOf: "2026-07-09",
+      publishedAt: "2026-07-13",
+    },
+    editorialContent.contributors,
   );
+  const undated = renderContributorBylineMarkup(
+    {
+      id: "article-market-undated",
+      type: "local_market_update",
+      authorId: "contributor-maya-brooks",
+    },
+    editorialContent.contributors,
+  );
+
+  assert.match(dated, /<time>As of Jul 9, 2026<\/time>/);
+  assert.equal(count(undated, "<time>"), 0);
 });

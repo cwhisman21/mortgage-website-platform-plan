@@ -3,7 +3,7 @@
   "articles": [
     {
       "id": "article-austin-market-update",
-      "title": "Austin mortgage market update: payments, inventory, and buyer leverage",
+      "title": "Austin mortgage market update: payments, price trends, and offer planning",
       "route": "/learning-center/austin-mortgage-market-update",
       "type": "local_market_update",
       "stateIds": ["state-tx"],
@@ -14,9 +14,9 @@
       "dek": "The useful question is not whether one headline makes Austin a buyer's or seller's market. It is whether the homes you are considering leave enough room for financing costs, taxes, insurance, repairs, and negotiation choices.",
       "publishedAt": "2026-07-13",
       "asOf": "2026-07-09",
-      "metaDescription": "Review Austin mortgage payment context, the limits of inventory data, and practical ways to compare offers using dated, authoritative sources.",
+      "metaDescription": "Review Austin mortgage payment and price-trend context, plus practical ways to build an offer plan using dated authoritative sources.",
       "introduction": [
-        "Austin's housing conversation often compresses price direction, mortgage rates, and inventory into one market label. Those measures answer different questions. The June 2026 FHFA release provides home-price index data through April for metro-level trend context, while the 2024 American Community Survey provides city estimates for home values, income, and owner costs. Neither source reports today's active listings or the value of a particular home.",
+        "Austin's housing conversation often compresses price direction, mortgage rates, and current supply into one market label. Those measures answer different questions. FHFA's official 2026 Q1 report provides quarterly Austin-area MSA home-price trend context, while the 2024 American Community Survey extract provides city estimates for home value, household income, and selected owner costs. Neither source reports today's active listings or the value of a particular home.",
         "For financing context, Freddie Mac reported national benchmark averages of 6.49% for a 30-year fixed mortgage and 5.82% for a 15-year fixed mortgage for the week ending July 9, 2026. Those are national conventional benchmarks for the survey profile, not Austin quotes. They are most useful as a consistent input for testing how term and rate assumptions change a payment worksheet."
       ],
       "keyTakeaways": [
@@ -30,7 +30,7 @@
           "id": "read-the-market-in-layers",
           "heading": "Read Austin market evidence in layers",
           "paragraphs": [
-            "FHFA HPI is designed to show price movement for a defined geography over time. For Austin, that means metro or county context rather than a city-block forecast. ACS estimates describe Austin city households and housing over a multi-year survey period. A current listing report, by contrast, can describe active supply, pending sales, price reductions, and time on market. Keeping those layers separate prevents a broad trend from becoming an unsupported claim about one neighborhood or one weekend of listings.",
+            "FHFA HPI is designed to show price movement for a defined geography over time. For this article, that means the Austin-area MSA in the 2026 Q1 quarterly report rather than a city-block forecast. The cited ACS extract supplies city estimates for home value, selected owner costs, and household income over a multi-year survey period. A current listing report, by contrast, can describe active supply, pending sales, price reductions, and time on market. Keeping those layers separate prevents a broad trend from becoming an unsupported claim about one neighborhood or one weekend of listings.",
             "A borrower can use the broad evidence to choose questions: Has the target submarket changed differently from the metro index? How many comparable homes are actually active? Are sellers accepting financing or inspection contingencies? Those answers should come from current property and listing records, not from substituting a survey estimate for live inventory."
           ]
         },
@@ -96,7 +96,7 @@
       ],
       "sourceIds": [
         "freddie-mac-pmms-2026-07-09",
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "census-acs-2024-austin-tx"
       ],
       "sourceClaims": [
@@ -105,8 +105,8 @@
           "claim": "For the week ending July 9, 2026, PMMS reported national averages of 6.49% for a 30-year fixed mortgage and 5.82% for a 15-year fixed mortgage; these are benchmarks, not local quotes."
         },
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "The June 2026 FHFA HPI release provides broad home-price trend data through April 2026 at supported metro, state, or other index geographies, not property valuations."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly Austin-area MSA home-price trend context through 2026 Q1, not city-level inventory or a property valuation."
         },
         {
           "sourceId": "census-acs-2024-austin-tx",
@@ -136,7 +136,7 @@
       "asOf": "2026-07-09",
       "metaDescription": "Compare conventional and FHA planning questions for a Dallas purchase, including limits, mortgage insurance, payment inputs, and cash to close.",
       "introduction": [
-        "Dallas buyers often encounter conventional and FHA options in the same search. The programs can finance similar goals, but they do not use identical limits, mortgage-insurance structures, property requirements, or underwriting rules. A useful comparison starts with the home's county because federal loan limits are published by county or county-equivalent, not by a Dallas mailing address alone.",
+        "Dallas buyers often encounter conventional and FHA options in the same search. HUD's FHA Handbook and CFPB's FHA guidance describe FHA-specific mortgage-insurance and property-review considerations; a conventional offer must be compared under the standards and terms that apply to that loan. A useful comparison starts with the home's county because federal loan limits are published by county or county-equivalent, not by a Dallas mailing address alone.",
         "The 2026 FHFA conforming limits define the loan-size boundary for loans eligible for purchase by Fannie Mae and Freddie Mac, while HUD's 2026 FHA lookup provides FHA forward limits by county and metropolitan area. Those boundaries do not determine approval or pricing. They tell you which program table to consult before a lender reviews the borrower and property."
       ],
       "keyTakeaways": [
@@ -159,7 +159,7 @@
           "heading": "Compare the whole payment path",
           "paragraphs": [
             "Build both scenarios from the same purchase price and occupancy. Show down payment, base loan amount, principal and interest, mortgage insurance, estimated taxes, homeowners insurance, association dues, closing costs, and cash to close. Keep lender credits and seller contributions visible rather than netting them into a vague low-cash claim.",
-            "FHA and conventional mortgage insurance work differently, and conventional pricing can vary with borrower and transaction characteristics. Do not infer program fit from one advertised rate. A lender should explain how insurance may change, whether it can end, and what assumptions appear in the disclosure for each option."
+            "FHA uses program-specific mortgage-insurance and property-review rules described in HUD's Handbook, while CFPB advises buyers to compare FHA costs and terms with other loan options. For the offered conventional loan, ask the lender which mortgage-insurance terms, removal conditions, appraisal standards, and property requirements apply. Do not infer program fit from one advertised rate."
           ],
           "table": {
             "caption": "Dallas conventional and FHA comparison worksheet",
@@ -167,8 +167,8 @@
             "rows": [
               ["Loan-size check", "Compare the base loan with the applicable 2026 FHFA county limit", "Compare the base loan with HUD's 2026 county or MSA limit"],
               ["Down payment", "Program and lender terms determine available structures", "Program and lender review determine available structures"],
-              ["Mortgage insurance", "May apply based on the final structure; verify cancellation rules", "FHA mortgage insurance applies under program rules; verify upfront and ongoing treatment"],
-              ["Property review", "Appraisal and lender requirements apply", "FHA appraisal and property requirements apply"],
+              ["Mortgage insurance", "Ask which insurance terms and removal conditions apply to the offered loan", "Review FHA upfront and ongoing mortgage-insurance treatment under the current program rules"],
+              ["Property review", "Ask which appraisal and property standards apply to the offered loan", "Confirm the FHA appraisal and property requirements that apply to the transaction"],
               ["Best comparison document", "Written Loan Estimate for the matched scenario", "Written Loan Estimate for the matched scenario"]
             ],
             "note": "This table organizes questions; it does not state available terms or eligibility. County, credit, income, debts, occupancy, property, and lender review all matter."
@@ -217,6 +217,8 @@
       "sourceIds": [
         "fhfa-conforming-loan-limits-2026",
         "hud-fha-loan-limits-2026",
+        "hud-fha-handbook-4000-1",
+        "cfpb-fha-loans",
         "cfpb-loan-estimate",
         "census-acs-2024-dallas-tx"
       ],
@@ -228,6 +230,14 @@
         {
           "sourceId": "hud-fha-loan-limits-2026",
           "claim": "HUD's 2026 FHA Mortgage Limits tool supports county and MSA lookup for FHA forward mortgage limits."
+        },
+        {
+          "sourceId": "hud-fha-handbook-4000-1",
+          "claim": "HUD Handbook 4000.1 supplies the official FHA mortgage-insurance, appraisal, property, borrower, and lender policy framework, subject to its current version."
+        },
+        {
+          "sourceId": "cfpb-fha-loans",
+          "claim": "CFPB's FHA guidance supports borrower-facing comparison of FHA down payment, mortgage insurance, costs, and other loan options without determining eligibility."
         },
         {
           "sourceId": "cfpb-loan-estimate",
@@ -261,7 +271,7 @@
       "asOf": "2026-07-09",
       "metaDescription": "Review Houston refinance tradeoffs involving equity, closing costs, property taxes, insurance, flood coverage, and the full monthly payment.",
       "introduction": [
-        "FHFA's latest available home-price index release can describe Houston-area price movement through April 2026, but an index is not a valuation of a homeowner's property. A refinance starts with property-specific evidence: estimated current value, mortgage payoff, liens, and the lender's valuation process. Broad market movement can help frame the question; it cannot establish available equity or cash proceeds.",
+        "FHFA's official 2026 Q1 report can describe quarterly Houston-area MSA price movement through 2026 Q1, but an index is not a valuation of a homeowner's property. A refinance starts with property-specific evidence: estimated current value, mortgage payoff, liens, and the lender's valuation process. Broad market movement can help frame the question; it cannot establish available equity or cash proceeds.",
         "The cost comparison also extends beyond rate. CFPB's Loan Estimate framework separates principal and interest, estimated taxes and insurance, closing costs, and cash to close. In Houston, property taxes are especially important to verify locally because Texas has no state property tax and local taxing units set and collect property taxes. Flood coverage is a separate review because standard homeowners policies generally do not cover flood damage."
       ],
       "keyTakeaways": [
@@ -284,7 +294,7 @@
           "heading": "Compare payment relief with term and total cost",
           "paragraphs": [
             "A refinance can reduce principal and interest because of a lower rate, a longer remaining term, a different loan amount, or a combination of those inputs. Label which input creates the change. Extending repayment can lower the scheduled payment while increasing the number of payments and potentially the total interest paid.",
-            "Use APR alongside rate to compare broader borrowing cost, but also inspect individual fees and credits. A simple breakeven calculation divides eligible upfront refinance costs by the expected monthly reduction; it is an illustrative planning measure, not a complete accounting of term reset, tax effects, future moves, or opportunity cost."
+            "Use APR alongside rate to compare broader borrowing cost, but also inspect individual fees and credits. For a simplified breakeven estimate, divide total applicable nonrecurring refinance costs net of lender credits by the expected monthly payment reduction. The numerator can include applicable lender charges and third-party appraisal, title, settlement, recording, and similar refinance costs. Exclude prepaid interest and initial escrow funding because they are timing and escrow items, not part of this simplified cost-recovery numerator. CFPB materials support comparing total costs and credits and describe monthly savings paying back refinance cost; they do not define this formula. Compare the term reset and total cost separately, along with equity changes, tax effects, future moves, and opportunity cost."
           ],
           "table": {
             "caption": "Houston refinance decision worksheet",
@@ -348,20 +358,30 @@
         }
       ],
       "sourceIds": [
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "cfpb-loan-estimate",
+        "cfpb-compare-loan-estimates",
+        "cfpb-home-loan-toolkit",
         "texas-comptroller-property-tax",
         "fema-floodsmart",
         "census-acs-2024-houston-tx"
       ],
       "sourceClaims": [
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "FHFA HPI provides broad Houston-area price-trend context through April 2026, not a property valuation or available-equity calculation."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly Houston-area MSA price-trend context through 2026 Q1, not a property valuation or available-equity calculation."
         },
         {
           "sourceId": "cfpb-loan-estimate",
           "claim": "CFPB's Loan Estimate guidance supports comparing rate, APR, principal and interest, estimated escrow, closing costs, and cash to close."
+        },
+        {
+          "sourceId": "cfpb-compare-loan-estimates",
+          "claim": "CFPB's comparison guidance supports matching loan terms, comparing total loan costs and lender credits, and distinguishing prepaids and initial escrow amounts; it does not define the simplified breakeven formula used here."
+        },
+        {
+          "sourceId": "cfpb-home-loan-toolkit",
+          "claim": "CFPB's toolkit describes monthly savings paying back the cost of a refinance and supports comparing payment, closing costs, cash to close, and longer-term loan cost; term reset and total cost still require separate review."
         },
         {
           "sourceId": "texas-comptroller-property-tax",
@@ -400,12 +420,12 @@
       "metaDescription": "Review Irvine jumbo planning, 2026 conforming loan boundaries, payment sensitivity, documentation, reserves, and California insurance questions.",
       "introduction": [
         "For 2026, FHFA set the baseline one-unit conforming loan limit at $832,750 and the high-cost ceiling at $1,249,125. The applicable number is county-specific, so an Irvine buyer should verify Orange County in FHFA's county table rather than assuming that the national baseline or maximum ceiling applies.",
-        "A mortgage becomes jumbo when its loan amount exceeds the applicable limit for purchase by Fannie Mae or Freddie Mac. That classification does not by itself establish a rate, down payment, reserve requirement, or approval path. Jumbo underwriting and pricing can vary by lender, borrower profile, property, occupancy, and loan structure."
+        "A mortgage becomes jumbo when its loan amount exceeds the applicable limit for purchase by Fannie Mae or Freddie Mac. That classification does not by itself establish a rate, down payment, reserve requirement, documentation list, or approval path. Ask each lender to state which terms and underwriting requirements apply to the proposed borrower, property, occupancy, and loan structure."
       ],
       "keyTakeaways": [
         "Compare the planned loan amount, not the purchase price, with Orange County's 2026 conforming limit.",
         "Use the national baseline and high-cost ceiling as boundaries only; confirm the actual county limit before relying on a label.",
-        "Compare APR, points, fees, rate-lock terms, reserves, and documentation across offers rather than focusing on note rate alone.",
+        "Ask each lender to state APR, points, fees, rate-lock terms, documentation, and any reserve requirement rather than focusing on note rate alone.",
         "Obtain a property-specific insurance quote early because coverage and cost can affect both payment planning and closing readiness."
       ],
       "sections": [
@@ -422,7 +442,7 @@
           "heading": "Compare conforming and jumbo offers on matched terms",
           "paragraphs": [
             "Ask each lender to price the same loan amount, occupancy, property type, term, lock period, and points. APR provides a broader cost measure than the interest rate because it reflects certain fees and points, but it does not eliminate the need to inspect fee lines, credits, prepaids, and escrow assumptions.",
-            "Jumbo lenders may ask for different documentation or reserves. Treat those requirements as lender- and scenario-specific until they are confirmed in writing. A buyer with variable compensation, concentrated assets, multiple properties, or a complex tax return should allow time for document review without assuming that one lender's request applies everywhere."
+            "Ask each jumbo lender which income, asset, property, and reserve documents apply to the exact scenario and request the answer in writing. If the borrower's finances or property ownership are complex, ask how much review time is needed rather than assuming that one documentation list or reserve standard applies across lenders."
           ],
           "table": {
             "caption": "Irvine loan-size and offer comparison",
@@ -430,8 +450,8 @@
             "rows": [
               ["Which boundary applies?", "FHFA 2026 county limit for the property and unit count", "Loan amount above the applicable FHFA limit, subject to lender product rules"],
               ["Which terms should match?", "Loan amount, term, lock period, points, occupancy, and property", "The same matched scenario"],
-              ["Which costs should be visible?", "Rate, APR, points, fees, credits, escrow, and cash to close", "The same fields, plus any lender-specific reserve or documentation effects"],
-              ["What remains uncertain?", "Final underwriting, appraisal, insurance, and available pricing", "Final underwriting, appraisal, insurance, reserves, and available pricing"]
+              ["Which costs should be visible?", "Rate, APR, points, fees, credits, escrow, and cash to close", "The same fields, plus a written answer about any documentation or reserve effects"],
+              ["What must be confirmed?", "Final underwriting, appraisal, insurance, and available pricing", "The lender's final underwriting, appraisal, insurance, documentation, reserve, and pricing requirements"]
             ],
             "note": "The 2026 baseline and ceiling are federal boundaries, not a statement that either number is the Orange County limit. Verify the county table for the property."
           }
@@ -448,7 +468,7 @@
           "id": "decide-with-a-buffer",
           "heading": "Decide with a documentation and cash buffer",
           "paragraphs": [
-            "High-balance transactions can magnify small changes in rate, points, taxes, insurance, and closing costs. Keep liquid reserves separate from cash to close and define how much post-closing flexibility the household wants. A lender's minimum is not automatically the household's comfort level.",
+            "High-balance transactions can magnify small changes in rate, points, taxes, insurance, and closing costs. Ask whether the lender requires reserves, keep any confirmed reserve amount separate from cash to close, and define how much additional post-closing flexibility the household wants.",
             "The decision should remain conditional until the county limit, written pricing, appraisal, property review, insurance, and underwriting are complete."
           ]
         }
@@ -661,7 +681,7 @@
     },
     {
       "id": "article-sacramento-market-update",
-      "title": "Sacramento move-up buyer update: price and inventory context",
+      "title": "Sacramento move-up buyer update: price and payment context",
       "route": "/learning-center/sacramento-move-up-market-update",
       "type": "local_market_update",
       "stateIds": ["state-ca"],
@@ -674,8 +694,8 @@
       "asOf": "2026-07-09",
       "metaDescription": "Plan a Sacramento move-up purchase by comparing sale proceeds, new payment, taxes, insurance, timing, contingencies, and current property evidence.",
       "introduction": [
-        "The June 2026 FHFA HPI release supplies Sacramento-area price-trend context through April 2026. That index can help a homeowner understand the broad backdrop since a prior purchase, but it cannot establish the current sale price of the existing home or the value of the next property. Both sides need current comparable sales and property-specific review.",
-        "Inventory requires the same discipline. ACS describes Sacramento housing and household conditions over a survey period; it does not report current active listings. Ask for a dated local listing report when deciding how quickly a sale or purchase may move, and build contingencies around the actual properties rather than a market nickname."
+        "FHFA's official 2026 Q1 report supplies quarterly Sacramento-area MSA price-trend context through 2026 Q1. That index can help a homeowner understand the broad backdrop since a prior purchase, but it cannot establish the current sale price of the existing home or the value of the next property. Both sides need current comparable sales and property-specific review.",
+        "Current supply requires a different source. The cited ACS extract provides Sacramento city estimates for home value, selected owner costs, and household income; it does not report active listings. Ask for a dated local listing report when deciding how quickly a sale or purchase may move, and build contingencies around the actual properties rather than a market nickname."
       ],
       "keyTakeaways": [
         "Estimate net sale proceeds from a value range, mortgage payoff, selling costs, and timing instead of treating gross equity as available cash.",
@@ -752,8 +772,8 @@
           "answer": "Use it only as broad market context. Sale proceeds require a property-specific value range, payoff, liens, selling costs, repairs or credits, and final settlement figures."
         },
         {
-          "question": "Does ACS vacancy data show current Sacramento homes for sale?",
-          "answer": "No. ACS is a survey of housing and households, not a live listing feed. Request current listing data for inventory and competition questions."
+          "question": "Do the cited ACS estimates show current Sacramento homes for sale?",
+          "answer": "No. The cited extract provides home-value, selected owner-cost, and household-income estimates, not a live listing feed. Request current listing data for supply and competition questions."
         },
         {
           "question": "Should I buy before selling?",
@@ -761,19 +781,19 @@
         }
       ],
       "sourceIds": [
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "census-acs-2024-sacramento-ca",
         "california-doi-residential-insurance",
         "cfpb-loan-estimate"
       ],
       "sourceClaims": [
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "The June 2026 FHFA HPI release provides Sacramento-area price-trend context through April 2026, not property values or sale proceeds."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly Sacramento-area MSA price-trend context through 2026 Q1, not property values or sale proceeds."
         },
         {
           "sourceId": "census-acs-2024-sacramento-ca",
-          "claim": "The 2024 ACS 5-year Sacramento place estimates provide survey context for housing, owner costs, home value, and income, not live inventory."
+          "claim": "The 2024 ACS 5-year Sacramento extract provides city estimates for selected owner costs, median home value, and household income, not active listings."
         },
         {
           "sourceId": "california-doi-residential-insurance",
@@ -807,11 +827,11 @@
       "asOf": "2026-07-09",
       "metaDescription": "Build a Denver relocation mortgage plan around employment documentation, temporary housing, payment scenarios, taxes, insurance, and closing timing.",
       "introduction": [
-        "Denver-area FHFA data through April 2026 and May 2026 BLS labor data can describe the metro backdrop. They cannot tell a relocating buyer whether a job offer, transfer, variable pay, or remote-work arrangement will satisfy a lender's documentation requirements. Qualification is a borrower-level review.",
+        "FHFA's official 2026 Q1 report and May 2026 BLS labor data can describe the Denver-area backdrop. They cannot tell a relocating buyer whether an employment offer or contract will satisfy the proposed loan's documentation requirements. Qualification is a borrower-level review.",
         "The 2024 ACS city estimates provide a consistent way to compare Denver housing costs and household conditions with other places, but they are multi-year survey estimates. A relocation budget should use the selected property's taxes, insurance, association obligations, and current loan terms, plus the real cost of travel or temporary housing."
       ],
       "keyTakeaways": [
-        "Confirm how the lender will document new, transferred, remote, bonus, commission, or variable income before setting the closing date.",
+        "Confirm how the lender will document an employment offer or contract and any transferred, remote, bonus, commission, or variable income before setting the closing date.",
         "Treat BLS labor data as metro context, not evidence of personal employment stability or mortgage eligibility.",
         "Compare temporary housing and payment overlap with the cost and risk of forcing a purchase into a narrow relocation window.",
         "Use written loan terms and property-specific tax and insurance inputs; national rate benchmarks are only scenario tools."
@@ -821,8 +841,8 @@
           "id": "align-employment-and-underwriting",
           "heading": "Align employment facts with underwriting timing",
           "paragraphs": [
-            "Share the employment transition with the lender early. Ask what documents are needed for an offer letter, start date, transfer, probation period, remote arrangement, or variable compensation. Do not assume that being employed in a growing metro or stable industry resolves borrower documentation.",
-            "Build the closing schedule around verified requirements. A lender may need evidence before closing, after the start date, or from the employer; the answer depends on program and lender rules. Keep contingencies and travel plans flexible until the documentation path is clear."
+            "Fannie Mae's Selling Guide provides a defined framework for employment offers or contracts on conventional loans subject to its standards. Ask the lender whether that framework applies to the proposed loan, which offer or contract terms and supporting documents must be verified, and how the employment start date affects the review. Do not treat the Fannie Mae standard as a universal rule for every program or lender.",
+            "For a transfer, remote arrangement, probation period, bonus, commission, or variable income, ask the lender which documents and timing conditions apply and request the answer before setting the closing schedule. Keep contingencies and travel plans flexible until the lender confirms the documentation path."
           ]
         },
         {
@@ -894,20 +914,25 @@
         }
       ],
       "sourceIds": [
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "bls-laus-may-2026",
+        "fannie-mae-employment-offers-contracts",
         "freddie-mac-pmms-2026-07-09",
         "colorado-property-taxation",
         "census-acs-2024-denver-co"
       ],
       "sourceClaims": [
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "FHFA provides Denver-area home-price trend context through April 2026, not a property value or timing forecast."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly Denver-area MSA price-trend context through 2026 Q1, not a property value or timing forecast."
         },
         {
           "sourceId": "bls-laus-may-2026",
           "claim": "BLS LAUS provides May 2026 state and metro labor-market context, not household income verification or mortgage eligibility."
+        },
+        {
+          "sourceId": "fannie-mae-employment-offers-contracts",
+          "claim": "Fannie Mae's Selling Guide provides a conventional-loan framework for qualifying income documented with an employment offer or contract; applicability and timing require lender confirmation."
         },
         {
           "sourceId": "freddie-mac-pmms-2026-07-09",
@@ -932,7 +957,7 @@
     },
     {
       "id": "article-colorado-springs-market-update",
-      "title": "Colorado Springs VA buyer update: inventory and payment context",
+      "title": "Colorado Springs VA buyer update: payment and planning context",
       "route": "/learning-center/colorado-springs-va-market-update",
       "type": "local_market_update",
       "stateIds": ["state-co"],
@@ -940,13 +965,13 @@
       "productIds": ["product-va", "product-fha"],
       "authorId": "contributor-marcus-lane",
       "summary": "Eligible Colorado Springs VA buyers can compare a no-VA-required-down-payment path with other financing while keeping entitlement, property review, taxes, insurance, and current listing evidence in view.",
-      "dek": "VA benefits can change cash needs and mortgage-insurance costs. They do not turn broad inventory or price data into an approval, property value, or final payment.",
+      "dek": "VA benefits can change cash needs and mortgage-insurance costs. They do not turn broad price or household-cost data into an approval, property value, or final payment.",
       "publishedAt": "2026-07-13",
       "asOf": "2026-07-09",
-      "metaDescription": "Review Colorado Springs VA planning, including eligibility, down payment, PMI, property review, payment inputs, taxes, and inventory evidence.",
+      "metaDescription": "Review Colorado Springs VA planning, including eligibility, down payment, PMI, property review, payment inputs, taxes, and reserves.",
       "introduction": [
-        "Colorado Springs has a large military-connected borrower audience, but the VA path still begins with individual eligibility and lender review. VA-backed purchase loans come from private lenders, and the borrower generally needs a valid Certificate of Eligibility, satisfactory credit and income under the lender's review, and an eligible occupancy plan.",
-        "For local context, FHFA HPI can describe broad Colorado Springs-area price movement and the 2024 ACS can describe city housing and household estimates. Neither reports today's active inventory. Use a current listing source for active, pending, and recently sold homes, and label its date and geography."
+        "The Colorado Springs VA path begins with individual eligibility and lender review. VA-backed purchase loans come from private lenders, and the borrower generally needs a valid Certificate of Eligibility, satisfactory credit and income under the lender's review, and an eligible occupancy plan.",
+        "For local context, FHFA's official 2026 Q1 report describes quarterly Colorado Springs-area MSA price movement through 2026 Q1, while the cited ACS extract provides city estimates for home value, selected owner costs, and household income. Neither reports today's active listings or the value of a selected property."
       ],
       "keyTakeaways": [
         "Confirm the Certificate of Eligibility, entitlement, occupancy, and lender documentation path before treating a VA scenario as available.",
@@ -987,7 +1012,7 @@
           "id": "read-inventory-carefully",
           "heading": "Read inventory with a date and geography",
           "paragraphs": [
-            "ACS housing-stock, tenure, and vacancy estimates are not counts of homes currently listed for sale. FHFA price indexes do not report active supply. To evaluate competition, request current listings, pending contracts, recent closed sales, price changes, and concessions for the relevant property type and price range.",
+            "The cited ACS home-value, selected owner-cost, and household-income estimates are not counts of homes currently listed for sale. FHFA price indexes also do not report active supply. To evaluate competition, request current listings, pending contracts, recent closed sales, price changes, and concessions for the relevant property type and price range.",
             "Even current market statistics do not predict the response to one offer. Property condition, seller priorities, competing terms, appraisal risk, and contract timing remain transaction-specific."
           ]
         },
@@ -1027,13 +1052,13 @@
           "answer": "VA identifies no private mortgage insurance as a benefit. A funding fee may apply unless the borrower is exempt, and taxes, insurance, closing costs, and other obligations remain."
         },
         {
-          "question": "Can ACS vacancy estimates tell me how many Colorado Springs homes are for sale?",
-          "answer": "No. ACS vacancy and housing-stock estimates are survey measures, not live active-listing counts. Use a current listing source for inventory."
+          "question": "Can the cited ACS estimates tell me how many Colorado Springs homes are for sale?",
+          "answer": "No. The cited extract reports home value, selected owner costs, and household income, not live active-listing counts. Use a current listing source for supply questions."
         }
       ],
       "sourceIds": [
         "va-home-loans",
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "colorado-property-taxation",
         "census-acs-2024-colorado-springs-co"
       ],
@@ -1043,8 +1068,8 @@
           "claim": "VA-backed home loans are made by private lenders for eligible borrowers; VA identifies no VA-required down payment and no PMI as benefits, with eligibility, occupancy, lender, and property review still required."
         },
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "FHFA HPI provides broad Colorado Springs-area price movement through April 2026, not active listings or a property value."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly Colorado Springs-area MSA price movement through 2026 Q1, not active listings or a property value."
         },
         {
           "sourceId": "colorado-property-taxation",
@@ -1052,7 +1077,7 @@
         },
         {
           "sourceId": "census-acs-2024-colorado-springs-co",
-          "claim": "The 2024 ACS 5-year Colorado Springs place estimates provide survey context for housing, owner costs, home value, and household income, not live inventory."
+          "claim": "The 2024 ACS 5-year Colorado Springs extract provides city estimates for selected owner costs, median home value, and household income, not active listings."
         }
       ],
       "relatedRoutes": [
@@ -1079,13 +1104,13 @@
       "metaDescription": "Review Boulder jumbo planning for self-employed buyers, including 2026 county limits, APR, documentation, reserves, property costs, and timing.",
       "introduction": [
         "FHFA's 2026 conforming limits establish a baseline one-unit limit of $832,750 and a high-cost ceiling of $1,249,125. Boulder buyers must check the county-level table for the property because the ceiling is not automatically the Boulder County limit. The planned loan amount, not the purchase price, determines whether the loan exceeds the applicable boundary.",
-        "Self-employment does not by itself define a mortgage product or outcome. Lenders review income and business documentation under the selected program and their requirements. A buyer with variable revenue, multiple entities, recent business changes, or significant deductions should clarify the document list and review timing before relying on a closing date."
+        "Self-employment does not by itself define a mortgage product or outcome. Fannie Mae's Selling Guide provides separate individual and business documentation frameworks for conventional loans subject to its standards, but those chapters do not create a universal jumbo rule. A Boulder buyer should ask the proposed lender which documents and review timing apply before relying on a closing date."
       ],
       "keyTakeaways": [
         "Verify Boulder County's 2026 conforming limit and compare it with the base loan amount after the planned down payment.",
         "Ask each lender for a written self-employed documentation list tied to the actual business and income structure.",
         "Compare rate, APR, points, fees, reserves, lock terms, and cash to close on matched jumbo scenarios.",
-        "Keep underwriting reserves separate from the household's preferred post-closing safety buffer."
+        "Keep any lender-confirmed reserve requirement separate from the household's preferred post-closing safety buffer."
       ],
       "sections": [
         {
@@ -1093,14 +1118,14 @@
           "heading": "Classify the loan with the county table",
           "paragraphs": [
             "Calculate the loan amount after down payment, then verify the property's county and legal unit count. Compare that loan amount with FHFA's current table. A loan above the applicable limit is generally considered jumbo because it is above the Fannie Mae and Freddie Mac purchase boundary described by CFPB.",
-            "The classification does not create universal jumbo terms. One lender may offer different rate, reserve, property, or documentation structures from another. Use the boundary to organize the search, not to predict approval."
+            "The classification does not create universal jumbo terms. Ask each lender which rate, reserve, property, and documentation conditions apply to the proposed loan. Use the boundary to organize the search, not to predict approval."
           ]
         },
         {
           "id": "prepare-self-employed-documentation",
           "heading": "Prepare the documentation path before the offer clock starts",
           "paragraphs": [
-            "Give the lender an accurate overview of ownership, business entities, income sources, compensation method, and recent material changes. Ask which personal and business returns, year-to-date statements, balance sheets, bank statements, licenses, contracts, or third-party confirmations may be requested. The list varies by scenario, so this is a preparation prompt rather than a representation that every item will apply.",
+            "Fannie Mae's individual and business self-employment chapters provide a conventional reference point for income documentation. Give the lender an accurate overview of ownership, business entities, income sources, compensation method, and recent material changes, then ask which personal or business tax returns, year-to-date statements, balance sheets, bank statements, licenses, contracts, or third-party confirmations apply to the proposed loan. This is a question list, not a representation that every item is required.",
             "Request enough review before making a time-sensitive offer to understand how the lender is treating income. An informal revenue figure, bank balance, or prior prequalification should not be treated as a final underwriting calculation."
           ],
           "table": {
@@ -1113,7 +1138,7 @@
               ["Reserves", "What does the lender require and what does the household want to retain?", "Separates underwriting minimums from household resilience"],
               ["Property costs", "What are the verified taxes, insurance, HOA, and maintenance obligations?", "Completes the affordability picture beyond P&I"]
             ],
-            "note": "Documentation and reserve requirements vary by lender, program, borrower, and property. Confirm them in writing for the actual scenario."
+            "note": "Fannie Mae's cited chapters apply to loans subject to its standards. Ask the proposed jumbo lender to confirm its documentation and reserve requirements in writing."
           }
         },
         {
@@ -1168,6 +1193,8 @@
         "fhfa-conforming-loan-limits-2026",
         "cfpb-jumbo-loan",
         "cfpb-mortgage-key-terms",
+        "fannie-mae-self-employment-individual",
+        "fannie-mae-self-employment-business",
         "census-acs-2024-boulder-co"
       ],
       "sourceClaims": [
@@ -1182,6 +1209,14 @@
         {
           "sourceId": "cfpb-mortgage-key-terms",
           "claim": "APR includes the interest rate plus certain points, broker fees, and other charges, supporting broader matched-loan comparison."
+        },
+        {
+          "sourceId": "fannie-mae-self-employment-individual",
+          "claim": "Fannie Mae's Selling Guide provides the individual self-employment documentation framework for conventional loans subject to its standards, not a universal jumbo document list."
+        },
+        {
+          "sourceId": "fannie-mae-self-employment-business",
+          "claim": "Fannie Mae's Selling Guide provides the business self-employment documentation framework for conventional loans subject to its standards; applicable records require lender confirmation."
         },
         {
           "sourceId": "census-acs-2024-boulder-co",
@@ -1211,14 +1246,14 @@
       "asOf": "2026-07-09",
       "metaDescription": "Review Tampa refinance decisions involving insurance, flood coverage, escrow, closing costs, term reset, property value, and breakeven timing.",
       "introduction": [
-        "Tampa-area FHFA HPI data through April 2026 can provide a broad equity backdrop, but it does not determine a home's current value or a homeowner's refinance eligibility. Start with a property-specific value range, current payoff, liens, and the lender's valuation process.",
+        "FHFA's official 2026 Q1 report provides quarterly price-trend context for the Tampa, FL metropolitan division (MSAD) through 2026 Q1, but it does not determine a home's current value or a homeowner's refinance eligibility. It should not be read as the combined Tampa-St. Petersburg-Clearwater metro. Start with a property-specific value range, current payoff, liens, and the lender's valuation process.",
         "Then rebuild the total payment. Florida insurance and flood costs can vary by address, carrier, coverage, deductible, and hazard. FEMA explains that most homeowners policies do not cover flood damage, so homeowners and flood coverage should appear as separate lines rather than one insurance assumption."
       ],
       "keyTakeaways": [
-        "Do not translate Tampa-area HPI movement into a property value or available cash-out amount.",
+        "Do not translate Tampa, FL metropolitan division HPI movement into a property value or available cash-out amount.",
         "Obtain current homeowners and flood quotes where applicable before comparing the old and new total payment.",
         "Compare rate, APR, principal and interest, escrow, closing costs, term, and cash to close on the Loan Estimate.",
-        "Test breakeven over a realistic time in the home and note that term reset can change total cost even when the payment falls."
+        "Estimate breakeven by subtracting lender credits from all applicable one-time refinance costs and dividing the result by the projected monthly payment decrease; review term reset and total cost independently."
       ],
       "sections": [
         {
@@ -1253,7 +1288,7 @@
           "id": "test-breakeven-and-term",
           "heading": "Test breakeven without hiding the term reset",
           "paragraphs": [
-            "A simple breakeven divides eligible upfront refinance costs by the estimated monthly reduction. Use it as one checkpoint, then compare cumulative principal, interest, and costs over several likely move or payoff dates. A longer new term can reduce the payment while extending repayment.",
+            "A simplified breakeven estimate starts with all applicable nonrecurring refinance charges, including lender, appraisal, title, settlement, recording, and comparable third-party costs. Subtract lender credits, then divide the remaining cost total by the expected monthly payment reduction. Do not put prepaid interest or initial escrow funding in the numerator; those are timing and escrow items rather than nonrecurring costs recovered through a lower payment. CFPB materials support comparing costs and credits and describe monthly savings paying back refinance cost, but they do not prescribe this arithmetic. Evaluate the term reset, cumulative principal and interest, and total cost independently over likely move or payoff dates.",
             "If the refinance includes cash out, separate the payment change caused by financing costs from the change caused by borrowing more. The proceeds add debt secured by the home and should be evaluated against the purpose, alternatives, and repayment risk."
           ]
         },
@@ -1298,8 +1333,10 @@
         }
       ],
       "sourceIds": [
-        "fhfa-hpi-june-2026",
+        "fhfa-hpi-2026q1",
         "cfpb-loan-estimate",
+        "cfpb-compare-loan-estimates",
+        "cfpb-home-loan-toolkit",
         "fema-floodsmart",
         "florida-property-tax",
         "naic-homeowners-insurance",
@@ -1307,12 +1344,20 @@
       ],
       "sourceClaims": [
         {
-          "sourceId": "fhfa-hpi-june-2026",
-          "claim": "FHFA HPI provides Tampa-area price-trend context through April 2026, not a property value or refinance eligibility determination."
+          "sourceId": "fhfa-hpi-2026q1",
+          "claim": "FHFA's official 2026 Q1 report provides quarterly price-trend context for the Tampa, FL metropolitan division (MSAD) through 2026 Q1, not the combined Tampa-St. Petersburg-Clearwater metro, a property value, or a refinance eligibility determination."
         },
         {
           "sourceId": "cfpb-loan-estimate",
           "claim": "The Loan Estimate separates rate, APR, projected payment, estimated escrow, closing costs, prepaids, and cash to close."
+        },
+        {
+          "sourceId": "cfpb-compare-loan-estimates",
+          "claim": "CFPB's comparison guidance supports matching loan terms, comparing total loan costs and lender credits, and distinguishing prepaid interest and initial escrow funding; it does not define the simplified breakeven formula used here."
+        },
+        {
+          "sourceId": "cfpb-home-loan-toolkit",
+          "claim": "CFPB's toolkit describes monthly savings paying back the cost of a refinance and supports reviewing payment, closing costs, cash to close, and longer-term borrowing cost; term reset and total cost still require separate review."
         },
         {
           "sourceId": "fema-floodsmart",
@@ -1341,27 +1386,27 @@
     },
     {
       "id": "article-orlando-market-update",
-      "title": "Orlando first-time buyer update: payment and inventory trends",
+      "title": "Orlando first-time buyer update: payment and housing-cost context",
       "route": "/learning-center/orlando-first-time-buyer-market-update",
       "type": "local_market_update",
       "stateIds": ["state-fl"],
       "cityIds": ["city-orlando-fl"],
       "productIds": ["product-fha", "product-purchase"],
       "authorId": "contributor-jordan-avery",
-      "summary": "Orlando first-time buyers can build a more reliable budget by separating current listing evidence from ACS housing context and stacking every payment and cash-to-close input before choosing a program.",
+      "summary": "Orlando first-time buyers can build a more reliable budget by using ACS home-value, owner-cost, and income estimates as broad context while stacking every payment and cash-to-close input before choosing a program.",
       "dek": "The first useful comparison is not rent versus principal and interest. It is current housing cost versus the complete cost of owning the specific property, with enough cash left after closing.",
       "publishedAt": "2026-07-13",
       "asOf": "2026-07-09",
-      "metaDescription": "Use an Orlando first-time buyer checklist for payment, cash to close, FHA limits, mortgage insurance, taxes, insurance, HOA, and inventory evidence.",
+      "metaDescription": "Use an Orlando first-time buyer checklist for payment, cash to close, FHA limits, mortgage insurance, taxes, insurance, HOA, and maintenance.",
       "introduction": [
-        "The 2024 ACS provides Orlando city estimates for housing value, owner costs, income, tenure, and vacancy. Those survey measures can support a broad affordability conversation, but they do not report homes currently for sale or determine what a first-time buyer can afford. Current inventory needs a dated listing source for the relevant property type, price range, and search area.",
+        "The cited 2024 ACS extract provides Orlando city estimates for median home value, selected monthly owner costs, and household income. Those survey measures can support a broad housing-cost conversation, but they do not determine what a first-time buyer can afford or what the selected property will cost to own.",
         "Program limits also require the right geography. HUD's 2026 FHA Mortgage Limits tool uses county or metropolitan-area lookup; it should not be inferred from the Orlando city name. The limit establishes a program boundary, not eligibility, a recommended price, or a final loan amount."
       ],
       "keyTakeaways": [
         "Build the ownership payment from principal, interest, taxes, homeowners and flood insurance where applicable, HOA dues, mortgage insurance, and maintenance.",
         "Keep closing costs, prepaids, escrow reserves, down payment, and post-closing savings visible as separate cash needs.",
         "Verify the property's county and 2026 FHA limit before relying on an FHA scenario.",
-        "Use current listing data for inventory; ACS vacancy and tenure estimates do not count active homes for sale."
+        "Use the ACS figures only as dated city context, then replace them with the selected property's price, taxes, insurance, association obligations, and condition."
       ],
       "sections": [
         {
@@ -1393,11 +1438,11 @@
           ]
         },
         {
-          "id": "read-inventory-as-a-search-input",
-          "heading": "Read inventory as a search input, not a promise",
+          "id": "use-property-specific-search-evidence",
+          "heading": "Use property-specific evidence in the search",
           "paragraphs": [
-            "Ask for current active, pending, and closed listings that match the target property type and price range. Record the date, geography, and source. Citywide statistics can hide meaningful differences between detached homes, condos, new construction, and neighborhoods.",
-            "Inventory can inform search pace and offer questions, but it does not guarantee a concession, accepted offer, appraisal result, or future price direction. Property condition and seller priorities remain specific to the transaction."
+            "Ask for current property records, comparable sales, association documents when applicable, tax information, and insurance quotes that match the target home. Record the date, geography, and source for any market comparison used in the decision.",
+            "Broad city estimates cannot guarantee a concession, accepted offer, appraisal result, payment, or future price direction. Property condition, seller priorities, financing terms, and ownership costs remain specific to the transaction."
           ]
         },
         {
@@ -1425,11 +1470,11 @@
           "route": "/calculators/down-payment"
         }
       ],
-      "conclusion": "An Orlando first-time buyer plan should turn broad market information into a short list of property and financing questions. Verify the county and program limit, build the full payment and cash-to-close stack, use current listing evidence, and protect enough flexibility for the first year of ownership.",
+      "conclusion": "An Orlando first-time buyer plan should turn broad city information into a short list of property and financing questions. Verify the county and program limit, build the full payment and cash-to-close stack, use current property evidence, and protect enough flexibility for the first year of ownership.",
       "faqs": [
         {
-          "question": "Does the Orlando ACS vacancy estimate show homes available to buy now?",
-          "answer": "No. ACS vacancy is a survey measure and is not the same as current active listings. Use a dated listing source for the target area and property type."
+          "question": "What can the cited Orlando ACS extract tell me?",
+          "answer": "It provides dated city estimates for median home value, selected monthly owner costs, and household income. It does not determine a property's price, current ownership cost, mortgage eligibility, or available loan terms."
         },
         {
           "question": "Does being under the FHA loan limit mean I qualify?",
@@ -1443,17 +1488,27 @@
       "sourceIds": [
         "census-acs-2024-orlando-fl",
         "hud-fha-loan-limits-2026",
+        "hud-fha-handbook-4000-1",
+        "cfpb-fha-loans",
         "cfpb-loan-estimate",
         "fema-floodsmart"
       ],
       "sourceClaims": [
         {
           "sourceId": "census-acs-2024-orlando-fl",
-          "claim": "The 2024 ACS 5-year Orlando place estimates provide city survey context for housing, owner costs, value, income, tenure, and vacancy, not live listings."
+          "claim": "The cited 2024 ACS 5-year Orlando extract provides city estimates for median home value, selected monthly owner costs, and household income."
         },
         {
           "sourceId": "hud-fha-loan-limits-2026",
           "claim": "HUD's 2026 FHA Mortgage Limits tool supports county and MSA lookup; a limit is a program boundary, not an eligibility result."
+        },
+        {
+          "sourceId": "hud-fha-handbook-4000-1",
+          "claim": "HUD Handbook 4000.1 supplies the official FHA mortgage-insurance, property, appraisal, borrower, and lender policy framework, subject to its current version."
+        },
+        {
+          "sourceId": "cfpb-fha-loans",
+          "claim": "CFPB's FHA guidance supports borrower-facing comparison of FHA down payment, mortgage insurance, and costs with other loan options."
         },
         {
           "sourceId": "cfpb-loan-estimate",
@@ -1479,7 +1534,7 @@
       "type": "local_market_update",
       "stateIds": ["state-fl"],
       "cityIds": ["city-miami-fl"],
-      "productIds": ["product-jumbo", "product-refinance"],
+      "productIds": ["product-jumbo", "product-purchase"],
       "authorId": "contributor-marcus-lane",
       "summary": "Miami condo buyers considering jumbo financing should verify the county loan boundary, project and association obligations, insurance, flood exposure, reserves, and APR before treating a payment estimate as complete.",
       "dek": "The unit price is only the opening input. Financing can depend on the loan amount and lender, while ownership cost can depend on the building, association budget, assessments, coverage, and address-specific flood risk.",
@@ -1488,13 +1543,13 @@
       "metaDescription": "Review Miami condo and jumbo mortgage planning, including 2026 county limits, APR, association costs, reserves, insurance, flood risk, and project review.",
       "introduction": [
         "A Miami purchase is not jumbo because it is a condo or because the price feels high. Compare the base loan amount after down payment with the applicable 2026 county conforming limit. FHFA's baseline one-unit limit is $832,750 and the high-cost ceiling is $1,249,125, but the Miami-Dade County table supplies the applicable boundary.",
-        "The condo adds a separate layer. A lender may review the unit, project, association, insurance, occupancy, budget, litigation, assessments, or other documents under its program and investor requirements. The buyer should also review the association's finances and obligations for ownership purposes rather than relying only on what financing requires."
+        "The condo adds a separate layer. Fannie Mae's project standards and full-review process identify project eligibility and document-review areas for conventional loans subject to those standards. Ask the proposed lender whether those standards or another project-review path applies, which project documents and characteristics will be reviewed, and how insurance, financial condition, occupancy, litigation, or assessments affect that specific loan."
       ],
       "keyTakeaways": [
         "Use the planned base loan amount and Miami-Dade County's 2026 limit to determine whether the conforming boundary is crossed.",
-        "Compare rate and APR with points, fees, lock terms, reserves, and cash to close on matched jumbo offers.",
+        "Compare rate and APR with points, fees, lock terms, any lender-confirmed reserve requirement, and cash to close on matched jumbo offers.",
         "Add association dues, current or planned assessments, homeowners coverage, building coverage questions, flood coverage, taxes, and maintenance to the affordability review.",
-        "Keep lender project review and the buyer's broader association due diligence as related but distinct workstreams."
+        "Keep the lender's project eligibility review separate from the buyer's questions about ongoing association obligations and ownership costs."
       ],
       "sections": [
         {
@@ -1509,8 +1564,8 @@
           "id": "review-the-condo-as-a-system",
           "heading": "Review the condo as a financial system",
           "paragraphs": [
-            "Request the association budget, recent financial statements, reserve information, insurance summary, governing documents, meeting minutes, current assessments, known proposed assessments, and any other documents recommended by the buyer's real estate and legal advisers. A lender's project approval does not replace the buyer's review of future ownership obligations.",
-            "Association dues are part of monthly affordability, while special assessments may create separate near-term or financed obligations. Ask what dues cover, what the unit owner must insure, and whether building coverage, deductibles, or exclusions could shift costs to owners."
+            "For a loan subject to Fannie Mae's standards, ask the lender which general project or full-review process applies and which association, financial, insurance, occupancy, litigation, or assessment documents it needs. For a different conventional or jumbo product, ask the lender to identify its own project standards rather than assuming the Fannie Mae process governs.",
+            "Separately, ask the association and appropriate real estate, legal, and insurance advisers which budget, financial, reserve, insurance, governing, meeting, and assessment records a buyer should review. Ask what dues cover, what the unit owner must insure, and which current or proposed obligations could affect the household budget."
           ],
           "table": {
             "caption": "Miami condo and jumbo review matrix",
@@ -1518,11 +1573,11 @@
             "rows": [
               ["Loan classification", "Does the base loan exceed Miami-Dade's applicable 2026 conforming limit?", "FHFA county table, unit count, price, and down payment"],
               ["Loan cost", "How do matched offers compare beyond note rate?", "Rate, APR, points, fees, credits, lock terms, and Loan Estimate"],
-              ["Project and association", "What obligations or conditions could affect financing and ownership?", "Lender document list plus association budget, reserves, minutes, assessments, and governing documents"],
+              ["Project and association", "What obligations or conditions could affect financing and ownership?", "The lender's applicable project-review list plus the association records the buyer's advisers recommend"],
               ["Insurance and flood", "Which risks are covered by the association and unit-owner policies?", "Master policy, unit quote, deductibles, exclusions, FEMA information, and separate flood quote when relevant"],
-              ["Liquidity", "What cash is needed at closing and after purchase?", "Down payment, closing costs, lender reserves, assessments, deductibles, and household reserve target"]
+              ["Liquidity", "What cash is needed at closing and after purchase?", "Down payment, closing costs, any lender-confirmed reserves, assessments, deductibles, and household reserve target"]
             ],
-            "note": "Project, insurance, reserve, and documentation requirements vary by lender, association, property, and coverage. Verify the current documents for the selected unit."
+            "note": "Fannie Mae's cited standards govern only applicable loans. Ask the proposed lender which project, insurance, reserve, and documentation rules apply to the selected unit."
           }
         },
         {
@@ -1538,7 +1593,7 @@
           "heading": "Compare affordability and reserves after closing",
           "paragraphs": [
             "APR captures certain borrowing costs beyond the interest rate, making it useful for matched jumbo comparisons. It does not include every ownership cost. Keep association dues, assessments, taxes, unit insurance, flood coverage, maintenance, and expected reserve contributions outside the loan-cost measure but inside the household budget.",
-            "The lender's reserve requirement and the household's preferred cash buffer answer different questions. Preserve enough visibility to evaluate both before committing."
+            "Ask whether the lender requires reserves, then keep any confirmed requirement separate from the household's preferred cash buffer. Preserve enough visibility to evaluate both before committing."
           ]
         }
       ],
@@ -1565,8 +1620,8 @@
           "answer": "No. Jumbo status depends on the base loan amount relative to the applicable county conforming limit, not on the property being a condo."
         },
         {
-          "question": "Does lender condo approval mean the association is financially healthy?",
-          "answer": "Not necessarily. Lender review serves financing requirements. Buyers should conduct their own association and legal due diligence with appropriate professionals."
+          "question": "Does a lender's condo project review answer every ownership question?",
+          "answer": "No. The lender reviews the project for the proposed loan under the standards that apply. Separately ask the association and appropriate real estate, legal, and insurance advisers which finances, assessments, rules, and coverage obligations to review."
         },
         {
           "question": "Does the condo association's master policy cover all unit-owner risks?",
@@ -1577,6 +1632,8 @@
         "fhfa-conforming-loan-limits-2026",
         "cfpb-jumbo-loan",
         "cfpb-mortgage-key-terms",
+        "fannie-mae-condo-project-standards",
+        "fannie-mae-condo-full-review",
         "fema-floodsmart",
         "naic-homeowners-insurance",
         "census-acs-2024-miami-fl"
@@ -1593,6 +1650,14 @@
         {
           "sourceId": "cfpb-mortgage-key-terms",
           "claim": "APR includes the rate plus certain points, broker fees, and other charges, making it broader than note rate for matched-loan comparison."
+        },
+        {
+          "sourceId": "fannie-mae-condo-project-standards",
+          "claim": "Fannie Mae's Selling Guide provides the project eligibility and lender-review framework for conventional loans subject to its project standards."
+        },
+        {
+          "sourceId": "fannie-mae-condo-full-review",
+          "claim": "Fannie Mae's full-review chapter identifies the project review process and supporting project information for applicable conventional condo loans; the proposed lender must confirm applicability."
         },
         {
           "sourceId": "fema-floodsmart",

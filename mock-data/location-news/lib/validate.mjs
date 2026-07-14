@@ -1,4 +1,12 @@
 import { createHash } from "node:crypto";
+import fs from "node:fs";
+
+const contributorDocument = JSON.parse(
+  fs.readFileSync(new URL("../../editorial/contributors.json", import.meta.url), "utf8"),
+);
+const CONTRIBUTOR_IDS = new Set(
+  (contributorDocument.contributors || []).map((contributor) => contributor.id),
+);
 
 const CITY_TYPES = new Set(["affordability_home_values", "housing_supply_tenure", "local_labor_market", "county_loan_limits"]);
 const STATE_TYPES = new Set(["state_home_price_movement", "state_labor_market", "state_housing_costs", "state_loan_limit_landscape"]);
@@ -37,9 +45,10 @@ function allowedNumericDisplays(article) {
 }
 
 export function validateArticle(article) {
-  for (const field of ["id", "route", "locationId", "locationType", "articleType", "title", "dek", "previewText", "publishedAt", "updatedAt", "imageId", "methodology", "limitations", "reviewStatus", "complianceStatus"]) {
+  for (const field of ["id", "route", "locationId", "locationType", "articleType", "authorId", "title", "dek", "previewText", "publishedAt", "updatedAt", "imageId", "methodology", "limitations", "reviewStatus", "complianceStatus"]) {
     requiredString(article[field], field);
   }
+  if (!CONTRIBUTOR_IDS.has(article.authorId)) throw new Error(`${article.id} has unknown contributor authorId ${article.authorId}`);
   if (!/^\/learning-center\/market-news\/[a-z0-9-]+$/.test(article.route)) throw new Error(`${article.id} has invalid route`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(article.publishedAt) || !/^\d{4}-\d{2}-\d{2}$/.test(article.updatedAt)) throw new Error(`${article.id} has invalid dates`);
   if (article.reviewStatus !== "editorial_review_required" || article.complianceStatus !== "compliance_review_required") throw new Error(`${article.id} missing review gates`);

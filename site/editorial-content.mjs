@@ -1,7 +1,7 @@
 const FALLBACK_AUTHOR = {
   id: "snap-mortgage",
   name: "Snap Mortgage",
-  title: "Editorial publishing responsibility",
+  title: "Published by Snap Mortgage",
   route: "",
   portrait: {
     src: "",
@@ -45,14 +45,20 @@ function normalizeContributor(contributor) {
 
 function normalizeTopicHub(hub) {
   return {
+    ...hub,
     id: hub.id,
     slug: hub.slug,
     route: hub.route,
     heroSummary: hub.heroSummary,
     beat: hub.beat,
     contributorId: hub.contributorId,
+    contributorIds: hub.contributorIds || (hub.contributorId ? [hub.contributorId] : []),
     public: hub.public === true,
     articleIds: hub.articleIds || [],
+    overviewParagraphs: hub.overviewParagraphs || [],
+    startHere: hub.startHere || [],
+    comparisonPoints: hub.comparisonPoints || [],
+    featuredLinkIds: hub.featuredLinkIds || [],
   };
 }
 
@@ -66,9 +72,23 @@ function buildArticleAuthorIds(topicHubs) {
   return articleAuthorIds;
 }
 
+function hasEditorialRegistries(raw) {
+  return unwrapList(raw, "contributors").length > 0 && unwrapList(raw, "topicHubs").length > 0;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 export function normalizeEditorialContent(raw = {}) {
   const contributors = unwrapList(raw, "contributors").map(normalizeContributor);
   const topicHubs = unwrapList(raw, "topicHubs").map(normalizeTopicHub);
+  const sources = unwrapList(raw, "sources");
 
   if (!uniqueByField(contributors, "id")) throw new Error("Contributor IDs must be unique.");
   if (!uniqueByField(contributors, "slug")) throw new Error("Contributor slugs must be unique.");
@@ -77,6 +97,7 @@ export function normalizeEditorialContent(raw = {}) {
   return {
     contributors,
     topicHubs,
+    sources,
     contributorMap: new Map(contributors.map((contributor) => [contributor.id, contributor])),
     authorRoutes: contributors.map((contributor) => ({
       route: contributor.route,
@@ -85,6 +106,22 @@ export function normalizeEditorialContent(raw = {}) {
     })),
     articleAuthorIds: buildArticleAuthorIds(topicHubs),
   };
+}
+
+export function normalizeEditorialContentWithFallback(primaryRaw, fallbackRaw = {}) {
+  if (hasEditorialRegistries(primaryRaw)) {
+    try {
+      return normalizeEditorialContent(primaryRaw);
+    } catch {
+      // Continue to the standalone registries.
+    }
+  }
+
+  try {
+    return normalizeEditorialContent(fallbackRaw);
+  } catch {
+    return normalizeEditorialContent();
+  }
 }
 
 export function contributorById(content, id) {
@@ -99,6 +136,25 @@ export function applyArticleAuthorIds(content, articles = []) {
   }));
 }
 
+export function mergeEditorialArticles(baseArticles = [], overlayRaw) {
+  const articles = Array.isArray(baseArticles) ? baseArticles : [];
+  const overlays = Array.isArray(overlayRaw)
+    ? overlayRaw
+    : Array.isArray(overlayRaw?.articles)
+      ? overlayRaw.articles
+      : [];
+  const overlaysById = new Map(
+    overlays
+      .filter((article) => article && typeof article === "object" && article.id)
+      .map((article) => [article.id, article]),
+  );
+
+  return articles.map((article) => ({
+    ...article,
+    ...(overlaysById.get(article.id) || {}),
+  }));
+}
+
 export function articlesForContributor(content, articles = [], id) {
   return articles.filter((article) => article.authorId === id);
 }
@@ -108,21 +164,25 @@ export function resolveArticleAuthor(article, contributors = []) {
   return contributors.find((contributor) => contributor.id === article.authorId) || FALLBACK_AUTHOR;
 }
 
-function formatBylineDate(article) {
-  const rawDate = article?.updatedAt || article?.publishedAt || "";
+function formatBylineDate(article, { month = "short" } = {}) {
+  const isMarketUpdate = String(article?.type || "").includes("market");
+  const usesAsOf = isMarketUpdate && Boolean(article?.asOf);
+  const rawDate = usesAsOf ? article.asOf : article?.updatedAt || article?.publishedAt || "";
   if (!rawDate) return "";
-  const prefix = article.updatedAt ? "Updated" : "Published";
-  const date = new Date(`${rawDate}T00:00:00`);
+  const prefix = usesAsOf ? "As of" : article.updatedAt ? "Updated" : "Published";
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(rawDate)
+    ? new Date(`${rawDate}T00:00:00Z`)
+    : new Date(rawDate);
   if (Number.isNaN(date.getTime())) return "";
   return `${prefix} ${new Intl.DateTimeFormat("en-US", {
-    month: "short",
+    month,
     day: "numeric",
     year: "numeric",
     timeZone: "UTC",
   }).format(date)}`;
 }
 
-export function renderBylineModel(article, contributors = []) {
+export function renderBylineModel(article, contributors = [], { dateMonth = "short" } = {}) {
   const author = resolveArticleAuthor(article, contributors);
   const isFallback = author.id === FALLBACK_AUTHOR.id;
   return {
@@ -131,9 +191,65 @@ export function renderBylineModel(article, contributors = []) {
     href: isFallback ? "" : author.route,
     portraitSrc: author.portrait?.src || silhouetteDataUri,
     portraitAlt: author.portrait?.alt || FALLBACK_AUTHOR.portrait.alt,
-    dateLabel: formatBylineDate(article),
+    dateLabel: formatBylineDate(article, { month: dateMonth }),
     isFallback,
   };
+}
+
+function displayBylineDate(article, dateLabel) {
+  if (!dateLabel) return "";
+  if (String(article?.type || "").includes("market")) return dateLabel;
+  return dateLabel.replace(/^Updated/, "Last updated");
+}
+
+export function renderContributorBylineMarkup(
+  article,
+  contributors = [],
+  { compact = false, routeHref = (href) => href, dateMonth = "short" } = {},
+) {
+  const byline = renderBylineModel(article, contributors, { dateMonth });
+  const dateLabel = displayBylineDate(article, byline.dateLabel);
+  const className = compact
+    ? "article-card-byline editorial-byline compact"
+    : "article-byline editorial-byline";
+  const titleMarkup = compact
+    ? ""
+    : `<span class="article-byline-title">${escapeHtml(byline.title)}</span>`;
+  const dateMarkup = dateLabel ? `<time>${escapeHtml(dateLabel)}</time>` : "";
+  const contributorHref = /^\/learning-center\/authors\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(byline.href || "")
+    ? byline.href
+    : "";
+  const portraitSrc = /^\/site\/assets\/contributors\/[a-z0-9._-]+\.(?:jpe?g|png|webp)$/i.test(byline.portraitSrc || "")
+    ? byline.portraitSrc
+    : silhouetteDataUri;
+  const innerMarkup = `
+      <img src="${escapeHtml(portraitSrc)}" alt="${escapeHtml(byline.portraitAlt)}" loading="lazy" decoding="async" data-contributor-portrait />
+      <span class="article-byline-copy">
+        <span class="article-byline-name${byline.isFallback ? " article-byline-fallback" : ""}">${escapeHtml(byline.name)}</span>
+        ${titleMarkup}
+        ${dateMarkup}
+      </span>`;
+
+  if (contributorHref) {
+    return `<a class="${className}" href="${escapeHtml(routeHref(contributorHref))}" data-editorial-byline>${innerMarkup}
+    </a>`;
+  }
+
+  return `<div class="${className}" data-editorial-byline>${innerMarkup}
+    </div>`;
+}
+
+export function renderContributorArchiveMarkup(
+  content,
+  articles,
+  contributor,
+  renderArticle,
+) {
+  const relatedArticles = articlesForContributor(content, articles, contributor.id);
+  if (relatedArticles.length) {
+    return `<div class="editorial-article-grid">${relatedArticles.map(renderArticle).join("")}</div>`;
+  }
+  return `<p class="contributor-empty-archive">Guidance from ${escapeHtml(contributor.name)} will appear here as it is published.</p>`;
 }
 
 export { silhouetteDataUri };

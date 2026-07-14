@@ -1,3 +1,5 @@
+import { renderContributorBylineMarkup } from "./editorial-content.mjs";
+
 const escapeHtml = (value) => String(value ?? "")
   .replace(/&/g, "&amp;")
   .replace(/</g, "&lt;")
@@ -6,11 +8,13 @@ const escapeHtml = (value) => String(value ?? "")
 
 const formatDate = (value) => {
   if (!value) return "";
-  const date = new Date(value);
+  const rawValue = String(value);
+  const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(rawValue) ? `${rawValue}T00:00:00Z` : rawValue);
   return Number.isNaN(date.valueOf()) ? String(value) : new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
-    year: "numeric"
+    year: "numeric",
+    timeZone: "UTC"
   }).format(date);
 };
 
@@ -55,11 +59,11 @@ const renderCta = (cta) => {
   return `<aside class="news-article-cta"><p>${cta.eyebrow ? escapeHtml(cta.eyebrow) : ""}</p><h2>${escapeHtml(cta.title || cta.label)}</h2><a class="button" href="${escapeHtml(href)}">${escapeHtml(cta.label)}</a></aside>`;
 };
 
-const renderArticleMeta = (article) => {
+const renderArticleMeta = (article, { includeDates = true } = {}) => {
   const parts = [
     article?.sourceDesk || article?.sourceLabels?.join(" + "),
-    article?.publishedAt ? `Published ${formatDate(article.publishedAt)}` : "",
-    article?.updatedAt ? `Updated ${formatDate(article.updatedAt)}` : "",
+    includeDates && article?.publishedAt ? `Published ${formatDate(article.publishedAt)}` : "",
+    includeDates && article?.updatedAt ? `Updated ${formatDate(article.updatedAt)}` : "",
   ].filter(Boolean);
   return parts.length ? `<p class="news-article-meta">${escapeHtml(parts.join(" | "))}</p>` : "";
 };
@@ -80,7 +84,7 @@ const renderRelatedRoutes = (relatedRoutes) => {
   }).join("")}</ul></nav>`;
 };
 
-export function renderArticleContent(article, media) {
+export function renderArticleContent(article, media, { author } = {}) {
   const visual = article?.visuals?.[0];
   const imageUrl = safeUrl(media?.localPath || media?.imageUrl || visual?.imageUrl || visual?.src);
   const imageAlt = media?.alt || visual?.alt || "";
@@ -96,7 +100,8 @@ export function renderArticleContent(article, media) {
         <p class="eyebrow">${escapeHtml(article?.relevanceLabel || article?.articleType || "")}</p>
         <h1>${escapeHtml(article?.title)}</h1>
         ${article?.dek ? `<p class="news-article-dek">${escapeHtml(article.dek)}</p>` : ""}
-        ${renderArticleMeta(article)}
+        ${author ? renderContributorBylineMarkup(article, [author], { dateMonth: "long" }) : ""}
+        ${renderArticleMeta(article, { includeDates: !author })}
       </header>
       ${imageUrl ? `<figure class="news-article-hero"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageAlt)}" loading="eager" />${imageCredit}</figure>` : ""}
       ${article?.keyTakeaways?.length ? `<section class="news-article-takeaways"><h2>Key takeaways</h2><ul>${article.keyTakeaways.map((takeaway) => `<li>${escapeHtml(takeaway)}</li>`).join("")}</ul></section>` : ""}

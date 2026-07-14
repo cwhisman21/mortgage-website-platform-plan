@@ -4,6 +4,17 @@ import assert from "node:assert/strict";
 import { composeCityArticles, composeStateArticles } from "../location-news/lib/compose.mjs";
 import { cityFixture, stateFixture } from "./fixtures/location-news-fixtures.mjs";
 
+const expectedAuthorByType = new Map([
+  ["affordability_home_values", "contributor-maya-brooks"],
+  ["housing_supply_tenure", "contributor-maya-brooks"],
+  ["state_home_price_movement", "contributor-maya-brooks"],
+  ["state_housing_costs", "contributor-maya-brooks"],
+  ["local_labor_market", "contributor-rowan-hale"],
+  ["state_labor_market", "contributor-rowan-hale"],
+  ["county_loan_limits", "contributor-marcus-lane"],
+  ["state_loan_limit_landscape", "contributor-marcus-lane"],
+]);
+
 function assertComplete(articles, expectedTypes, locationId) {
   assert.equal(articles.length, 4);
   assert.deepEqual(new Set(articles.map((article) => article.articleType)), new Set(expectedTypes));
@@ -18,6 +29,7 @@ function assertComplete(articles, expectedTypes, locationId) {
     assert.ok(article.visuals.length >= 1, article.id);
     assert.ok(article.tables.length >= 1, article.id);
     assert.ok(article.imageId, article.id);
+    assert.equal(article.authorId, expectedAuthorByType.get(article.articleType), `${article.id} author`);
   }
 }
 

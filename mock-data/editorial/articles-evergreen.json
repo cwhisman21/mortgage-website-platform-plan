@@ -1,0 +1,2075 @@
+{
+  "articles": [
+    {
+      "id": "article-texas-tax-guide",
+    "title": "How Texas property taxes affect mortgage payments",
+    "route": "/learning-center/texas-property-tax-mortgage-guide",
+    "type": "state_tax_insurance_explainer",
+    "eyebrow": "Taxes and insurance",
+      "stateIds": [
+        "state-tx"
+      ],
+      "cityIds": [
+        "city-austin-tx",
+        "city-dallas-tx",
+        "city-houston-tx"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-refinance"
+      ],
+      "authorId": "contributor-priya-bennett",
+      "summary": "Texas property taxes are local, address-specific costs that can change the total mortgage payment even when principal and interest stay the same.",
+      "dek": "A useful estimate starts with the property's current taxable value, every taxing unit that serves the address, and exemptions that may apply to the new owner, not the seller's last bill alone.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Learn how Texas appraisals, local tax rates, homestead exemptions, and escrow changes can affect a homeowner's total mortgage payment.",
+      "introduction": [
+        "Texas does not impose a state property tax. County appraisal districts value taxable property, while school districts, cities, counties, and other local taxing units set rates and collect revenue for local services. That division matters to a homebuyer: there is no single statewide percentage that can reliably estimate the bill for every address.",
+        "Property tax also sits outside the principal-and-interest calculation. It may be collected through an escrow account as part of the total mortgage payment, and that escrow portion can change when the tax bill changes. The state rules and exemption amounts discussed here are current as of July 13, 2026; a county appraisal district and the taxing units serving the property remain the sources for an address-specific estimate."
+      ],
+      "keyTakeaways": [
+        "Build a Texas tax estimate from the property's taxable value and the combined rates for the exact address, rather than applying a statewide average.",
+        "Do not assume the seller's exemptions or capped appraised value will carry over after a purchase; ask the county appraisal district how the property may be treated under new ownership.",
+        "The residence-homestead limitation applies to appraised value under defined conditions, not directly to the percentage increase in the final tax bill.",
+        "Keep property tax, homeowners insurance, association dues, and mortgage insurance visible beside principal and interest when reviewing the total monthly housing cost."
+      ],
+      "sections": [
+        {
+          "id": "decode-texas-property-tax",
+          "heading": "Follow the Texas property-tax chain",
+          "paragraphs": [
+            "The appraisal district determines a property's value for the tax year. The taxable value for a particular taxing unit reflects that value after exemptions or other adjustments that apply to that unit. Each local government then applies its adopted rate. Because an address can sit within several jurisdictions, the complete bill may include separate amounts for a school district, county, city, hospital district, community college, or other special district.",
+            "For planning, collect three items: the appraisal district's current value record, the list of taxing units attached to the parcel, and each unit's adopted rate. Add the resulting unit-level estimates rather than treating one listed rate as the whole bill. The Comptroller directs owners to local appraisal districts for valuation and exemption questions and to the relevant taxing units or tax assessor-collector for rates and bills."
+          ]
+        },
+        {
+          "id": "understand-homestead-effects",
+          "heading": "Separate homestead exemptions from value limits",
+          "paragraphs": [
+            "A qualifying residence homestead may receive exemptions that remove part of its appraised value from taxation. As of July 13, 2026, the Texas Comptroller states that school districts must provide a $140,000 general residence-homestead exemption. Some local taxing units may offer additional exemptions, and the appraisal district decides whether an application meets the applicable requirements. A buyer should confirm eligibility and filing steps instead of subtracting an exemption before it has been granted.",
+            "Texas also limits annual increases in the appraised value of a residence homestead when the owner qualified for the exemption in the preceding and current year. The limit generally takes effect on January 1 of the tax year after qualification and does not include the market value of qualifying new improvements in the same way. This is a limit on appraised value, not a promise that the tax bill or escrow deposit cannot rise by more than 10 percent; exemptions, adopted rates, taxing-unit boundaries, and other bill components can change."
+          ],
+          "table": {
+            "caption": "Texas property-tax estimate checklist",
+            "columns": [
+              "Item to review",
+              "Why it matters",
+              "Where to verify it"
+            ],
+            "rows": [
+              [
+                "Current market and appraised values",
+                "They are the starting point for taxable-value calculations and may differ from the purchase price or the seller's prior record.",
+                "County appraisal district property record and notice of appraised value"
+              ],
+              [
+                "Approved exemptions",
+                "Different exemptions can reduce taxable value for different taxing units, subject to qualification.",
+                "County appraisal district exemption record and application decision"
+              ],
+              [
+                "Taxing units and adopted rates",
+                "The full bill is the sum of the applicable local levies for the address.",
+                "Tax statement, county tax office, and each taxing unit's published rate"
+              ],
+              [
+                "Escrow collection",
+                "The servicer may collect a monthly amount based on expected taxes and later adjust it after an escrow analysis.",
+                "Loan Estimate, Closing Disclosure, mortgage statement, and annual escrow statement"
+              ]
+            ],
+            "note": "This checklist supports budgeting; it does not determine a property's tax liability or a future escrow payment."
+          }
+        },
+        {
+          "id": "estimate-after-a-purchase",
+          "heading": "Rebuild the estimate for the buyer's ownership",
+          "paragraphs": [
+            "The seller's tax bill can be useful history, but it may reflect exemptions, ownership dates, or an appraised-value limitation that will not apply to the buyer in the same way. Ask the appraisal district for the current record and how a change in ownership may affect the next appraisal cycle. Then request the latest adopted rates from the taxing units serving the parcel. This approach is more defensible than multiplying the purchase price by the prior owner's effective tax percentage.",
+            "Leave room for timing differences. A tax estimate used during the loan process may precede a later appraisal notice, exemption decision, or adopted rate. Review the Loan Estimate and Closing Disclosure to see which property costs are included in projected payments and escrow. If a cost is not escrowed, plan for the bill separately instead of treating its absence from the mortgage payment as a savings."
+          ]
+        },
+        {
+          "id": "prepare-for-escrow-changes",
+          "heading": "Plan for tax changes after closing",
+          "paragraphs": [
+            "An escrow account spreads expected tax and insurance costs across monthly mortgage payments, but it does not freeze those costs. The Consumer Financial Protection Bureau explains that a change in taxes or insurance can change the escrow payment and the total amount sent to the servicer. An annual escrow statement can show projected disbursements, shortages, surpluses, and the resulting payment adjustment.",
+            "Keep the appraisal notice, exemption confirmation, tax statement, insurance renewal, and escrow analysis together. If the servicer's projection appears inconsistent with a new bill, contact the servicer and compare the underlying documents. For future purchase planning, test a higher tax assumption as a cushion, but label it as a scenario rather than an expected bill."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "understand-homestead-effects",
+          "heading": "Put the local tax estimate beside the mortgage payment",
+          "body": "Use the payment calculator to change the annual property-tax input while keeping the loan amount, term, and rate assumptions visible.",
+          "label": "Estimate the total monthly payment",
+          "route": "/calculators/mortgage-payment"
+        },
+        {
+          "afterSectionId": "estimate-after-a-purchase",
+          "heading": "Review Texas markets one address at a time",
+          "body": "Start with statewide planning context, then open the city page that matches the home you are considering.",
+          "label": "Explore Texas mortgage markets",
+          "route": "/locations/texas"
+        }
+      ],
+      "conclusion": "A Texas property-tax estimate becomes more useful when every input has an owner and a date. The appraisal district supplies the value and exemption record, local taxing units supply rates, and the servicer explains how the resulting bill is handled in escrow. Recheck those inputs before closing and after each annual notice so the total housing budget does not depend on a seller's tax history continuing unchanged.",
+      "faqs": [
+        {
+          "question": "Is there one Texas property-tax rate I can use for every home?",
+          "answer": "No. Texas property taxes are imposed by local taxing units, and the combination of jurisdictions, rates, taxable value, and exemptions depends on the property. Use the exact parcel and current local records for an estimate."
+        },
+        {
+          "question": "Does the 10 percent homestead limit cap my tax bill increase at 10 percent?",
+          "answer": "No. The state guidance describes a limit on annual growth in a qualifying residence homestead's appraised value. The final bill can also reflect adopted rates, exemptions, new improvements, and other changes."
+        },
+        {
+          "question": "Will a fixed-rate mortgage keep the escrow portion of my payment fixed?",
+          "answer": "Not necessarily. Principal and interest may remain level on a standard fixed-rate loan, but property taxes and insurance premiums can change. If they are escrowed, the total mortgage payment may change after an escrow analysis."
+        }
+      ],
+      "sourceIds": [
+        "texas-comptroller-property-tax",
+        "texas-comptroller-property-tax-basics-2026",
+        "texas-comptroller-homestead-exemptions-2026",
+        "texas-comptroller-homestead-value-limitation-2026",
+        "cfpb-escrow-account-2024"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "texas-comptroller-property-tax",
+          "claim": "Texas has no state property tax; appraisal, rates, and collection are handled through local entities."
+        },
+        {
+          "sourceId": "texas-comptroller-property-tax-basics-2026",
+          "claim": "Appraisal districts value property, while local taxing units adopt rates and may levy separate taxes for the same address."
+        },
+        {
+          "sourceId": "texas-comptroller-homestead-exemptions-2026",
+          "claim": "The general school-district residence-homestead exemption shown by the Comptroller is $140,000 as of July 13, 2026, with qualification and local-option rules handled through appraisal districts."
+        },
+        {
+          "sourceId": "texas-comptroller-homestead-value-limitation-2026",
+          "claim": "The residence-homestead limitation generally restricts annual appraised-value growth under stated conditions and begins after the owner has qualified in the required years."
+        },
+        {
+          "sourceId": "cfpb-escrow-account-2024",
+          "claim": "Escrow accounts may collect taxes and insurance monthly, and changes in those costs can change the total mortgage payment."
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/texas",
+        "/locations/texas/austin",
+        "/locations/texas/dallas",
+        "/locations/texas/houston",
+        "/calculators/mortgage-payment",
+        "/learning-center/taxes-insurance"
+      ]
+    },
+    {
+      "id": "article-california-insurance-guide",
+    "title": "California taxes, insurance, and high-cost mortgage planning",
+    "route": "/learning-center/california-tax-insurance-mortgage-guide",
+    "type": "state_tax_insurance_explainer",
+    "eyebrow": "Taxes and insurance",
+      "stateIds": [
+        "state-ca"
+      ],
+      "cityIds": [
+        "city-irvine-ca",
+        "city-san-diego-ca",
+        "city-sacramento-ca"
+      ],
+      "productIds": [
+        "product-jumbo",
+        "product-conventional"
+      ],
+      "authorId": "contributor-priya-bennett",
+      "summary": "California buyers can reduce payment surprises by estimating post-purchase property taxes, securing property-specific insurance terms, and checking the county's current conforming loan limit.",
+      "dek": "The seller's tax bill, a statewide insurance comparison, and a national loan limit each provide context, but none substitutes for the records and written terms tied to the home being financed.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Plan for California property taxes, supplemental assessments, homeowners insurance, and 2026 county conforming loan limits before choosing a mortgage.",
+      "introduction": [
+        "A California purchase can reset several housing-cost assumptions at once. A change in ownership generally creates a new property-tax base-year value, the county may issue a supplemental bill, an insurer must evaluate the specific property, and the requested loan amount must be compared with the conforming limit for that county. The prior owner's costs may therefore describe the past without describing the buyer's first full year.",
+        "This guide uses California tax and insurance guidance plus the Federal Housing Finance Agency's 2026 conforming limits. It does not estimate a home's tax bill, insurance premium, or available mortgage terms. Treat July 13, 2026 as the information date, then replace each statewide input with a county record, insurance quote, and lender disclosure for the transaction."
+      ],
+      "keyTakeaways": [
+        "Estimate property taxes from the value expected after the change in ownership and the local rate, not only from the seller's current assessment.",
+        "Set aside a separate line for a possible supplemental tax bill because California sends that bill to the property owner in addition to the annual bill.",
+        "Shop insurance early enough to compare premiums, deductibles, limits, exclusions, and policy form details before a financing deadline becomes binding.",
+        "Check the 2026 conforming limit for the property's county; California counties do not all use the same maximum, and a limit is not a rate or qualification decision."
+      ],
+      "sections": [
+        {
+          "id": "rebuild-the-tax-estimate",
+          "heading": "Rebuild the tax estimate after a purchase",
+          "paragraphs": [
+            "California's Proposition 13 framework limits the general property-tax rate to 1 percent of assessed value plus amounts needed for local voter-approved bonded debt. A property's base-year value is generally established when ownership changes or new construction is completed, then adjusted under state rules. For many purchases, that means the buyer's expected assessment is closer to the property's market value at acquisition than to a longtime owner's lower factored base-year value.",
+            "A county-specific estimate should include the base levy, applicable bond charges, direct assessments, and any exemption or exclusion that the county confirms. If the property's current market value is below its factored base-year value, California also has a decline-in-value process, but a buyer should not assume a reduction before the assessor enrolls it. The county assessor and tax collector can explain the record, local rate, and bill timing for the parcel."
+          ]
+        },
+        {
+          "id": "budget-for-supplemental-bills",
+          "heading": "Keep supplemental taxes outside the seller's annual bill",
+          "paragraphs": [
+            "A change in ownership can produce a supplemental assessment that places the new value into effect before the next annual roll. The California State Board of Equalization explains that the resulting supplemental tax bill is in addition to the annual property-tax bill and is prorated for the portion of the fiscal year following the event. Depending on timing, one or two supplemental bills may be issued.",
+            "The state also notes that lending agencies do not receive the original or a copy of the supplemental bill even when they pay the annual taxes from an impound account. A buyer should watch for the notice, confirm whether the lender will handle it, and retain cash until responsibility is clear. This is a timing and administration issue, not a reason to add the same tax twice to a long-term payment estimate."
+          ]
+        },
+        {
+          "id": "shop-california-insurance",
+          "heading": "Compare the insurance contract, not only the premium",
+          "paragraphs": [
+            "The California Department of Insurance advises consumers to compare price, coverage, conditions, and complaint information. Homeowners policies commonly contain limits and exclusions, and the Department's January 2026 guide identifies flood and earthquake among perils generally not covered by a standard homeowners policy. A lender's requirement for homeowners insurance does not establish that every property risk is insured.",
+            "If traditional coverage is difficult to obtain, the Department describes the California FAIR Plan as an insurer of last resort and explains that its basic fire policy has coverage limitations. A separate difference-in-conditions policy may be needed to address some gaps, depending on what is offered. Before relying on any combination, request the declarations, policy form, endorsements, deductible schedule, replacement-cost treatment, and written premium for the property."
+          ],
+          "table": {
+            "caption": "California purchase-cost review",
+            "columns": [
+              "Cost question",
+              "Document to obtain",
+              "Planning use"
+            ],
+            "rows": [
+              [
+                "What value may the county assess after the transfer?",
+                "Assessor property record and a county estimate based on the proposed ownership change",
+                "Build the recurring property-tax scenario"
+              ],
+              [
+                "Could a supplemental bill arrive after closing?",
+                "Supplemental assessment notice and county tax-collector instructions",
+                "Hold cash for a bill that may not be routed through impound"
+              ],
+              [
+                "What losses, limits, and deductibles are in the insurance offer?",
+                "Written quote, declarations, policy form, and endorsements",
+                "Compare both monthly premium and loss exposure"
+              ],
+              [
+                "What conforming limit applies to the county in 2026?",
+                "FHFA county limit and the lender's written loan options",
+                "Understand which financing categories may be reviewed"
+              ],
+              [
+                "Which costs are included in projected payments?",
+                "Loan Estimate and, before closing, Closing Disclosure",
+                "Separate principal and interest, escrow, mortgage insurance, and cash to close"
+              ]
+            ],
+            "note": "State tools and federal limits organize the questions; written property and loan records supply the transaction inputs."
+          }
+        },
+        {
+          "id": "place-the-loan-amount-in-context",
+          "heading": "Place a higher loan amount in county context",
+          "paragraphs": [
+            "For 2026, FHFA set the one-unit baseline conforming loan limit at $832,750 and the one-unit high-cost-area ceiling at $1,249,125. The actual conforming limit is county-specific. Some California counties use the baseline, while qualifying high-cost areas use a higher amount up to the ceiling. The applicable figure should be checked against FHFA's county list for the year of the loan.",
+            "A conforming limit describes the maximum loan size Fannie Mae and Freddie Mac may acquire under that framework; it is not a mortgage offer and does not show whether a particular borrower or property fits a product. Compare loan amount, APR, interest rate, points, lender fees, reserves, mortgage insurance when applicable, and total cash to close using written disclosures. A smaller down payment can preserve cash for taxes or insurance, but it can also change the loan amount and other costs, so test the tradeoff rather than optimizing one line in isolation."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "budget-for-supplemental-bills",
+          "heading": "Model the recurring payment and the first-year cash separately",
+          "body": "Use the payment calculator for the monthly scenario, then keep supplemental taxes and initial insurance costs in a separate closing-year worksheet.",
+          "label": "Build a California payment scenario",
+          "route": "/calculators/mortgage-payment"
+        },
+        {
+          "afterSectionId": "shop-california-insurance",
+          "heading": "Compare California markets before narrowing the property",
+          "body": "Open the statewide location page for local tax, insurance, price, and mortgage-planning links across California cities.",
+          "label": "Explore California mortgage markets",
+          "route": "/locations/california"
+        },
+        {
+          "afterSectionId": "place-the-loan-amount-in-context",
+          "heading": "Review sample mortgage options with the county limit in mind",
+          "body": "Use the rates page to compare illustrative structures, then refine the property and borrower inputs without treating the first result as a quote.",
+          "label": "Compare sample mortgage options",
+          "route": "/rates"
+        }
+      ],
+      "conclusion": "California planning works best as four linked reviews: the new assessment, any supplemental bill, the actual insurance contract, and the county's current loan limit. None can be inferred safely from a listing price or the seller's payment. Gather those records early, keep recurring expenses separate from one-time cash needs, and update the comparison when a county notice, insurer, or written loan term changes.",
+      "faqs": [
+        {
+          "question": "Can I use the seller's California property-tax bill for my mortgage budget?",
+          "answer": "Use it as background, not as the buyer's final estimate. A change in ownership generally creates a new base-year value, and local bonded debt, assessments, exemptions, and supplemental billing can affect the buyer's costs."
+        },
+        {
+          "question": "Is a California FAIR Plan policy the same as a standard homeowners policy?",
+          "answer": "No. California's Department of Insurance describes the FAIR Plan as a last-resort option with a basic fire policy and coverage limitations. A separate difference-in-conditions policy may be considered for some gaps, subject to availability and terms."
+        },
+        {
+          "question": "Does the 2026 high-cost conforming ceiling apply everywhere in California?",
+          "answer": "No. FHFA publishes county-specific limits. The national ceiling is the maximum for qualifying high-cost areas, while other counties may use the baseline or another amount shown in FHFA's list."
+        }
+      ],
+      "sourceIds": [
+        "california-boe-property-tax-overview-2025",
+        "california-boe-supplemental-assessment",
+        "california-doi-homeowners-insurance-guide-2026",
+        "california-doi-residential-insurance",
+        "fhfa-conforming-loan-limits-2026",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "california-boe-property-tax-overview-2025",
+          "claim": "Proposition 13 generally limits the rate to 1 percent plus voter-approved bonded debt and establishes an acquisition-based assessment framework."
+        },
+        {
+          "sourceId": "california-boe-supplemental-assessment",
+          "claim": "A change in ownership may create one or two prorated supplemental bills in addition to the annual bill, and the bill is sent to the owner rather than copied to the lender."
+        },
+        {
+          "sourceId": "california-doi-homeowners-insurance-guide-2026",
+          "claim": "California consumers should compare policy terms and exclusions; flood and earthquake are among the losses generally excluded from standard homeowners coverage."
+        },
+        {
+          "sourceId": "california-doi-residential-insurance",
+          "claim": "The FAIR Plan is a last-resort basic property option with limitations, and a difference-in-conditions policy may be considered for some uncovered perils."
+        },
+        {
+          "sourceId": "fhfa-conforming-loan-limits-2026",
+          "claim": "The 2026 one-unit baseline is $832,750, the high-cost ceiling is $1,249,125, and the applicable conforming limit varies by county."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "The Loan Estimate separates projected payments, estimated taxes and insurance, closing costs, and cash-to-close information for comparison."
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/california",
+        "/locations/california/irvine",
+        "/locations/california/san-diego",
+        "/locations/california/sacramento",
+        "/rates",
+        "/calculators/mortgage-payment",
+        "/learning-center/taxes-insurance"
+      ]
+    },
+    {
+      "id": "article-colorado-tax-guide",
+    "title": "Colorado property tax and insurance considerations for buyers",
+    "route": "/learning-center/colorado-property-tax-insurance-guide",
+    "type": "state_tax_insurance_explainer",
+    "eyebrow": "Taxes and insurance",
+      "stateIds": [
+        "state-co"
+      ],
+      "cityIds": [
+        "city-denver-co",
+        "city-colorado-springs-co",
+        "city-boulder-co"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-va"
+      ],
+      "authorId": "contributor-maya-brooks",
+      "summary": "Colorado buyers can create a stronger housing budget by tracing the local tax calculation and comparing property-specific insurance coverage before relying on a listing estimate.",
+      "dek": "Actual value, statutory assessment rules, local mill levies, wildfire or hail exposure, roof terms, and deductibles can all change the cost of owning two similarly priced homes.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Understand Colorado property-tax calculations, local mill levies, homeowners insurance terms, and escrow planning before buying a home.",
+      "introduction": [
+        "A Colorado home's purchase price does not translate directly into one statewide property-tax rate. The county establishes actual value, state law determines how value is converted for assessment, and local jurisdictions apply mill levies. Recent legislation has also used different valuation rules for school-district and other local-government levies, making old shortcuts especially unreliable.",
+        "Insurance requires a second address-level review. Colorado's Division of Insurance points consumers to coverage summaries, comparison resources, wildfire and hail information, and a homeowners and HOA toolkit. The guidance below is current through July 13, 2026, but an assessor record, adopted mill levies, and a written insurance offer are needed to turn the framework into a property budget."
+      ],
+      "keyTakeaways": [
+        "Trace the calculation from actual value to assessed value and then through every applicable mill levy instead of using a statewide effective-rate shortcut.",
+        "Verify the property-tax year and current state adjustments because Colorado assessment formulas can change and may differ between school and non-school levies.",
+        "Compare homeowners policies by coverage, valuation method, roof treatment, deductibles, exclusions, and additional-living-expense terms as well as premium.",
+        "For a condominium or planned community, review both the association's master policy and the owner's proposed coverage before estimating the full monthly obligation."
+      ],
+      "sections": [
+        {
+          "id": "trace-the-colorado-tax-formula",
+          "heading": "Trace value, assessment, and mill levies",
+          "paragraphs": [
+            "Colorado property tax begins with actual value. An assessment formula set under state law converts that value into assessed value, and the applicable local mill levies are then applied. One mill represents one dollar of tax for each $1,000 of assessed value. The parcel may be served by a county, municipality, school district, fire district, metropolitan district, or other local entities, so the combined levy depends on location.",
+            "For recent tax years, state law has distinguished between valuation used for school-district levies and valuation used for other local governments. That means a single assessment percentage may not reproduce the complete bill. Obtain the county assessor's property record and the current tax statement, then identify the property-tax year, actual value, adjustments, assessed values, and mill levies shown for that parcel."
+          ]
+        },
+        {
+          "id": "use-current-local-records",
+          "heading": "Use the right tax year and local record",
+          "paragraphs": [
+            "A listing may display the most recent tax paid, but that amount can reflect a prior valuation cycle, a different set of levies, or a classification that needs review. Ask the assessor which value period supports the current notice and whether a sale changes any assumptions in the estimate. For the payment worksheet, preserve the assessor's annual figure as one scenario and add a higher planning case if the next valuation or levy is not yet known.",
+            "Tax relief programs have their own conditions and application processes. Do not reduce the budget for an exemption, classification, rebate, or deferral until the administering agency confirms how it applies. If a notice appears incorrect, follow the appeal instructions and deadline on the notice rather than waiting for the mortgage servicer's next escrow analysis."
+          ]
+        },
+        {
+          "id": "compare-colorado-insurance-terms",
+          "heading": "Compare the insurance terms that carry loss risk",
+          "paragraphs": [
+            "Colorado insurers must provide summary information that explains major coverages and exclusions, but the Division of Insurance emphasizes that the summary does not replace the policy. Review the declarations and contract for dwelling coverage, other structures, personal property, additional living expense, liability, special limits, exclusions, and endorsements. Then compare whether losses are settled using replacement cost or actual cash value and when depreciation may apply.",
+            "Wildfire, hail, roof condition, construction features, and location can affect underwriting, terms, and premium. Ask each insurer how the roof will be valued after a covered loss, whether a wind or hail deductible differs from the standard deductible, what mitigation information it considers, and whether the dwelling limit reflects current reconstruction costs. The answer must come from the offered policy, not a general market description."
+          ],
+          "table": {
+            "caption": "Colorado property budget document check",
+            "columns": [
+              "Review area",
+              "Evidence to collect",
+              "Decision it supports"
+            ],
+            "rows": [
+              [
+                "Property valuation",
+                "County assessor record, notice of value, and property classification",
+                "Choose the actual-value input and identify the governing tax year"
+              ],
+              [
+                "Assessment and levies",
+                "Current tax statement showing assessed values and mill levies",
+                "Estimate annual taxes for the exact parcel"
+              ],
+              [
+                "Dwelling and roof coverage",
+                "Insurance quote, declarations, policy form, roof schedule, and endorsements",
+                "Compare premium with the amount and method of potential claim payment"
+              ],
+              [
+                "Catastrophe deductibles",
+                "Dollar amount or percentage for wind, hail, wildfire, and other applicable perils",
+                "Set a cash-reserve target outside the monthly premium"
+              ],
+              [
+                "Association insurance",
+                "HOA master policy, deductible, loss-assessment terms, and proposed owner policy",
+                "Identify coverage gaps and costs not shown in principal and interest"
+              ]
+            ],
+            "note": "Policy availability, deductible acceptability, and loan requirements depend on the property, insurer, association documents, and lender review."
+          }
+        },
+        {
+          "id": "connect-costs-to-the-payment",
+          "heading": "Connect annual costs to the total payment",
+          "paragraphs": [
+            "Principal and interest are only part of the monthly housing obligation. Taxes and homeowners insurance may be collected through escrow, while association dues and some owner-policy costs may be paid separately. The Consumer Financial Protection Bureau recommends reviewing the total monthly payment and notes that an escrow amount can change when tax or insurance bills change.",
+            "Use an annual-to-monthly conversion for comparison, then retain the annual bills and deductible exposure as separate cash planning lines. A lower premium paired with a larger percentage deductible may reduce the recurring amount while increasing what the homeowner must fund after a covered loss. Neither choice is automatically preferable; compare it with available reserves, the home's risk features, and the written policy."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "use-current-local-records",
+          "heading": "Start with the Colorado market, then narrow to the parcel",
+          "body": "Use the state location page to reach Denver, Colorado Springs, Boulder, and other city planning pages before gathering address-level records.",
+          "label": "Explore Colorado mortgage markets",
+          "route": "/locations/colorado"
+        },
+        {
+          "afterSectionId": "compare-colorado-insurance-terms",
+          "heading": "See how taxes and insurance move the monthly total",
+          "body": "Enter annual estimates separately so the calculator shows which housing-cost input is changing the scenario.",
+          "label": "Calculate a total payment scenario",
+          "route": "/calculators/mortgage-payment"
+        }
+      ],
+      "conclusion": "Colorado's tax and insurance costs become manageable when the source documents are read in sequence. Start with the assessor and current levies, then read the actual insurance offer and any association master policy. Convert the recurring amounts for monthly comparison without losing sight of deductibles, coverage gaps, and future escrow adjustments that may require cash beyond the scheduled principal and interest.",
+      "faqs": [
+        {
+          "question": "How is Colorado property tax generally calculated?",
+          "answer": "The general chain is actual value multiplied by the applicable assessment formula to determine assessed value, followed by the local mill levies. Current adjustments and the set of taxing districts must be verified for the parcel and tax year."
+        },
+        {
+          "question": "Does a homeowners premium comparison show which Colorado policy is best for a home?",
+          "answer": "No. A comparison can help organize shopping, but the offered premium, coverages, exclusions, valuation method, deductibles, and property underwriting determine the actual option. Review the full written policy terms."
+        },
+        {
+          "question": "Can taxes or insurance change a fixed-rate mortgage payment?",
+          "answer": "They can change the total amount paid to the servicer when those costs are escrowed. A fixed interest rate does not freeze property taxes, insurance premiums, association dues, or other ownership expenses."
+        }
+      ],
+      "sourceIds": [
+      "colorado-property-taxation",
+      "colorado-general-assembly-property-tax-formula",
+      "colorado-general-assembly-sb24-233",
+      "colorado-general-assembly-hb24b-1001",
+      "colorado-legislative-council-2026-balancing-percentage",
+      "colorado-doi-homeowners-renters-insurance",
+        "colorado-doi-homeowners-hoa-toolkit",
+        "cfpb-total-monthly-mortgage-payment-2023"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "colorado-property-taxation",
+          "claim": "Colorado's Division of Property Taxation oversees statewide property-tax administration and directs taxpayers to valuation, exemption, and appeal resources."
+        },
+        {
+          "sourceId": "colorado-general-assembly-property-tax-formula",
+          "claim": "Colorado's general calculation applies an assessment rate to actual value and then applies local mill levies to assessed value."
+        },
+    {
+      "sourceId": "colorado-general-assembly-sb24-233",
+      "claim": "SB24-233 established distinct valuation rules for school-district and other local-government levies, subject to later amendments that also govern the 2026 property-tax year."
+    },
+    {
+      "sourceId": "colorado-general-assembly-hb24b-1001",
+      "claim": "HB24B-1001 amended Colorado's recent residential valuation rules and established the school-district limit used with the 2026 tax-year framework."
+    },
+    {
+      "sourceId": "colorado-legislative-council-2026-balancing-percentage",
+      "claim": "Colorado Legislative Council Staff reported that no balancing reduction below the permanent 7.05% school-district residential assessment rate was required for property-tax year 2026."
+        },
+        {
+          "sourceId": "colorado-doi-homeowners-renters-insurance",
+          "claim": "Colorado requires summary disclosures for major coverages and exclusions, while the actual policy controls the contract terms."
+        },
+        {
+          "sourceId": "colorado-doi-homeowners-hoa-toolkit",
+          "claim": "Colorado's consumer toolkit identifies current homeowners and HOA insurance issues, shopping steps, mitigation questions, and policy-review considerations."
+        },
+        {
+          "sourceId": "cfpb-total-monthly-mortgage-payment-2023",
+          "claim": "A total monthly mortgage payment may include taxes and insurance, and an escrow amount can change even when scheduled principal and interest do not."
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/colorado",
+        "/locations/colorado/denver",
+        "/locations/colorado/colorado-springs",
+        "/locations/colorado/boulder",
+        "/calculators/mortgage-payment",
+        "/learning-center/taxes-insurance"
+      ]
+    },
+    {
+      "id": "article-florida-insurance-guide",
+    "title": "Florida insurance costs and mortgage payment planning",
+    "route": "/learning-center/florida-insurance-mortgage-guide",
+    "type": "state_tax_insurance_explainer",
+    "eyebrow": "Taxes and insurance",
+      "stateIds": [
+        "state-fl"
+      ],
+      "cityIds": [
+        "city-tampa-fl",
+        "city-orlando-fl",
+        "city-miami-fl"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-refinance"
+      ],
+      "authorId": "contributor-maya-brooks",
+      "summary": "Florida homeowners insurance belongs near the start of mortgage planning because the premium, coverage limits, hurricane deductible, and flood protection are specific to the property.",
+      "dek": "A complete comparison looks beyond the annual premium to the policy's wind terms, valuation method, exclusions, separate flood coverage, and cash needed before insurance responds to a covered loss.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Review Florida homeowners insurance, hurricane deductibles, flood coverage, escrow, and cash-reserve questions before estimating a mortgage payment.",
+      "introduction": [
+        "In Florida, the same purchase price can lead to very different insurance results based on location, construction, roof details, insured value, selected coverage, deductibles, and the insurer's review. That makes a listing's premium history a weak substitute for a current quote in the buyer's name. The insurance conversation should begin while the property and financing terms can still be evaluated together.",
+        "The Florida Department of Financial Services provides consumer guidance on homeowners coverage and hurricane deductibles, while FEMA explains that most homeowners policies do not cover flood damage. These sources describe how to ask better questions, not what a particular policy will cost. The state and federal information in this guide was reviewed on July 13, 2026."
+      ],
+      "keyTakeaways": [
+        "Request property-specific insurance terms early and compare the declarations, policy form, endorsements, exclusions, valuation basis, and deductibles before relying on the premium.",
+        "Translate a percentage hurricane deductible into dollars using the policy's dwelling limit, not the home's purchase price or the mortgage balance.",
+        "Treat wind coverage and flood coverage as separate questions because Florida's hurricane coverage definition does not include flooding and standard homeowners policies generally exclude flood loss.",
+        "Budget both the recurring premium and the cash exposure under deductibles; escrow can spread premiums monthly but does not fund the homeowner's share of a claim."
+      ],
+      "sections": [
+        {
+          "id": "read-the-florida-policy",
+          "heading": "Read the policy from coverage to exclusions",
+          "paragraphs": [
+            "Start with the written quote and declarations page. Identify the dwelling limit, other structures, personal property, loss-of-use or additional-living-expense coverage, liability, and every listed deductible. Then read the policy form and endorsements for exclusions, roof settlement terms, water limitations, wind treatment, and whether covered property is valued at replacement cost or actual cash value. A premium comparison without these terms can place unlike policies side by side.",
+            "Florida's consumer guidance notes that a lender may require homeowners insurance when a mortgage is attached to the property. That requirement protects the lender's interest, but it does not mean every peril or every rebuilding expense is covered. Ask the insurer and lender to address questions in writing, especially when a deductible is stated as a percentage or when wind coverage is handled separately."
+          ]
+        },
+        {
+          "id": "translate-the-hurricane-deductible",
+          "heading": "Translate the hurricane deductible into cash",
+          "paragraphs": [
+            "Florida law defines when the hurricane deductible applies and how it operates across covered hurricane losses during a calendar year. The Department of Financial Services explains that available deductible options and exceptions depend on dwelling limits and policy type. The declarations page must show the deductible as a dollar amount even when the contract also expresses it as a percentage.",
+            "For a planning example, a 2 percent hurricane deductible on a $450,000 dwelling limit represents $9,000. That arithmetic is illustrative only; the actual dollar amount, covered event, remaining calendar-year deductible, and claim treatment come from the policy and Florida rules. Keep the deductible in a liquid-reserve discussion rather than dividing it across the monthly payment as though it were a premium."
+          ]
+        },
+        {
+          "id": "separate-wind-and-flood",
+          "heading": "Separate wind damage from flood damage",
+          "paragraphs": [
+            "Florida's hurricane coverage guidance addresses windstorm loss during a hurricane and expressly states that flooding is not included. FEMA similarly advises that most homeowners and renters policies do not cover flood damage. A home outside a mapped high-risk area can still have flood exposure, and a lender's decision not to require flood insurance does not establish that the property cannot flood.",
+            "Ask for the property's current flood-zone information, an elevation certificate when relevant and available, and written flood-insurance options. Compare building and contents coverage, deductibles, waiting periods, exclusions, and effective dates. Keep the homeowners and flood policies together in the budget so one premium is not mistaken for complete hazard protection."
+          ],
+          "table": {
+            "caption": "Florida insurance and mortgage review",
+            "columns": [
+              "Question",
+              "Written evidence",
+              "Budget treatment"
+            ],
+            "rows": [
+              [
+                "What does the homeowners policy cover?",
+                "Quote, declarations, policy form, endorsements, and coverage summary",
+                "Use the premium only after comparing limits and exclusions"
+              ],
+              [
+                "How large is the hurricane deductible in dollars?",
+                "Declarations page and the dwelling limit used in the percentage calculation",
+                "Hold the exposure as a separate cash-reserve target"
+              ],
+              [
+                "Is wind included, limited, or written separately?",
+                "Wind coverage terms and any separate policy or exclusion",
+                "Combine all required premiums for the recurring estimate"
+              ],
+              [
+                "What flood protection is available?",
+                "Flood-zone record and a separate NFIP or private flood quote",
+                "Add premium and deductible without assuming homeowners coverage applies"
+              ],
+              [
+                "How will the mortgage handle premiums?",
+                "Loan Estimate, Closing Disclosure, and escrow instructions",
+                "Distinguish monthly escrow from upfront premium and prepaid amounts"
+              ]
+            ],
+            "note": "Insurance terms and lender requirements vary. Confirm the offered policies and financing conditions for the specific property."
+          }
+        },
+        {
+          "id": "build-the-payment-and-reserve-plan",
+          "heading": "Build a payment plan and a loss-reserve plan",
+          "paragraphs": [
+            "When insurance is escrowed, the servicer generally collects part of the expected annual premium with each mortgage payment and pays the bill when due. A renewal change can alter the escrow projection and total monthly amount. Review the first-year projected payment on the Loan Estimate, then compare it with the final Closing Disclosure and the insurer's invoice so the same premium is not omitted or counted twice.",
+            "The monthly worksheet should sit beside a reserve worksheet. The first tracks principal, interest, property taxes, homeowners insurance, flood insurance, mortgage insurance when applicable, and association dues. The second tracks hurricane, wind, flood, roof, water, and other deductibles plus likely maintenance needs. Florida's Office of Insurance Regulation publishes county and ZIP-level market data reported by insurers, but the Office states that the submissions are not audited before publication; use that information for market context, not as a substitute for a quote."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "translate-the-hurricane-deductible",
+          "heading": "See the recurring insurance cost inside the payment",
+          "body": "Add the annual homeowners and flood estimates separately, then compare the monthly result with the deductible reserve you may need outside escrow.",
+          "label": "Estimate a Florida mortgage payment",
+          "route": "/calculators/mortgage-payment"
+        },
+        {
+          "afterSectionId": "separate-wind-and-flood",
+          "heading": "Move from statewide guidance to a local market",
+          "body": "Use Florida's location page to reach Tampa, Orlando, Miami, and other city-level mortgage planning resources.",
+          "label": "Explore Florida mortgage markets",
+          "route": "/locations/florida"
+        }
+      ],
+      "conclusion": "Florida insurance planning is not complete when a premium appears in the payment estimate. The policy must also show what is covered, which deductibles apply, how wind is handled, and whether flood protection is separate. Compare those terms while the property is still under review, then maintain both a monthly ownership budget and a realistic cash reserve for losses the homeowner must fund before coverage responds.",
+      "faqs": [
+        {
+          "question": "Is a Florida hurricane deductible based on the purchase price?",
+          "answer": "Generally, a percentage hurricane deductible is tied to the policy's dwelling or structure limit, and the declarations page shows its dollar amount. Review the actual policy because options and exceptions vary."
+        },
+        {
+          "question": "Does homeowners insurance cover storm-surge or other flood damage?",
+          "answer": "Most standard homeowners policies do not cover flood damage, and Florida's definition of hurricane coverage does not include flooding. Review separate flood-insurance options and the terms offered for the property."
+        },
+        {
+          "question": "Will escrow pay my insurance deductible after a loss?",
+          "answer": "No. Escrow is generally used to collect and pay scheduled property expenses such as premiums and taxes. A claim deductible is the policyholder's responsibility and should be considered in a separate cash reserve."
+        }
+      ],
+      "sourceIds": [
+        "florida-dfs-homeowners-insurance-2026",
+        "florida-dfs-hurricane-deductible-2026",
+        "florida-oir-residential-policy-data-2026",
+        "fema-floodsmart",
+        "cfpb-escrow-account-2024"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "florida-dfs-homeowners-insurance-2026",
+          "claim": "Florida consumer guidance covers homeowners policy components, deductibles, inspections, endorsements, and the lender's potential insurance requirement."
+        },
+        {
+          "sourceId": "florida-dfs-hurricane-deductible-2026",
+          "claim": "Florida specifies the hurricane-deductible period, annual application rules, required dollar disclosure, available options, and exceptions; hurricane coverage does not include flooding."
+        },
+        {
+          "sourceId": "florida-oir-residential-policy-data-2026",
+          "claim": "Florida OIR market reports use insurer-submitted monthly county and ZIP-level data beginning in 2025, and OIR states that it does not audit the submissions before publication."
+        },
+        {
+          "sourceId": "fema-floodsmart",
+          "claim": "Most homeowners policies do not cover flood damage, and flood risk should be reviewed separately from standard property coverage."
+        },
+        {
+          "sourceId": "cfpb-escrow-account-2024",
+          "claim": "An escrow account may collect insurance and tax costs monthly, and later changes in those bills can change the total mortgage payment."
+        }
+      ],
+      "relatedRoutes": [
+        "/locations/florida",
+        "/locations/florida/tampa",
+        "/locations/florida/orlando",
+        "/locations/florida/miami",
+        "/calculators/mortgage-payment",
+        "/learning-center/taxes-insurance"
+      ]
+    },
+    {
+      "id": "article-fha-basics",
+    "title": "How FHA loans work for lower down payment buyers",
+    "route": "/learning-center/fha-loan-basics",
+    "type": "product_explainer",
+    "eyebrow": "FHA loan guide",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": [
+        "product-fha"
+      ],
+      "authorId": "contributor-marcus-lane",
+      "summary": "FHA financing may help a buyer use a smaller down payment, but the useful comparison also includes mortgage insurance, county loan limits, property review, cash to close, and the cost over the years the loan may be kept.",
+      "dek": "An FHA label does not settle the decision. Compare an FHA scenario with other available loans using the same property, loan term, rate-lock period, and time horizon.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Learn how FHA loans, mortgage insurance, county limits, property review, and closing costs fit into a careful home loan comparison.",
+      "introduction": [
+        "An FHA loan is made by a private lender and insured through the Federal Housing Administration. That insurance may allow a lender to offer a lower-down-payment path than some conventional options, but it does not eliminate underwriting or turn a general program feature into an approval. The lender still reviews the borrower, property, occupancy, loan amount, and current FHA requirements.",
+        "The clearest way to evaluate FHA financing is to build a complete scenario. Start with the purchase price and planned down payment, confirm the current FHA limit for the property's county, and include both upfront and ongoing mortgage insurance in the comparison. Then place the FHA Loan Estimate beside any conventional or other program estimate that uses matching assumptions."
+      ],
+      "keyTakeaways": [
+        "FHA insures loans made by approved private lenders; it does not lend money directly to the borrower.",
+        "A smaller down payment may preserve cash at closing while mortgage insurance and a larger balance may change monthly and long-run costs.",
+        "The applicable FHA loan limit depends on the property's county or supported metropolitan area and the current calendar-year table.",
+        "Use matched Loan Estimates to compare rate, APR, mortgage insurance, closing costs, cash to close, and total payment before choosing a path."
+      ],
+      "sections": [
+        {
+          "id": "understand-fha-insurance",
+          "heading": "Understand what FHA insurance changes",
+      "paragraphs": [
+        "FHA insurance protects the lender against certain losses; it is not insurance for the buyer's repairs, job loss, or future home value. Under HUD rules current as of July 2026, maximum purchase financing generally requires at least a 3.5% borrower investment when the FHA minimum decision credit score is 580 or higher. Scores from 500 through 579 are generally limited to 90% loan-to-value, and lenders may apply additional standards. The property, borrower, loan purpose, and full current handbook still require transaction-specific review.",
+        "For standard FHA forward mortgages, the current upfront mortgage insurance premium is generally 1.75% of the base loan amount. The annual premium is set by the loan amount, term, and loan-to-value ratio and is usually collected through monthly installments. Under the current schedule, annual mortgage insurance may remain for 11 years when the origination loan-to-value ratio is 90% or less and for the mortgage term when it is above 90%. Ask the lender to confirm the rate and assessment period for the proposed loan rather than relying on a general example.",
+        "The applicable upfront premium must generally be paid entirely in cash at closing or financed entirely into the mortgage, subject to HUD's rounding treatment and any transaction-specific exception. Financing reduces the immediate cash requirement but increases the balance on which interest is charged. Ask the lender to show both the base loan and total loan amount so the comparison does not hide that tradeoff."
+          ]
+        },
+        {
+          "id": "compare-matched-scenarios",
+          "heading": "Compare FHA and conventional scenarios on equal terms",
+          "paragraphs": [
+            "A headline rate is not enough to identify the less expensive loan. Keep the property, price, occupancy, term, lock period, and expected closing date consistent, then compare the written offers line by line. If one scenario uses points or lender credits, request a second version without them or make the same pricing choice in the other scenario.",
+            "Include costs that sit outside principal and interest. Estimated property taxes, homeowners insurance, association dues, and mortgage insurance can materially change the housing payment. Cash to close should also remain separate from the monthly total so a low-cash structure is not mistaken for a low-cost loan."
+          ],
+          "table": {
+            "caption": "FHA comparison checklist",
+            "columns": [
+              "Decision item",
+              "What to compare",
+              "What to confirm"
+            ],
+            "rows": [
+              [
+                "Loan boundary",
+                "Base loan amount against the current FHA county limit",
+                "Property county, unit count, and current HUD lookup"
+              ],
+              [
+                "Price of borrowing",
+                "Interest rate, APR, points, and lender credits",
+                "Same lock period and closing assumptions"
+              ],
+              [
+                "Mortgage insurance",
+                "Upfront premium, monthly amount, and expected assessment period",
+                "Current HUD treatment for the proposed loan"
+              ],
+              [
+                "Monthly obligation",
+                "Principal, interest, mortgage insurance, taxes, insurance, and association dues",
+                "Which items are escrowed and which are paid separately"
+              ],
+              [
+                "Upfront cash",
+                "Down payment, lender charges, third-party costs, prepaids, and initial escrow",
+                "Estimated Cash to Close on each Loan Estimate"
+              ],
+              [
+                "Property review",
+                "Appraisal and FHA property requirements",
+                "Repairs, documentation, and timing identified by the lender"
+              ]
+            ],
+            "note": "This checklist organizes a review; it does not state that an FHA or conventional loan is available to a particular borrower or property."
+          }
+        },
+        {
+          "id": "check-property-and-limit",
+          "heading": "Check the property before relying on the program",
+          "paragraphs": [
+            "FHA maximum mortgage amounts vary by location, so confirm the property's county rather than relying on a city name or an old national figure. Compare the proposed base loan amount with HUD's current lookup. Staying within the limit only clears one program boundary; it does not establish eligibility, value, or final loan terms.",
+            "The property also goes through an FHA appraisal and lender review under the current handbook. Ask early whether the home type, condition, utilities, planned repairs, or condominium status could require additional documentation. A buyer can separately consider an independent inspection and contract protections based on the home and local transaction practices."
+          ]
+        },
+        {
+          "id": "protect-cash-after-closing",
+          "heading": "Protect the budget beyond closing day",
+          "paragraphs": [
+            "A lower initial down payment can leave more money available for moving, maintenance, and emergency reserves. It can also create a larger financed balance and a different insurance cost. Measure both sides: cash retained after closing and the projected payment under realistic tax, insurance, and association assumptions.",
+            "Before deciding, ask for written FHA and alternative scenarios from lenders who can offer them. Review the Loan Estimate's loan amount, projected payments, mortgage insurance, origination charges, lender credits, and cash to close. If future refinancing is part of the plan, treat it as an uncertain option rather than a promised exit from mortgage insurance or today's terms."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "understand-fha-insurance",
+          "heading": "See the FHA option in one place",
+          "body": "Review the program's payment, mortgage-insurance, property, and documentation questions before deciding which scenarios to request.",
+          "label": "Review FHA loan options",
+          "route": "/loan-options/fha-loans"
+        },
+        {
+          "afterSectionId": "compare-matched-scenarios",
+          "heading": "Test the down payment tradeoff",
+          "body": "Change the down payment while keeping the property and other assumptions steady to see how cash and the estimated payment move.",
+          "label": "Compare down payment scenarios",
+          "route": "/calculators/down-payment"
+        }
+      ],
+      "conclusion": "FHA financing can be a useful path when its complete cost and property rules support the buyer's plan. The disciplined comparison is not FHA versus conventional in the abstract. It is one written FHA scenario beside other available offers for the same home, with mortgage insurance, cash to close, reserves, and the likely ownership period all visible.",
+      "faqs": [
+        {
+          "question": "Does a lower FHA down payment mean the loan costs less?",
+          "answer": "Not necessarily. A smaller down payment may preserve cash, but the resulting balance, mortgage insurance, rate, APR, fees, and time in the loan all affect the cost. Compare matched written estimates."
+        },
+        {
+          "question": "Does being under the FHA county limit mean I qualify?",
+          "answer": "No. The limit is a loan-size boundary. A lender must still review income, debts, credit, assets, occupancy, the property, and all current program requirements."
+        },
+        {
+          "question": "Can FHA mortgage insurance be removed later?",
+          "answer": "The assessment period depends on the loan's characteristics and current HUD rules. Ask the lender to identify the applicable period in writing and do not assume a future refinance will be available."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-fha-loans",
+        "hud-fha-handbook-4000-1",
+        "hud-fha-loan-limits-2026",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-fha-loans",
+          "claim": "CFPB explains that private lenders make FHA-insured loans, that FHA may support a lower down payment, that county limits apply, and that total costs should be compared with other options."
+        },
+        {
+          "sourceId": "hud-fha-handbook-4000-1",
+      "claim": "HUD Handbook 4000.1 provides the current FHA minimum-investment, credit-score, upfront and annual mortgage-insurance, assessment-period, appraisal, property, borrower, and lender requirements."
+        },
+        {
+          "sourceId": "hud-fha-loan-limits-2026",
+          "claim": "HUD's 2026 lookup provides FHA forward mortgage limits by county or supported metropolitan area; the limit is a program boundary rather than an approval."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "CFPB's Loan Estimate explainer identifies the fields borrowers can use to compare loan terms, mortgage insurance, closing costs, lender credits, projected payments, and cash to close."
+        }
+      ],
+      "relatedRoutes": [
+        "/loan-options/fha-loans",
+        "/learning-center/fha-loans",
+        "/rates",
+        "/calculators/down-payment"
+      ]
+    },
+    {
+      "id": "article-va-basics",
+    "title": "VA loan basics for eligible Veterans, service members, and surviving spouses",
+    "route": "/learning-center/va-loan-basics",
+    "type": "product_explainer",
+    "eyebrow": "VA loan guide",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": [
+        "product-va"
+      ],
+      "authorId": "contributor-marcus-lane",
+      "summary": "A VA-backed loan can offer a distinct purchase path for eligible Veterans, service members, and some surviving spouses, but the Certificate of Eligibility, entitlement, lender review, property value, funding fee, and closing costs each answer a different question.",
+      "dek": "Start with the benefit record, then compare the actual loan. A COE documents VA home-loan eligibility based on service history; it does not promise a loan amount, rate, or approval.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Understand VA loan COEs, entitlement, down payment options, funding fees, appraisals, closing costs, and lender review.",
+      "introduction": [
+        "VA-backed purchase loans are issued by private lenders, while the Department of Veterans Affairs guarantees part of the loan. The first program step is usually confirming whether the borrower can receive a Certificate of Eligibility. The COE shows service-based benefit information and entitlement, but the lender separately reviews credit, income, debts, assets, occupancy, and the requested loan amount.",
+        "The program may permit a purchase without a down payment when the transaction, entitlement, appraisal, and lender review support that structure. That feature should be evaluated beside the VA funding fee, other closing costs, the amount financed, cash retained after closing, and the full monthly housing budget."
+      ],
+      "keyTakeaways": [
+        "A Certificate of Eligibility confirms service-related VA home-loan benefit information; it does not replace the lender's underwriting decision.",
+        "A no-down-payment option may be available, but entitlement, appraised value, purchase price, lender standards, and the proposed loan all matter.",
+        "VA-backed loans do not require monthly mortgage insurance, while a one-time funding fee may apply unless the borrower has a confirmed exemption.",
+        "Interest rates, points, and many closing costs come from the private lender, so compare written offers rather than treating VA as a single price."
+      ],
+      "sections": [
+        {
+          "id": "separate-coe-and-underwriting",
+          "heading": "Separate the COE from loan approval",
+          "paragraphs": [
+            "VA determines whether the service history and duty status support a COE. A borrower can request the certificate directly or may ask a lender to help retrieve it. Because eligibility rules vary by service period and circumstance, use the VA's current guidance rather than relying on a general service-length shortcut.",
+            "After the COE is available, the lender evaluates the financing request. The review may include documented income, debts, credit history, assets, occupancy, and the property's appraised value. Full entitlement does not mean an unlimited approval; it means the county loan limit does not cap the guaranty calculation in the same way it can when some entitlement is already in use."
+          ]
+        },
+        {
+          "id": "read-entitlement-and-value",
+          "heading": "Read entitlement, down payment, and value together",
+          "paragraphs": [
+            "For a borrower with full entitlement, VA states that there is no home-loan limit as long as the borrower can afford the amount and the appraisal supports the purchase price. When entitlement is already in use, the county's FHFA conforming limit may affect the guaranty calculation, and a lender may require a down payment if remaining entitlement is not enough for the proposed loan.",
+            "A purchase price above the appraised value can create another cash decision. The buyer may discuss a reconsideration of value through the lender, renegotiate the contract, use an available contract right, or pay a difference in cash if the transaction can otherwise proceed. Those choices depend on the contract, available funds, and lender review."
+          ],
+          "table": {
+            "caption": "VA purchase review worksheet",
+            "columns": [
+              "Review point",
+              "What it tells you",
+              "Next item to verify"
+            ],
+            "rows": [
+              [
+                "Certificate of Eligibility",
+                "Service-based benefit status and entitlement information",
+                "Current COE and any entitlement already charged"
+              ],
+              [
+                "Down payment",
+                "Cash applied to the price",
+                "Whether entitlement, value, and lender terms support the proposed structure"
+              ],
+              [
+                "Funding fee",
+                "Potential one-time program charge",
+                "Confirmed exemption status, applicable amount, and whether it is paid or financed"
+              ],
+              [
+                "Monthly insurance",
+                "VA does not require monthly PMI or FHA-style MIP",
+                "Other payment components, including taxes and homeowners insurance"
+              ],
+              [
+                "Appraisal",
+                "VA value opinion and minimum property requirement review",
+                "Contract options, repairs, and any separate home inspection"
+              ],
+              [
+                "Loan offer",
+                "Private lender's rate, APR, points, fees, and projected payment",
+                "Matched Loan Estimates from available lenders"
+              ]
+            ],
+            "note": "The COE, appraisal, and lender approval are separate steps. None of them alone establishes the final loan amount or cash required."
+          }
+        },
+        {
+          "id": "account-for-funding-fee",
+          "heading": "Account for the funding fee and closing costs",
+          "paragraphs": [
+            "The VA funding fee is generally a one-time program charge, but exemptions apply in defined circumstances. Its amount can depend on the loan type, loan amount, whether the benefit has been used before, and, for some transactions, the down payment. Confirm the borrower's status on current VA records rather than assuming the fee applies or is waived.",
+            "When permitted, financing the funding fee reduces the amount due at closing but increases the loan balance and interest paid over time. Other purchase closing costs are handled separately. Review the Loan Estimate for lender charges, discount points, appraisal, title, recording, taxes, insurance, prepaids, escrow funding, seller credits, and the final estimate of cash to close."
+          ]
+        },
+        {
+          "id": "plan-property-process",
+          "heading": "Plan for the appraisal, inspection, and closing",
+          "paragraphs": [
+            "A VA-approved appraiser provides an opinion of value and reviews the home against VA minimum property requirements. VA explains that the appraisal is not the same as a home inspection. A buyer can consider arranging an independent inspection to examine condition and maintenance concerns, subject to the purchase contract and local practice.",
+            "Ask the lender about appraisal timing, condominium approval when relevant, required repairs, and the documents still needed for underwriting. Before closing, compare the final Closing Disclosure with the selected Loan Estimate and resolve unexpected changes in the loan amount, rate, fees, credits, funding fee, or cash required."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "separate-coe-and-underwriting",
+          "heading": "Review the VA purchase path",
+          "body": "See the program steps and questions to bring to a lender after checking your Certificate of Eligibility.",
+          "label": "Explore VA loan options",
+          "route": "/loan-options/va-loans"
+        },
+        {
+          "afterSectionId": "read-entitlement-and-value",
+          "heading": "Build a complete housing budget",
+          "body": "Estimate principal, interest, taxes, insurance, association dues, and other recurring costs without assuming a final loan decision.",
+          "label": "Use the affordability calculator",
+          "route": "/calculators/affordability"
+        }
+      ],
+      "conclusion": "A VA-backed loan is best understood as a sequence, not a single benefit claim. Confirm the COE and entitlement, let the lender review the borrower and property, then compare the proposed rate, fee treatment, payment, and cash to close with other available options. That approach preserves the value of the program without assuming that every eligible borrower should use the same structure.",
+      "faqs": [
+        {
+          "question": "Does a VA Certificate of Eligibility guarantee loan approval?",
+          "answer": "No. A COE confirms service-based benefit information. The private lender still reviews credit, income, debts, assets, occupancy, the property, and the requested amount."
+        },
+        {
+          "question": "Does every VA purchase loan require no down payment?",
+          "answer": "No single structure applies to every transaction. Entitlement, appraised value, purchase price, lender standards, and the borrower's selected terms can affect whether cash is required."
+        },
+        {
+          "question": "Is the VA funding fee always charged?",
+          "answer": "No. VA identifies exemptions for certain borrowers and circumstances. Confirm the current funding-fee status before closing and review how any fee is shown on the Loan Estimate."
+        },
+        {
+          "question": "Can the VA home-loan benefit be used again?",
+          "answer": "It may be reusable through restored or remaining entitlement. The result depends on the borrower's COE, prior VA-backed loans, property disposition, and current VA requirements."
+        }
+      ],
+      "sourceIds": [
+        "va-home-loans",
+        "va-purchase-loan-2026",
+        "va-home-loan-eligibility-2025",
+        "va-home-loan-entitlement-limits-2025",
+        "va-funding-fee-closing-costs-2026",
+        "va-home-buying-process-2026",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "va-home-loans",
+          "claim": "VA's program overview explains that VA direct and VA-backed loans serve eligible Veterans, service members, and certain survivors while lenders still review credit and income."
+        },
+        {
+          "sourceId": "va-purchase-loan-2026",
+          "claim": "VA's purchase-loan page describes the COE, lender and VA review, occupancy, potential no-down-payment structure, lack of monthly mortgage insurance, and one-time funding fee."
+        },
+        {
+          "sourceId": "va-home-loan-eligibility-2025",
+          "claim": "VA publishes service-period eligibility guidance and states that financing also requires the borrower to meet VA and lender credit, income, and occupancy requirements."
+        },
+        {
+          "sourceId": "va-home-loan-entitlement-limits-2025",
+          "claim": "VA distinguishes full from remaining entitlement and explains how appraisal, affordability, prior entitlement use, and county limits may affect the proposed amount and down payment."
+        },
+        {
+          "sourceId": "va-funding-fee-closing-costs-2026",
+          "claim": "VA describes funding-fee factors and exemptions, financing of the fee, lender-set loan terms, other closing costs, and the need to review the Loan Estimate."
+        },
+        {
+          "sourceId": "va-home-buying-process-2026",
+          "claim": "VA's home-buying process distinguishes a VA appraisal from a home inspection and outlines value, property-condition, and pre-closing review steps."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "CFPB identifies where program fees, loan terms, projected payments, lender credits, closing costs, and estimated cash to close appear on a Loan Estimate."
+        }
+      ],
+      "relatedRoutes": [
+        "/loan-options/va-loans",
+        "/learning-center/va-loans",
+        "/rates",
+        "/calculators/affordability"
+      ]
+    },
+    {
+      "id": "article-jumbo-basics",
+    "title": "Jumbo loan basics for high-cost home purchases",
+    "route": "/learning-center/jumbo-loan-basics",
+    "type": "product_explainer",
+    "eyebrow": "Jumbo loan guide",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": [
+        "product-jumbo"
+      ],
+      "authorId": "contributor-marcus-lane",
+      "summary": "A jumbo mortgage starts with a loan amount above the applicable FHFA conforming limit, but the decision depends on far more than size: lender standards, liquidity, valuation, pricing, term, and total housing cost may all differ.",
+      "dek": "Find the current county boundary first. Then compare jumbo and possible conforming structures without assuming that either label determines the better rate, easier review, or lower cost.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Learn how jumbo loan limits, lender-specific review, reserves, appraisals, rates, and closing costs affect a high-cost home purchase.",
+      "introduction": [
+        "FHFA sets conforming loan limits for mortgages Fannie Mae and Freddie Mac may acquire. A mortgage above the applicable limit is generally described as jumbo. The boundary changes by calendar year and can vary by county and property unit count, which means the right starting point is the property's location and proposed loan amount rather than the purchase price alone.",
+        "Jumbo loans are non-conforming and less standardized. One lender's documentation, reserve, property, and pricing approach may differ from another's, so a generic jumbo checklist cannot predict approval or available terms. It can, however, help a borrower request comparable offers and protect enough liquidity for both closing and ownership."
+      ],
+      "keyTakeaways": [
+      "Compare the proposed first-mortgage amount with the current FHFA limit for the property's county and unit count before calling the loan jumbo.",
+        "Jumbo underwriting and product features can vary by lender, so ask what income, asset, reserve, appraisal, and property documentation applies to the actual scenario.",
+        "A larger down payment may move a loan below the conforming boundary, but using more cash can reduce reserves and does not automatically lower total cost.",
+        "Compare rate, APR, points, lender credits, closing costs, term, prepayment features, and cash remaining after closing across matched written offers."
+      ],
+      "sections": [
+        {
+          "id": "find-current-boundary",
+          "heading": "Find the current conforming boundary",
+          "paragraphs": [
+            "Use FHFA's current county table and select the correct number of property units. High-cost areas can have higher limits than the national baseline, and the table is updated for each calendar year. A home price above the limit does not automatically create a jumbo loan because the down payment reduces the amount borrowed.",
+            "Calculate the proposed first-mortgage amount after the planned down payment, then compare that figure with the applicable limit. If the result is close to the boundary, ask the lender to show both a conforming structure and a jumbo structure when available. Keep the cash contribution and remaining reserves visible in each version."
+          ]
+        },
+        {
+          "id": "prepare-lender-review",
+          "heading": "Prepare for a lender-specific review",
+          "paragraphs": [
+            "Because jumbo loans do not follow one universal set of conforming purchase standards, lenders may use different approaches to income history, asset documentation, debt obligations, cash reserves, property types, and appraisal review. A borrower with variable compensation, business income, multiple properties, or concentrated assets should ask for the document list early.",
+            "The property can be as important as the borrower profile. High-value homes, unique construction, condominiums, acreage, or limited comparable sales may require additional valuation work. Ask how many appraisals or reviews may be needed, who pays for them, and whether the expected timeline fits the purchase contract."
+          ]
+        },
+        {
+          "id": "compare-jumbo-offers",
+          "heading": "Compare the whole jumbo offer",
+          "paragraphs": [
+            "Do not assume a jumbo mortgage always carries a higher or lower rate than a conforming loan. Pricing changes with the market, loan structure, borrower profile, property, points, and lender. Request Loan Estimates for the same amount, term, rate-lock period, occupancy, and closing date so the differences are meaningful.",
+            "High purchase prices can make small pricing differences significant in dollars, but preserving liquidity can matter just as much. Review what remains after the down payment, closing costs, moving expenses, near-term repairs, and any reserve amount the lender expects the borrower to document."
+          ],
+          "table": {
+            "caption": "Jumbo offer comparison worksheet",
+            "columns": [
+              "Comparison area",
+              "Question for each offer",
+              "Evidence to review"
+            ],
+            "rows": [
+              [
+                "Loan classification",
+                "Is the proposed amount above the current county and unit limit?",
+                "FHFA table and lender's stated loan type"
+              ],
+              [
+                "Pricing",
+                "What rate, APR, points, and lender credits apply?",
+                "Matched Loan Estimates with the same lock assumptions"
+              ],
+              [
+                "Liquidity",
+                "How much cash is needed and what reserves must remain?",
+                "Cash-to-close calculation and lender asset requirements"
+              ],
+              [
+                "Income review",
+                "How will salary, bonus, commission, rental, or business income be documented?",
+                "Lender's scenario-specific document list"
+              ],
+              [
+                "Valuation",
+                "Will the property need added appraisal or review steps?",
+                "Written valuation requirements, fees, and timing"
+              ],
+              [
+                "Loan features",
+                "Are the rate, payment, and amortization fixed or adjustable?",
+                "Product terms, projected payments, and any risky features"
+              ]
+            ],
+            "note": "Jumbo policies can differ across lenders. This worksheet prompts questions and does not represent a universal qualification standard."
+          }
+        },
+        {
+          "id": "choose-cash-structure",
+          "heading": "Choose a structure without draining the plan",
+          "paragraphs": [
+            "Putting more money down may reduce the balance or create a conforming option, but it also moves cash out of the borrower's reserves and into the property. Compare the effect on principal and interest with the effect on emergency funds, planned improvements, investment concentration, and the lender's reserve review.",
+            "A split-loan structure, adjustable-rate product, or other alternative may appear in a lender's proposal. Each introduces its own rate, payment, fee, and future-risk questions. Review the written terms rather than choosing an unfamiliar structure only to avoid the jumbo label."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "find-current-boundary",
+          "heading": "Review jumbo planning questions",
+          "body": "See how loan size, reserves, property review, and lender-specific terms fit into a high-cost purchase comparison.",
+          "label": "Explore jumbo loan options",
+          "route": "/loan-options/jumbo-loans"
+        },
+        {
+          "afterSectionId": "compare-jumbo-offers",
+          "heading": "Compare available rate scenarios",
+          "body": "Use the same loan amount and term while reviewing illustrative comparisons, then confirm actual terms through written lender disclosures.",
+          "label": "Review mortgage rate options",
+          "route": "/rates"
+        }
+      ],
+      "conclusion": "The jumbo decision begins with a dated FHFA boundary and ends with lender-specific documents. Confirm the county and unit limit, decide how much cash can be committed without weakening the broader plan, and compare consistent written offers. Loan size identifies the category; it does not decide which structure fits the borrower or property.",
+      "faqs": [
+        {
+          "question": "Is every mortgage on an expensive home a jumbo loan?",
+          "answer": "No. Jumbo status is based on the loan amount compared with the applicable conforming limit, not the purchase price by itself. Down payment, county, unit count, and calendar year matter."
+        },
+        {
+          "question": "Do jumbo loans always have higher interest rates?",
+          "answer": "No fixed relationship applies to every offer. Market conditions, loan design, lender, borrower profile, property, points, and lock timing can change the result. Compare matched Loan Estimates."
+        },
+        {
+          "question": "Can a larger down payment turn a jumbo loan into a conforming loan?",
+          "answer": "It may reduce the proposed balance below the current limit. Before committing more cash, compare payment, pricing, reserves, and total costs under both available structures."
+        }
+      ],
+      "sourceIds": [
+        "fhfa-conforming-loan-limits-2026",
+        "cfpb-jumbo-loan",
+        "cfpb-conventional-loans-2024",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "fhfa-conforming-loan-limits-2026",
+          "claim": "FHFA publishes the 2026 county and county-equivalent limits that define the maximum origination balances eligible for Enterprise acquisition."
+        },
+        {
+          "sourceId": "cfpb-jumbo-loan",
+          "claim": "CFPB defines jumbo mortgages as loans above applicable conforming limits and notes that obtaining one may cost more than obtaining a conforming mortgage."
+        },
+        {
+          "sourceId": "cfpb-conventional-loans-2024",
+          "claim": "CFPB explains that non-conforming loans are less standardized and that eligibility, pricing, and features can vary widely by lender, supporting comparison of several offers."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "CFPB's standardized Loan Estimate guidance supports comparison of loan type, amount, rate structure, APR, points, lender credits, projected payment, fees, and cash to close."
+        }
+      ],
+      "relatedRoutes": [
+        "/loan-options/jumbo-loans",
+        "/learning-center/jumbo-loans",
+        "/rates",
+        "/calculators/mortgage-payment"
+      ]
+    },
+    {
+      "id": "article-refinance-basics",
+    "title": "When refinancing may change your payment strategy",
+    "route": "/learning-center/refinance-basics",
+    "type": "product_explainer",
+    "eyebrow": "Refinance guide",
+      "stateIds": [],
+      "cityIds": [],
+      "productIds": [
+        "product-refinance"
+      ],
+      "authorId": "contributor-elena-park",
+      "summary": "Refinancing replaces an existing mortgage with a new loan, so a useful review measures the new payment, remaining and new terms, closing costs, cash required, and total borrowing path against a specific household goal.",
+      "dek": "A lower rate or payment can be meaningful, but neither tells the whole story. The term may reset, costs may take time to recover, and cash-out increases the debt secured by the home.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Compare refinance payments, loan terms, closing costs, break-even timing, fixed-rate options, and cash-out tradeoffs before choosing a new mortgage.",
+      "introduction": [
+        "A mortgage refinance pays off and replaces an existing home loan with a new one. Homeowners may explore it to change the interest rate, monthly principal-and-interest payment, remaining repayment schedule, rate type, or amount borrowed. Because the replacement loan has new terms and transaction costs, the first question is not whether refinancing is generally attractive. It is what measurable goal the new loan is supposed to accomplish.",
+        "Build the comparison with a current mortgage statement, the original or latest loan documents, a realistic estimate of how long the loan may be kept, and written proposals for the new mortgage. Keep principal and interest separate from taxes, homeowners insurance, association dues, and other ownership costs that may not fall simply because the mortgage changes."
+      ],
+      "keyTakeaways": [
+        "A refinance is a new loan that pays off the existing mortgage; it can change the rate, payment, term, costs, and home-equity position.",
+        "A smaller monthly payment may come from a lower rate, a longer repayment period, a lower balance, or a combination of those changes.",
+        "Measure nonrecurring refinance costs against the expected recurring monthly loan-payment reduction, while keeping prepaids, escrow funding, term reset, and total interest visible separately.",
+        "Compare Loan Estimates for the same refinance purpose, loan amount, term, rate type, points, and lock period before selecting an offer."
+      ],
+      "sections": [
+        {
+          "id": "name-refinance-goal",
+          "heading": "Name the goal before comparing offers",
+          "paragraphs": [
+            "A rate-and-term refinance may be considered to reduce the rate or payment, shorten the repayment period, or move from an adjustable rate to a fixed rate. A cash-out refinance has a different purpose because the new loan also converts part of the owner's equity into borrowed funds. Write the goal in one sentence and identify the measure that would show whether it was met.",
+            "A payment target should distinguish principal and interest from the total monthly housing obligation. A term target should compare the years remaining on the current mortgage with the proposed new term. A stability target should identify whether the new rate and principal-and-interest payment are fixed, adjustable, or subject to other changes."
+          ]
+        },
+        {
+          "id": "measure-tradeoffs",
+          "heading": "Match each goal with its tradeoffs",
+          "paragraphs": [
+            "The CFPB cautions that starting a new, longer term can lower a monthly payment while increasing the total amount paid over time. Choosing a shorter term may reduce the repayment period and interest path, yet require a higher scheduled payment. Moving from an adjustable rate to a fixed rate can improve payment predictability even when the immediate payment does not fall.",
+            "Cash-out proceeds are borrowed funds, not money released without repayment; they create additional debt secured by the home. Compare the new balance and payment with non-mortgage alternatives, the purpose of the funds, and the consequences of moving unsecured obligations into home-secured debt."
+          ],
+          "table": {
+            "caption": "Refinance goal and measurement table",
+            "columns": [
+              "Possible goal",
+              "Measure to compare",
+              "Tradeoff to keep visible"
+            ],
+            "rows": [
+              [
+                "Reduce monthly principal and interest",
+                "Current payment versus proposed payment",
+                "New term length, closing costs, and total paid over the expected holding period"
+              ],
+              [
+                "Pay the mortgage off sooner",
+                "Remaining months versus proposed months",
+                "Higher scheduled payment and available monthly cash flow"
+              ],
+              [
+                "Change an adjustable rate to fixed",
+                "Current adjustment terms versus proposed fixed terms",
+                "Immediate payment, new costs, and time expected in the loan"
+              ],
+              [
+                "Take cash out",
+                "Net proceeds after payoff and transaction costs",
+                "Larger home-secured balance, payment, and equity remaining"
+              ],
+              [
+                "Remove a loan feature",
+                "Written current terms versus replacement terms",
+                "Whether the benefit justifies the new loan's price and timeline"
+              ],
+              [
+                "Consolidate mortgage debt",
+                "Combined current balances and payments versus the new loan",
+                "Lien position, fees, repayment period, and total borrowing cost"
+              ]
+            ],
+            "note": "These are planning measures, not predictions. The proposed loan must be evaluated from its written terms and the homeowner's own time horizon."
+          }
+        },
+        {
+          "id": "count-cost-and-time",
+          "heading": "Count the cost and the time needed to recover it",
+          "paragraphs": [
+            "Refinancing commonly involves lender and third-party charges such as origination, appraisal, credit, title, recording, and other settlement services. Points can add upfront expense in exchange for a different rate. A lender credit may reduce cash due at closing while raising the rate compared with another version of the loan. Review the Loan Estimate instead of treating a low-cash-at-closing offer as cost-free.",
+            "For a basic payment-reduction check, divide applicable nonrecurring refinance costs after lender credits by the expected recurring monthly loan-payment reduction. The result estimates how many months of that reduction would be needed to offset those transaction costs. Keep prepaid interest, initial escrow deposits, and changes in taxes or insurance in separate cash-flow columns, and evaluate a term reset, equity taken out, and total cost independently because the simple calculation does not capture them."
+          ]
+        },
+        {
+          "id": "compare-current-and-proposed",
+          "heading": "Compare the current loan with the proposed loan",
+          "paragraphs": [
+            "Record the current unpaid balance, rate type, interest rate, principal-and-interest payment, remaining term, mortgage insurance when applicable, and any prepayment penalty. For each proposed loan, record the new amount, rate, APR, points, credits, projected payments, closing costs, cash to close, and whether costs are paid in cash, offset with credits, or added to the balance.",
+            "Then compare more than one lender when practical using the same scenario. Resolve differences in loan purpose, amount, term, rate-lock period, and points before comparing price. The final choice should support the stated goal under a realistic ownership period, not merely produce the smallest number in one column."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "name-refinance-goal",
+          "heading": "Test a refinance scenario",
+          "body": "Compare the current loan with a proposed rate, term, costs, and expected time in the home using adjustable planning inputs.",
+          "label": "Use the refinance calculator",
+          "route": "/calculators/refinance"
+        },
+        {
+          "afterSectionId": "count-cost-and-time",
+          "heading": "Review current refinance options",
+          "body": "Start with sample terms, refine the scenario, and request written disclosures before treating any rate or payment as available.",
+          "label": "Compare mortgage rate options",
+          "route": "/rates"
+        }
+      ],
+      "conclusion": "Refinancing is a replacement-loan decision, not a rate-only decision. Define the household goal, compare the remaining current path with the full proposed path, and give closing costs enough time to matter. A payment reduction, shorter term, fixed-rate structure, or cash-out amount should be judged alongside the new balance, cash required, equity retained, and likely time in the loan.",
+      "faqs": [
+        {
+          "question": "Does a lower refinance payment always mean a lower total cost?",
+          "answer": "No. A longer term can reduce the scheduled payment while extending repayment. Compare the rate, APR, new term, closing costs, and expected total paid over the time you may keep the loan."
+        },
+        {
+          "question": "Which costs belong in a simple refinance recovery calculation?",
+          "answer": "Use applicable nonrecurring transaction costs after lender credits and the expected recurring monthly loan-payment reduction. Keep prepaids, initial escrow funding, tax and insurance changes, term changes, equity taken out, and total cost outside that simple calculation."
+        },
+        {
+          "question": "Does refinancing always restart a 30-year mortgage?",
+          "answer": "No. Available terms vary by lender and loan. Compare the current months remaining with each proposed term, and ask whether a term closer to the existing schedule is available."
+        },
+        {
+          "question": "Is a no-cost refinance free?",
+          "answer": "A low-cash structure may use a lender credit, a higher rate, or a larger financed amount. Review the Loan Estimate to see how costs are paid and how that choice changes the loan."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-mortgage-key-terms",
+        "cfpb-should-i-refinance-2020",
+        "freddie-mac-refinance-costs",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-mortgage-key-terms",
+          "claim": "CFPB defines refinancing as using a new loan to pay off and replace an existing mortgage and warns that payment reduction may come partly from a longer term."
+        },
+        {
+          "sourceId": "cfpb-should-i-refinance-2020",
+          "claim": "CFPB's refinance handout frames the decision around a financial goal, transaction costs, time to recover those costs, term changes, payment tradeoffs, and rate stability."
+        },
+        {
+          "sourceId": "freddie-mac-refinance-costs",
+          "claim": "Freddie Mac identifies common refinance closing-cost categories and explains that a low-cost or no-cost presentation may use a higher rate or financed costs rather than remove the expense."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "CFPB's Loan Estimate guidance supports side-by-side review of loan purpose, amount, rate, APR, projected payment, points, lender credits, closing costs, and cash to close."
+        }
+      ],
+      "relatedRoutes": [
+        "/learning-center/refinance",
+        "/calculators/refinance",
+        "/rates",
+        "/loan-options/cash-out-refinance"
+      ]
+    },
+    {
+      "id": "article-first-time-buyer",
+    "title": "First-time buyer checklist for comparing local markets",
+    "route": "/learning-center/first-time-buyer-local-market-checklist",
+    "type": "borrower_intent_guide",
+    "eyebrow": "First-time homebuyer guide",
+      "stateIds": [],
+      "cityIds": [
+        "city-austin-tx",
+        "city-orlando-fl"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-fha"
+      ],
+      "authorId": "contributor-jordan-avery",
+      "summary": "A first home search becomes easier to compare when every market is measured with the same budget, ownership-cost, insurance, and cash-to-close checklist.",
+      "dek": "Start with the monthly amount and cash reserve that work for your household, then replace broad market averages with property-specific facts as your search narrows.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Use a first-time buyer checklist to compare local home prices, taxes, insurance, HOA costs, cash to close, and mortgage offers.",
+      "introduction": [
+        "A median home price can tell you where to begin looking, but it cannot tell you what a particular home will cost to own. Property taxes can differ across nearby jurisdictions, insurance depends on the home and its hazards, association dues vary by community, and repairs do not arrive on a predictable schedule. A useful first-time buyer comparison keeps those local costs beside the purchase price instead of treating them as details to solve after an offer.",
+        "Build the search in stages. First, set a household limit for total housing spending and protect cash for closing, moving, and surprises. Next, compare markets with one scorecard. Finally, replace estimates with an address-specific tax record, insurance indication, association documents, inspection findings, and written Loan Estimates. Each step makes the range more precise without turning an early worksheet into a promise of approval or available terms."
+      ],
+      "keyTakeaways": [
+        "Set a total monthly housing limit from your real spending and savings priorities before using a home-price target supplied by a calculator or lender.",
+        "Compare purchase price together with taxes, insurance, association dues, utilities, maintenance, commute costs, and likely near-term repairs.",
+        "Keep down payment, closing costs, moving expenses, initial repairs, and an emergency cushion in separate rows so one goal does not consume every dollar.",
+        "Request written Loan Estimates for the same loan scenario and compare payment, cash to close, points, credits, and borrowing cost on equal terms."
+      ],
+      "sections": [
+        {
+          "id": "set-household-guardrails",
+          "heading": "Set household guardrails before choosing a price range",
+          "paragraphs": [
+            "Begin with what remains after taxes, recurring living expenses, debt payments, savings goals, and an allowance for expenses that do not occur every month. That remainder is not automatically a housing budget. Decide how much of it you are comfortable assigning to the complete monthly home cost while still leaving room for repairs, income changes, health costs, transportation, and other priorities. A lender's reviewed maximum and your preferred spending limit answer different questions.",
+            "Create a second guardrail for upfront cash. One planning calculation is: available cash minus the emergency reserve, moving budget, immediate repair allowance, and other protected savings equals the most you would direct toward down payment and closing. CFPB guidance notes that closing costs vary with the property, loan, lender, and location, so use an estimate early and replace it with written figures later. A larger down payment may reduce the loan amount, while preserving more cash may make the first year of ownership easier to absorb."
+          ]
+        },
+        {
+          "id": "compare-local-markets",
+          "heading": "Compare local markets with one ownership scorecard",
+          "paragraphs": [
+            "Use the same categories for every city or neighborhood. A lower listing price may be offset by a different tax bill, insurance cost, commute, association assessment, or repair profile. Conversely, a higher-priced area may fit if another recurring cost is lower or if the home needs less near-term work. The point is not to predict which area will appreciate most. It is to reveal which assumptions are carrying your budget.",
+            "Record the source and date beside each input. County or municipal records can help with current property-tax facts, but a future bill may change after a sale or reassessment. An insurer can discuss the specific home and coverage assumptions. Association documents can identify regular dues and disclosed assessments. An inspection can surface condition questions, but it does not guarantee that every future repair will be found."
+          ],
+          "table": {
+            "caption": "First-time buyer local-market checklist",
+            "columns": [
+              "Cost or question",
+              "Where to verify it",
+              "How to use it"
+            ],
+            "rows": [
+              [
+                "Purchase price and down payment",
+                "Current listing, contract terms, and lender-reviewed scenario",
+                "Calculate the proposed loan amount and remaining cash reserve"
+              ],
+              [
+                "Property taxes",
+                "Local tax authority and property record",
+                "Ask how a transfer, reassessment, exemption, or supplemental bill may affect the estimate"
+              ],
+              [
+                "Homeowners and flood insurance",
+                "Property-specific indications or quotes and hazard information",
+                "Test both availability and premium changes rather than copying a seller's prior cost"
+              ],
+              [
+                "HOA dues and assessments",
+                "Association budget, resale package, minutes, and governing documents",
+                "Add regular dues to the monthly total and keep known assessments visible"
+              ],
+              [
+                "Condition and near-term work",
+                "Inspection, disclosures, specialist reviews, and repair estimates",
+                "Reserve cash for priority work instead of assuming every dollar can go to closing"
+              ],
+              [
+                "Utilities and transportation",
+                "Service providers, commute plan, and your own usage assumptions",
+                "Compare the household budget effect that sits outside the mortgage payment"
+              ]
+            ],
+            "note": "These inputs are planning estimates. Costs, loan terms, insurance availability, and property conditions require current review for the selected home."
+          }
+        },
+        {
+          "id": "turn-listing-into-payment-range",
+          "heading": "Turn each promising listing into a payment range",
+          "paragraphs": [
+            "For each home, add estimated principal and interest, mortgage insurance when applicable, property taxes, homeowners and flood insurance, association dues, and any housing charge that will be paid separately. Then add a maintenance contribution and the utilities that differ from your current budget. This expanded total is more useful than principal and interest alone because it reflects more of the cash the household may need each month.",
+            "Run at least a base case and a higher-cost case. The higher case can test a different rate assumption, a larger insurance premium, a changed tax estimate, or an early repair. Do not combine every worst case into a prediction; change one or two inputs at a time so you can see what matters. CFPB guidance also recommends revisiting payment, rate, down-payment, closing-cost, disaster-risk, and insurance assumptions as the search becomes property-specific."
+          ]
+        },
+        {
+          "id": "prepare-and-compare-written-offers",
+          "heading": "Prepare documents and compare written loan offers",
+          "paragraphs": [
+            "Keep recent income, asset, debt, identity, and housing records organized, then ask what else a lender would need for your situation. Early account estimates or prequalification conversations can help you plan, but they are not final approval and do not fix the eventual rate, payment, or cash to close. Avoid making a new credit or cash decision solely because an early screen produced a larger home-price range.",
+            "Once you have an address and request offers, compare Loan Estimates built for the same loan amount, term, product, occupancy, rate-lock timing, and points or credits. Review total monthly payment, origination charges, lender credits, cash to close, and the five-year comparison figures. Taxes and insurance are not lender-controlled prices, so a surprisingly low estimate for either item deserves verification rather than automatic preference for that offer."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "set-household-guardrails",
+          "heading": "Build a home-price range from your budget",
+          "body": "Change the down payment, rate, taxes, insurance, and association costs separately to see how each estimate affects the range.",
+          "label": "Use the affordability calculator",
+          "route": "/calculators/affordability"
+        },
+        {
+          "afterSectionId": "compare-local-markets",
+          "heading": "Put local costs beside the home search",
+          "body": "Open state and city pages to organize market questions, then verify every cost for the address you are considering.",
+          "label": "Compare mortgage markets",
+          "route": "/locations"
+        }
+      ],
+      "conclusion": "A strong first-time buyer plan is not the highest price a worksheet will produce. It is a range that leaves the household able to close, move, maintain the property, and keep saving when one estimate changes. Use public market information to narrow the search, property records and professional reviews to refine it, and matched Loan Estimates to compare financing. That sequence gives each new fact a place without asking one early number to carry the whole decision.",
+      "faqs": [
+        {
+          "question": "Should I use a lender's maximum amount as my home-buying budget?",
+          "answer": "Not automatically. A lender evaluates a loan under its program and underwriting standards. Your preferred budget can be lower after you account for savings goals, repairs, utilities, transportation, childcare, health costs, or other household priorities."
+        },
+        {
+          "question": "How can I compare two cities when their home prices are very different?",
+          "answer": "Apply the same scorecard to representative homes in each place. Compare the full monthly housing estimate, upfront cash, insurance availability, taxes, association costs, likely repairs, utilities, and transportation rather than price alone."
+        },
+        {
+          "question": "Does a prequalification mean the loan terms are final?",
+          "answer": "No. An early qualification result is not final approval or a promise of rate, payment, costs, or closing. The borrower, property, documents, market, and selected loan still require lender review."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-homebuying-budget-2026",
+        "cfpb-find-right-home-2024",
+        "freddie-mac-homebuying-budget-2025",
+        "cfpb-compare-loan-estimates"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-homebuying-budget-2026",
+          "claim": "CFPB identifies principal, interest, taxes, mortgage insurance, homeowners and supplemental insurance, and HOA fees as components to consider in a total monthly home payment, with maintenance, utilities, and cash reserves planned separately."
+        },
+        {
+          "sourceId": "cfpb-find-right-home-2024",
+          "claim": "CFPB advises buyers to update total-payment, rate, down-payment, closing-cost, disaster-risk, and insurance assumptions as they evaluate a specific home."
+        },
+        {
+          "sourceId": "freddie-mac-homebuying-budget-2025",
+          "claim": "Freddie Mac's consumer guidance separates down payment and closing costs from ongoing taxes, insurance, association charges, maintenance, and emergency savings."
+        },
+        {
+          "sourceId": "cfpb-compare-loan-estimates",
+          "claim": "CFPB's Loan Estimate comparison guidance covers loan amount, rate, monthly payment, mortgage insurance, origination charges, credits, cash to close, and five-year borrowing cost."
+        }
+      ],
+      "relatedRoutes": [
+        "/learning-center/buying-a-home",
+        "/calculators/affordability",
+        "/calculators/down-payment",
+        "/locations",
+        "/rates"
+      ]
+    },
+    {
+      "id": "article-move-up-buyer",
+    "title": "Move-up buyer guide: comparing payment, equity, and timing",
+    "route": "/learning-center/move-up-buyer-payment-equity-guide",
+    "type": "borrower_intent_guide",
+    "eyebrow": "Move-up buyer guide",
+      "stateIds": [],
+      "cityIds": [
+        "city-sacramento-ca",
+        "city-denver-co"
+      ],
+      "productIds": [
+        "product-purchase",
+        "product-conventional"
+      ],
+      "authorId": "contributor-jordan-avery",
+      "summary": "Move-up buyers can compare selling first, buying first, and coordinated closing paths by separating usable sale proceeds, the next payment, and overlap risk.",
+      "dek": "A current home's estimated equity is only the starting point. The workable plan depends on payoff figures, selling costs, purchase cash, timing, and the household's ability to carry uncertainty.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Compare move-up buyer timing, estimated sale proceeds, down payment, monthly payment, overlap costs, and mortgage offers before making a move.",
+      "introduction": [
+        "A move-up purchase connects two transactions that can change on different schedules. The current home may sell above or below an early estimate, the mortgage payoff must be confirmed, and selling expenses reduce the equity that becomes usable cash. At the same time, the next home brings a new payment, closing costs, moving work, insurance questions, and the possibility that both homes need funding for a period.",
+        "The safest planning view is a set of scenarios rather than one perfect closing date. Calculate conservative net sale proceeds, decide how much of that cash can support the next purchase, and test what happens if the sale or purchase moves later. A larger down payment is only one possible use of equity; preserving reserves for overlap, repairs, or a price change may be more important to the household."
+      ],
+      "keyTakeaways": [
+        "Convert estimated equity into estimated net sale proceeds by subtracting the mortgage payoff, other liens, selling costs, agreed repairs or credits, and a contingency reserve.",
+        "Compare sell-first, buy-first, and coordinated paths using the same next-home budget and a realistic delay scenario.",
+        "Stress-test any period with two homes by including both complete housing costs, moving or storage, utilities, and accessible reserves.",
+        "Review the next mortgage on its own terms and do not assume a familiar loan payment will carry over to a different price, rate, tax bill, or insurance cost."
+      ],
+      "sections": [
+        {
+          "id": "calculate-usable-sale-proceeds",
+          "heading": "Calculate usable sale proceeds, not just headline equity",
+          "paragraphs": [
+            "An early equity estimate is the expected selling price minus debts secured by the home. The amount available for the next transaction is usually lower. For planning, subtract the current mortgage payoff, any additional liens, estimated seller-side transaction costs, repair or concession allowances, and a buffer for changes. Obtain a current payoff statement and local estimates before treating the remainder as down-payment cash.",
+            "Keep proceeds and savings in separate rows. Then protect amounts for the next purchase's closing costs, moving, temporary housing or storage, immediate work, and an emergency reserve. This shows how much cash could be directed to a down payment without requiring the sale to close at the top of its estimated range. Taxes and legal consequences of a sale depend on the household and jurisdiction, so those questions belong with qualified tax or legal professionals."
+          ]
+        },
+        {
+          "id": "choose-timing-path",
+          "heading": "Choose a timing path you can still manage when dates move",
+          "paragraphs": [
+            "Selling first may make the available cash clearer and avoid carrying two homes, but it can create a need for temporary housing and a faster next-home search. Buying first may provide more control over the move, but it can require enough verified funds and income to support the new transaction before the old home closes. A coordinated or contingent path can connect the deals, although contract acceptance, deadlines, and remedies depend on the market and negotiated terms.",
+            "Discuss contract structure with the appropriate real estate and legal professionals, and discuss financing assumptions with the lender. Do not count on future sale proceeds until the lender confirms how and when they may be documented for the proposed loan. Build a fallback for a delayed appraisal, repair negotiation, buyer financing issue, title matter, or closing change."
+          ],
+          "table": {
+            "caption": "Move-up timing paths to compare",
+            "columns": [
+              "Path",
+              "Potential advantage",
+              "Pressure to plan for",
+              "Questions to answer"
+            ],
+            "rows": [
+              [
+                "Sell before buying",
+                "Sale proceeds and current mortgage payoff are known before the next closing",
+                "Temporary housing, storage, and pressure to find the next home",
+                "How long can the household wait, and what will an interim move cost?"
+              ],
+              [
+                "Buy before selling",
+                "More control over the destination and moving schedule",
+                "Qualification, cash, and carrying costs before the prior home sells",
+                "How many months of both homes could reserves support?"
+              ],
+              [
+                "Coordinate or use a sale-related contingency",
+                "May reduce the period between transactions",
+                "Contract complexity and dependence on two sets of deadlines",
+                "What happens if either closing is delayed or the contingency is not accepted?"
+              ]
+            ],
+            "note": "Contract options and financing treatment vary. This table organizes questions and does not recommend a transaction structure."
+          }
+        },
+        {
+          "id": "stress-test-overlap",
+          "heading": "Stress-test the month when two homes may need funding",
+          "paragraphs": [
+            "Build an overlap worksheet even if the intended closings are back to back. Add the current home's mortgage, taxes, insurance, association dues, utilities, and essential maintenance to the next home's estimated complete payment and operating costs. Then include duplicate utilities, moving, storage, travel, and any temporary accommodation. Multiply that total by the number of months in the delay scenario and compare it with reserves that are actually accessible.",
+            "Run the next-home payment at more than one rate, tax, and insurance assumption. The current owner's insurance premium does not predict the cost for another property, and the seller's tax bill may not equal the buyer's future obligation. A scenario that works only if every estimate lands at its lowest value needs a narrower price range, more cash, a different schedule, or another reviewed option."
+          ]
+        },
+        {
+          "id": "compare-next-loan-and-equity-use",
+          "heading": "Compare the next loan and the use of equity together",
+          "paragraphs": [
+            "Test several down-payment amounts without assuming the largest one is automatically preferable. More cash down may reduce the balance and some monthly costs. Less cash down may preserve funds for overlap, improvements, or emergencies, while potentially changing mortgage insurance, pricing, and payment. Ask lenders to show written scenarios for the same property, term, lock timing, and loan type so the tradeoff is visible.",
+            "On matched Loan Estimates, compare total monthly payment, origination charges, points, credits, cash to close, and five-year borrowing cost. Then return those figures to the two-home plan. The less expensive loan on paper may not be the workable path if its cash requirement leaves no room for a delayed sale, and a lower scheduled payment can still carry a higher total cost when the new term is longer."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "calculate-usable-sale-proceeds",
+          "heading": "Test the next home without spending every dollar of equity",
+          "body": "Compare down payment choices while keeping closing, moving, repair, and emergency reserves visible.",
+          "label": "Estimate an affordable range",
+          "route": "/calculators/affordability"
+        },
+        {
+          "afterSectionId": "stress-test-overlap",
+          "heading": "See how the next payment changes",
+          "body": "Adjust the loan amount, term, rate, taxes, insurance, and association costs before requesting a reviewed scenario.",
+          "label": "Compare payment estimates",
+          "route": "/calculators/mortgage-payment"
+        }
+      ],
+      "conclusion": "A move-up plan becomes more resilient when sale proceeds, purchase financing, and timing are evaluated together but never blurred into one optimistic number. Use a conservative sale worksheet, protect cash for the transition, and decide in advance how much overlap the household could carry. Then compare written mortgage scenarios for the next property. The goal is not to force two closings onto a flawless schedule; it is to choose a path with enough room to respond when one part of the move changes.",
+      "faqs": [
+        {
+          "question": "Can I use equity from my current home for the next down payment?",
+          "answer": "Sale proceeds may be available after the current mortgage, other liens, and transaction obligations are paid. Whether and when projected proceeds can be used in a purchase depends on the closing sequence, documentation, contract, and lender review."
+        },
+        {
+          "question": "What should I include in an overlap reserve?",
+          "answer": "Include the complete cost of both homes, duplicate utilities, essential maintenance, moving or storage, temporary housing if relevant, and a buffer for delays. Use a period longer than the ideal schedule to see where the plan becomes uncomfortable."
+        },
+        {
+          "question": "Is a bigger down payment always the better move-up strategy?",
+          "answer": "No. It may reduce the loan amount or certain monthly costs, but it also uses cash that could support closing, repairs, overlap, or emergencies. Compare written loan options and the household reserve under each choice."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-right-time-buy-2024",
+        "cfpb-homebuying-budget-2026",
+        "cfpb-find-right-home-2024",
+        "cfpb-loan-estimate"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-right-time-buy-2024",
+          "claim": "CFPB notes that selling and buying can involve commissions, taxes, and other transaction costs and that home values can decline, supporting a scenario-based timing plan."
+        },
+        {
+          "sourceId": "cfpb-homebuying-budget-2026",
+          "claim": "CFPB's budget guidance separates total monthly housing obligations from maintenance, utilities, emergency savings, down payment, and closing costs."
+        },
+        {
+          "sourceId": "cfpb-find-right-home-2024",
+          "claim": "CFPB advises buyers to recalculate payment and cash assumptions as the target property changes and to investigate disaster risk and insurance cost before committing."
+        },
+        {
+          "sourceId": "cfpb-loan-estimate",
+          "claim": "The CFPB Loan Estimate explainer identifies payment, loan costs, credits, taxes, insurance, escrow, and cash to close as distinct figures that borrowers should review."
+        }
+      ],
+      "relatedRoutes": [
+        "/learning-center/buying-a-home",
+        "/calculators/affordability",
+        "/calculators/mortgage-payment",
+        "/locations/california/sacramento",
+        "/locations/colorado/denver",
+        "/rates"
+      ]
+    },
+    {
+      "id": "article-home-equity-guide",
+    "title": "Home equity guide: HELOC and refinance options to compare",
+    "route": "/learning-center/home-equity-options-guide",
+    "type": "borrower_intent_guide",
+    "eyebrow": "Home equity guide",
+      "stateIds": [],
+      "cityIds": [
+        "city-tampa-fl",
+        "city-miami-fl"
+      ],
+      "productIds": [
+        "product-home-equity",
+        "product-cash-out-refinance"
+      ],
+      "authorId": "contributor-elena-park",
+      "summary": "Homeowners can compare a home equity loan, HELOC, and cash-out refinance by matching the way funds arrive with payment risk, lien position, fees, and the plan for repayment.",
+      "dek": "Equity is not the same as available cash. Each option uses the home as collateral, and the most useful comparison keeps the existing first mortgage, future borrowing needs, and exit plan in view.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Compare home equity loans, HELOCs, and cash-out refinancing by funding pattern, rate structure, payment risk, fees, and impact on your mortgage.",
+      "introduction": [
+        "Home equity is the estimated property value minus debts secured by the home. That estimate can help frame a conversation, but it does not establish the amount a lender may offer. A lender may review the property value, existing liens, income, credit, occupancy, loan purpose, and product rules before determining whether an option is available and on what terms.",
+        "The products also solve different cash-flow problems. A home equity loan generally provides one amount at closing. A HELOC allows repeated draws up to an available line during a defined period, usually with an adjustable rate. A cash-out refinance replaces the current first mortgage with a larger new mortgage and returns part of the proceeds after payoffs and costs. Comparing only the advertised rate or first payment can hide the larger tradeoff."
+      ],
+      "keyTakeaways": [
+        "Estimate equity by subtracting all home-secured debt from a supportable property value, then expect the lender's available amount to be lower than that gross figure.",
+        "Match a known one-time expense, a staged or uncertain project, and a replacement-first-mortgage decision with the funding structure that actually fits the need.",
+        "For a HELOC, review the index, margin, caps, draw rules, fees, repayment period, and payment at a higher balance and rate.",
+        "Because each option is secured by the home, compare repayment capacity, total cost, future sale or refinance plans, and alternatives that do not place the property at risk."
+      ],
+      "sections": [
+        {
+          "id": "measure-equity-and-need",
+          "heading": "Measure the equity estimate and define the borrowing need",
+          "paragraphs": [
+            "Start with a dated, supportable property-value range rather than the highest automated estimate you can find. Subtract the first-mortgage payoff and every other lien secured by the property. The result is estimated gross equity, not an offer and not a recommended borrowing amount. The lender's valuation and combined lien limits may produce less available credit, and closing costs or required payoffs can reduce the cash received.",
+            "Write down the purpose, amount, timing, and repayment source before comparing products. A fixed contractor bid due at once presents a different need from a renovation paid in stages. A temporary liquidity need differs from debt that may remain for many years. If the household is already struggling with the mortgage, CFPB guidance recommends discussing alternatives with a housing counselor before adding home-secured debt."
+          ]
+        },
+        {
+          "id": "compare-equity-options",
+          "heading": "Compare how each equity option changes the household balance sheet",
+          "paragraphs": [
+            "A home equity loan or HELOC generally sits beside an existing first mortgage, so the original mortgage terms usually remain while a second payment and lien are added. A cash-out refinance pays off the first mortgage and creates a new first-lien balance. That distinction matters when the current mortgage has terms the homeowner values, because replacing the entire balance can change the rate, term, payment, and total interest on money that was already borrowed.",
+            "Use the same planned amount and holding period for every option. Record upfront charges, annual or transaction fees, rate structure, minimum draws, scheduled payment, possible payment change, and payoff conditions. Also compare a smaller borrowing amount, delayed project, cash contribution, or non-home-secured alternative. The home should not become collateral for an expense merely because equity appears available."
+          ],
+          "table": {
+            "caption": "Home equity options comparison",
+            "columns": [
+              "Option",
+              "How funds are accessed",
+              "Rate and payment questions",
+              "Existing first mortgage"
+            ],
+            "rows": [
+              [
+                "Home equity loan",
+                "A lump sum at closing",
+                "Often fixed, but verify APR, term, payment, fees, and any balloon feature",
+                "Usually remains in place with a new second-mortgage payment"
+              ],
+              [
+                "HELOC",
+                "Repeated draws up to available credit during the draw period",
+                "Usually variable; review index, margin, caps, draw payment, repayment payment, and fees",
+                "Usually remains, while future refinancing may require second-lien cooperation or payoff"
+              ],
+              [
+                "Cash-out refinance",
+                "Net proceeds after the new loan pays the prior mortgage, liens, and transaction amounts",
+                "Review the new rate, term, total payment, costs, and borrowing expense on the entire replacement balance",
+                "Replaced by the new first mortgage"
+              ],
+              [
+                "Cash or non-home-secured credit",
+                "Savings or a separate credit product",
+                "May have a different rate or cash impact, but does not add a mortgage lien",
+                "Remains unchanged"
+              ]
+            ],
+            "note": "Product features and availability vary by lender and borrower. Obtain written terms and evaluate the effect on both monthly cash flow and long-run cost."
+          }
+        },
+        {
+          "id": "stress-test-payment-and-access",
+          "heading": "Stress-test the payment and the continued access to funds",
+          "paragraphs": [
+            "For a HELOC, calculate a payment at the expected draw and another at the full planned balance under a higher-rate assumption. Ask whether draw-period payments include principal, when the repayment period begins, how its payment is calculated, and whether a balloon amount could be due. CFPB explains that HELOC rates are commonly variable and that payments can rise when the draw period ends. A credit line may also be reduced or frozen under conditions described in the agreement, so it should not be treated as an unconditional emergency fund.",
+            "For a home equity loan, confirm whether the rate is fixed or adjustable and whether the scheduled payment fully repays the balance by the end of the term. For cash-out refinancing, compare the proposed principal and interest with the existing mortgage on the same remaining horizon, then add taxes, insurance, and all transaction charges. A lower rate on one product does not settle the comparison when it applies to a different balance, term, or fee structure."
+          ]
+        },
+        {
+          "id": "review-lien-and-exit-plan",
+          "heading": "Review the lien, exit plan, and documents before proceeding",
+          "paragraphs": [
+            "Any of these mortgage products can put the home at risk if required payments are not made. Read the disclosures for APR, fees, rate adjustments, payment rules, late charges, early termination terms, and the right to cancel when applicable. For a HELOC, CFPB's comparison booklet specifically directs borrowers to examine the draw and repayment periods, transaction minimums, index and margin, caps, annual charges, and possible balloon payment.",
+            "Plan the exit before opening the account. A sale generally requires liens to be paid from closing proceeds. A later first-mortgage refinance may require the HELOC lender to subordinate its lien, and CFPB notes that a lender may decline, which can require the line to be paid off. If the expected repayment source is a future sale, bonus, refinance, or investment return, test what happens when that event is later or smaller than expected."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "measure-equity-and-need",
+          "heading": "Compare the current loan with a proposed change",
+          "body": "Use a consistent balance, term, cost, and time horizon to see which assumptions change the result.",
+          "label": "Open the refinance calculator",
+          "route": "/calculators/refinance"
+        },
+        {
+          "afterSectionId": "compare-equity-options",
+          "heading": "Review equity choices in context",
+          "body": "Read more about second mortgages and replacement financing before requesting terms for your property and goals.",
+          "label": "Explore home equity guidance",
+          "route": "/learning-center/home-equity"
+        }
+      ],
+      "conclusion": "The amount of equity shown on a worksheet is not a reason to borrow it. Start with the expense and repayment plan, preserve the terms of a valuable first mortgage unless replacing them survives a full-cost comparison, and model the payment after introductory or draw-period conditions end. Written disclosures should answer how the rate, fees, access, lien, and payoff work. A sound choice is the option the household can repay under a less favorable scenario, not simply the one that makes cash available fastest.",
+      "faqs": [
+        {
+          "question": "How much of my estimated home equity can I borrow?",
+          "answer": "There is no universal amount. A lender may consider the verified property value, current mortgage and other liens, product limits, income, credit, occupancy, and purpose. Closing costs and required payoffs can further reduce net proceeds."
+        },
+        {
+          "question": "Can a HELOC payment change after I open the line?",
+          "answer": "Yes. HELOCs commonly use variable rates, the balance can change as you draw or repay, and the payment method may change when the draw period ends. Review the index, margin, caps, minimum payment, repayment schedule, and any balloon feature."
+        },
+        {
+          "question": "Will a HELOC affect a future refinance of my first mortgage?",
+          "answer": "It may. The HELOC lender may need to approve keeping its lien behind a new first mortgage. If it does not agree, the line may need to be paid off as part of the refinance."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-home-equity-loan-vs-heloc-2025",
+        "cfpb-heloc-overview-2024",
+        "cfpb-home-equity-loan-2024",
+        "cfpb-heloc-brochure",
+        "cfpb-heloc-first-mortgage-refinance-2024",
+        "cfpb-cashout-research-2025"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-home-equity-loan-vs-heloc-2025",
+          "claim": "CFPB distinguishes a home equity loan's lump-sum structure from a HELOC's reusable line and notes that both generally become second mortgages when a first mortgage already exists."
+        },
+        {
+          "sourceId": "cfpb-heloc-overview-2024",
+          "claim": "CFPB explains HELOC draw and repayment periods, commonly variable rates, possible payment increases, and circumstances in which further access may be reduced or frozen."
+        },
+        {
+          "sourceId": "cfpb-home-equity-loan-2024",
+          "claim": "CFPB describes home equity loans as lump-sum, home-secured debt that often has a fixed rate and may include upfront charges."
+        },
+        {
+          "sourceId": "cfpb-heloc-brochure",
+          "claim": "The CFPB HELOC booklet provides a comparison framework for APR, index and margin, caps, fees, draw rules, repayment structure, balloon risk, and cancellation rights."
+        },
+        {
+          "sourceId": "cfpb-heloc-first-mortgage-refinance-2024",
+          "claim": "CFPB states that a HELOC lender may need to approve a later first-mortgage refinance and that payoff may be required if the lender does not agree."
+        },
+        {
+          "sourceId": "cfpb-cashout-research-2025",
+          "claim": "CFPB research notes that cash-out refinancing can replace an existing first mortgage at a different rate and that costs and financial results vary with individual circumstances and market conditions."
+        }
+      ],
+      "relatedRoutes": [
+        "/learning-center/home-equity",
+        "/learning-center/refinance",
+        "/learning-center/cash-out-refinance-guide",
+        "/calculators/refinance",
+        "/rates"
+      ]
+    },
+    {
+      "id": "article-cash-out-guide",
+    "title": "Cash-out refinance guide for homeowners with equity",
+    "route": "/learning-center/cash-out-refinance-guide",
+    "type": "borrower_intent_guide",
+    "eyebrow": "Cash-out refinance guide",
+      "stateIds": [],
+      "cityIds": [
+        "city-houston-tx"
+      ],
+      "productIds": [
+        "product-cash-out-refinance",
+        "product-refinance"
+      ],
+      "authorId": "contributor-elena-park",
+      "summary": "A cash-out refinance comparison should measure the new mortgage, net cash received, transaction charges, debts affected, and remaining balances over the same time horizon.",
+      "dek": "Replacing a mortgage can change the rate and term on the entire first-lien balance. The useful question is whether the complete new debt plan supports a defined goal after costs and risk are counted.",
+      "updatedAt": "2026-07-13",
+      "asOf": "2026-07-13",
+      "metaDescription": "Learn how to compare a cash-out refinance using net proceeds, payment changes, closing costs, term, total borrowing cost, and home-equity risk.",
+      "introduction": [
+        "In a cash-out refinance, a new mortgage pays off the existing mortgage and is large enough to provide additional proceeds after other required amounts are settled. The transaction can create one new payment and release cash for a defined use, but it also reprices and reschedules the first-mortgage balance. That makes it different from evaluating a small separate loan in isolation.",
+        "Start with the goal and compare complete paths. If cash would pay another debt, show that debt's current payment, rate, remaining term, and payoff next to the proposed mortgage. If cash would fund a project, compare the amount and timing with a home equity loan, HELOC, staged work, or available cash. No single payment figure shows whether converting equity into new mortgage debt improves the household's long-run position."
+      ],
+      "keyTakeaways": [
+        "Calculate net cash from the lender's written figures after the current mortgage, other liens, and transaction amounts are paid, rather than using the increase in principal as spendable cash.",
+        "Compare old and new mortgage balances, rates, remaining terms, total payments, and projected balances at the same future date.",
+        "When paying other debts, compare the household's entire before-and-after debt stack and recognize that unsecured balances may become debt secured by the home.",
+      "Separate nonrecurring refinance costs from prepaid interest and initial escrow funding, then review monthly cash flow, the limits of any cash-flow checkpoint, and long-run cost."
+      ],
+      "sections": [
+        {
+          "id": "define-cash-goal-and-net-proceeds",
+          "heading": "Define the cash goal and calculate estimated net proceeds",
+          "paragraphs": [
+            "Name the exact use, target amount, and date the funds are needed. Then estimate net proceeds as the new loan amount minus the current mortgage payoff, other liens or debts paid at closing, lender and third-party charges, and other amounts funded from the transaction. Prepaid interest and initial escrow deposits affect cash at closing but are not the same as lender fees, so keep them visible in their own category. The Closing Disclosure supplies the final accounting before closing.",
+            "Use a conservative property value and ask the lender which valuation, equity, and cash-out rules apply. An estimated value does not establish available proceeds, and the amount a homeowner wishes to receive does not establish eligibility or pricing. If the project or debt payoff amount changes, update the proposed loan instead of automatically taking the largest amount shown."
+          ]
+        },
+        {
+          "id": "compare-entire-debt-stack",
+          "heading": "Compare the entire debt stack before and after refinancing",
+          "paragraphs": [
+            "For the current path, list the first mortgage and every debt that the cash-out proceeds would pay. Record each balance, scheduled payment, rate or APR, remaining term, and whether the debt is secured. For the proposed path, list the new mortgage, any debts that remain, closing charges, and the cash retained for another purpose. This prevents a lower number of monthly bills from being mistaken for a lower total cost.",
+        "In nationally representative U.S. borrower cohorts from 2014 through 2021, paying other bills or debts was the most commonly reported use of cash-out funds. A separate CFPB credit-record analysis found sharp credit-card and auto-balance declines around cash-out refinances. Converting non-mortgage balances into mortgage debt can place the home at foreclosure risk if payments become unsustainable. The FTC similarly advises consumers to count interest, points, and other costs when evaluating consolidation secured by the home. A longer mortgage term can reduce monthly outflow while extending how long the borrowed amount accrues interest."
+          ],
+          "table": {
+            "caption": "Cash-out refinance full-cost worksheet",
+            "columns": [
+              "Comparison",
+              "Current path",
+              "Proposed cash-out path",
+              "What to verify"
+            ],
+            "rows": [
+              [
+                "Balances at closing",
+                "Current mortgage plus debts that would otherwise remain",
+                "New mortgage plus any debts not paid",
+                "Payoff statements and proposed loan amount"
+              ],
+              [
+                "Monthly household debt outflow",
+                "Current complete mortgage payment plus affected debt payments",
+                "New complete mortgage payment plus remaining debt payments",
+                "Taxes, insurance, mortgage insurance, association dues, and payment-change features"
+              ],
+              [
+                "Upfront transaction amount",
+                "No new refinance cost",
+                "Origination charges, points, third-party costs, and credits",
+                "Loan Estimate and later Closing Disclosure"
+              ],
+              [
+                "Position at the chosen horizon",
+                "Payments made and balances still owed under the current schedules",
+                "Payments made, new mortgage balance, and equity withdrawn",
+                "Use the same future date and consistent assumptions"
+              ],
+              [
+                "Collateral risk",
+                "Existing mortgage lien plus the original status of other debts",
+                "A larger share of debt may be secured by the home",
+                "Consequences of missed payments and available non-home-secured alternatives"
+              ]
+            ],
+            "note": "This worksheet organizes a comparison; it is not a quote, tax conclusion, or prediction of approval, home value, savings, or future rates."
+          }
+        },
+        {
+          "id": "calculate-three-cost-views",
+          "heading": "Calculate transaction cost, monthly cash flow, and horizon cost",
+          "paragraphs": [
+            "First, total nonrecurring refinance costs: lender origination charges, points, and applicable third-party settlement costs, minus lender credits. Keep prepaid interest and initial escrow funding separate because they are timing and reserve amounts rather than the same kind of transaction charge. Second, calculate the monthly household change as the new complete mortgage payment plus remaining debt payments, minus the current complete mortgage payment and the payments on debts being replaced.",
+        "If the proposed path reduces monthly outflow, dividing selected nonrecurring transaction costs by the estimated monthly reduction can show how many months of that stated reduction would equal those charges. Treat this only as a monthly-cash-flow checkpoint. It does not show savings, net benefit, recovery of the equity withdrawn, or overall cost recovery because it omits the extra cash borrowed, a reset loan term, changing rates, remaining balances, taxes, and total interest. For the fuller view, choose a realistic ownership horizon and compare cumulative payments, upfront charges, cash received, and every remaining balance on the same date."
+          ]
+        },
+        {
+          "id": "review-written-terms-and-alternatives",
+          "heading": "Review written terms and alternatives before using equity",
+          "paragraphs": [
+            "CFPB's refinance handout emphasizes that a new mortgage can involve many of the same costs as the original loan and that a lower payment with a longer term may increase total cost. Review the Loan Estimate for loan amount, rate and APR, term, payment, points, credits, cash to close, prepayment penalty, balloon feature, and the five-year comparison section. Ask for corrected or matched scenarios when offers use different cash-out amounts or terms.",
+            "Compare at least one alternative that leaves the first mortgage intact, such as a home equity loan or HELOC, when those products are relevant and available. Also compare borrowing less, changing the project schedule, using part cash, or not converting unsecured debt into home-secured debt. The preferred path should still be manageable if the property value, project cost, rate, or time in the home differs from the first estimate."
+          ]
+        }
+      ],
+      "ctaBreaks": [
+        {
+          "afterSectionId": "define-cash-goal-and-net-proceeds",
+          "heading": "Compare the current mortgage with a proposed refinance",
+          "body": "Enter the balances, term, rate, closing charges, and expected payment change without assuming the estimate is an available offer.",
+          "label": "Use the refinance calculator",
+          "route": "/calculators/refinance"
+        },
+        {
+          "afterSectionId": "calculate-three-cost-views",
+          "heading": "Review refinance choices side by side",
+          "body": "Compare sample terms, then request written scenarios for the same cash amount and time horizon from a participating provider.",
+          "label": "Compare refinance options",
+          "route": "/rates"
+        }
+      ],
+      "conclusion": "Cash-out refinancing can be evaluated responsibly only when the cash and the replacement mortgage stay on the same page. Confirm net proceeds, show every debt before and after, separate transaction charges from escrow funding, and compare balances at a shared future date. A lower monthly outflow may be useful, but it is not proof of lower total cost. The final decision should reflect written terms, the value of the equity being withdrawn, the consequence of securing more debt with the home, and a repayment plan that remains workable when assumptions change.",
+      "faqs": [
+        {
+          "question": "Does a cash-out refinance always lower the monthly payment?",
+          "answer": "No. The new balance, rate, term, mortgage insurance, taxes, insurance, and costs can raise or lower the complete payment. A longer term may reduce scheduled principal and interest while increasing the number of payments and total cost."
+        },
+        {
+          "question": "Is paying credit card debt with cash-out proceeds automatically a savings strategy?",
+          "answer": "No. Compare interest, fees, payoff time, and the full mortgage change. The transaction may convert unsecured debt into debt backed by the home, which changes the consequence of missed payments."
+        },
+        {
+      "question": "How can I put transaction charges beside a monthly cash-flow change?",
+      "answer": "You can divide selected nonrecurring lender and third-party refinance charges net of credits by an estimated monthly cash-flow reduction to create a limited timing checkpoint. It does not establish savings, net benefit, recovery of withdrawn equity, or overall cost recovery. Keep prepaid interest and initial escrow separate, then compare cash received, cumulative payments, and remaining balances at the same future date."
+        }
+      ],
+      "sourceIds": [
+        "cfpb-cashout-research-2025",
+        "cfpb-should-i-refinance-2020",
+        "cfpb-compare-loan-estimates",
+        "cfpb-home-equity-loan-vs-heloc-2025",
+        "ftc-debt-consolidation-guidance"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "cfpb-cashout-research-2025",
+      "claim": "CFPB's 2025 report covers U.S. borrower cohorts from 2014 through 2021, distinguishing self-reported debt-payoff uses from credit-record balance changes around cash-out refinances and explaining the added cost and home-secured-debt risk."
+        },
+        {
+          "sourceId": "cfpb-should-i-refinance-2020",
+          "claim": "CFPB explains that refinancing replaces the current mortgage, often repeats mortgage transaction costs, and can lower a payment while increasing total cost when the new term is longer."
+        },
+        {
+          "sourceId": "cfpb-compare-loan-estimates",
+          "claim": "CFPB directs borrowers to compare matched Loan Estimates using loan amount, rate, payment, mortgage insurance, origination charges, credits, cash to close, and five-year borrowing cost."
+        },
+        {
+          "sourceId": "cfpb-home-equity-loan-vs-heloc-2025",
+          "claim": "CFPB's comparison distinguishes second-mortgage home equity products from one another, providing a basis for comparing options that can leave the first mortgage in place."
+        },
+        {
+          "sourceId": "ftc-debt-consolidation-guidance",
+          "claim": "FTC consumer guidance warns that debt consolidation secured by a home can put the property at risk and advises counting interest, points, and other costs."
+        }
+      ],
+      "relatedRoutes": [
+        "/learning-center/refinance",
+        "/learning-center/home-equity",
+        "/learning-center/home-equity-options-guide",
+        "/calculators/refinance",
+        "/rates"
+      ]
+    }
+  ]
+}

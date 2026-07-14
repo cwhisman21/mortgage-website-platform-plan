@@ -470,7 +470,7 @@ function expandedPanel(offer, state) {
 function resultsHeader(state, totalVisibleLabel) {
   return `
     <div class="rates-results-heading">
-      <h2>${esc(totalVisibleLabel)} sample offers</h2>
+      <h2>${esc(totalVisibleLabel)} illustrative lender scenarios</h2>
       ${segmented("result-type", RESULT_TYPES, state.resultType, "rates_marketplace_result_type")}
     </div>
   `;
@@ -491,7 +491,7 @@ function renderBody(fixture, state) {
       <div>
         <p class="eyebrow">Rates and offers</p>
         <h1>Compare mortgage offers with your priorities in view</h1>
-        <p>Start with sample offers, refine the details that matter to you, and review the full cost before choosing who to contact.</p>
+        <p>Start with illustrative lender scenarios, refine the details that matter to you, and review the full cost before choosing who to contact.</p>
       </div>
     </section>
     <section class="rates-marketplace-workspace">
@@ -513,7 +513,7 @@ function renderBody(fixture, state) {
 function noMatchState() {
   return `
     <div class="rates-empty-state">
-      <strong>No sample offers match those filters yet.</strong>
+      <strong>No illustrative lender scenarios match those filters yet.</strong>
       <p>Try a broader loan term, include FHA or VA options, or read the public rate education below before contacting a loan officer.</p>
       <a href="/learning-center">Review mortgage education</a>
       <a href="/loan-officers">Find loan officer guidance</a>
@@ -526,7 +526,7 @@ function errorState(message) {
     <section class="rates-marketplace" data-rates-marketplace>
       <div class="rates-empty-state">
         <strong>Rate comparison is temporarily unavailable.</strong>
-        <p>${esc(message || "The sample offer data could not be read.")}</p>
+        <p>${esc(message || "The illustrative lender scenarios could not be read.")}</p>
         <a href="/rates#rate-table">Continue to rate education</a>
         <a href="/loan-officers">Find loan officer guidance</a>
       </div>

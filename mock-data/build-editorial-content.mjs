@@ -11,6 +11,12 @@ const localArticleIds = [
   "article-denver-market-update", "article-colorado-springs-market-update", "article-boulder-market-update",
   "article-tampa-market-update", "article-orlando-market-update", "article-miami-market-update",
 ];
+const evergreenArticleIds = [
+  "article-texas-tax-guide", "article-california-insurance-guide", "article-colorado-tax-guide",
+  "article-florida-insurance-guide", "article-fha-basics", "article-va-basics",
+  "article-jumbo-basics", "article-refinance-basics", "article-first-time-buyer",
+  "article-move-up-buyer", "article-home-equity-guide", "article-cash-out-guide",
+];
 const publicHubRoutes = [
   "/learning-center/local-market-updates", "/learning-center/buying-a-home", "/learning-center/refinance",
   "/learning-center/fha-loans", "/learning-center/va-loans", "/learning-center/jumbo-loans",
@@ -167,8 +173,7 @@ function compile() {
   const topicHubs = unwrapList(readJson("editorial/topic-hubs.json"), "topicHubs", "topic-hubs.json");
   const ledger = unwrapList(readJson("editorial/source-ledger.json"), "sources", "source-ledger.json");
   const localFragments = unwrapList(readJson("editorial/articles-local.json"), "articles", "articles-local.json");
-  const guideDocument = readJson("editorial/articles-guides.json", { optional: true });
-  const guideFragments = guideDocument ? unwrapList(guideDocument, "articles", "articles-guides.json") : [];
+  const evergreenFragments = unwrapList(readJson("editorial/articles-evergreen.json"), "articles", "articles-evergreen.json");
   const baseArticles = {
     byId: new Map(seed.articles.map((article) => [article.id, article])),
     byRoute: new Map(seed.articles.map((article) => [article.route, article])),
@@ -179,7 +184,12 @@ function compile() {
   const routes = collectRoutes(seed);
   const localByCanonicalId = new Map(localFragments.map((fragment) => [resolveBaseArticle(fragment, baseArticles).id, fragment]));
   if (localByCanonicalId.size !== localArticleIds.length || localArticleIds.some((id) => !localByCanonicalId.has(id))) fail("local overlays must be exactly the approved twelve");
-  const fragments = [...localArticleIds.map((id) => ({ fragment: localByCanonicalId.get(id), isLocal: true })), ...guideFragments.map((fragment) => ({ fragment, isLocal: false }))];
+  const evergreenByCanonicalId = new Map(evergreenFragments.map((fragment) => [resolveBaseArticle(fragment, baseArticles).id, fragment]));
+  if (evergreenByCanonicalId.size !== evergreenArticleIds.length || evergreenArticleIds.some((id) => !evergreenByCanonicalId.has(id))) fail("evergreen overlays must be exactly the approved twelve");
+  const fragments = [
+    ...localArticleIds.map((id) => ({ fragment: localByCanonicalId.get(id), isLocal: true })),
+    ...evergreenArticleIds.map((id) => ({ fragment: evergreenByCanonicalId.get(id), isLocal: false })),
+  ];
   const articles = fragments.map(({ fragment, isLocal }) => validateArticle(fragment, resolveBaseArticle(fragment, baseArticles), contributorIds, sources, routes, isLocal));
   if (new Set(articles.map((article) => article.id)).size !== articles.length) fail("each base article may have only one overlay");
   const openings = new Set();

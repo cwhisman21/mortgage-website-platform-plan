@@ -1,5 +1,6 @@
 import { assignMedia } from "./media.mjs";
 import { slugify } from "./core.mjs";
+import { authorIdForLocationNews } from "./author-assignment.mjs";
 
 const PUBLISHER = {
   census: "U.S. Census Bureau",
@@ -175,6 +176,7 @@ function articleBase({ context, articleType, title, dek, previewText, relevanceL
     locationId: location.id,
     locationType,
     articleType,
+    authorId: authorIdForLocationNews({ articleType, topicIds }),
     title: qualifiedTitle,
     dek,
     previewText,

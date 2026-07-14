@@ -9,13 +9,21 @@
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/branches/orange-county</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/branches/tampa-bay</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/buy</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators/affordability</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators/down-payment</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators/mortgage-payment</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators/refinance</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/calculators/rent-vs-buy</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/home-equity</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/austin-mortgage-market-update</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/elena-park</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/jordan-avery</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/marcus-lane</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/maya-brooks</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/priya-bennett</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/authors/rowan-hale</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/boulder-jumbo-market-update</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/buying-a-home</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/learning-center/california-tax-insurance-mortgage-guide</loc></url>
@@ -4015,4 +4023,6 @@
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/locations/wyoming/cheyenne</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/rates</loc></url>
   <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/refinance</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/prequal/start</loc></url>
+  <url><loc>https://mortgage-website-platform-plan-thinkwhale.vercel.app/prequal/start</loc></url>
 </urlset>

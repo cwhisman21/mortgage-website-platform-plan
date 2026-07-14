@@ -5,9 +5,15 @@ export const DEFAULT_SITE_ORIGIN = "https://mortgage-website-platform-plan-think
 const absoluteUrl = (origin, route) => new URL(route, origin).toString();
 const jsonForScript = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 
-export function renderArticleDocument(article, media, { siteOrigin = DEFAULT_SITE_ORIGIN } = {}) {
+export function renderArticleDocument(article, media, { siteOrigin = DEFAULT_SITE_ORIGIN, author } = {}) {
   const canonical = absoluteUrl(siteOrigin, article.route);
   const image = media?.localPath || media?.imageUrl ? absoluteUrl(siteOrigin, media.localPath || media.imageUrl) : "";
+  const articleAuthor = author ? {
+    "@type": "Person",
+    name: author.name,
+    url: absoluteUrl(siteOrigin, author.route),
+    image: author.portrait?.src ? absoluteUrl(siteOrigin, author.portrait.src) : undefined,
+  } : undefined;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -16,7 +22,9 @@ export function renderArticleDocument(article, media, { siteOrigin = DEFAULT_SIT
     datePublished: article.publishedAt,
     dateModified: article.updatedAt || article.publishedAt,
     mainEntityOfPage: canonical,
-    image: image || undefined
+    image: image || undefined,
+    author: articleAuthor,
+    publisher: { "@type": "Organization", name: "Snap Mortgage" },
   };
   return `<!doctype html>
 <html lang="en"><head>
@@ -35,7 +43,7 @@ export function renderArticleDocument(article, media, { siteOrigin = DEFAULT_SIT
   <link rel="stylesheet" href="/site/styles.css" />
 </head><body>
   <header class="site-header"><div class="header-inner"><a class="brand" href="/"><img class="brand-logo" src="/site/assets/images/snap-loans.svg" alt="Snap Loans" /></a></div></header>
-  <main class="page">${renderArticleContent(article, media)}</main>
+  <main class="page">${renderArticleContent(article, media, { author })}</main>
   <footer class="site-footer"><div class="footer-inner"><a href="/locations">Locations</a><a href="/learning-center">Learning center</a></div></footer>
 </body></html>`.replace(/[ \t]+(?=\r?\n)/g, "");
 }
