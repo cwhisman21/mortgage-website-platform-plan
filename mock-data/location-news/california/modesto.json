@@ -11,9 +11,9 @@
       "articleType": "affordability_home_values",
       "authorId": "contributor-maya-brooks",
       "title": "Modesto, CA home values, income, and owner costs",
-      "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Modesto.",
-      "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Modesto.",
-      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Modesto. Review official evidence, comparisons, limitations, and pract",
+      "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Modesto, CA.",
+      "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Modesto, CA.",
+      "metaDescription": "Modesto, CA home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Modesto, CA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "Affordability evidence",
@@ -34,10 +34,10 @@
       "imageId": "home_values-07",
       "keyTakeaways": [
         "ACS median owner-occupied home value: $442,700.",
+        "prior ACS median owner-occupied home value: $283,800.",
         "ACS median household income: $79,891.",
-        "median monthly owner cost with a mortgage: $2,835.",
-        "change from the prior ACS home-value estimate: 56.0%.",
-        "California median home value: $734,700."
+        "median monthly owner cost with a mortgage: $2,099.",
+        "change from the prior ACS home-value estimate: 56.0%."
       ],
       "evidenceFacts": [
         {
@@ -49,6 +49,16 @@
             "news-modesto-ca-affordability-home-values-source-city-home-value-current"
           ],
           "comparison": false
+        },
+        {
+          "id": "prior-home-value",
+          "label": "prior ACS median owner-occupied home value",
+          "value": 283800,
+          "display": "$283,800",
+          "sourceRecordIds": [
+            "news-modesto-ca-affordability-home-values-source-city-home-value-prior"
+          ],
+          "comparison": true
         },
         {
           "id": "median-household-income",
@@ -63,8 +73,8 @@
         {
           "id": "median-owner-cost",
           "label": "median monthly owner cost with a mortgage",
-          "value": 2835,
-          "display": "$2,835",
+          "value": 2099,
+          "display": "$2,099",
           "sourceRecordIds": [
             "news-modesto-ca-affordability-home-values-source-city-owner-cost-current"
           ],
@@ -90,91 +100,124 @@
             "news-modesto-ca-affordability-home-values-source-state-home-value-current"
           ],
           "comparison": true
+        },
+        {
+          "id": "state-home-value-gap",
+          "label": "local median home-value gap below the state estimate",
+          "value": 39.7,
+          "display": "39.7%",
+          "sourceRecordIds": [
+            "news-modesto-ca-affordability-home-values-source-city-home-value-current",
+            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
+          ],
+          "comparison": true
         }
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "Home values and income in the latest ACS release",
+          "id": "local-baseline",
+          "heading": "The local value, income, and owner-cost baseline",
           "body": [
-            "The latest evidence for Modesto, CA puts ACS median owner-occupied home value at $442,700, while ACS median household income is $79,891. Together, home value, household income, and selected owner costs describe different sides of the local payment conversation without assuming that a typical household is buying a typical home. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "In Modesto, CA, the 2024 ACS reports a median owner-occupied home value of $442,700 and median household income of $79,891; these are separate medians, not the finances of one representative household. The same release reports $2,099 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Modesto, CA, reading $442,700, $79,891, and $2,099 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $442,700, $79,891, and $2,099 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "median-household-income",
+            "median-owner-cost"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-affordability-home-values-source-city-home-value-current",
             "news-modesto-ca-affordability-home-values-source-city-income-current",
-            "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
+            "news-modesto-ca-affordability-home-values-source-city-owner-cost-current"
+          ]
+        },
+        {
+          "id": "change-over-time",
+          "heading": "What changed between the ACS periods",
+          "body": [
+            "Modesto, CA's median home-value estimate increased from $283,800 in the prior ACS period to $442,700 in the current release, a reported change of 56.0%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 56.0% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $283,800 to $442,700 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Modesto, CA. Before the 56.0% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value",
+            "home-value-change"
+          ],
+          "sourceRecordIds": [
             "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
+            "news-modesto-ca-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "state-comparison",
+          "heading": "How the city estimate sits within the state",
+          "body": [
+            "Modesto, CA's $442,700 median home-value estimate is below the statewide $734,700 estimate, with a reported city-to-state gap of 39.7%. That 39.7% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Modesto, CA. It does not mean every local property is 39.7% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $442,700 and $734,700 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "state-home-value",
+            "state-home-value-gap"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-affordability-home-values-source-city-home-value-current",
             "news-modesto-ca-affordability-home-values-source-state-home-value-current"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "How the current estimate compares",
+          "id": "owner-cost-boundary",
+          "heading": "What the owner-cost estimate includes and excludes",
           "body": [
-            "The clearest comparison in this release is change from the prior ACS home-value estimate at 56.0%. A change between ACS periods can show direction, but margins of error and the multi-year survey windows must be considered before treating the difference as precise. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Modesto, CA. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "The $2,099 owner-cost estimate gives Modesto, CA borrowers a broader monthly reference than principal and interest alone, while the $79,891 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $79,891 is the owner household at $2,099. The $442,700 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $442,700, $79,891, and $2,099 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+          ],
+          "evidenceFactIds": [
+            "median-owner-cost",
+            "median-household-income",
+            "median-home-value"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-affordability-home-values-source-city-home-value-current",
-            "news-modesto-ca-affordability-home-values-source-city-income-current",
             "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
-            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
+            "news-modesto-ca-affordability-home-values-source-city-income-current",
+            "news-modesto-ca-affordability-home-values-source-city-home-value-current"
           ]
         },
         {
-          "id": "borrower-planning",
-          "heading": "Use the evidence to test payment assumptions",
+          "id": "decision-limits",
+          "heading": "What these local medians cannot decide",
           "body": [
-            "For a borrower, median monthly owner cost with a mortgage at $2,835 is most useful as an input to an organized comparison. Compare a realistic purchase range with verified principal, interest, taxes, insurance, association charges, and cash-to-close rather than converting the median value directly into a promised payment. In Modesto, CA, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+            "Neither $442,700 nor $2,099 determines the value of a specific Modesto, CA home, what a borrower will pay each month, or an underwriting result. The $79,891 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 56.0% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $442,700, $2,099, and $79,891 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "median-owner-cost",
+            "median-household-income",
+            "home-value-change"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-affordability-home-values-source-city-home-value-current",
-            "news-modesto-ca-affordability-home-values-source-city-income-current",
             "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
-            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
-          "id": "tradeoffs",
-          "heading": "Owner costs are broader than principal and interest",
-          "body": [
-            "Another boundary comes from change from the prior ACS home-value estimate, reported here as 56.0%. Selected owner costs help keep the monthly discussion connected to recurring housing expenses, but the ACS measure is not a lender worksheet and is not tailored to a property under consideration. A borrower comparing options in Modesto, CA can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-affordability-home-values-source-city-home-value-current",
             "news-modesto-ca-affordability-home-values-source-city-income-current",
-            "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
-            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
-          "body": [
-            "Neither $442,700 for ACS median owner-occupied home value nor $2,835 for median monthly owner cost with a mortgage determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The ACS does not contain a borrower's credit, debts, down payment, loan term, current rate options, or the taxes and insurance for a selected property. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-affordability-home-values-source-city-home-value-current",
-            "news-modesto-ca-affordability-home-values-source-city-income-current",
-            "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
-            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
+            "news-modesto-ca-affordability-home-values-source-city-home-value-prior"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific affordability comparison",
+          "heading": "Build a property-specific comparison",
           "body": [
-            "A practical next step is to carry $79,891 for ACS median household income and 56.0% for change from the prior ACS home-value estimate into a side-by-side planning conversation. Use the local figures to challenge assumptions, then replace broad estimates with current property and loan information before deciding what range is comfortable. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Modesto, CA, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's home-value and affordability evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+            "A practical Modesto, CA worksheet can begin with $442,700 as broad value context, $2,099 as a reminder to include recurring ownership expenses, and $79,891 as a local economic reference. After noting those $442,700, $2,099, and $79,891 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 39.7% city-to-state difference is a prompt to keep the analysis local, while the 56.0% period change is a prompt to date every assumption. A licensed professional can use the 39.7% and 56.0% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "median-owner-cost",
+            "median-household-income",
+            "state-home-value-gap",
+            "home-value-change"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-affordability-home-values-source-city-home-value-current",
-            "news-modesto-ca-affordability-home-values-source-city-income-current",
             "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
-            "news-modesto-ca-affordability-home-values-source-state-home-value-current"
+            "news-modesto-ca-affordability-home-values-source-city-income-current",
+            "news-modesto-ca-affordability-home-values-source-state-home-value-current",
+            "news-modesto-ca-affordability-home-values-source-city-home-value-prior"
           ]
         }
       ],
@@ -197,24 +240,24 @@
               "display": "$442,700"
             },
             {
+              "label": "prior ACS median owner-occupied home value",
+              "value": 283800,
+              "display": "$283,800"
+            },
+            {
               "label": "ACS median household income",
               "value": 79891,
               "display": "$79,891"
             },
             {
               "label": "median monthly owner cost with a mortgage",
-              "value": 2835,
-              "display": "$2,835"
+              "value": 2099,
+              "display": "$2,099"
             },
             {
               "label": "change from the prior ACS home-value estimate",
               "value": 56,
               "display": "56.0%"
-            },
-            {
-              "label": "California median home value",
-              "value": 734700,
-              "display": "$734,700"
             }
           ]
         }
@@ -232,27 +275,37 @@
             [
               "ACS median owner-occupied home value",
               "$442,700",
-              "news-modesto-ca-affordability-home-values-source-city-home-value-current"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "prior ACS median owner-occupied home value",
+              "$283,800",
+              "U.S. Census Bureau, 2019"
             ],
             [
               "ACS median household income",
               "$79,891",
-              "news-modesto-ca-affordability-home-values-source-city-income-current"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "median monthly owner cost with a mortgage",
-              "$2,835",
-              "news-modesto-ca-affordability-home-values-source-city-owner-cost-current"
+              "$2,099",
+              "U.S. Census Bureau, 2024"
             ],
             [
               "change from the prior ACS home-value estimate",
               "56.0%",
-              "news-modesto-ca-affordability-home-values-source-city-home-value-current,news-modesto-ca-affordability-home-values-source-city-home-value-prior"
+              "U.S. Census Bureau, 2019 and 2024"
             ],
             [
               "California median home value",
               "$734,700",
-              "news-modesto-ca-affordability-home-values-source-state-home-value-current"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "local median home-value gap below the state estimate",
+              "39.7%",
+              "U.S. Census Bureau, 2024"
             ]
           ],
           "sourceRecordIds": [
@@ -266,13 +319,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "change-over-time",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -289,7 +342,7 @@
           "estimate": 442700,
           "marginOfError": 4972,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median owner-occupied home value"
         },
         {
           "sourceId": "news-modesto-ca-affordability-home-values-source-city-income-current",
@@ -305,23 +358,23 @@
           "estimate": 79891,
           "marginOfError": 1825,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B19013_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median household income"
         },
         {
           "sourceId": "news-modesto-ca-affordability-home-values-source-city-owner-cost-current",
           "publisher": "U.S. Census Bureau",
           "dataset": "Census ACS 5-year Table-Based Summary File",
-          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
-          "variableOrSeriesId": "B25103_001E",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25088.dat",
+          "variableOrSeriesId": "B25088_002E",
           "geographyType": "place",
           "geographyId": "0648354",
           "period": "2024",
           "releasedAt": "2026-01-29",
           "retrievedAt": "2026-07-10",
-          "estimate": 2835,
-          "marginOfError": 82,
+          "estimate": 2099,
+          "marginOfError": 50,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25103_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median selected monthly owner costs for owners with a mortgage"
         },
         {
           "sourceId": "news-modesto-ca-affordability-home-values-source-city-home-value-prior",
@@ -337,7 +390,7 @@
           "estimate": 283800,
           "marginOfError": 2980,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25077_001E, 2019 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2019 ACS 5-year: median owner-occupied home value"
         },
         {
           "sourceId": "news-modesto-ca-affordability-home-values-source-state-home-value-current",
@@ -353,17 +406,38 @@
           "estimate": 734700,
           "marginOfError": 1307,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median owner-occupied home value"
         }
       ],
       "relatedRoutes": [
-        "/locations/california/modesto",
-        "/locations/california",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/california/modesto",
+          "label": "Modesto, CA mortgage and housing guide"
+        },
+        {
+          "route": "/locations/california",
+          "label": "California mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -376,9 +450,9 @@
       "articleType": "housing_supply_tenure",
       "authorId": "contributor-maya-brooks",
       "title": "Modesto, CA housing supply, ownership, and rent",
-      "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Modesto.",
-      "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Modesto.",
-      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Modesto. Review official evidence, comparisons, limitation",
+      "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Modesto, CA.",
+      "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Modesto, CA.",
+      "metaDescription": "Modesto, CA housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "Housing mix",
@@ -401,8 +475,8 @@
         "total housing units: 75,752.",
         "occupied housing units: 72,989.",
         "vacant housing units: 2,763.",
-        "vacant-unit share of housing stock: 3.6%.",
-        "owner share of occupied units: 58.9%."
+        "prior ACS vacant housing units: 2,889.",
+        "vacant-unit share of housing stock: 3.6%."
       ],
       "evidenceFacts": [
         {
@@ -436,6 +510,16 @@
           "comparison": false
         },
         {
+          "id": "prior-vacant-units",
+          "label": "prior ACS vacant housing units",
+          "value": 2889,
+          "display": "2,889",
+          "sourceRecordIds": [
+            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+          ],
+          "comparison": true
+        },
+        {
           "id": "vacancy-share",
           "label": "vacant-unit share of housing stock",
           "value": 3.6,
@@ -447,12 +531,34 @@
           "comparison": true
         },
         {
+          "id": "vacancy-count-change",
+          "label": "change in vacant units from the prior ACS period",
+          "value": -4.4,
+          "display": "-4.4%",
+          "sourceRecordIds": [
+            "news-modesto-ca-housing-supply-tenure-source-vacant-units",
+            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+          ],
+          "comparison": true
+        },
+        {
           "id": "owner-share",
           "label": "owner share of occupied units",
           "value": 58.9,
           "display": "58.9%",
           "sourceRecordIds": [
             "news-modesto-ca-housing-supply-tenure-source-owner-units",
+            "news-modesto-ca-housing-supply-tenure-source-occupied-units"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "renter-share",
+          "label": "renter share of occupied units",
+          "value": 41.1,
+          "display": "41.1%",
+          "sourceRecordIds": [
+            "news-modesto-ca-housing-supply-tenure-source-renter-units",
             "news-modesto-ca-housing-supply-tenure-source-occupied-units"
           ],
           "comparison": true
@@ -470,99 +576,117 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "The size and occupancy of the local housing stock",
+          "id": "stock-baseline",
+          "heading": "The size and use of the local housing stock",
           "body": [
-            "The latest evidence for Modesto, CA puts total housing units at 75,752, while occupied housing units is 72,989. Unit counts establish the broad housing base, while occupancy and tenure measures show how that stock was being used across the ACS survey period. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "Modesto, CA's current ACS housing baseline includes 75,752 total housing units, 72,989 occupied units, and 2,763 vacant units. Those counts describe the housing stock across the survey period; they do not say that 2,763 homes were listed for sale or available to rent at one moment. The difference between 75,752 total units and 72,989 occupied units is useful for checking the internal scale of the release, while 2,763 provides the numerator for a more careful vacancy reading. For a borrower researching Modesto, CA, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+          ],
+          "evidenceFactIds": [
+            "housing-units",
+            "occupied-units",
+            "vacant-units"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-housing-supply-tenure-source-housing-units",
             "news-modesto-ca-housing-supply-tenure-source-occupied-units",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units",
-            "news-modesto-ca-housing-supply-tenure-source-owner-units",
-            "news-modesto-ca-housing-supply-tenure-source-renter-units",
-            "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-vacant-units"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Vacancy and ownership need careful definitions",
+          "id": "vacancy-comparison",
+          "heading": "Vacancy changed, but it is not listing inventory",
           "body": [
-            "The clearest comparison in this release is vacant-unit share of housing stock at 3.6%. A vacant-unit share is not the same as homes listed for sale, and an owner share is not a forecast of buyer competition or future inventory. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Modesto, CA. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "Vacant units in Modesto, CA decreased from 2,889 in the prior ACS period to 2,763 in the current release, a reported change of -4.4%. In the current housing stock, 2,763 units equal 3.6% of the 75,752 total. ACS vacancy covers several statuses, so the 3.6% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 2,889 to 2,763 can still prompt better questions about current for-sale and rental inventory in Modesto, CA, provided those questions are answered with timely listing and property data rather than the survey count alone."
+          ],
+          "evidenceFactIds": [
+            "prior-vacant-units",
+            "vacant-units",
+            "vacancy-count-change",
+            "vacancy-share",
+            "housing-units"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-housing-supply-tenure-source-housing-units",
-            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
+            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior",
             "news-modesto-ca-housing-supply-tenure-source-vacant-units",
-            "news-modesto-ca-housing-supply-tenure-source-owner-units",
-            "news-modesto-ca-housing-supply-tenure-source-renter-units",
-            "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-housing-units"
           ]
         },
         {
-          "id": "borrower-planning",
-          "heading": "Compare buying and renting on the same horizon",
+          "id": "tenure-mix",
+          "heading": "Ownership and renting within occupied housing",
           "body": [
-            "For a borrower, vacant housing units at 2,763 is most useful as an input to an organized comparison. A useful worksheet aligns expected time in the home, maintenance responsibility, rent changes, transaction costs, and property-specific monthly costs instead of comparing rent with principal and interest alone. In Modesto, CA, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+            "Among 72,989 occupied units in Modesto, CA, the ACS-derived owner share is 58.9% and the renter share is 41.1%, making owner-occupied housing the larger measured tenure group. The 58.9% and 41.1% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Modesto, CA. The 58.9% and 41.1% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+          ],
+          "evidenceFactIds": [
+            "occupied-units",
+            "owner-share",
+            "renter-share"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-housing-supply-tenure-source-housing-units",
             "news-modesto-ca-housing-supply-tenure-source-occupied-units",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units",
             "news-modesto-ca-housing-supply-tenure-source-owner-units",
-            "news-modesto-ca-housing-supply-tenure-source-renter-units",
-            "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-renter-units"
           ]
         },
         {
-          "id": "tradeoffs",
-          "heading": "Rent is context, not a break-even answer",
+          "id": "rent-context",
+          "heading": "Use rent as a matched comparison, not a shortcut",
           "body": [
-            "Another boundary comes from vacant-unit share of housing stock, reported here as 3.6%. Median gross rent reflects the occupied rental stock measured by ACS and does not identify an equivalent property, lease offer, or future rent for a particular household. A borrower comparing options in Modesto, CA can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+            "Modesto, CA's ACS median gross rent is $1,690, while renter-occupied units account for 41.1% of occupied housing and owner-occupied units account for 58.9%. The $1,690 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,690 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Modesto, CA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-housing-supply-tenure-source-housing-units",
-            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units",
-            "news-modesto-ca-housing-supply-tenure-source-owner-units",
-            "news-modesto-ca-housing-supply-tenure-source-renter-units",
             "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-renter-units",
+            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
+            "news-modesto-ca-housing-supply-tenure-source-owner-units"
           ]
         },
         {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
+          "id": "supply-limits",
+          "heading": "What the housing-stock evidence cannot show",
           "body": [
-            "Neither 75,752 for total housing units nor 2,763 for vacant housing units determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. Housing-stock counts do not show the condition, price, financing eligibility, insurance availability, or seller terms of homes currently offered to a borrower. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+            "The 3.6% vacant-unit share and 58.9% owner share cannot determine competition for a specific Modesto, CA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 75,752 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 3.6% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 2,763 vacant units separate from active inventory and keep the $1,690 median separate from a current lease quote, using each figure only for the question its definition can answer."
+          ],
+          "evidenceFactIds": [
+            "vacancy-share",
+            "owner-share",
+            "housing-units",
+            "vacant-units",
+            "median-rent"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-housing-supply-tenure-source-housing-units",
-            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
             "news-modesto-ca-housing-supply-tenure-source-vacant-units",
+            "news-modesto-ca-housing-supply-tenure-source-housing-units",
             "news-modesto-ca-housing-supply-tenure-source-owner-units",
-            "news-modesto-ca-housing-supply-tenure-source-renter-units",
-            "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
+            "news-modesto-ca-housing-supply-tenure-source-median-rent"
           ]
         },
         {
-          "id": "next-comparison",
-          "heading": "Match the broad housing mix to real choices",
+          "id": "matched-options",
+          "heading": "Compare current local choices on the same terms",
           "body": [
-            "A practical next step is to carry 72,989 for occupied housing units and 3.6% for vacant-unit share of housing stock into a side-by-side planning conversation. Use the local mix to frame questions, then compare actual listings, lease terms, taxes, insurance, maintenance, and financing disclosures over a consistent period. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Modesto, CA, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's housing supply, tenure, and rent evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+            "A grounded Modesto, CA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 75,752 total units, a 3.6% vacancy share, and a 58.9% owner share. For renting, replace the $1,690 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 58.9% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 41.1% or 58.9% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+          ],
+          "evidenceFactIds": [
+            "housing-units",
+            "vacancy-share",
+            "owner-share",
+            "renter-share",
+            "median-rent"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-housing-supply-tenure-source-housing-units",
-            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
             "news-modesto-ca-housing-supply-tenure-source-vacant-units",
             "news-modesto-ca-housing-supply-tenure-source-owner-units",
+            "news-modesto-ca-housing-supply-tenure-source-occupied-units",
             "news-modesto-ca-housing-supply-tenure-source-renter-units",
-            "news-modesto-ca-housing-supply-tenure-source-median-rent",
-            "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior"
+            "news-modesto-ca-housing-supply-tenure-source-median-rent"
           ]
         }
       ],
@@ -597,14 +721,14 @@
               "display": "2,763"
             },
             {
+              "label": "prior ACS vacant housing units",
+              "value": 2889,
+              "display": "2,889"
+            },
+            {
               "label": "vacant-unit share of housing stock",
               "value": 3.6,
               "display": "3.6%"
-            },
-            {
-              "label": "owner share of occupied units",
-              "value": 58.9,
-              "display": "58.9%"
             }
           ]
         }
@@ -622,32 +746,47 @@
             [
               "total housing units",
               "75,752",
-              "news-modesto-ca-housing-supply-tenure-source-housing-units"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "occupied housing units",
               "72,989",
-              "news-modesto-ca-housing-supply-tenure-source-occupied-units"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "vacant housing units",
               "2,763",
-              "news-modesto-ca-housing-supply-tenure-source-vacant-units"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "prior ACS vacant housing units",
+              "2,889",
+              "U.S. Census Bureau, 2019"
             ],
             [
               "vacant-unit share of housing stock",
               "3.6%",
-              "news-modesto-ca-housing-supply-tenure-source-vacant-units,news-modesto-ca-housing-supply-tenure-source-housing-units"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "change in vacant units from the prior ACS period",
+              "-4.4%",
+              "U.S. Census Bureau, 2019 and 2024"
             ],
             [
               "owner share of occupied units",
               "58.9%",
-              "news-modesto-ca-housing-supply-tenure-source-owner-units,news-modesto-ca-housing-supply-tenure-source-occupied-units"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "renter share of occupied units",
+              "41.1%",
+              "U.S. Census Bureau, 2024"
             ],
             [
               "median gross rent",
               "$1,690",
-              "news-modesto-ca-housing-supply-tenure-source-median-rent"
+              "U.S. Census Bureau, 2024"
             ]
           ],
           "sourceRecordIds": [
@@ -663,13 +802,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "vacancy-comparison",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 ACS 5-year place estimates for units, occupancy, vacancy, owner and renter tenure, and gross rent, with 2019 evidence retained for comparison review. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses 2024 ACS 5-year place estimates for units, occupancy, vacancy, owner and renter tenure, and gross rent, with 2019 evidence retained for comparison review. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "ACS vacancy includes categories beyond for-sale availability, and tenure and rent estimates carry sampling error and do not measure current listing inventory. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -686,7 +825,7 @@
           "estimate": 75752,
           "marginOfError": 903,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25001_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: total housing units"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-occupied-units",
@@ -702,7 +841,7 @@
           "estimate": 72989,
           "marginOfError": 988,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25002_002E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: occupied housing units"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-vacant-units",
@@ -718,7 +857,7 @@
           "estimate": 2763,
           "marginOfError": 483,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25002_003E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: vacant housing units"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-owner-units",
@@ -734,7 +873,7 @@
           "estimate": 42973,
           "marginOfError": 1115,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25003_002E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: owner-occupied housing units"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-renter-units",
@@ -750,7 +889,7 @@
           "estimate": 30016,
           "marginOfError": 1186,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25003_003E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: renter-occupied housing units"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-median-rent",
@@ -766,7 +905,7 @@
           "estimate": 1690,
           "marginOfError": 33,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25064_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median gross rent"
         },
         {
           "sourceId": "news-modesto-ca-housing-supply-tenure-source-vacant-units-prior",
@@ -782,17 +921,38 @@
           "estimate": 2889,
           "marginOfError": 437,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25002_003E, 2019 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2019 ACS 5-year: vacant housing units"
         }
       ],
       "relatedRoutes": [
-        "/locations/california/modesto",
-        "/locations/california",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/california/modesto",
+          "label": "Modesto, CA mortgage and housing guide"
+        },
+        {
+          "route": "/locations/california",
+          "label": "California mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -805,9 +965,9 @@
       "articleType": "local_labor_market",
       "authorId": "contributor-rowan-hale",
       "title": "Modesto, CA labor market: latest employment evidence",
-      "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Modesto.",
-      "previewText": "See what changed in Modesto's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "See what changed in Modesto's labor market and why broad employment data cannot determine mortgage eligibility. Review official evidence, comparisons, limitations, a",
+      "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Modesto, CA.",
+      "previewText": "See what changed in Modesto, CA, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "Modesto, CA labor market: latest employment evidence. See what changed in Modesto, CA, CA's labor market and why broad employment data cannot determine.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "Labor market",
@@ -831,7 +991,7 @@
         "employment: 94,053.",
         "unemployment: 5,698.",
         "unemployment rate: 5.7%.",
-        "change in unemployment rate from a year earlier: -0.6%."
+        "previous-month unemployment rate: 6.0%."
       ],
       "evidenceFacts": [
         {
@@ -875,6 +1035,37 @@
           "comparison": false
         },
         {
+          "id": "previous-rate",
+          "label": "previous-month unemployment rate",
+          "value": 6,
+          "display": "6.0%",
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-previous-previous-rate"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "year-ago-rate",
+          "label": "year-ago unemployment rate",
+          "value": 6.3,
+          "display": "6.3%",
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "monthly-rate-change",
+          "label": "change in unemployment rate from the prior month",
+          "value": -0.3,
+          "display": "-0.3%",
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-modesto-ca-local-labor-market-source-previous-previous-rate"
+          ],
+          "comparison": true
+        },
+        {
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.6,
@@ -888,93 +1079,119 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "What the latest LAUS release reports",
+          "id": "labor-baseline",
+          "heading": "The latest labor-force counts",
           "body": [
-            "The latest evidence for Modesto, CA puts labor force at 99,751, while employment is 94,053. The labor force, employment, unemployment, and unemployment rate are related measures, and reading all of them prevents a rate movement from being interpreted without its underlying counts. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "The latest LAUS release reports a Modesto, CA labor force of 99,751, with 94,053 people employed and 5,698 unemployed under the program's definitions. Those three counts belong together: 94,053 plus 5,698 explains the scale behind the published 5.7% unemployment rate. For mortgage planning, the 99,751 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 99,751 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-local-labor-market-source-latest-labor-force",
             "news-modesto-ca-local-labor-market-source-latest-employment",
             "news-modesto-ca-local-labor-market-source-latest-unemployment",
+            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "monthly-movement",
+          "heading": "What changed from the prior month",
+          "body": [
+            "Modesto, CA's unemployment rate fell from 6.0% in the prior month to 5.7% in the latest month, a change of -0.3%. A -0.3% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 5,698 unemployment count and 99,751 labor force. The -0.3% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Modesto, CA borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+          ],
+          "evidenceFactIds": [
+            "previous-rate",
+            "unemployment-rate",
+            "monthly-rate-change",
+            "unemployment",
+            "labor-force"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
+            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-modesto-ca-local-labor-market-source-latest-unemployment",
+            "news-modesto-ca-local-labor-market-source-latest-labor-force"
+          ]
+        },
+        {
+          "id": "annual-movement",
+          "heading": "The year-over-year comparison",
+          "body": [
+            "Compared with 6.3% a year earlier, the latest Modesto, CA unemployment rate of 5.7% fell by -0.6%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.6% difference still describes a population estimate rather than an individual's job stability. Reading 6.3%, 6.0%, and 5.7% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Modesto, CA pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+          ],
+          "evidenceFactIds": [
+            "year-ago-rate",
+            "previous-rate",
+            "unemployment-rate",
+            "annual-rate-change"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate",
+            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
+            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "counts-and-rate",
+          "heading": "Why the rate needs its underlying counts",
+          "body": [
+            "At 5.7%, Modesto, CA's unemployment rate summarizes 5,698 unemployed people within a 99,751 labor force; the rate should not be discussed without those counts. The 94,053 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 94,053 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 5.7% rate attached to 99,751, 94,053, and 5,698 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "unemployment",
+            "labor-force",
+            "employment"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-modesto-ca-local-labor-market-source-latest-unemployment",
+            "news-modesto-ca-local-labor-market-source-latest-labor-force",
+            "news-modesto-ca-local-labor-market-source-latest-employment"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Labor statistics are not an income review",
+          "body": [
+            "Neither 94,053 employed people nor a 5.7% unemployment rate tells a lender what one Modesto, CA applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.3% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.7% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.6% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+          ],
+          "evidenceFactIds": [
+            "employment",
+            "unemployment-rate",
+            "monthly-rate-change",
+            "annual-rate-change"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-local-labor-market-source-latest-employment",
             "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
             "news-modesto-ca-local-labor-market-source-previous-previous-rate",
             "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Month and year comparisons answer different questions",
+          "id": "documentation-next-step",
+          "heading": "Turn the trend into documentation questions",
           "body": [
-            "The clearest comparison in this release is change in unemployment rate from a year earlier at -0.6%. A monthly movement can reflect short-term change and revision, while the year-over-year comparison gives a wider reference point without predicting the next release. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Modesto, CA. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "A practical next step for a Modesto, CA borrower is to note the latest 5.7% unemployment rate and the -0.6% year-over-year change, then move immediately to the records that describe the household. After noting the 5.7% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 99,751 local labor force and 94,053 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.3% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Modesto, CA's 5.7% LAUS rate in its proper role as dated local economic context."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "annual-rate-change",
+            "monthly-rate-change",
+            "labor-force",
+            "employment"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-local-labor-market-source-latest-labor-force",
-            "news-modesto-ca-local-labor-market-source-latest-employment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment",
             "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate",
             "news-modesto-ca-local-labor-market-source-previous-previous-rate",
-            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "borrower-planning",
-          "heading": "Use labor data as economic context",
-          "body": [
-            "For a borrower, unemployment at 5,698 is most useful as an input to an organized comparison. Broad labor evidence can help organize questions about timing and local economic conditions, but a lender evaluates documented income, employment history, debts, assets, and program rules at the borrower level. In Modesto, CA, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
-          ],
-          "sourceRecordIds": [
             "news-modesto-ca-local-labor-market-source-latest-labor-force",
-            "news-modesto-ca-local-labor-market-source-latest-employment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
-            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
-            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "tradeoffs",
-          "heading": "Employment counts do not measure mortgage readiness",
-          "body": [
-            "Another boundary comes from unemployment rate, reported here as 5.7%. The LAUS definition of employment is an economic statistic, not a review of income stability, job tenure, variable earnings, self-employment records, or the continuity standards used in underwriting. A borrower comparing options in Modesto, CA can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-local-labor-market-source-latest-labor-force",
-            "news-modesto-ca-local-labor-market-source-latest-employment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
-            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
-            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
-          "body": [
-            "Neither 99,751 for labor force nor 5,698 for unemployment determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. BLS does not evaluate any applicant and cannot indicate whether a person's income is eligible, sufficient, stable, or likely to continue for mortgage purposes. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-local-labor-market-source-latest-labor-force",
-            "news-modesto-ca-local-labor-market-source-latest-employment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
-            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
-            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "next-comparison",
-          "heading": "Translate economic context into documentation questions",
-          "body": [
-            "A practical next step is to carry 94,053 for employment and -0.6% for change in unemployment rate from a year earlier into a side-by-side planning conversation. Keep the public trend separate from the borrower's records, and ask what pay history, tax returns, contracts, reserves, or explanations may be needed for the actual loan path. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Modesto, CA, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's labor-market evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-local-labor-market-source-latest-labor-force",
-            "news-modesto-ca-local-labor-market-source-latest-employment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment",
-            "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
-            "news-modesto-ca-local-labor-market-source-previous-previous-rate",
-            "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
+            "news-modesto-ca-local-labor-market-source-latest-employment"
           ]
         }
       ],
@@ -1013,9 +1230,9 @@
               "display": "5.7%"
             },
             {
-              "label": "change in unemployment rate from a year earlier",
-              "value": -0.6,
-              "display": "-0.6%"
+              "label": "previous-month unemployment rate",
+              "value": 6,
+              "display": "6.0%"
             }
           ]
         }
@@ -1033,27 +1250,42 @@
             [
               "labor force",
               "99,751",
-              "news-modesto-ca-local-labor-market-source-latest-labor-force"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "employment",
               "94,053",
-              "news-modesto-ca-local-labor-market-source-latest-employment"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "unemployment",
               "5,698",
-              "news-modesto-ca-local-labor-market-source-latest-unemployment"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "unemployment rate",
               "5.7%",
-              "news-modesto-ca-local-labor-market-source-latest-unemployment-rate"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
+            ],
+            [
+              "previous-month unemployment rate",
+              "6.0%",
+              "U.S. Bureau of Labor Statistics, 2026-M04"
+            ],
+            [
+              "year-ago unemployment rate",
+              "6.3%",
+              "U.S. Bureau of Labor Statistics, 2025-M05"
+            ],
+            [
+              "change in unemployment rate from the prior month",
+              "-0.3%",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
             ],
             [
               "change in unemployment rate from a year earlier",
               "-0.6%",
-              "news-modesto-ca-local-labor-market-source-latest-unemployment-rate,news-modesto-ca-local-labor-market-source-yearago-year-ago-rate"
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
             ]
           ],
           "sourceRecordIds": [
@@ -1068,13 +1300,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "monthly-movement",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses BLS LAUS unadjusted city monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses BLS LAUS unadjusted city monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "LAUS estimates can be revised, city series are unadjusted, and local labor statistics describe a population rather than an individual applicant's income or employment. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -1091,7 +1323,7 @@
           "estimate": 99751,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 labor-force"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: labor-force"
         },
         {
           "sourceId": "news-modesto-ca-local-labor-market-source-latest-employment",
@@ -1107,7 +1339,7 @@
           "estimate": 94053,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 employment"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: employment"
         },
         {
           "sourceId": "news-modesto-ca-local-labor-market-source-latest-unemployment",
@@ -1123,7 +1355,7 @@
           "estimate": 5698,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 unemployment"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: unemployment"
         },
         {
           "sourceId": "news-modesto-ca-local-labor-market-source-latest-unemployment-rate",
@@ -1139,7 +1371,7 @@
           "estimate": 5.7,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 unemployment-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: unemployment-rate"
         },
         {
           "sourceId": "news-modesto-ca-local-labor-market-source-previous-previous-rate",
@@ -1155,7 +1387,7 @@
           "estimate": 6,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M04 previous-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M04: previous-rate"
         },
         {
           "sourceId": "news-modesto-ca-local-labor-market-source-yearago-year-ago-rate",
@@ -1171,17 +1403,38 @@
           "estimate": 6.3,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2025-M05 year-ago-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2025-M05: year-ago-rate"
         }
       ],
       "relatedRoutes": [
-        "/locations/california/modesto",
-        "/locations/california",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/california/modesto",
+          "label": "Modesto, CA mortgage and housing guide"
+        },
+        {
+          "route": "/locations/california",
+          "label": "California mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -1195,8 +1448,8 @@
       "authorId": "contributor-marcus-lane",
       "title": "Modesto, CA loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
-      "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Modesto, including unit-count differences and important limits.",
-      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Modesto, including unit-count differences and important limits. Review official evidence, comparis",
+      "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Modesto, CA, including unit-count differences and important limits.",
+      "metaDescription": "Modesto, CA loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Modesto, CA, including unit-count.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "2026 loan limits",
@@ -1279,104 +1532,107 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "The published loan-limit figures",
+          "id": "published-limits",
+          "heading": "The published one-unit limits for the matched area",
           "body": [
-            "The latest evidence for Modesto, CA puts one-unit conforming limit at $832,750, while four-unit conforming limit is $1,601,750. Conforming and FHA limits come from different programs and should be read by the published county or county-equivalent geography and unit count before they are used to organize financing questions. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "Modesto, CA is connected to Stanislaus County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $545,100. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $545,100 is not an FHA eligibility finding. For Modesto, CA, starting with Stanislaus County keeps the limits attached to the county or county-equivalent area used in the official files. A Modesto, CA borrower still needs to confirm the selected property's location and legal unit count, because the relevant Stanislaus County row follows the property rather than the city label or mailing address alone. Around Modesto, CA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Stanislaus County as Modesto, CA's confirmed county row before comparing the $832,750 and $545,100 program boundaries."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
+            "news-modesto-ca-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "one-unit-comparison",
+          "heading": "How the one-unit program boundaries compare",
+          "body": [
+            "For the matched Modesto, CA area, the difference between the $832,750 one-unit conforming limit and the $545,100 one-unit FHA limit is $287,650. The $287,650 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $545,100 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $287,650 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
+            "news-modesto-ca-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "unit-count",
+          "heading": "Unit count changes the published ceiling",
+          "body": [
+            "Stanislaus County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $545,100 to $1,048,300. The higher $1,601,750 and $1,048,300 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Modesto, CA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,048,300 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "conforming-four",
+            "fha-one",
+            "fha-four"
+          ],
+          "sourceRecordIds": [
+            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
             "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
             "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
             "news-modesto-ca-county-loan-limits-source-fha-fourunit"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Why the one-unit limits differ",
+          "id": "category-boundary",
+          "heading": "A limit is a category boundary, not borrowing power",
           "body": [
-            "The clearest comparison in this release is difference between one-unit conforming and FHA limits at $287,650. The gap marks different program boundaries, not a pricing advantage, approval result, required loan amount, or recommendation for a borrower. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Modesto, CA. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "The $832,750 conforming ceiling and $545,100 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Modesto, CA household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $545,100 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $287,650 program gap is therefore best used to route questions, not to rank products. Regardless of the $287,650 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
-            "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
-            "news-modesto-ca-county-loan-limits-source-fha-fourunit"
+            "news-modesto-ca-county-loan-limits-source-fha-oneunit"
           ]
         },
         {
-          "id": "borrower-planning",
-          "heading": "Start with geography, unit count, and loan amount",
+          "id": "limit-boundaries",
+          "heading": "What the county limits cannot decide",
           "body": [
-            "For a borrower, one-unit FHA limit at $545,100 is most useful as an input to an organized comparison. Confirm the property's county or county-equivalent geography and number of legal units, then compare the needed base loan amount with the current program tables before discussing product fit. In Modesto, CA, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+            "Neither $1,601,750 nor $1,048,300 indicates what a four-unit property in Modesto, CA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $545,100 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $545,100 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Modesto, CA's connection to Stanislaus County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+          ],
+          "evidenceFactIds": [
+            "conforming-four",
+            "fha-four",
+            "conforming-one",
+            "fha-one"
           ],
           "sourceRecordIds": [
-            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
             "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
-            "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
-            "news-modesto-ca-county-loan-limits-source-fha-fourunit"
+            "news-modesto-ca-county-loan-limits-source-fha-fourunit",
+            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
+            "news-modesto-ca-county-loan-limits-source-fha-oneunit"
           ]
         },
         {
-          "id": "tradeoffs",
-          "heading": "A higher limit is not additional borrowing power",
+          "id": "verify-next",
+          "heading": "Verify the property before comparing products",
           "body": [
-            "Another boundary comes from four-unit FHA limit, reported here as $1,048,300. Published ceilings describe the maximum loan size within a program category for that geography; they do not increase income, reduce required cash, or waive underwriting standards. A borrower comparing options in Modesto, CA can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+            "A useful Modesto, CA next step is to document the property address, Stanislaus County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $545,100 for a one-unit property, or with $1,601,750 and $1,048,300 only when the four-unit category is actually applicable. After the $832,750 and $545,100 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $545,100 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $287,650 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "conforming-four",
+            "fha-four",
+            "one-unit-difference"
           ],
           "sourceRecordIds": [
             "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
             "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
-            "news-modesto-ca-county-loan-limits-source-fha-fourunit"
-          ]
-        },
-        {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
-          "body": [
-            "Neither $832,750 for one-unit conforming limit nor $545,100 for one-unit FHA limit determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. A loan limit cannot determine credit eligibility, debt-to-income acceptance, appraisal results, mortgage insurance, occupancy rules, cash requirements, rates, fees, or approval. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
             "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
-            "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
-            "news-modesto-ca-county-loan-limits-source-fha-fourunit"
-          ]
-        },
-        {
-          "id": "next-comparison",
-          "heading": "Use limits to route the next product questions",
-          "body": [
-            "A practical next step is to carry $1,601,750 for four-unit conforming limit and $287,650 for difference between one-unit conforming and FHA limits into a side-by-side planning conversation. Bring the property geography, unit count, price, down-payment plan, and desired loan amount to a licensed professional who can verify current limits and applicable program rules. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Modesto, CA, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Modesto, CA's loan-limit evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
-          ],
-          "sourceRecordIds": [
-            "news-modesto-ca-county-loan-limits-source-conforming-oneunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-twounit",
-            "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
-            "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
-            "news-modesto-ca-county-loan-limits-source-fha-oneunit",
-            "news-modesto-ca-county-loan-limits-source-fha-twounit",
-            "news-modesto-ca-county-loan-limits-source-fha-threeunit",
             "news-modesto-ca-county-loan-limits-source-fha-fourunit"
           ]
         }
@@ -1438,27 +1694,27 @@
             [
               "one-unit conforming limit",
               "$832,750",
-              "news-modesto-ca-county-loan-limits-source-conforming-oneunit"
+              "Federal Housing Finance Agency, 2026"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "news-modesto-ca-county-loan-limits-source-conforming-fourunit"
+              "Federal Housing Finance Agency, 2026"
             ],
             [
               "one-unit FHA limit",
               "$545,100",
-              "news-modesto-ca-county-loan-limits-source-fha-oneunit"
+              "U.S. Department of Housing and Urban Development, 2026"
             ],
             [
               "four-unit FHA limit",
               "$1,048,300",
-              "news-modesto-ca-county-loan-limits-source-fha-fourunit"
+              "U.S. Department of Housing and Urban Development, 2026"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$287,650",
-              "news-modesto-ca-county-loan-limits-source-conforming-oneunit,news-modesto-ca-county-loan-limits-source-fha-oneunit"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
             ]
           ],
           "sourceRecordIds": [
@@ -1475,13 +1731,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "one-unit-comparison",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article joins the official 2026 FHFA all-county conforming file and HUD 2026 FHA forward-limit file by the published five-digit county or county-equivalent FIPS and retains one- through four-unit amounts. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article joins the official 2026 FHFA all-county conforming file and HUD 2026 FHA forward-limit file by the published five-digit county or county-equivalent FIPS and retains one- through four-unit amounts. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "The location mapping identifies a published source geography for this location record, but a specific property can require separate geography verification and current program guidance. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -1498,7 +1754,7 @@
           "estimate": 832750,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-oneUnit"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: one-unit conforming limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-conforming-twounit",
@@ -1514,7 +1770,7 @@
           "estimate": 1066250,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-twoUnit"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: two-unit conforming limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-conforming-threeunit",
@@ -1530,7 +1786,7 @@
           "estimate": 1288800,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-threeUnit"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: three-unit conforming limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-conforming-fourunit",
@@ -1546,7 +1802,7 @@
           "estimate": 1601750,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-fourUnit"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: four-unit conforming limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-fha-oneunit",
@@ -1562,7 +1818,7 @@
           "estimate": 545100,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-oneUnit"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: one-unit FHA limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-fha-twounit",
@@ -1578,7 +1834,7 @@
           "estimate": 697800,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-twoUnit"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: two-unit FHA limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-fha-threeunit",
@@ -1594,7 +1850,7 @@
           "estimate": 843500,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-threeUnit"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: three-unit FHA limit"
         },
         {
           "sourceId": "news-modesto-ca-county-loan-limits-source-fha-fourunit",
@@ -1610,17 +1866,38 @@
           "estimate": 1048300,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-fourUnit"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: four-unit FHA limit"
         }
       ],
       "relatedRoutes": [
-        "/locations/california/modesto",
-        "/locations/california",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/california/modesto",
+          "label": "Modesto, CA mortgage and housing guide"
+        },
+        {
+          "route": "/locations/california",
+          "label": "California mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"

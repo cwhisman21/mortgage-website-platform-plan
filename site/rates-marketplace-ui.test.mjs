@@ -309,7 +309,8 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     assert.match(text, new RegExp(label, "i"));
   }
   assert.match(text, /Purchase \| 92109 \| \$1,060,000 price \| 20% down/);
-  assert.match(text, /These sample offers illustrate/);
+  assert.match(text, /illustrative examples, not live offers or commitments to lend/i);
+  assert.doesNotMatch(text, /fixture data|UI development|fictional/i);
   assert.equal((html.match(/data-offer-id=/g) || []).length, 8);
   assert.match(text, /Show more offers/);
   assert.doesNotMatch(html, /<div hidden aria-hidden="true">/);
@@ -353,8 +354,13 @@ test("keeps marketplace stylesheet selectors aligned with rendered offer markup"
   const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 
   for (const className of [
+    "rates-form-grid",
+    "rates-segmented",
+    "rates-results-heading",
+    "rates-summary-grid",
     "rates-offer",
     "rates-offer-row",
+    "rates-offer-metrics",
     "rates-offer-profile",
     "rates-expanded-panel",
     "rates-tabs",
@@ -486,4 +492,17 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   assert.equal(cached.resultType, "loanOfficer");
   assert.equal(cached.sort, "highestRating");
   assert.equal("email" in cached, false);
+});
+
+test("mounts the approved marketplace before crawlable rate education on the public rates page", () => {
+  const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
+  const ratesPageSource = appSource.match(/function ratesPage\(\) \{([\s\S]*?)\r?\n\}\r?\n\r?\nfunction statePage/);
+
+  assert.ok(ratesPageSource, "ratesPage should remain a discrete public-page renderer");
+  const body = ratesPageSource[1];
+  const marketplaceIndex = body.indexOf("renderRatesMarketplace({ fixture: ratesMarketplaceFixture })");
+  const educationIndex = body.indexOf('label: "Before you compare"');
+
+  assert.ok(marketplaceIndex >= 0, "the rates page should mount the marketplace component");
+  assert.ok(educationIndex > marketplaceIndex, "crawlable rate education should follow the comparison workspace");
 });

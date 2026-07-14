@@ -260,6 +260,21 @@ test("renders structured production article content with citations, CTAs, TOC, d
   assert.doesNotMatch(html, /placeholder|scaffold|wireframe|dummy|mock/i);
 });
 
+test("shows one freshness date when updatedAt and asOf are the same day", () => {
+  const content = JSON.parse(fs.readFileSync(compiledEditorialPath, "utf8"));
+  const article = content.articles.find((entry) => entry.id === "article-fha-basics");
+  const html = renderProductionArticle(article, {
+    contributors: content.contributors,
+    sources: content.sources,
+    relatedRoutes: new Map(),
+    route,
+  });
+
+  assert.equal(count(html, "Jul 13, 2026"), 1);
+  assert.match(html, /As of Jul 13, 2026/);
+  assert.doesNotMatch(html, /Last updated Jul 13, 2026|Updated Jul 13, 2026/);
+});
+
 test("renders every structured field from the compiled production article schema", () => {
   const content = JSON.parse(fs.readFileSync(compiledEditorialPath, "utf8"));
   const sourcesById = new Map(content.sources.map((entry) => [entry.id, entry]));

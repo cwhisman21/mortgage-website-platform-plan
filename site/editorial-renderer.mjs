@@ -189,7 +189,15 @@ export function renderProductionArticle(article, {
   const published = formatDate(article.publishedAt, "Published");
   const updated = formatDate(article.updatedAt, "Updated");
   const asOf = formatDate(article.asOf, "As of");
-  const dateDetails = [published, updated, asOf].filter(Boolean);
+  const dateDetailsByValue = new Map();
+  [
+    [article.publishedAt, published],
+    [article.updatedAt, updated],
+    [article.asOf, asOf],
+  ].forEach(([value, label]) => {
+    if (value && label) dateDetailsByValue.set(value, label);
+  });
+  const dateDetails = [...dateDetailsByValue.values()];
 
   return `
     <article class="production-article-page" data-production-article="${escapeHtml(article.id)}">
@@ -198,7 +206,7 @@ export function renderProductionArticle(article, {
           <p class="eyebrow">${escapeHtml(articleType)}</p>
           <h1>${escapeHtml(article.title)}</h1>
           ${article.dek ? `<p class="production-article-dek">${escapeHtml(article.dek)}</p>` : ""}
-          ${renderContributorBylineMarkup(article, contributors, { routeHref: route })}
+          ${renderContributorBylineMarkup(article, contributors, { routeHref: route, showDate: false })}
           ${dateDetails.length ? `<p class="production-article-dates">${dateDetails.map(escapeHtml).join(" <span aria-hidden=\"true\">|</span> ")}</p>` : ""}
         </div>
       </header>

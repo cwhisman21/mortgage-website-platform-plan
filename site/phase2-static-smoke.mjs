@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { DEFAULT_SITE_ORIGIN } from "./document-metadata.mjs";
+import { createPublicRouteManifest } from "./public-route-manifest.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(siteDir, "..");
@@ -11,6 +13,8 @@ const stylesSource = read("site/styles.css");
 const indexSource = read("site/index.html");
 const seedSource = read("mock-data/production-seed.json");
 const seed = JSON.parse(seedSource);
+const editorialContent = JSON.parse(read("mock-data/editorial-content.json"));
+const publicRouteManifest = createPublicRouteManifest({ seed, editorialContent });
 
 const failures = [];
 const fail = (message) => failures.push(message);
@@ -26,7 +30,8 @@ const routeCollections = [
   seed.blogPages,
   seed.articles,
   seed.calculators,
-  seed.directoryPages
+  seed.directoryPages,
+  editorialContent.contributors
 ];
 
 const collectionNames = [
@@ -40,10 +45,11 @@ const collectionNames = [
   "blogPages",
   "articles",
   "calculators",
-  "directoryPages"
+  "directoryPages",
+  "contributors"
 ];
 
-const routes = new Set(["/", "/locations", "/loan-options", "/loan-officers", "/branches", "/prequal/start"]);
+const routes = new Set(publicRouteManifest.map((entry) => entry.route));
 const routeOwners = new Map();
 const idOwners = new Map();
 
@@ -223,7 +229,33 @@ if (/function (?:prequalHandoffRequest|returnToRatesUrl|prequalScenarioRows|preq
 }
 if (!/built\.routes\.set\(\"\/prequal\/start\"/.test(appSource)) fail("prequal handoff route is not registered");
 if (!/rel=\"canonical\"/.test(indexSource)) fail("site/index.html missing canonical metadata shell");
-if (!/\"rewrites\"/.test(read("vercel.json"))) fail("vercel.json missing SPA route rewrites");
+if (!/document-metadata\.mjs/.test(appSource)) fail("site/app.js does not use shared document metadata");
+
+const vercelConfig = JSON.parse(read("vercel.json"));
+const firstRewrite = vercelConfig.rewrites?.[0];
+if (firstRewrite?.source !== "/learning-center/market-news/:slug") fail("market-news rewrite must remain first");
+const prequalRewrite = vercelConfig.rewrites?.find((rewrite) => rewrite.source === "/prequal/start");
+if (prequalRewrite?.destination !== "/site/generated/routes/prequal/start/index.html") fail("prequal must have an exact generated-document rewrite");
+if (vercelConfig.rewrites?.some((rewrite) => rewrite.source !== "/" && rewrite.destination === "/site/index.html")) {
+  fail("a non-root public route still rewrites to the homepage shell");
+}
+
+const generatedRoot = path.join(repoRoot, "site", "generated", "routes");
+const nonRootManifest = publicRouteManifest.filter((entry) => entry.route !== "/");
+if (nonRootManifest.length !== 871) fail(`expected 871 non-root public routes, found ${nonRootManifest.length}`);
+for (const entry of nonRootManifest) {
+  const generatedPath = path.join(generatedRoot, ...entry.route.slice(1).split("/"), "index.html");
+  if (!fs.existsSync(generatedPath)) {
+    fail(`missing generated document for ${entry.route}`);
+    continue;
+  }
+  const html = fs.readFileSync(generatedPath, "utf8");
+  if ((html.match(/<h1\b/g) || []).length !== 1) fail(`${entry.route} generated document must contain exactly one h1`);
+  if (!html.includes(`<link rel="canonical" href="${DEFAULT_SITE_ORIGIN}${entry.route}"`)) fail(`${entry.route} generated document has incorrect canonical metadata`);
+  if (!html.includes('href="/site/styles.css"')) fail(`${entry.route} generated document is missing the canonical stylesheet`);
+  if (!html.includes('src="/site/app.js"')) fail(`${entry.route} generated document is missing the SPA script`);
+  if (/Loading Snap Mortgage|loading-state/i.test(html)) fail(`${entry.route} generated document contains loading text`);
+}
 
 if (/href=["']#["']/.test(appSource) || /href=["']#["']/.test(indexSource)) {
   fail("A public template still renders href=\"#\"");

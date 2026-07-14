@@ -169,7 +169,8 @@ test("normalizes the fixture contract", async () => {
 
   assert.equal(fixture.version, "snap-rates-marketplace-v1");
   assert.equal(fixture.offers.length, 40);
-  assert.ok(fixture.disclosure.includes("These sample offers illustrate"));
+  assert.match(fixture.disclosure, /illustrative examples, not live offers or commitments to lend/i);
+  assert.doesNotMatch(`${fixture.disclosure} ${fixture.sampleOfferDisclosure}`, /fixture data|UI development|fictional/i);
 });
 
 test("rejects duplicate offer ids in the fixture schema", async () => {

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
+const documentMetadataSource = fs.readFileSync(new URL("./document-metadata.mjs", import.meta.url), "utf8");
 const vercel = JSON.parse(fs.readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
 
 const sourceBetween = (startMarker, endMarker) => {
@@ -18,7 +19,7 @@ test("Vercel preserves generated articles without intercepting existing learning
   assert.ok(articleRewrite, "missing generated article rewrite");
   assert.equal(articleRewrite.source, "/learning-center/market-news/:slug");
   for (const route of ["/buy", "/refinance", "/home-equity"]) {
-    assert.ok(vercel.rewrites.some((rewrite) => rewrite.source === route && rewrite.destination === "/site/index.html"), `missing ${route} rewrite`);
+    assert.ok(vercel.rewrites.some((rewrite) => rewrite.source === route && rewrite.destination === `/site/generated/routes${route}/index.html`), `missing ${route} rewrite`);
   }
 });
 
@@ -53,8 +54,9 @@ test("modal and direct article rendering receive the assigned contributor", () =
 test("SPA Article JSON-LD identifies the assigned contributor as a linked Person", () => {
   const metadataSource = sourceBetween("function setDocumentMeta", "function notFoundPage");
 
-  assert.match(metadataSource, /authorId/);
-  assert.match(metadataSource, /"@type":\s*"Person"/);
   assert.match(metadataSource, /contributors/);
-  assert.match(metadataSource, /\.route|route\(/);
+  assert.match(metadataSource, /resolveDocumentMetadata/);
+  assert.match(documentMetadataSource, /authorId/);
+  assert.match(documentMetadataSource, /"@type":\s*"Person"/);
+  assert.match(documentMetadataSource, /contributor\.route/);
 });

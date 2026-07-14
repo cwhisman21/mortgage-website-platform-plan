@@ -16,11 +16,11 @@ export const ACS_VARIABLES = {
   renterOccupiedUnits: ["B25003_003E", "B25003_003M"],
   medianGrossRent: ["B25064_001E", "B25064_001M"],
   medianHomeValue: ["B25077_001E", "B25077_001M"],
-  medianOwnerCostWithMortgage: ["B25103_001E", "B25103_001M"],
+  medianOwnerCostWithMortgage: ["B25088_002E", "B25088_002M"],
 };
 
 export const ACS_YEARS = ["2024", "2019"];
-export const ACS_SUMMARY_TABLES = ["B01003", "B19013", "B25001", "B25002", "B25003", "B25064", "B25077", "B25103"];
+export const ACS_SUMMARY_TABLES = ["B01003", "B19013", "B25001", "B25002", "B25003", "B25064", "B25077", "B25088"];
 export const ACS_RELEASE_URL = "https://www.census.gov/programs-surveys/acs/news/data-releases/2024/release.html";
 export const ACS_SUMMARY_PAGE = "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html";
 const PLACE_ALIASES = new Map([

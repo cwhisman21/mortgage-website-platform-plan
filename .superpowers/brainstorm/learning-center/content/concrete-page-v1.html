@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Snap Mortgage Learning Center — concrete mockup</title>
+  <style>
+    :root{--ink:#0b1f3a;--muted:#5d6b80;--blue:#0b55ff;--teal:#11bfb3;--gold:#fdba22;--green:#21c983;--red:#dc475c;--purple:#6f61a8;--line:#dce4ef;--soft:#f6f8fc;--navy:#071b34}*{box-sizing:border-box}body{margin:0;background:#e9edf4;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.note{position:sticky;top:0;z-index:20;background:#fff8db;border-bottom:1px solid #ead27a;padding:10px 20px;text-align:center;font-size:13px;color:#66520b}.page{max-width:1180px;margin:20px auto;background:#fff;box-shadow:0 18px 70px #11233b22}.header{height:78px;display:grid;grid-template-columns:210px 1fr auto;align-items:center;padding:0 38px;border-bottom:1px solid #e8edf5;background:#fff}.brand{display:flex;flex-direction:column;gap:2px}.brand strong{font-size:20px;letter-spacing:-.4px}.brand span{font-size:10px;text-transform:uppercase;letter-spacing:1.7px;color:#60708a}.nav{display:flex;gap:24px;justify-content:center;font-size:13px;font-weight:650}.nav a{color:#21324a;text-decoration:none}.nav a.active{color:var(--blue)}.account{border:1px solid #bfcce0;border-radius:20px;padding:9px 14px;font-size:12px;background:white}.hero{min-height:320px;display:grid;grid-template-columns:58% 42%;align-items:center;padding:54px 64px;background:linear-gradient(90deg,#f4f8ff 0,#f7fbff 60%,#eef5ff 100%);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-70px;bottom:-130px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,#d7e7ff 0,#edf5ff 53%,transparent 54%)}.eyebrow{margin:0 0 10px;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-family:Georgia,serif;font-size:50px;line-height:1.02;letter-spacing:-1.5px;margin:0 0 15px;max-width:680px}.hero p{font-size:17px;line-height:1.55;color:#52627a;max-width:620px;margin:0}.hero-actions{display:flex;gap:10px;margin-top:23px}.btn{display:inline-block;border:0;border-radius:7px;padding:12px 17px;background:var(--blue);color:#fff;font-weight:750;font-size:13px}.btn.secondary{background:#fff;color:var(--blue);border:1px solid #c5d6f2}.hero-visual{position:relative;z-index:2;display:flex;justify-content:center}.hero-visual img{width:230px;height:230px;object-fit:contain;filter:drop-shadow(0 18px 18px #3865aa24)}.search-zone{padding:24px 64px 20px;border-bottom:1px solid #edf1f6}.search{height:50px;border:1px solid #bccbe1;border-radius:12px;display:flex;align-items:center;padding:0 17px;box-shadow:0 5px 17px #0c367112;background:#fff}.search span{color:#78869a;margin-right:11px}.search input{border:0;outline:0;font-size:15px;flex:1;color:#263952}.search button{border:0;background:var(--blue);color:#fff;border-radius:7px;padding:9px 15px;font-weight:700}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.tag{padding:8px 12px;border:1px solid #c7d7ed;border-radius:999px;font-size:11px;font-weight:750;color:#24518d;background:#fbfdff}.cta{margin:24px 64px 0;border-radius:10px;background:linear-gradient(110deg,#084bb7,#0877d9);color:#fff;padding:20px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}.cta-icon{width:52px;height:52px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:22px}.cta h3{margin:0 0 4px;font-family:Georgia,serif;font-size:24px}.cta p{margin:0;color:#e7f2ff;font-size:13px}.cta .btn{background:#fff;color:#0755bb}.section{padding:34px 64px 0}.section:last-of-type{padding-bottom:34px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}.section h2{font-family:Georgia,serif;font-size:27px;margin:0}.section-head a{font-size:12px;color:var(--blue);font-weight:750}.grid{display:grid;gap:14px}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}.grid.five{grid-template-columns:repeat(5,1fr)}.card{border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden;min-width:0}.art{height:92px;position:relative;background:linear-gradient(135deg,#dce8fa,#f4f7fb)}.art.a{background:linear-gradient(135deg,#7d9fc2,#d9be8f)}.art.b{background:linear-gradient(135deg,#79b3bf,#d4ebed)}.art.c{background:linear-gradient(135deg,#d5b489,#f0e4cd)}.art:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:18px;top:14px;background:#ffffff66}.card-body{padding:14px}.kicker{font-size:9px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.card h3{font-family:Georgia,serif;font-size:17px;line-height:1.2;margin:6px 0 7px}.card p{font-size:11px;line-height:1.45;margin:0 0 9px;color:var(--muted)}.link{font-size:11px;color:var(--blue);font-weight:800}.topic-card,.calc-card{display:grid;grid-template-columns:42px 1fr;gap:10px;padding:13px;min-height:96px}.icon{width:38px;height:38px;border-radius:8px;background:#eef4ff;color:var(--blue);display:grid;place-items:center;font-weight:850}.topic-card h3,.calc-card h3{font-family:Georgia,serif;font-size:15px;margin:1px 0 5px}.topic-card p,.calc-card p{font-size:10px;line-height:1.4;margin:0;color:var(--muted)}.article-row .card{display:grid;grid-template-columns:1fr 82px;min-height:112px}.article-row .art{height:100%;min-height:112px}.loan-tile{height:128px;display:flex;flex-direction:column;justify-content:end;padding:15px;color:#fff;border-radius:9px;background:linear-gradient(180deg,#173c66aa,#092546),linear-gradient(135deg,#8198ad,#334b65)}.loan-tile:nth-child(2){background:linear-gradient(180deg,#173c66aa,#092546),linear-gradient(135deg,#92a88a,#3b5f47)}.loan-tile:nth-child(3){background:linear-gradient(180deg,#173c66aa,#092546),linear-gradient(135deg,#c09272,#76503b)}.loan-tile:nth-child(4){background:linear-gradient(180deg,#173c66aa,#092546),linear-gradient(135deg,#9487b0,#51466e)}.loan-tile h3{font-size:15px;margin:3px 0 0}.loan-tile span{font-size:9px;text-transform:uppercase;letter-spacing:.08em}.footer{background:var(--navy);color:#d7e2ee;margin-top:38px;padding:38px 64px}.footer-grid{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:34px}.footer h3{color:#fff;font-size:14px;margin:0 0 10px}.footer p,.footer a{display:block;color:#aebdd0;font-size:11px;line-height:1.6;text-decoration:none;margin:0 0 4px}.decision{padding:22px;background:#fff;border-top:1px solid #d9e2ee;display:flex;align-items:center;justify-content:center;gap:12px}.decision button{border:1px solid #bfd0e9;background:white;border-radius:8px;padding:10px 15px;font-weight:750;color:#16375f}.decision button:hover{border-color:var(--blue);color:var(--blue)}@media(max-width:800px){.page{margin:0}.header{grid-template-columns:1fr auto;padding:0 20px}.nav{display:none}.hero{grid-template-columns:1fr;padding:38px 24px}.hero h1{font-size:39px}.hero-visual{display:none}.search-zone,.section{padding-left:24px;padding-right:24px}.cta{margin-left:24px;margin-right:24px;grid-template-columns:auto 1fr}.cta .btn{grid-column:1/-1;text-align:center}.grid.three,.grid.four,.grid.five{grid-template-columns:1fr}.footer{padding:32px 24px}.footer-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div class="note">Concrete composition using canonical Snap objects only. The artwork is neutral layout treatment, not a proposed content object.</div>
+  <div class="page">
+    <header class="header">
+      <div class="brand"><strong>Snap Loans</strong><span>Mortgage intelligence</span></div>
+      <nav class="nav"><a>Locations</a><a>Rates</a><a>Buy</a><a>Refinance</a><a>Loan Options</a><a>Calculators</a><a class="active">Learning</a><a>Experts</a></nav>
+      <button class="account">My Account</button>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Learning center</p>
+        <h1>Mortgage education connected to local decisions.</h1>
+        <p>Read market updates, product explainers, tax and insurance guides, calculator walkthroughs, and first-time buyer resources.</p>
+        <div class="hero-actions"><span class="btn">Market updates</span><span class="btn secondary">Buying guides</span></div>
+      </div>
+      <div class="hero-visual"><img src="https://mortgage-website-platform-plan-thinkwhale.vercel.app/site/assets/images/mortgage.png" alt="Existing Snap mortgage illustration"></div>
+    </section>
+
+    <div class="search-zone">
+      <div class="search"><span>⌕</span><input aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..."><button>Search</button></div>
+      <div class="tags">
+        <span class="tag">Local Market Updates</span><span class="tag">Buying a Home</span><span class="tag">Refinance</span><span class="tag">FHA Loans</span><span class="tag">VA Loans</span><span class="tag">Jumbo Loans</span><span class="tag">Home Equity</span><span class="tag">Taxes &amp; Insurance</span><span class="tag">Editorial Team</span>
+      </div>
+    </div>
+
+    <div class="cta"><div class="cta-icon">✓</div><div><h3>Start a prequalification conversation</h3><p>Organize the borrower, property, and timing details a licensed loan officer may need to review next steps.</p></div><span class="btn">Start prequalification</span></div>
+
+    <section class="section">
+      <div class="section-head"><h2>Featured articles</h2><a>Learning Center →</a></div>
+      <div class="grid three">
+        <article class="card"><div class="art a"></div><div class="card-body"><span class="kicker">Local market update</span><h3>Austin mortgage market update: payments, inventory, and buyer leverage</h3><span class="link">Read →</span></div></article>
+        <article class="card"><div class="art b"></div><div class="card-body"><span class="kicker">Taxes &amp; insurance</span><h3>Florida insurance costs and mortgage payment planning</h3><span class="link">Read →</span></div></article>
+        <article class="card"><div class="art c"></div><div class="card-body"><span class="kicker">FHA loans</span><h3>How FHA loans work for lower down payment buyers</h3><span class="link">Read →</span></div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Topic hubs</h2><a>All topics →</a></div>
+      <div class="grid four">
+        <div class="card topic-card"><div class="icon">01</div><div><h3>Local Market Updates</h3><p>Index for city and state market update articles.</p></div></div>
+        <div class="card topic-card"><div class="icon">02</div><div><h3>Buying a Home</h3><p>Buyer education hub and first-time buyer path.</p></div></div>
+        <div class="card topic-card"><div class="icon">03</div><div><h3>Refinance</h3><p>Refinance article hub.</p></div></div>
+        <div class="card topic-card"><div class="icon">04</div><div><h3>FHA Loans</h3><p>FHA article hub.</p></div></div>
+        <div class="card topic-card"><div class="icon">05</div><div><h3>VA Loans</h3><p>VA article hub.</p></div></div>
+        <div class="card topic-card"><div class="icon">06</div><div><h3>Jumbo Loans</h3><p>Jumbo and high-cost market article hub.</p></div></div>
+        <div class="card topic-card"><div class="icon">07</div><div><h3>Home Equity</h3><p>HELOC, cash-out, and equity education hub.</p></div></div>
+        <div class="card topic-card"><div class="icon">08</div><div><h3>Taxes &amp; Insurance</h3><p>Tax, insurance, and affordability context hub.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Calculators</h2><a>All calculators →</a></div>
+      <div class="grid five">
+        <div class="card calc-card"><div class="icon">$</div><div><h3>Mortgage Payment Calculator</h3><span class="link">Calculate →</span></div></div>
+        <div class="card calc-card"><div class="icon">⌂</div><div><h3>Affordability Calculator</h3><span class="link">Calculate →</span></div></div>
+        <div class="card calc-card"><div class="icon">↻</div><div><h3>Refinance Calculator</h3><span class="link">Calculate →</span></div></div>
+        <div class="card calc-card"><div class="icon">⇄</div><div><h3>Rent vs Buy Calculator</h3><span class="link">Calculate →</span></div></div>
+        <div class="card calc-card"><div class="icon">%</div><div><h3>Down Payment Calculator</h3><span class="link">Calculate →</span></div></div>
+      </div>
+    </section>
+
+    <section class="section article-row">
+      <div class="section-head"><h2>Helpful next reads</h2><a>All articles →</a></div>
+      <div class="grid three">
+        <article class="card"><div class="card-body"><span class="kicker">Market update</span><h3>Dallas buyer update: comparing conventional and FHA payment paths</h3><span class="link">Read →</span></div><div class="art a"></div></article>
+        <article class="card"><div class="card-body"><span class="kicker">Market update</span><h3>San Diego VA and coastal affordability update</h3><span class="link">Read →</span></div><div class="art b"></div></article>
+        <article class="card"><div class="card-body"><span class="kicker">Buyer guide</span><h3>First-time buyer checklist for comparing local markets</h3><span class="link">Read →</span></div><div class="art c"></div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Loan paths</h2><a>Loan Options →</a></div>
+      <div class="grid four">
+        <div class="loan-tile"><span>Buy a home</span><h3>Home Purchase Loans</h3></div><div class="loan-tile"><span>Refinance a mortgage</span><h3>Refinance</h3></div><div class="loan-tile"><span>Lower down payment purchase</span><h3>FHA Loans</h3></div><div class="loan-tile"><span>Military or veteran financing</span><h3>VA Loans</h3></div>
+      </div>
+    </section>
+
+    <div class="cta"><div class="cta-icon">?</div><div><h3>Ask for mortgage guidance</h3><p>Get ready to connect with licensed help when your question needs a person.</p></div><span class="btn">Request guidance</span></div>
+
+    <footer class="footer"><div class="footer-grid"><div><h3>Snap Mortgage</h3><p>Local mortgage intelligence, rate details, market data, education, and licensed expert help.</p><p>Information is educational and does not replace a Loan Estimate, approval decision, or commitment to lend.</p></div><div><h3>Explore</h3><a>Locations</a><a>Rates</a><a>Loan options</a><a>Loan officers</a></div><div><h3>Tools</h3><a>Calculators</a><a>Affordability</a><a>Refinance</a><a>Compare an offer</a></div><div><h3>People</h3><a>Loan officers</a><a>Branches</a><a>Request guidance</a><a>Editorial team</a></div><div><h3>Learning</h3><a>Learning center</a><a>Market updates</a><a>Buying a home</a></div></div></footer>
+  </div>
+  <div class="decision"><strong>Does this concrete structure capture the direction?</strong><button data-choice="concrete-yes" onclick="toggleSelect(this)">Yes, refine this</button><button data-choice="concrete-no" onclick="toggleSelect(this)">No, revise structure</button></div>
+</body>
+</html>

@@ -46298,7 +46298,7 @@
       "name": "Learning Center home",
       "route": "/learning-center",
       "topic": "all",
-      "purpose": "Editorial landing page with featured articles, topic hubs, local market updates, and product education.",
+      "purpose": "Browse borrower guides, local market updates, loan options, calculators, and practical next steps.",
       "featuredArticleIds": [
         "article-austin-market-update",
         "article-florida-insurance-guide",

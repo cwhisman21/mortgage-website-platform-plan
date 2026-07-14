@@ -205,7 +205,7 @@ function displayBylineDate(article, dateLabel) {
 export function renderContributorBylineMarkup(
   article,
   contributors = [],
-  { compact = false, routeHref = (href) => href, dateMonth = "short" } = {},
+  { compact = false, routeHref = (href) => href, dateMonth = "short", showDate = true } = {},
 ) {
   const byline = renderBylineModel(article, contributors, { dateMonth });
   const dateLabel = displayBylineDate(article, byline.dateLabel);
@@ -215,7 +215,7 @@ export function renderContributorBylineMarkup(
   const titleMarkup = compact
     ? ""
     : `<span class="article-byline-title">${escapeHtml(byline.title)}</span>`;
-  const dateMarkup = dateLabel ? `<time>${escapeHtml(dateLabel)}</time>` : "";
+  const dateMarkup = showDate && dateLabel ? `<time>${escapeHtml(dateLabel)}</time>` : "";
   const contributorHref = /^\/learning-center\/authors\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(byline.href || "")
     ? byline.href
     : "";

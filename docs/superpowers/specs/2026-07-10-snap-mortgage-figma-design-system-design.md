@@ -6,7 +6,7 @@ Approved for Figma design work. This document does not authorize changes to the 
 
 ## Goal
 
-Create a high-fidelity Figma source of truth for the Snap Mortgage public-site component system and six core responsive templates. The system should clean up reusable visual components while preserving the existing page structure and borrower-facing content architecture.
+Create a high-fidelity Figma source of truth for the Snap Mortgage public-site component system and all approved responsive public-page templates. The system should clean up reusable visual components while preserving the existing page structure and borrower-facing content architecture.
 
 ## Product Boundary
 
@@ -21,10 +21,10 @@ Create a high-fidelity Figma source of truth for the Snap Mortgage public-site c
 
 - A new Figma file named `Snap Mortgage - Component System & Core Templates`.
 - A component-first Figma foundation for existing public-site structure.
-- High-fidelity desktop and mobile layouts for Home, City/State, Rates, Calculator, Product, and Article templates.
+- High-fidelity desktop and mobile layouts for Home, location directory, state market desk, city market desk, rates, directory search, loan options, product detail, calculator, loan officer, branch, learning center, topic guide, and article templates.
 - Existing Snap Mortgage logo and blue, navy, teal, and orange palette refined into a coherent token system.
-- Outfield for display and heading text.
-- Existing clean Aptos/Segoe-style sans-serif for body copy, navigation, forms, tables, and dense interface text.
+- Figma source typography uses the user-approved Outfit substitute for display and heading text because Outfield is not installed in the workspace.
+- Figma source typography uses Inter for body copy, navigation, forms, tables, and dense interface text because Aptos/Segoe UI are not installed in the workspace.
 - The supplied mortgage-machine campaign image reconstructed as editable visual and text layers for the homepage hero concept.
 - Editable hero copy: `There is a better way than hoping for the best.`
 - Decorative, non-interactive loan cards in the homepage hero.
@@ -48,7 +48,7 @@ Create a high-fidelity Figma source of truth for the Snap Mortgage public-site c
 
 ## Figma File Structure
 
-The authenticated Figma Starter workspace allows three file pages. Preserve the approved organization with three Figma pages and named canvas sections rather than seven Figma pages.
+The approved Figma organization uses three pages and named canvas sections rather than seven pages.
 
 ### 00 Reference & Foundations
 
@@ -56,11 +56,11 @@ The authenticated Figma Starter workspace allows three file pages. Preserve the 
 - Existing wireframe inventory and page-template reference.
 - A short note that page structure is fixed during component cleanup.
 - Color variables for core navy, blue, teal, orange, neutral surfaces, borders, and semantic states.
-- Typography variables and styles: Outfield display headings plus the existing sans-serif UI/body scale.
+- Typography variables and styles: Outfit display headings plus the Inter UI/body scale used in the Figma source file.
 - Spacing, grid, breakpoint, radius, stroke, and elevation tokens.
 - Desktop and mobile layout rules.
 
-### 02 Components
+### 01 Components
 
 - Header, global navigation, mobile navigation trigger, account menu, breadcrumb, and footer.
 - Buttons, text links, icon buttons, tags, badges, and status labels.
@@ -78,15 +78,23 @@ Create these named sections on this Figma page: `Desktop Templates`, `Mobile Tem
 #### Desktop Templates
 
 - Homepage.
-- City/State market dashboard.
-- Rates page.
-- Calculator page.
-- Product page.
-- Article page.
+- Locations directory.
+- State market desk.
+- City market desk.
+- Rates hybrid.
+- Directory search.
+- Loan options.
+- Product detail.
+- Calculator.
+- Loan officer profile.
+- Branch profile.
+- Learning center.
+- Topic guide.
+- Article.
 
 #### Mobile Templates
 
-- Matching mobile frame for each desktop core template.
+- Matching 390 px mobile frame for each desktop template.
 - Mobile navigation, single-column stacking, chart/table overflow behavior, sticky action treatment, and touch target rules.
 
 #### Campaign Hero
@@ -124,7 +132,7 @@ Create these named sections on this Figma page: `Desktop Templates`, `Mobile Tem
 
 ## Responsive Requirements
 
-- Build desktop and mobile frames for all six core templates.
+- Build desktop and mobile frames for all approved public-page templates.
 - Use responsive variants and auto layout for components instead of manually redrawing mobile copies.
 - Tables must define a horizontal-scroll or transformed-card mobile behavior.
 - Charts retain a readable axis/source relationship at mobile widths and have a data-table fallback pattern.
@@ -133,10 +141,10 @@ Create these named sections on this Figma page: `Desktop Templates`, `Mobile Tem
 ## Validation
 
 - Inspect all Figma component instances to confirm they use shared tokens and variants.
-- Verify desktop and mobile screenshots for all six core templates: no clipped text, overlaps, invisible controls, or broken component instances.
+- Verify desktop and mobile screenshots for every approved template: no clipped text, overlaps, invisible controls, or broken component instances.
 - Compare each template against the current route structure to confirm no approved section was lost or reordered without approval.
 - Verify hero text is editable and separate from the source image.
-- Verify Outfield is available in Figma before creating heading styles. If unavailable, stop and ask for a font-file or approved replacement before substituting another family.
+- Verify the approved Figma typography choice is available before creating styles. Outfit for headings and Inter for UI/body are the approved source-file substitutes until the original fonts are installed.
 
 ## Deferred Review Note
 
@@ -144,9 +152,9 @@ The supplied campaign source uses approval and rate/APR language. It is accepted
 
 ## Acceptance Criteria
 
-- A new Figma file follows the approved three-page Starter-plan structure above.
+- A new Figma file follows the approved three-page structure above.
 - Foundations and reusable components are created before page-level custom work.
-- The six core templates have high-fidelity desktop and mobile frames using component instances.
+- All 14 public page templates have high-fidelity desktop and mobile frames using component instances.
 - Page-family composition matches the approved map.
 - The public site's existing routes and page structure remain unchanged during this phase.
 - The homepage campaign hero uses the supplied visual direction with editable text layers.

@@ -278,7 +278,7 @@ function disclosure(fixture) {
     <aside class="rates-disclosure">
       <span aria-hidden="true">i</span>
       <div>
-        <strong>Sample offers from participating providers</strong>
+        <strong>Illustrative comparison results</strong>
         <p>${esc(fixture.disclosure)}</p>
         ${fixture.sampleOfferDisclosure ? `<p>${esc(fixture.sampleOfferDisclosure)}</p>` : ""}
       </div>
@@ -313,13 +313,15 @@ function offerRow(offer, state) {
     <article class="rates-offer ${expanded ? "active" : ""}" data-offer-id="${esc(offer.id)}">
       <div class="rates-offer-row">
         ${offerProfile(offer)}
-        ${offerMetric("Rate", formatRate(offer.rate))}
-        ${offerMetric("APR", formatRate(offer.apr))}
-        ${offerMetric("Points", Number(offer.points).toFixed(3).replace(/0+$/, "").replace(/\.$/, ""), false)}
-        ${offerMetric("Payment", formatCurrency(offer.principalAndInterest))}
-        ${offerMetric("Upfront", formatCurrency(offer.upfrontCost))}
-        ${offerMetric("8-year cost", formatCurrency(offer.eightYearCost))}
-        ${offerMetric("Rating", `${offer.rating} / 5`, false)}
+        <div class="rates-offer-metrics">
+          ${offerMetric("Rate", formatRate(offer.rate))}
+          ${offerMetric("APR", formatRate(offer.apr))}
+          ${offerMetric("Points", Number(offer.points).toFixed(3).replace(/0+$/, "").replace(/\.$/, ""), false)}
+          ${offerMetric("Payment", formatCurrency(offer.principalAndInterest))}
+          ${offerMetric("Upfront", formatCurrency(offer.upfrontCost))}
+          ${offerMetric("8-year cost", formatCurrency(offer.eightYearCost))}
+          ${offerMetric("Rating", `${offer.rating} / 5`, false)}
+        </div>
         <div class="rates-offer-actions">
           <button class="button" type="button" data-prequal-offer="${esc(offer.id)}" data-analytics-event="rates_provider_next">Next</button>
           <button class="text-button" type="button" data-offer-details="${esc(offer.id)}" aria-expanded="${expanded ? "true" : "false"}" data-analytics-event="rates_marketplace_expand_offer">${expanded ? "Hide details" : "Show details"}</button>
@@ -435,7 +437,7 @@ function reviewsPanel(offer) {
     <div class="rates-reviews-panel">
       <div>
         <h4>Customer reviews</h4>
-        <p><strong>${esc(offer.rating)} / 5</strong> from ${esc(offer.reviewCount)} sample reviews</p>
+        <p><strong>${esc(offer.rating)} / 5</strong> across ${esc(offer.reviewCount)} illustrative review entries</p>
         <p>Read-only review source: ${esc(offer.reviews.source)}</p>
       </div>
       <div class="rates-rating-bars" aria-label="Review distribution">

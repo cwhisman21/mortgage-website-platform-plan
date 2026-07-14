@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { resolveDocumentMetadata } from "./document-metadata.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(siteDir, "..");
@@ -16,6 +17,7 @@ const contributors = readJson("mock-data/editorial/contributors.json").contribut
 const ratesFixture = readJson("mock-data/rates-marketplace-fixtures.json");
 const appSource = read("site/app.js");
 const indexSource = read("site/index.html");
+const metadataSource = read("site/document-metadata.mjs");
 const sitemapSource = read("site/sitemap.xml");
 
 const routeCollections = [
@@ -113,13 +115,6 @@ function collectDataRouteReferences(value, file, pathParts = [], references = []
   return references;
 }
 
-function extractObjectString(source, objectName, key) {
-  const block = source.match(new RegExp(`const ${objectName} = \\{([\\s\\S]*?)\\n  \\};`));
-  if (!block) return "";
-  const match = block[1].match(new RegExp(`\\b${key}:\\s*["'\`]([^"'\`]+)["'\`]`));
-  return match?.[1] || "";
-}
-
 function mergeArticleOverlays() {
   const overlays = new Map((editorialContent.articles || []).map((article) => [article.id, article]));
   return (seed.articles || []).map((article) => ({ ...article, ...(overlays.get(article.id) || {}) }));
@@ -127,34 +122,28 @@ function mergeArticleOverlays() {
 
 function metadataRecords() {
   const records = [];
+  const statesById = Object.fromEntries(seed.states.map((state) => [state.id, state]));
+  const contributorsById = Object.fromEntries(contributors.map((contributor) => [contributor.id, contributor]));
+  const resolveRecord = (type, item) => {
+    const metadata = resolveDocumentMetadata({ type, item }, {
+      path: item.route,
+      siteOrigin: "https://mortgage.example",
+      statesById,
+      contributorsById,
+    });
+    return { route: item.route, title: metadata.title, description: metadata.description };
+  };
   const rates = seed.ratesPages.find((page) => page.route === "/rates");
-  records.push({
-    route: "/rates",
-    title: extractObjectString(appSource, "titles", "rates"),
-    description: extractObjectString(appSource, "descriptions", "rates"),
-  });
+  records.push(resolveRecord("rates", rates));
 
   for (const hub of seed.blogPages.filter((page) => page.route !== "/learning-center")) {
-    records.push({
-      route: hub.route,
-      title: hub.metaTitle || `${hub.name} | Snap Mortgage Learning Center`,
-      description: hub.metaDescription || "",
-      fallbackDescription: hub.purpose || rates?.purpose || "",
-    });
+    records.push(resolveRecord("blog", hub));
   }
   for (const contributor of contributors) {
-    records.push({
-      route: contributor.route,
-      title: contributor.metaTitle || `${contributor.name} | Snap Mortgage Learning Center`,
-      description: contributor.metaDescription || contributor.bio || "",
-    });
+    records.push(resolveRecord("contributor", contributor));
   }
   for (const article of mergeArticleOverlays()) {
-    records.push({
-      route: article.route,
-      title: article.metaTitle || `${article.title} | Snap Mortgage`,
-      description: article.metaDescription || article.dek || "",
-    });
+    records.push(resolveRecord("article", article));
   }
   return records;
 }
@@ -218,11 +207,12 @@ test("the metadata shell updates title, description, canonical, Open Graph, and 
   assert.match(indexSource, /<meta\s+property="og:description"/);
   assert.match(indexSource, /<meta\s+property="og:url"/);
   assert.match(indexSource, /data-document-jsonld/);
-  assert.match(appSource, /document\.title\s*=/);
-  assert.match(appSource, /meta\[name="description"\].*setAttribute\("content", description\)/);
-  assert.match(appSource, /link\[rel="canonical"\].*setAttribute\("href", canonical\)/);
-  assert.match(appSource, /meta\[property="og:url"\].*setAttribute\("content", canonical\)/);
-  assert.match(appSource, /"@type":\s*"Article"/);
+  assert.match(appSource, /from "\/site\/document-metadata\.mjs"/);
+  assert.match(appSource, /resolveDocumentMetadata\(found,\s*\{/);
+  assert.match(appSource, /applyDocumentMetadata\(document, metadata\)/);
+  assert.match(metadataSource, /documentLike\.title\s*=\s*metadata\.title/);
+  assert.match(metadataSource, /meta\[name=\\?"twitter:title/);
+  assert.match(metadataSource, /"@type":\s*"Article"/);
 });
 
 test("sitemap entries and canonical route ownership match in both directions", () => {

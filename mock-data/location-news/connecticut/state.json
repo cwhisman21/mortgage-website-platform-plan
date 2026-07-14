@@ -13,7 +13,7 @@
       "title": "Connecticut home-price movement in the latest FHFA HPI",
       "dek": "Quarterly, annual, and longer-run state HPI comparisons with a clear boundary between market movement and property value.",
       "previewText": "Review the latest FHFA home-price movement for Connecticut and why an index cannot value a specific property.",
-      "metaDescription": "Review the latest FHFA home-price movement for Connecticut and why an index cannot value a specific property. Review official evidence, comparisons, limitations, and",
+      "metaDescription": "Connecticut home-price movement in the latest FHFA HPI. Review the latest FHFA home-price movement for Connecticut and why an index cannot value a specific.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "Home-price movement",
@@ -82,81 +82,107 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "What the latest state index shows",
+          "id": "latest-index",
+          "heading": "The latest statewide index reading",
           "body": [
-            "The latest evidence for Connecticut puts FHFA purchase-only HPI at 314, while quarterly HPI change is 1.4%. The purchase-only index tracks broad price movement in repeat transactions and is designed to show direction over time rather than a typical sale price. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "Connecticut's latest FHFA purchase-only HPI is 314, accompanied by a quarterly change of 1.4%. For Connecticut, the 314 index level is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price. A quarter in which the index rose by 1.4% can help a borrower date the statewide market context, but it cannot identify the value or asking price of a selected property. Reading 314 with 1.4% also keeps the level separate from the rate of change. Alongside the 314 state index, local inventory, property type, condition, concessions, taxes, insurance, and financing costs still need current evidence before the trend informs a decision."
+          ],
+          "evidenceFactIds": [
+            "hpi-index",
+            "quarterly-change"
           ],
           "sourceRecordIds": [
             "news-ct-state-home-price-movement-source-hpi-index",
+            "news-ct-state-home-price-movement-source-quarterly-change"
+          ]
+        },
+        {
+          "id": "short-and-annual",
+          "heading": "Quarterly and annual windows tell different stories",
+          "body": [
+            "Over the latest quarter, Connecticut's purchase-only HPI rose by 1.4%; over the latest year, it rose by 4.7%. The 1.4% figure is more sensitive to recent movement, while 4.7% compares the latest quarter with the matching quarter a year earlier. A borrower should not choose between the 1.4% and 4.7% windows based only on which looks more favorable, because the comparisons answer different timing questions. Together they show whether recent statewide movement is aligned with or different from the broader year without predicting the next quarter, a local bidding environment, or the price path of one home in Connecticut."
+          ],
+          "evidenceFactIds": [
+            "quarterly-change",
+            "annual-change"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-home-price-movement-source-quarterly-change",
+            "news-ct-state-home-price-movement-source-annual-change"
+          ]
+        },
+        {
+          "id": "longer-run",
+          "heading": "Place the latest movement in a longer sequence",
+          "body": [
+            "Across the five-year comparison, the Connecticut HPI rose by 53.6%, compared with the latest annual movement of 4.7%. The 53.6% change places the current 314 index reading in a longer repeat-sale sequence, but it can span very different rate, inventory, and economic conditions. The 53.6% change should not be applied to an old purchase price to estimate a current property value. For a borrower, the contrast between 53.6% and 4.7% is most useful as a reminder that search assumptions can age at different speeds. Even when the 53.6% direction is clear, current comparable properties and a property-specific payment worksheet remain necessary."
+          ],
+          "evidenceFactIds": [
+            "five-year-change",
+            "annual-change",
+            "hpi-index"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-home-price-movement-source-five-year-change",
+            "news-ct-state-home-price-movement-source-annual-change",
+            "news-ct-state-home-price-movement-source-hpi-index"
+          ]
+        },
+        {
+          "id": "market-context",
+          "heading": "Use the index to test local assumptions",
+          "body": [
+            "The combination of a 1.4% quarterly change, 4.7% annual change, and 53.6% five-year change gives Connecticut borrowers three dated views of the same statewide index. If the 1.4%, 4.7%, and 53.6% windows point in different directions, the divergence shows that timing matters; if they point together, statewide consistency still does not erase local variation. A Connecticut search plan can use those three changes to ask whether current listings, seller concessions, and property types resemble the broad state movement. It should not use 314 as a sale price or use any of the percentage changes as a forecast, because FHFA HPI measures repeat-sale movement rather than the complete set of homes available to one borrower."
+          ],
+          "evidenceFactIds": [
+            "quarterly-change",
+            "annual-change",
+            "five-year-change",
+            "hpi-index"
+          ],
+          "sourceRecordIds": [
             "news-ct-state-home-price-movement-source-quarterly-change",
             "news-ct-state-home-price-movement-source-annual-change",
+            "news-ct-state-home-price-movement-source-five-year-change",
+            "news-ct-state-home-price-movement-source-hpi-index"
+          ]
+        },
+        {
+          "id": "valuation-boundary",
+          "heading": "The HPI cannot value a property or set a payment",
+          "body": [
+            "An HPI level of 314 does not establish a Connecticut property's dollar value, and an 4.7% annual movement does not establish how much any home gained or lost. The 314 index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the 1.4% and 53.6% comparisons should retain their release period. The 314 index level must remain separate from the dollar figures used in a property review. Those limits make the 314 state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
+          ],
+          "evidenceFactIds": [
+            "hpi-index",
+            "annual-change",
+            "quarterly-change",
+            "five-year-change"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-home-price-movement-source-hpi-index",
+            "news-ct-state-home-price-movement-source-annual-change",
+            "news-ct-state-home-price-movement-source-quarterly-change",
             "news-ct-state-home-price-movement-source-five-year-change"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Quarterly and annual changes use different windows",
+          "id": "local-next-step",
+          "heading": "Connect the state trend to current property evidence",
           "body": [
-            "The clearest comparison in this release is quarterly HPI change at 1.4%. The shorter comparison can be more sensitive to recent movement, while the annual and longer-run figures place the latest quarter in a broader sequence. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Connecticut. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "A practical Connecticut borrower review can record 1.4%, 4.7%, and 53.6% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the 1.4% state change as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review rather than multiplying a prior value by 4.7% or 53.6%. This approach preserves the information in the 314 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
+          ],
+          "evidenceFactIds": [
+            "quarterly-change",
+            "annual-change",
+            "five-year-change",
+            "hpi-index"
           ],
           "sourceRecordIds": [
-            "news-ct-state-home-price-movement-source-hpi-index",
             "news-ct-state-home-price-movement-source-quarterly-change",
             "news-ct-state-home-price-movement-source-annual-change",
-            "news-ct-state-home-price-movement-source-five-year-change"
-          ]
-        },
-        {
-          "id": "borrower-planning",
-          "heading": "Use an index to frame, not price, a search",
-          "body": [
-            "For a borrower, annual HPI change at 4.7% is most useful as an input to an organized comparison. A borrower can use the trend to ask how current listings, concessions, inventory, and property types compare with the statewide pattern, then rely on property-specific evidence for an offer or valuation. In Connecticut, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-home-price-movement-source-hpi-index",
-            "news-ct-state-home-price-movement-source-quarterly-change",
-            "news-ct-state-home-price-movement-source-annual-change",
-            "news-ct-state-home-price-movement-source-five-year-change"
-          ]
-        },
-        {
-          "id": "tradeoffs",
-          "heading": "Index movement and affordability are not the same",
-          "body": [
-            "Another boundary comes from five-year HPI change, reported here as 53.6%. An index does not include the borrower's income, financing costs, taxes, insurance, maintenance, or the mix of homes available at a chosen price point. A borrower comparing options in Connecticut can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-home-price-movement-source-hpi-index",
-            "news-ct-state-home-price-movement-source-quarterly-change",
-            "news-ct-state-home-price-movement-source-annual-change",
-            "news-ct-state-home-price-movement-source-five-year-change"
-          ]
-        },
-        {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
-          "body": [
-            "Neither 314 for FHFA purchase-only HPI nor 4.7% for annual HPI change determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. FHFA HPI cannot establish the market value of a home, predict a future sale price, identify a competitive offer, or determine a mortgage payment or approval. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-home-price-movement-source-hpi-index",
-            "news-ct-state-home-price-movement-source-quarterly-change",
-            "news-ct-state-home-price-movement-source-annual-change",
-            "news-ct-state-home-price-movement-source-five-year-change"
-          ]
-        },
-        {
-          "id": "next-comparison",
-          "heading": "Connect the state trend to current local evidence",
-          "body": [
-            "A practical next step is to carry 1.4% for quarterly HPI change and 1.4% for quarterly HPI change into a side-by-side planning conversation. Compare the state index with recent property-level information, a realistic payment worksheet, and current disclosures instead of multiplying a prior home value by the index change. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Connecticut, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state home-price index evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-home-price-movement-source-hpi-index",
-            "news-ct-state-home-price-movement-source-quarterly-change",
-            "news-ct-state-home-price-movement-source-annual-change",
-            "news-ct-state-home-price-movement-source-five-year-change"
+            "news-ct-state-home-price-movement-source-five-year-change",
+            "news-ct-state-home-price-movement-source-hpi-index"
           ]
         }
       ],
@@ -208,22 +234,22 @@
             [
               "FHFA purchase-only HPI",
               "314",
-              "news-ct-state-home-price-movement-source-hpi-index"
+              "Federal Housing Finance Agency, 2026Q1"
             ],
             [
               "quarterly HPI change",
               "1.4%",
-              "news-ct-state-home-price-movement-source-quarterly-change"
+              "Federal Housing Finance Agency, 2026Q1"
             ],
             [
               "annual HPI change",
               "4.7%",
-              "news-ct-state-home-price-movement-source-annual-change"
+              "Federal Housing Finance Agency, 2026Q1"
             ],
             [
               "five-year HPI change",
               "53.6%",
-              "news-ct-state-home-price-movement-source-five-year-change"
+              "Federal Housing Finance Agency, 2026Q1"
             ]
           ],
           "sourceRecordIds": [
@@ -236,13 +262,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "short-and-annual",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses the official FHFA purchase-only state quarterly HPI and calculates changes from matching prior-quarter, prior-year, and five-year index observations when available. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses the official FHFA purchase-only state quarterly HPI and calculates changes from matching prior-quarter, prior-year, and five-year index observations when available. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "FHFA may revise index values, statewide movement can mask local and property-type differences, and an index level is not a dollar-denominated home value. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -259,7 +285,7 @@
           "estimate": 313.96,
           "marginOfError": null,
           "revisionStatus": "FHFA HPI values may be revised",
-          "citationLabel": "FHFA state HPI 2026Q1, hpi-index"
+          "citationLabel": "Federal Housing Finance Agency, state HPI 2026Q1: purchase-only HPI"
         },
         {
           "sourceId": "news-ct-state-home-price-movement-source-quarterly-change",
@@ -275,7 +301,7 @@
           "estimate": 1.41,
           "marginOfError": null,
           "revisionStatus": "FHFA HPI values may be revised",
-          "citationLabel": "FHFA state HPI 2026Q1, quarterly-change"
+          "citationLabel": "Federal Housing Finance Agency, state HPI 2026Q1: quarterly HPI change"
         },
         {
           "sourceId": "news-ct-state-home-price-movement-source-annual-change",
@@ -291,7 +317,7 @@
           "estimate": 4.74,
           "marginOfError": null,
           "revisionStatus": "FHFA HPI values may be revised",
-          "citationLabel": "FHFA state HPI 2026Q1, annual-change"
+          "citationLabel": "Federal Housing Finance Agency, state HPI 2026Q1: annual HPI change"
         },
         {
           "sourceId": "news-ct-state-home-price-movement-source-five-year-change",
@@ -307,16 +333,34 @@
           "estimate": 53.57,
           "marginOfError": null,
           "revisionStatus": "FHFA HPI values may be revised",
-          "citationLabel": "FHFA state HPI 2026Q1, five-year-change"
+          "citationLabel": "Federal Housing Finance Agency, state HPI 2026Q1: five-year HPI change"
         }
       ],
       "relatedRoutes": [
-        "/locations/connecticut",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/connecticut",
+          "label": "Connecticut mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -331,7 +375,7 @@
       "title": "Connecticut statewide labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Connecticut.",
       "previewText": "See what changed in Connecticut's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "See what changed in Connecticut's labor market and why broad employment data cannot determine mortgage eligibility. Review official evidence, comparisons, limitation",
+      "metaDescription": "Connecticut statewide labor market: latest employment evidence. See what changed in Connecticut's labor market and why broad employment data cannot determine.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "Labor market",
@@ -355,7 +399,7 @@
         "employment: 1,803,060.",
         "unemployment: 97,350.",
         "unemployment rate: 5.1%.",
-        "change in unemployment rate from a year earlier: 1.3%."
+        "previous-month unemployment rate: 5.0%."
       ],
       "evidenceFacts": [
         {
@@ -399,6 +443,37 @@
           "comparison": false
         },
         {
+          "id": "previous-rate",
+          "label": "previous-month unemployment rate",
+          "value": 5,
+          "display": "5.0%",
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-previous-previous-rate"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "year-ago-rate",
+          "label": "year-ago unemployment rate",
+          "value": 3.8,
+          "display": "3.8%",
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-yearago-year-ago-rate"
+          ],
+          "comparison": true
+        },
+        {
+          "id": "monthly-rate-change",
+          "label": "change in unemployment rate from the prior month",
+          "value": 0.1,
+          "display": "0.1%",
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-latest-unemployment-rate",
+            "news-ct-state-labor-market-source-previous-previous-rate"
+          ],
+          "comparison": true
+        },
+        {
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 1.3,
@@ -412,93 +487,119 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "What the latest LAUS release reports",
+          "id": "labor-baseline",
+          "heading": "The latest labor-force counts",
           "body": [
-            "The latest evidence for Connecticut puts labor force at 1,900,410, while employment is 1,803,060. The labor force, employment, unemployment, and unemployment rate are related measures, and reading all of them prevents a rate movement from being interpreted without its underlying counts. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "The latest LAUS release reports a Connecticut labor force of 1,900,410, with 1,803,060 people employed and 97,350 unemployed under the program's definitions. Those three counts belong together: 1,803,060 plus 97,350 explains the scale behind the published 5.1% unemployment rate. For mortgage planning, the 1,900,410 state-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 1,900,410 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
           ],
           "sourceRecordIds": [
             "news-ct-state-labor-market-source-latest-labor-force",
             "news-ct-state-labor-market-source-latest-employment",
             "news-ct-state-labor-market-source-latest-unemployment",
+            "news-ct-state-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "monthly-movement",
+          "heading": "What changed from the prior month",
+          "body": [
+            "Connecticut's unemployment rate rose from 5.0% in the prior month to 5.1% in the latest month, a change of 0.1%. A 0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 97,350 unemployment count and 1,900,410 labor force. The 0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Connecticut borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+          ],
+          "evidenceFactIds": [
+            "previous-rate",
+            "unemployment-rate",
+            "monthly-rate-change",
+            "unemployment",
+            "labor-force"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-previous-previous-rate",
+            "news-ct-state-labor-market-source-latest-unemployment-rate",
+            "news-ct-state-labor-market-source-latest-unemployment",
+            "news-ct-state-labor-market-source-latest-labor-force"
+          ]
+        },
+        {
+          "id": "annual-movement",
+          "heading": "The year-over-year comparison",
+          "body": [
+            "Compared with 3.8% a year earlier, the latest Connecticut unemployment rate of 5.1% rose by 1.3%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 1.3% difference still describes a population estimate rather than an individual's job stability. Reading 3.8%, 5.0%, and 5.1% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Connecticut pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+          ],
+          "evidenceFactIds": [
+            "year-ago-rate",
+            "previous-rate",
+            "unemployment-rate",
+            "annual-rate-change"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-yearago-year-ago-rate",
+            "news-ct-state-labor-market-source-previous-previous-rate",
+            "news-ct-state-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "counts-and-rate",
+          "heading": "Why the rate needs its underlying counts",
+          "body": [
+            "At 5.1%, Connecticut's unemployment rate summarizes 97,350 unemployed people within a 1,900,410 labor force; the rate should not be discussed without those counts. The 1,803,060 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 1,803,060 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 5.1% rate attached to 1,900,410, 1,803,060, and 97,350 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "unemployment",
+            "labor-force",
+            "employment"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-latest-unemployment-rate",
+            "news-ct-state-labor-market-source-latest-unemployment",
+            "news-ct-state-labor-market-source-latest-labor-force",
+            "news-ct-state-labor-market-source-latest-employment"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Labor statistics are not an income review",
+          "body": [
+            "Neither 1,803,060 employed people nor a 5.1% unemployment rate tells a lender what one Connecticut applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.1% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 1.3% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+          ],
+          "evidenceFactIds": [
+            "employment",
+            "unemployment-rate",
+            "monthly-rate-change",
+            "annual-rate-change"
+          ],
+          "sourceRecordIds": [
+            "news-ct-state-labor-market-source-latest-employment",
             "news-ct-state-labor-market-source-latest-unemployment-rate",
             "news-ct-state-labor-market-source-previous-previous-rate",
             "news-ct-state-labor-market-source-yearago-year-ago-rate"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Month and year comparisons answer different questions",
+          "id": "documentation-next-step",
+          "heading": "Turn the trend into documentation questions",
           "body": [
-            "The clearest comparison in this release is change in unemployment rate from a year earlier at 1.3%. A monthly movement can reflect short-term change and revision, while the year-over-year comparison gives a wider reference point without predicting the next release. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Connecticut. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "A practical next step for a Connecticut borrower is to note the latest 5.1% unemployment rate and the 1.3% year-over-year change, then move immediately to the records that describe the household. After noting the 5.1% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 1,900,410 local labor force and 1,803,060 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Connecticut's 5.1% LAUS rate in its proper role as dated local economic context."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "annual-rate-change",
+            "monthly-rate-change",
+            "labor-force",
+            "employment"
           ],
           "sourceRecordIds": [
-            "news-ct-state-labor-market-source-latest-labor-force",
-            "news-ct-state-labor-market-source-latest-employment",
-            "news-ct-state-labor-market-source-latest-unemployment",
             "news-ct-state-labor-market-source-latest-unemployment-rate",
+            "news-ct-state-labor-market-source-yearago-year-ago-rate",
             "news-ct-state-labor-market-source-previous-previous-rate",
-            "news-ct-state-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "borrower-planning",
-          "heading": "Use labor data as economic context",
-          "body": [
-            "For a borrower, unemployment at 97,350 is most useful as an input to an organized comparison. Broad labor evidence can help organize questions about timing and local economic conditions, but a lender evaluates documented income, employment history, debts, assets, and program rules at the borrower level. In Connecticut, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
-          ],
-          "sourceRecordIds": [
             "news-ct-state-labor-market-source-latest-labor-force",
-            "news-ct-state-labor-market-source-latest-employment",
-            "news-ct-state-labor-market-source-latest-unemployment",
-            "news-ct-state-labor-market-source-latest-unemployment-rate",
-            "news-ct-state-labor-market-source-previous-previous-rate",
-            "news-ct-state-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "tradeoffs",
-          "heading": "Employment counts do not measure mortgage readiness",
-          "body": [
-            "Another boundary comes from unemployment rate, reported here as 5.1%. The LAUS definition of employment is an economic statistic, not a review of income stability, job tenure, variable earnings, self-employment records, or the continuity standards used in underwriting. A borrower comparing options in Connecticut can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-labor-market-source-latest-labor-force",
-            "news-ct-state-labor-market-source-latest-employment",
-            "news-ct-state-labor-market-source-latest-unemployment",
-            "news-ct-state-labor-market-source-latest-unemployment-rate",
-            "news-ct-state-labor-market-source-previous-previous-rate",
-            "news-ct-state-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
-          "body": [
-            "Neither 1,900,410 for labor force nor 97,350 for unemployment determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. BLS does not evaluate any applicant and cannot indicate whether a person's income is eligible, sufficient, stable, or likely to continue for mortgage purposes. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-labor-market-source-latest-labor-force",
-            "news-ct-state-labor-market-source-latest-employment",
-            "news-ct-state-labor-market-source-latest-unemployment",
-            "news-ct-state-labor-market-source-latest-unemployment-rate",
-            "news-ct-state-labor-market-source-previous-previous-rate",
-            "news-ct-state-labor-market-source-yearago-year-ago-rate"
-          ]
-        },
-        {
-          "id": "next-comparison",
-          "heading": "Translate economic context into documentation questions",
-          "body": [
-            "A practical next step is to carry 1,803,060 for employment and 1.3% for change in unemployment rate from a year earlier into a side-by-side planning conversation. Keep the public trend separate from the borrower's records, and ask what pay history, tax returns, contracts, reserves, or explanations may be needed for the actual loan path. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Connecticut, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's labor-market evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
-          ],
-          "sourceRecordIds": [
-            "news-ct-state-labor-market-source-latest-labor-force",
-            "news-ct-state-labor-market-source-latest-employment",
-            "news-ct-state-labor-market-source-latest-unemployment",
-            "news-ct-state-labor-market-source-latest-unemployment-rate",
-            "news-ct-state-labor-market-source-previous-previous-rate",
-            "news-ct-state-labor-market-source-yearago-year-ago-rate"
+            "news-ct-state-labor-market-source-latest-employment"
           ]
         }
       ],
@@ -537,9 +638,9 @@
               "display": "5.1%"
             },
             {
-              "label": "change in unemployment rate from a year earlier",
-              "value": 1.3,
-              "display": "1.3%"
+              "label": "previous-month unemployment rate",
+              "value": 5,
+              "display": "5.0%"
             }
           ]
         }
@@ -557,27 +658,42 @@
             [
               "labor force",
               "1,900,410",
-              "news-ct-state-labor-market-source-latest-labor-force"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "employment",
               "1,803,060",
-              "news-ct-state-labor-market-source-latest-employment"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "unemployment",
               "97,350",
-              "news-ct-state-labor-market-source-latest-unemployment"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
             ],
             [
               "unemployment rate",
               "5.1%",
-              "news-ct-state-labor-market-source-latest-unemployment-rate"
+              "U.S. Bureau of Labor Statistics, 2026-M05"
+            ],
+            [
+              "previous-month unemployment rate",
+              "5.0%",
+              "U.S. Bureau of Labor Statistics, 2026-M04"
+            ],
+            [
+              "year-ago unemployment rate",
+              "3.8%",
+              "U.S. Bureau of Labor Statistics, 2025-M05"
+            ],
+            [
+              "change in unemployment rate from the prior month",
+              "0.1%",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
             ],
             [
               "change in unemployment rate from a year earlier",
               "1.3%",
-              "news-ct-state-labor-market-source-latest-unemployment-rate,news-ct-state-labor-market-source-yearago-year-ago-rate"
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
             ]
           ],
           "sourceRecordIds": [
@@ -592,13 +708,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "monthly-movement",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses BLS LAUS state monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses BLS LAUS state monthly series for labor force, employment, unemployment, and unemployment rate, with prior-month and year-ago comparisons. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "LAUS estimates can be revised, city series are unadjusted, and local labor statistics describe a population rather than an individual applicant's income or employment. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -615,7 +731,7 @@
           "estimate": 1900410,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 labor-force"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: labor-force"
         },
         {
           "sourceId": "news-ct-state-labor-market-source-latest-employment",
@@ -631,7 +747,7 @@
           "estimate": 1803060,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 employment"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: employment"
         },
         {
           "sourceId": "news-ct-state-labor-market-source-latest-unemployment",
@@ -647,7 +763,7 @@
           "estimate": 97350,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 unemployment"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: unemployment"
         },
         {
           "sourceId": "news-ct-state-labor-market-source-latest-unemployment-rate",
@@ -663,7 +779,7 @@
           "estimate": 5.1,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M05 unemployment-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M05: unemployment-rate"
         },
         {
           "sourceId": "news-ct-state-labor-market-source-previous-previous-rate",
@@ -679,7 +795,7 @@
           "estimate": 5,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2026-M04 previous-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2026-M04: previous-rate"
         },
         {
           "sourceId": "news-ct-state-labor-market-source-yearago-year-ago-rate",
@@ -695,16 +811,34 @@
           "estimate": 3.8,
           "marginOfError": null,
           "revisionStatus": "BLS data are subject to revision",
-          "citationLabel": "BLS LAUS 2025-M05 year-ago-rate"
+          "citationLabel": "U.S. Bureau of Labor Statistics, LAUS 2025-M05: year-ago-rate"
         }
       ],
       "relatedRoutes": [
-        "/locations/connecticut",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/connecticut",
+          "label": "Connecticut mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -719,7 +853,7 @@
       "title": "Connecticut housing costs, ownership, and rent in the latest ACS",
       "dek": "Statewide evidence on home value, income, owner costs, housing stock, tenure, vacancy, and rent for borrower planning.",
       "previewText": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Connecticut with survey limitations and practical questions.",
-      "metaDescription": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Connecticut with survey limitations and practical questions. Review official evidence, compari",
+      "metaDescription": "Connecticut housing costs, ownership, and rent in the latest ACS. Read statewide housing-cost, ownership, vacancy, and rent evidence for Connecticut with.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "State housing costs",
@@ -741,10 +875,10 @@
       "imageId": "housing_supply-02",
       "keyTakeaways": [
         "state median home value: $366,900.",
+        "prior ACS state median home value: $275,400.",
         "state median household income: $95,781.",
-        "median monthly owner cost with a mortgage: $6,643.",
-        "median gross rent: $1,488.",
-        "total housing units: 1,541,822."
+        "median monthly owner cost with a mortgage: $2,429.",
+        "median gross rent: $1,488."
       ],
       "evidenceFacts": [
         {
@@ -756,6 +890,16 @@
             "news-ct-state-housing-costs-source-home-value"
           ],
           "comparison": false
+        },
+        {
+          "id": "prior-home-value",
+          "label": "prior ACS state median home value",
+          "value": 275400,
+          "display": "$275,400",
+          "sourceRecordIds": [
+            "news-ct-state-housing-costs-source-home-value-prior"
+          ],
+          "comparison": true
         },
         {
           "id": "income",
@@ -770,8 +914,8 @@
         {
           "id": "owner-cost",
           "label": "median monthly owner cost with a mortgage",
-          "value": 6643,
-          "display": "$6,643",
+          "value": 2429,
+          "display": "$2,429",
           "sourceRecordIds": [
             "news-ct-state-housing-costs-source-owner-cost"
           ],
@@ -809,6 +953,17 @@
           "comparison": true
         },
         {
+          "id": "renter-share",
+          "label": "renter share of occupied units",
+          "value": 33.5,
+          "display": "33.5%",
+          "sourceRecordIds": [
+            "news-ct-state-housing-costs-source-renter-units",
+            "news-ct-state-housing-costs-source-occupied-units"
+          ],
+          "comparison": true
+        },
+        {
           "id": "vacancy-share",
           "label": "vacant-unit share of housing stock",
           "value": 7,
@@ -833,117 +988,116 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "Statewide values, income, and recurring housing costs",
+          "id": "state-cost-baseline",
+          "heading": "Statewide value, income, and owner costs",
           "body": [
-            "The latest evidence for Connecticut puts state median home value at $366,900, while state median household income is $95,781. Value, income, owner-cost, and rent estimates describe different parts of the housing budget, while housing-stock and tenure records show the scale and use of the statewide inventory. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "Connecticut's 2024 ACS housing baseline reports a median owner-occupied home value of $366,900, median household income of $95,781, and median selected monthly owner costs of $2,429 for owners with a mortgage. The $366,900, $95,781, and $2,429 values are separate statewide medians, so they should not be treated as the price, income, and monthly budget of one typical household. The $2,429 measure combines recurring ownership expenses and is not a real-estate-tax figure or a current mortgage quote. For planning, $366,900, $95,781, and $2,429 identify statewide reference points and cost categories, while a real decision still requires local property, borrower, tax, insurance, and loan information."
+          ],
+          "evidenceFactIds": [
+            "home-value",
+            "income",
+            "owner-cost"
           ],
           "sourceRecordIds": [
             "news-ct-state-housing-costs-source-home-value",
             "news-ct-state-housing-costs-source-income",
-            "news-ct-state-housing-costs-source-owner-cost",
-            "news-ct-state-housing-costs-source-rent",
-            "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
-            "news-ct-state-housing-costs-source-vacant-units",
-            "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-owner-cost"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "Tenure, vacancy, and change need separate readings",
+          "id": "owner-and-renter-costs",
+          "heading": "Keep owner costs and rent comparable",
           "body": [
-            "The clearest comparison in this release is owner share of occupied units at 66.5%. Owner share, vacant-unit share, and change across survey periods answer different questions and should not be collapsed into a claim about current for-sale supply or future prices. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Connecticut. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "The same Connecticut release reports $1,488 in median gross rent alongside $2,429 in median selected monthly owner costs for owners with a mortgage. The two measures cover different housing populations and cost definitions, so $1,488 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,488 and $2,429 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. The $95,781 statewide median can provide economic context, but dividing it by either $1,488 or $2,429 would still combine medians that do not represent the same household."
+          ],
+          "evidenceFactIds": [
+            "rent",
+            "owner-cost",
+            "income"
           ],
           "sourceRecordIds": [
-            "news-ct-state-housing-costs-source-home-value",
-            "news-ct-state-housing-costs-source-income",
-            "news-ct-state-housing-costs-source-owner-cost",
             "news-ct-state-housing-costs-source-rent",
-            "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
-            "news-ct-state-housing-costs-source-vacant-units",
-            "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-owner-cost",
+            "news-ct-state-housing-costs-source-income"
           ]
         },
         {
-          "id": "borrower-planning",
-          "heading": "Build comparable owner and renter budgets",
+          "id": "state-tenure",
+          "heading": "How occupied housing is divided by tenure",
           "body": [
-            "For a borrower, median monthly owner cost with a mortgage at $6,643 is most useful as an input to an organized comparison. Compare actual property and lease choices over the intended time horizon, including taxes, insurance, maintenance, association obligations, utilities, transaction costs, and cash reserves. In Connecticut, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+            "Across Connecticut's measured housing stock of 1,541,822 units, the owner share of occupied housing is 66.5% and the renter share is 33.5%, making owner-occupied housing the larger statewide tenure group. The 66.5% and 33.5% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase. The 66.5% and 33.5% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. It remains too broad to select a product or characterize a particular city, county, property type, or household inside Connecticut."
+          ],
+          "evidenceFactIds": [
+            "housing-units",
+            "owner-share",
+            "renter-share"
           ],
           "sourceRecordIds": [
-            "news-ct-state-housing-costs-source-home-value",
-            "news-ct-state-housing-costs-source-income",
-            "news-ct-state-housing-costs-source-owner-cost",
-            "news-ct-state-housing-costs-source-rent",
             "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
-            "news-ct-state-housing-costs-source-vacant-units",
             "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-occupied-units",
+            "news-ct-state-housing-costs-source-renter-units"
           ]
         },
         {
-          "id": "tradeoffs",
-          "heading": "State medians do not describe every local market",
+          "id": "state-vacancy",
+          "heading": "Vacancy is broader than homes for sale",
           "body": [
-            "Another boundary comes from median gross rent, reported here as $1,488. A statewide midpoint can provide orientation while still sitting far from the conditions in a particular city, county, property type, or price segment. A borrower comparing options in Connecticut can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+            "Connecticut's vacant-unit share is 7.0% within a statewide stock of 1,541,822 housing units. ACS vacancy includes categories beyond property currently offered for sale or rent, so 7.0% is not a live inventory rate and cannot measure competition for a selected home. Read beside the 66.5% owner share and 33.5% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. Borrowers should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 7.0% and 1,541,822 were not designed to resolve."
+          ],
+          "evidenceFactIds": [
+            "vacancy-share",
+            "housing-units",
+            "owner-share",
+            "renter-share"
           ],
           "sourceRecordIds": [
-            "news-ct-state-housing-costs-source-home-value",
-            "news-ct-state-housing-costs-source-income",
-            "news-ct-state-housing-costs-source-owner-cost",
-            "news-ct-state-housing-costs-source-rent",
-            "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
             "news-ct-state-housing-costs-source-vacant-units",
+            "news-ct-state-housing-costs-source-housing-units",
             "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-occupied-units",
+            "news-ct-state-housing-costs-source-renter-units"
           ]
         },
         {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
+          "id": "state-change",
+          "heading": "The statewide home-value estimate changed across periods",
           "body": [
-            "Neither $366,900 for state median home value nor $6,643 for median monthly owner cost with a mortgage determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The ACS cannot select a product, value a property, predict appreciation or rent, establish a payment, or determine whether an applicant meets underwriting requirements. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+            "Connecticut's median home-value estimate increased from $275,400 in the prior ACS period to $366,900 in the current release, a reported change of 33.2%. Because both estimates summarize multi-year survey windows, 33.2% is not a point-to-point appreciation rate for a property purchased at $275,400. The 33.2% comparison can show that an old statewide reference may need updating, but it cannot explain the value path in each local market or price segment. Margins of error, changes in the housing mix, and current property evidence should be reviewed before the move from $275,400 to $366,900 influences a purchase, refinance, or equity assumption."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "home-value",
+            "home-value-change"
           ],
           "sourceRecordIds": [
-            "news-ct-state-housing-costs-source-home-value",
-            "news-ct-state-housing-costs-source-income",
-            "news-ct-state-housing-costs-source-owner-cost",
-            "news-ct-state-housing-costs-source-rent",
-            "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
-            "news-ct-state-housing-costs-source-vacant-units",
-            "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-home-value-prior",
+            "news-ct-state-housing-costs-source-home-value"
           ]
         },
         {
-          "id": "next-comparison",
+          "id": "state-to-local",
           "heading": "Move from statewide context to a local worksheet",
           "body": [
-            "A practical next step is to carry $95,781 for state median household income and 66.5% for owner share of occupied units into a side-by-side planning conversation. Use the state evidence to identify cost categories and comparison questions, then replace statewide medians with current local, property-specific, and borrower-specific information. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Connecticut, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's state housing-cost and ownership evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+            "A borrower can carry $366,900, $2,429, $1,488, and the 7.0% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. For ownership, replace the $366,900 and $2,429 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. For renting, replace the $1,488 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. The 33.5% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 66.5% tenure measure can help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one Connecticut household."
+          ],
+          "evidenceFactIds": [
+            "home-value",
+            "owner-cost",
+            "rent",
+            "vacancy-share",
+            "owner-share",
+            "renter-share"
           ],
           "sourceRecordIds": [
             "news-ct-state-housing-costs-source-home-value",
-            "news-ct-state-housing-costs-source-income",
             "news-ct-state-housing-costs-source-owner-cost",
             "news-ct-state-housing-costs-source-rent",
-            "news-ct-state-housing-costs-source-housing-units",
-            "news-ct-state-housing-costs-source-occupied-units",
             "news-ct-state-housing-costs-source-vacant-units",
+            "news-ct-state-housing-costs-source-housing-units",
             "news-ct-state-housing-costs-source-owner-units",
-            "news-ct-state-housing-costs-source-renter-units",
-            "news-ct-state-housing-costs-source-home-value-prior"
+            "news-ct-state-housing-costs-source-occupied-units",
+            "news-ct-state-housing-costs-source-renter-units"
           ]
         }
       ],
@@ -971,24 +1125,24 @@
               "display": "$366,900"
             },
             {
+              "label": "prior ACS state median home value",
+              "value": 275400,
+              "display": "$275,400"
+            },
+            {
               "label": "state median household income",
               "value": 95781,
               "display": "$95,781"
             },
             {
               "label": "median monthly owner cost with a mortgage",
-              "value": 6643,
-              "display": "$6,643"
+              "value": 2429,
+              "display": "$2,429"
             },
             {
               "label": "median gross rent",
               "value": 1488,
               "display": "$1,488"
-            },
-            {
-              "label": "total housing units",
-              "value": 1541822,
-              "display": "1,541,822"
             }
           ]
         }
@@ -1006,42 +1160,52 @@
             [
               "state median home value",
               "$366,900",
-              "news-ct-state-housing-costs-source-home-value"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "prior ACS state median home value",
+              "$275,400",
+              "U.S. Census Bureau, 2019"
             ],
             [
               "state median household income",
               "$95,781",
-              "news-ct-state-housing-costs-source-income"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "median monthly owner cost with a mortgage",
-              "$6,643",
-              "news-ct-state-housing-costs-source-owner-cost"
+              "$2,429",
+              "U.S. Census Bureau, 2024"
             ],
             [
               "median gross rent",
               "$1,488",
-              "news-ct-state-housing-costs-source-rent"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "total housing units",
               "1,541,822",
-              "news-ct-state-housing-costs-source-housing-units"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "owner share of occupied units",
               "66.5%",
-              "news-ct-state-housing-costs-source-owner-units,news-ct-state-housing-costs-source-occupied-units"
+              "U.S. Census Bureau, 2024"
+            ],
+            [
+              "renter share of occupied units",
+              "33.5%",
+              "U.S. Census Bureau, 2024"
             ],
             [
               "vacant-unit share of housing stock",
               "7.0%",
-              "news-ct-state-housing-costs-source-vacant-units,news-ct-state-housing-costs-source-housing-units"
+              "U.S. Census Bureau, 2024"
             ],
             [
               "change from the prior ACS home-value estimate",
               "33.2%",
-              "news-ct-state-housing-costs-source-home-value,news-ct-state-housing-costs-source-home-value-prior"
+              "U.S. Census Bureau, 2019 and 2024"
             ]
           ],
           "sourceRecordIds": [
@@ -1060,13 +1224,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "owner-and-renter-costs",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -1083,7 +1247,7 @@
           "estimate": 366900,
           "marginOfError": 1621,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25077_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median owner-occupied home value"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-income",
@@ -1099,23 +1263,23 @@
           "estimate": 95781,
           "marginOfError": 732,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B19013_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median household income"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-owner-cost",
           "publisher": "U.S. Census Bureau",
           "dataset": "Census ACS 5-year Table-Based Summary File",
-          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
-          "variableOrSeriesId": "B25103_001E",
+          "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25088.dat",
+          "variableOrSeriesId": "B25088_002E",
           "geographyType": "state",
           "geographyId": "09",
           "period": "2024",
           "releasedAt": "2026-01-29",
           "retrievedAt": "2026-07-10",
-          "estimate": 6643,
-          "marginOfError": 25,
+          "estimate": 2429,
+          "marginOfError": 11,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25103_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median selected monthly owner costs for owners with a mortgage"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-rent",
@@ -1131,7 +1295,7 @@
           "estimate": 1488,
           "marginOfError": 10,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25064_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: median gross rent"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-housing-units",
@@ -1147,7 +1311,7 @@
           "estimate": 1541822,
           "marginOfError": 276,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25001_001E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: total housing units"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-occupied-units",
@@ -1163,7 +1327,7 @@
           "estimate": 1434007,
           "marginOfError": 3233,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25002_002E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: occupied housing units"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-vacant-units",
@@ -1179,7 +1343,7 @@
           "estimate": 107815,
           "marginOfError": 3242,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25002_003E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: vacant housing units"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-owner-units",
@@ -1195,7 +1359,7 @@
           "estimate": 952989,
           "marginOfError": 5585,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25003_002E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: owner-occupied housing units"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-renter-units",
@@ -1211,7 +1375,7 @@
           "estimate": 481018,
           "marginOfError": 4678,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25003_003E, 2024 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2024 ACS 5-year: renter-occupied housing units"
         },
         {
           "sourceId": "news-ct-state-housing-costs-source-home-value-prior",
@@ -1227,16 +1391,34 @@
           "estimate": 275400,
           "marginOfError": 972,
           "revisionStatus": "ACS estimates include sampling error and should be compared with their margins of error",
-          "citationLabel": "B25077_001E, 2019 ACS 5-year"
+          "citationLabel": "U.S. Census Bureau, 2019 ACS 5-year: median owner-occupied home value"
         }
       ],
       "relatedRoutes": [
-        "/locations/connecticut",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/connecticut",
+          "label": "Connecticut mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"
@@ -1251,7 +1433,7 @@
       "title": "Connecticut 2026 county loan-limit landscape",
       "dek": "How conforming and FHA one-unit limits vary across Connecticut counties and how borrowers can use them responsibly.",
       "previewText": "See the range of 2026 conforming and FHA county limits across Connecticut without treating a limit as eligibility or pricing.",
-      "metaDescription": "See the range of 2026 conforming and FHA county limits across Connecticut without treating a limit as eligibility or pricing. Review official evidence, comparisons, ",
+      "metaDescription": "Connecticut 2026 county loan-limit landscape. See the range of 2026 conforming and FHA county limits across Connecticut without treating a limit as eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
       "relevanceLabel": "State loan-limit landscape",
@@ -1343,99 +1525,119 @@
       ],
       "sections": [
         {
-          "id": "latest-evidence",
-          "heading": "The statewide range begins with county records",
+          "id": "statewide-conforming-range",
+          "heading": "The conforming range across county records",
           "body": [
-            "The latest evidence for Connecticut puts counties in the statewide limit summary at 9, while lowest one-unit conforming limit is $832,750. A statewide summary is a map of county program boundaries, not a single limit that applies uniformly to every property in the state. Reading the figures together is more useful than treating either as a verdict: the first describes one part of the market and the second supplies context for the borrower decision. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. This is a planning signal, not a quote, appraisal, approval decision, or forecast, and it should lead to more precise questions rather than a predetermined loan choice."
+            "Connecticut's statewide summary covers 9 county or county-equivalent records. Within those records, the 2026 one-unit conforming limit runs from $832,750 to $977,500. The $832,750 to $977,500 range confirms that one conforming ceiling does not apply uniformly across Connecticut. The 9 record count keeps the range tied to the statewide source coverage rather than an assumed national rule. The $832,750 to $977,500 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $977,500 statewide maximum, county, legal unit count, and expected base loan amount must be known."
+          ],
+          "evidenceFactIds": [
+            "county-count",
+            "conforming-range-low",
+            "conforming-range-high"
           ],
           "sourceRecordIds": [
             "news-ct-state-loan-limit-landscape-source-county-count",
             "news-ct-state-loan-limit-landscape-source-conforming-min",
-            "news-ct-state-loan-limit-landscape-source-conforming-max",
-            "news-ct-state-loan-limit-landscape-source-conforming-above",
-            "news-ct-state-loan-limit-landscape-source-fha-min",
-            "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-max"
           ]
         },
         {
-          "id": "comparison",
-          "heading": "High-cost counties create a range",
+          "id": "statewide-fha-range",
+          "heading": "The FHA range follows its own county table",
           "body": [
-            "The clearest comparison in this release is highest one-unit conforming limit at $977,500. The low and high ends show why the property county must be confirmed before conventional, jumbo, or FHA categories are discussed. That difference can help a borrower identify which assumptions deserve attention first, but it cannot explain every household or property inside Connecticut. The comparison should stay attached to its dates and definitions, especially when estimates or revised labor records are involved. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. A sound comparison keeps the same measure and geography aligned before drawing a conclusion, then checks the property-level facts separately."
+            "Across the same 9 Connecticut records, the 2026 one-unit FHA limit spans $541,287 to $977,500. The $541,287 low and $977,500 high show that FHA's published boundary also varies within the state. The $541,287 floor and $977,500 high remain county-table values even when they match conforming amounts elsewhere. The FHA range should not be merged with the $832,750 to $977,500 conforming range, because the programs use different authorities and requirements. A $541,287 to $977,500 comparison can route loan-amount and product-category questions, but it cannot determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
+          ],
+          "evidenceFactIds": [
+            "county-count",
+            "fha-range-low",
+            "fha-range-high",
+            "conforming-range-low",
+            "conforming-range-high"
           ],
           "sourceRecordIds": [
             "news-ct-state-loan-limit-landscape-source-county-count",
-            "news-ct-state-loan-limit-landscape-source-conforming-min",
-            "news-ct-state-loan-limit-landscape-source-conforming-max",
-            "news-ct-state-loan-limit-landscape-source-conforming-above",
             "news-ct-state-loan-limit-landscape-source-fha-min",
             "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-min",
+            "news-ct-state-loan-limit-landscape-source-conforming-max"
           ]
         },
         {
-          "id": "borrower-planning",
-          "heading": "County and unit count come before product labels",
+          "id": "high-cost-counties",
+          "heading": "Why county verification matters",
           "body": [
-            "For a borrower, highest one-unit conforming limit at $977,500 is most useful as an input to an organized comparison. Start with the property's county, legal unit count, price, down-payment plan, and expected loan amount, then look up the applicable official row. In Connecticut, that means separating the market evidence from personal inputs such as cash available, credit profile, debts, intended occupancy, property type, taxes, insurance, and time horizon. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. The evidence can narrow the questions for a lender or housing professional, but it does not replace verified disclosures, a property review, or an individualized affordability discussion."
+            "3 Connecticut counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $977,500. That count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 3 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. It only describes how many matched county rows exceed the baseline. The $977,500 maximum should therefore be treated as evidence that county lookup matters, not as the default Connecticut limit. Before treating $977,500 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
+          ],
+          "evidenceFactIds": [
+            "counties-above",
+            "conforming-range-low",
+            "conforming-range-high"
           ],
           "sourceRecordIds": [
-            "news-ct-state-loan-limit-landscape-source-county-count",
-            "news-ct-state-loan-limit-landscape-source-conforming-min",
-            "news-ct-state-loan-limit-landscape-source-conforming-max",
             "news-ct-state-loan-limit-landscape-source-conforming-above",
-            "news-ct-state-loan-limit-landscape-source-fha-min",
-            "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-min",
+            "news-ct-state-loan-limit-landscape-source-conforming-max"
           ]
         },
         {
-          "id": "tradeoffs",
-          "heading": "County ceilings do not measure affordability",
+          "id": "program-comparison",
+          "heading": "Conforming and FHA ranges answer different questions",
           "body": [
-            "Another boundary comes from lowest one-unit FHA limit, reported here as $541,287. A program can permit a larger loan category in a county without making that amount suitable, affordable, or available to a particular borrower. A borrower comparing options in Connecticut can use that boundary to keep unlike choices from being blended together. The objective is not to select a product from a public statistic; it is to understand which product, cash-flow, timing, and documentation questions belong in the next conversation. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. When the evidence changes, the worksheet should change with it rather than preserving an outdated assumption."
+            "The highest one-unit conforming amount in Connecticut is $977,500, while the highest FHA amount is $977,500; at the low end, the figures are $832,750 and $541,287. These pairs show program boundaries, not competing offers. A requested amount below $977,500 may still fall outside the applicable county's conforming limit, and an amount below $977,500 may still face FHA borrower and property requirements. Comparing $832,750, $977,500, $541,287, and $977,500 is useful only when county and unit count are held constant. The $977,500 and $977,500 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
+          ],
+          "evidenceFactIds": [
+            "conforming-range-high",
+            "fha-range-high",
+            "conforming-range-low",
+            "fha-range-low"
           ],
           "sourceRecordIds": [
-            "news-ct-state-loan-limit-landscape-source-county-count",
-            "news-ct-state-loan-limit-landscape-source-conforming-min",
             "news-ct-state-loan-limit-landscape-source-conforming-max",
-            "news-ct-state-loan-limit-landscape-source-conforming-above",
-            "news-ct-state-loan-limit-landscape-source-fha-min",
             "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-min",
+            "news-ct-state-loan-limit-landscape-source-fha-min"
           ]
         },
         {
-          "id": "what-data-cannot-decide",
-          "heading": "What the data cannot decide for you",
+          "id": "state-limit-boundaries",
+          "heading": "A larger county limit is not greater affordability",
           "body": [
-            "Neither 9 for counties in the statewide limit summary nor $977,500 for highest one-unit conforming limit determines whether an individual borrower qualifies, what pricing may be available, or what a specific home is worth. The statewide range cannot establish approval, pricing, debt capacity, appraisal, mortgage insurance, cash requirements, occupancy compliance, or which product is appropriate. Public evidence also cannot see contract terms, reserves, property condition, association obligations, tax exemptions, insurance quotes, or changes after the stated period. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. Those limits matter because a broad local measure can be accurate for its published purpose while still being unsuitable as a substitute for underwriting, an appraisal, or personalized advice."
+            "A $977,500 conforming ceiling or $977,500 FHA ceiling does not make that loan amount affordable to a Connecticut household, and the lower $832,750 or $541,287 figures do not describe home prices. Published $977,500 and $977,500 limits cannot establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $977,500 and $977,500 figures can also change with a new calendar year or corrected property geography. Keeping the 9 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
+          ],
+          "evidenceFactIds": [
+            "conforming-range-high",
+            "fha-range-high",
+            "conforming-range-low",
+            "fha-range-low",
+            "county-count"
           ],
           "sourceRecordIds": [
-            "news-ct-state-loan-limit-landscape-source-county-count",
-            "news-ct-state-loan-limit-landscape-source-conforming-min",
             "news-ct-state-loan-limit-landscape-source-conforming-max",
-            "news-ct-state-loan-limit-landscape-source-conforming-above",
-            "news-ct-state-loan-limit-landscape-source-fha-min",
             "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-min",
+            "news-ct-state-loan-limit-landscape-source-fha-min",
+            "news-ct-state-loan-limit-landscape-source-county-count"
           ]
         },
         {
-          "id": "next-comparison",
-          "heading": "Verify the applicable county row",
+          "id": "county-lookup",
+          "heading": "Use the range to reach the correct county row",
           "body": [
-            "A practical next step is to carry $832,750 for lowest one-unit conforming limit and $977,500 for highest one-unit conforming limit into a side-by-side planning conversation. Use the range to understand why location matters, then confirm the current county and unit-count limits with a licensed professional before comparing disclosures. Ask which assumptions are verified, which are estimates, which can change before closing, and which depend on the selected property. In Connecticut, the cited evidence gives that conversation a factual starting point without promising an outcome. The figures are tied to the cited geography and period, so the useful reading is specific to Connecticut's statewide county loan-limit evidence; a different release, geography, or property can support a different conclusion. Borrowers should confirm current program guidance and property-specific costs with appropriately licensed professionals before acting."
+            "The next step is to verify the selected property's Connecticut county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. Then compare that amount with the exact official row, using the $832,750 to $977,500 conforming range and $541,287 to $977,500 FHA range only as orientation. The 3 above-baseline count explains why this lookup matters, but it does not replace it. Keep the selected county row with the worksheet so the $977,500 and $977,500 statewide maximums cannot be mistaken for property-specific figures. After the 3 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
+          ],
+          "evidenceFactIds": [
+            "conforming-range-low",
+            "conforming-range-high",
+            "fha-range-low",
+            "fha-range-high",
+            "counties-above"
           ],
           "sourceRecordIds": [
-            "news-ct-state-loan-limit-landscape-source-county-count",
             "news-ct-state-loan-limit-landscape-source-conforming-min",
             "news-ct-state-loan-limit-landscape-source-conforming-max",
-            "news-ct-state-loan-limit-landscape-source-conforming-above",
             "news-ct-state-loan-limit-landscape-source-fha-min",
             "news-ct-state-loan-limit-landscape-source-fha-max",
-            "news-ct-state-loan-limit-landscape-source-fha-above"
+            "news-ct-state-loan-limit-landscape-source-conforming-above"
           ]
         }
       ],
@@ -1495,32 +1697,32 @@
             [
               "counties in the statewide limit summary",
               "9",
-              "news-ct-state-loan-limit-landscape-source-county-count"
+              "Federal Housing Finance Agency, 2026"
             ],
             [
               "lowest one-unit conforming limit",
               "$832,750",
-              "news-ct-state-loan-limit-landscape-source-conforming-min"
+              "Federal Housing Finance Agency, 2026"
             ],
             [
               "highest one-unit conforming limit",
               "$977,500",
-              "news-ct-state-loan-limit-landscape-source-conforming-max"
+              "Federal Housing Finance Agency, 2026"
             ],
             [
               "lowest one-unit FHA limit",
               "$541,287",
-              "news-ct-state-loan-limit-landscape-source-fha-min"
+              "U.S. Department of Housing and Urban Development, 2026"
             ],
             [
               "highest one-unit FHA limit",
               "$977,500",
-              "news-ct-state-loan-limit-landscape-source-fha-max"
+              "U.S. Department of Housing and Urban Development, 2026"
             ],
             [
               "counties above the conforming baseline",
               "3",
-              "news-ct-state-loan-limit-landscape-source-conforming-above"
+              "Federal Housing Finance Agency, 2026"
             ]
           ],
           "sourceRecordIds": [
@@ -1536,13 +1738,13 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "borrower-planning",
-          "type": "compare_options",
-          "label": "Compare verified loan options",
+          "afterSectionId": "statewide-fha-range",
+          "type": "review_options",
+          "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article joins official 2026 FHFA conforming and HUD FHA county files by five-digit county FIPS, then summarizes the observed one-unit range and county counts for the state. Values are assembled only from structured source records for the cited geography and period. Comparisons retain the underlying source identifiers, and no missing figure is replaced with an estimate created by this generator.",
+      "methodology": "This article joins official 2026 FHFA conforming and HUD FHA county files by five-digit county FIPS, then summarizes the observed one-unit range and county counts for the state. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
       "limitations": "State summaries can conceal special exceptions and multi-unit differences, and official program updates or property-location corrections can change the applicable row. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
@@ -1559,7 +1761,7 @@
           "estimate": 9,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 county loan-limit landscape, county-count"
+          "citationLabel": "Federal Housing Finance Agency, 2026 county loan-limit landscape: counties in the statewide summary"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-conforming-min",
@@ -1575,7 +1777,7 @@
           "estimate": 832750,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-min"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: lowest one-unit conforming limit"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-conforming-max",
@@ -1591,7 +1793,7 @@
           "estimate": 977500,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-max"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: highest one-unit conforming limit"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-conforming-above",
@@ -1607,7 +1809,7 @@
           "estimate": 3,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 conforming county loan limits, conforming-above"
+          "citationLabel": "Federal Housing Finance Agency, 2026 conforming county loan limits: counties above the conforming baseline"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-fha-min",
@@ -1623,7 +1825,7 @@
           "estimate": 541287,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-min"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: lowest one-unit FHA limit"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-fha-max",
@@ -1639,7 +1841,7 @@
           "estimate": 977500,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-max"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: highest one-unit FHA limit"
         },
         {
           "sourceId": "news-ct-state-loan-limit-landscape-source-fha-above",
@@ -1655,16 +1857,34 @@
           "estimate": 2,
           "marginOfError": null,
           "revisionStatus": "Current published program limit; verify the applicable county and unit count at comparison time",
-          "citationLabel": "2026 FHA forward mortgage limits, fha-above"
+          "citationLabel": "U.S. Department of Housing and Urban Development, 2026 FHA forward mortgage limits: counties above the FHA floor"
         }
       ],
       "relatedRoutes": [
-        "/locations/connecticut",
-        "/loan-options",
-        "/loan-options/conventional",
-        "/loan-options/fha",
-        "/calculators/affordability",
-        "/rates"
+        {
+          "route": "/locations/connecticut",
+          "label": "Connecticut mortgage and housing guide"
+        },
+        {
+          "route": "/loan-options",
+          "label": "Loan Options"
+        },
+        {
+          "route": "/loan-options/conventional-loans",
+          "label": "Conventional Loans"
+        },
+        {
+          "route": "/loan-options/fha-loans",
+          "label": "FHA Loans"
+        },
+        {
+          "route": "/calculators/affordability",
+          "label": "Affordability Calculator"
+        },
+        {
+          "route": "/rates",
+          "label": "Mortgage Rates"
+        }
       ],
       "reviewStatus": "editorial_reviewed",
       "complianceStatus": "compliance_approved"

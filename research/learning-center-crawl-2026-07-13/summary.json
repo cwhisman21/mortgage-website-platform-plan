@@ -1,0 +1,21 @@
+{
+  "settings": {
+    "url": "https://mortgage-website-platform-plan-chi.vercel.app/learning-center",
+    "max_pages": 60,
+    "max_depth": 2,
+    "delay": 0.5,
+    "respect_robots": true,
+    "include": [],
+    "exclude": [],
+    "user_agent": "CodexWebCrawler/1.0 (+https://openai.com; respectful research crawler)"
+  },
+  "counts": {
+    "pages": 1,
+    "visited": 1,
+    "queued_remaining": 0,
+    "skipped": 0,
+    "errors": 0
+  },
+  "skipped": [],
+  "errors": []
+}

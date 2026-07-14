@@ -1,7 +1,7 @@
 {
   "version": "snap-rates-marketplace-v1",
-  "disclosure": "These sample offers illustrate how participating companies and mortgage professionals may appear on Snap. Snap may receive platform fees, and not every provider or offer is represented. Rates, APRs, payments, fees, and availability are estimates for comparison only and may change after borrower, property, and lender review.",
-  "sampleOfferDisclosure": "Provider names, mortgage professionals, review snippets, and NMLS identifiers in this sample marketplace are fictional fixture data for UI development only.",
+  "disclosure": "The companies, loan officers, NMLS identifiers, ratings, reviews, and pricing shown on this page are illustrative examples, not live offers or commitments to lend. Actual rates, APRs, payments, fees, and availability may change after borrower, property, licensing, and lender review.",
+  "sampleOfferDisclosure": "No name, email, or phone is required to explore these examples. Selecting Next opens a provider-specific prequalification start page; it does not submit an application or make a credit decision.",
   "allowedValues": {
     "mortgageType": ["purchase", "refinance"],
     "resultType": ["company", "loanOfficer"],

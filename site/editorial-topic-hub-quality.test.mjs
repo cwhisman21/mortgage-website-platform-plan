@@ -6,6 +6,7 @@ const sourceUrl = new URL("../mock-data/editorial/topic-hubs.json", import.meta.
 const source = JSON.parse(await readFile(sourceUrl, "utf8"));
 
 const PUBLIC_COPY_FIELDS = ["name", "heroSummary", "whyItMatters"];
+const MEANINGFUL_BODY_FIELDS = ["heroSummary", "whyItMatters"];
 const BANNED_PUBLIC_COPY = [
   /\btopic hub\b/i,
   /\bcontent graph\b/i,
@@ -33,11 +34,22 @@ function visibleHubCopy(hub) {
     .join(" ");
 }
 
+function meaningfulHubBodyCopy(hub) {
+  return [
+    ...MEANINGFUL_BODY_FIELDS.map((field) => hub[field]),
+    ...(hub.overviewParagraphs || []),
+    ...(hub.startHere || []).map((item) => item.text),
+    ...(hub.comparisonPoints || []).map((item) => item.text),
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
 function meaningfulWordCount(text) {
   return text.match(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*/g)?.length || 0;
 }
 
-test("every borrower-facing topic guide contains at least 500 visible words", () => {
+test("every borrower-facing topic guide contains at least 500 meaningful body words", () => {
   const borrowerHubs = source.topicHubs.filter(
     (hub) => hub.public === true && hub.slug !== "editorial-team",
   );
@@ -45,8 +57,8 @@ test("every borrower-facing topic guide contains at least 500 visible words", ()
   assert.equal(borrowerHubs.length, 8, "expected the eight borrower topic guides");
 
   for (const hub of borrowerHubs) {
-    const count = meaningfulWordCount(visibleHubCopy(hub));
-    assert.ok(count >= 500, `${hub.route} contains ${count} visible words; expected at least 500`);
+    const count = meaningfulWordCount(meaningfulHubBodyCopy(hub));
+    assert.ok(count >= 500, `${hub.route} contains ${count} meaningful body words; expected at least 500`);
   }
 });
 

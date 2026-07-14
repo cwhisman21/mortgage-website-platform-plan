@@ -32,6 +32,15 @@ function assertComplete(articles, expectedTypes, locationId) {
     assert.equal(article.authorId, expectedAuthorByType.get(article.articleType), `${article.id} author`);
     assert.equal(article.reviewStatus, "editorial_reviewed", `${article.id} editorial status`);
     assert.equal(article.complianceStatus, "compliance_approved", `${article.id} compliance status`);
+    assert.ok(article.metaDescription.length <= 160, `${article.id} meta description length`);
+    assert.match(article.metaDescription, /[.!?]$/, `${article.id} meta description ending`);
+    for (const section of article.sections) {
+      assert.ok(section.evidenceFactIds?.length >= 2, `${article.id} ${section.id} evidence bindings`);
+      const body = section.body.join(" ");
+      const boundFacts = section.evidenceFactIds.map((id) => article.evidenceFacts.find((fact) => fact.id === id));
+      assert.ok(boundFacts.every(Boolean), `${article.id} ${section.id} unknown evidence fact`);
+      assert.ok(boundFacts.some((fact) => body.includes(fact.display)), `${article.id} ${section.id} missing evidence value`);
+    }
   }
 }
 
@@ -89,7 +98,45 @@ test("composes four complete and distinct Texas articles", () => {
       .find((article) => article.articleType === "state_housing_costs")
       .sourceRecords.map((record) => record.variableOrSeriesId),
   );
-  for (const variable of ["B25001_001E", "B25003_002E", "B25064_001E", "B25077_001E", "B25103_001E"]) {
+  for (const variable of ["B25001_001E", "B25003_002E", "B25064_001E", "B25077_001E", "B25088_002E"]) {
     assert.ok(housingVariables.has(variable), `state housing article missing ${variable}`);
+  }
+  assert.ok(!housingVariables.has("B25103_001E"), "state housing article relabeled median real estate taxes as owner costs");
+});
+
+test("honors the BLS geography type for District of Columbia state series", () => {
+  const context = {
+    ...stateFixture,
+    location: { ...stateFixture.location, id: "state-dc", name: "District of Columbia", abbr: "DC" },
+    bls: { ...stateFixture.bls, geographyType: "state", geographyId: "CN1100100000000" },
+  };
+  const article = composeStateArticles(context).find((item) => item.articleType === "state_labor_market");
+  assert.ok(article);
+  assert.ok(article.sourceRecords.every((record) => record.geographyType === "state"));
+});
+
+test("keeps audit identifiers internal and emits canonical borrower-facing actions", () => {
+  const articles = [...composeCityArticles(cityFixture), ...composeStateArticles(stateFixture)];
+  for (const article of articles) {
+    for (const source of article.sourceRecords) {
+      assert.doesNotMatch(source.citationLabel, /\b[A-Z]\d{5}_\d{3}[EM]\b/, `${article.id} raw variable label`);
+      assert.match(source.citationLabel, new RegExp(source.publisher.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${article.id} source attribution`);
+    }
+    for (const table of article.tables) {
+      for (const row of table.rows) {
+        assert.doesNotMatch(String(row[2]), /(?:^|,)news-[a-z0-9-]+-source-/i, `${article.id} raw table source id`);
+        assert.doesNotMatch(String(row[2]), /^https?:\/\//i, `${article.id} raw table URL`);
+      }
+    }
+    for (const cta of article.ctaPlacements) {
+      assert.notEqual(cta.label, "Compare verified loan options");
+      assert.equal(cta.route, "/loan-options");
+    }
+    const related = article.relatedRoutes.map((item) => typeof item === "string" ? { route: item, label: item } : item);
+    assert.ok(related.some((item) => item.route === "/loan-options/conventional-loans"), `${article.id} conventional route`);
+    assert.ok(related.some((item) => item.route === "/loan-options/fha-loans"), `${article.id} FHA route`);
+    assert.ok(related.every((item) => item.label && !item.label.startsWith("/") && !/^https?:\/\//.test(item.label)), `${article.id} borrower-facing related labels`);
+    assert.ok(!related.some((item) => ["/loan-options/conventional", "/loan-options/fha"].includes(item.route)), `${article.id} dead related route`);
+    assert.doesNotMatch(article.methodology, /created by this generator|source identifiers|structured source records/i);
   }
 });

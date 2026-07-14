@@ -23,7 +23,7 @@ const cityMetrics = {
   renterOccupiedUnits: metric(230470, 2900, "B25003_003E", "place", "4805000"),
   medianGrossRent: metric(1729, 31, "B25064_001E", "place", "4805000"),
   medianHomeValue: metric(555300, 11734, "B25077_001E", "place", "4805000"),
-  medianOwnerCostWithMortgage: metric(2487, 54, "B25103_001E", "place", "4805000"),
+  medianOwnerCostWithMortgage: metric(2487, 54, "B25088_002E", "place", "4805000"),
 };
 
 const priorCityMetrics = Object.fromEntries(
@@ -40,7 +40,7 @@ const stateMetrics = {
   renterOccupiedUnits: metric(4220000, 8000, "B25003_003E", "state", "48"),
   medianGrossRent: metric(1463, 12, "B25064_001E", "state", "48"),
   medianHomeValue: metric(303800, 2200, "B25077_001E", "state", "48"),
-  medianOwnerCostWithMortgage: metric(2074, 21, "B25103_001E", "state", "48"),
+  medianOwnerCostWithMortgage: metric(2074, 21, "B25088_002E", "state", "48"),
 };
 
 const priorStateMetrics = Object.fromEntries(
@@ -75,7 +75,14 @@ export const cityFixture = {
   limits,
   mediaAssets,
   productIds: ["product-purchase", "product-conventional", "product-fha", "product-jumbo"],
-  relatedRoutes: ["/locations/texas", "/loan-options/conventional", "/loan-options/fha", "/calculators/affordability", "/rates"],
+  relatedRoutes: [
+    { route: "/locations/texas", label: "Texas mortgage and housing guide" },
+    { route: "/loan-options", label: "Loan options" },
+    { route: "/loan-options/conventional-loans", label: "Conventional loans" },
+    { route: "/loan-options/fha-loans", label: "FHA loans" },
+    { route: "/calculators/affordability", label: "Affordability calculator" },
+    { route: "/rates", label: "Mortgage rates" },
+  ],
   publishedAt: "2026-07-10",
 };
 
@@ -99,6 +106,13 @@ export const stateFixture = {
   limitSummary: { geographyId: "48", countyCount: 254, conforming: { minimumOneUnit: 806500, maximumOneUnit: 1249125, countiesAboveBaseline: 13 }, fha: { minimumOneUnit: 541287, maximumOneUnit: 1249125, countiesAboveFloor: 19 } },
   mediaAssets,
   productIds: ["product-purchase", "product-conventional", "product-fha", "product-jumbo"],
-  relatedRoutes: ["/locations/texas/austin", "/loan-options/conventional", "/loan-options/fha", "/calculators/affordability", "/rates"],
+  relatedRoutes: [
+    { route: "/locations/texas/austin", label: "Austin mortgage and housing guide" },
+    { route: "/loan-options", label: "Loan options" },
+    { route: "/loan-options/conventional-loans", label: "Conventional loans" },
+    { route: "/loan-options/fha-loans", label: "FHA loans" },
+    { route: "/calculators/affordability", label: "Affordability calculator" },
+    { route: "/rates", label: "Mortgage rates" },
+  ],
   publishedAt: "2026-07-10",
 };

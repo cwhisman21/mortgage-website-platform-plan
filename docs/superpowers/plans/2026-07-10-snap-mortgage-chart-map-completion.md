@@ -690,7 +690,7 @@ const files = [
   new URL("./location-news-static.mjs", import.meta.url),
 ];
 const forbidden = [
-  "placeholder", "wireframe", "prototype", "scaffold", "demo", "tbd", "todo", "xxxx",
+  "wireframe", "prototype", "scaffold", "demo", "tbd", "todo", "xxxx",
   "trust layer", "answer unlock", "content graph", "editorial graph", "city dashboard",
 ];
 
@@ -706,6 +706,8 @@ test("public renderers keep ordinary crawlable anchors", () => {
   assert.doesNotMatch(source, /href=["']#["']/);
 });
 ~~~
+
+The literal HTML attribute name placeholder is allowed for search-input examples. The word must still never appear as rendered explanatory, status, button, or headline copy.
 
 - [ ] **Step 2: Run the guard test to verify current failures**
 
@@ -724,6 +726,7 @@ Review app.js, news-renderer.mjs, and location-news-static.mjs. Preserve useful 
 - Replace planning labels with a borrower question or concise explanation.
 - Replace generic instructions with a direct outcome-oriented sentence.
 - Remove any element that has no borrower value.
+- Replace article-facing review-status and internal-pricing labels with borrower-facing source or update language; do not surface internal system names.
 - Keep source, disclosure, and status language readable and user-facing.
 - Do not modify valid route targets to hide an unfinished feature.
 

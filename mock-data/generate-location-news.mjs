@@ -36,6 +36,7 @@ function parseArgs(argv) {
     locationId: values.get("location-id") ? String(values.get("location-id")) : null,
     censusSummaryFile: values.get("census-summary-file") ? path.resolve(String(values.get("census-summary-file"))) : null,
     attributionOnly: values.has("attribution-only"),
+    contentOnly: values.has("content-only"),
     repoRoot: path.resolve(String(values.get("repo-root") || repoRoot)),
   };
 }
@@ -248,14 +249,25 @@ function compactIndexItem(article, contentPath) {
   };
 }
 
-function relatedRoutes(location, state) {
+function requiredSeedItem(collection, id, label) {
+  const item = collection.find((candidate) => candidate.id === id);
+  if (!item?.route) throw new Error(`Missing canonical ${label} route ${id} in production seed`);
+  return item;
+}
+
+function relatedRoutes(location, state, seed) {
+  const loanOptions = requiredSeedItem(seed.directoryPages, "directory-loan-options", "directory");
+  const conventional = requiredSeedItem(seed.products, "product-conventional", "product");
+  const fha = requiredSeedItem(seed.products, "product-fha", "product");
+  const affordability = requiredSeedItem(seed.calculators, "calc-affordability", "calculator");
+  const rates = requiredSeedItem(seed.ratesPages, "rates-mortgage", "rates page");
   return [
-    state?.route,
-    "/loan-options",
-    "/loan-options/conventional",
-    "/loan-options/fha",
-    "/calculators/affordability",
-    "/rates",
+    state?.route ? { route: state.route, label: `${state.name} mortgage and housing guide` } : null,
+    { route: loanOptions.route, label: loanOptions.name },
+    { route: conventional.route, label: conventional.name },
+    { route: fha.route, label: fha.name },
+    { route: affordability.route, label: affordability.name },
+    { route: rates.route, label: rates.name },
   ].filter(Boolean);
 }
 
@@ -263,7 +275,7 @@ function productIds(location) {
   return location.productIds || location.featuredProductIds || ["product-purchase", "product-conventional", "product-fha", "product-refinance"];
 }
 
-function buildContext(location, state, evidence, mediaAssets) {
+function buildContext(location, state, evidence, mediaAssets, seed) {
   if (location.id.startsWith("state-")) {
     return {
       location,
@@ -273,7 +285,7 @@ function buildContext(location, state, evidence, mediaAssets) {
       limitSummary: evidence.loans.stateLimitSummaries[location.id],
       mediaAssets,
       productIds: productIds(location),
-      relatedRoutes: relatedRoutes(location, location),
+      relatedRoutes: relatedRoutes(location, location, seed),
       publishedAt: "2026-07-10",
     };
   }
@@ -292,7 +304,7 @@ function buildContext(location, state, evidence, mediaAssets) {
     limitCountyFips: evidence.loans.countyLimitFipsByCityId[location.id],
     mediaAssets,
     productIds: productIds(location),
-    relatedRoutes: relatedRoutes(location, state),
+    relatedRoutes: relatedRoutes(location, state, seed),
     publishedAt: "2026-07-10",
   };
 }
@@ -338,7 +350,7 @@ function publicRoutes(seed, articles, contributors = []) {
   ])].sort();
 }
 
-async function publishStaticArticles({ seed, articles, indexItems, mediaById, contributors = [], sitemapArticles = articles }) {
+async function publishStaticArticles({ seed, articles, indexItems, mediaById, contributors = [], sitemapArticles = articles, writeRobots = true }) {
   const indexByArticleId = new Map(indexItems.map((item) => [item.id, item]));
   const contributorsById = new Map(contributors.map((contributor) => [contributor.id, contributor]));
   for (const article of articles) {
@@ -359,10 +371,12 @@ async function publishStaticArticles({ seed, articles, indexItems, mediaById, co
     path.join(repoRoot, "site", "sitemap.xml"),
     renderSitemap(publicRoutes(seed, sitemapArticles, contributors), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
   );
-  await writeTextAtomic(
-    path.join(repoRoot, "site", "robots.txt"),
-    renderRobots({ siteOrigin: DEFAULT_SITE_ORIGIN }),
-  );
+  if (writeRobots) {
+    await writeTextAtomic(
+      path.join(repoRoot, "site", "robots.txt"),
+      renderRobots({ siteOrigin: DEFAULT_SITE_ORIGIN }),
+    );
+  }
 }
 
 async function main() {
@@ -375,6 +389,7 @@ async function main() {
   const seed = JSON.parse(await fs.readFile(seedPath, "utf8"));
   const contributorDocument = JSON.parse(await fs.readFile(path.join(mockDataDir, "editorial", "contributors.json"), "utf8"));
   const contributors = contributorDocument.contributors || [];
+  const validRoutes = new Set(publicRoutes(seed, [], contributors));
   const statesById = new Map(seed.states.map((state) => [state.id, state]));
   const allLocations = [...seed.states, ...seed.cities];
   const selectedLocations = options.locationId ? allLocations.filter((location) => location.id === options.locationId) : allLocations;
@@ -384,7 +399,7 @@ async function main() {
   const existingSourceManifest = options.locationId ? JSON.parse(await fs.readFile(sourceManifestPath, "utf8")) : null;
 
   const approvedManifest = createVerifiedMediaManifest("2026-07-10");
-  await writeJsonAtomic(mediaManifestPath, approvedManifest);
+  if (!options.contentOnly) await writeJsonAtomic(mediaManifestPath, approvedManifest);
   const media = await loadMediaLibrary({ manifestPath: mediaManifestPath, refresh: options.refreshMedia });
   const mediaAssets = Object.values(media.assetsById);
   await materializeMediaAssets({ assets: mediaAssets, repoRoot, refresh: options.refreshMedia });
@@ -412,10 +427,10 @@ async function main() {
     const sourceIds = new Set();
     for (const location of locations) {
       const state = location.id.startsWith("state-") ? location : statesById.get(location.stateId);
-      const context = buildContext(location, state, evidence, mediaAssets);
+      const context = buildContext(location, state, evidence, mediaAssets, seed);
       const articles = location.id.startsWith("state-") ? composeStateArticles(context) : composeCityArticles(context);
       for (const article of articles) {
-        validateArticle(article);
+        validateArticle(article, { validRoutes });
         for (const record of article.sourceRecords) sourceIds.add(record.sourceId);
       }
       const contentPath = contentPathFor(location, statesById);
@@ -444,6 +459,7 @@ async function main() {
   const validation = validateCorpus(corpus, {
     expectedLocationIds: selectedLocations.map((location) => location.id),
     minimumArticles: selectedLocations.length * 4,
+    validRoutes,
   });
   const sourceDatasets = await sourceRecordsWithChecksums([census.sources, bls.sources, loans.sources]);
   const generatedIndex = {
@@ -482,9 +498,11 @@ async function main() {
 
   if (!options.locationId) {
     await writeJsonAtomic(indexPath, generatedIndex);
-    await writeJsonAtomic(sourceManifestPath, generatedSourceManifest);
-    await writeJsonAtomic(seedPath, seed);
-    await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById, contributors });
+    if (!options.contentOnly) {
+      await writeJsonAtomic(sourceManifestPath, generatedSourceManifest);
+      await writeJsonIfChanged(seedPath, seed);
+    }
+    await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById, contributors, writeRobots: !options.contentOnly });
   } else {
     const locationId = selectedLocations[0].id;
     const retained = existingIndex.articles.filter((article) => article.locationId !== locationId);
@@ -528,8 +546,10 @@ async function main() {
       exceptions: generatedSourceManifest.exceptions,
     };
     await writeJsonAtomic(indexPath, mergedIndex);
-    await writeJsonAtomic(sourceManifestPath, mergedSourceManifest);
-    await writeJsonAtomic(seedPath, seed);
+    if (!options.contentOnly) {
+      await writeJsonAtomic(sourceManifestPath, mergedSourceManifest);
+      await writeJsonIfChanged(seedPath, seed);
+    }
     await publishStaticArticles({
       seed,
       articles: corpus,
@@ -537,6 +557,7 @@ async function main() {
       mediaById: media.assetsById,
       contributors,
       sitemapArticles: mergedArticles,
+      writeRobots: !options.contentOnly,
     });
   }
   console.log(`Generated ${indexItems.length} articles for ${selectedLocations.length} locations in ${batches.length} validated batches.`);

@@ -59,11 +59,44 @@ test("rejects borrower-facing scaffold language", () => {
   assert.throws(() => validateArticle(article), /scaffold/i);
 });
 
+test("rejects internal generator language in borrower-visible copy", () => {
+  const article = structuredClone(validArticleFixture);
+  article.methodology += " No missing figure is replaced with an estimate created by this generator.";
+  assert.throws(() => validateArticle(article), /internal|generator|borrower-visible/i);
+});
+
+test("rejects raw source IDs and URLs in borrower-visible fields", () => {
+  const article = structuredClone(validArticleFixture);
+  article.tables[0].rows[0][2] = article.sourceRecords[0].sourceId;
+  article.relatedRoutes = [{ route: "/loan-options", label: "https://internal.example/source" }];
+  assert.throws(() => validateArticle(article), /source id|raw url|borrower-visible|related/i);
+});
+
+test("rejects dead routes and unsupported option-comparison copy", () => {
+  const article = structuredClone(validArticleFixture);
+  article.relatedRoutes = [{ route: "/loan-options/conventional", label: "Conventional loans" }, { route: "/loan-options", label: "Loan options" }];
+  article.ctaPlacements[0].label = "Compare verified loan options";
+  assert.throws(() => validateArticle(article), /dead route|verified loan options|unsupported/i);
+});
+
+test("rejects descriptions without a complete sentence ending", () => {
+  const article = structuredClone(validArticleFixture);
+  article.metaDescription = "Austin housing evidence and practical mortgage questions that end midwo";
+  assert.throws(() => validateArticle(article), /meta description/i);
+});
+
+test("requires each analysis section to bind its local evidence", () => {
+  const article = structuredClone(validArticleFixture);
+  delete article.sections[0].evidenceFactIds;
+  assert.throws(() => validateArticle(article), /evidence binding|local evidence/i);
+});
+
 test("rejects duplicated substantive paragraphs", () => {
   const first = structuredClone(validArticleFixture);
   const second = structuredClone(validArticleFixture);
   second.id = "second";
   second.route = "/learning-center/market-news/second";
   second.title = "Second evidence article";
+  second.metaDescription = "Second evidence article with a distinct local market description.";
   assert.throws(() => validateCorpus([first, second]), /duplicate substantive paragraph/i);
 });

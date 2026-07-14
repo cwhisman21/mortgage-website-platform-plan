@@ -29,8 +29,25 @@ test("maps an ACS place row to Austin with estimates and margins", () => {
   assert.equal(result["city-austin-tx"].metrics.medianHomeValue.marginOfError, 11734);
 });
 
-test("uses the complete ACS selected owner-cost measure", () => {
-  assert.deepEqual(ACS_VARIABLES.medianOwnerCostWithMortgage, ["B25103_001E", "B25103_001M"]);
+test("uses median selected monthly owner costs for housing units with a mortgage", () => {
+  assert.deepEqual(ACS_VARIABLES.medianOwnerCostWithMortgage, ["B25088_002E", "B25088_002M"]);
+  assert.ok(ACS_SUMMARY_TABLES.includes("B25088"));
+  assert.ok(!ACS_SUMMARY_TABLES.includes("B25103"));
+});
+
+test("does not relabel median real estate taxes as monthly owner costs", () => {
+  const rows = [
+    ["NAME", "B25088_002E", "B25088_002M", "B25103_001E", "B25103_001M", "state", "place"],
+    ["Austin city, Texas", "2487", "54", "8024", "114", "48", "05000"],
+  ];
+  const result = mapPlaceRows(
+    rows,
+    [{ id: "city-austin-tx", name: "Austin", sourceGeography: { stateFips: "48", cityKey: "austin|TX" } }],
+    "2024",
+  );
+  const ownerCost = result["city-austin-tx"].metrics.medianOwnerCostWithMortgage;
+  assert.equal(ownerCost.estimate, 2487);
+  assert.equal(ownerCost.variableOrSeriesId, "B25088_002E");
 });
 
 test("maps the Honolulu source alias without weakening exact matching", () => {
@@ -132,7 +149,7 @@ test("rejects an ACS geography row with a missing required estimate", () => {
 });
 
 test("maps API variable IDs to table-based summary columns", () => {
-  assert.equal(summaryColumnForApiVariable("B25103_001E"), "B25103_E001");
+  assert.equal(summaryColumnForApiVariable("B25088_002E"), "B25088_E002");
   assert.equal(summaryColumnForApiVariable("B25002_003M"), "B25002_M003");
 });
 
@@ -143,6 +160,8 @@ test("uses the documented 2019 prototype source layout and CSV geography file", 
   assert.equal(prior.geography, "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/Geos20195YR.csv");
   assert.equal(prior.geographyFilename, "Geos20195YR.csv");
   assert.equal(prior.tables.B25001, "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25001.dat");
+  assert.equal(prior.tables.B25088, "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25088.dat");
+  assert.equal(current.tables.B25088, "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25088.dat");
   assert.equal(current.geographyFilename, "Geos20245YR.txt");
 });
 

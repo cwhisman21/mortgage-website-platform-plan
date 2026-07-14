@@ -22,6 +22,7 @@ import {
   renderProductionArticle,
   renderProductionTopicHub,
 } from "/site/editorial-renderer.mjs";
+import { applyDocumentMetadata, resolveDocumentMetadata } from "/site/document-metadata.mjs";
 import { productContentById, renderProductContent } from "/site/product-content.mjs";
 import { renderRatesMarketplace, wireRatesMarketplace } from "/site/rates-marketplace-ui.mjs";
 import { createFixtureMarketplaceAdapter } from "/site/rates-marketplace.mjs";
@@ -1030,7 +1031,7 @@ function disclosureFor(pageType, title = "Disclosure notes") {
     article: "Editorial content is educational and works best when reviewed with a licensed professional before making mortgage decisions.",
     loan_officer: "Loan officer availability, licensing, NMLS information, specialties, reviews, and service areas must remain controlled by approved licensing and compliance records.",
     branch: "Branch information, team rosters, service areas, licensing, and contact options are subject to company records and state requirements.",
-    directory: "Directory results are organized by service area, loan type, language, and page relationships. They are not rankings or endorsements."
+    directory: "Directory results are organized by service area, loan type, language, and related markets or products. They are not rankings or endorsements."
   };
   return disclosureBlock(title, copy[pageType] || copy.product);
 }
@@ -1519,7 +1520,7 @@ function locationsPage() {
       { label: "Payment", value: "Monthly estimate", text: "Payment estimates pair price with taxes, insurance, rate assumptions, and loan type." },
       { label: "Inventory", value: "Market pace", text: "Inventory and days on market help borrowers understand timing without making predictions." },
       { label: "Local costs", value: "Tax and insurance", text: "Escrow assumptions stay close to payment scenarios." },
-      { label: "Next step", value: "Expert handoff", text: "Location content connects borrowers with loan officers and branches that serve the market." }
+      { label: "Next step", value: "Licensed guidance", text: "Connect with a loan officer or branch that serves the market." }
     ]) + marketSnapshotReference("locations_snapshot", "locations"), "modern-band")}
     ${section("State market entry", { label: "Market overview", text: "Open the statewide view before comparing individual city pages." }, `<div class="grid four">${stateCards.join("")}</div>`)}
     ${section("City market links", { label: "Cities", text: "Open a city view for market snapshots, charts, local loan options, experts, branches, and updates." }, table(["City", "Median price", "Payment scenario", "Inventory", "DOM"], cityRows), "compact")}
@@ -1542,14 +1543,7 @@ function ratesPage() {
   });
 
   return pageShell(`
-    ${hero({
-      eyebrow: "Mortgage rates",
-      title: "Mortgage rates with APR, assumptions, and next steps.",
-      lead: "Review national benchmarks, see what affects personalized pricing, then move into a calculator or licensed review.",
-      actions: `<a class="button" href="${routeWithAnchor("/rates", "rate-table")}">View rate table</a>${ctaButton("rateReview", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel visual-panel"><img src="${ASSETS.mortgage}" alt="" /><h2>Personalize the scenario</h2><p>Loan purpose, state, credit profile, down payment, loan amount, occupancy, and property type can all affect pricing.</p><form class="quote-form"><label>Loan purpose<select><option>Purchase</option><option>Refinance</option><option>Cash-out refinance</option></select></label><label>State<select>${data.states.map((state) => `<option>${esc(state.name)}</option>`).join("")}</select></label><label>Credit range<select><option>740+</option><option>700-739</option><option>660-699</option></select></label>${ctaButton("rateReview")}</form></aside>`
-    })}
-    ${section("Compare verified loan terms", { label: "Personalized pricing", text: "Provider-specific rates and offers are shown only after the provider, licensing record, assumptions, and availability have been verified." }, `<div class="panel"><h2>Start with a documented comparison</h2><p>Ask for written terms that identify the lender, loan amount, rate, APR, points, fees, lock period, payment assumptions, and expiration. Snap does not display fictional providers or development-only offers as available financing.</p>${ctaButton("rateReview", { label: "Request a verified rate review" })}</div>`, "compact")}
+    ${renderRatesMarketplace({ fixture: ratesMarketplaceFixture })}
     ${editorialSection({
       label: "Before you compare",
       title: "Know what is included before you compare rates.",
@@ -1627,9 +1621,9 @@ function statePage(state) {
     ${editorialSection({
       label: "State brief",
       title: `${state.name} mortgage planning starts with local cost drivers.`,
-      intro: "A state guide translates broad housing data into the mortgage questions a borrower can act on.",
+      intro: "Use statewide housing data to compare local costs and identify the mortgage questions worth reviewing next.",
       paragraphs: [
-        `${state.name} borrowers may compare the same loan product across very different city conditions. The state page gives them a baseline for price, payment, property tax, insurance, inventory, and branch coverage before they choose a city page.`,
+        `${state.name} borrowers may compare the same loan product across very different city conditions. Use the statewide baseline for price, payment, property tax, insurance, inventory, and branch coverage before comparing individual cities.`,
         "Loan-limit details matter. Conventional, jumbo, FHA, and VA conversations can change when county limits, entitlement, property type, or borrower profile changes.",
         "Each market figure includes its source and review date so you can distinguish a current benchmark from a property-specific estimate."
       ],
@@ -1653,7 +1647,7 @@ function statePage(state) {
           </div>
         </div>
         <aside class="side-stack">
-          <div class="cta-panel"><h3>${cities.length ? "Compare a city" : "Review statewide options"}</h3><p>${cities.length ? "Open a city market page for payment scenarios, tax and insurance notes, and local experts." : "Use the statewide view to compare rates, product paths, and a payment estimate before a licensed review."}</p><div class="cta-inline-actions"><a class="button" href="${route(primaryRoute)}">${cities.length ? "Open city" : "Review rates"}</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
+          <div class="cta-panel"><h3>${cities.length ? "Compare a city" : "Review statewide options"}</h3><p>${cities.length ? "Open a city guide for payment scenarios, tax and insurance notes, and local experts." : "Use the statewide view to compare rates, product paths, and a payment estimate before a licensed review."}</p><div class="cta-inline-actions"><a class="button" href="${route(primaryRoute)}">${cities.length ? "Open city" : "Review rates"}</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
           ${disclosureFor("state", "State disclosure")}
         </aside>
       </div>
@@ -1662,15 +1656,15 @@ function statePage(state) {
       { label: "Conforming", value: "County limits", text: "FHFA limits help explain conventional versus jumbo conversations." },
       { label: "FHA", value: "HUD limits", text: "FHA county limits shape lower down payment planning." },
       { label: "Income", value: "ACS data", text: "Income and household data help frame affordability, not eligibility." },
-      { label: "Labor", value: "BLS trend", text: "Employment data can support local market updates and editorial analysis." }
+      { label: "Labor", value: "BLS trend", text: "Employment data can help explain local income stability and housing demand." }
     ]) + sourceNote(["fhfaLimits", "hudFha", "census", "bls"], "State data sources"), "modern-band")}
     ${section("State product guidance", { label: "Loan options", text: "Review the loan path, then compare how local factors may change the numbers." }, `<div class="grid four">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).join("")}</div>`, "compact")}
     ${section("Save this state", { label: "Snap Homes", text: "Keep statewide market notes connected to rate, product, and prequalification questions." }, ctaDeck(["watchlist", "rateReview", "leadForm"], `${state.name} research can live in your Watchlist.`, "Track market movement, request a rate review, or ask for local guidance when the statewide view narrows to a city or property."), "compact")}
     ${locationProductModules(state.route, state.name)}
-    ${section("Branches and local experts", { label: "Coverage", text: "Placement follows licensing, service area, product fit, and market relationship." }, `<div class="grid three">${branches.map((branch, index) => card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[index % accentColors.length], linkLabel: "Open branch" })).join("")}</div>`, "compact")}
+    ${section("Branches and local experts", { label: "Coverage", text: "Find branches and licensed experts serving the markets you are comparing." }, `<div class="grid three">${branches.map((branch, index) => card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[index % accentColors.length], linkLabel: "Open branch" })).join("")}</div>`, "compact")}
     ${section("State FAQ", { label: "Borrower questions", text: "Get practical answers with source notes nearby." }, `${faqBlock([
       { q: `How do I compare ${state.name} cities?`, a: "Start with payment, property tax, insurance, inventory, and local expert coverage before choosing a product path." },
-      { q: "Can a state page tell me which loan I qualify for?", a: "No. It can explain product paths and local factors, but eligibility and pricing require borrower and property review." }
+      { q: "Can statewide data tell me which loan I qualify for?", a: "No. It can explain product paths and local factors, but eligibility and pricing require borrower and property review." }
     ])}`, "compact")}
   `);
 }
@@ -1687,7 +1681,7 @@ function cityPage(city) {
   return pageShell(`
     ${breadcrumb(["Locations", state.name, city.name], ["/locations", state.route, city.route])}
     ${hero({
-      eyebrow: "City market page",
+      eyebrow: "City market guide",
       title: `${city.name}, ${state.abbr} mortgage and housing market`,
       lead: `${city.marketPositioning} Review local price, payment, inventory, taxes, insurance, loan options, and experts in one place.`,
       actions: `${ctaButton("prequal", { label: heroCta.primary })}${ctaButton("watchlist", { variant: "secondary" })}`,
@@ -1742,9 +1736,9 @@ function cityPage(city) {
       { label: "Insurance", value: city.marketSnapshot.insurance, text: "Insurance cost and availability can materially affect monthly obligations." }
     ]) + sourceNote(["fhfaHpi", "census", "bls"], "City data sources"), "modern-band")}
     ${section("Nearby city comparison", { label: "Compare", text: "Move through nearby markets before settling on a payment scenario." }, `<div class="grid two">${nearby.map((near, index) => card({ title: `${near.name}, ${maps.states[near.stateId].abbr}`, text: `${near.marketSnapshot.medianHomePrice} median price. ${near.marketSnapshot.inventory} inventory.`, href: near.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
-    ${section("Review local answers", { label: "Personalized review", text: "The city market page remains public; specific answers need borrower or account details." }, `${gatedAnswer({
+    ${section("Review local answers", { label: "Personalized review", text: "Use citywide data for research; specific answers need borrower or account details." }, `${gatedAnswer({
       title: `How would ${city.name} affect my payment?`,
-      answer: `The public market page can show ${city.name} price, inventory, tax, insurance, and loan details. It cannot decide your exact payment, cash to close, product fit, or prequalification result.`,
+      answer: `This guide shows ${city.name} price, inventory, tax, insurance, and loan details. It cannot decide your exact payment, cash to close, product fit, or prequalification result.`,
       unlockTitle: "Save or request a local review",
       unlockText: "Save this market to Snap Homes or share your price range, down payment, timeline, and product questions for a licensed review path.",
       types: ["watchlist", "prequal"]
@@ -1918,7 +1912,7 @@ function learningHome() {
     : "";
   const topicCards = model.topicCards.length
     ? section(
-        "Topic hubs",
+        "Explore by topic",
         {
           label: "Categories",
           text: "Browse mortgage guides by the decision you are working through."
@@ -2133,7 +2127,7 @@ function loanOfficerPage(officer) {
       { title: "Compare options", text: "Available options may differ by borrower facts, property details, market conditions, and lender guidelines." },
       { title: "Choose a next step", text: "Move into prequalification, document collection, or a follow-up conversation when ready." }
     ]), "compact")}
-    ${section("Markets and branch", { label: "Placement", text: "See the markets and branch coverage connected to this loan officer." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Market" })).concat(branch ? [card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[3], linkLabel: "Branch" })] : []).join("")}</div>`)}
+    ${section("Markets and branch", { label: "Service area", text: "Explore the markets and branch coverage this loan officer serves." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Market" })).concat(branch ? [card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[3], linkLabel: "Branch" })] : []).join("")}</div>`)}
     ${section("Loan paths this officer can discuss", { label: "Product fit", text: "Open product explainers and calculators from this profile." }, `<div class="grid three">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View path" })).join("")}</div>`, "compact")}
     ${section("Choose how to reach out", { label: "Contact options", text: "Use the contact path that matches your question and timing." }, ctaDeck([
       { type: "loContact", href: `${officer.route}#contact`, label: `Contact ${officer.name.split(" ")[0]}` },
@@ -2191,10 +2185,10 @@ function branchPage(branch) {
       ]
     })}
     ${section("Branch snapshot", { label: "Office details", text: "Review practical contact, team, map, and licensing information." }, `<div class="grid four">${metric("State", state.name)}${metric("Cities served", String(cities.length))}${metric("Team members", String(officers.length))}${metric("Coverage", branch.coverageNote)}</div>`)}
-    ${section("Branch team", { label: "Loan officer roster", text: "Names, NMLS IDs, specialties, and profile links help the branch page convert without overclaiming." }, `<div class="grid two">${officers.map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Profile" })).join("")}</div>`)}
+    ${section("Branch team", { label: "Loan officer roster", text: "Compare licensed loan officers by NMLS ID, specialty, language, and the markets they serve." }, `<div class="grid two">${officers.map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Profile" })).join("")}</div>`)}
     ${section("Coverage and services", { label: "Local office hub", text: "Move from the branch into city markets, products, calculators, articles, and licensing details." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "City" })).concat([card({ title: "Mortgage payment calculator", text: "Estimate payment with visible taxes, insurance, rate, and down payment assumptions.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[4], linkLabel: "Calculate" })]).join("")}</div>`, "compact")}
-    ${section("Branch next steps", { label: "Local support", text: "Move from the branch page into contact, market tracking, or rate review." }, ctaDeck(["leadForm", "loContact", "watchlist", "rateReview"], "Use branch details in your next step.", "Ask for guidance, contact a loan officer, save covered markets, or request a rate review."), "compact")}
-    ${section("Loan options and local updates", { label: "Related pages", text: "Keep moving into products, markets, articles, and tools." }, `<div class="grid three">${products.slice(0, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).concat(articles.map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review the latest local mortgage evidence.", href: article.route, iconName: "article", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "Read" }))).join("")}</div><div style="margin-top:18px">${sourceNote(["nmls"], "Branch and licensing source")}</div><div style="margin-top:18px">${disclosureFor("branch", "Branch disclosure")}</div>`, "compact")}
+    ${section("Branch next steps", { label: "Local support", text: "Contact the branch, save a market, or request a rate review when you are ready for the next step." }, ctaDeck(["leadForm", "loContact", "watchlist", "rateReview"], "Use branch details in your next step.", "Ask for guidance, contact a loan officer, save covered markets, or request a rate review."), "compact")}
+    ${section("Loan options and local updates", { label: "More to explore", text: "Compare relevant loan options, markets, articles, and planning tools." }, `<div class="grid three">${products.slice(0, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).concat(articles.map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review the latest local mortgage evidence.", href: article.route, iconName: "article", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "Read" }))).join("")}</div><div style="margin-top:18px">${sourceNote(["nmls"], "Branch and licensing source")}</div><div style="margin-top:18px">${disclosureFor("branch", "Branch disclosure")}</div>`, "compact")}
   `);
 }
 
@@ -2343,33 +2337,53 @@ const calculatorPresets = {
   }
 };
 
-function calculatorHubCard(calculator, index) {
+function calculatorHubCard(calculator, index, emphasis = "supporting") {
   const preset = calculatorPresets[calculator.id] || calculatorPresets["calc-payment"];
-  return `<a class="calculator-hub-card" href="${route(calculator.route)}">
+  return `<a class="calculator-hub-card ${emphasis === "primary" ? "is-primary" : "is-supporting"}" href="${route(calculator.route)}" data-calculator-id="${esc(calculator.id)}">
     <span class="icon-bubble" style="--accent:${accentColors[index % accentColors.length]}">${icon("calculator")}</span>
     <span class="calculator-hub-card-copy">
       <strong>${esc(calculator.name)}</strong>
       <small>${esc(preset.explainer)}</small>
       <em>${esc(calculator.captures.slice(0, 5).join(" • "))}</em>
     </span>
+    <span class="calculator-hub-card-arrow" aria-hidden="true">→</span>
   </a>`;
 }
 
 function calculatorsHubPage(directory) {
+  const [payment, affordability, ...supporting] = data.calculators;
   return pageShell(`
-    ${breadcrumb(["Calculators"], ["/calculators"])}
-    <section class="section calculator-hub-hero">
-      <div class="section-header">
-        <div>
+    <main class="calculator-hub-page">
+      <section class="calculator-hub-mobile-stage" aria-labelledby="calculator-hub-title">
+        <div class="calculator-hub-intro">
           <span class="eyebrow">Calculators</span>
-          <h1>${esc(directory?.name || "Mortgage calculators")}</h1>
+          <h1 id="calculator-hub-title">${esc(directory?.name || "Mortgage calculators")}</h1>
           <p>Choose a calculator, enter visible assumptions, and compare product-aware estimates before a licensed review.</p>
         </div>
-      </div>
-      <div class="calculator-hub-grid">
-        ${data.calculators.map((calculator, index) => calculatorHubCard(calculator, index)).join("")}
-      </div>
-    </section>
+        <div class="calculator-hub-orbit" aria-hidden="true">
+          <span class="calculator-hub-orbit-ring ring-one"></span>
+          <span class="calculator-hub-orbit-ring ring-two"></span>
+          <span class="calculator-hub-orbit-node node-one"></span>
+          <span class="calculator-hub-orbit-node node-two"></span>
+          <span class="calculator-hub-orbit-tile tile-payment">Payment</span>
+          <span class="calculator-hub-orbit-tile tile-affordability">Affordability</span>
+        </div>
+        <div class="calculator-hub-primary">
+          ${calculatorHubCard(payment, 0, "primary")}
+          ${calculatorHubCard(affordability, 1, "primary")}
+        </div>
+      </section>
+      <section class="calculator-hub-supporting" aria-label="More mortgage calculators">
+        ${supporting.map((calculator, index) => calculatorHubCard(calculator, index + 2)).join("")}
+      </section>
+      <aside class="calculator-hub-prequal" aria-label="Prequalification next step">
+        <div class="calculator-hub-prequal-copy">
+          <strong>Start a prequalification conversation</strong>
+          <p>Organize the borrower, property, and timing details a licensed loan officer may need to review next steps.</p>
+        </div>
+        <a class="button" href="${route("/prequal/start")}">Start prequalification <span aria-hidden="true">→</span></a>
+      </aside>
+    </main>
   `);
 }
 
@@ -2541,7 +2555,7 @@ function directoryPage(directory) {
     ${hero({
       eyebrow: "Directory",
       title: directory.name,
-      lead: `Search ${directoryNoun} by ${directory.filters.join(", ")} and open the page that matches the borrower's next step.`,
+      lead: `Search ${directoryNoun} by ${directory.filters.join(", ")} and open the result that best fits your next step.`,
       actions: `<a class="button" href="${route(results[0]?.route || "/")}">Open first result</a>`,
       panel: `<aside class="hero-panel"><h2>Filters</h2><div class="tag-row">${directory.filters.map((filter) => `<span class="tag">${esc(filter)}</span>`).join("")}</div><form class="search-form" data-directory-filter><input name="filter" aria-label="Filter results" placeholder="Filter these results..." /><button class="button" type="submit">Filter</button></form></aside>`
     })}
@@ -2563,8 +2577,8 @@ function directoryPage(directory) {
         "No unsupported rankings"
       ]
     })}
-    ${section("Results", { label: "Search", text: "Filter results and open the matching page." }, `<div class="grid three" data-directory-results>${results.slice(0, 24).map((item, index) => card({ title: item.name || item.title, text: item.stateNarrative || item.marketPositioning || item.purpose || humanStatus(item.reviewStatus) || productBriefs[item.id]?.fit || item.borrowerGoal || "Result", href: item.route, iconName: directory.route.includes("branch") ? "branch" : directory.route.includes("loan-officer") ? "expert" : directory.route.includes("loan-options") ? "rates" : "article", accent: accentColors[index % accentColors.length], linkLabel: "Open", searchText: `${item.name || item.title} ${item.stateNarrative || ""} ${item.marketPositioning || ""} ${item.purpose || ""} ${humanStatus(item.reviewStatus) || ""} ${item.borrowerGoal || ""} ${(item.specialties || []).join(" ")} ${(item.filters || []).join(" ")}` })).join("")}</div><div class="result-note" data-directory-empty hidden>No matching results found.</div>`)}
-    ${section("Directory next steps", { label: "Helpful links", text: "Each directory keeps high-intent users connected to related pages." }, `<div class="grid three">${card({ title: "Compare rates", text: "Move from any directory into the rates table and payment assumptions.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Rates" })}${card({ title: "Run a calculator", text: "Use a scenario before talking to an expert.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[1], linkLabel: "Calculate" })}${card({ title: "Browse locations", text: "Pair the result with local market details.", href: "/locations", iconName: "location", accent: accentColors[2], linkLabel: "Locations" })}</div><div style="margin-top:18px">${disclosureFor("directory", "Directory disclosure")}</div>`, "compact")}
+    ${section("Results", { label: "Search", text: "Filter the results and open the option you want to review." }, `<div class="grid three" data-directory-results>${results.slice(0, 24).map((item, index) => card({ title: item.name || item.title, text: item.stateNarrative || item.marketPositioning || item.purpose || humanStatus(item.reviewStatus) || productBriefs[item.id]?.fit || item.borrowerGoal || "Result", href: item.route, iconName: directory.route.includes("branch") ? "branch" : directory.route.includes("loan-officer") ? "expert" : directory.route.includes("loan-options") ? "rates" : "article", accent: accentColors[index % accentColors.length], linkLabel: "Open", searchText: `${item.name || item.title} ${item.stateNarrative || ""} ${item.marketPositioning || ""} ${item.purpose || ""} ${humanStatus(item.reviewStatus) || ""} ${item.borrowerGoal || ""} ${(item.specialties || []).join(" ")} ${(item.filters || []).join(" ")}` })).join("")}</div><div class="result-note" data-directory-empty hidden>No matching results found.</div>`)}
+    ${section("Keep comparing", { label: "Helpful links", text: "Compare a result with rates, calculators, and local market details." }, `<div class="grid three">${card({ title: "Compare rates", text: "Review rate details, APR, and payment assumptions.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Rates" })}${card({ title: "Run a calculator", text: "Use a scenario before talking to an expert.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[1], linkLabel: "Calculate" })}${card({ title: "Browse locations", text: "Pair the result with local market details.", href: "/locations", iconName: "location", accent: accentColors[2], linkLabel: "Locations" })}</div><div style="margin-top:18px">${disclosureFor("directory", "Search disclosure")}</div>`, "compact")}
     ${section("Save the path", { label: "Snap Homes", text: "Keep useful results connected to your saved research and next-step questions." }, ctaDeck(["watchlist", "leadForm", "account"], "Keep browsing while your research stays organized.", "Save the result to Snap Homes, ask for guidance, or open the account view for markets, searches, rates, and product availability."), "compact")}
   `);
 }
@@ -2706,64 +2720,16 @@ function navigateFromArticleModal(path) {
   render();
 }
 
-const snapMortgagePublisher = { "@type": "Organization", name: "Snap Mortgage" };
-
 function setDocumentMeta(found, path) {
-  const item = found?.item || {};
-  const titles = {
-    home: "Snap Mortgage | Local Mortgage Intelligence",
-    locations: "Locations | Snap Mortgage Market Guides",
-    rates: "Mortgage Rates, APR Details, and Review Options | Snap Mortgage",
-    prequalHandoff: "Provider Prequal Handoff | Snap Mortgage",
-    state: `${item.name} Mortgage Guide | Snap Mortgage`,
-    city: `${item.name}, ${maps.states[item.stateId]?.abbr || ""} Mortgage Market | Snap Mortgage`,
-    product: `${item.name} Guide | Snap Mortgage`,
-    blog: `${item.name} | Snap Mortgage Learning Center`,
-    contributor: `${item.name} | Snap Mortgage Learning Center`,
-    article: `${item.title} | Snap Mortgage`,
-    newsArticle: `${item.title} | Snap Mortgage`,
-    loanOfficer: `${item.name} | Snap Mortgage Loan Officer`,
-    branch: `${item.name} | Snap Mortgage Branch`,
-    calculator: `${item.name} | Snap Mortgage Calculator`,
-    directory: `${item.name} | Snap Mortgage`
-  };
-  const descriptions = {
-    home: "Compare rates, local markets, loan options, calculators, account save actions, and licensed mortgage guidance.",
-    rates: "Review public mortgage-rate benchmarks, APR details, rate-review options, and offer-comparison questions.",
-    prequalHandoff: "Carry a selected provider and saved rate-comparison details into the connected Snap prequalification path."
-  };
-  const title = titles[found?.type] || "Snap Mortgage";
-  const description = descriptions[found?.type] || item.metaDescription || item.dek || item.bio || item.marketPositioning || item.stateNarrative || item.purpose || item.borrowerGoal || "Snap Mortgage local mortgage intelligence, calculators, rate details, loan options, experts, branches, and account save actions.";
-  const canonical = new URL(path || "/", window.location.origin).toString();
-  const image = maps?.newsMedia?.[item.imageId]?.imageUrl || maps?.newsMedia?.[item.imageId]?.localPath || "";
-  const contributor = item.authorId ? maps?.contributors?.[item.authorId] : null;
-  const articleAuthor = contributor ? {
-    "@type": "Person",
-    name: contributor.name,
-    url: new URL(contributor.route, window.location.origin).toString(),
-    image: contributor.portrait?.src ? new URL(contributor.portrait.src, window.location.origin).toString() : undefined,
-  } : snapMortgagePublisher;
-  document.title = title.replace(/\s+/g, " ").trim();
-  document.querySelector('meta[name="description"]')?.setAttribute("content", description);
-  document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
-  document.querySelector('meta[property="og:title"]')?.setAttribute("content", document.title);
-  document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
-  document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonical);
-  document.querySelector('meta[property="og:image"]')?.setAttribute("content", image ? new URL(image, window.location.origin).toString() : "");
-  document.querySelector('meta[name="twitter:card"]')?.setAttribute("content", image ? "summary_large_image" : "summary");
-  const jsonLd = document.querySelector("[data-document-jsonld]");
-  if (jsonLd) jsonLd.textContent = ["article", "newsArticle"].includes(found?.type) ? JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: item.title,
-    description,
-    datePublished: item.publishedAt,
-    dateModified: item.updatedAt || item.publishedAt,
-    mainEntityOfPage: canonical,
-    image: image ? new URL(image, window.location.origin).toString() : undefined,
-    author: articleAuthor,
-    publisher: snapMortgagePublisher
-  }).replace(/</g, "\\u003c") : "";
+  const metadata = resolveDocumentMetadata(found, {
+    path,
+    siteOrigin: window.location.origin,
+    statesById: maps?.states,
+    productCopyBundle,
+    mediaById: maps?.newsMedia,
+    contributorsById: maps?.contributors,
+  });
+  applyDocumentMetadata(document, metadata);
 }
 
 function notFoundPage(path) {
@@ -2771,7 +2737,7 @@ function notFoundPage(path) {
     ${hero({
       eyebrow: "Page not found",
       title: "We could not find that page.",
-      lead: `No route matched ${path}. Use the navigation to continue.`,
+      lead: "The address may be outdated or mistyped. Use the navigation to keep exploring.",
       actions: `<a class="button" href="${route("/")}">Back home</a>`,
       panel: `<aside class="hero-panel"><h2>Explore Snap Mortgage</h2><p>Find locations, rates, loan options, calculators, learning guides, and licensed experts.</p></aside>`
     })}
@@ -3526,7 +3492,7 @@ async function boot() {
       fetchOptionalJson(EDITORIAL_CONTENT_URL),
       fetchOptionalJson(PRODUCT_COPY_URL)
     ]);
-    if (!response.ok) throw new Error("Site data could not be loaded.");
+    if (!response.ok) throw new Error("The requested content could not be loaded.");
     const loadedData = await response.json();
     editorialContent = loadOptionalEditorialContent(optionalEditorialBundle, optionalContributors, optionalTopicHubs);
     productCopyBundle = optionalProductCopy || { products: [] };
@@ -3543,12 +3509,12 @@ async function boot() {
     loadSessionState();
     render();
     window.addEventListener("popstate", handlePopstate);
-  } catch (error) {
+  } catch {
     app.innerHTML = `
       <main class="error-state" id="main">
         <div>
-          <h1>Could not load site data.</h1>
-          <p>${esc(error.message)}</p>
+          <h1>We could not open this page.</h1>
+          <p>Refresh and try again. If the problem continues, return to the home page.</p>
         </div>
       </main>
     `;

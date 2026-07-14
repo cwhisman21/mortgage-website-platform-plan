@@ -18,6 +18,25 @@ const mediaManifest = readJson(new URL("../location-news-media-manifest.json", i
 const contributorDocument = readJson(new URL("../editorial/contributors.json", import.meta.url));
 const contributorsById = new Map(contributorDocument.contributors.map((contributor) => [contributor.id, contributor]));
 const referencedContentPaths = [...new Set(index.articles.map((article) => article.contentPath))];
+const seedRouteCollections = [
+  seed.siteEntryPages,
+  seed.states,
+  seed.cities,
+  seed.branches,
+  seed.loanOfficers,
+  seed.products,
+  seed.ratesPages,
+  seed.blogPages,
+  seed.articles,
+  seed.calculators,
+  seed.directoryPages,
+];
+const canonicalSeedRoutes = new Set([
+  "/",
+  "/locations",
+  "/prequal/start",
+  ...seedRouteCollections.flatMap((collection) => collection.map((item) => item.route).filter(Boolean)),
+]);
 let corpusCache;
 
 const loadCorpus = () => {
@@ -101,6 +120,82 @@ test("requires one valid, matching contributor authorId on compact and full reco
   }
 });
 
+test("keeps borrower-visible corpus copy production-safe and locally evidence-specific", () => {
+  const corpus = loadCorpus();
+  const fullArticlesById = new Map(corpus.map((article) => [article.id, article]));
+  const descriptions = new Set();
+  const repeatedSentences = new Map();
+  const forbiddenPublicCopy = /created by this generator|source identifiers|structured source records|compare verified loan options|\b(?:todo|tbd|placeholder|scaffold)\b/i;
+  const rawPublicValue = /\bnews-[a-z0-9-]+-source-[a-z0-9-]+\b|\b[A-Z]\d{5}_\d{3}[EM]\b|^https?:\/\//i;
+
+  for (const compact of index.articles) {
+    assert.ok(compact.metaDescription.length >= 50 && compact.metaDescription.length <= 160, `${compact.id} description length`);
+    assert.match(compact.metaDescription, /[.!?]$/, `${compact.id} description ends mid-word or without punctuation`);
+    assert.ok(!descriptions.has(compact.metaDescription), `${compact.id} duplicate meta description`);
+    descriptions.add(compact.metaDescription);
+
+    const article = fullArticlesById.get(compact.id);
+    assert.ok(article, `${compact.id} full article`);
+    const sources = new Map(article.sourceRecords.map((source) => [source.sourceId, source]));
+    const locallyScopedFacts = article.evidenceFacts.filter((fact) => fact.sourceRecordIds.every((id) => {
+      const geographyType = sources.get(id)?.geographyType;
+      return article.locationType === "city"
+        ? ["place", "city", "county"].includes(geographyType)
+        : ["state", "state_counties"].includes(geographyType);
+    }));
+    assert.ok(locallyScopedFacts.length >= 4, `${article.id} lacks four locally scoped evidence facts`);
+
+    const localContextFacts = new Set();
+    for (const paragraph of compact.localContext || []) {
+      const matches = locallyScopedFacts.filter((fact) => paragraph.includes(fact.display));
+      assert.ok(matches.length, `${article.id} local context lacks a local evidence value`);
+      for (const fact of matches) localContextFacts.add(fact.id);
+    }
+    assert.ok(localContextFacts.size >= 3, `${article.id} local context does not analyze enough distinct evidence`);
+
+    const visibleValues = [
+      article.title,
+      article.dek,
+      article.previewText,
+      article.metaDescription,
+      ...(article.keyTakeaways || []),
+      ...article.sections.flatMap((section) => [section.heading, ...(section.body || [])]),
+      ...article.tables.flatMap((table) => [table.title, ...table.columns, ...table.rows.flat()]),
+      ...article.ctaPlacements.flatMap((cta) => [cta.label, cta.description]),
+      article.methodology,
+      article.limitations,
+      ...article.sourceRecords.map((source) => source.citationLabel),
+      ...article.relatedRoutes.map((item) => typeof item === "string" ? item : item.label),
+    ].filter(Boolean).map(String);
+    assert.ok(!visibleValues.some((value) => forbiddenPublicCopy.test(value)), `${article.id} exposes internal generator language`);
+    assert.ok(!visibleValues.some((value) => rawPublicValue.test(value)), `${article.id} exposes a raw source ID or URL`);
+
+    for (const source of article.sourceRecords) {
+      assert.match(source.citationLabel, new RegExp(source.publisher.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${article.id} visible source attribution`);
+    }
+    for (const related of article.relatedRoutes) {
+      const route = typeof related === "string" ? related : related.route;
+      const label = typeof related === "string" ? related : related.label;
+      assert.ok(canonicalSeedRoutes.has(route), `${article.id} dead related route ${route}`);
+      assert.ok(label && !label.startsWith("/") && !/^https?:\/\//.test(label), `${article.id} raw related label ${label}`);
+    }
+    for (const cta of article.ctaPlacements) assert.ok(canonicalSeedRoutes.has(cta.route), `${article.id} dead CTA route ${cta.route}`);
+
+    const evidenceDisplays = [...new Set(article.evidenceFacts.map((fact) => String(fact.display)).filter(Boolean))];
+    for (const paragraph of article.sections.flatMap((section) => section.body || [])) {
+      if (evidenceDisplays.some((display) => paragraph.includes(display))) continue;
+      const sentences = paragraph
+        .split(/(?<=[.!?])\s+/)
+        .map((value) => value.replace(/\s+/g, " ").trim())
+        .filter((value) => value.split(/\s+/).length >= 12);
+      for (const sentence of sentences) repeatedSentences.set(sentence, (repeatedSentences.get(sentence) || 0) + 1);
+    }
+  }
+
+  const overused = [...repeatedSentences].filter(([, count]) => count > 8).sort((a, b) => b[1] - a[1]);
+  assert.deepEqual(overused.slice(0, 10), [], `repeated unanchored article scaffolding: ${JSON.stringify(overused.slice(0, 10))}`);
+});
+
 test("publishes a crawlable static document and sitemap entry for every article", () => {
   const standalonePaths = new Set(index.articles.map((article) => article.standalonePath));
   assert.equal(standalonePaths.size, index.articles.length);
@@ -141,6 +236,18 @@ test("publishes a crawlable static document and sitemap entry for every article"
   for (const contributor of contributorDocument.contributors) {
     const absoluteRoute = `https://mortgage-website-platform-plan-thinkwhale.vercel.app${contributor.route}`;
     assert.ok(sitemap.includes(`<loc>${absoluteRoute}</loc>`), `${contributor.name} sitemap route`);
+  }
+});
+
+test("publishes borrower-facing static text without raw IDs, internal language, or dead links", () => {
+  for (const compact of index.articles) {
+    const html = fs.readFileSync(new URL(`../../${compact.standalonePath}`, import.meta.url), "utf8");
+    assert.ok(!html.includes('href="/loan-options/conventional"'), `${compact.id} dead conventional link`);
+    assert.ok(!html.includes('href="/loan-options/fha"'), `${compact.id} dead FHA link`);
+    assert.doesNotMatch(html, /created by this generator|source identifiers|structured source records|Compare verified loan options/i, `${compact.id} internal language`);
+    assert.doesNotMatch(html, />\s*(?:news-[a-z0-9-]+-source-[a-z0-9-]+|[A-Z]\d{5}_\d{3}[EM]|https?:\/\/[^<]+)\s*</i, `${compact.id} raw visible source value`);
+    const escapedDescription = compact.metaDescription.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+    assert.ok(html.includes(`content="${escapedDescription}"`), `${compact.id} static meta description mismatch`);
   }
 });
 

@@ -7,17 +7,31 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+const PRODUCT_META_DESCRIPTIONS = Object.freeze({
+  "product-purchase": "Plan a home purchase by comparing the full monthly payment, cash to close, loan options, property costs, reserves, and the steps from offer to closing.",
+  "product-refinance": "Compare refinancing goals, closing costs, break-even timing, loan terms, monthly payments, and total borrowing cost against your current mortgage.",
+  "product-fha": "Learn how FHA loans handle mortgage insurance, county loan limits, property review, down payments, lender underwriting, and total borrowing costs.",
+  "product-va": "Explore VA-backed loans, including eligibility, entitlement, funding fees, appraisal and occupancy rules, closing costs, and private-lender review.",
+  "product-conventional": "Compare conventional loans by conforming limits, private mortgage insurance, pricing, down payment, property fit, reserves, and total borrowing cost.",
+  "product-jumbo": "Learn how jumbo loans differ by lender, with guidance on conforming limits, income and asset documentation, reserves, appraisals, pricing, and liquidity.",
+  "product-home-equity": "Compare HELOCs and home equity loans by rate structure, payment changes, draw and repayment rules, fees, lien risk, and plans for the borrowed funds.",
+  "product-cash-out-refinance": "Evaluate a cash-out refinance by comparing the new mortgage with your current loan, closing costs, equity, repayment term, proceeds, and alternatives.",
+});
+
 export function meaningfulWordCount(product) {
   const text = [
     product?.summary,
-    ...(product?.sections || []).flatMap((section) => [section.heading, ...(section.paragraphs || [])]),
-    ...(product?.questions || []).flatMap((item) => [item.question, item.answer]),
+    ...(product?.sections || []).flatMap((section) => section.paragraphs || []),
+    ...(product?.questions || []).map((item) => item.answer),
   ].filter(Boolean).join(" ");
   return (text.match(/\b[A-Za-z0-9][A-Za-z0-9'’-]*\b/g) || []).length;
 }
 
 export function productContentById(bundle, productId) {
-  return (bundle?.products || []).find((product) => product.id === productId) || null;
+  const product = (bundle?.products || []).find((item) => item.id === productId);
+  if (!product) return null;
+  const metaDescription = product.metaDescription || PRODUCT_META_DESCRIPTIONS[product.id];
+  return metaDescription ? { ...product, metaDescription } : product;
 }
 
 export function renderProductContent(product, { routeHref = (href) => href, sources = [] } = {}) {
