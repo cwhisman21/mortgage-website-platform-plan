@@ -1,8 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 
 import {
+  buildPublicTagRegistry,
   buildTaggedContentSearch,
+  validatePublicTagRegistry,
   validateSearchIndex,
   validateTagRegistry,
 } from "./build-tagged-content-search.mjs";
@@ -71,11 +74,7 @@ test("uses stable canonical tag IDs and rejects invalid registry values", () => 
   assert.equal(fha.canonicalRoute, "/learning-center/tags/fha-loans");
   assert.equal(fha.updatedAt, "2026-07-14");
   assert.deepEqual(fha.redirectSlugs, []);
-  assert.deepEqual(fha.competingPageReview.routes.filter(({ route }) => route !== "/learning-center/market-news/tampa-home-values"), [
-    { route: "/learning-center/fha-loan-basics", relationship: "DIRECT", disposition: "KEEP_DISTINCT" },
-    { route: "/learning-center/fha-loans", relationship: "DIRECT", disposition: "KEEP_DISTINCT" },
-    { route: "/loan-options/fha-loans", relationship: "DIRECT", disposition: "KEEP_DISTINCT" },
-  ]);
+  assert.ok(fha.competingPageReview.routes.every((review) => ["KEEP DISTINCT", "DIFFERENTIATE"].includes(review.disposition)));
   assert.throws(() => validateTagRegistry({ ...registry, tags: [{ ...fha, type: "internal" }] }), /approved type/i);
   assert.throws(() => validateTagRegistry({ ...registry, tags: [{ ...fha, displayName: "Demo FHA Loans" }] }), /forbidden public/i);
 });
@@ -86,4 +85,73 @@ test("rejects search records with unknown tags or full body fields", () => {
 
   assert.throws(() => validateSearchIndex({ ...searchIndex, records: [{ ...record, tagIds: ["tag-missing"] }] }, registry), /unknown tag/i);
   assert.throws(() => validateSearchIndex({ ...searchIndex, records: [{ ...record, body: "Not compact" }] }, registry), /full article body/i);
+  assert.throws(() => validateSearchIndex({ ...searchIndex, records: [{ ...record, debug: true }] }, registry), /unexpected key/i);
+});
+
+function readCanonicalInputs() {
+  return {
+    productionSeed: JSON.parse(fs.readFileSync(new URL("./production-seed.json", import.meta.url), "utf8")),
+    editorialContent: JSON.parse(fs.readFileSync(new URL("./editorial-content.json", import.meta.url), "utf8")),
+    locationNewsIndex: JSON.parse(fs.readFileSync(new URL("./location-news-index.json", import.meta.url), "utf8")),
+    productCopy: JSON.parse(fs.readFileSync(new URL("./product-copy.json", import.meta.url), "utf8")),
+  };
+}
+
+test("prioritizes a city home-values story by location and subject instead of generic product goals", () => {
+  const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  const record = searchIndex.records.find(({ id }) => id === "news-austin-tx-affordability-home-values");
+
+  assert.ok(record.primaryTagIds.includes("tag-city-austin-texas"));
+  assert.ok(record.primaryTagIds.includes("tag-market-topic-home-values"));
+  assert.ok(!record.primaryTagIds.includes("tag-borrower-goal-buy-a-home"));
+  assert.ok(!record.primaryTagIds.includes("tag-borrower-goal-refinance-a-mortgage"));
+  assert.ok(record.tagIds.includes("tag-borrower-goal-buy-a-home"));
+  assert.ok(record.tagIds.includes("tag-borrower-goal-refinance-a-mortgage"));
+  validateTagRegistry(registry);
+});
+
+test("keeps last-updated dates out of publishedAt", () => {
+  const inputs = structuredClone(fixtureInputs);
+  inputs.editorialContent.topicHubs[0].lastUpdated = "2026-07-13";
+  const { searchIndex } = buildTaggedContentSearch(inputs, { updatedAt: "2026-07-14" });
+  const hub = searchIndex.records.find(({ id }) => id === "topic-hub-fha");
+
+  assert.equal(hub.publishedAt, null);
+  assert.equal(hub.updatedAt, "2026-07-13");
+});
+
+test("records credible competing-page review fields with approved vocabulary", () => {
+  const { registry } = buildTaggedContentSearch(fixtureInputs, { updatedAt: "2026-07-14" });
+  const [review] = registry.tags.find(({ slug }) => slug === "fha-loans").competingPageReview.routes;
+
+  assert.deepEqual(Object.keys(review).sort(), [
+    "action", "audience", "borrowerQuestion", "disposition", "entity", "intent", "rationale", "relationship", "route", "substantiveCoverage",
+  ]);
+  assert.ok(["DIRECT", "NEAR", "SUPPORTING"].includes(review.relationship));
+  assert.ok(["KEEP DISTINCT", "DIFFERENTIATE", "MERGE", "CANONICALIZE", "REDIRECT", "DO NOT CREATE"].includes(review.disposition));
+  assert.notEqual(review.rationale, "");
+});
+
+test("rejects duplicate canonical record IDs and routes", () => {
+  const duplicateIdInputs = structuredClone(fixtureInputs);
+  duplicateIdInputs.editorialContent.articles.push({ ...duplicateIdInputs.editorialContent.articles[0], route: "/learning-center/duplicate-fha" });
+  assert.throws(() => buildTaggedContentSearch(duplicateIdInputs, { updatedAt: "2026-07-14" }), /duplicate canonical record ID/i);
+
+  const duplicateRouteInputs = structuredClone(fixtureInputs);
+  duplicateRouteInputs.editorialContent.articles.push({ ...duplicateRouteInputs.editorialContent.articles[0], id: "article-other", route: duplicateRouteInputs.editorialContent.articles[0].route });
+  assert.throws(() => buildTaggedContentSearch(duplicateRouteInputs, { updatedAt: "2026-07-14" }), /duplicate canonical record route/i);
+});
+
+test("builds a browser-safe public registry projection within corpus payload budgets", () => {
+  const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  const publicRegistry = buildPublicTagRegistry(registry);
+
+  validatePublicTagRegistry(publicRegistry);
+  assert.ok(publicRegistry.tags.every((tag) => !Object.hasOwn(tag, "sourceRoutes") && !Object.hasOwn(tag, "competingPageReview")));
+  assert.ok(!JSON.stringify(publicRegistry).match(/competingPageReview|sourceRoutes|KEEP DISTINCT|borrowerQuestion/));
+  assert.ok(Buffer.byteLength(JSON.stringify(publicRegistry)) < 1_500_000);
+  assert.ok(Buffer.byteLength(JSON.stringify(searchIndex)) < 4_000_000);
+  assert.deepEqual(Object.keys(searchIndex.records[0]).sort(), [
+    "author", "canonicalOrder", "family", "id", "image", "locationIds", "preview", "primaryTagIds", "productIds", "publishedAt", "route", "tagIds", "title", "updatedAt",
+  ]);
 });

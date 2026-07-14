@@ -11,10 +11,15 @@ const APPROVED_TAG_TYPES = new Set([
   "property-concept", "market-topic",
 ]);
 const APPROVED_REVIEW_RELATIONSHIPS = new Set(["DIRECT", "NEAR", "SUPPORTING"]);
-const APPROVED_REVIEW_DISPOSITIONS = new Set(["KEEP_DISTINCT", "CONSOLIDATE", "REDIRECT", "REVIEW"]);
+const APPROVED_REVIEW_DISPOSITIONS = new Set(["KEEP DISTINCT", "DIFFERENTIATE", "MERGE", "CANONICALIZE", "REDIRECT", "DO NOT CREATE"]);
 const FORBIDDEN_PUBLIC_COPY = /\b(?:placeholder|wireframe|demo|scaffold|schema|workflow|review status|internal)\b/i;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const FAMILY_RANK = new Map(CONTENT_FAMILY_ORDER.map((family, index) => [family, index]));
+const SEARCH_RECORD_KEYS = new Set([
+  "id", "route", "family", "title", "preview", "image", "author", "publishedAt", "updatedAt",
+  "tagIds", "primaryTagIds", "locationIds", "productIds", "canonicalOrder",
+]);
+const PUBLIC_TAG_KEYS = new Set(["id", "displayName", "slug", "type", "description", "canonicalRoute"]);
 
 const PHRASE_TAGS = [
   ["homeowners insurance", "Homeowners Insurance", "property-concept"],
@@ -66,15 +71,17 @@ function compactText(value, maximum = 320) {
   return text.length <= maximum ? text : `${text.slice(0, maximum - 1).trimEnd()}...`;
 }
 
-function candidate(type, displayName) {
+function candidate(type, displayName, priority) {
   const slug = slugify(displayName);
-  return { id: `tag-${type}-${slug}`, type, displayName, slug };
+  return { id: `tag-${type}-${slug}`, type, displayName, slug, priority };
 }
 
-function addCandidate(candidates, type, displayName) {
+function addCandidate(candidates, type, displayName, priority) {
   const normalized = compactText(displayName, 120);
   if (!normalized || FORBIDDEN_PUBLIC_COPY.test(normalized)) return;
-  candidates.set(`${type}:${slugify(normalized)}`, candidate(type, normalized));
+  const key = `${type}:${slugify(normalized)}`;
+  const existing = candidates.get(key);
+  if (!existing || priority < existing.priority) candidates.set(key, candidate(type, normalized, priority));
 }
 
 function tagDescription(tag) {
@@ -98,7 +105,7 @@ function makeRecord(family, source, extra = {}) {
     preview: sourcePreview(source),
     image: source.image?.src || source.image || source.imageId || null,
     author: source.authorId || source.contributorId || null,
-    publishedAt: source.publishedAt || source.lastUpdated || null,
+    publishedAt: source.publishedAt || null,
     updatedAt: source.updatedAt || source.lastUpdated || source.publishedAt || null,
     source,
     ...extra,
@@ -121,12 +128,16 @@ function collectCanonicalRecords(inputs) {
   for (const product of products.values()) records.push(makeRecord("product-guides", product));
   for (const calculator of seed.calculators || []) records.push(makeRecord("calculators", calculator));
 
-  const deduplicated = new Map();
+  const ids = new Set();
+  const routes = new Set();
   for (const record of records) {
-    if (!record.id || !record.route || !record.title || !FAMILY_RANK.has(record.family)) continue;
-    if (!deduplicated.has(record.id)) deduplicated.set(record.id, record);
+    if (!record.id || !record.route || !record.title || !FAMILY_RANK.has(record.family)) fail("canonical records must include an ID, route, title, and approved family");
+    if (ids.has(record.id)) fail(`duplicate canonical record ID ${record.id}`);
+    if (routes.has(record.route)) fail(`duplicate canonical record route ${record.route}`);
+    ids.add(record.id);
+    routes.add(record.route);
   }
-  return [...deduplicated.values()]
+  return records
     .sort((left, right) => FAMILY_RANK.get(left.family) - FAMILY_RANK.get(right.family) || left.route.localeCompare(right.route))
     .map((record, canonicalOrder) => ({ ...record, canonicalOrder, states, cities, products }));
 }
@@ -134,52 +145,76 @@ function collectCanonicalRecords(inputs) {
 function candidatesForRecord(record) {
   const candidates = new Map();
   const { source, states, cities, products } = record;
+  const isLocalNews = record.family === "local-market-news";
+  const isProductGuide = record.family === "product-guides";
+  const subjectPriority = isLocalNews ? 1 : 0;
+  const locationPriority = isLocalNews ? 0 : 3;
+  const productPriority = isLocalNews ? 4 : isProductGuide ? 0 : 1;
+  const goalPriority = isLocalNews ? 9 : isProductGuide ? 1 : 5;
   const productIds = source.productIds || (record.family === "product-guides" ? [source.id] : []);
   for (const productId of productIds) {
     const product = products.get(productId);
     if (!product) continue;
-    addCandidate(candidates, "loan-program", product.name);
-    addCandidate(candidates, "borrower-goal", product.borrowerGoal);
+    addCandidate(candidates, "loan-program", product.name, productPriority);
+    addCandidate(candidates, "borrower-goal", product.borrowerGoal, goalPriority);
   }
   const title = String(source.title || source.name || "").toLowerCase();
   for (const product of products.values()) {
     const productPhrase = product.name.toLowerCase().replace(/\s+loans?$/, "");
-    if (productPhrase && title.includes(productPhrase)) addCandidate(candidates, "loan-program", product.name);
+    if (productPhrase && title.includes(productPhrase)) addCandidate(candidates, "loan-program", product.name, subjectPriority);
   }
   for (const stateId of source.stateIds || []) {
     const state = states.get(stateId);
-    if (state) addCandidate(candidates, "state", state.name);
+    if (state) addCandidate(candidates, "state", state.name, locationPriority + 1);
   }
   for (const cityId of source.cityIds || (source.locationId?.startsWith("city-") ? [source.locationId] : [])) {
     const city = cities.get(cityId);
     if (!city) continue;
     const state = states.get(city.stateId);
-    addCandidate(candidates, "city", state ? `${city.name}, ${state.name}` : city.name);
+    addCandidate(candidates, "city", state ? `${city.name}, ${state.name}` : city.name, locationPriority);
   }
   if (source.locationId?.startsWith("state-")) {
     const state = states.get(source.locationId);
-    if (state) addCandidate(candidates, "state", state.name);
+    if (state) addCandidate(candidates, "state", state.name, locationPriority);
   }
-  if (record.family === "topic-guides") addPhraseCandidates(candidates, source.name || source.title);
-  if (record.family === "calculators") addPhraseCandidates(candidates, source.name || source.title);
-  for (const topicId of source.topicIds || []) addPhraseCandidates(candidates, titleCase(topicId));
-  addPhraseCandidates(candidates, source.title || source.name);
-  for (const section of source.sections || []) addPhraseCandidates(candidates, section.heading);
-  return [...candidates.values()].sort((left, right) => left.id.localeCompare(right.id));
+  if (record.family === "topic-guides" || record.family === "calculators") addPhraseCandidates(candidates, source.name || source.title, 0);
+  for (const topicId of source.topicIds || []) addPhraseCandidates(candidates, titleCase(topicId), subjectPriority);
+  addPhraseCandidates(candidates, source.title || source.name, subjectPriority);
+  for (const section of source.sections || []) addPhraseCandidates(candidates, section.heading, subjectPriority + 1);
+  return [...candidates.values()].sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
 }
 
-function addPhraseCandidates(candidates, value) {
+function addPhraseCandidates(candidates, value, priority) {
   const text = compactText(value, 240).toLowerCase();
   for (const [phrase, displayName, type] of PHRASE_TAGS) {
-    if (text.includes(phrase)) addCandidate(candidates, type, displayName);
+    if (text.includes(phrase)) addCandidate(candidates, type, displayName, priority);
   }
 }
 
-function relationshipFor(record) {
-  if (record.family === "product-guides" || record.family === "topic-guides") return "DIRECT";
-  if (record.family === "articles") return "DIRECT";
-  if (record.family === "local-market-news") return "SUPPORTING";
-  return "NEAR";
+function reviewFor(tag, record) {
+  const candidate = candidatesForRecord(record).find(({ id }) => id === tag.id);
+  const relationship = candidate.priority <= 1 ? "DIRECT" : candidate.priority <= 4 ? "NEAR" : "SUPPORTING";
+  const jobs = {
+    "articles": ["Learn how this mortgage topic affects a decision", "research", "borrowers comparing mortgage choices", "editorial explanation", "read guidance and compare next steps"],
+    "topic-guides": ["Where should I start learning about this mortgage topic", "learn", "borrowers exploring a topic", "topic hub", "browse related guidance"],
+    "local-market-news": ["What does this local evidence mean for my plan", "understand local context", "borrowers considering this market", "dated local market update", "review local evidence"],
+    "product-guides": ["Does this loan program fit my situation", "compare loan options", "borrowers evaluating a program", "loan program guide", "compare loan requirements"],
+    "calculators": ["How does this input change my mortgage scenario", "estimate", "borrowers modeling a payment", "interactive calculator", "calculate a scenario"],
+  }[record.family];
+  const [borrowerQuestion, intent, audience, substantiveCoverage, action] = jobs;
+  const disposition = relationship === "DIRECT" ? "KEEP DISTINCT" : "DIFFERENTIATE";
+  return {
+    route: record.route,
+    borrowerQuestion,
+    intent,
+    audience,
+    entity: record.title,
+    substantiveCoverage,
+    action,
+    relationship,
+    disposition,
+    rationale: `${record.title} serves the ${substantiveCoverage} job; the ${tag.displayName} discovery page remains a separate cross-content starting point.`,
+  };
 }
 
 function buildRegistry(catalog, updatedAt) {
@@ -196,11 +231,13 @@ function buildRegistry(catalog, updatedAt) {
     for (const tag of tags) {
       const detail = tagDetails.get(tag.id);
       for (const related of tags) if (related.id !== tag.id) detail.related.add(related.id);
-      detail.reviews.push({ route: record.route, relationship: relationshipFor(record), disposition: "KEEP_DISTINCT" });
+      detail.reviews.push(reviewFor(tag, record));
     }
   }
-  const tags = [...tagDetails.values()].map(({ tag, routes, related, reviews }) => ({
-    ...tag,
+  const tags = [...tagDetails.values()].map(({ tag, routes, related, reviews }) => {
+    const { priority, ...publicTag } = tag;
+    return {
+    ...publicTag,
     description: tagDescription(tag),
     sourceRoutes: sortedUnique([...routes]),
     relatedTagIds: sortedUnique([...related]),
@@ -210,10 +247,11 @@ function buildRegistry(catalog, updatedAt) {
     updatedAt,
     redirectSlugs: [],
     competingPageReview: {
-      disposition: "KEEP_DISTINCT",
+      disposition: reviews.some(({ disposition }) => disposition === "KEEP DISTINCT") ? "KEEP DISTINCT" : "DIFFERENTIATE",
       routes: reviews.sort((left, right) => left.route.localeCompare(right.route)),
     },
-  })).sort((left, right) => left.id.localeCompare(right.id));
+  };
+  }).sort((left, right) => left.id.localeCompare(right.id));
   const assignments = catalog.map((record) => {
     const tagIds = (routeCandidates.get(record.route) || []).map((tag) => tag.id);
     return { route: record.route, primaryTagIds: tagIds.slice(0, 3), additionalTagIds: tagIds.slice(3) };
@@ -223,11 +261,9 @@ function buildRegistry(catalog, updatedAt) {
 
 function buildCompactIndex(catalog, registry, updatedAt) {
   const assignmentByRoute = new Map(registry.assignments.map((assignment) => [assignment.route, assignment]));
-  const tagById = new Map(registry.tags.map((tag) => [tag.id, tag]));
   const records = catalog.map((record) => {
     const assignment = assignmentByRoute.get(record.route);
     const tagIds = [...assignment.primaryTagIds, ...assignment.additionalTagIds];
-    const tagText = tagIds.map((id) => tagById.get(id)?.displayName).filter(Boolean).join(" ");
     return {
       id: record.id,
       route: record.route,
@@ -242,11 +278,46 @@ function buildCompactIndex(catalog, registry, updatedAt) {
       primaryTagIds: assignment.primaryTagIds,
       locationIds: sortedUnique([...(record.source.stateIds || []), ...(record.source.cityIds || []), record.source.locationId]),
       productIds: sortedUnique(record.source.productIds || (record.family === "product-guides" ? [record.id] : [])),
-      searchText: compactText(`${record.title} ${record.preview} ${tagText}`, 800),
       canonicalOrder: record.canonicalOrder,
     };
   });
   return { version: 1, updatedAt, records };
+}
+
+export function buildPublicTagRegistry(registry) {
+  validateTagRegistry(registry);
+  const tags = registry.tags.map(({ id, displayName, slug, type, description, canonicalRoute }) => ({
+    id, displayName, slug, type, description, canonicalRoute,
+  }));
+  const tagIndexes = new Map(tags.map(({ id }, index) => [id, index]));
+  const assignments = registry.assignments.map(({ route, primaryTagIds, additionalTagIds }) => [
+    route,
+    primaryTagIds.map((id) => tagIndexes.get(id)),
+    additionalTagIds.map((id) => tagIndexes.get(id)),
+  ]);
+  const publicRegistry = { version: 1, updatedAt: registry.updatedAt, tags, assignments };
+  validatePublicTagRegistry(publicRegistry);
+  return publicRegistry;
+}
+
+export function validatePublicTagRegistry(registry) {
+  if (!registry || registry.version !== 1 || !DATE_PATTERN.test(registry.updatedAt || "") || !Array.isArray(registry.tags) || !Array.isArray(registry.assignments)) {
+    fail("public tag registry must have version 1, YYYY-MM-DD updatedAt, tags, and assignments");
+  }
+  const ids = new Set();
+  for (const tag of registry.tags) {
+    const keys = Object.keys(tag);
+    if (keys.length !== PUBLIC_TAG_KEYS.size || keys.some((key) => !PUBLIC_TAG_KEYS.has(key))) fail(`public tag ${tag.id || "without ID"} has unexpected fields`);
+    if (!tag.id || ids.has(tag.id) || !APPROVED_TAG_TYPES.has(tag.type) || tag.canonicalRoute !== `/learning-center/tags/${tag.slug}`) fail(`invalid public tag ${tag.id || "without ID"}`);
+    if (FORBIDDEN_PUBLIC_COPY.test(`${tag.displayName} ${tag.description}`)) fail(`forbidden public copy in public tag ${tag.id}`);
+    ids.add(tag.id);
+  }
+  for (const assignment of registry.assignments) {
+    if (!Array.isArray(assignment) || assignment.length !== 3 || !String(assignment[0] || "").startsWith("/") || !Array.isArray(assignment[1]) || !Array.isArray(assignment[2]) || assignment[1].length < 1 || assignment[1].length > 3) {
+      fail("public assignment must contain route and one to three primary tag indexes");
+    }
+    for (const index of [...assignment[1], ...assignment[2]]) if (!Number.isInteger(index) || index < 0 || index >= registry.tags.length) fail("public assignment references an invalid tag index");
+  }
 }
 
 export function validateTagRegistry(registry) {
@@ -270,7 +341,10 @@ export function validateTagRegistry(registry) {
     const review = tag.competingPageReview;
     if (!APPROVED_REVIEW_DISPOSITIONS.has(review?.disposition) || !Array.isArray(review.routes) || !review.routes.length) fail(`tag ${tag.id} needs a complete competing-page review`);
     for (const item of review.routes) {
-      if (!String(item.route || "").startsWith("/") || !APPROVED_REVIEW_RELATIONSHIPS.has(item.relationship) || !APPROVED_REVIEW_DISPOSITIONS.has(item.disposition)) fail(`tag ${tag.id} has an invalid competing-page review record`);
+      for (const field of ["route", "borrowerQuestion", "intent", "audience", "entity", "substantiveCoverage", "action", "relationship", "disposition", "rationale"]) {
+        if (typeof item[field] !== "string" || !item[field].trim()) fail(`tag ${tag.id} has an incomplete competing-page review record`);
+      }
+      if (!item.route.startsWith("/") || !APPROVED_REVIEW_RELATIONSHIPS.has(item.relationship) || !APPROVED_REVIEW_DISPOSITIONS.has(item.disposition)) fail(`tag ${tag.id} has an invalid competing-page review record`);
     }
   }
   for (const assignment of registry.assignments) {
@@ -286,6 +360,8 @@ export function validateSearchIndex(searchIndex, registry) {
   for (const record of searchIndex.records) {
     if (!FAMILY_RANK.has(record.family) || !record.id || !String(record.route || "").startsWith("/") || !record.title || !record.preview) fail(`invalid search record ${record.id || "without ID"}`);
     if ("sections" in record || "body" in record || "localContext" in record) fail(`search record ${record.id} contains full article body data`);
+    const keys = Object.keys(record);
+    if (keys.length !== SEARCH_RECORD_KEYS.size || keys.some((key) => !SEARCH_RECORD_KEYS.has(key))) fail(`search record ${record.id} has an unexpected key`);
     if (routes.has(record.route)) fail(`duplicate search route ${record.route}`);
     routes.add(record.route);
     if (!Array.isArray(record.tagIds) || !Array.isArray(record.primaryTagIds) || record.primaryTagIds.length < 1 || record.primaryTagIds.length > 3) fail(`search record ${record.id} has invalid tag assignments`);
@@ -308,8 +384,8 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function writeJson(filePath, value) {
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+function writeJson(filePath, value, { compact = false } = {}) {
+  fs.writeFileSync(filePath, `${compact ? JSON.stringify(value) : JSON.stringify(value, null, 2)}\n`);
 }
 
 function runCli() {
@@ -320,11 +396,14 @@ function runCli() {
     locationNewsIndex: readJson(path.join(directory, "location-news-index.json")),
     productCopy: readJson(path.join(directory, "product-copy.json")),
   });
+  const publicRegistry = buildPublicTagRegistry(result.registry);
   const registryPath = path.join(directory, "tag-registry.json");
+  const publicRegistryPath = path.join(directory, "public-tag-registry.json");
   const searchIndexPath = path.join(directory, "search-index.json");
   writeJson(registryPath, result.registry);
-  writeJson(searchIndexPath, result.searchIndex);
-  console.log(`Accepted ${result.registry.tags.length} tags, ${result.registry.assignments.length} assignments, and ${result.searchIndex.records.length} search records: ${registryPath}, ${searchIndexPath}`);
+  writeJson(publicRegistryPath, publicRegistry, { compact: true });
+  writeJson(searchIndexPath, result.searchIndex, { compact: true });
+  console.log(`Accepted ${result.registry.tags.length} tags, ${result.registry.assignments.length} assignments, and ${result.searchIndex.records.length} search records: ${registryPath}, ${publicRegistryPath}, ${searchIndexPath}`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) runCli();
