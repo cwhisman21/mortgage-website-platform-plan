@@ -13,9 +13,11 @@
       "title": "Coconut Creek, FL home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Coconut Creek, FL.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Coconut Creek, FL.",
-      "metaDescription": "Coconut Creek, FL home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Coconut.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Coconut Creek, FL.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $309,600.",
         "prior ACS median owner-occupied home value: $192,500.",
-        "ACS median household income: $75,014.",
-        "median monthly owner cost with a mortgage: $2,162.",
-        "change from the prior ACS home-value estimate: 60.8%."
+        "ACS median household income: $75,014."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 60.8,
-          "display": "60.8%",
-          "sourceRecordIds": [
-            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-current",
-            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Florida median home value",
           "value": 359000,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Start with the evidence: the local value, income, and owner-cost baseline",
           "body": [
-            "In Coconut Creek, FL, the 2024 ACS reports a median owner-occupied home value of $309,600 and median household income of $75,014; these are separate medians, not the finances of one representative household. The same release reports $2,162 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Coconut Creek, FL, reading $309,600, $75,014, and $2,162 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $309,600, $75,014, and $2,162 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The local figures answer the first question: In Coconut Creek, FL, the 2024 ACS reports a median owner-occupied home value of $309,600, median household income of $75,014, and median selected monthly owner costs of $2,162 for owners with a mortgage. For borrower planning, together, those three reference points may still help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $2,162 measure combines recurring ownership expenses rather than real estate taxes alone. A useful affordability review starts with $309,600, $75,014, and $2,162, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,15 +122,14 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
+          "id": "vintage-observations",
+          "heading": "Planning context: read the ACS vintages as separate nominal observations",
           "body": [
-            "Coconut Creek, FL's median home-value estimate increased from $192,500 in the prior ACS period to $309,600 in the current release, a reported change of 60.8%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 60.8% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $192,500 to $309,600 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Coconut Creek, FL. Before the 60.8% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+            "The 2019 ACS published $192,500 as Coconut Creek, FL's median owner-occupied home-value estimate, while the 2024 ACS published $309,600. For the decision at hand, these dated nominal observations may help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. In practical terms, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $192,500 attached to 2019 and $309,600 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "median-home-value",
-            "home-value-change"
+            "median-home-value"
           ],
           "sourceRecordIds": [
             "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior",
@@ -149,9 +138,9 @@
         },
         {
           "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
+          "heading": "What the comparison adds: how the city estimate sits within the state",
           "body": [
-            "Coconut Creek, FL's $309,600 median home-value estimate is below the statewide $359,000 estimate, with a reported city-to-state gap of 13.8%. That 13.8% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Coconut Creek, FL. It does not mean every local property is 13.8% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $309,600 and $359,000 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Coconut Creek, FL's $309,600 median home-value estimate is below the statewide $359,000 estimate, with a reported city-to-state gap of 13.8%. For borrower planning, that 13.8% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Coconut Creek, FL. It does not mean every local property is 13.8% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower may use $309,600 and $359,000 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -164,10 +153,30 @@
           ]
         },
         {
-          "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "id": "decision-limits",
+          "heading": "What these local medians cannot decide",
           "body": [
-            "The $2,162 owner-cost estimate gives Coconut Creek, FL borrowers a broader monthly reference than principal and interest alone, while the $75,014 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $75,014 is the owner household at $2,162. The $309,600 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $309,600, $75,014, and $2,162 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "Neither the 2024 $309,600 estimate nor the $2,162 owner-cost median determines the value of a specific Coconut Creek, FL home, a borrower's payment, or an underwriting result. The $75,014 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $192,500 also cannot forecast the next market move or establish a safe purchase horizon. For borrower planning, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-current",
+            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior",
+            "news-coconut-creek-fl-affordability-home-values-source-city-owner-cost-current",
+            "news-coconut-creek-fl-affordability-home-values-source-city-income-current"
+          ]
+        },
+        {
+          "id": "owner-cost-boundary",
+          "heading": "Where the evidence stops: what the owner-cost estimate includes and excludes",
+          "body": [
+            "The $2,162 owner-cost estimate gives Coconut Creek, FL borrowers a broader monthly reference than principal and interest alone, while the $75,014 income estimate supplies separate household context. For the decision at hand, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $75,014 is the owner household at $2,162.",
+            "For borrowers reviewing evidence from Coconut Creek, FL, the $309,600 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. In practical terms, keeping $309,600, $75,014, and $2,162 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +190,24 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
-          "body": [
-            "Neither $309,600 nor $2,162 determines the value of a specific Coconut Creek, FL home, what a borrower will pay each month, or an underwriting result. The $75,014 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 60.8% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $309,600, $2,162, and $75,014 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-current",
-            "news-coconut-creek-fl-affordability-home-values-source-city-owner-cost-current",
-            "news-coconut-creek-fl-affordability-home-values-source-city-income-current",
-            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior"
-          ]
-        },
-        {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Put the evidence to work: build a property-specific comparison",
           "body": [
-            "A practical Coconut Creek, FL worksheet can begin with $309,600 as broad value context, $2,162 as a reminder to include recurring ownership expenses, and $75,014 as a local economic reference. After noting those $309,600, $2,162, and $75,014 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 13.8% city-to-state difference is a prompt to keep the analysis local, while the 60.8% period change is a prompt to date every assumption. A licensed professional can use the 13.8% and 60.8% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A practical Coconut Creek, FL worksheet can begin with $309,600 as dated value context, $2,162 as a reminder to include recurring ownership expenses, and $75,014 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 13.8% city-to-state difference is a prompt to keep the analysis local, while the separate $192,500 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For borrower planning, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-coconut-creek-fl-affordability-home-values-source-city-home-value-current",
+            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior",
             "news-coconut-creek-fl-affordability-home-values-source-city-owner-cost-current",
             "news-coconut-creek-fl-affordability-home-values-source-city-income-current",
-            "news-coconut-creek-fl-affordability-home-values-source-state-home-value-current",
-            "news-coconut-creek-fl-affordability-home-values-source-city-home-value-prior"
+            "news-coconut-creek-fl-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +245,9 @@
               "display": "$2,162"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 60.8,
-              "display": "60.8%"
+              "label": "Florida median home value",
+              "value": 359000,
+              "display": "$359,000"
             }
           ]
         }
@@ -269,43 +259,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$309,600",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$192,500",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$75,014",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,162",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "60.8%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Florida median home value",
               "$359,000",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "13.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +311,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "vintage-observations",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-coconut-creek-fl-affordability-home-values-source-city-home-value-current",
@@ -452,9 +444,11 @@
       "title": "Coconut Creek, FL housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Coconut Creek, FL.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Coconut Creek, FL.",
-      "metaDescription": "Coconut Creek, FL housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Coconut Creek, FL.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +466,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 27,340.",
         "occupied housing units: 24,304.",
-        "vacant housing units: 3,036.",
-        "prior ACS vacant housing units: 3,713.",
-        "vacant-unit share of housing stock: 11.1%."
+        "vacant housing units: 3,036."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +570,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Evidence at a glance: the size and use of the local housing stock",
           "body": [
-            "Coconut Creek, FL's current ACS housing baseline includes 27,340 total housing units, 24,304 occupied units, and 3,036 vacant units. Those counts describe the housing stock across the survey period; they do not say that 3,036 homes were listed for sale or available to rent at one moment. The difference between 27,340 total units and 24,304 occupied units is useful for checking the internal scale of the release, while 3,036 provides the numerator for a more careful vacancy reading. For a borrower researching Coconut Creek, FL, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Start with the dated local finding: Coconut Creek, FL's current ACS housing baseline includes 27,340 total housing units, 24,304 occupied units, and 3,036 vacant units. In practical terms, those counts can help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 3,036 homes were listed for sale or available to rent at one moment. For the decision at hand, reading 27,340 total units with 24,304 occupied and 3,036 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +586,27 @@
           ]
         },
         {
-          "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "id": "tenure-mix",
+          "heading": "Evidence check: ownership and renting within occupied housing",
           "body": [
-            "Vacant units in Coconut Creek, FL decreased from 3,713 in the prior ACS period to 3,036 in the current release, a reported change of -18.2%. In the current housing stock, 3,036 units equal 11.1% of the 27,340 total. ACS vacancy covers several statuses, so the 11.1% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 3,713 to 3,036 can still prompt better questions about current for-sale and rental inventory in Coconut Creek, FL, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Among 24,304 occupied units in Coconut Creek, FL, the ACS-derived owner share is 64.8% and the renter share is 35.2%, making owner-occupied housing the larger measured tenure group. For the decision at hand, the 64.8% and 35.2% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Coconut Creek, FL. In practical terms, the 64.8% and 35.2% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+          ],
+          "evidenceFactIds": [
+            "occupied-units",
+            "owner-share",
+            "renter-share"
+          ],
+          "sourceRecordIds": [
+            "news-coconut-creek-fl-housing-supply-tenure-source-occupied-units",
+            "news-coconut-creek-fl-housing-supply-tenure-source-owner-units",
+            "news-coconut-creek-fl-housing-supply-tenure-source-renter-units"
+          ]
+        },
+        {
+          "id": "vacancy-comparison",
+          "heading": "What the comparison adds: vacancy changed, but it is not listing inventory",
+          "body": [
+            "Vacant units in Coconut Creek, FL decreased from 3,713 in the prior ACS period to 3,036 in the current release, a reported movement of 18.2%. In the current housing stock, 3,036 units equal 11.1% of the 27,340 total. ACS vacancy covers several statuses, so the 11.1% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For borrower planning, the movement from 3,713 to 3,036 can nevertheless prompt better questions about current for-sale and rental inventory in Coconut Creek, FL, provided those questions are answered with timely listing and property data rather than the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -612,27 +622,11 @@
           ]
         },
         {
-          "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
-          "body": [
-            "Among 24,304 occupied units in Coconut Creek, FL, the ACS-derived owner share is 64.8% and the renter share is 35.2%, making owner-occupied housing the larger measured tenure group. The 64.8% and 35.2% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Coconut Creek, FL. The 64.8% and 35.2% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
-          ],
-          "evidenceFactIds": [
-            "occupied-units",
-            "owner-share",
-            "renter-share"
-          ],
-          "sourceRecordIds": [
-            "news-coconut-creek-fl-housing-supply-tenure-source-occupied-units",
-            "news-coconut-creek-fl-housing-supply-tenure-source-owner-units",
-            "news-coconut-creek-fl-housing-supply-tenure-source-renter-units"
-          ]
-        },
-        {
           "id": "rent-context",
           "heading": "Use rent as a matched comparison, not a shortcut",
           "body": [
-            "Coconut Creek, FL's ACS median gross rent is $2,102, while renter-occupied units account for 35.2% of occupied housing and owner-occupied units account for 64.8%. The $2,102 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $2,102 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Coconut Creek, FL comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+            "Coconut Creek, FL's ACS median gross rent is $2,102, while renter-occupied units account for 35.2% of occupied housing and owner-occupied units account for 64.8%. The $2,102 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration.",
+            "Comparing $2,102 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For borrower planning, a more useful Coconut Creek, FL comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
           ],
           "evidenceFactIds": [
             "median-rent",
@@ -650,7 +644,8 @@
           "id": "supply-limits",
           "heading": "What the housing-stock evidence cannot show",
           "body": [
-            "The 11.1% vacant-unit share and 64.8% owner share cannot determine competition for a specific Coconut Creek, FL listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 27,340 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 11.1% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 3,036 vacant units separate from active inventory and keep the $2,102 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 11.1% vacant-unit share and 64.8% owner share cannot determine competition for a specific Coconut Creek, FL listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. For the decision at hand, likewise, 27,340 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements.",
+            "For borrowers reviewing evidence from Coconut Creek, FL, the ACS period behind the 11.1% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. In practical terms, the borrower should therefore keep 3,036 vacant units separate from active inventory and keep the $2,102 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -671,7 +666,8 @@
           "id": "matched-options",
           "heading": "Compare current local choices on the same terms",
           "body": [
-            "A grounded Coconut Creek, FL comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 27,340 total units, a 11.1% vacancy share, and a 64.8% owner share. For renting, replace the $2,102 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 64.8% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 35.2% or 64.8% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Coconut Creek, FL comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 27,340 total units, a vacancy share of 11.1%, and an owner share of 64.8%. For renting, replace the $2,102 median with the actual lease, utilities, deposits, and expected changes.",
+            "For the next comparison in Coconut Creek, FL, for the ownership budget, keep the 64.8% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For borrower planning, the resulting worksheet will not turn 35.2% or 64.8% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +736,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "27,340",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "24,304",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "3,036",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "3,713",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "11.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-18.2%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "64.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "35.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$2,102",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +808,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "tenure-mix",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +972,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Coconut Creek, FL labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Coconut Creek, FL.",
-      "previewText": "See what changed in Coconut Creek, FL, FL's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Coconut Creek, FL labor market: latest employment evidence. See what changed in Coconut Creek, FL, FL's labor market and why broad employment data cannot.",
+      "previewText": "See what changed in Coconut Creek, FL's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Coconut Creek, FL's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +995,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 32,323.",
-        "employment: 30,987.",
-        "unemployment: 1,336.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 4.1%.",
-        "previous-month unemployment rate: 4.2%."
+        "change in unemployment rate from the prior month: -0.1 percentage points.",
+        "change in unemployment rate from a year earlier: 0.9 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1065,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.1,
-          "display": "-0.1%",
+          "display": "-0.1 percentage points",
           "sourceRecordIds": [
             "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate",
             "news-coconut-creek-fl-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1076,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.9,
-          "display": "0.9%",
+          "display": "0.9 percentage points",
           "sourceRecordIds": [
             "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate",
             "news-coconut-creek-fl-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1086,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Coconut Creek, FL labor force of 32,323, with 30,987 people employed and 1,336 unemployed under the program's definitions. Those three counts belong together: 30,987 plus 1,336 explains the scale behind the published 4.1% unemployment rate. For mortgage planning, the 32,323 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 32,323 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-coconut-creek-fl-local-labor-market-source-latest-labor-force",
-            "news-coconut-creek-fl-local-labor-market-source-latest-employment",
-            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment",
-            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Comparison view: what changed in the latest month",
           "body": [
-            "Coconut Creek, FL's unemployment rate fell from 4.2% in the prior month to 4.1% in the latest month, a change of -0.1%. A -0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,336 unemployment count and 32,323 labor force. The -0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Coconut Creek, FL borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "Start with the dated local finding: As of May 2026, Coconut Creek, FL's unemployment rate fell from 4.2% in April 2026 to 4.1% in May 2026, a change of 0.1 percentage points. That movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not show that a particular employer is hiring or cutting jobs, and it cannot prove one applicant's income stability, mortgage eligibility, or loan price. For borrower planning, the release also estimates 1,336 people unemployed within a labor force of 32,323, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1107,28 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Read the comparison: what changed over the year",
           "body": [
-            "Compared with 3.2% a year earlier, the latest Coconut Creek, FL unemployment rate of 4.1% rose by 0.9%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.9% difference still describes a population estimate rather than an individual's job stability. Reading 3.2%, 4.2%, and 4.1% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Coconut Creek, FL pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Coconut Creek, FL's unemployment rate rose from 3.2% in May 2025 to 4.1%, a change of 0.9 percentage points.",
+            "That wider window helps show whether Coconut Creek, FL's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.1 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Coconut Creek, FL or describes the stability of one household's earnings. For mortgage planning in Coconut Creek, FL, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Coconut Creek, FL's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-coconut-creek-fl-local-labor-market-source-yearago-year-ago-rate",
-            "news-coconut-creek-fl-local-labor-market-source-previous-previous-rate",
-            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate"
+            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate",
+            "news-coconut-creek-fl-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Planning context: why the rate needs its underlying counts",
           "body": [
-            "At 4.1%, Coconut Creek, FL's unemployment rate summarizes 1,336 unemployed people within a 32,323 labor force; the rate should not be discussed without those counts. The 30,987 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 30,987 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.1% rate attached to 32,323, 30,987, and 1,336 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 4.1%, Coconut Creek, FL's unemployment rate summarizes 1,336 unemployed people within a labor force of 32,323; the rate should not be discussed without those counts. For borrower planning, the 30,987 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 30,987 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.1% rate attached to 32,323, 30,987, and 1,336 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1144,30 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "Start with the evidence: the counts behind the published rate",
           "body": [
-            "Neither 30,987 employed people nor a 4.1% unemployment rate tells a lender what one Coconut Creek, FL applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 4.1% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.9% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 32,323 people in the Coconut Creek, FL labor force, including 30,987 employed and 1,336 unemployed under LAUS definitions. In practical terms, the employment and unemployment counts belong together because they establish the scale behind the published 4.1% rate. For mortgage planning, that city-level labor force describes the surrounding economy instead of the income or employment record of an applicant. For the decision at hand, it can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should therefore follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-coconut-creek-fl-local-labor-market-source-latest-labor-force",
+            "news-coconut-creek-fl-local-labor-market-source-latest-employment",
+            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment",
+            "news-coconut-creek-fl-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Where the evidence stops: labor statistics are not an income review",
+          "body": [
+            "Neither 30,987 employed people nor an unemployment rate of 4.1% tells a lender what an applicant in Coconut Creek, FL earns, whether that income is eligible, or whether it is likely to continue. The monthly movement of 0.1 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "For the next comparison in Coconut Creek, FL, the 4.1% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For borrower planning, that boundary protects borrowers from treating the year-over-year movement of 0.9 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1177,7 +1186,8 @@
           "id": "documentation-next-step",
           "heading": "Turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Coconut Creek, FL borrower is to note the latest 4.1% unemployment rate and the 0.9% year-over-year change, then move immediately to the records that describe the household. After noting the 4.1% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 32,323 local labor force and 30,987 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Coconut Creek, FL's 4.1% LAUS rate in its proper role as dated local economic context."
+            "A practical next step for borrowers in Coconut Creek, FL is to note the latest 4.1% unemployment rate and the year-over-year movement of 0.9 percentage points, then move immediately to the records that describe the household. After noting the 4.1% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path.",
+            "The 32,323 local labor force and 30,987 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The monthly movement of 0.1 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Coconut Creek, FL's 4.1% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1254,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "32,323",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "30,987",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,336",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "4.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.2%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "3.2%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.9%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.9 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1319,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1468,11 @@
       "title": "Coconut Creek, FL loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Coconut Creek, FL, including unit-count differences and important limits.",
-      "metaDescription": "Coconut Creek, FL loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Coconut Creek, FL, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Coconut Creek, FL, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1492,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $667,000.",
-        "four-unit FHA limit: $1,282,700.",
-        "difference between one-unit conforming and FHA limits: $165,750."
+        "one-unit FHA limit: $667,000."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1553,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Where the evidence stops: the published one-unit limits for the matched area",
           "body": [
-            "Coconut Creek, FL is connected to Broward County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $667,000. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $667,000 is not an FHA eligibility finding. For Coconut Creek, FL, starting with Broward County keeps the limits attached to the county or county-equivalent area used in the official files. A Coconut Creek, FL borrower still needs to confirm the selected property's location and legal unit count, because the relevant Broward County row follows the property rather than the city label or mailing address alone. Around Coconut Creek, FL, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Broward County as Coconut Creek, FL's confirmed county row before comparing the $832,750 and $667,000 program boundaries."
+            "The published evidence provides the starting point: Coconut Creek, FL is connected to Broward County for this 2026 source comparison. In practical terms, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $667,000. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $667,000 is not an FHA eligibility finding. For Coconut Creek, FL, starting with Broward County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Coconut Creek, FL still need to confirm the selected property's location and legal unit count, because the relevant Broward County row follows the property in place of the city label or mailing address alone. Around Coconut Creek, FL, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Broward County as Coconut Creek, FL's confirmed county row before comparing the $832,750 and $667,000 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,26 +1567,11 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
-          "body": [
-            "For the matched Coconut Creek, FL area, the difference between the $832,750 one-unit conforming limit and the $667,000 one-unit FHA limit is $165,750. The $165,750 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $667,000 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $165,750 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-coconut-creek-fl-county-loan-limits-source-conforming-oneunit",
-            "news-coconut-creek-fl-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "unit-count",
           "heading": "Unit count changes the published ceiling",
           "body": [
-            "Broward County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $667,000 to $1,282,700. The higher $1,601,750 and $1,282,700 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Coconut Creek, FL, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,282,700 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "As local context for Coconut Creek, FL, Broward County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $667,000 to $1,282,700. For borrower planning, the higher $1,601,750 and $1,282,700 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Coconut Creek, FL, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,282,700 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1583,9 +1588,27 @@
         },
         {
           "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
+          "heading": "Keep the boundary clear: a limit is a category boundary, not borrowing power",
           "body": [
-            "The $832,750 conforming ceiling and $667,000 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Coconut Creek, FL household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $667,000 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $165,750 program gap is therefore best used to route questions, not to rank products. Regardless of the $165,750 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $832,750 conforming ceiling and $667,000 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Coconut Creek, FL or reduces household debts.",
+            "Applied to a decision in Coconut Creek, FL, a borrower seeking less than $832,750 can nevertheless have important conventional requirements to review, and a request below $667,000 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $165,750 program gap is therefore best used to route questions, not to rank products. For the decision at hand, regardless of the $165,750 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-coconut-creek-fl-county-loan-limits-source-conforming-oneunit",
+            "news-coconut-creek-fl-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "one-unit-comparison",
+          "heading": "What the comparison adds: how the one-unit program boundaries compare",
+          "body": [
+            "For the matched Coconut Creek, FL area, the difference between the $832,750 one-unit conforming limit and the $667,000 one-unit FHA limit is $165,750. In practical terms, the $165,750 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more.",
+            "Applied to a decision in Coconut Creek, FL, a needed loan amount can be compared with $832,750 and $667,000 only after price, down payment, financed items, and the applicable base-loan definition are established. For the decision at hand, even when $165,750 is material, it does not determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1599,9 +1622,10 @@
         },
         {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Where the evidence stops: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,282,700 indicates what a four-unit property in Coconut Creek, FL is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $667,000 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $667,000 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Coconut Creek, FL's connection to Broward County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,282,700 indicates what a four-unit property in Coconut Creek, FL is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For borrower planning, the one-unit $832,750 and $667,000 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval.",
+            "The $832,750 and $667,000 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Coconut Creek, FL's connection to Broward County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1620,7 +1644,8 @@
           "id": "verify-next",
           "heading": "Verify the property before comparing products",
           "body": [
-            "A useful Coconut Creek, FL next step is to document the property address, Broward County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $667,000 for a one-unit property, or with $1,601,750 and $1,282,700 only when the four-unit category is actually applicable. After the $832,750 and $667,000 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $667,000 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $165,750 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Coconut Creek, FL next step is to document the property address, Broward County geography, legal unit count, price, down-payment plan, and expected base loan amount. In practical terms, compare that amount with $832,750 and $667,000 for a one-unit property, or with $1,601,750 and $1,282,700 only when the four-unit category is actually applicable. After the $832,750 and $667,000 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option.",
+            "Applied to a decision in Coconut Creek, FL, the $832,750 conforming figure and $667,000 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $165,750 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1713,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$667,000",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,282,700",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$165,750",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1762,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "unit-count",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

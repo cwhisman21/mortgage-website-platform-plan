@@ -79,8 +79,16 @@ function sourceMapFor(sources) {
     requireString(source?.id, "source id");
     if (map.has(source.id)) fail(`duplicate source ID ${source.id}`);
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(source.id)) fail(`source ${source.id} has an unstable ID`);
-    for (const field of ["publisher", "title", "dataPeriod", "accessedAt", "geographicScope", "claimSupported"]) requireString(source[field], `source ${source.id}.${field}`);
+    for (const field of ["publisher", "title", "dataPeriod", "accessedAt", "reviewedAt", "geographicScope", "claimSupported", "limitation", "approvalState"]) {
+      requireString(source[field], `source ${source.id}.${field}`);
+    }
+    requireString(source.limitation, `source ${source.id}.limitation`, 40);
     requireDate(source.accessedAt, `source ${source.id}.accessedAt`);
+    requireDate(source.reviewedAt, `source ${source.id}.reviewedAt`);
+    if (source.reviewedAt !== "2026-07-13") fail(`source ${source.id}.reviewedAt must be the factual review date 2026-07-13`);
+    if (source.approvalState !== "research_reviewed_not_publication_approved") {
+      fail(`source ${source.id}.approvalState must preserve the evidence audit's publication boundary`);
+    }
     if (source.authoritative !== true) fail(`source ${source.id} must be authoritative`);
     if (!/^https:\/\//.test(source.url || "")) fail(`source ${source.id} must use a direct HTTPS URL`);
     map.set(source.id, source);
@@ -143,7 +151,7 @@ function validateArticle(fragment, baseArticle, contributorIds, sources, routes,
   return article;
 }
 
-function validateTopicHubs(hubs, contributorIds) {
+function validateTopicHubs(hubs, contributorIds, sources) {
   const publicHubs = hubs.filter((hub) => hub.public === true);
   if (publicHubs.length !== publicHubRoutes.length) fail(`expected ${publicHubRoutes.length} public topic hubs, found ${publicHubs.length}`);
   if (publicHubs.map((hub) => hub.route).join("|") !== publicHubRoutes.join("|")) fail("public topic hubs must use the approved routes and order");
@@ -154,6 +162,12 @@ function validateTopicHubs(hubs, contributorIds) {
     requireString(hub.name, `${hub.id}.name`, 3);
     requireString(hub.heroSummary, `${hub.id}.heroSummary`, 40);
     requireString(hub.whyItMatters, `${hub.id}.whyItMatters`, 40);
+    requireDate(hub.lastUpdated, `${hub.id}.lastUpdated`);
+    if (!Array.isArray(hub.sourceIds) || hub.sourceIds.length < 1) fail(`${hub.id} needs claim-level source IDs`);
+    if (new Set(hub.sourceIds).size !== hub.sourceIds.length) fail(`${hub.id} repeats a source ID`);
+    hub.sourceIds.forEach((id) => {
+      if (!sources.has(id)) fail(`${hub.id} cites missing source ${id}`);
+    });
     if (!Array.isArray(hub.overviewParagraphs) || hub.overviewParagraphs.length < 2) fail(`${hub.id} needs overview paragraphs`);
     hub.overviewParagraphs.forEach((paragraph, index) => requireString(paragraph, `${hub.id}.overviewParagraphs[${index}]`, 40));
     if (!Array.isArray(hub.startHere) || hub.startHere.length < 2) fail(`${hub.id} needs start-here steps`);
@@ -201,7 +215,7 @@ function compile() {
   const output = {
     version: "snap-editorial-production-v1",
     contributors,
-    topicHubs: validateTopicHubs(topicHubs, contributorIds),
+    topicHubs: validateTopicHubs(topicHubs, contributorIds, sources),
     articles,
     sources: ledger,
   };

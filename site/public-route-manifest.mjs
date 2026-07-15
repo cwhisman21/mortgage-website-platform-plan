@@ -1,6 +1,7 @@
 export const PUBLIC_ROUTE_GROUP_COUNTS = Object.freeze({
   root: 1,
   locations: 789,
+  // Compatibility snapshot only; manifest validation derives the live Learning Center count below.
   learningCenter: 41,
   loanOfficers: 17,
   branches: 7,
@@ -40,14 +41,38 @@ function routeEntry(group, type, item, source) {
   };
 }
 
+function tagRouteEntry(tag) {
+  const route = tag?.canonicalRoute;
+  assertCanonicalRoute(route);
+  return {
+    route,
+    type: "tag",
+    group: "learningCenter",
+    itemId: tag.id,
+    source: "tagRegistry.tags",
+  };
+}
+
 function findRoute(items, route, source) {
   const item = (items || []).find((candidate) => candidate?.route === route);
   if (!item) throw new Error(`Missing required public route ${route} in ${source}`);
   return item;
 }
 
-function assertGroupCounts(manifest) {
-  for (const [group, expected] of Object.entries(PUBLIC_ROUTE_GROUP_COUNTS)) {
+function learningCenterRouteCount(seed, editorialContent, tagRegistry) {
+  return (seed.blogPages || []).length
+    + (seed.articles || []).length
+    + (editorialContent.contributors || []).length
+    + 1
+    + (tagRegistry.tags || []).length;
+}
+
+function assertGroupCounts(manifest, { seed, editorialContent, tagRegistry }) {
+  const expectedCounts = {
+    ...PUBLIC_ROUTE_GROUP_COUNTS,
+    learningCenter: learningCenterRouteCount(seed, editorialContent, tagRegistry),
+  };
+  for (const [group, expected] of Object.entries(expectedCounts)) {
     const actual = manifest.filter((entry) => entry.group === group).length;
     if (actual !== expected) {
       throw new Error(`Public route group ${group} must contain ${expected} routes; received ${actual}`);
@@ -55,7 +80,7 @@ function assertGroupCounts(manifest) {
   }
 }
 
-export function createPublicRouteManifest({ seed = {}, editorialContent = {} } = {}) {
+export function createPublicRouteManifest({ seed = {}, editorialContent = {}, tagRegistry = {} } = {}) {
   const entries = [];
   const addAll = (group, type, items, source) => {
     for (const item of items || []) entries.push(routeEntry(group, type, item, source));
@@ -71,6 +96,7 @@ export function createPublicRouteManifest({ seed = {}, editorialContent = {} } =
   addAll("learningCenter", "article", seed.articles, "articles");
   addAll("learningCenter", "contributor", editorialContent.contributors, "editorialContent.contributors");
   entries.push(routeEntry("learningCenter", "directory", findRoute(seed.directoryPages, "/learning-center/search", "directoryPages"), "directoryPages"));
+  for (const tag of tagRegistry.tags || []) entries.push(tagRouteEntry(tag));
 
   entries.push(routeEntry("loanOfficers", "directory", findRoute(seed.directoryPages, "/loan-officers", "directoryPages"), "directoryPages"));
   addAll("loanOfficers", "loanOfficer", seed.loanOfficers, "loanOfficers");
@@ -97,7 +123,7 @@ export function createPublicRouteManifest({ seed = {}, editorialContent = {} } =
     owners.set(entry.route, entry.source);
   }
 
-  assertGroupCounts(entries);
+  assertGroupCounts(entries, { seed, editorialContent, tagRegistry });
   return entries.sort((left, right) => {
     if (left.route === "/") return -1;
     if (right.route === "/") return 1;

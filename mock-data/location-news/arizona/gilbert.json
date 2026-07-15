@@ -13,9 +13,11 @@
       "title": "Gilbert, AZ home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Gilbert, AZ.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Gilbert, AZ.",
-      "metaDescription": "Gilbert, AZ home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Gilbert, AZ.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Gilbert, AZ.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $575,100.",
         "prior ACS median owner-occupied home value: $328,700.",
-        "ACS median household income: $122,551.",
-        "median monthly owner cost with a mortgage: $2,174.",
-        "change from the prior ACS home-value estimate: 75.0%."
+        "ACS median household income: $122,551."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 75,
-          "display": "75.0%",
-          "sourceRecordIds": [
-            "news-gilbert-az-affordability-home-values-source-city-home-value-current",
-            "news-gilbert-az-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Arizona median home value",
           "value": 394500,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Evidence at a glance: the local value, income, and owner-cost baseline",
           "body": [
-            "In Gilbert, AZ, the 2024 ACS reports a median owner-occupied home value of $575,100 and median household income of $122,551; these are separate medians, not the finances of one representative household. The same release reports $2,174 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Gilbert, AZ, reading $575,100, $122,551, and $2,174 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $575,100, $122,551, and $2,174 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "Start with the dated local finding: In Gilbert, AZ, the 2024 ACS reports a median owner-occupied home value of $575,100, median household income of $122,551, and median selected monthly owner costs of $2,174 for owners with a mortgage. Together, those three reference points can nevertheless help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $2,174 measure combines recurring ownership expenses instead of real estate taxes alone. For borrower planning, a useful affordability review starts with $575,100, $122,551, and $2,174, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,42 +122,10 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Gilbert, AZ's median home-value estimate increased from $328,700 in the prior ACS period to $575,100 in the current release, a reported change of 75.0%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 75.0% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $328,700 to $575,100 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Gilbert, AZ. Before the 75.0% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-gilbert-az-affordability-home-values-source-city-home-value-prior",
-            "news-gilbert-az-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
-          "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
-          "body": [
-            "Gilbert, AZ's $575,100 median home-value estimate is above the statewide $394,500 estimate, with a reported city-to-state gap of 45.8%. That 45.8% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Gilbert, AZ. It does not mean every local property is 45.8% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $575,100 and $394,500 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "state-home-value",
-            "state-home-value-gap"
-          ],
-          "sourceRecordIds": [
-            "news-gilbert-az-affordability-home-values-source-city-home-value-current",
-            "news-gilbert-az-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Evidence limits: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $2,174 owner-cost estimate gives Gilbert, AZ borrowers a broader monthly reference than principal and interest alone, while the $122,551 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $122,551 is the owner household at $2,174. The $575,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $575,100, $122,551, and $2,174 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $2,174 owner-cost estimate gives Gilbert, AZ borrowers a broader monthly reference than principal and interest alone, while the $122,551 income estimate supplies separate household context. In practical terms, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $122,551 is the owner household at $2,174. The $575,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. For the decision at hand, keeping $575,100, $122,551, and $2,174 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +139,77 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "vintage-observations",
+          "heading": "Planning context: read the ACS vintages as separate nominal observations",
           "body": [
-            "Neither $575,100 nor $2,174 determines the value of a specific Gilbert, AZ home, what a borrower will pay each month, or an underwriting result. The $122,551 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 75.0% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $575,100, $2,174, and $122,551 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "The 2019 ACS published $328,700 as Gilbert, AZ's median owner-occupied home-value estimate, while the 2024 ACS published $575,100. In practical terms, these dated nominal observations may help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change.",
+            "Applied to a decision in Gilbert, AZ, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $328,700 attached to 2019 and $575,100 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-gilbert-az-affordability-home-values-source-city-home-value-prior",
+            "news-gilbert-az-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "state-comparison",
+          "heading": "How the city estimate sits within the state",
+          "body": [
+            "Gilbert, AZ's $575,100 median home-value estimate is above the statewide $394,500 estimate, with a reported city-to-state gap of 45.8%.",
+            "That 45.8% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Gilbert, AZ. It does not mean every local property is 45.8% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For borrower planning, borrowers can use $575,100 and $394,500 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "state-home-value",
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-gilbert-az-affordability-home-values-source-city-home-value-current",
+            "news-gilbert-az-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "What these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $575,100 estimate nor the $2,174 owner-cost median determines the value of a specific Gilbert, AZ home, a borrower's payment, or an underwriting result. For borrower planning, the $122,551 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $328,700 also cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-gilbert-az-affordability-home-values-source-city-home-value-current",
+            "news-gilbert-az-affordability-home-values-source-city-home-value-prior",
             "news-gilbert-az-affordability-home-values-source-city-owner-cost-current",
-            "news-gilbert-az-affordability-home-values-source-city-income-current",
-            "news-gilbert-az-affordability-home-values-source-city-home-value-prior"
+            "news-gilbert-az-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
           "heading": "Build a property-specific comparison",
           "body": [
-            "A practical Gilbert, AZ worksheet can begin with $575,100 as broad value context, $2,174 as a reminder to include recurring ownership expenses, and $122,551 as a local economic reference. After noting those $575,100, $2,174, and $122,551 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 45.8% city-to-state difference is a prompt to keep the analysis local, while the 75.0% period change is a prompt to date every assumption. A licensed professional can use the 45.8% and 75.0% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "One practical Gilbert, AZ worksheet can begin with $575,100 as dated value context, $2,174 as a reminder to include recurring ownership expenses, and $122,551 as a local economic reference.",
+            "In a borrower review centered on Gilbert, AZ, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 45.8% city-to-state difference is a prompt to keep the analysis local, while the separate $328,700 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. A licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-gilbert-az-affordability-home-values-source-city-home-value-current",
+            "news-gilbert-az-affordability-home-values-source-city-home-value-prior",
             "news-gilbert-az-affordability-home-values-source-city-owner-cost-current",
             "news-gilbert-az-affordability-home-values-source-city-income-current",
-            "news-gilbert-az-affordability-home-values-source-state-home-value-current",
-            "news-gilbert-az-affordability-home-values-source-city-home-value-prior"
+            "news-gilbert-az-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +247,9 @@
               "display": "$2,174"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 75,
-              "display": "75.0%"
+              "label": "Arizona median home value",
+              "value": 394500,
+              "display": "$394,500"
             }
           ]
         }
@@ -269,43 +261,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$575,100",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$328,700",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$122,551",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,174",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "75.0%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Arizona median home value",
               "$394,500",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap above the state estimate",
               "45.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +313,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "owner-cost-boundary",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-gilbert-az-affordability-home-values-source-city-home-value-current",
@@ -452,9 +446,11 @@
       "title": "Gilbert, AZ housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Gilbert, AZ.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Gilbert, AZ.",
-      "metaDescription": "Gilbert, AZ housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Gilbert, AZ.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +468,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 100,336.",
         "occupied housing units: 96,363.",
-        "vacant housing units: 3,973.",
-        "prior ACS vacant housing units: 4,460.",
-        "vacant-unit share of housing stock: 4.0%."
+        "vacant housing units: 3,973."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +572,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Start with the evidence: the size and use of the local housing stock",
           "body": [
-            "Gilbert, AZ's current ACS housing baseline includes 100,336 total housing units, 96,363 occupied units, and 3,973 vacant units. Those counts describe the housing stock across the survey period; they do not say that 3,973 homes were listed for sale or available to rent at one moment. The difference between 100,336 total units and 96,363 occupied units is useful for checking the internal scale of the release, while 3,973 provides the numerator for a more careful vacancy reading. For a borrower researching Gilbert, AZ, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "The local figures answer the first question: Gilbert, AZ's current ACS housing baseline includes 100,336 total housing units, 96,363 occupied units, and 3,973 vacant units. For the decision at hand, those counts may help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 3,973 homes were listed for sale or available to rent at one moment. In practical terms, reading 100,336 total units with 96,363 occupied and 3,973 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +588,29 @@
           ]
         },
         {
+          "id": "rent-context",
+          "heading": "Evidence check: use rent as a matched comparison, not a shortcut",
+          "body": [
+            "Gilbert, AZ's ACS median gross rent is $2,110, while renter-occupied units account for 26.9% of occupied housing and owner-occupied units account for 73.1%. For borrower planning, the $2,110 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $2,110 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Gilbert, AZ comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-gilbert-az-housing-supply-tenure-source-median-rent",
+            "news-gilbert-az-housing-supply-tenure-source-renter-units",
+            "news-gilbert-az-housing-supply-tenure-source-occupied-units",
+            "news-gilbert-az-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
           "id": "vacancy-comparison",
           "heading": "Vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Gilbert, AZ decreased from 4,460 in the prior ACS period to 3,973 in the current release, a reported change of -10.9%. In the current housing stock, 3,973 units equal 4.0% of the 100,336 total. ACS vacancy covers several statuses, so the 4.0% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 4,460 to 3,973 can still prompt better questions about current for-sale and rental inventory in Gilbert, AZ, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Gilbert, AZ decreased from 4,460 in the prior ACS period to 3,973 in the current release, a reported movement of 10.9%. In the current housing stock, 3,973 units equal 4.0% of the 100,336 total.",
+            "ACS vacancy covers several statuses, so the 4.0% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 4,460 to 3,973 can still prompt better questions about current for-sale and rental inventory in Gilbert, AZ, provided those questions are answered with timely listing and property data rather than the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +627,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "Among 96,363 occupied units in Gilbert, AZ, the ACS-derived owner share is 73.1% and the renter share is 26.9%, making owner-occupied housing the larger measured tenure group. The 73.1% and 26.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Gilbert, AZ. The 73.1% and 26.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 96,363 occupied units in Gilbert, AZ, the ACS-derived owner share is 73.1% and the renter share is 26.9%, making owner-occupied housing the larger measured tenure group. In practical terms, the 73.1% and 26.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage.",
+            "This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Gilbert, AZ. For the decision at hand, the 73.1% and 26.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +644,10 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Gilbert, AZ's ACS median gross rent is $2,110, while renter-occupied units account for 26.9% of occupied housing and owner-occupied units account for 73.1%. The $2,110 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $2,110 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Gilbert, AZ comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-gilbert-az-housing-supply-tenure-source-median-rent",
-            "news-gilbert-az-housing-supply-tenure-source-renter-units",
-            "news-gilbert-az-housing-supply-tenure-source-occupied-units",
-            "news-gilbert-az-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
           "heading": "What the housing-stock evidence cannot show",
           "body": [
-            "The 4.0% vacant-unit share and 73.1% owner share cannot determine competition for a specific Gilbert, AZ listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 100,336 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.0% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 3,973 vacant units separate from active inventory and keep the $2,110 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 4.0% vacant-unit share and 73.1% owner share does not determine competition for a specific Gilbert, AZ listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. In practical terms, likewise, 100,336 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.0% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. For the decision at hand, a borrower should, as a result, keep 3,973 vacant units separate from active inventory and keep the $2,110 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +666,9 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Borrower action: compare current local choices on the same terms",
           "body": [
-            "A grounded Gilbert, AZ comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 100,336 total units, a 4.0% vacancy share, and a 73.1% owner share. For renting, replace the $2,110 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 73.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 26.9% or 73.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Gilbert, AZ comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 100,336 total units, a vacancy share of 4.0%, and an owner share of 73.1%. For renting, replace the $2,110 median with the actual lease, utilities, deposits, and expected changes. On the ownership side, keep the 73.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 26.9% or 73.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +737,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "100,336",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "96,363",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "3,973",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "4,460",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "4.0%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-10.9%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "73.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "26.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$2,110",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +809,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "rent-context",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +973,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Gilbert, AZ labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Gilbert, AZ.",
-      "previewText": "See what changed in Gilbert, AZ, AZ's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Gilbert, AZ labor market: latest employment evidence. See what changed in Gilbert, AZ, AZ's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Gilbert, AZ's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Gilbert, AZ's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +996,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 160,628.",
-        "employment: 154,908.",
-        "unemployment: 5,720.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.6%.",
-        "previous-month unemployment rate: 3.3%."
+        "change in unemployment rate from the prior month: 0.3 percentage points.",
+        "change in unemployment rate from a year earlier: 0.4 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1066,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0.3,
-          "display": "0.3%",
+          "display": "0.3 percentage points",
           "sourceRecordIds": [
             "news-gilbert-az-local-labor-market-source-latest-unemployment-rate",
             "news-gilbert-az-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1077,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.4,
-          "display": "0.4%",
+          "display": "0.4 percentage points",
           "sourceRecordIds": [
             "news-gilbert-az-local-labor-market-source-latest-unemployment-rate",
             "news-gilbert-az-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1087,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Gilbert, AZ labor force of 160,628, with 154,908 people employed and 5,720 unemployed under the program's definitions. Those three counts belong together: 154,908 plus 5,720 explains the scale behind the published 3.6% unemployment rate. For mortgage planning, the 160,628 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 160,628 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-gilbert-az-local-labor-market-source-latest-labor-force",
-            "news-gilbert-az-local-labor-market-source-latest-employment",
-            "news-gilbert-az-local-labor-market-source-latest-unemployment",
-            "news-gilbert-az-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Read the comparison: what changed in the latest month",
           "body": [
-            "Gilbert, AZ's unemployment rate rose from 3.3% in the prior month to 3.6% in the latest month, a change of 0.3%. A 0.3% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 5,720 unemployment count and 160,628 labor force. The 0.3% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Gilbert, AZ borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The local figures answer the first question: As of May 2026, Gilbert, AZ's unemployment rate rose from 3.3% in April 2026 to 3.6% in May 2026, a change of 0.3 percentage points. For borrower planning, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not reveal that a particular employer is hiring or cutting jobs, and it cannot prove one applicant's income stability, mortgage eligibility, or loan price. The release also estimates 5,720 people unemployed within a labor force of 160,628, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1108,29 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What the comparison adds: what changed over the year",
           "body": [
-            "Compared with 3.2% a year earlier, the latest Gilbert, AZ unemployment rate of 3.6% rose by 0.4%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.4% difference still describes a population estimate rather than an individual's job stability. Reading 3.2%, 3.3%, and 3.6% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Gilbert, AZ pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Gilbert, AZ's unemployment rate rose from 3.2% in May 2025 to 3.6%, a change of 0.4 percentage points.",
+            "For borrower planning, that wider window helps show whether Gilbert, AZ's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.3 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Gilbert, AZ or describes the stability of one household's earnings. For mortgage planning in Gilbert, AZ, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Gilbert, AZ's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-gilbert-az-local-labor-market-source-yearago-year-ago-rate",
-            "news-gilbert-az-local-labor-market-source-previous-previous-rate",
-            "news-gilbert-az-local-labor-market-source-latest-unemployment-rate"
+            "news-gilbert-az-local-labor-market-source-latest-unemployment-rate",
+            "news-gilbert-az-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
           "heading": "Why the rate needs its underlying counts",
           "body": [
-            "At 3.6%, Gilbert, AZ's unemployment rate summarizes 5,720 unemployed people within a 160,628 labor force; the rate should not be discussed without those counts. The 154,908 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 154,908 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.6% rate attached to 160,628, 154,908, and 5,720 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.6%, Gilbert, AZ's unemployment rate summarizes 5,720 unemployed people within a labor force of 160,628; the rate should not be discussed without those counts. The 154,908 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file.",
+            "For the next comparison in Gilbert, AZ, that makes 154,908 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For borrower planning, keeping the 3.6% rate attached to 160,628, 154,908, and 5,720 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1146,29 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "The dated finding: the counts behind the published rate",
           "body": [
-            "Neither 154,908 employed people nor a 3.6% unemployment rate tells a lender what one Gilbert, AZ applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.3% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.6% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.4% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 160,628 people in the Gilbert, AZ labor force, including 154,908 employed and 5,720 unemployed under LAUS definitions. For the decision at hand, the employment and unemployment counts belong together because they establish the scale behind the published 3.6% rate. In mortgage planning, that city-level labor force describes the surrounding economy rather than the income or employment record of an applicant. In practical terms, it can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should therefore follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-gilbert-az-local-labor-market-source-latest-labor-force",
+            "news-gilbert-az-local-labor-market-source-latest-employment",
+            "news-gilbert-az-local-labor-market-source-latest-unemployment",
+            "news-gilbert-az-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Evidence limits: labor statistics are not an income review",
+          "body": [
+            "Neither 154,908 employed people nor an unemployment rate of 3.6% tells a lender what an applicant in Gilbert, AZ earns, whether that income is eligible, or whether it is likely to continue. For borrower planning, the monthly movement of 0.3 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.6% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating the year-over-year movement of 0.4 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1185,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Borrower action: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Gilbert, AZ borrower is to note the latest 3.6% unemployment rate and the 0.4% year-over-year change, then move immediately to the records that describe the household. After noting the 3.6% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 160,628 local labor force and 154,908 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.3% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Gilbert, AZ's 3.6% LAUS rate in its proper role as dated local economic context."
+            "One practical next step for borrowers in Gilbert, AZ is to note the latest 3.6% unemployment rate and the year-over-year movement of 0.4 percentage points, then move immediately to the records that describe the household.",
+            "After noting the 3.6% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 160,628 local labor force and 154,908 employment count can frame the economic conversation, but they should not alter verified borrower inputs. For borrower planning, the monthly movement of 0.3 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Gilbert, AZ's 3.6% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1255,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "160,628",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "154,908",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "5,720",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.6%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "3.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "3.2%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.3 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.4%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.4 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1320,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1469,11 @@
       "title": "Gilbert, AZ loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Gilbert, AZ, including unit-count differences and important limits.",
-      "metaDescription": "Gilbert, AZ loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Gilbert, AZ, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Gilbert, AZ, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1493,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $557,750.",
-        "four-unit FHA limit: $1,072,600.",
-        "difference between one-unit conforming and FHA limits: $275,000."
+        "one-unit FHA limit: $557,750."
       ],
       "evidenceFacts": [
         {
@@ -1535,7 +1556,7 @@
           "id": "published-limits",
           "heading": "The published one-unit limits for the matched area",
           "body": [
-            "Gilbert, AZ is connected to Maricopa County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $557,750. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $557,750 is not an FHA eligibility finding. For Gilbert, AZ, starting with Maricopa County keeps the limits attached to the county or county-equivalent area used in the official files. A Gilbert, AZ borrower still needs to confirm the selected property's location and legal unit count, because the relevant Maricopa County row follows the property rather than the city label or mailing address alone. Around Gilbert, AZ, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Maricopa County as Gilbert, AZ's confirmed county row before comparing the $832,750 and $557,750 program boundaries."
+            "Gilbert, AZ is connected to Maricopa County for this 2026 source comparison. For the decision at hand, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $557,750. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $557,750 is not an FHA eligibility finding. For Gilbert, AZ, starting with Maricopa County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Gilbert, AZ still need to confirm the selected property's location and legal unit count, because the relevant Maricopa County row follows the property instead of the city label or mailing address alone. Around Gilbert, AZ, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Maricopa County as Gilbert, AZ's confirmed county row before comparing the $832,750 and $557,750 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1569,27 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "What the comparison adds: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Gilbert, AZ area, the difference between the $832,750 one-unit conforming limit and the $557,750 one-unit FHA limit is $275,000. The $275,000 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $557,750 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $275,000 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Gilbert, AZ area, the difference between the $832,750 one-unit conforming limit and the $557,750 one-unit FHA limit is $275,000. For the decision at hand, the $275,000 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more.",
+            "For borrowers reviewing evidence from Gilbert, AZ, a needed loan amount can be compared with $832,750 and $557,750 only after price, down payment, financed items, and the applicable base-loan definition are established. In practical terms, even when $275,000 is material, it does not determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-gilbert-az-county-loan-limits-source-conforming-oneunit",
+            "news-gilbert-az-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "category-boundary",
+          "heading": "Evidence limits: a limit is a category boundary, not borrowing power",
+          "body": [
+            "The $832,750 conforming ceiling and $557,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Gilbert, AZ or reduces household debts. For the decision at hand, a borrower seeking less than $832,750 may still have important conventional requirements to review, and a request below $557,750 may still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis.",
+            "For borrowers reviewing evidence from Gilbert, AZ, the $275,000 program gap is therefore best used to route questions, not to rank products. In practical terms, regardless of the $275,000 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules instead of the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1566,7 +1605,8 @@
           "id": "unit-count",
           "heading": "Unit count changes the published ceiling",
           "body": [
-            "Maricopa County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $557,750 to $1,072,600. The higher $1,601,750 and $1,072,600 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Gilbert, AZ, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,072,600 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "In borrower planning for Gilbert, AZ, Maricopa County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $557,750 to $1,072,600. The higher $1,601,750 and $1,072,600 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Gilbert, AZ, a legal unit count should be verified from reliable property information before a multi-unit limit is used. For borrower planning, the $1,601,750 and $1,072,600 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,26 +1622,11 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
-          "body": [
-            "The $832,750 conforming ceiling and $557,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Gilbert, AZ household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $557,750 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $275,000 program gap is therefore best used to route questions, not to rank products. Regardless of the $275,000 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-gilbert-az-county-loan-limits-source-conforming-oneunit",
-            "news-gilbert-az-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Keep the boundary clear: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,072,600 indicates what a four-unit property in Gilbert, AZ is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $557,750 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $557,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Gilbert, AZ's connection to Maricopa County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,072,600 indicates what a four-unit property in Gilbert, AZ is worth, what income its units may produce, or whether a borrower can qualify to purchase it.",
+            "The one-unit $832,750 and $557,750 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $557,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. For borrower planning, that is why Gilbert, AZ's connection to Maricopa County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1618,9 +1643,9 @@
         },
         {
           "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "heading": "Borrower action: verify the property before comparing products",
           "body": [
-            "A useful Gilbert, AZ next step is to document the property address, Maricopa County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $557,750 for a one-unit property, or with $1,601,750 and $1,072,600 only when the four-unit category is actually applicable. After the $832,750 and $557,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $557,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $275,000 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Gilbert, AZ next step is to document the property address, Maricopa County geography, legal unit count, price, down-payment plan, and expected base loan amount. For the decision at hand, compare that amount with $832,750 and $557,750 for a one-unit property, or with $1,601,750 and $1,072,600 only when the four-unit category is actually applicable. After the $832,750 and $557,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. In practical terms, the $832,750 conforming figure and $557,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $275,000 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1713,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$557,750",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,072,600",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$275,000",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

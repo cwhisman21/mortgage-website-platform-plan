@@ -19,6 +19,10 @@ const publicSourceFiles = [
   "site/market-charts.mjs",
   "site/locations-hero.mjs",
   "site/learning-center.mjs",
+  "site/content-freshness.mjs",
+  "site/document-metadata.mjs",
+  "site/location-news-static.mjs",
+  "site/static-route-document.mjs",
 ].filter((relativePath) => fs.existsSync(path.join(repoRoot, relativePath)));
 
 const forbiddenPatterns = [
@@ -62,7 +66,7 @@ const forbiddenPatterns = [
   ["expert handoff", /\bexpert handoff\b/i],
   ["state guide translates", /\ba state guide translates\b/i],
   ["created by this generator", /\bcreated by this generator\b/i],
-  ["placement", /\bplacement\b/i],
+  ["placement", /\bplacement\b(?!\s+claim\b)/i],
   ["branch page", /\bbranch page\b/i],
   ["convert without overclaiming", /\bconvert without overclaiming\b/i],
   ["high-intent users", /\bhigh-intent users\b/i],
@@ -77,6 +81,40 @@ const forbiddenPatterns = [
   ["site data", /\bsite data\b/i],
   ["directory next steps", /\bdirectory next steps\b/i],
   ["move from any directory", /\bmove from any directory\b/i],
+  ["seed assumption", /\bseed(?:ed)? (?:assumption|value|snapshot|content|market data)\b/i],
+  ["connected market data", /\bconnected market[- ]data\b/i],
+  ["future integration", /\bfuture (?:connected )?integration\b/i],
+  ["public release or reliance", /\bpublic (?:release|reliance)\b/i],
+  ["source provenance", /\b(?:source|as-of) provenance\b/i],
+  ["layout assumptions", /\blayout assumptions?\b/i],
+  ["illustrative planning assumption", /\billustrative planning assumptions?\b/i],
+  ["source or as-of dates", /\bsource or as-of dates?\b/i],
+];
+
+const appCopyPatterns = [
+  ["this page", /\bthis page\b/i],
+  ["borrower-facing hub", /\b(?:article|buyer education|calculator|content|learning|loan|local branch|locations|mortgage|topic) hub\b/i],
+  ["borrower-facing path", /\b(?:borrower|comparison|contact|guidance|loan|mortgage|prequalification|product|purchase|refinance|review|service) path\b/i],
+  ["next click", /\bnext[- ]click\b/i],
+  ["profile includes", /\bprofile includes\b/i],
+  ["show what happens", /\bshow what happens\b/i],
+  ["open first result", /\bopen first result\b/i],
+  ["latest sourced update", /\blatest sourced update\b/i],
+  ["product-aware estimate", /\bproduct-aware estimate\b/i],
+  ["where to find us", /\bwhere to find us\b/i],
+  ["consent-aware contact form", /\bconsent-aware contact form\b/i],
+];
+
+const canonicalTaxonomyPatterns = [
+  ["hub", /\bhub\b/i],
+  ["index", /\bindex\b/i],
+  ["page", /\bpage\b/i],
+  ["path", /\bpath\b/i],
+  ["placement", /\bplacement\b/i],
+  ["structured", /\bstructured\b/i],
+  ["generator", /\bgenerator\b/i],
+  ["next click", /\bnext[- ]click\b/i],
+  ["template", /\btemplate\b/i],
 ];
 
 const publicTextKeys = new Set([
@@ -125,6 +163,15 @@ function lineNumber(source, index) {
 function compact(value, limit = 150) {
   const normalized = String(value).replace(/\s+/g, " ").trim();
   return normalized.length > limit ? `${normalized.slice(0, limit - 3)}...` : normalized;
+}
+
+function decodeHtmlText(value) {
+  return String(value || "")
+    .replaceAll("&amp;", "&")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'");
 }
 
 function stripJsComments(source) {
@@ -205,9 +252,9 @@ function sourceVisibleLines(relativePath, source) {
   });
 }
 
-function scanText(text, evidence) {
+function scanText(text, evidence, patterns = forbiddenPatterns) {
   const findings = [];
-  for (const [label, pattern] of forbiddenPatterns) {
+  for (const [label, pattern] of patterns) {
     if (pattern.test(text)) findings.push(`${evidence} [${label}] "${compact(text)}"`);
   }
   return findings;
@@ -216,13 +263,14 @@ function scanText(text, evidence) {
 function scanSource(relativePath) {
   const source = read(relativePath);
   return sourceVisibleLines(relativePath, source).flatMap(({ line, text, sourceLine }) =>
-    scanText(text, `${relativePath}:${line}`).map((finding) => `${finding} | ${compact(sourceLine)}`),
+    scanText(text, `${relativePath}:${line}`, relativePath === "site/app.js" ? [...forbiddenPatterns, ...appCopyPatterns] : forbiddenPatterns)
+      .map((finding) => `${finding} | ${compact(sourceLine)}`),
   );
 }
 
-function collectPublicDataStrings(value, file, pathParts = [], inheritedRoute = "", visibleContext = false, findings = []) {
+function collectPublicDataStrings(value, file, pathParts = [], inheritedRoute = "", visibleContext = false, findings = [], patterns = forbiddenPatterns) {
   if (Array.isArray(value)) {
-    value.forEach((item, index) => collectPublicDataStrings(item, file, [...pathParts, index], inheritedRoute, visibleContext, findings));
+    value.forEach((item, index) => collectPublicDataStrings(item, file, [...pathParts, index], inheritedRoute, visibleContext, findings, patterns));
     return findings;
   }
   if (!value || typeof value !== "object") return findings;
@@ -233,9 +281,9 @@ function collectPublicDataStrings(value, file, pathParts = [], inheritedRoute = 
     const isPublic = publicTextKeys.has(key) || visibleContext;
     if (typeof child === "string" && isPublic && (route || !file.endsWith("production-seed.json"))) {
       const evidence = route ? `${file} route ${route} (${childPath.join(".")})` : `${file} (${childPath.join(".")})`;
-      findings.push(...scanText(child, evidence));
+      findings.push(...scanText(child, evidence, patterns));
     } else if (child && typeof child === "object") {
-      collectPublicDataStrings(child, file, childPath, route, isPublic, findings);
+      collectPublicDataStrings(child, file, childPath, route, isPublic, findings, patterns);
     }
   }
   return findings;
@@ -255,6 +303,107 @@ test("borrower-visible templates and public content contain no scaffolding langu
     findings.push(...collectPublicDataStrings(JSON.parse(read(relativePath)), relativePath));
   }
   assertNoFindings("Borrower-visible scaffolding language remains:", [...new Set(findings)]);
+});
+
+test("public tag display names and descriptions contain no scaffolding language", () => {
+  const relativePath = "mock-data/public-tag-registry.json";
+  const registry = JSON.parse(read(relativePath));
+  const findings = registry.tags.flatMap((tag, index) => ["displayName", "description"].flatMap((field) =>
+    scanText(tag[field], `${relativePath} tag ${tag.id || index} (${field})`),
+  ));
+  assertNoFindings("Public tag copy contains scaffolding language:", [...new Set(findings)]);
+});
+
+test("public tag descriptions are complete, distinct, and borrower-readable", () => {
+  const relativePath = "mock-data/public-tag-registry.json";
+  const registry = JSON.parse(read(relativePath));
+  const descriptions = new Map();
+  const findings = [];
+
+  for (const tag of registry.tags) {
+    const description = String(tag.description || "").trim();
+    const words = description.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) || [];
+    if (words.length < 8 || words.length > 40) findings.push(`${tag.id} has ${words.length} description words`);
+    if (!/[.!?]$/.test(description)) findings.push(`${tag.id} description lacks terminal punctuation`);
+    if (/support borrowers planning to/i.test(description)) findings.push(`${tag.id} uses generic planning copy: "${description}"`);
+    const normalized = description.toLowerCase();
+    if (descriptions.has(normalized)) findings.push(`${tag.id} duplicates ${descriptions.get(normalized)}`);
+    else descriptions.set(normalized, tag.id);
+  }
+
+  assertNoFindings("Public tag descriptions are not borrower-ready:", findings);
+});
+
+test("public search records contain no undefined or null sentinel copy", () => {
+  const relativePath = "mock-data/search-index.json";
+  const searchIndex = JSON.parse(read(relativePath));
+  const findings = searchIndex.records.flatMap((record) => ["title", "preview"].flatMap((field) => {
+    const value = String(record[field] || "");
+    return /\b(?:undefined|null)\b/i.test(value)
+      ? [`${relativePath} record ${record.id} (${field}) "${compact(value)}"`]
+      : [];
+  }));
+
+  assertNoFindings("Public search copy contains serialization sentinels:", findings);
+});
+
+test("generated tag titles, headings, and structured names are grammatical and coherent", () => {
+  const registry = JSON.parse(read("mock-data/public-tag-registry.json"));
+  const findings = [];
+
+  for (const tag of registry.tags) {
+    const relativePath = `site/generated/routes${tag.canonicalRoute}/index.html`;
+    const absolutePath = path.join(repoRoot, ...relativePath.split("/"));
+    if (!fs.existsSync(absolutePath)) {
+      findings.push(`${tag.id} is missing ${relativePath}`);
+      continue;
+    }
+    const html = fs.readFileSync(absolutePath, "utf8");
+    const title = decodeHtmlText(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]).trim();
+    const heading = decodeHtmlText(html.match(/<h1>([\s\S]*?)<\/h1>/i)?.[1]).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    const titleHeading = title.replace(/\s+\|\s+Snap Mortgage$/, "");
+    const jsonSource = html.match(/<script type="application\/ld\+json" data-document-jsonld>([\s\S]*?)<\/script>/i)?.[1];
+    let resourceNames = [];
+    try {
+      const structuredData = JSON.parse(jsonSource || "null");
+      resourceNames = (Array.isArray(structuredData) ? structuredData : [structuredData])
+        .filter((item) => ["CollectionPage", "ItemList"].includes(item?.["@type"]))
+        .map((item) => item.name);
+    } catch {
+      findings.push(`${tag.id} has invalid tag JSON-LD`);
+    }
+
+    if (!heading || titleHeading !== heading) findings.push(`${tag.id} title/H1 mismatch: "${titleHeading}" vs "${heading}"`);
+    if (resourceNames.length !== 2 || resourceNames.some((name) => name !== heading)) {
+      findings.push(`${tag.id} JSON-LD names do not match its H1`);
+    }
+    if ([title, heading, ...resourceNames].some((value) => /\bmortgage\s+mortgage\b/i.test(value))) {
+      findings.push(`${tag.id} repeats "mortgage mortgage" in generated resource copy`);
+    }
+    if (tag.slug === "refinance-a-mortgage" && heading !== "Mortgage refinance resources") {
+      findings.push(`${tag.id} has awkward resource heading "${heading}"`);
+    }
+  }
+
+  assert.equal(
+    findings.length,
+    0,
+    `Generated tag resource copy is not borrower-ready (${findings.length}):\n${findings.slice(0, 30).map((finding) => `- ${finding}`).join("\n")}${findings.length > 30 ? `\n- ...and ${findings.length - 30} more` : ""}`,
+  );
+});
+
+test("canonical seed copy contains no public content-model vocabulary", () => {
+  const relativePath = "mock-data/production-seed.json";
+  const findings = collectPublicDataStrings(
+    JSON.parse(read(relativePath)),
+    relativePath,
+    [],
+    "",
+    false,
+    [],
+    canonicalTaxonomyPatterns,
+  );
+  assertNoFindings("Canonical borrower copy still exposes content-model vocabulary:", [...new Set(findings)]);
 });
 
 test("sample-offer wording appears only inside the marketplace disclosure", () => {

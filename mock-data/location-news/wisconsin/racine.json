@@ -13,9 +13,11 @@
       "title": "Racine, WI home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Racine, WI.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Racine, WI.",
-      "metaDescription": "Racine, WI home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Racine, WI.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Racine, WI.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $166,500.",
         "prior ACS median owner-occupied home value: $108,700.",
-        "ACS median household income: $57,740.",
-        "median monthly owner cost with a mortgage: $1,398.",
-        "change from the prior ACS home-value estimate: 53.2%."
+        "ACS median household income: $57,740."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 53.2,
-          "display": "53.2%",
-          "sourceRecordIds": [
-            "news-racine-wi-affordability-home-values-source-city-home-value-current",
-            "news-racine-wi-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Wisconsin median home value",
           "value": 266500,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Evidence at a glance: the local value, income, and owner-cost baseline",
           "body": [
-            "In Racine, WI, the 2024 ACS reports a median owner-occupied home value of $166,500 and median household income of $57,740; these are separate medians, not the finances of one representative household. The same release reports $1,398 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Racine, WI, reading $166,500, $57,740, and $1,398 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $166,500, $57,740, and $1,398 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "Start with the dated local finding: In Racine, WI, the 2024 ACS reports a median owner-occupied home value of $166,500, median household income of $57,740, and median selected monthly owner costs of $1,398 for owners with a mortgage. Together, those three reference points may help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,398 measure combines recurring ownership expenses in place of real estate taxes alone. For borrower planning, a useful affordability review starts with $166,500, $57,740, and $1,398, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,42 +122,11 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Racine, WI's median home-value estimate increased from $108,700 in the prior ACS period to $166,500 in the current release, a reported change of 53.2%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 53.2% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $108,700 to $166,500 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Racine, WI. Before the 53.2% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-racine-wi-affordability-home-values-source-city-home-value-prior",
-            "news-racine-wi-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
-          "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
-          "body": [
-            "Racine, WI's $166,500 median home-value estimate is below the statewide $266,500 estimate, with a reported city-to-state gap of 37.5%. That 37.5% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Racine, WI. It does not mean every local property is 37.5% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $166,500 and $266,500 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "state-home-value",
-            "state-home-value-gap"
-          ],
-          "sourceRecordIds": [
-            "news-racine-wi-affordability-home-values-source-city-home-value-current",
-            "news-racine-wi-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Where the evidence stops: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $1,398 owner-cost estimate gives Racine, WI borrowers a broader monthly reference than principal and interest alone, while the $57,740 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $57,740 is the owner household at $1,398. The $166,500 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $166,500, $57,740, and $1,398 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $1,398 owner-cost estimate gives Racine, WI borrowers a broader monthly reference than principal and interest alone, while the $57,740 income estimate supplies separate household context.",
+            "Applied to a decision in Racine, WI, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $57,740 is the owner household at $1,398. The $166,500 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. For the decision at hand, keeping $166,500, $57,740, and $1,398 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +140,77 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "vintage-observations",
+          "heading": "Borrower view: read the ACS vintages as separate nominal observations",
           "body": [
-            "Neither $166,500 nor $1,398 determines the value of a specific Racine, WI home, what a borrower will pay each month, or an underwriting result. The $57,740 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 53.2% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $166,500, $1,398, and $57,740 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "The 2019 ACS published $108,700 as Racine, WI's median owner-occupied home-value estimate, while the 2024 ACS published $166,500. In practical terms, these dated nominal observations may help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change.",
+            "Applied to a decision in Racine, WI, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $108,700 attached to 2019 and $166,500 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-racine-wi-affordability-home-values-source-city-home-value-prior",
+            "news-racine-wi-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "state-comparison",
+          "heading": "How the city estimate sits within the state",
+          "body": [
+            "Racine, WI's $166,500 median home-value estimate is below the statewide $266,500 estimate, with a reported city-to-state gap of 37.5%. That 37.5% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Racine, WI. It does not mean every local property is 37.5% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For borrower planning, borrowers can use $166,500 and $266,500 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "state-home-value",
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-racine-wi-affordability-home-values-source-city-home-value-current",
+            "news-racine-wi-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "Evidence limits: what these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $166,500 estimate nor the $1,398 owner-cost median determines the value of a specific Racine, WI home, a borrower's payment, or an underwriting result. For borrower planning, the $57,740 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income.",
+            "In a borrower review centered on Racine, WI, the separate 2019 observation of $108,700 also cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-racine-wi-affordability-home-values-source-city-home-value-current",
+            "news-racine-wi-affordability-home-values-source-city-home-value-prior",
             "news-racine-wi-affordability-home-values-source-city-owner-cost-current",
-            "news-racine-wi-affordability-home-values-source-city-income-current",
-            "news-racine-wi-affordability-home-values-source-city-home-value-prior"
+            "news-racine-wi-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
           "heading": "Build a property-specific comparison",
           "body": [
-            "A practical Racine, WI worksheet can begin with $166,500 as broad value context, $1,398 as a reminder to include recurring ownership expenses, and $57,740 as a local economic reference. After noting those $166,500, $1,398, and $57,740 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 37.5% city-to-state difference is a prompt to keep the analysis local, while the 53.2% period change is a prompt to date every assumption. A licensed professional can use the 37.5% and 53.2% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A useful Racine, WI worksheet can begin with $166,500 as dated value context, $1,398 as a reminder to include recurring ownership expenses, and $57,740 as a local economic reference.",
+            "In a borrower review centered on Racine, WI, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 37.5% city-to-state difference is a prompt to keep the analysis local, while the separate $108,700 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. A licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-racine-wi-affordability-home-values-source-city-home-value-current",
+            "news-racine-wi-affordability-home-values-source-city-home-value-prior",
             "news-racine-wi-affordability-home-values-source-city-owner-cost-current",
             "news-racine-wi-affordability-home-values-source-city-income-current",
-            "news-racine-wi-affordability-home-values-source-state-home-value-current",
-            "news-racine-wi-affordability-home-values-source-city-home-value-prior"
+            "news-racine-wi-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +248,9 @@
               "display": "$1,398"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 53.2,
-              "display": "53.2%"
+              "label": "Wisconsin median home value",
+              "value": 266500,
+              "display": "$266,500"
             }
           ]
         }
@@ -269,43 +262,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$166,500",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$108,700",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$57,740",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,398",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "53.2%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Wisconsin median home value",
               "$266,500",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "37.5%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +314,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "owner-cost-boundary",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-racine-wi-affordability-home-values-source-city-home-value-current",
@@ -452,9 +447,11 @@
       "title": "Racine, WI housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Racine, WI.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Racine, WI.",
-      "metaDescription": "Racine, WI housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Racine, WI.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +469,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 34,848.",
         "occupied housing units: 31,970.",
-        "vacant housing units: 2,878.",
-        "prior ACS vacant housing units: 2,887.",
-        "vacant-unit share of housing stock: 8.3%."
+        "vacant housing units: 2,878."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +573,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Start with the evidence: the size and use of the local housing stock",
           "body": [
-            "Racine, WI's current ACS housing baseline includes 34,848 total housing units, 31,970 occupied units, and 2,878 vacant units. Those counts describe the housing stock across the survey period; they do not say that 2,878 homes were listed for sale or available to rent at one moment. The difference between 34,848 total units and 31,970 occupied units is useful for checking the internal scale of the release, while 2,878 provides the numerator for a more careful vacancy reading. For a borrower researching Racine, WI, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "The local figures answer the first question: Racine, WI's current ACS housing baseline includes 34,848 total housing units, 31,970 occupied units, and 2,878 vacant units. For the decision at hand, those counts may help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 2,878 homes were listed for sale or available to rent at one moment. In practical terms, reading 34,848 total units with 31,970 occupied and 2,878 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -594,9 +590,10 @@
         },
         {
           "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Racine, WI decreased from 2,887 in the prior ACS period to 2,878 in the current release, a reported change of -0.3%. In the current housing stock, 2,878 units equal 8.3% of the 34,848 total. ACS vacancy covers several statuses, so the 8.3% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 2,887 to 2,878 can still prompt better questions about current for-sale and rental inventory in Racine, WI, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Racine, WI decreased from 2,887 in the prior ACS period to 2,878 in the current release, a reported movement of 0.3%. In the current housing stock, 2,878 units equal 8.3% of the 34,848 total.",
+            "ACS vacancy covers several statuses, so the 8.3% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 2,887 to 2,878 can nevertheless prompt better questions about current for-sale and rental inventory in Racine, WI, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +610,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "Among 31,970 occupied units in Racine, WI, the ACS-derived owner share is 60.2% and the renter share is 39.8%, making owner-occupied housing the larger measured tenure group. The 60.2% and 39.8% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Racine, WI. The 60.2% and 39.8% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 31,970 occupied units in Racine, WI, the ACS-derived owner share is 60.2% and the renter share is 39.8%, making owner-occupied housing the larger measured tenure group. In practical terms, the 60.2% and 39.8% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage.",
+            "This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Racine, WI. For the decision at hand, the 60.2% and 39.8% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon in place of used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +627,11 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Racine, WI's ACS median gross rent is $1,033, while renter-occupied units account for 39.8% of occupied housing and owner-occupied units account for 60.2%. The $1,033 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,033 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Racine, WI comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-racine-wi-housing-supply-tenure-source-median-rent",
-            "news-racine-wi-housing-supply-tenure-source-renter-units",
-            "news-racine-wi-housing-supply-tenure-source-occupied-units",
-            "news-racine-wi-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
           "heading": "What the housing-stock evidence cannot show",
           "body": [
-            "The 8.3% vacant-unit share and 60.2% owner share cannot determine competition for a specific Racine, WI listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 34,848 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 8.3% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 2,878 vacant units separate from active inventory and keep the $1,033 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 8.3% vacant-unit share and 60.2% owner share cannot decide competition for a specific Racine, WI listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "Applied to a decision in Racine, WI, likewise, 34,848 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 8.3% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. For the decision at hand, borrowers should therefore keep 2,878 vacant units separate from active inventory and keep the $1,033 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -668,10 +649,29 @@
           ]
         },
         {
-          "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "id": "rent-context",
+          "heading": "Evidence check: use rent as a matched comparison, not a shortcut",
           "body": [
-            "A grounded Racine, WI comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 34,848 total units, a 8.3% vacancy share, and a 60.2% owner share. For renting, replace the $1,033 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 60.2% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 39.8% or 60.2% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "Racine, WI's ACS median gross rent is $1,033, while renter-occupied units account for 39.8% of occupied housing and owner-occupied units account for 60.2%. For borrower planning, the $1,033 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration.",
+            "Comparing $1,033 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Racine, WI comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-racine-wi-housing-supply-tenure-source-median-rent",
+            "news-racine-wi-housing-supply-tenure-source-renter-units",
+            "news-racine-wi-housing-supply-tenure-source-occupied-units",
+            "news-racine-wi-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
+          "id": "matched-options",
+          "heading": "Borrower action: compare current local choices on the same terms",
+          "body": [
+            "A grounded Racine, WI comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 34,848 total units, a vacancy share of 8.3%, and an owner share of 60.2%. For the rental budget, replace the $1,033 median with the actual lease, utilities, deposits, and expected changes. For the ownership budget, keep the 60.2% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 39.8% or 60.2% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +740,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "34,848",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "31,970",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "2,878",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "2,887",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "8.3%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-0.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "60.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "39.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,033",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +976,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Racine, WI labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Racine, WI.",
-      "previewText": "See what changed in Racine, WI, WI's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Racine, WI labor market: latest employment evidence. See what changed in Racine, WI, WI's labor market and why broad employment data cannot determine mortgage.",
+      "previewText": "See what changed in Racine, WI's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Racine, WI's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +999,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 36,608.",
-        "employment: 35,176.",
-        "unemployment: 1,432.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.9%.",
-        "previous-month unemployment rate: 4.8%."
+        "change in unemployment rate from the prior month: -0.9 percentage points.",
+        "change in unemployment rate from a year earlier: -0.1 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1069,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.9,
-          "display": "-0.9%",
+          "display": "-0.9 percentage points",
           "sourceRecordIds": [
             "news-racine-wi-local-labor-market-source-latest-unemployment-rate",
             "news-racine-wi-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1080,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.1,
-          "display": "-0.1%",
+          "display": "-0.1 percentage points",
           "sourceRecordIds": [
             "news-racine-wi-local-labor-market-source-latest-unemployment-rate",
             "news-racine-wi-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1090,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Racine, WI labor force of 36,608, with 35,176 people employed and 1,432 unemployed under the program's definitions. Those three counts belong together: 35,176 plus 1,432 explains the scale behind the published 3.9% unemployment rate. For mortgage planning, the 36,608 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 36,608 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-racine-wi-local-labor-market-source-latest-labor-force",
-            "news-racine-wi-local-labor-market-source-latest-employment",
-            "news-racine-wi-local-labor-market-source-latest-unemployment",
-            "news-racine-wi-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Read the comparison: what changed in the latest month",
           "body": [
-            "Racine, WI's unemployment rate fell from 4.8% in the prior month to 3.9% in the latest month, a change of -0.9%. A -0.9% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,432 unemployment count and 36,608 labor force. The -0.9% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Racine, WI borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The local figures answer the first question: As of May 2026, Racine, WI's unemployment rate fell from 4.8% in April 2026 to 3.9% in May 2026, a change of 0.9 percentage points. For borrower planning, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not reveal that a particular employer is hiring or cutting jobs, and it does not establish one applicant's income stability, mortgage eligibility, or loan price. The release also estimates 1,432 people unemployed within a labor force of 36,608, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,46 +1111,48 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Read the comparison: what changed over the year",
           "body": [
-            "Compared with 4.0% a year earlier, the latest Racine, WI unemployment rate of 3.9% fell by -0.1%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.1% difference still describes a population estimate rather than an individual's job stability. Reading 4.0%, 4.8%, and 3.9% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Racine, WI pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Racine, WI's unemployment rate fell from 4.0% in May 2025 to 3.9%, a change of 0.1 percentage points.",
+            "For borrower planning, that wider window helps show whether Racine, WI's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.9 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Racine, WI or describes the stability of one household's earnings. For mortgage planning in Racine, WI, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Racine, WI's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-racine-wi-local-labor-market-source-yearago-year-ago-rate",
-            "news-racine-wi-local-labor-market-source-previous-previous-rate",
-            "news-racine-wi-local-labor-market-source-latest-unemployment-rate"
+            "news-racine-wi-local-labor-market-source-latest-unemployment-rate",
+            "news-racine-wi-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
-          "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "id": "labor-baseline",
+          "heading": "The counts behind the published rate",
           "body": [
-            "At 3.9%, Racine, WI's unemployment rate summarizes 1,432 unemployed people within a 36,608 labor force; the rate should not be discussed without those counts. The 35,176 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 35,176 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.9% rate attached to 36,608, 35,176, and 1,432 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "For the May 2026 source period, BLS estimated 36,608 people in the Racine, WI labor force, including 35,176 employed and 1,432 unemployed under LAUS definitions. For the decision at hand, the employment and unemployment counts belong together because they establish the scale behind the published 3.9% rate. For mortgage planning, that city-level labor force describes the surrounding economy instead of the income or employment record of an applicant. In practical terms, it can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should, as a result, follow the change summary instead of replacing the borrower answer."
           ],
           "evidenceFactIds": [
-            "unemployment-rate",
-            "unemployment",
             "labor-force",
-            "employment"
+            "employment",
+            "unemployment",
+            "unemployment-rate"
           ],
           "sourceRecordIds": [
-            "news-racine-wi-local-labor-market-source-latest-unemployment-rate",
-            "news-racine-wi-local-labor-market-source-latest-unemployment",
             "news-racine-wi-local-labor-market-source-latest-labor-force",
-            "news-racine-wi-local-labor-market-source-latest-employment"
+            "news-racine-wi-local-labor-market-source-latest-employment",
+            "news-racine-wi-local-labor-market-source-latest-unemployment",
+            "news-racine-wi-local-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
           "id": "borrower-boundary",
           "heading": "Labor statistics are not an income review",
           "body": [
-            "Neither 35,176 employed people nor a 3.9% unemployment rate tells a lender what one Racine, WI applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.9% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.1% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 35,176 employed people nor an unemployment rate of 3.9% tells a lender what an applicant in Racine, WI earns, whether that income is eligible, or whether it is likely to continue. For borrower planning, the monthly movement of 0.9 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "In a borrower review centered on Racine, WI, the 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating the year-over-year movement of 0.1 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1174,10 +1168,31 @@
           ]
         },
         {
-          "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "id": "counts-and-rate",
+          "heading": "Why the rate needs its underlying counts",
           "body": [
-            "A practical next step for a Racine, WI borrower is to note the latest 3.9% unemployment rate and the -0.1% year-over-year change, then move immediately to the records that describe the household. After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 36,608 local labor force and 35,176 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.9% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Racine, WI's 3.9% LAUS rate in its proper role as dated local economic context."
+            "At 3.9%, Racine, WI's unemployment rate summarizes 1,432 unemployed people within a labor force of 36,608; the rate should not be discussed without those counts.",
+            "For the next comparison in Racine, WI, the 35,176 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 35,176 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For borrower planning, keeping the 3.9% rate attached to 36,608, 35,176, and 1,432 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "unemployment",
+            "labor-force",
+            "employment"
+          ],
+          "sourceRecordIds": [
+            "news-racine-wi-local-labor-market-source-latest-unemployment-rate",
+            "news-racine-wi-local-labor-market-source-latest-unemployment",
+            "news-racine-wi-local-labor-market-source-latest-labor-force",
+            "news-racine-wi-local-labor-market-source-latest-employment"
+          ]
+        },
+        {
+          "id": "documentation-next-step",
+          "heading": "Borrower action: turn the trend into documentation questions",
+          "body": [
+            "A useful next step for borrowers in Racine, WI is to note the latest 3.9% unemployment rate and the year-over-year movement of 0.1 percentage points, then move immediately to the records that describe the household.",
+            "After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 36,608 local labor force and 35,176 employment count can frame the economic conversation, but they should not alter verified borrower inputs. For borrower planning, the monthly movement of 0.9 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Racine, WI's 3.9% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1259,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "36,608",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "35,176",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,432",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.9%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.0%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.9%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.9 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-0.1%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1324,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1473,11 @@
       "title": "Racine, WI loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Racine, WI, including unit-count differences and important limits.",
-      "metaDescription": "Racine, WI loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Racine, WI, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Racine, WI, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1497,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $541,287.",
-        "four-unit FHA limit: $1,041,125.",
-        "difference between one-unit conforming and FHA limits: $291,463."
+        "one-unit FHA limit: $541,287."
       ],
       "evidenceFacts": [
         {
@@ -1535,7 +1560,7 @@
           "id": "published-limits",
           "heading": "The published one-unit limits for the matched area",
           "body": [
-            "Racine, WI is connected to Racine County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Racine, WI, starting with Racine County keeps the limits attached to the county or county-equivalent area used in the official files. A Racine, WI borrower still needs to confirm the selected property's location and legal unit count, because the relevant Racine County row follows the property rather than the city label or mailing address alone. Around Racine, WI, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Racine County as Racine, WI's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
+            "Racine, WI is connected to Racine County for this 2026 source comparison. For the decision at hand, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Racine, WI, starting with Racine County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Racine, WI still need to confirm the selected property's location and legal unit count, because the relevant Racine County row follows the property instead of the city label or mailing address alone. Around Racine, WI, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Racine County as Racine, WI's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,26 +1572,11 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
-          "body": [
-            "For the matched Racine, WI area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. The $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-racine-wi-county-loan-limits-source-conforming-oneunit",
-            "news-racine-wi-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Borrower view: unit count changes the published ceiling",
           "body": [
-            "Racine County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Racine, WI, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "In borrower planning for Racine, WI, Racine County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Racine, WI, a legal unit count should be verified from reliable property information before a multi-unit limit is used. For borrower planning, the $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1583,9 +1593,26 @@
         },
         {
           "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
+          "heading": "Keep the boundary clear: a limit is a category boundary, not borrowing power",
           "body": [
-            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Racine, WI household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Racine, WI or reduces household debts.",
+            "For borrowers reviewing evidence from Racine, WI, a borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. In practical terms, regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules in place of the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-racine-wi-county-loan-limits-source-conforming-oneunit",
+            "news-racine-wi-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "one-unit-comparison",
+          "heading": "Read the comparison: how the one-unit program boundaries compare",
+          "body": [
+            "For the matched Racine, WI area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. For the decision at hand, the $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. In practical terms, even when $291,463 is material, it cannot decide approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1601,7 +1628,7 @@
           "id": "limit-boundaries",
           "heading": "What the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Racine, WI is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Racine, WI's connection to Racine County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Racine, WI is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. For borrower planning, that is why Racine, WI's connection to Racine County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1618,9 +1645,9 @@
         },
         {
           "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "heading": "Put the evidence to work: verify the property before comparing products",
           "body": [
-            "A useful Racine, WI next step is to document the property address, Racine County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Racine, WI next step is to document the property address, Racine County geography, legal unit count, price, down-payment plan, and expected base loan amount. For the decision at hand, compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. In practical terms, the $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1715,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,041,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$291,463",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1764,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "unit-count",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

@@ -13,9 +13,11 @@
       "title": "Walnut Creek, CA home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Walnut Creek, CA.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Walnut Creek, CA.",
-      "metaDescription": "Walnut Creek, CA home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Walnut.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Walnut Creek, CA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $1,057,300.",
         "prior ACS median owner-occupied home value: $793,100.",
-        "ACS median household income: $130,432.",
-        "median monthly owner cost with a mortgage: $3,764.",
-        "change from the prior ACS home-value estimate: 33.3%."
+        "ACS median household income: $130,432."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 33.3,
-          "display": "33.3%",
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "California median home value",
           "value": 734700,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Start with the evidence: the local value, income, and owner-cost baseline",
           "body": [
-            "In Walnut Creek, CA, the 2024 ACS reports a median owner-occupied home value of $1,057,300 and median household income of $130,432; these are separate medians, not the finances of one representative household. The same release reports $3,764 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Walnut Creek, CA, reading $1,057,300, $130,432, and $3,764 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $1,057,300, $130,432, and $3,764 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The local figures answer the first question: In Walnut Creek, CA, the 2024 ACS reports a median owner-occupied home value of $1,057,300, median household income of $130,432, and median selected monthly owner costs of $3,764 for owners with a mortgage. For borrower planning, together, those three reference points can still help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $3,764 measure combines recurring ownership expenses instead of real estate taxes alone. A useful affordability review starts with $1,057,300, $130,432, and $3,764, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,42 +122,11 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Walnut Creek, CA's median home-value estimate increased from $793,100 in the prior ACS period to $1,057,300 in the current release, a reported change of 33.3%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 33.3% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $793,100 to $1,057,300 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Walnut Creek, CA. Before the 33.3% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior",
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
-          "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
-          "body": [
-            "Walnut Creek, CA's $1,057,300 median home-value estimate is above the statewide $734,700 estimate, with a reported city-to-state gap of 43.9%. That 43.9% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Walnut Creek, CA. It does not mean every local property is 43.9% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $1,057,300 and $734,700 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "state-home-value",
-            "state-home-value-gap"
-          ],
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
-            "news-walnut-creek-ca-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Evidence limits: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $3,764 owner-cost estimate gives Walnut Creek, CA borrowers a broader monthly reference than principal and interest alone, while the $130,432 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $130,432 is the owner household at $3,764. The $1,057,300 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $1,057,300, $130,432, and $3,764 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $3,764 owner-cost estimate gives Walnut Creek, CA borrowers a broader monthly reference than principal and interest alone, while the $130,432 income estimate supplies separate household context. For the decision at hand, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $130,432 is the owner household at $3,764.",
+            "For borrowers reviewing evidence from Walnut Creek, CA, the $1,057,300 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. In practical terms, keeping $1,057,300, $130,432, and $3,764 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +140,75 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "vintage-observations",
+          "heading": "Evidence check: read the ACS vintages as separate nominal observations",
           "body": [
-            "Neither $1,057,300 nor $3,764 determines the value of a specific Walnut Creek, CA home, what a borrower will pay each month, or an underwriting result. The $130,432 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 33.3% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $1,057,300, $3,764, and $130,432 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "The 2019 ACS published $793,100 as Walnut Creek, CA's median owner-occupied home-value estimate, while the 2024 ACS published $1,057,300. For the decision at hand, these dated nominal observations may still help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. In practical terms, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $793,100 attached to 2019 and $1,057,300 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior",
+            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "state-comparison",
+          "heading": "What the comparison adds: how the city estimate sits within the state",
+          "body": [
+            "Walnut Creek, CA's $1,057,300 median home-value estimate is above the statewide $734,700 estimate, with a reported city-to-state gap of 43.9%. For borrower planning, that 43.9% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Walnut Creek, CA. It does not mean every local property is 43.9% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. Borrowers can use $1,057,300 and $734,700 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "state-home-value",
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
+            "news-walnut-creek-ca-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "What these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $1,057,300 estimate nor the $3,764 owner-cost median determines the value of a specific Walnut Creek, CA home, a borrower's payment, or an underwriting result. The $130,432 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income.",
+            "For the next comparison in Walnut Creek, CA, the separate 2019 observation of $793,100 also cannot forecast the next market move or establish a safe purchase horizon. For borrower planning, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
+            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior",
             "news-walnut-creek-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-walnut-creek-ca-affordability-home-values-source-city-income-current",
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior"
+            "news-walnut-creek-ca-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Borrower action: build a property-specific comparison",
           "body": [
-            "A practical Walnut Creek, CA worksheet can begin with $1,057,300 as broad value context, $3,764 as a reminder to include recurring ownership expenses, and $130,432 as a local economic reference. After noting those $1,057,300, $3,764, and $130,432 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 43.9% city-to-state difference is a prompt to keep the analysis local, while the 33.3% period change is a prompt to date every assumption. A licensed professional can use the 43.9% and 33.3% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A practical Walnut Creek, CA worksheet can begin with $1,057,300 as dated value context, $3,764 as a reminder to include recurring ownership expenses, and $130,432 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 43.9% city-to-state difference is a prompt to keep the analysis local, while the separate $793,100 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For borrower planning, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
+            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior",
             "news-walnut-creek-ca-affordability-home-values-source-city-owner-cost-current",
             "news-walnut-creek-ca-affordability-home-values-source-city-income-current",
-            "news-walnut-creek-ca-affordability-home-values-source-state-home-value-current",
-            "news-walnut-creek-ca-affordability-home-values-source-city-home-value-prior"
+            "news-walnut-creek-ca-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +246,9 @@
               "display": "$3,764"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 33.3,
-              "display": "33.3%"
+              "label": "California median home value",
+              "value": 734700,
+              "display": "$734,700"
             }
           ]
         }
@@ -269,43 +260,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$1,057,300",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$793,100",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$130,432",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$3,764",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "33.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "California median home value",
               "$734,700",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap above the state estimate",
               "43.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +312,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "owner-cost-boundary",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-walnut-creek-ca-affordability-home-values-source-city-home-value-current",
@@ -452,9 +445,11 @@
       "title": "Walnut Creek, CA housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Walnut Creek, CA.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Walnut Creek, CA.",
-      "metaDescription": "Walnut Creek, CA housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Walnut Creek, CA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +467,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 34,389.",
         "occupied housing units: 33,072.",
-        "vacant housing units: 1,317.",
-        "prior ACS vacant housing units: 1,767.",
-        "vacant-unit share of housing stock: 3.8%."
+        "vacant housing units: 1,317."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +571,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Evidence at a glance: the size and use of the local housing stock",
           "body": [
-            "Walnut Creek, CA's current ACS housing baseline includes 34,389 total housing units, 33,072 occupied units, and 1,317 vacant units. Those counts describe the housing stock across the survey period; they do not say that 1,317 homes were listed for sale or available to rent at one moment. The difference between 34,389 total units and 33,072 occupied units is useful for checking the internal scale of the release, while 1,317 provides the numerator for a more careful vacancy reading. For a borrower researching Walnut Creek, CA, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Start with the dated local finding: Walnut Creek, CA's current ACS housing baseline includes 34,389 total housing units, 33,072 occupied units, and 1,317 vacant units. In practical terms, those counts may help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 1,317 homes were listed for sale or available to rent at one moment. For the decision at hand, reading 34,389 total units with 33,072 occupied and 1,317 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +587,29 @@
           ]
         },
         {
-          "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "id": "rent-context",
+          "heading": "Planning context: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Vacant units in Walnut Creek, CA decreased from 1,767 in the prior ACS period to 1,317 in the current release, a reported change of -25.5%. In the current housing stock, 1,317 units equal 3.8% of the 34,389 total. ACS vacancy covers several statuses, so the 3.8% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 1,767 to 1,317 can still prompt better questions about current for-sale and rental inventory in Walnut Creek, CA, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Walnut Creek, CA's ACS median gross rent is $2,680, while renter-occupied units account for 35.6% of occupied housing and owner-occupied units account for 64.4%. The $2,680 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $2,680 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For borrower planning, a more useful Walnut Creek, CA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-walnut-creek-ca-housing-supply-tenure-source-median-rent",
+            "news-walnut-creek-ca-housing-supply-tenure-source-renter-units",
+            "news-walnut-creek-ca-housing-supply-tenure-source-occupied-units",
+            "news-walnut-creek-ca-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
+          "id": "vacancy-comparison",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
+          "body": [
+            "Vacant units in Walnut Creek, CA decreased from 1,767 in the prior ACS period to 1,317 in the current release, a reported movement of 25.5%.",
+            "In the current housing stock, 1,317 units equal 3.8% of the 34,389 total. ACS vacancy covers several statuses, so the 3.8% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For borrower planning, the movement from 1,767 to 1,317 may still prompt better questions about current for-sale and rental inventory in Walnut Creek, CA, provided those questions are answered with timely listing and property data rather than the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +626,9 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "Among 33,072 occupied units in Walnut Creek, CA, the ACS-derived owner share is 64.4% and the renter share is 35.6%, making owner-occupied housing the larger measured tenure group. The 64.4% and 35.6% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Walnut Creek, CA. The 64.4% and 35.6% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 33,072 occupied units in Walnut Creek, CA, the ACS-derived owner share is 64.4% and the renter share is 35.6%, making owner-occupied housing the larger measured tenure group. For the decision at hand, the 64.4% and 35.6% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Walnut Creek, CA. In practical terms, the 64.4% and 35.6% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +642,11 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Walnut Creek, CA's ACS median gross rent is $2,680, while renter-occupied units account for 35.6% of occupied housing and owner-occupied units account for 64.4%. The $2,680 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $2,680 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Walnut Creek, CA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-housing-supply-tenure-source-median-rent",
-            "news-walnut-creek-ca-housing-supply-tenure-source-renter-units",
-            "news-walnut-creek-ca-housing-supply-tenure-source-occupied-units",
-            "news-walnut-creek-ca-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Evidence limits: what the housing-stock evidence cannot show",
           "body": [
-            "The 3.8% vacant-unit share and 64.4% owner share cannot determine competition for a specific Walnut Creek, CA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 34,389 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 3.8% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 1,317 vacant units separate from active inventory and keep the $2,680 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 3.8% vacant-unit share and 64.4% owner share does not determine competition for a specific Walnut Creek, CA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "For borrowers reviewing evidence from Walnut Creek, CA, likewise, 34,389 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 3.8% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. In practical terms, borrowers should, as a result, keep 1,317 vacant units separate from active inventory and keep the $2,680 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +665,9 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Borrower action: compare current local choices on the same terms",
           "body": [
-            "A grounded Walnut Creek, CA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 34,389 total units, a 3.8% vacancy share, and a 64.4% owner share. For renting, replace the $2,680 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 64.4% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 35.6% or 64.4% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Walnut Creek, CA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 34,389 total units, a vacancy share of 3.8%, and an owner share of 64.4%. For renting, replace the $2,680 median with the actual lease, utilities, deposits, and expected changes. For the ownership budget, keep the 64.4% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For borrower planning, the resulting worksheet will not turn 35.6% or 64.4% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +736,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "34,389",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "33,072",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "1,317",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "1,767",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "3.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-25.5%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "64.4%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "35.6%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$2,680",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +808,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "rent-context",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +972,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Walnut Creek, CA labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Walnut Creek, CA.",
-      "previewText": "See what changed in Walnut Creek, CA, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Walnut Creek, CA labor market: latest employment evidence. See what changed in Walnut Creek, CA, CA's labor market and why broad employment data cannot.",
+      "previewText": "See what changed in Walnut Creek, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Walnut Creek, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +995,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 33,347.",
-        "employment: 32,063.",
-        "unemployment: 1,284.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.9%.",
-        "previous-month unemployment rate: 4.0%."
+        "change in unemployment rate from the prior month: -0.1 percentage points.",
+        "change in unemployment rate from a year earlier: -0.2 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1065,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.1,
-          "display": "-0.1%",
+          "display": "-0.1 percentage points",
           "sourceRecordIds": [
             "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate",
             "news-walnut-creek-ca-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1076,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.2,
-          "display": "-0.2%",
+          "display": "-0.2 percentage points",
           "sourceRecordIds": [
             "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate",
             "news-walnut-creek-ca-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1086,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Walnut Creek, CA labor force of 33,347, with 32,063 people employed and 1,284 unemployed under the program's definitions. Those three counts belong together: 32,063 plus 1,284 explains the scale behind the published 3.9% unemployment rate. For mortgage planning, the 33,347 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 33,347 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-local-labor-market-source-latest-labor-force",
-            "news-walnut-creek-ca-local-labor-market-source-latest-employment",
-            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment",
-            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Comparison view: what changed in the latest month",
           "body": [
-            "Walnut Creek, CA's unemployment rate fell from 4.0% in the prior month to 3.9% in the latest month, a change of -0.1%. A -0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,284 unemployment count and 33,347 labor force. The -0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Walnut Creek, CA borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "Start with the dated local finding: As of May 2026, Walnut Creek, CA's unemployment rate fell from 4.0% in April 2026 to 3.9% in May 2026, a change of 0.1 percentage points. That movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it does not establish one applicant's income stability, mortgage eligibility, or loan price. For borrower planning, the release also estimates 1,284 people unemployed within a labor force of 33,347, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,46 +1107,47 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What the comparison adds: what changed over the year",
           "body": [
-            "Compared with 4.1% a year earlier, the latest Walnut Creek, CA unemployment rate of 3.9% fell by -0.2%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.2% difference still describes a population estimate rather than an individual's job stability. Reading 4.1%, 4.0%, and 3.9% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Walnut Creek, CA pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Walnut Creek, CA's unemployment rate fell from 4.1% in May 2025 to 3.9%, a change of 0.2 percentage points.",
+            "That wider window helps show whether Walnut Creek, CA's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.1 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Walnut Creek, CA or describes the stability of one household's earnings. For mortgage planning in Walnut Creek, CA, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Walnut Creek, CA's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-walnut-creek-ca-local-labor-market-source-yearago-year-ago-rate",
-            "news-walnut-creek-ca-local-labor-market-source-previous-previous-rate",
+            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-walnut-creek-ca-local-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "Start with the evidence: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 33,347 people in the Walnut Creek, CA labor force, including 32,063 employed and 1,284 unemployed under LAUS definitions. In practical terms, the employment and unemployment counts belong together because they establish the scale behind the published 3.9% rate. For mortgage planning, that city-level labor force describes the surrounding economy rather than the income or employment record of an applicant. For the decision at hand, it can still help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-walnut-creek-ca-local-labor-market-source-latest-labor-force",
+            "news-walnut-creek-ca-local-labor-market-source-latest-employment",
+            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment",
             "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
-          "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
-          "body": [
-            "At 3.9%, Walnut Creek, CA's unemployment rate summarizes 1,284 unemployed people within a 33,347 labor force; the rate should not be discussed without those counts. The 32,063 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 32,063 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.9% rate attached to 33,347, 32,063, and 1,284 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
-          ],
-          "evidenceFactIds": [
-            "unemployment-rate",
-            "unemployment",
-            "labor-force",
-            "employment"
-          ],
-          "sourceRecordIds": [
-            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate",
-            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment",
-            "news-walnut-creek-ca-local-labor-market-source-latest-labor-force",
-            "news-walnut-creek-ca-local-labor-market-source-latest-employment"
-          ]
-        },
-        {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Evidence limits: labor statistics are not an income review",
           "body": [
-            "Neither 32,063 employed people nor a 3.9% unemployment rate tells a lender what one Walnut Creek, CA applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.2% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 32,063 employed people nor an unemployment rate of 3.9% tells a lender what an applicant in Walnut Creek, CA earns, whether that income is eligible, or whether it is likely to continue. The monthly movement of 0.1 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For borrower planning, that boundary protects borrowers from treating the year-over-year movement of 0.2 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1174,10 +1163,30 @@
           ]
         },
         {
-          "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "id": "counts-and-rate",
+          "heading": "Evidence check: why the rate needs its underlying counts",
           "body": [
-            "A practical next step for a Walnut Creek, CA borrower is to note the latest 3.9% unemployment rate and the -0.2% year-over-year change, then move immediately to the records that describe the household. After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 33,347 local labor force and 32,063 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Walnut Creek, CA's 3.9% LAUS rate in its proper role as dated local economic context."
+            "At 3.9%, Walnut Creek, CA's unemployment rate summarizes 1,284 unemployed people within a labor force of 33,347; the rate should not be discussed without those counts. For borrower planning, the 32,063 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 32,063 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.9% rate attached to 33,347, 32,063, and 1,284 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "unemployment",
+            "labor-force",
+            "employment"
+          ],
+          "sourceRecordIds": [
+            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-walnut-creek-ca-local-labor-market-source-latest-unemployment",
+            "news-walnut-creek-ca-local-labor-market-source-latest-labor-force",
+            "news-walnut-creek-ca-local-labor-market-source-latest-employment"
+          ]
+        },
+        {
+          "id": "documentation-next-step",
+          "heading": "Next step: turn the trend into documentation questions",
+          "body": [
+            "A practical next step for borrowers in Walnut Creek, CA is to note the latest 3.9% unemployment rate and the year-over-year movement of 0.2 percentage points, then move immediately to the records that describe the household. After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path.",
+            "The 33,347 local labor force and 32,063 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The monthly movement of 0.1 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Walnut Creek, CA's 3.9% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1253,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "33,347",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "32,063",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,284",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.9%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.0%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.1%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-0.2%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-0.2 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1318,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1467,11 @@
       "title": "Walnut Creek, CA loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Walnut Creek, CA, including unit-count differences and important limits.",
-      "metaDescription": "Walnut Creek, CA loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Walnut Creek, CA, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Walnut Creek, CA, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1491,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $1,249,125.",
         "four-unit conforming limit: $2,402,625.",
-        "one-unit FHA limit: $1,249,125.",
-        "four-unit FHA limit: $2,402,625.",
-        "difference between one-unit conforming and FHA limits: $0."
+        "one-unit FHA limit: $1,249,125."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1552,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Where the evidence stops: the published one-unit limits for the matched area",
           "body": [
-            "Walnut Creek, CA is connected to Contra Costa County for this 2026 source comparison. The published one-unit conforming limit is $1,249,125, while the published one-unit FHA limit is $1,249,125. Those figures organize different program categories; $1,249,125 is not a conventional loan offer, and $1,249,125 is not an FHA eligibility finding. For Walnut Creek, CA, starting with Contra Costa County keeps the limits attached to the county or county-equivalent area used in the official files. A Walnut Creek, CA borrower still needs to confirm the selected property's location and legal unit count, because the relevant Contra Costa County row follows the property rather than the city label or mailing address alone. Around Walnut Creek, CA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Contra Costa County as Walnut Creek, CA's confirmed county row before comparing the $1,249,125 and $1,249,125 program boundaries."
+            "The published evidence provides the starting point: Walnut Creek, CA is connected to Contra Costa County for this 2026 source comparison. In practical terms, the published one-unit conforming limit is $1,249,125, while the published one-unit FHA limit is $1,249,125. Those figures organize different program categories; $1,249,125 is not a conventional loan offer, and $1,249,125 is not an FHA eligibility finding. For Walnut Creek, CA, starting with Contra Costa County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Walnut Creek, CA still need to confirm the selected property's location and legal unit count, because the relevant Contra Costa County row follows the property rather than the city label or mailing address alone. Around Walnut Creek, CA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Contra Costa County as Walnut Creek, CA's confirmed county row before comparing the $1,249,125 and $1,249,125 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1567,10 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Walnut Creek, CA area, the difference between the $1,249,125 one-unit conforming limit and the $1,249,125 one-unit FHA limit is $0. In this release the two one-unit figures are equal at $1,249,125, so the comparison does not create a larger published boundary for either program. A needed loan amount can be compared with $1,249,125 and $1,249,125 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $0 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Walnut Creek, CA area, the difference between the $1,249,125 one-unit conforming limit and the $1,249,125 one-unit FHA limit is $0. In this release the two one-unit figures are equal at $1,249,125, so the comparison does not create a larger published boundary for either program.",
+            "Applied to a decision in Walnut Creek, CA, a needed loan amount can be compared with $1,249,125 and $1,249,125 only after price, down payment, financed items, and the applicable base-loan definition are established. For the decision at hand, even when $0 is material, it does not determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1564,9 +1584,10 @@
         },
         {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Evidence check: unit count changes the published ceiling",
           "body": [
-            "Contra Costa County's conforming limit rises from $1,249,125 for one unit to $2,402,625 for four units, while the FHA figures move from $1,249,125 to $2,402,625. The higher $2,402,625 and $2,402,625 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Walnut Creek, CA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $2,402,625 and $2,402,625 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "As local context for Walnut Creek, CA, Contra Costa County's conforming limit rises from $1,249,125 for one unit to $2,402,625 for four units, while the FHA figures move from $1,249,125 to $2,402,625. For borrower planning, the higher $2,402,625 and $2,402,625 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Walnut Creek, CA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $2,402,625 and $2,402,625 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1585,7 +1606,8 @@
           "id": "category-boundary",
           "heading": "A limit is a category boundary, not borrowing power",
           "body": [
-            "The $1,249,125 conforming ceiling and $1,249,125 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Walnut Creek, CA household's income or reduces its debts. A borrower seeking less than $1,249,125 can still have important conventional requirements to review, and a request below $1,249,125 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $0 program gap is therefore best used to route questions, not to rank products. Regardless of the $0 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $1,249,125 conforming ceiling and $1,249,125 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Walnut Creek, CA or reduces household debts. In practical terms, a borrower seeking less than $1,249,125 can nevertheless have important conventional requirements to review, and a request below $1,249,125 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis.",
+            "Applied to a decision in Walnut Creek, CA, the $0 program gap is therefore best used to route questions, not to rank products. For the decision at hand, regardless of the $0 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1601,7 +1623,8 @@
           "id": "limit-boundaries",
           "heading": "What the county limits cannot decide",
           "body": [
-            "Neither $2,402,625 nor $2,402,625 indicates what a four-unit property in Walnut Creek, CA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $1,249,125 and $1,249,125 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $1,249,125 and $1,249,125 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Walnut Creek, CA's connection to Contra Costa County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $2,402,625 nor $2,402,625 indicates what a four-unit property in Walnut Creek, CA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For borrower planning, the one-unit $1,249,125 and $1,249,125 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval.",
+            "The $1,249,125 and $1,249,125 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Walnut Creek, CA's connection to Contra Costa County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1620,7 +1643,8 @@
           "id": "verify-next",
           "heading": "Verify the property before comparing products",
           "body": [
-            "A useful Walnut Creek, CA next step is to document the property address, Contra Costa County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $1,249,125 and $1,249,125 for a one-unit property, or with $2,402,625 and $2,402,625 only when the four-unit category is actually applicable. After the $1,249,125 and $1,249,125 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $1,249,125 conforming figure and $1,249,125 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $0 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Walnut Creek, CA next step is to document the property address, Contra Costa County geography, legal unit count, price, down-payment plan, and expected base loan amount. In practical terms, compare that amount with $1,249,125 and $1,249,125 for a one-unit property, or with $2,402,625 and $2,402,625 only when the four-unit category is actually applicable. After the $1,249,125 and $1,249,125 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option.",
+            "Applied to a decision in Walnut Creek, CA, the $1,249,125 conforming figure and $1,249,125 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $0 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1712,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$1,249,125",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$2,402,625",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$1,249,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$2,402,625",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$0",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

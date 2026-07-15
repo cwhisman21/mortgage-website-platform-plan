@@ -24,6 +24,8 @@ test("calculator hub preserves the five canonical calculator destinations", () =
 });
 
 test("calculator hub renders the approved editorial orbit and scenario stage structure", () => {
+  assert.match(appSource, /<div class="calculator-hub-page">/);
+  assert.doesNotMatch(appSource, /<main class="calculator-hub-page">/);
   for (const className of [
     "calculator-hub-page",
     "calculator-hub-intro",
@@ -44,14 +46,16 @@ test("calculator hub renders the approved editorial orbit and scenario stage str
 
 test("calculator cards remain whole-card links with canonical field summaries", () => {
   assert.match(appSource, /<a class="calculator-hub-card[^>]+data-calculator-id=/);
-  assert.match(appSource, /calculator\.captures\.slice\(0, 5\)\.join/);
+  assert.match(appSource, /calculator\.captures\.slice\(0, 5\)\.map\(humanizePublicLabel\)\.join/);
+  assert.doesNotMatch(appSource, /calculator\.captures\.slice\(0, 5\)\.join/);
   assert.doesNotMatch(appSource, /calculator-hub-card[\s\S]{0,800}<button/);
 });
 
 test("prequalification CTA uses canonical copy and safe sticky mobile behavior", () => {
-  assert.match(appSource, /Start a prequalification conversation/);
-  assert.match(appSource, /Organize the borrower, property, and timing details a licensed loan officer may need to review next steps\./);
-  assert.match(appSource, /Start prequalification/);
+  assert.match(appSource, /Review prequalification details/);
+  assert.match(appSource, /Organize the borrower, property, and timing details a lender may need to review next steps\./);
+  assert.match(appSource, />Review prequalification/);
+  assert.doesNotMatch(appSource, /Start a prequalification conversation|>Start prequalification|licensed loan officer/i);
 
   assert.match(stylesSource, /@media\s*\(max-width:\s*760px\)[\s\S]*\.calculator-hub-prequal\s*\{[\s\S]*position:\s*fixed/);
   assert.match(stylesSource, /padding-bottom:\s*calc\([^;]*env\(safe-area-inset-bottom\)/);

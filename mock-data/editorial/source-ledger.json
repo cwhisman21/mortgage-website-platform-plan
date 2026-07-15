@@ -10,6 +10,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States national conventional benchmark",
       "claimSupported": "National 30-year and 15-year fixed-rate benchmark context, not a personalized or local quote.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "National survey averages are not Snap offers, APRs, personalized rates, local quotes, or borrower-specific payment terms.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -21,6 +24,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "FHFA HPI geographies including state, MSA, county, ZIP Code, and tract where available",
       "claimSupported": "Dated home-price trend context that must retain its published geography.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The repeat-sales index is not a median sale price, listing inventory measure, city forecast, property valuation, or appraisal; recent observations may be revised.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -32,6 +38,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Supported metropolitan statistical areas and divisions in the FHFA quarterly report",
       "claimSupported": "Quarterly MSA home-price trend context through 2026 Q1; not a city-level listing measure or individual property valuation.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The repeat-sales index must retain its published MSA or division and period; it is not city inventory, a median sale price, a forecast, or a property valuation.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -43,6 +52,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States conventional loans subject to Fannie Mae project standards",
       "claimSupported": "Fannie Mae project eligibility and lender project-review framework; not a universal rule for every condo loan or buyer due-diligence question.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This framework applies only to loans and projects subject to Fannie Mae standards; lender, product, project, and buyer due-diligence requirements may differ.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -54,6 +66,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States conventional condo loans subject to Fannie Mae full project review",
       "claimSupported": "Documents and project characteristics evaluated in Fannie Mae's full-review process; lender and product requirements must be confirmed for the proposed loan.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The full-review process is not universal to every condo transaction; the proposed lender must confirm the applicable review path and current requirements.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -65,6 +80,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States conventional loans subject to Fannie Mae income documentation standards",
       "claimSupported": "Fannie Mae's individual self-employment documentation framework; jumbo and lender-specific requirements require separate confirmation.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The guidance applies to qualifying conventional loans under Fannie Mae standards and does not establish a universal jumbo or lender-specific document list.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -76,6 +94,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States conventional loans subject to Fannie Mae business-income documentation standards",
       "claimSupported": "Fannie Mae's business self-employment documentation framework; applicable documents depend on the borrower, business, loan, and lender review.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The guidance applies to qualifying conventional loans under Fannie Mae standards; required records still depend on the borrower, business, transaction, and lender review.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -87,6 +108,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States conventional loans subject to Fannie Mae employment-income standards",
       "claimSupported": "Fannie Mae's framework for qualifying income documented with an employment offer or contract; applicability and timing require lender confirmation.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The framework applies only when current Fannie Mae requirements are met; the lender must confirm eligibility, documentation, timing, and all other underwriting conditions.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -98,6 +122,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States FHA Single Family Housing program",
       "claimSupported": "Official FHA borrower, property, appraisal, mortgage-insurance, and lender policy framework, subject to the current handbook version and lender review.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Current handbook provisions and incorporated updates control; the source does not guarantee approval, terms, property acceptance, or the absence of lender overlays.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -109,6 +136,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Borrower-facing FHA down-payment, mortgage-insurance, and loan-comparison guidance; final eligibility and terms require lender review.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This is general consumer education, not a current lender offer, eligibility decision, mortgage-insurance quote, approval, or commitment to lend.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -116,10 +146,13 @@
       "publisher": "Consumer Financial Protection Bureau",
       "title": "Compare Loan Estimates",
       "url": "https://www.consumerfinance.gov/owning-a-home/compare/compare-loan-estimates/",
-      "dataPeriod": "Consumer guidance accessed 2026-07-13",
+      "dataPeriod": "Page modified 2024-12-12; current as reviewed 2026-07-13",
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Matched Loan Estimate comparison of lender-controlled costs, loan terms, monthly payments, prepaids, and initial escrow amounts.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Comparisons require matching loan assumptions and dates; taxes and insurance are not lender-controlled, and the guidance is not a quote or Loan Estimate.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -131,6 +164,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Loan-offer comparison across interest rate, payment, closing costs, cash to close, and longer-term borrowing cost.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The toolkit is general education and does not supply current pricing, a personalized comparison, a Loan Estimate, an eligibility result, or approval.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -142,6 +178,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States county and county-equivalent limits",
       "claimSupported": "2026 conforming baseline and high-cost loan-limit comparisons.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "National baseline and ceiling values are not a local county limit; local use requires the official county file and county-equivalent identifier, including special-area rules.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -153,6 +192,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "County and metropolitan statistical area",
       "claimSupported": "FHA Forward loan limits that must be checked by county or MSA.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "National FHA floor and ceiling values cannot substitute for the applicable county or MSA limit; the current lookup and case-number effective rules control.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -164,6 +206,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States federal VA loan program",
       "claimSupported": "VA guaranty, occupancy, Certificate of Eligibility, funding-fee, and program-path context.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The overview does not establish an individual's eligibility, entitlement, fee, rate, approval, property acceptance, or lender terms; transaction-specific VA and lender review still applies.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -175,6 +220,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Home-shopping and mortgage-comparison education.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This consumer education does not provide current lender pricing, property-specific costs, personalized loan options, eligibility, approval, or a commitment to lend.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -186,6 +234,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Loan Estimate payment, APR, closing-cost, prepaid, escrow, and cash-to-close comparisons.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "An illustrative result is not a Loan Estimate, and CFPB attribution cannot support rates, fees, payments, or other scenario values that CFPB did not publish.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -197,6 +248,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Plain-language definitions for APR, ARM, amortization, income, and Closing Disclosure.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Definitions provide general context only and do not establish transaction-specific calculations, current loan terms, eligibility, underwriting treatment, or approval.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -208,6 +262,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "General jumbo-loan definition; current numeric limits come from FHFA.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The page supports the general definition only; current county limits must come from FHFA, and jumbo pricing, documentation, reserves, and eligibility vary by lender.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -215,10 +272,13 @@
       "publisher": "U.S. Bureau of Labor Statistics",
       "title": "Local Area Unemployment Statistics",
       "url": "https://www.bls.gov/lau/",
-      "dataPeriod": "May 2026 release cycle",
+      "dataPeriod": "May 2026 observations; state release 2026-06-23 and metro release 2026-07-01",
       "accessedAt": "2026-07-13",
       "geographicScope": "State and metropolitan labor markets",
       "claimSupported": "Dated labor-market context, not a prediction of an individual borrower's eligibility.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Use the exact LAUS series, geography, seasonal-adjustment status, and period; May state values were preliminary and do not establish household income or mortgage eligibility.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -230,6 +290,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Texas",
       "claimSupported": "Texas has no state property tax; local taxing units set rates and bills.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Local appraisal-district, taxing-unit, exemption, and property records control an actual Texas bill; statewide guidance does not provide a property-specific estimate.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -241,6 +304,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "California",
       "claimSupported": "Residential insurance shopping, FAIR Plan last-resort, and difference-in-conditions context.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "No property-specific availability, premium, coverage, eligibility, or insurability conclusion may be inferred; actual policy terms and licensed carrier review control.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -252,6 +318,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado",
       "claimSupported": "Colorado property-tax administration and assessment guidance.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Current county valuation, classification, assessment rate, exemptions, mill levies, and an actual property bill require local records for the applicable tax year.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -263,6 +332,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Florida",
       "claimSupported": "Florida property-tax administration and homestead framing.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "County and local property records, assessed value, millage, exemptions, and eligibility control an actual Florida tax obligation; statewide guidance is not an estimate.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -274,6 +346,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States flood-insurance education",
       "claimSupported": "Flood coverage limits in typical homeowners policies and flood-risk-map context.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "General flood education and map context do not determine address-specific risk, required coverage, policy terms, premium, availability, or a lender's flood determination.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -285,6 +360,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States insurance consumer education",
       "claimSupported": "General homeowners-insurance coverage structure and state-department lookup guidance.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This is general consumer guidance; state law, the insurer, the actual policy, property characteristics, and licensed review control coverage, availability, and premium.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -292,10 +370,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Austin city, Texas",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:05000&in=state:48",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Austin city/place, Texas",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -303,10 +384,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Dallas city, Texas",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:19000&in=state:48",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Dallas city/place, Texas",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -314,10 +398,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Houston city, Texas",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:35000&in=state:48",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Houston city/place, Texas",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -325,10 +412,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Irvine city, California",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:36770&in=state:06",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Irvine city/place, California",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -336,10 +426,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, San Diego city, California",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:66000&in=state:06",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "San Diego city/place, California",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -347,10 +440,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Sacramento city, California",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:64000&in=state:06",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Sacramento city/place, California",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -358,10 +454,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Denver city, Colorado",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:20000&in=state:08",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Denver city/place, Colorado",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -369,10 +468,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Colorado Springs city, Colorado",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:16000&in=state:08",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado Springs city/place, Colorado",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -380,10 +482,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Boulder city, Colorado",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:07850&in=state:08",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Boulder city/place, Colorado",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -391,10 +496,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Tampa city, Florida",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:71000&in=state:12",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Tampa city/place, Florida",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -402,10 +510,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Orlando city, Florida",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:53000&in=state:12",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Orlando city/place, Florida",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -413,10 +524,13 @@
       "publisher": "U.S. Census Bureau",
       "title": "2024 ACS 5-Year Data, Miami city, Florida",
       "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME,B25077_001E,B25088_002E,B19013_001E&for=place:45000&in=state:12",
-      "dataPeriod": "2024 ACS 5-year estimate",
+      "dataPeriod": "Survey years 2020-2024; released 2026-01-29",
       "accessedAt": "2026-07-13",
       "geographicScope": "Miami city/place, Florida",
       "claimSupported": "City-level survey estimates for median home value, selected monthly owner costs, and household income.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "These are 2020-2024 five-year survey estimates with 90% confidence margins of error, not January 2026 market observations, live listings, appraisals, or property valuations.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -428,6 +542,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Texas local property-tax system",
       "claimSupported": "County appraisal districts value property, local taxing units adopt rates, and multiple jurisdictions may tax the same parcel.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The statewide system description does not calculate an actual bill; current appraisal, jurisdictions, adopted rates, exemptions, and property records must be checked locally.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -439,6 +556,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Texas residence homesteads",
       "claimSupported": "General and local-option residence-homestead exemption framework, application responsibility, and the $140,000 school-district exemption shown as of access.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Qualification, filing, local-option exemptions, and the resulting property bill vary; the appraisal district and current local records control an owner's actual treatment.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -450,6 +570,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Texas taxable real property",
       "claimSupported": "Appraisal notices, residence-homestead appraised-value limitation, effective timing, and treatment of new improvements.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The limitation depends on qualification, timing, ownership, and property changes; the appraisal district and current local records control the actual appraised value and bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -461,6 +584,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage servicing",
       "claimSupported": "Escrow accounts collect certain property expenses monthly, and changes in taxes or insurance can change the escrow and total mortgage payment.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Escrow collection does not fix the underlying tax or insurance bill, guarantee sufficient funds, or provide a property-specific estimate; the servicer's analysis controls collection.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -472,6 +598,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "California property-tax assessment",
       "claimSupported": "Proposition 13 rate framework, base-year assessment, annual value adjustments, county administration, and appeal context.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The statewide overview does not determine a parcel's base-year value, voter-approved debt, exemptions, reassessment, or bill; county records and current law control.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -483,6 +612,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "California county-assessed real property",
       "claimSupported": "Change-in-ownership supplemental assessments, proration, one- or two-bill timing, and direct delivery of supplemental bills to owners rather than lenders.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "An actual supplemental assessment requires county values, the ownership or construction event date, local rates, and proration; examples do not estimate a specific bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -494,6 +626,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "California residential insurance consumers",
       "claimSupported": "Policy shopping, common coverages and exclusions, replacement-cost concepts, FAIR Plan limits, and separate flood or earthquake considerations.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The guide does not establish property-specific coverage, availability, premium, replacement cost, FAIR Plan eligibility, or insurability; the policy and licensed carrier control.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -505,6 +640,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado property-tax calculation framework",
       "claimSupported": "General relationship among actual value, assessment rate, assessed value, and local mill levies.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This source supports the general formula only, not current assessment rates, exemptions, mill levies, property values, later amendments, or an actual tax bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -516,6 +654,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado taxable property",
       "claimSupported": "Recent residential valuation rules, including separate treatment for school-district and other local-government levies and tax-year-specific adjustments.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Later amendments and tax-year-specific rules must be read together with this act; local valuation, classification, levies, and property records control an actual bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -527,6 +668,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado residential insurance consumers",
       "claimSupported": "Required summary disclosures, policy controls, homeowners coverage resources, catastrophe guidance, and replacement-cost versus actual-cash-value concepts.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Required summaries and consumer guidance do not replace the policy or establish property-specific coverage, exclusions, availability, premium, valuation, or claim treatment.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -538,6 +682,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado homeowners and homeowners associations",
       "claimSupported": "Insurance shopping actions, homeowners and HOA market issues, wildfire-risk transparency, mitigation questions, and deductible or owner-policy review considerations.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The toolkit is general market and consumer guidance; it does not provide a quote, guarantee availability, define a property's risk, or replace policy and licensed-carrier review.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -549,6 +696,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Total mortgage payments may include taxes and insurance, while escrowed amounts can change independently of scheduled principal and interest.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This explains payment components generally and does not calculate a property-specific payment, tax, premium, escrow analysis, loan term, or servicer adjustment.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -560,6 +710,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Florida residential insurance consumers",
       "claimSupported": "Homeowners coverage, deductibles, endorsements, inspections, policy shopping, and the potential mortgage-lender insurance requirement.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "General state guidance does not establish property-specific coverage, exclusions, required endorsements, availability, premium, inspection result, or lender acceptance.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -571,6 +724,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Florida personal-lines residential property insurance",
       "claimSupported": "Hurricane-deductible options and exceptions, annual application, dollar disclosure, coverage period, and exclusion of flooding from hurricane coverage.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The applicable deductible, exceptions, dollar amount, covered event, and policy treatment depend on current law and the actual policy; flooding requires separate review.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -582,6 +738,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Florida county and ZIP-level residential property-insurance market data",
       "claimSupported": "Market Intelligence Report scope, reporting frequency, geographic detail, and OIR's notice that submitted data is not audited before publication.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Insurer-submitted data are not audited by OIR; retain county or ZIP, policy or peril, reporting period, and source, and do not infer a quote or property insurability.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -593,6 +752,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States VA-backed home loan program",
       "claimSupported": "VA purchase-loan framework covering COE, VA and lender review, occupancy, potential no-down-payment terms, mortgage-insurance treatment, and funding-fee context.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Potential program benefits do not establish eligibility, approval, zero cash to close, fee treatment, rate, property acceptance, or terms for a specific borrower and transaction.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -604,6 +766,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States VA direct and VA-backed home loan eligibility",
       "claimSupported": "Service-period COE guidance plus the separate VA and lender credit, income, and occupancy requirements for financing.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Meeting service criteria or obtaining a Certificate of Eligibility does not establish financing approval; VA and lender credit, income, occupancy, property, and transaction review remain required.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -615,6 +780,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States VA home loan entitlement and guaranty calculations",
       "claimSupported": "Full and remaining entitlement, lender affordability review, appraisal constraints, county-limit use, and possible down-payment implications.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Entitlement alone does not determine loan amount, down payment, affordability, approval, value, or terms; prior use, appraisal, county limits, and lender review may change the scenario.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -622,10 +790,13 @@
       "publisher": "U.S. Department of Veterans Affairs",
       "title": "VA Funding Fee and Loan Closing Costs",
       "url": "https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/",
-      "dataPeriod": "Page last updated 2026-01-15; accessed 2026-07-13",
+      "dataPeriod": "Rates effective 2023-04-07; page last updated 2026-01-15",
       "accessedAt": "2026-07-13",
       "geographicScope": "United States VA-backed and VA direct home loans",
       "claimSupported": "Funding-fee purpose, factors, exemptions, payment methods, lender-set terms, closing-cost categories, seller credits, and Loan Estimate review.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The fee varies by transaction, prior use, down payment, and exemption; lenders set rates and most costs, and the reviewed schedule must be rechecked before release.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -637,6 +808,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States VA-backed purchase-loan process",
       "claimSupported": "Private-lender process, VA appraisal and minimum property review, distinction from a home inspection, value options, and pre-closing disclosure review.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "A VA appraisal is not a home inspection or condition guarantee, and process guidance does not establish approval, value, repair outcome, timing, or lender terms.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -648,6 +822,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "General distinction between conforming and non-conforming loans and lender-to-lender variation in jumbo eligibility, pricing, and features; current numeric limits must come from FHFA.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The page provides general distinctions only; current limits must come from FHFA, and lender-specific eligibility, pricing, documentation, features, and approval require direct review.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -659,6 +836,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Refinance goal setting, closing-cost recovery, term and payment tradeoffs, adjustable-to-fixed considerations, and use of a Loan Estimate.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The 2020 handout is general education, not current pricing or a recommendation; a decision requires current complete costs, matching assumptions, borrower facts, and time horizon.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -670,6 +850,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Common refinance cost categories, points, lender comparisons, and tradeoffs behind low-cost or no-cost refinance presentations.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Cost categories are educational, not a quote; actual charges, points, credits, rate, balance, and breakeven depend on current written terms and the borrower's scenario.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -681,6 +864,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Borrower budgeting for total monthly housing cost, maintenance, utilities, emergency reserves, down payment, and closing costs.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Budget guidance does not establish affordability, approval, a property-specific payment, closing costs, reserves, or suitable spending; actual household and property facts control.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -692,6 +878,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Property-specific budget updates, disaster-risk and insurance review, contingencies, and home-search due diligence.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The checklist does not determine a property's condition, hazards, insurance availability, value, legal status, financing eligibility, or suitable contract protections.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -703,6 +892,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer homebuying education",
       "claimSupported": "Upfront and ongoing homeownership budget categories, including down payment, closing costs, taxes, insurance, association dues, maintenance, and reserves.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The guide identifies budget categories but does not provide current loan terms, actual closing costs, property expenses, required reserves, affordability, or approval.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -714,6 +906,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Home-value risk, repair responsibility, expected time in the home, and transaction costs involved in selling and buying.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This is decision-framing guidance, not a market forecast, property valuation, cost estimate, timing recommendation, affordability result, or prediction of future home value.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -725,6 +920,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer home-equity education",
       "claimSupported": "HELOC draw and repayment periods, variable-rate payment risk, fees and minimums, and possible restrictions on future draws.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "HELOC rates, caps, fees, draw access, payment changes, eligibility, and availability vary by lender and agreement; the page is not a quote or approval.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -736,6 +934,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer home-equity education",
       "claimSupported": "Lump-sum home equity loan and revolving HELOC structures, typical rate differences, and second-mortgage treatment when a first mortgage exists.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The comparison describes common structures, not universal rate types, lien treatment, fees, availability, eligibility, tax results, or terms for a particular property and borrower.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -747,6 +948,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer home-equity education",
       "claimSupported": "Home equity loan collateral, lump-sum funding, commonly fixed rates, upfront costs, and foreclosure risk.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The page describes common features and risk but does not establish a fixed rate, costs, available equity, loan amount, eligibility, approval, or suitable use for a borrower.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -758,6 +962,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer home-equity education",
       "claimSupported": "HELOC comparison fields for APR, index and margin, caps, fees, draw rules, repayment terms, balloon risk, disclosures, and cancellation rights.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The booklet is general disclosure guidance; the lender's current agreement and disclosures control actual APR, index, margin, caps, fees, draw access, repayment, and rights.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -769,6 +976,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer home-equity education",
       "claimSupported": "Potential HELOC-lender approval or payoff requirement when refinancing an existing first mortgage.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "Whether subordination, approval, payoff, closure, or other action is required depends on the HELOC agreement, lien position, lenders, property, and proposed refinance.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -780,6 +990,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States mortgage borrowers represented in the cited federal datasets",
       "claimSupported": "Cash-out refinance use for debt payoff, transaction and interest costs, replacement-rate risk, equity reduction, and conversion of non-mortgage debt into home-secured debt.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The report covers represented 2014-2021 borrower cohorts and does not predict an individual's behavior, savings, suitable use, current terms, credit outcome, or causal result.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -791,6 +1004,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado property taxation",
       "claimSupported": "Amendments to SB24-233 residential valuation rules and the school-district limit used in the 2026 framework.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This act must be read with SB24-233 and later tax-year authority; local valuation, classification, levies, exemptions, and property records control an actual bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -802,6 +1018,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "Colorado school-district residential property taxation",
       "claimSupported": "No 2026 balancing reduction below the permanent 7.05% school-district residential assessment rate was required.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "The memorandum addresses the 2026 school-district balancing percentage only; it does not establish other levy treatment, a property's value, exemptions, or an actual bill.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },
     {
@@ -813,6 +1032,9 @@
       "accessedAt": "2026-07-13",
       "geographicScope": "United States consumer credit education",
       "claimSupported": "Debt-consolidation cost questions and risk of securing consolidated debt with a home.",
+      "reviewedAt": "2026-07-13",
+      "limitation": "This consumer guidance does not recommend a consolidation product, calculate costs or savings, establish current terms, determine suitability, or replace legal or financial advice.",
+      "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     }
   ]

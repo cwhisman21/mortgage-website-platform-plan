@@ -13,9 +13,11 @@
       "title": "South Carolina home-price movement in the latest FHFA HPI",
       "dek": "Quarterly, annual, and longer-run state HPI comparisons with a clear boundary between market movement and property value.",
       "previewText": "Review the latest FHFA home-price movement for South Carolina and why an index cannot value a specific property.",
-      "metaDescription": "South Carolina home-price movement in the latest FHFA HPI. Review the latest FHFA home-price movement for South Carolina and why an index cannot value a.",
+      "metaDescription": "Review the latest FHFA home-price movement for South Carolina and why an index cannot value a specific property.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 Q1",
+      "sourcePeriod": "2026Q1",
       "relevanceLabel": "Home-price movement",
       "topicIds": [
         "home-price-index",
@@ -33,7 +35,7 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
-        "FHFA purchase-only HPI: 443.5.",
+        "As of: 2026 Q1. Source period: 2026Q1.",
         "quarterly HPI change: -0.1%.",
         "annual HPI change: 1.5%.",
         "five-year HPI change: 52.8%."
@@ -82,25 +84,10 @@
       ],
       "sections": [
         {
-          "id": "latest-index",
-          "heading": "The latest statewide index reading",
-          "body": [
-            "South Carolina's latest FHFA purchase-only HPI is 443.5, accompanied by a quarterly change of -0.1%. For South Carolina, the 443.5 index level is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price. A quarter in which the index fell by -0.1% can help a borrower date the statewide market context, but it cannot identify the value or asking price of a selected property. Reading 443.5 with -0.1% also keeps the level separate from the rate of change. Alongside the 443.5 state index, local inventory, property type, condition, concessions, taxes, insurance, and financing costs still need current evidence before the trend informs a decision."
-          ],
-          "evidenceFactIds": [
-            "hpi-index",
-            "quarterly-change"
-          ],
-          "sourceRecordIds": [
-            "news-sc-state-home-price-movement-source-hpi-index",
-            "news-sc-state-home-price-movement-source-quarterly-change"
-          ]
-        },
-        {
           "id": "short-and-annual",
-          "heading": "Quarterly and annual windows tell different stories",
+          "heading": "What changed over the quarter and year",
           "body": [
-            "Over the latest quarter, South Carolina's purchase-only HPI fell by -0.1%; over the latest year, it rose by 1.5%. The -0.1% figure is more sensitive to recent movement, while 1.5% compares the latest quarter with the matching quarter a year earlier. A borrower should not choose between the -0.1% and 1.5% windows based only on which looks more favorable, because the comparisons answer different timing questions. Together they show whether recent statewide movement is aligned with or different from the broader year without predicting the next quarter, a local bidding environment, or the price path of one home in South Carolina."
+            "As of 2026 Q1, South Carolina's purchase-only HPI fell 0.1% over the latest quarter and rose 1.5% over the year. For borrower planning, the quarterly window is more sensitive to recent movement, while the annual window compares the latest quarter with the matching quarter one year earlier. That difference may matter when a borrower checks whether search, offer, or refinance assumptions still fit the broad direction of the state market. If the two windows diverge, timing is part of the answer; if they align, local variation still remains. Neither change identifies a home's value, a competitive offer, an affordable payment, or what the index will do next, so current property and financing evidence must carry the decision."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -115,7 +102,7 @@
           "id": "longer-run",
           "heading": "Place the latest movement in a longer sequence",
           "body": [
-            "Across the five-year comparison, the South Carolina HPI rose by 52.8%, compared with the latest annual movement of 1.5%. The 52.8% change places the current 443.5 index reading in a longer repeat-sale sequence, but it can span very different rate, inventory, and economic conditions. The 52.8% change should not be applied to an old purchase price to estimate a current property value. For a borrower, the contrast between 52.8% and 1.5% is most useful as a reminder that search assumptions can age at different speeds. Even when the 52.8% direction is clear, current comparable properties and a property-specific payment worksheet remain necessary."
+            "Over the five years ending 2026 Q1, the South Carolina HPI rose 52.8%, compared with the latest annual movement of 1.5%. For the decision at hand, the longer window shows how far the repeat-sale index moved across several market cycles, while the one-year figure gives more weight to recent conditions. That contrast may help a borrower recognize when an older search budget, equity assumption, or comparable sale needs fresh evidence. In practical terms, it does not justify applying the five-year percentage to an old purchase price, and it cannot forecast a future sale. Even when the long and short directions agree, current comparable properties, taxes, insurance, financing costs, condition, and a property-specific payment worksheet remain necessary before the trend informs a mortgage decision."
           ],
           "evidenceFactIds": [
             "five-year-change",
@@ -129,10 +116,26 @@
           ]
         },
         {
-          "id": "market-context",
-          "heading": "Use the index to test local assumptions",
+          "id": "latest-index",
+          "heading": "The index level is context, not a home price",
           "body": [
-            "The combination of a -0.1% quarterly change, 1.5% annual change, and 52.8% five-year change gives South Carolina borrowers three dated views of the same statewide index. If the -0.1%, 1.5%, and 52.8% windows point in different directions, the divergence shows that timing matters; if they point together, statewide consistency still does not erase local variation. A South Carolina search plan can use those three changes to ask whether current listings, seller concessions, and property types resemble the broad state movement. It should not use 443.5 as a sale price or use any of the percentage changes as a forecast, because FHFA HPI measures repeat-sale movement rather than the complete set of homes available to one borrower."
+            "South Carolina's latest FHFA purchase-only HPI level is 443.5. For borrower planning, that number is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price, listing price, or appraisal.",
+            "In a borrower review centered on South Carolina, reading the 443.5 level with the -0.1% quarterly change keeps the index itself separate from its rate of movement. Borrowers can apply the dated level to identify the release being discussed, but not to value a selected property. Local inventory, property type, condition, concessions, taxes, insurance, maintenance, association costs, and financing terms still need current evidence. This boundary is especially important when broad statewide movement differs from the neighborhood, price band, or property type involved in an actual purchase, refinance, or equity review."
+          ],
+          "evidenceFactIds": [
+            "hpi-index",
+            "quarterly-change"
+          ],
+          "sourceRecordIds": [
+            "news-sc-state-home-price-movement-source-hpi-index",
+            "news-sc-state-home-price-movement-source-quarterly-change"
+          ]
+        },
+        {
+          "id": "market-context",
+          "heading": "Borrower view: use the index to test local assumptions",
+          "body": [
+            "A South Carolina search plan can use the quarterly, annual, and five-year windows to ask whether current listings, seller concessions, and property types resemble the broad state movement. At an annual movement of 1.5%, the dated 443.5 index level provides a reference point for that question without supplying a sale price. If the windows point in different directions, the divergence shows why the selected period matters; if they point together, statewide consistency still does not erase local variation. The plan therefore should compare the broad pattern with current listings and recent property-level evidence in place of treating any percentage as a forecast. FHFA HPI measures repeat-sale movement, not the complete set of homes available to one borrower."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -151,7 +154,8 @@
           "id": "valuation-boundary",
           "heading": "The HPI cannot value a property or set a payment",
           "body": [
-            "An HPI level of 443.5 does not establish a South Carolina property's dollar value, and an 1.5% annual movement does not establish how much any home gained or lost. The 443.5 index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the -0.1% and 52.8% comparisons should retain their release period. The 443.5 index level must remain separate from the dollar figures used in a property review. Those limits make the 443.5 state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
+            "An HPI level of 443.5 does not establish the dollar value of a property in South Carolina, and an annual movement of 1.5% does not establish how much any home gained or lost.",
+            "For the next comparison in South Carolina, the index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the 0.1% and 52.8% comparisons should retain their source period. For borrower planning, the 443.5 level must remain separate from the dollar figures used in a property review. Those limits make the state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
           ],
           "evidenceFactIds": [
             "hpi-index",
@@ -168,9 +172,10 @@
         },
         {
           "id": "local-next-step",
-          "heading": "Connect the state trend to current property evidence",
+          "heading": "Borrower action: connect the state trend to current property evidence",
           "body": [
-            "A practical South Carolina borrower review can record -0.1%, 1.5%, and 52.8% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the -0.1% state change as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review rather than multiplying a prior value by 1.5% or 52.8%. This approach preserves the information in the 443.5 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
+            "A practical South Carolina borrower review can record 0.1%, 1.5%, and 52.8% as statewide trend markers, then compare them with current local listings and recent property-level evidence.",
+            "For the next comparison in South Carolina, for a purchase, keep the 0.1% state movement as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review instead of multiplying a prior value by 1.5% or 52.8%. For borrower planning, this approach preserves the information in the 443.5 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -228,28 +233,33 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "FHFA purchase-only HPI",
               "443.5",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "quarterly HPI change",
               "-0.1%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "annual HPI change",
               "1.5%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "five-year HPI change",
               "52.8%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ]
           ],
           "sourceRecordIds": [
@@ -262,7 +272,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "short-and-annual",
+          "afterSectionId": "longer-run",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -375,9 +385,11 @@
       "title": "South Carolina statewide labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for South Carolina.",
       "previewText": "See what changed in South Carolina's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "South Carolina statewide labor market: latest employment evidence. See what changed in South Carolina's labor market and why broad employment data cannot.",
+      "metaDescription": "See what changed in South Carolina's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -395,11 +407,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 2,673,031.",
-        "employment: 2,549,347.",
-        "unemployment: 123,684.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 4.6%.",
-        "previous-month unemployment rate: 4.8%."
+        "change in unemployment rate from the prior month: -0.2 percentage points.",
+        "change in unemployment rate from a year earlier: 0.3 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -466,7 +477,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.2,
-          "display": "-0.2%",
+          "display": "-0.2 percentage points",
           "sourceRecordIds": [
             "news-sc-state-labor-market-source-latest-unemployment-rate",
             "news-sc-state-labor-market-source-previous-previous-rate"
@@ -477,7 +488,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.3,
-          "display": "0.3%",
+          "display": "0.3 percentage points",
           "sourceRecordIds": [
             "news-sc-state-labor-market-source-latest-unemployment-rate",
             "news-sc-state-labor-market-source-yearago-year-ago-rate"
@@ -487,29 +498,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a South Carolina labor force of 2,673,031, with 2,549,347 people employed and 123,684 unemployed under the program's definitions. Those three counts belong together: 2,549,347 plus 123,684 explains the scale behind the published 4.6% unemployment rate. For mortgage planning, the 2,673,031 state-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 2,673,031 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-sc-state-labor-market-source-latest-labor-force",
-            "news-sc-state-labor-market-source-latest-employment",
-            "news-sc-state-labor-market-source-latest-unemployment",
-            "news-sc-state-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What the comparison adds: what changed in the latest month",
           "body": [
-            "South Carolina's unemployment rate fell from 4.8% in the prior month to 4.6% in the latest month, a change of -0.2%. A -0.2% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 123,684 unemployment count and 2,673,031 labor force. The -0.2% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a South Carolina borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The published evidence provides the starting point: As of May 2026, South Carolina's unemployment rate fell from 4.8% in April 2026 to 4.6% in May 2026, a change of 0.2 percentage points. In practical terms, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not show that a particular employer is hiring or cutting jobs, and it cannot establish one applicant's income stability, mortgage eligibility, or loan price. For the decision at hand, the release also estimates 123,684 people unemployed within a labor force of 2,673,031, which shows the scale of the movement without turning a state-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -527,46 +519,48 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What changed over the year",
           "body": [
-            "Compared with 4.3% a year earlier, the latest South Carolina unemployment rate of 4.6% rose by 0.3%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.3% difference still describes a population estimate rather than an individual's job stability. Reading 4.3%, 4.8%, and 4.6% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad South Carolina pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, South Carolina's unemployment rate rose from 4.3% in May 2025 to 4.6%, a change of 0.3 percentage points. For the decision at hand, that wider window helps show whether South Carolina's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.2 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for South Carolina or describes the stability of one household's earnings. For mortgage planning in South Carolina, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in South Carolina's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-sc-state-labor-market-source-yearago-year-ago-rate",
-            "news-sc-state-labor-market-source-previous-previous-rate",
+            "news-sc-state-labor-market-source-latest-unemployment-rate",
+            "news-sc-state-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "The counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 2,673,031 people in the South Carolina labor force, including 2,549,347 employed and 123,684 unemployed under LAUS definitions.",
+            "For the next comparison in South Carolina, the employment and unemployment counts belong together because they establish the scale behind the published 4.6% rate. For a mortgage decision, that state-level labor force describes the surrounding economy rather than the income or employment record of an applicant. For borrower planning, it may help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-sc-state-labor-market-source-latest-labor-force",
+            "news-sc-state-labor-market-source-latest-employment",
+            "news-sc-state-labor-market-source-latest-unemployment",
             "news-sc-state-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
-          "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
-          "body": [
-            "At 4.6%, South Carolina's unemployment rate summarizes 123,684 unemployed people within a 2,673,031 labor force; the rate should not be discussed without those counts. The 2,549,347 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 2,549,347 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.6% rate attached to 2,673,031, 2,549,347, and 123,684 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
-          ],
-          "evidenceFactIds": [
-            "unemployment-rate",
-            "unemployment",
-            "labor-force",
-            "employment"
-          ],
-          "sourceRecordIds": [
-            "news-sc-state-labor-market-source-latest-unemployment-rate",
-            "news-sc-state-labor-market-source-latest-unemployment",
-            "news-sc-state-labor-market-source-latest-labor-force",
-            "news-sc-state-labor-market-source-latest-employment"
-          ]
-        },
-        {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Where the evidence stops: labor statistics are not an income review",
           "body": [
-            "Neither 2,549,347 employed people nor a 4.6% unemployment rate tells a lender what one South Carolina applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.2% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 4.6% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.3% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 2,549,347 employed people nor an unemployment rate of 4.6% tells a lender what an applicant in South Carolina earns, whether that income is eligible, or whether it is likely to continue. For the decision at hand, the monthly movement of 0.2 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "For borrowers reviewing evidence from South Carolina, the 4.6% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. In practical terms, that boundary protects borrowers from treating the year-over-year movement of 0.3 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -582,10 +576,31 @@
           ]
         },
         {
-          "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "id": "counts-and-rate",
+          "heading": "Why the rate needs its underlying counts",
           "body": [
-            "A practical next step for a South Carolina borrower is to note the latest 4.6% unemployment rate and the 0.3% year-over-year change, then move immediately to the records that describe the household. After noting the 4.6% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 2,673,031 local labor force and 2,549,347 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.2% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping South Carolina's 4.6% LAUS rate in its proper role as dated local economic context."
+            "At 4.6%, South Carolina's unemployment rate summarizes 123,684 unemployed people within a labor force of 2,673,031; the rate should not be discussed without those counts.",
+            "Applied to a decision in South Carolina, the 2,549,347 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 2,549,347 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For the decision at hand, keeping the 4.6% rate attached to 2,673,031, 2,549,347, and 123,684 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+          ],
+          "evidenceFactIds": [
+            "unemployment-rate",
+            "unemployment",
+            "labor-force",
+            "employment"
+          ],
+          "sourceRecordIds": [
+            "news-sc-state-labor-market-source-latest-unemployment-rate",
+            "news-sc-state-labor-market-source-latest-unemployment",
+            "news-sc-state-labor-market-source-latest-labor-force",
+            "news-sc-state-labor-market-source-latest-employment"
+          ]
+        },
+        {
+          "id": "documentation-next-step",
+          "heading": "Put the evidence to work: turn the trend into documentation questions",
+          "body": [
+            "A useful next step for borrowers in South Carolina is to note the latest 4.6% unemployment rate and the year-over-year movement of 0.3 percentage points, then move immediately to the records that describe the household. After noting the 4.6% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 2,673,031 local labor force and 2,549,347 employment count can frame the economic conversation, but they should not alter verified borrower inputs.",
+            "For the decision at hand, the monthly movement of 0.2 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping South Carolina's 4.6% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -652,48 +667,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "2,673,031",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "2,549,347",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "123,684",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "4.6%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.3%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.2%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.2 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.3%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.3 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -708,7 +732,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -853,9 +877,11 @@
       "title": "South Carolina housing costs, ownership, and rent in the latest ACS",
       "dek": "Statewide evidence on home value, income, owner costs, housing stock, tenure, vacancy, and rent for borrower planning.",
       "previewText": "Read statewide housing-cost, ownership, vacancy, and rent evidence for South Carolina with survey limitations and practical questions.",
-      "metaDescription": "South Carolina housing costs, ownership, and rent in the latest ACS. Read statewide housing-cost, ownership, vacancy, and rent evidence for South Carolina with.",
+      "metaDescription": "Read statewide housing-cost, ownership, vacancy, and rent evidence for South Carolina with survey limitations and practical questions.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "State housing costs",
       "topicIds": [
         "state-housing",
@@ -874,11 +900,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "state median home value: $259,000.",
         "prior ACS state median home value: $162,300.",
-        "state median household income: $69,324.",
-        "median monthly owner cost with a mortgage: $1,529.",
-        "median gross rent: $1,180."
+        "state median household income: $69,324."
       ],
       "evidenceFacts": [
         {
@@ -973,25 +998,14 @@
             "news-sc-state-housing-costs-source-housing-units"
           ],
           "comparison": true
-        },
-        {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 59.6,
-          "display": "59.6%",
-          "sourceRecordIds": [
-            "news-sc-state-housing-costs-source-home-value",
-            "news-sc-state-housing-costs-source-home-value-prior"
-          ],
-          "comparison": true
         }
       ],
       "sections": [
         {
           "id": "state-cost-baseline",
-          "heading": "Statewide value, income, and owner costs",
+          "heading": "Start with the evidence: statewide value, income, and owner costs",
           "body": [
-            "South Carolina's 2024 ACS housing baseline reports a median owner-occupied home value of $259,000, median household income of $69,324, and median selected monthly owner costs of $1,529 for owners with a mortgage. The $259,000, $69,324, and $1,529 values are separate statewide medians, so they should not be treated as the price, income, and monthly budget of one typical household. The $1,529 measure combines recurring ownership expenses and is not a real-estate-tax figure or a current mortgage quote. For planning, $259,000, $69,324, and $1,529 identify statewide reference points and cost categories, while a real decision still requires local property, borrower, tax, insurance, and loan information."
+            "The local figures answer the first question: South Carolina's 2024 ACS housing baseline reports a median owner-occupied home value of $259,000, median household income of $69,324, and median selected monthly owner costs of $1,529 for owners with a mortgage. For borrower planning, those three reference points may help a borrower identify which statewide value, income, and recurring-cost assumptions need local replacement first. They remain separate medians, not the price, income, and monthly budget of one typical household, and the $1,529 measure is not a real-estate-tax figure or a current mortgage quote. A real decision continues to require local property evidence, borrower documentation, taxes, insurance, maintenance, association obligations, and current loan information."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1005,27 +1019,11 @@
           ]
         },
         {
-          "id": "owner-and-renter-costs",
-          "heading": "Keep owner costs and rent comparable",
-          "body": [
-            "The same South Carolina release reports $1,180 in median gross rent alongside $1,529 in median selected monthly owner costs for owners with a mortgage. The two measures cover different housing populations and cost definitions, so $1,180 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,180 and $1,529 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. The $69,324 statewide median can provide economic context, but dividing it by either $1,180 or $1,529 would still combine medians that do not represent the same household."
-          ],
-          "evidenceFactIds": [
-            "rent",
-            "owner-cost",
-            "income"
-          ],
-          "sourceRecordIds": [
-            "news-sc-state-housing-costs-source-rent",
-            "news-sc-state-housing-costs-source-owner-cost",
-            "news-sc-state-housing-costs-source-income"
-          ]
-        },
-        {
           "id": "state-tenure",
-          "heading": "How occupied housing is divided by tenure",
+          "heading": "Planning context: how occupied housing is divided by tenure",
           "body": [
-            "Across South Carolina's measured housing stock of 2,443,039 units, the owner share of occupied housing is 71.9% and the renter share is 28.1%, making owner-occupied housing the larger statewide tenure group. The 71.9% and 28.1% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase. The 71.9% and 28.1% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. It remains too broad to select a product or characterize a particular city, county, property type, or household inside South Carolina."
+            "Across South Carolina's measured housing stock of 2,443,039 units, the owner share of occupied housing is 71.9% and the renter share is 28.1%, making owner-occupied housing the larger statewide tenure group. The 71.9% and 28.1% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase.",
+            "The 71.9% and 28.1% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. For borrower planning, it remains too broad to select a product or characterize a particular city, county, property type, or household inside South Carolina."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -1040,10 +1038,29 @@
           ]
         },
         {
-          "id": "state-vacancy",
-          "heading": "Vacancy is broader than homes for sale",
+          "id": "owner-and-renter-costs",
+          "heading": "Start with the evidence: keep owner costs and rent comparable",
           "body": [
-            "South Carolina's vacant-unit share is 13.3% within a statewide stock of 2,443,039 housing units. ACS vacancy includes categories beyond property currently offered for sale or rent, so 13.3% is not a live inventory rate and cannot measure competition for a selected home. Read beside the 71.9% owner share and 28.1% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. Borrowers should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 13.3% and 2,443,039 were not designed to resolve."
+            "The same South Carolina release reports $1,180 in median gross rent alongside $1,529 in median selected monthly owner costs for owners with a mortgage.",
+            "In a borrower review centered on South Carolina, the two measures cover different housing populations and cost definitions, so $1,180 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,180 and $1,529 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. The $69,324 statewide median can provide economic context, but dividing it by either $1,180 or $1,529 would still combine medians that do not represent the same household."
+          ],
+          "evidenceFactIds": [
+            "rent",
+            "owner-cost",
+            "income"
+          ],
+          "sourceRecordIds": [
+            "news-sc-state-housing-costs-source-rent",
+            "news-sc-state-housing-costs-source-owner-cost",
+            "news-sc-state-housing-costs-source-income"
+          ]
+        },
+        {
+          "id": "state-vacancy",
+          "heading": "Borrower view: vacancy is broader than homes for sale",
+          "body": [
+            "South Carolina's vacant-unit share is 13.3% within a statewide stock of 2,443,039 housing units. ACS vacancy includes categories beyond property currently offered for sale or rent, so 13.3% is not a live inventory rate and cannot measure competition for a selected home.",
+            "For the next comparison in South Carolina, read beside the 71.9% owner share and 28.1% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. For borrower planning, a borrower should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 13.3% and 2,443,039 were not designed to resolve."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -1060,15 +1077,14 @@
           ]
         },
         {
-          "id": "state-change",
-          "heading": "The statewide home-value estimate changed across periods",
+          "id": "state-vintage-observations",
+          "heading": "Borrower view: keep the statewide ACS vintages separate",
           "body": [
-            "South Carolina's median home-value estimate increased from $162,300 in the prior ACS period to $259,000 in the current release, a reported change of 59.6%. Because both estimates summarize multi-year survey windows, 59.6% is not a point-to-point appreciation rate for a property purchased at $162,300. The 59.6% comparison can show that an old statewide reference may need updating, but it cannot explain the value path in each local market or price segment. Margins of error, changes in the housing mix, and current property evidence should be reviewed before the move from $162,300 to $259,000 influences a purchase, refinance, or equity assumption."
+            "The 2019 ACS published $162,300 as South Carolina's median owner-occupied home-value estimate, while the 2024 ACS published $259,000. For the decision at hand, these nominal statewide observations can nevertheless help show why an older planning reference needs current local evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between the vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. In practical terms, both values summarize multi-year survey windows and carry sampling error. Keep $162,300 attached to 2019 and $259,000 attached to 2024, then use current local and property-specific evidence for purchase, refinance, or equity assumptions."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "home-value",
-            "home-value-change"
+            "home-value"
           ],
           "sourceRecordIds": [
             "news-sc-state-housing-costs-source-home-value-prior",
@@ -1079,7 +1095,8 @@
           "id": "state-to-local",
           "heading": "Move from statewide context to a local worksheet",
           "body": [
-            "A borrower can carry $259,000, $1,529, $1,180, and the 13.3% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. For ownership, replace the $259,000 and $1,529 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. For renting, replace the $1,180 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. The 28.1% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 71.9% tenure measure can help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one South Carolina household."
+            "In borrower planning for South Carolina, borrowers can carry $259,000, $1,529, $1,180, and the 13.3% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision.",
+            "On the ownership side, replace the $259,000 and $1,529 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. On the rental side, replace the $1,180 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. For borrower planning, the 28.1% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 71.9% tenure measure may help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one South Carolina household."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1154,58 +1171,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "state median home value",
               "$259,000",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS state median home value",
               "$162,300",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "state median household income",
               "$69,324",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,529",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,180",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "total housing units",
               "2,443,039",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "71.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "28.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "13.3%",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "59.6%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -1224,14 +1246,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "owner-and-renter-costs",
+          "afterSectionId": "state-tenure",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a separate 2019 nominal home-value observation. It does not calculate a percentage change between home-value vintages. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The 2019 and 2024 home-value dollars are not inflation-adjusted, and their methodology is not directly comparable. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-sc-state-housing-costs-source-home-value",
@@ -1433,9 +1455,11 @@
       "title": "South Carolina 2026 county loan-limit landscape",
       "dek": "How conforming and FHA one-unit limits vary across South Carolina counties and how borrowers can use them responsibly.",
       "previewText": "See the range of 2026 conforming and FHA county limits across South Carolina without treating a limit as eligibility or pricing.",
-      "metaDescription": "South Carolina 2026 county loan-limit landscape. See the range of 2026 conforming and FHA county limits across South Carolina without treating a limit as.",
+      "metaDescription": "See the range of 2026 conforming and FHA county limits across South Carolina without treating a limit as eligibility or pricing.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "State loan-limit landscape",
       "topicIds": [
         "loan-limits",
@@ -1455,11 +1479,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "counties in the statewide limit summary: 46.",
         "lowest one-unit conforming limit: $832,750.",
-        "highest one-unit conforming limit: $832,750.",
-        "lowest one-unit FHA limit: $541,287.",
-        "highest one-unit FHA limit: $690,000."
+        "highest one-unit conforming limit: $832,750."
       ],
       "evidenceFacts": [
         {
@@ -1526,9 +1549,9 @@
       "sections": [
         {
           "id": "statewide-conforming-range",
-          "heading": "The conforming range across county records",
+          "heading": "Start with the evidence: the conforming range across county records",
           "body": [
-            "South Carolina's statewide summary covers 46 county or county-equivalent records. Within those records, the 2026 one-unit conforming limit runs from $832,750 to $832,750. The matched records share a one-unit conforming figure of $832,750, but the applicable county row still must be verified for a property. The 46 record count keeps the range tied to the statewide source coverage rather than an assumed national rule. The $832,750 to $832,750 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $832,750 statewide maximum, county, legal unit count, and expected base loan amount must be known."
+            "The local figures answer the first question: South Carolina's statewide summary covers 46 county or county-equivalent records. Within those records, the 2026 one-unit conforming limit runs from $832,750 to $832,750. That range may help borrowers see why the property county must be identified before a loan amount is assigned a conforming or jumbo category. For borrower planning, the matched records share a one-unit conforming figure of $832,750, but the applicable county row still must be verified for a property. The 46 record count keeps the range tied to the statewide source coverage in place of an assumed national rule. The $832,750 to $832,750 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $832,750 statewide maximum, county, legal unit count, and expected base loan amount must be known."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1542,10 +1565,30 @@
           ]
         },
         {
-          "id": "statewide-fha-range",
-          "heading": "The FHA range follows its own county table",
+          "id": "program-comparison",
+          "heading": "What the comparison adds: conforming and FHA ranges answer different questions",
           "body": [
-            "Across the same 46 South Carolina records, the 2026 one-unit FHA limit spans $541,287 to $690,000. The $541,287 low and $690,000 high show that FHA's published boundary also varies within the state. The $541,287 floor and $690,000 high remain county-table values even when they match conforming amounts elsewhere. The FHA range should not be merged with the $832,750 to $832,750 conforming range, because the programs use different authorities and requirements. A $541,287 to $690,000 comparison can route loan-amount and product-category questions, but it cannot determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
+            "The highest one-unit conforming amount in South Carolina is $832,750, while the highest FHA amount is $690,000; at the low end, the figures are $832,750 and $541,287. For the decision at hand, these pairs show program boundaries, not competing offers. A requested amount below $832,750 may still fall outside the applicable county's conforming limit, and an amount below $690,000 may still face FHA borrower and property requirements. In practical terms, comparing $832,750, $832,750, $541,287, and $690,000 is useful only when county and unit count are held constant. The $832,750 and $690,000 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
+          ],
+          "evidenceFactIds": [
+            "conforming-range-high",
+            "fha-range-high",
+            "conforming-range-low",
+            "fha-range-low"
+          ],
+          "sourceRecordIds": [
+            "news-sc-state-loan-limit-landscape-source-conforming-max",
+            "news-sc-state-loan-limit-landscape-source-fha-max",
+            "news-sc-state-loan-limit-landscape-source-conforming-min",
+            "news-sc-state-loan-limit-landscape-source-fha-min"
+          ]
+        },
+        {
+          "id": "statewide-fha-range",
+          "heading": "Evidence at a glance: the FHA range follows its own county table",
+          "body": [
+            "Across the same 46 South Carolina records, the 2026 one-unit FHA limit spans $541,287 to $690,000. In practical terms, the $541,287 low and $690,000 high show that FHA's published boundary also varies within the state. The $541,287 floor and $690,000 high remain county-table values even when they match conforming amounts elsewhere.",
+            "Applied to a decision in South Carolina, the FHA range should not be merged with the $832,750 to $832,750 conforming range, because the programs use different authorities and requirements. A $541,287 to $690,000 comparison can route loan-amount and product-category questions, but it cannot determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1564,9 +1607,10 @@
         },
         {
           "id": "high-cost-counties",
-          "heading": "Why county verification matters",
+          "heading": "Evidence at a glance: why county verification matters",
           "body": [
-            "0 South Carolina counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $832,750. That count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 0 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. It only describes how many matched county rows exceed the baseline. The $832,750 maximum should therefore be treated as evidence that county lookup matters, not as the default South Carolina limit. Before treating $832,750 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
+            "0 South Carolina counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $832,750.",
+            "That count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 0 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. For borrower planning, it only describes how many matched county rows exceed the baseline. The $832,750 maximum should, as a result, be treated as evidence that county lookup matters, not as the default South Carolina limit. Before treating $832,750 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
           ],
           "evidenceFactIds": [
             "counties-above",
@@ -1580,29 +1624,11 @@
           ]
         },
         {
-          "id": "program-comparison",
-          "heading": "Conforming and FHA ranges answer different questions",
-          "body": [
-            "The highest one-unit conforming amount in South Carolina is $832,750, while the highest FHA amount is $690,000; at the low end, the figures are $832,750 and $541,287. These pairs show program boundaries, not competing offers. A requested amount below $832,750 may still fall outside the applicable county's conforming limit, and an amount below $690,000 may still face FHA borrower and property requirements. Comparing $832,750, $832,750, $541,287, and $690,000 is useful only when county and unit count are held constant. The $832,750 and $690,000 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
-          ],
-          "evidenceFactIds": [
-            "conforming-range-high",
-            "fha-range-high",
-            "conforming-range-low",
-            "fha-range-low"
-          ],
-          "sourceRecordIds": [
-            "news-sc-state-loan-limit-landscape-source-conforming-max",
-            "news-sc-state-loan-limit-landscape-source-fha-max",
-            "news-sc-state-loan-limit-landscape-source-conforming-min",
-            "news-sc-state-loan-limit-landscape-source-fha-min"
-          ]
-        },
-        {
           "id": "state-limit-boundaries",
-          "heading": "A larger county limit is not greater affordability",
+          "heading": "Where the evidence stops: a larger county limit is not greater affordability",
           "body": [
-            "A $832,750 conforming ceiling or $690,000 FHA ceiling does not make that loan amount affordable to a South Carolina household, and the lower $832,750 or $541,287 figures do not describe home prices. Published $832,750 and $690,000 limits cannot establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $832,750 and $690,000 figures can also change with a new calendar year or corrected property geography. Keeping the 46 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
+            "A $832,750 conforming ceiling or $690,000 FHA ceiling does not make that loan amount affordable to a household in South Carolina, and the lower $832,750 or $541,287 figures do not describe home prices.",
+            "Applied to a decision in South Carolina, published $832,750 and $690,000 limits does not establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $832,750 and $690,000 figures can also change with a new calendar year or corrected property geography. For the decision at hand, keeping the 46 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
           ],
           "evidenceFactIds": [
             "conforming-range-high",
@@ -1621,9 +1647,10 @@
         },
         {
           "id": "county-lookup",
-          "heading": "Use the range to reach the correct county row",
+          "heading": "Put the evidence to work: use the range to reach the correct county row",
           "body": [
-            "The next step is to verify the selected property's South Carolina county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. Then compare that amount with the exact official row, using the $832,750 to $832,750 conforming range and $541,287 to $690,000 FHA range only as orientation. The 0 above-baseline count explains why this lookup matters, but it does not replace it. Keep the selected county row with the worksheet so the $832,750 and $690,000 statewide maximums cannot be mistaken for property-specific figures. After the 0 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
+            "The next step is to verify the selected property's South Carolina county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. For borrower planning, then compare that amount with the exact official row, using the $832,750 to $832,750 conforming range and $541,287 to $690,000 FHA range only as orientation.",
+            "In a borrower review centered on South Carolina, the 0 above-baseline count explains why this lookup matters, but it does not replace it. Keep the selected county row with the worksheet so the $832,750 and $690,000 statewide maximums cannot be mistaken for property-specific figures. After the 0 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
           ],
           "evidenceFactIds": [
             "conforming-range-low",
@@ -1691,38 +1718,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "counties in the statewide limit summary",
               "46",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit FHA limit",
               "$690,000",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "counties above the conforming baseline",
               "0",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1738,7 +1772,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "statewide-fha-range",
+          "afterSectionId": "program-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

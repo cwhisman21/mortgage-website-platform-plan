@@ -2,11 +2,15 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
+  CONTRIBUTOR_DISCLOSURE,
   articlesForContributor,
+  buildContributorArticleIndex,
   contributorById,
   mergeEditorialArticles,
   normalizeEditorialContent,
   normalizeEditorialContentWithFallback,
+  renderContributorArchiveMarkup,
+  renderContributorBylineMarkup,
   renderBylineModel,
   resolveArticleAuthor,
   applyArticleAuthorIds,
@@ -17,6 +21,12 @@ const contributorsRaw = JSON.parse(
 );
 const topicHubsRaw = JSON.parse(
   fs.readFileSync(new URL("../mock-data/editorial/topic-hubs.json", import.meta.url), "utf8"),
+);
+const productionSeed = JSON.parse(
+  fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"),
+);
+const locationNewsIndex = JSON.parse(
+  fs.readFileSync(new URL("../mock-data/location-news-index.json", import.meta.url), "utf8"),
 );
 
 const expectedRoster = [
@@ -135,6 +145,41 @@ test("derives related articles from authorId only", () => {
     articlesForContributor(content, articles, "contributor-rowan-hale").map(({ id }) => id),
     ["a", "c"],
   );
+});
+
+test("indexes editorial and location-news articles once for performant contributor archives", () => {
+  const content = normalizeEditorialContent({
+    contributors: contributorsRaw,
+    topicHubs: topicHubsRaw,
+  });
+  const editorialArticles = applyArticleAuthorIds(content, productionSeed.articles);
+  const index = buildContributorArticleIndex(editorialArticles, locationNewsIndex.articles);
+
+  for (const contributor of content.contributors) {
+    const expected = [...editorialArticles, ...locationNewsIndex.articles]
+      .filter(({ authorId }) => authorId === contributor.id);
+    const indexed = articlesForContributor(content, index, contributor.id);
+
+    assert.equal(indexed.length, expected.length, contributor.name);
+    if (locationNewsIndex.articles.some(({ authorId }) => authorId === contributor.id)) {
+      assert.ok(indexed.some(({ route }) => route.startsWith("/learning-center/market-news/")), contributor.name);
+    }
+  }
+
+  const rowan = contributorById(content, "contributor-rowan-hale");
+  const rowanArticles = articlesForContributor(content, index, rowan.id);
+  const markup = renderContributorArchiveMarkup(
+    content,
+    index,
+    rowan,
+    (article) => `<a data-archive-article href="${article.route}">${article.title}</a>`,
+    { limit: 12, showCount: true },
+  );
+
+  assert.equal((markup.match(/data-archive-article/g) || []).length, 12);
+  assert.match(markup, new RegExp(`data-contributor-article-count="${rowanArticles.length}"`));
+  assert.match(markup, new RegExp(`Showing 12 of ${rowanArticles.length}`));
+  assert.match(markup, /href="\/learning-center\/market-news\//);
 });
 
 test("applies structural article ownership without editing base article records", () => {
@@ -261,6 +306,22 @@ test("resolves bylines with linked contributors and safe Snap fallback", () => {
   assert.equal(fallback.portraitAlt, "Snap Mortgage editorial attribution");
   assert.equal(fallback.dateLabel, "Published Jul 10, 2026");
   assert.equal(fallback.isFallback, true);
+});
+
+test("full named bylines disclose the Snap editorial voice without a licensing claim", () => {
+  const content = normalizeEditorialContent(contributorsRaw);
+  const article = {
+    authorId: "contributor-maya-brooks",
+    publishedAt: "2026-07-10",
+  };
+
+  const full = renderContributorBylineMarkup(article, content.contributors);
+  const compact = renderContributorBylineMarkup(article, content.contributors, { compact: true });
+
+  assert.equal(CONTRIBUTOR_DISCLOSURE, "Snap editorial voice, not a loan officer or licensed mortgage professional.");
+  assert.match(full, /Snap editorial voice, not a loan officer or licensed mortgage professional\./);
+  assert.doesNotMatch(full, /human|avatar/i);
+  assert.doesNotMatch(compact, /licensed mortgage professional/i);
 });
 
 test("keeps missing and invalid article dates undisclosed", () => {

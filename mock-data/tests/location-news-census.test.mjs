@@ -7,6 +7,7 @@ import path from "node:path";
 import {
   ACS_SUMMARY_TABLES,
   ACS_VARIABLES,
+  ACS_YEARS,
   loadCensusEvidence,
   mapPlaceRows,
   mapStateRows,
@@ -33,6 +34,24 @@ test("uses median selected monthly owner costs for housing units with a mortgage
   assert.deepEqual(ACS_VARIABLES.medianOwnerCostWithMortgage, ["B25088_002E", "B25088_002M"]);
   assert.ok(ACS_SUMMARY_TABLES.includes("B25088"));
   assert.ok(!ACS_SUMMARY_TABLES.includes("B25103"));
+});
+
+test("keeps Census source-manifest acquisitions aligned with loader tables and variables", async () => {
+  const manifest = JSON.parse(await fs.readFile(new URL("../location-news-source-manifest.json", import.meta.url), "utf8"));
+  const variablesByTable = new Map(ACS_SUMMARY_TABLES.map((table) => [
+    table,
+    [...new Set(Object.values(ACS_VARIABLES).flat().filter((variable) => variable.startsWith(`${table}_`)))].sort(),
+  ]));
+
+  for (const year of ACS_YEARS) {
+    const prefix = `ACS ${year} 5-year `;
+    const records = manifest.sourceDatasets.filter((source) => source.dataset.startsWith(prefix) && /^B\d+$/.test(source.dataset.slice(prefix.length)));
+    assert.deepEqual(records.map((source) => source.dataset.slice(prefix.length)), ACS_SUMMARY_TABLES);
+    for (const source of records) {
+      const table = source.dataset.slice(prefix.length);
+      assert.deepEqual(source.variables, variablesByTable.get(table), `${source.dataset} variables diverge from the Census loader`);
+    }
+  }
 });
 
 test("does not relabel median real estate taxes as monthly owner costs", () => {

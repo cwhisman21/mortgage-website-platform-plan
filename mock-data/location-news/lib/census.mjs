@@ -23,6 +23,11 @@ export const ACS_YEARS = ["2024", "2019"];
 export const ACS_SUMMARY_TABLES = ["B01003", "B19013", "B25001", "B25002", "B25003", "B25064", "B25077", "B25088"];
 export const ACS_RELEASE_URL = "https://www.census.gov/programs-surveys/acs/news/data-releases/2024/release.html";
 export const ACS_SUMMARY_PAGE = "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html";
+
+export function variablesForSummaryTable(table) {
+  return [...new Set(Object.values(ACS_VARIABLES).flat().filter((variable) => variable.startsWith(`${table}_`)))].sort();
+}
+
 const PLACE_ALIASES = new Map([
   ["city-athens-ga", "athens-clarke-county-unified-government-balance"],
   ["city-augusta-ga", "augusta-richmond-county-consolidated-government-balance"],
@@ -341,7 +346,15 @@ async function loadCensusSummaryEvidence({ cities, states, cacheDir, summaryFile
       byCityId[id][year === "2024" ? "current" : "prior"] = record;
     }
     sources.push({ dataset: `ACS ${year} 5-year geography labels`, sourceUrl: files.urls.geography, sourcePage: ACS_SUMMARY_PAGE, cachePath: files.geography });
-    for (const table of ACS_SUMMARY_TABLES) sources.push({ dataset: `ACS ${year} 5-year ${table}`, sourceUrl: files.urls.tables[table], sourcePage: ACS_SUMMARY_PAGE, cachePath: files.tables[table] });
+    for (const table of ACS_SUMMARY_TABLES) {
+      sources.push({
+        dataset: `ACS ${year} 5-year ${table}`,
+        variables: variablesForSummaryTable(table),
+        sourceUrl: files.urls.tables[table],
+        sourcePage: ACS_SUMMARY_PAGE,
+        cachePath: files.tables[table],
+      });
+    }
   }
   return { mode: "table_based_summary_file", byCityId, byStateId, aliases: Object.fromEntries(PLACE_ALIASES), sources };
 }

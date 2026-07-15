@@ -13,9 +13,11 @@
       "title": "Pawtucket, RI home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Pawtucket, RI.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Pawtucket, RI.",
-      "metaDescription": "Pawtucket, RI home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Pawtucket.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Pawtucket, RI.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $325,500.",
         "prior ACS median owner-occupied home value: $194,600.",
-        "ACS median household income: $68,310.",
-        "median monthly owner cost with a mortgage: $1,923.",
-        "change from the prior ACS home-value estimate: 67.3%."
+        "ACS median household income: $68,310."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 67.3,
-          "display": "67.3%",
-          "sourceRecordIds": [
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-current",
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Rhode Island median home value",
           "value": 404200,
@@ -118,7 +108,7 @@
           "id": "local-baseline",
           "heading": "The local value, income, and owner-cost baseline",
           "body": [
-            "In Pawtucket, RI, the 2024 ACS reports a median owner-occupied home value of $325,500 and median household income of $68,310; these are separate medians, not the finances of one representative household. The same release reports $1,923 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Pawtucket, RI, reading $325,500, $68,310, and $1,923 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $325,500, $68,310, and $1,923 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "In Pawtucket, RI, the 2024 ACS reports a median owner-occupied home value of $325,500, median household income of $68,310, and median selected monthly owner costs of $1,923 for owners with a mortgage. For the decision at hand, together, those three reference points can help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,923 measure combines recurring ownership expenses rather than real estate taxes alone. In practical terms, a useful affordability review starts with $325,500, $68,310, and $1,923, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,26 +122,10 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Pawtucket, RI's median home-value estimate increased from $194,600 in the prior ACS period to $325,500 in the current release, a reported change of 67.3%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 67.3% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $194,600 to $325,500 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Pawtucket, RI. Before the 67.3% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior",
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
           "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
+          "heading": "What the comparison adds: how the city estimate sits within the state",
           "body": [
-            "Pawtucket, RI's $325,500 median home-value estimate is below the statewide $404,200 estimate, with a reported city-to-state gap of 19.5%. That 19.5% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Pawtucket, RI. It does not mean every local property is 19.5% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $325,500 and $404,200 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Pawtucket, RI's $325,500 median home-value estimate is below the statewide $404,200 estimate, with a reported city-to-state gap of 19.5%. For the decision at hand, that 19.5% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Pawtucket, RI. It does not mean every local property is 19.5% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. In practical terms, a borrower can apply $325,500 and $404,200 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -165,9 +139,10 @@
         },
         {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Where the evidence stops: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $1,923 owner-cost estimate gives Pawtucket, RI borrowers a broader monthly reference than principal and interest alone, while the $68,310 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $68,310 is the owner household at $1,923. The $325,500 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $325,500, $68,310, and $1,923 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $1,923 owner-cost estimate gives Pawtucket, RI borrowers a broader monthly reference than principal and interest alone, while the $68,310 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $68,310 is the owner household at $1,923.",
+            "For the next comparison in Pawtucket, RI, the $325,500 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. For borrower planning, keeping $325,500, $68,310, and $1,923 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +156,61 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "vintage-observations",
+          "heading": "Borrower view: read the ACS vintages as separate nominal observations",
           "body": [
-            "Neither $325,500 nor $1,923 determines the value of a specific Pawtucket, RI home, what a borrower will pay each month, or an underwriting result. The $68,310 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 67.3% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $325,500, $1,923, and $68,310 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "The 2019 ACS published $194,600 as Pawtucket, RI's median owner-occupied home-value estimate, while the 2024 ACS published $325,500. For borrower planning, these dated nominal observations can help a borrower notice that a search budget built around the older release needs current property evidence.",
+            "In a borrower review centered on Pawtucket, RI, they are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. Each estimate also summarizes a multi-year survey window and carries sampling error. Keep $194,600 attached to 2019 and $325,500 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior",
+            "news-pawtucket-ri-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "Evidence limits: what these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $325,500 estimate nor the $1,923 owner-cost median determines the value of a specific Pawtucket, RI home, a borrower's payment, or an underwriting result. For the decision at hand, the $68,310 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income.",
+            "For borrowers reviewing evidence from Pawtucket, RI, the separate 2019 observation of $194,600 also cannot forecast the next market move or establish a safe purchase horizon. In practical terms, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "median-household-income"
           ],
           "sourceRecordIds": [
             "news-pawtucket-ri-affordability-home-values-source-city-home-value-current",
+            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior",
             "news-pawtucket-ri-affordability-home-values-source-city-owner-cost-current",
-            "news-pawtucket-ri-affordability-home-values-source-city-income-current",
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior"
+            "news-pawtucket-ri-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Next step: build a property-specific comparison",
           "body": [
-            "A practical Pawtucket, RI worksheet can begin with $325,500 as broad value context, $1,923 as a reminder to include recurring ownership expenses, and $68,310 as a local economic reference. After noting those $325,500, $1,923, and $68,310 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 19.5% city-to-state difference is a prompt to keep the analysis local, while the 67.3% period change is a prompt to date every assumption. A licensed professional can use the 19.5% and 67.3% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A useful Pawtucket, RI worksheet can begin with $325,500 as dated value context, $1,923 as a reminder to include recurring ownership expenses, and $68,310 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves.",
+            "For borrowers reviewing evidence from Pawtucket, RI, the 19.5% city-to-state difference is a prompt to keep the analysis local, while the separate $194,600 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. In practical terms, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-pawtucket-ri-affordability-home-values-source-city-home-value-current",
+            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior",
             "news-pawtucket-ri-affordability-home-values-source-city-owner-cost-current",
             "news-pawtucket-ri-affordability-home-values-source-city-income-current",
-            "news-pawtucket-ri-affordability-home-values-source-state-home-value-current",
-            "news-pawtucket-ri-affordability-home-values-source-city-home-value-prior"
+            "news-pawtucket-ri-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +248,9 @@
               "display": "$1,923"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 67.3,
-              "display": "67.3%"
+              "label": "Rhode Island median home value",
+              "value": 404200,
+              "display": "$404,200"
             }
           ]
         }
@@ -269,43 +262,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$325,500",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$194,600",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$68,310",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,923",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "67.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Rhode Island median home value",
               "$404,200",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "19.5%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +314,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "state-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-pawtucket-ri-affordability-home-values-source-city-home-value-current",
@@ -452,9 +447,11 @@
       "title": "Pawtucket, RI housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Pawtucket, RI.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Pawtucket, RI.",
-      "metaDescription": "Pawtucket, RI housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Pawtucket, RI.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +469,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 32,810.",
         "occupied housing units: 30,598.",
-        "vacant housing units: 2,212.",
-        "prior ACS vacant housing units: 3,183.",
-        "vacant-unit share of housing stock: 6.7%."
+        "vacant housing units: 2,212."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +573,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "The dated finding: the size and use of the local housing stock",
           "body": [
-            "Pawtucket, RI's current ACS housing baseline includes 32,810 total housing units, 30,598 occupied units, and 2,212 vacant units. Those counts describe the housing stock across the survey period; they do not say that 2,212 homes were listed for sale or available to rent at one moment. The difference between 32,810 total units and 30,598 occupied units is useful for checking the internal scale of the release, while 2,212 provides the numerator for a more careful vacancy reading. For a borrower researching Pawtucket, RI, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "The published evidence provides the starting point: Pawtucket, RI's current ACS housing baseline includes 32,810 total housing units, 30,598 occupied units, and 2,212 vacant units. Those counts can nevertheless help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 2,212 homes were listed for sale or available to rent at one moment. For borrower planning, reading 32,810 total units with 30,598 occupied and 2,212 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +589,47 @@
           ]
         },
         {
+          "id": "tenure-mix",
+          "heading": "Ownership and renting within occupied housing",
+          "body": [
+            "Among 30,598 occupied units in Pawtucket, RI, the ACS-derived owner share is 50.1% and the renter share is 49.9%, making owner-occupied housing the larger measured tenure group. For borrower planning, the 50.1% and 49.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Pawtucket, RI. The 50.1% and 49.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon in place of used as a signal to buy or rent by itself."
+          ],
+          "evidenceFactIds": [
+            "occupied-units",
+            "owner-share",
+            "renter-share"
+          ],
+          "sourceRecordIds": [
+            "news-pawtucket-ri-housing-supply-tenure-source-occupied-units",
+            "news-pawtucket-ri-housing-supply-tenure-source-owner-units",
+            "news-pawtucket-ri-housing-supply-tenure-source-renter-units"
+          ]
+        },
+        {
+          "id": "rent-context",
+          "heading": "Planning context: use rent as a matched comparison, not a shortcut",
+          "body": [
+            "Pawtucket, RI's ACS median gross rent is $1,208, while renter-occupied units account for 49.9% of occupied housing and owner-occupied units account for 50.1%.",
+            "In practical terms, the $1,208 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,208 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For the decision at hand, a more useful Pawtucket, RI comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-pawtucket-ri-housing-supply-tenure-source-median-rent",
+            "news-pawtucket-ri-housing-supply-tenure-source-renter-units",
+            "news-pawtucket-ri-housing-supply-tenure-source-occupied-units",
+            "news-pawtucket-ri-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
           "id": "vacancy-comparison",
           "heading": "Vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Pawtucket, RI decreased from 3,183 in the prior ACS period to 2,212 in the current release, a reported change of -30.5%. In the current housing stock, 2,212 units equal 6.7% of the 32,810 total. ACS vacancy covers several statuses, so the 6.7% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 3,183 to 2,212 can still prompt better questions about current for-sale and rental inventory in Pawtucket, RI, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Pawtucket, RI decreased from 3,183 in the prior ACS period to 2,212 in the current release, a reported movement of 30.5%. In the current housing stock, 2,212 units equal 6.7% of the 32,810 total.",
+            "ACS vacancy covers several statuses, so the 6.7% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For the decision at hand, the movement from 3,183 to 2,212 can still prompt better questions about current for-sale and rental inventory in Pawtucket, RI, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -612,45 +645,10 @@
           ]
         },
         {
-          "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
-          "body": [
-            "Among 30,598 occupied units in Pawtucket, RI, the ACS-derived owner share is 50.1% and the renter share is 49.9%, making owner-occupied housing the larger measured tenure group. The 50.1% and 49.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Pawtucket, RI. The 50.1% and 49.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
-          ],
-          "evidenceFactIds": [
-            "occupied-units",
-            "owner-share",
-            "renter-share"
-          ],
-          "sourceRecordIds": [
-            "news-pawtucket-ri-housing-supply-tenure-source-occupied-units",
-            "news-pawtucket-ri-housing-supply-tenure-source-owner-units",
-            "news-pawtucket-ri-housing-supply-tenure-source-renter-units"
-          ]
-        },
-        {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Pawtucket, RI's ACS median gross rent is $1,208, while renter-occupied units account for 49.9% of occupied housing and owner-occupied units account for 50.1%. The $1,208 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,208 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Pawtucket, RI comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-pawtucket-ri-housing-supply-tenure-source-median-rent",
-            "news-pawtucket-ri-housing-supply-tenure-source-renter-units",
-            "news-pawtucket-ri-housing-supply-tenure-source-occupied-units",
-            "news-pawtucket-ri-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Where the evidence stops: what the housing-stock evidence cannot show",
           "body": [
-            "The 6.7% vacant-unit share and 50.1% owner share cannot determine competition for a specific Pawtucket, RI listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 32,810 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 6.7% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 2,212 vacant units separate from active inventory and keep the $1,208 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 6.7% vacant-unit share and 50.1% owner share does not determine competition for a specific Pawtucket, RI listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 32,810 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 6.7% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. For borrower planning, the borrower should therefore keep 2,212 vacant units separate from active inventory and keep the $1,208 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +667,9 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Next step: compare current local choices on the same terms",
           "body": [
-            "A grounded Pawtucket, RI comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 32,810 total units, a 6.7% vacancy share, and a 50.1% owner share. For renting, replace the $1,208 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 50.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 49.9% or 50.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Pawtucket, RI comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 32,810 total units, a vacancy share of 6.7%, and an owner share of 50.1%. For the rental budget, replace the $1,208 median with the actual lease, utilities, deposits, and expected changes. On the ownership side, keep the 50.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. In practical terms, the resulting worksheet will not turn 49.9% or 50.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +738,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "32,810",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "30,598",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "2,212",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "3,183",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "6.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-30.5%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "50.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "49.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,208",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +810,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "tenure-mix",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +974,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Pawtucket, RI labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Pawtucket, RI.",
-      "previewText": "See what changed in Pawtucket, RI, RI's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Pawtucket, RI labor market: latest employment evidence. See what changed in Pawtucket, RI, RI's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Pawtucket, RI's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Pawtucket, RI's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +997,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 41,734.",
-        "employment: 40,122.",
-        "unemployment: 1,612.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.9%.",
-        "previous-month unemployment rate: 4.0%."
+        "change in unemployment rate from the prior month: -0.1 percentage points.",
+        "change in unemployment rate from a year earlier: -0.9 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1067,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.1,
-          "display": "-0.1%",
+          "display": "-0.1 percentage points",
           "sourceRecordIds": [
             "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate",
             "news-pawtucket-ri-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1078,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.9,
-          "display": "-0.9%",
+          "display": "-0.9 percentage points",
           "sourceRecordIds": [
             "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate",
             "news-pawtucket-ri-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1088,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Pawtucket, RI labor force of 41,734, with 40,122 people employed and 1,612 unemployed under the program's definitions. Those three counts belong together: 40,122 plus 1,612 explains the scale behind the published 3.9% unemployment rate. For mortgage planning, the 41,734 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 41,734 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-pawtucket-ri-local-labor-market-source-latest-labor-force",
-            "news-pawtucket-ri-local-labor-market-source-latest-employment",
-            "news-pawtucket-ri-local-labor-market-source-latest-unemployment",
-            "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What changed in the latest month",
           "body": [
-            "Pawtucket, RI's unemployment rate fell from 4.0% in the prior month to 3.9% in the latest month, a change of -0.1%. A -0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,612 unemployment count and 41,734 labor force. The -0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Pawtucket, RI borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "As of May 2026, Pawtucket, RI's unemployment rate fell from 4.0% in April 2026 to 3.9% in May 2026, a change of 0.1 percentage points. For the decision at hand, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it cannot prove one applicant's income stability, mortgage eligibility, or loan price. In practical terms, the release also estimates 1,612 people unemployed within a labor force of 41,734, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1109,28 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What changed over the year",
           "body": [
-            "Compared with 4.8% a year earlier, the latest Pawtucket, RI unemployment rate of 3.9% fell by -0.9%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.9% difference still describes a population estimate rather than an individual's job stability. Reading 4.8%, 4.0%, and 3.9% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Pawtucket, RI pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Pawtucket, RI's unemployment rate fell from 4.8% in May 2025 to 3.9%, a change of 0.9 percentage points. In practical terms, that wider window helps show whether Pawtucket, RI's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.1 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Pawtucket, RI or describes the stability of one household's earnings. For mortgage planning in Pawtucket, RI, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Pawtucket, RI's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-pawtucket-ri-local-labor-market-source-yearago-year-ago-rate",
-            "news-pawtucket-ri-local-labor-market-source-previous-previous-rate",
-            "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate"
+            "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate",
+            "news-pawtucket-ri-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Borrower view: why the rate needs its underlying counts",
           "body": [
-            "At 3.9%, Pawtucket, RI's unemployment rate summarizes 1,612 unemployed people within a 41,734 labor force; the rate should not be discussed without those counts. The 40,122 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 40,122 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.9% rate attached to 41,734, 40,122, and 1,612 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.9%, Pawtucket, RI's unemployment rate summarizes 1,612 unemployed people within a labor force of 41,734; the rate should not be discussed without those counts.",
+            "For borrowers reviewing evidence from Pawtucket, RI, the 40,122 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 40,122 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. In practical terms, keeping the 3.9% rate attached to 41,734, 40,122, and 1,612 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1146,31 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "Evidence at a glance: the counts behind the published rate",
           "body": [
-            "Neither 40,122 employed people nor a 3.9% unemployment rate tells a lender what one Pawtucket, RI applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.9% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 41,734 people in the Pawtucket, RI labor force, including 40,122 employed and 1,612 unemployed under LAUS definitions.",
+            "In a borrower review centered on Pawtucket, RI, the employment and unemployment counts belong together because they establish the scale behind the published 3.9% rate. For mortgage planning, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. It may still help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should therefore follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-pawtucket-ri-local-labor-market-source-latest-labor-force",
+            "news-pawtucket-ri-local-labor-market-source-latest-employment",
+            "news-pawtucket-ri-local-labor-market-source-latest-unemployment",
+            "news-pawtucket-ri-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Evidence limits: labor statistics are not an income review",
+          "body": [
+            "Neither 40,122 employed people nor an unemployment rate of 3.9% tells a lender what an applicant in Pawtucket, RI earns, whether that income is eligible, or whether it is likely to continue. In practical terms, the monthly movement of 0.1 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "Applied to a decision in Pawtucket, RI, the 3.9% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For the decision at hand, that boundary protects borrowers from treating the year-over-year movement of 0.9 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1187,9 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Put the evidence to work: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Pawtucket, RI borrower is to note the latest 3.9% unemployment rate and the -0.9% year-over-year change, then move immediately to the records that describe the household. After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 41,734 local labor force and 40,122 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Pawtucket, RI's 3.9% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Pawtucket, RI is to note the latest 3.9% unemployment rate and the year-over-year movement of 0.9 percentage points, then move immediately to the records that describe the household. After noting the 3.9% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 41,734 local labor force and 40,122 employment count can frame the economic conversation, but they should not alter verified borrower inputs. In practical terms, the monthly movement of 0.1 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Pawtucket, RI's 3.9% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1256,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "41,734",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "40,122",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,612",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.9%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.0%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-0.9%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-0.9 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1321,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1470,11 @@
       "title": "Pawtucket, RI loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Pawtucket, RI, including unit-count differences and important limits.",
-      "metaDescription": "Pawtucket, RI loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Pawtucket, RI, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Pawtucket, RI, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1494,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $787,750.",
-        "four-unit FHA limit: $1,514,950.",
-        "difference between one-unit conforming and FHA limits: $45,000."
+        "one-unit FHA limit: $787,750."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1555,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Evidence limits: the published one-unit limits for the matched area",
           "body": [
-            "Pawtucket, RI is connected to Providence County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $787,750. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $787,750 is not an FHA eligibility finding. For Pawtucket, RI, starting with Providence County keeps the limits attached to the county or county-equivalent area used in the official files. A Pawtucket, RI borrower still needs to confirm the selected property's location and legal unit count, because the relevant Providence County row follows the property rather than the city label or mailing address alone. Around Pawtucket, RI, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Providence County as Pawtucket, RI's confirmed county row before comparing the $832,750 and $787,750 program boundaries."
+            "The local figures answer the first question: Pawtucket, RI is connected to Providence County for this 2026 source comparison. For borrower planning, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $787,750. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $787,750 is not an FHA eligibility finding. For Pawtucket, RI, starting with Providence County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Pawtucket, RI still need to confirm the selected property's location and legal unit count, because the relevant Providence County row follows the property rather than the city label or mailing address alone. Around Pawtucket, RI, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Providence County as Pawtucket, RI's confirmed county row before comparing the $832,750 and $787,750 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,26 +1569,10 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
-          "body": [
-            "For the matched Pawtucket, RI area, the difference between the $832,750 one-unit conforming limit and the $787,750 one-unit FHA limit is $45,000. The $45,000 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $787,750 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $45,000 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-pawtucket-ri-county-loan-limits-source-conforming-oneunit",
-            "news-pawtucket-ri-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "unit-count",
           "heading": "Unit count changes the published ceiling",
           "body": [
-            "Providence County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $787,750 to $1,514,950. The higher $1,601,750 and $1,514,950 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Pawtucket, RI, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,514,950 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "Providence County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $787,750 to $1,514,950. In practical terms, the higher $1,601,750 and $1,514,950 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Pawtucket, RI, a legal unit count should be verified from reliable property information before a multi-unit limit is used. For the decision at hand, the $1,601,750 and $1,514,950 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,10 +1588,27 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
+          "id": "one-unit-comparison",
+          "heading": "How the one-unit program boundaries compare",
           "body": [
-            "The $832,750 conforming ceiling and $787,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Pawtucket, RI household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $787,750 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $45,000 program gap is therefore best used to route questions, not to rank products. Regardless of the $45,000 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "For the matched Pawtucket, RI area, the difference between the $832,750 one-unit conforming limit and the $787,750 one-unit FHA limit is $45,000. The $45,000 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $787,750 only after price, down payment, financed items, and the applicable base-loan definition are established. For borrower planning, even when $45,000 is material, it does not determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-pawtucket-ri-county-loan-limits-source-conforming-oneunit",
+            "news-pawtucket-ri-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "category-boundary",
+          "heading": "Where the evidence stops: a limit is a category boundary, not borrowing power",
+          "body": [
+            "The $832,750 conforming ceiling and $787,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Pawtucket, RI or reduces household debts.",
+            "For the next comparison in Pawtucket, RI, a borrower seeking less than $832,750 may still have important conventional requirements to review, and a request below $787,750 may still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $45,000 program gap is therefore best used to route questions, not to rank products. For borrower planning, regardless of the $45,000 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules in place of the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1599,9 +1622,9 @@
         },
         {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Evidence limits: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,514,950 indicates what a four-unit property in Pawtucket, RI is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $787,750 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $787,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Pawtucket, RI's connection to Providence County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,514,950 indicates what a four-unit property in Pawtucket, RI is worth, what income its units may produce, or whether a borrower can qualify to purchase it. In practical terms, the one-unit $832,750 and $787,750 limits likewise cannot prove a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $787,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. For the decision at hand, that is why Pawtucket, RI's connection to Providence County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1618,9 +1641,10 @@
         },
         {
           "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "heading": "Next step: verify the property before comparing products",
           "body": [
-            "A useful Pawtucket, RI next step is to document the property address, Providence County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $787,750 for a one-unit property, or with $1,601,750 and $1,514,950 only when the four-unit category is actually applicable. After the $832,750 and $787,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $787,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $45,000 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Pawtucket, RI next step is to document the property address, Providence County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $787,750 for a one-unit property, or with $1,601,750 and $1,514,950 only when the four-unit category is actually applicable.",
+            "For the next comparison in Pawtucket, RI, after the $832,750 and $787,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. For borrower planning, the $832,750 conforming figure and $787,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $45,000 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1712,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$787,750",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,514,950",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$45,000",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1761,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "unit-count",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

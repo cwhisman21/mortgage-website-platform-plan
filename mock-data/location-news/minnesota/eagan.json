@@ -13,9 +13,11 @@
       "title": "Eagan, MN home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Eagan, MN.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Eagan, MN.",
-      "metaDescription": "Eagan, MN home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Eagan, MN.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Eagan, MN.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $397,100.",
         "prior ACS median owner-occupied home value: $288,200.",
-        "ACS median household income: $108,690.",
-        "median monthly owner cost with a mortgage: $2,059.",
-        "change from the prior ACS home-value estimate: 37.8%."
+        "ACS median household income: $108,690."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 37.8,
-          "display": "37.8%",
-          "sourceRecordIds": [
-            "news-eagan-mn-affordability-home-values-source-city-home-value-current",
-            "news-eagan-mn-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Minnesota median home value",
           "value": 329300,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "The dated finding: the local value, income, and owner-cost baseline",
           "body": [
-            "In Eagan, MN, the 2024 ACS reports a median owner-occupied home value of $397,100 and median household income of $108,690; these are separate medians, not the finances of one representative household. The same release reports $2,059 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Eagan, MN, reading $397,100, $108,690, and $2,059 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $397,100, $108,690, and $2,059 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The published evidence provides the starting point: In Eagan, MN, the 2024 ACS reports a median owner-occupied home value of $397,100, median household income of $108,690, and median selected monthly owner costs of $2,059 for owners with a mortgage. In practical terms, together, those three reference points can nevertheless help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $2,059 measure combines recurring ownership expenses rather than real estate taxes alone. For the decision at hand, a useful affordability review starts with $397,100, $108,690, and $2,059, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,15 +122,15 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
+          "id": "vintage-observations",
+          "heading": "Planning context: read the ACS vintages as separate nominal observations",
           "body": [
-            "Eagan, MN's median home-value estimate increased from $288,200 in the prior ACS period to $397,100 in the current release, a reported change of 37.8%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 37.8% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $288,200 to $397,100 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Eagan, MN. Before the 37.8% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+            "The 2019 ACS published $288,200 as Eagan, MN's median owner-occupied home-value estimate, while the 2024 ACS published $397,100.",
+            "For the next comparison in Eagan, MN, these dated nominal observations can help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. For borrower planning, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $288,200 attached to 2019 and $397,100 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "median-home-value",
-            "home-value-change"
+            "median-home-value"
           ],
           "sourceRecordIds": [
             "news-eagan-mn-affordability-home-values-source-city-home-value-prior",
@@ -151,7 +141,8 @@
           "id": "state-comparison",
           "heading": "How the city estimate sits within the state",
           "body": [
-            "Eagan, MN's $397,100 median home-value estimate is above the statewide $329,300 estimate, with a reported city-to-state gap of 20.6%. That 20.6% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Eagan, MN. It does not mean every local property is 20.6% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $397,100 and $329,300 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Eagan, MN's $397,100 median home-value estimate is above the statewide $329,300 estimate, with a reported city-to-state gap of 20.6%. In practical terms, that 20.6% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Eagan, MN.",
+            "Applied to a decision in Eagan, MN, it does not mean every local property is 20.6% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For the decision at hand, borrowers may use $397,100 and $329,300 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -165,9 +156,9 @@
         },
         {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Keep the boundary clear: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $2,059 owner-cost estimate gives Eagan, MN borrowers a broader monthly reference than principal and interest alone, while the $108,690 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $108,690 is the owner household at $2,059. The $397,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $397,100, $108,690, and $2,059 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $2,059 owner-cost estimate gives Eagan, MN borrowers a broader monthly reference than principal and interest alone, while the $108,690 income estimate supplies separate household context. For borrower planning, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $108,690 is the owner household at $2,059. The $397,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $397,100, $108,690, and $2,059 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -182,42 +173,44 @@
         },
         {
           "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "heading": "Keep the boundary clear: what these local medians cannot decide",
           "body": [
-            "Neither $397,100 nor $2,059 determines the value of a specific Eagan, MN home, what a borrower will pay each month, or an underwriting result. The $108,690 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 37.8% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $397,100, $2,059, and $108,690 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Neither the 2024 $397,100 estimate nor the $2,059 owner-cost median determines the value of a specific Eagan, MN home, a borrower's payment, or an underwriting result. In practical terms, the $108,690 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income.",
+            "Applied to a decision in Eagan, MN, the separate 2019 observation of $288,200 also cannot forecast the next market move or establish a safe purchase horizon. For the decision at hand, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "median-household-income"
           ],
           "sourceRecordIds": [
             "news-eagan-mn-affordability-home-values-source-city-home-value-current",
+            "news-eagan-mn-affordability-home-values-source-city-home-value-prior",
             "news-eagan-mn-affordability-home-values-source-city-owner-cost-current",
-            "news-eagan-mn-affordability-home-values-source-city-income-current",
-            "news-eagan-mn-affordability-home-values-source-city-home-value-prior"
+            "news-eagan-mn-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Next step: build a property-specific comparison",
           "body": [
-            "A practical Eagan, MN worksheet can begin with $397,100 as broad value context, $2,059 as a reminder to include recurring ownership expenses, and $108,690 as a local economic reference. After noting those $397,100, $2,059, and $108,690 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 20.6% city-to-state difference is a prompt to keep the analysis local, while the 37.8% period change is a prompt to date every assumption. A licensed professional can use the 20.6% and 37.8% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A useful Eagan, MN worksheet can begin with $397,100 as dated value context, $2,059 as a reminder to include recurring ownership expenses, and $108,690 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves.",
+            "Applied to a decision in Eagan, MN, the 20.6% city-to-state difference is a prompt to keep the analysis local, while the separate $288,200 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For the decision at hand, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-eagan-mn-affordability-home-values-source-city-home-value-current",
+            "news-eagan-mn-affordability-home-values-source-city-home-value-prior",
             "news-eagan-mn-affordability-home-values-source-city-owner-cost-current",
             "news-eagan-mn-affordability-home-values-source-city-income-current",
-            "news-eagan-mn-affordability-home-values-source-state-home-value-current",
-            "news-eagan-mn-affordability-home-values-source-city-home-value-prior"
+            "news-eagan-mn-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +248,9 @@
               "display": "$2,059"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 37.8,
-              "display": "37.8%"
+              "label": "Minnesota median home value",
+              "value": 329300,
+              "display": "$329,300"
             }
           ]
         }
@@ -269,43 +262,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$397,100",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$288,200",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$108,690",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,059",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "37.8%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Minnesota median home value",
               "$329,300",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap above the state estimate",
               "20.6%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +314,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "vintage-observations",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-eagan-mn-affordability-home-values-source-city-home-value-current",
@@ -452,9 +447,11 @@
       "title": "Eagan, MN housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Eagan, MN.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Eagan, MN.",
-      "metaDescription": "Eagan, MN housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Eagan, MN.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +469,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 28,789.",
         "occupied housing units: 28,264.",
-        "vacant housing units: 525.",
-        "prior ACS vacant housing units: 728.",
-        "vacant-unit share of housing stock: 1.8%."
+        "vacant housing units: 525."
       ],
       "evidenceFacts": [
         {
@@ -579,7 +575,7 @@
           "id": "stock-baseline",
           "heading": "The size and use of the local housing stock",
           "body": [
-            "Eagan, MN's current ACS housing baseline includes 28,789 total housing units, 28,264 occupied units, and 525 vacant units. Those counts describe the housing stock across the survey period; they do not say that 525 homes were listed for sale or available to rent at one moment. The difference between 28,789 total units and 28,264 occupied units is useful for checking the internal scale of the release, while 525 provides the numerator for a more careful vacancy reading. For a borrower researching Eagan, MN, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Eagan, MN's current ACS housing baseline includes 28,789 total housing units, 28,264 occupied units, and 525 vacant units. For borrower planning, those counts can still help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 525 homes were listed for sale or available to rent at one moment. Reading 28,789 total units with 28,264 occupied and 525 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -594,9 +590,10 @@
         },
         {
           "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Eagan, MN decreased from 728 in the prior ACS period to 525 in the current release, a reported change of -27.9%. In the current housing stock, 525 units equal 1.8% of the 28,789 total. ACS vacancy covers several statuses, so the 1.8% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 728 to 525 can still prompt better questions about current for-sale and rental inventory in Eagan, MN, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Eagan, MN decreased from 728 in the prior ACS period to 525 in the current release, a reported movement of 27.9%. In the current housing stock, 525 units equal 1.8% of the 28,789 total.",
+            "ACS vacancy covers several statuses, so the 1.8% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. In practical terms, the movement from 728 to 525 can still prompt better questions about current for-sale and rental inventory in Eagan, MN, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +610,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "Among 28,264 occupied units in Eagan, MN, the ACS-derived owner share is 67.7% and the renter share is 32.3%, making owner-occupied housing the larger measured tenure group. The 67.7% and 32.3% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Eagan, MN. The 67.7% and 32.3% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 28,264 occupied units in Eagan, MN, the ACS-derived owner share is 67.7% and the renter share is 32.3%, making owner-occupied housing the larger measured tenure group. The 67.7% and 32.3% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage.",
+            "This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Eagan, MN. For borrower planning, the 67.7% and 32.3% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -630,9 +628,10 @@
         },
         {
           "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
+          "heading": "Evidence check: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Eagan, MN's ACS median gross rent is $1,679, while renter-occupied units account for 32.3% of occupied housing and owner-occupied units account for 67.7%. The $1,679 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,679 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Eagan, MN comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+            "Eagan, MN's ACS median gross rent is $1,679, while renter-occupied units account for 32.3% of occupied housing and owner-occupied units account for 67.7%. For the decision at hand, the $1,679 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration.",
+            "Comparing $1,679 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. In practical terms, a more useful Eagan, MN comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
           ],
           "evidenceFactIds": [
             "median-rent",
@@ -648,9 +647,10 @@
         },
         {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Keep the boundary clear: what the housing-stock evidence cannot show",
           "body": [
-            "The 1.8% vacant-unit share and 67.7% owner share cannot determine competition for a specific Eagan, MN listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 28,789 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 1.8% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 525 vacant units separate from active inventory and keep the $1,679 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 1.8% vacant-unit share and 67.7% owner share cannot determine competition for a specific Eagan, MN listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "In a borrower review centered on Eagan, MN, likewise, 28,789 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 1.8% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. The borrower should, as a result, keep 525 vacant units separate from active inventory and keep the $1,679 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +669,9 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Next step: compare current local choices on the same terms",
           "body": [
-            "A grounded Eagan, MN comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 28,789 total units, a 1.8% vacancy share, and a 67.7% owner share. For renting, replace the $1,679 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 67.7% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 32.3% or 67.7% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Eagan, MN comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 28,789 total units, a vacancy share of 1.8%, and an owner share of 67.7%. For the rental budget, replace the $1,679 median with the actual lease, utilities, deposits, and expected changes. For the ownership budget, keep the 67.7% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For the decision at hand, the resulting worksheet will not turn 32.3% or 67.7% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +740,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "28,789",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "28,264",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "525",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "728",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "1.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-27.9%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "67.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "32.3%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,679",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +976,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Eagan, MN labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Eagan, MN.",
-      "previewText": "See what changed in Eagan, MN, MN's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Eagan, MN labor market: latest employment evidence. See what changed in Eagan, MN, MN's labor market and why broad employment data cannot determine mortgage.",
+      "previewText": "See what changed in Eagan, MN's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Eagan, MN's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +999,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 39,103.",
-        "employment: 37,616.",
-        "unemployment: 1,487.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.8%.",
-        "previous-month unemployment rate: 3.5%."
+        "change in unemployment rate from the prior month: 0.3 percentage points.",
+        "change in unemployment rate from a year earlier: 0.5 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1069,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0.3,
-          "display": "0.3%",
+          "display": "0.3 percentage points",
           "sourceRecordIds": [
             "news-eagan-mn-local-labor-market-source-latest-unemployment-rate",
             "news-eagan-mn-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1080,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.5,
-          "display": "0.5%",
+          "display": "0.5 percentage points",
           "sourceRecordIds": [
             "news-eagan-mn-local-labor-market-source-latest-unemployment-rate",
             "news-eagan-mn-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1090,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Eagan, MN labor force of 39,103, with 37,616 people employed and 1,487 unemployed under the program's definitions. Those three counts belong together: 37,616 plus 1,487 explains the scale behind the published 3.8% unemployment rate. For mortgage planning, the 39,103 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 39,103 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-eagan-mn-local-labor-market-source-latest-labor-force",
-            "news-eagan-mn-local-labor-market-source-latest-employment",
-            "news-eagan-mn-local-labor-market-source-latest-unemployment",
-            "news-eagan-mn-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What the comparison adds: what changed in the latest month",
           "body": [
-            "Eagan, MN's unemployment rate rose from 3.5% in the prior month to 3.8% in the latest month, a change of 0.3%. A 0.3% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,487 unemployment count and 39,103 labor force. The 0.3% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Eagan, MN borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The published evidence provides the starting point: As of May 2026, Eagan, MN's unemployment rate rose from 3.5% in April 2026 to 3.8% in May 2026, a change of 0.3 percentage points. In practical terms, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not reveal that a particular employer is hiring or cutting jobs, and it cannot establish one applicant's income stability, mortgage eligibility, or loan price. For the decision at hand, the release also estimates 1,487 people unemployed within a labor force of 39,103, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1111,48 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Read the comparison: what changed over the year",
           "body": [
-            "Compared with 3.3% a year earlier, the latest Eagan, MN unemployment rate of 3.8% rose by 0.5%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.5% difference still describes a population estimate rather than an individual's job stability. Reading 3.3%, 3.5%, and 3.8% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Eagan, MN pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Eagan, MN's unemployment rate rose from 3.3% in May 2025 to 3.8%, a change of 0.5 percentage points. For the decision at hand, that wider window helps show whether Eagan, MN's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.3 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Eagan, MN or describes the stability of one household's earnings. For mortgage planning in Eagan, MN, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Eagan, MN's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-eagan-mn-local-labor-market-source-yearago-year-ago-rate",
-            "news-eagan-mn-local-labor-market-source-previous-previous-rate",
+            "news-eagan-mn-local-labor-market-source-latest-unemployment-rate",
+            "news-eagan-mn-local-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "The dated finding: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 39,103 people in the Eagan, MN labor force, including 37,616 employed and 1,487 unemployed under LAUS definitions.",
+            "For the next comparison in Eagan, MN, the employment and unemployment counts belong together because they establish the scale behind the published 3.8% rate. For mortgage planning, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. For borrower planning, it may still help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-eagan-mn-local-labor-market-source-latest-labor-force",
+            "news-eagan-mn-local-labor-market-source-latest-employment",
+            "news-eagan-mn-local-labor-market-source-latest-unemployment",
             "news-eagan-mn-local-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Planning context: why the rate needs its underlying counts",
           "body": [
-            "At 3.8%, Eagan, MN's unemployment rate summarizes 1,487 unemployed people within a 39,103 labor force; the rate should not be discussed without those counts. The 37,616 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 37,616 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.8% rate attached to 39,103, 37,616, and 1,487 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.8%, Eagan, MN's unemployment rate summarizes 1,487 unemployed people within a labor force of 39,103; the rate should not be discussed without those counts. In practical terms, the 37,616 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file.",
+            "Applied to a decision in Eagan, MN, that makes 37,616 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For the decision at hand, keeping the 3.8% rate attached to 39,103, 37,616, and 1,487 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1156,9 +1169,10 @@
         },
         {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Evidence limits: labor statistics are not an income review",
           "body": [
-            "Neither 37,616 employed people nor a 3.8% unemployment rate tells a lender what one Eagan, MN applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.3% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.5% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 37,616 employed people nor an unemployment rate of 3.8% tells a lender what an applicant in Eagan, MN earns, whether that income is eligible, or whether it is likely to continue.",
+            "For borrowers reviewing evidence from Eagan, MN, the monthly movement of 0.3 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. In practical terms, that boundary protects borrowers from treating the year-over-year movement of 0.5 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1189,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Borrower action: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Eagan, MN borrower is to note the latest 3.8% unemployment rate and the 0.5% year-over-year change, then move immediately to the records that describe the household. After noting the 3.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 39,103 local labor force and 37,616 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.3% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Eagan, MN's 3.8% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Eagan, MN is to note the latest 3.8% unemployment rate and the year-over-year movement of 0.5 percentage points, then move immediately to the records that describe the household. After noting the 3.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 39,103 local labor force and 37,616 employment count can frame the economic conversation, but they should not alter verified borrower inputs.",
+            "For the decision at hand, the monthly movement of 0.3 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Eagan, MN's 3.8% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1259,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "39,103",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "37,616",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,487",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "3.5%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "3.3%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.3 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.5%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.5 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1324,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1473,11 @@
       "title": "Eagan, MN loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Eagan, MN, including unit-count differences and important limits.",
-      "metaDescription": "Eagan, MN loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Eagan, MN, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Eagan, MN, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1497,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $552,000.",
-        "four-unit FHA limit: $1,061,550.",
-        "difference between one-unit conforming and FHA limits: $280,750."
+        "one-unit FHA limit: $552,000."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1558,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Keep the boundary clear: the published one-unit limits for the matched area",
           "body": [
-            "Eagan, MN is connected to Dakota County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $552,000. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $552,000 is not an FHA eligibility finding. For Eagan, MN, starting with Dakota County keeps the limits attached to the county or county-equivalent area used in the official files. A Eagan, MN borrower still needs to confirm the selected property's location and legal unit count, because the relevant Dakota County row follows the property rather than the city label or mailing address alone. Around Eagan, MN, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Dakota County as Eagan, MN's confirmed county row before comparing the $832,750 and $552,000 program boundaries."
+            "Start with the dated local finding: Eagan, MN is connected to Dakota County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $552,000. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $552,000 is not an FHA eligibility finding. For Eagan, MN, starting with Dakota County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Eagan, MN still need to confirm the selected property's location and legal unit count, because the relevant Dakota County row follows the property in place of the city label or mailing address alone. Around Eagan, MN, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Dakota County as Eagan, MN's confirmed county row before comparing the $832,750 and $552,000 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1573,9 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "What the comparison adds: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Eagan, MN area, the difference between the $832,750 one-unit conforming limit and the $552,000 one-unit FHA limit is $280,750. The $280,750 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $552,000 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $280,750 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Eagan, MN area, the difference between the $832,750 one-unit conforming limit and the $552,000 one-unit FHA limit is $280,750. For borrower planning, the $280,750 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $552,000 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $280,750 is material, it cannot decide approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1564,9 +1589,10 @@
         },
         {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Borrower view: unit count changes the published ceiling",
           "body": [
-            "Dakota County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $552,000 to $1,061,550. The higher $1,601,750 and $1,061,550 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Eagan, MN, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,061,550 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "For borrowers in Eagan, MN, Dakota County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $552,000 to $1,061,550.",
+            "For the decision at hand, the higher $1,601,750 and $1,061,550 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Eagan, MN, a legal unit count should be verified from reliable property information before a multi-unit limit is used. In practical terms, the $1,601,750 and $1,061,550 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,26 +1608,11 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
-          "body": [
-            "The $832,750 conforming ceiling and $552,000 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Eagan, MN household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $552,000 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $280,750 program gap is therefore best used to route questions, not to rank products. Regardless of the $280,750 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-eagan-mn-county-loan-limits-source-conforming-oneunit",
-            "news-eagan-mn-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Where the evidence stops: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,061,550 indicates what a four-unit property in Eagan, MN is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $552,000 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $552,000 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Eagan, MN's connection to Dakota County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,061,550 indicates what a four-unit property in Eagan, MN is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For the decision at hand, the one-unit $832,750 and $552,000 limits likewise does not establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval.",
+            "The $832,750 and $552,000 official limits can change by year, and a corrected property geography or unit count can change the applicable row. In practical terms, that is why Eagan, MN's connection to Dakota County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1617,10 +1628,28 @@
           ]
         },
         {
-          "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "id": "category-boundary",
+          "heading": "Keep the boundary clear: a limit is a category boundary, not borrowing power",
           "body": [
-            "A useful Eagan, MN next step is to document the property address, Dakota County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $552,000 for a one-unit property, or with $1,601,750 and $1,061,550 only when the four-unit category is actually applicable. After the $832,750 and $552,000 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $552,000 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $280,750 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "The $832,750 conforming ceiling and $552,000 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Eagan, MN or reduces household debts.",
+            "In a borrower review centered on Eagan, MN, a borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $552,000 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $280,750 program gap is therefore best used to route questions, not to rank products. Regardless of the $280,750 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-eagan-mn-county-loan-limits-source-conforming-oneunit",
+            "news-eagan-mn-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "verify-next",
+          "heading": "Borrower action: verify the property before comparing products",
+          "body": [
+            "A useful Eagan, MN next step is to document the property address, Dakota County geography, legal unit count, price, down-payment plan, and expected base loan amount. For borrower planning, compare that amount with $832,750 and $552,000 for a one-unit property, or with $1,601,750 and $1,061,550 only when the four-unit category is actually applicable.",
+            "In a borrower review centered on Eagan, MN, after the $832,750 and $552,000 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $552,000 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $280,750 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1717,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$552,000",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,061,550",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$280,750",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

@@ -48,6 +48,49 @@ test("renders a linked contributor headshot, name, and UTC-safe publication date
   assert.doesNotMatch(html, /July 9, 2026/);
 });
 
+test("renders tags around location news content and uses the supplied route mapper", () => {
+  const tagContext = {
+    primaryTags: [{ id: "florida", slug: "florida", displayName: "Florida" }],
+    additionalTags: Array.from({ length: 9 }, (_, index) => ({
+      id: `tag-${index + 1}`,
+      slug: `tag-${index + 1}`,
+      displayName: `Tag ${index + 1}`,
+    })),
+  };
+  const html = renderArticleContent(article, media, {
+    tagContext,
+    routeHref: (href) => `/app${href}`,
+  });
+
+  assert.match(html, /class="content-primary-tags"[\s\S]*href="\/app\/learning-center\/tags\/florida"[\s\S]*<h1>/);
+  assert.equal((html.match(/data-additional-tag=/g) || []).length, 9);
+  assert.match(html, /<details class="content-additional-tags-more">/);
+  assert.ok(html.indexOf("news-article-sources") < html.indexOf("content-additional-tags"));
+  assert.ok(html.indexOf("content-additional-tags") < html.indexOf("news-article-related"));
+});
+
+test("keeps location news article output unchanged when tag context is omitted", () => {
+  const html = renderArticleContent(article, media);
+
+  assert.doesNotMatch(html, /content-(?:primary|additional)-tags/);
+  assert.match(html, /<h1>Austin housing costs in context<\/h1>/);
+});
+
+test("places location news tags before related content when sources are absent", () => {
+  const sourceFreeArticle = {
+    ...article,
+    sourceRecords: [],
+  };
+  const tagContext = {
+    primaryTags: [{ slug: "texas", displayName: "Texas" }],
+    additionalTags: [{ slug: "housing-costs", displayName: "Housing costs" }],
+  };
+  const html = renderArticleContent(sourceFreeArticle, media, { tagContext });
+
+  assert.doesNotMatch(html, /news-article-sources/);
+  assert.ok(html.indexOf("content-additional-tags") < html.indexOf("news-article-related"));
+});
+
 test("formats date-only article values in UTC", () => {
   assert.equal(formatDate("2026-07-10"), "July 10, 2026");
 });
@@ -91,7 +134,7 @@ test("does not emit trailing whitespace in standalone article documents", () => 
   assert.doesNotMatch(html, /[ \t]+\r?\n/);
 });
 
-test("standalone documents render the contributor byline and linked Person JSON-LD", () => {
+test("standalone documents render the contributor byline and editorial-organization JSON-LD", () => {
   const siteOrigin = "https://example.snap.test";
   const html = renderArticleDocument(
     { ...article, route: "/learning-center/market-news/austin-housing-costs" },
@@ -105,9 +148,12 @@ test("standalone documents render the contributor byline and linked Person JSON-
   assert.ok(jsonLdMatch, "missing Article JSON-LD");
   const jsonLd = JSON.parse(jsonLdMatch[1]);
   assert.deepEqual(jsonLd.author, {
-    "@type": "Person",
-    name: "Maya Brooks",
-    url: "https://example.snap.test/learning-center/authors/maya-brooks",
-    image: "https://example.snap.test/site/assets/contributors/maya-brooks.jpg",
+    "@type": "Organization",
+    "@id": "https://example.snap.test/#snap-mortgage-editorial",
+    name: "Snap Mortgage Editorial",
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Snap Mortgage",
+    },
   });
 });

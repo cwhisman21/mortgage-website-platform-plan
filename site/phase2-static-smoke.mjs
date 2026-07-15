@@ -14,7 +14,12 @@ const indexSource = read("site/index.html");
 const seedSource = read("mock-data/production-seed.json");
 const seed = JSON.parse(seedSource);
 const editorialContent = JSON.parse(read("mock-data/editorial-content.json"));
-const publicRouteManifest = createPublicRouteManifest({ seed, editorialContent });
+const publicTagRegistry = JSON.parse(read("mock-data/public-tag-registry.json"));
+const publicRouteManifest = createPublicRouteManifest({
+  seed,
+  editorialContent,
+  tagRegistry: publicTagRegistry,
+});
 
 const failures = [];
 const fail = (message) => failures.push(message);
@@ -198,22 +203,40 @@ if (/borrowerCopy|sanitizeVisibleCopy/.test(appSource)) {
 
 // Location news must use clean paths, defer full article payloads, and keep its
 // reading experience separate from the compact account/CTA dialog.
-if (/window\.location\.hash|hashchange/.test(appSource)) fail("site/app.js still uses fragment routing");
+const fragmentRoutingSource = appSource.replace(
+  /(\$\{canonicalTagRoute\}\$\{window\.location\.search\})\$\{window\.location\.hash\}/g,
+  "$1",
+);
+if (/window\.location\.hash|hashchange/.test(fragmentRoutingSource)) fail("site/app.js still uses fragment routing");
 if (!/window\.history\.pushState/.test(appSource)) fail("site/app.js missing History API navigation");
 if (!/location-news-index\.json/.test(appSource)) fail("site/app.js does not load the news index");
 if (!/function locationNewsFeed\(/.test(appSource)) fail("locationNewsFeed renderer missing");
 if (!/class=\"news-card-media\"/.test(appSource)) fail("news card media missing");
 if (!/data-news-article-id/.test(appSource)) fail("news Read more hook missing");
 
-const stateBrief = appSource.indexOf('label: "State brief"');
-const stateFeed = appSource.indexOf("locationNewsFeed(state)");
-const stateTable = appSource.indexOf('<section class="section">', stateBrief);
-if (!(stateBrief < stateFeed && stateFeed < stateTable)) fail("state news feed placement is incorrect");
+const statePageSource = appSource.slice(
+  appSource.indexOf("function statePage(state)"),
+  appSource.indexOf("function cityPage(city)"),
+);
+const stateHero = statePageSource.indexOf("${hero({");
+const stateFeed = statePageSource.indexOf("locationNewsFeed(state)");
+const stateBrief = statePageSource.indexOf("${editorialSection({");
+const stateTable = statePageSource.indexOf('<section class="section">', stateBrief);
+if (!(stateHero < stateFeed && stateFeed < stateBrief && stateBrief < stateTable)) {
+  fail("state news feed placement is incorrect");
+}
 
-const cityBrief = appSource.indexOf('label: "Local cost read"');
-const cityFeed = appSource.indexOf("locationNewsFeed(city)");
-const cityTable = appSource.indexOf('<section class="section">', cityBrief);
-if (!(cityBrief < cityFeed && cityFeed < cityTable)) fail("city news feed placement is incorrect");
+const cityPageSource = appSource.slice(
+  appSource.indexOf("function cityPage(city)"),
+  appSource.indexOf("function productPage(product)"),
+);
+const cityHero = cityPageSource.indexOf("${hero({");
+const cityFeed = cityPageSource.indexOf("locationNewsFeed(city)");
+const cityBrief = cityPageSource.indexOf("${editorialSection({");
+const cityTable = cityPageSource.indexOf('<section class="section">', cityBrief);
+if (!(cityHero < cityFeed && cityFeed < cityBrief && cityBrief < cityTable)) {
+  fail("city news feed placement is incorrect");
+}
 
 for (const required of ["data-article-modal", 'aria-modal="true"', "data-article-modal-title", "data-article-modal-close", "openArticleModal", "closeArticleModal"]) {
   if (!appSource.includes(required)) fail(`article modal missing ${required}`);
@@ -242,19 +265,23 @@ if (vercelConfig.rewrites?.some((rewrite) => rewrite.source !== "/" && rewrite.d
 
 const generatedRoot = path.join(repoRoot, "site", "generated", "routes");
 const nonRootManifest = publicRouteManifest.filter((entry) => entry.route !== "/");
-if (nonRootManifest.length !== 871) fail(`expected 871 non-root public routes, found ${nonRootManifest.length}`);
+let generatedRouteCount = 0;
 for (const entry of nonRootManifest) {
   const generatedPath = path.join(generatedRoot, ...entry.route.slice(1).split("/"), "index.html");
   if (!fs.existsSync(generatedPath)) {
     fail(`missing generated document for ${entry.route}`);
     continue;
   }
+  generatedRouteCount += 1;
   const html = fs.readFileSync(generatedPath, "utf8");
   if ((html.match(/<h1\b/g) || []).length !== 1) fail(`${entry.route} generated document must contain exactly one h1`);
   if (!html.includes(`<link rel="canonical" href="${DEFAULT_SITE_ORIGIN}${entry.route}"`)) fail(`${entry.route} generated document has incorrect canonical metadata`);
   if (!html.includes('href="/site/styles.css"')) fail(`${entry.route} generated document is missing the canonical stylesheet`);
   if (!html.includes('src="/site/app.js"')) fail(`${entry.route} generated document is missing the SPA script`);
   if (/Loading Snap Mortgage|loading-state/i.test(html)) fail(`${entry.route} generated document contains loading text`);
+}
+if (generatedRouteCount !== nonRootManifest.length) {
+  fail(`expected ${nonRootManifest.length} generated manifest documents, found ${generatedRouteCount}`);
 }
 
 if (/href=["']#["']/.test(appSource) || /href=["']#["']/.test(indexSource)) {

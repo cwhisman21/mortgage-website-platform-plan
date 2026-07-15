@@ -1,4 +1,5 @@
 import { renderContributorBylineMarkup } from "./editorial-content.mjs";
+import { renderAdditionalTagLinks, renderPrimaryTagLinks } from "./tag-presentation.mjs";
 
 const escapeHtml = (value) => String(value ?? "")
   .replace(/&/g, "&amp;")
@@ -84,7 +85,7 @@ const renderRelatedRoutes = (relatedRoutes) => {
   }).join("")}</ul></nav>`;
 };
 
-export function renderArticleContent(article, media, { author } = {}) {
+export function renderArticleContent(article, media, { author, tagContext, routeHref = (href) => href } = {}) {
   const visual = article?.visuals?.[0];
   const imageUrl = safeUrl(media?.localPath || media?.imageUrl || visual?.imageUrl || visual?.src);
   const imageAlt = media?.alt || visual?.alt || "";
@@ -93,11 +94,14 @@ export function renderArticleContent(article, media, { author } = {}) {
     ? `<figcaption>Photo by ${creditUrl ? `<a href="${escapeHtml(creditUrl)}">${escapeHtml(media.photographer)}</a>` : escapeHtml(media.photographer)}${media.provider ? ` via ${escapeHtml(media.provider)}` : ""}</figcaption>`
     : "";
   const ctas = Array.isArray(article?.ctaPlacements) ? article.ctaPlacements : [];
+  const primaryTagMarkup = renderPrimaryTagLinks(tagContext?.primaryTags, routeHref);
+  const additionalTagMarkup = renderAdditionalTagLinks(tagContext?.additionalTags, routeHref);
 
   return `
     <article class="news-article">
       <header class="news-article-header">
         <p class="eyebrow">${escapeHtml(article?.relevanceLabel || article?.articleType || "")}</p>
+        ${primaryTagMarkup}
         <h1>${escapeHtml(article?.title)}</h1>
         ${article?.dek ? `<p class="news-article-dek">${escapeHtml(article.dek)}</p>` : ""}
         ${author ? renderContributorBylineMarkup(article, [author], { dateMonth: "long" }) : ""}
@@ -117,6 +121,7 @@ export function renderArticleContent(article, media, { author } = {}) {
       ${article?.methodology ? `<section class="news-article-methodology"><h2>Methodology</h2><p>${escapeHtml(article.methodology)}</p></section>` : ""}
       ${article?.limitations ? `<section class="news-article-limitations"><h2>What this data cannot determine</h2><p>${escapeHtml(article.limitations)}</p></section>` : ""}
       ${renderSources(article?.sourceRecords)}
+      ${additionalTagMarkup}
       ${renderRelatedRoutes(article?.relatedRoutes)}
       ${article?.disclosure ? `<p class="disclosure">${escapeHtml(article.disclosure)}</p>` : ""}
     </article>`.replace(/[ \t]+(?=\r?\n)/g, "");

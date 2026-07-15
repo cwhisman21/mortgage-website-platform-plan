@@ -46,9 +46,9 @@ test("homepage follows the approved Figma decision-flow sequence", () => {
   );
 
   assert.match(homeSource, /home-metrics/);
-  assert.match(homeSource, /Choose your path/);
+  assert.match(homeSource, /Choose your goal/);
   assert.match(homeSource, /home-decision-grid/);
-  assert.match(homeSource, /Bring your research into one clear conversation/);
+  assert.match(homeSource, /Bring your research into one clear comparison/);
   assert.doesNotMatch(homeSource, /routeStrip\(/);
   assert.doesNotMatch(homeSource, /ctaDeck\(/);
 });

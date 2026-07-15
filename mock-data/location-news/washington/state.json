@@ -13,9 +13,11 @@
       "title": "Washington home-price movement in the latest FHFA HPI",
       "dek": "Quarterly, annual, and longer-run state HPI comparisons with a clear boundary between market movement and property value.",
       "previewText": "Review the latest FHFA home-price movement for Washington and why an index cannot value a specific property.",
-      "metaDescription": "Washington home-price movement in the latest FHFA HPI. Review the latest FHFA home-price movement for Washington and why an index cannot value a specific.",
+      "metaDescription": "Review the latest FHFA home-price movement for Washington and why an index cannot value a specific property.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 Q1",
+      "sourcePeriod": "2026Q1",
       "relevanceLabel": "Home-price movement",
       "topicIds": [
         "home-price-index",
@@ -33,7 +35,7 @@
       ],
       "imageId": "home_values-07",
       "keyTakeaways": [
-        "FHFA purchase-only HPI: 588.5.",
+        "As of: 2026 Q1. Source period: 2026Q1.",
         "quarterly HPI change: 0.2%.",
         "annual HPI change: -0.3%.",
         "five-year HPI change: 27.3%."
@@ -82,25 +84,10 @@
       ],
       "sections": [
         {
-          "id": "latest-index",
-          "heading": "The latest statewide index reading",
-          "body": [
-            "Washington's latest FHFA purchase-only HPI is 588.5, accompanied by a quarterly change of 0.2%. For Washington, the 588.5 index level is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price. A quarter in which the index rose by 0.2% can help a borrower date the statewide market context, but it cannot identify the value or asking price of a selected property. Reading 588.5 with 0.2% also keeps the level separate from the rate of change. Alongside the 588.5 state index, local inventory, property type, condition, concessions, taxes, insurance, and financing costs still need current evidence before the trend informs a decision."
-          ],
-          "evidenceFactIds": [
-            "hpi-index",
-            "quarterly-change"
-          ],
-          "sourceRecordIds": [
-            "news-wa-state-home-price-movement-source-hpi-index",
-            "news-wa-state-home-price-movement-source-quarterly-change"
-          ]
-        },
-        {
           "id": "short-and-annual",
-          "heading": "Quarterly and annual windows tell different stories",
+          "heading": "Planning context: what changed over the quarter and year",
           "body": [
-            "Over the latest quarter, Washington's purchase-only HPI rose by 0.2%; over the latest year, it fell by -0.3%. The 0.2% figure is more sensitive to recent movement, while -0.3% compares the latest quarter with the matching quarter a year earlier. A borrower should not choose between the 0.2% and -0.3% windows based only on which looks more favorable, because the comparisons answer different timing questions. Together they show whether recent statewide movement is aligned with or different from the broader year without predicting the next quarter, a local bidding environment, or the price path of one home in Washington."
+            "The published evidence provides the starting point: As of 2026 Q1, Washington's purchase-only HPI rose 0.2% over the latest quarter and fell 0.3% over the year. The quarterly window is more sensitive to recent movement, while the annual window compares the latest quarter with the matching quarter one year earlier. That difference may matter when a borrower checks whether search, offer, or refinance assumptions still fit the broad direction of the state market. For borrower planning, if the two windows diverge, timing is part of the answer; if they align, local variation still remains. Neither change identifies a home's value, a competitive offer, an affordable payment, or what the index will do next, so current property and financing evidence must carry the decision."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -115,7 +102,7 @@
           "id": "longer-run",
           "heading": "Place the latest movement in a longer sequence",
           "body": [
-            "Across the five-year comparison, the Washington HPI rose by 27.3%, compared with the latest annual movement of -0.3%. The 27.3% change places the current 588.5 index reading in a longer repeat-sale sequence, but it can span very different rate, inventory, and economic conditions. The 27.3% change should not be applied to an old purchase price to estimate a current property value. For a borrower, the contrast between 27.3% and -0.3% is most useful as a reminder that search assumptions can age at different speeds. Even when the 27.3% direction is clear, current comparable properties and a property-specific payment worksheet remain necessary."
+            "Over the five years ending 2026 Q1, the Washington HPI rose 27.3%, compared with the latest annual movement of 0.3%. In practical terms, the longer window shows how far the repeat-sale index moved across several market cycles, while the one-year figure gives more weight to recent conditions. That contrast may help a borrower recognize when an older search budget, equity assumption, or comparable sale needs fresh evidence. For the decision at hand, it does not justify applying the five-year percentage to an old purchase price, and it cannot forecast a future sale. Even when the long and short directions agree, current comparable properties, taxes, insurance, financing costs, condition, and a property-specific payment worksheet are still needed before the trend informs a mortgage decision."
           ],
           "evidenceFactIds": [
             "five-year-change",
@@ -130,9 +117,9 @@
         },
         {
           "id": "market-context",
-          "heading": "Use the index to test local assumptions",
+          "heading": "Evidence check: use the index to test local assumptions",
           "body": [
-            "The combination of a 0.2% quarterly change, -0.3% annual change, and 27.3% five-year change gives Washington borrowers three dated views of the same statewide index. If the 0.2%, -0.3%, and 27.3% windows point in different directions, the divergence shows that timing matters; if they point together, statewide consistency still does not erase local variation. A Washington search plan can use those three changes to ask whether current listings, seller concessions, and property types resemble the broad state movement. It should not use 588.5 as a sale price or use any of the percentage changes as a forecast, because FHFA HPI measures repeat-sale movement rather than the complete set of homes available to one borrower."
+            "A Washington search plan can apply the quarterly, annual, and five-year windows to ask whether current listings, seller concessions, and property types resemble the broad state movement. At an annual movement of 0.3%, the dated 588.5 index level provides a reference point for that question without supplying a sale price. If the windows point in different directions, the divergence shows why the selected period matters; if they point together, statewide consistency still does not erase local variation. For borrower planning, the plan should therefore compare the broad pattern with current listings and recent property-level evidence rather than treating any percentage as a forecast. FHFA HPI measures repeat-sale movement, not the complete set of homes available to one borrower."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -148,10 +135,27 @@
           ]
         },
         {
+          "id": "latest-index",
+          "heading": "The index level is context, not a home price",
+          "body": [
+            "Washington's latest FHFA purchase-only HPI level is 588.5. That number is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price, listing price, or appraisal.",
+            "For the next comparison in Washington, reading the 588.5 level with the 0.2% quarterly change keeps the index itself separate from its rate of movement. For borrower planning, borrowers can apply the dated level to identify the release being discussed, but not to value a selected property. Local inventory, property type, condition, concessions, taxes, insurance, maintenance, association costs, and financing terms still need current evidence. This boundary is especially important when broad statewide movement differs from the neighborhood, price band, or property type involved in an actual purchase, refinance, or equity review."
+          ],
+          "evidenceFactIds": [
+            "hpi-index",
+            "quarterly-change"
+          ],
+          "sourceRecordIds": [
+            "news-wa-state-home-price-movement-source-hpi-index",
+            "news-wa-state-home-price-movement-source-quarterly-change"
+          ]
+        },
+        {
           "id": "valuation-boundary",
           "heading": "The HPI cannot value a property or set a payment",
           "body": [
-            "An HPI level of 588.5 does not establish a Washington property's dollar value, and an -0.3% annual movement does not establish how much any home gained or lost. The 588.5 index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the 0.2% and 27.3% comparisons should retain their release period. The 588.5 index level must remain separate from the dollar figures used in a property review. Those limits make the 588.5 state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
+            "An HPI level of 588.5 does not prove the dollar value of a property in Washington, and an annual movement of 0.3% does not prove how much any home gained or lost. For borrower planning, the index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon.",
+            "In a borrower review centered on Washington, FHFA can also revise published values, so the 0.2% and 27.3% comparisons should retain their source period. The 588.5 level must remain separate from the dollar figures used in a property review. Those limits make the state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
           ],
           "evidenceFactIds": [
             "hpi-index",
@@ -168,9 +172,9 @@
         },
         {
           "id": "local-next-step",
-          "heading": "Connect the state trend to current property evidence",
+          "heading": "Put the evidence to work: connect the state trend to current property evidence",
           "body": [
-            "A practical Washington borrower review can record 0.2%, -0.3%, and 27.3% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the 0.2% state change as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review rather than multiplying a prior value by -0.3% or 27.3%. This approach preserves the information in the 588.5 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
+            "A useful Washington borrower review can record 0.2%, 0.3%, and 27.3% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the 0.2% state movement as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review rather than multiplying a prior value by 0.3% or 27.3%. This approach preserves the information in the 588.5 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -228,28 +232,33 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "FHFA purchase-only HPI",
               "588.5",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "quarterly HPI change",
               "0.2%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "annual HPI change",
               "-0.3%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "five-year HPI change",
               "27.3%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ]
           ],
           "sourceRecordIds": [
@@ -262,7 +271,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "short-and-annual",
+          "afterSectionId": "longer-run",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -375,9 +384,11 @@
       "title": "Washington statewide labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Washington.",
       "previewText": "See what changed in Washington's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Washington statewide labor market: latest employment evidence. See what changed in Washington's labor market and why broad employment data cannot determine.",
+      "metaDescription": "See what changed in Washington's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -395,11 +406,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 4,065,952.",
-        "employment: 3,853,540.",
-        "unemployment: 212,412.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 5.2%.",
-        "previous-month unemployment rate: 5.2%."
+        "change in unemployment rate from the prior month: 0.0 percentage points.",
+        "change in unemployment rate from a year earlier: 0.7 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -466,7 +476,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0,
-          "display": "0.0%",
+          "display": "0.0 percentage points",
           "sourceRecordIds": [
             "news-wa-state-labor-market-source-latest-unemployment-rate",
             "news-wa-state-labor-market-source-previous-previous-rate"
@@ -477,7 +487,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.7,
-          "display": "0.7%",
+          "display": "0.7 percentage points",
           "sourceRecordIds": [
             "news-wa-state-labor-market-source-latest-unemployment-rate",
             "news-wa-state-labor-market-source-yearago-year-ago-rate"
@@ -487,29 +497,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Washington labor force of 4,065,952, with 3,853,540 people employed and 212,412 unemployed under the program's definitions. Those three counts belong together: 3,853,540 plus 212,412 explains the scale behind the published 5.2% unemployment rate. For mortgage planning, the 4,065,952 state-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 4,065,952 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-wa-state-labor-market-source-latest-labor-force",
-            "news-wa-state-labor-market-source-latest-employment",
-            "news-wa-state-labor-market-source-latest-unemployment",
-            "news-wa-state-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What changed in the latest month",
           "body": [
-            "Washington's unemployment rate was unchanged from 5.2% in the prior month to 5.2% in the latest month, a change of 0.0%. A 0.0% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 212,412 unemployment count and 4,065,952 labor force. The 0.0% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Washington borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "As of May 2026, Washington's unemployment rate was unchanged from 5.2% in April 2026 to 5.2% in May 2026, a change of 0.0 percentage points. For the decision at hand, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it does not establish one applicant's income stability, mortgage eligibility, or loan price. In practical terms, the release also estimates 212,412 people unemployed within a labor force of 4,065,952, which shows the scale of the movement without turning a state-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -527,27 +518,48 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What changed over the year",
           "body": [
-            "Compared with 4.5% a year earlier, the latest Washington unemployment rate of 5.2% rose by 0.7%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.7% difference still describes a population estimate rather than an individual's job stability. Reading 4.5%, 5.2%, and 5.2% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Washington pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Washington's unemployment rate rose from 4.5% in May 2025 to 5.2%, a change of 0.7 percentage points. In practical terms, that wider window helps show whether Washington's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.0 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Washington or describes the stability of one household's earnings. For mortgage planning in Washington, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Washington's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-wa-state-labor-market-source-yearago-year-ago-rate",
-            "news-wa-state-labor-market-source-previous-previous-rate",
+            "news-wa-state-labor-market-source-latest-unemployment-rate",
+            "news-wa-state-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "The dated finding: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 4,065,952 people in the Washington labor force, including 3,853,540 employed and 212,412 unemployed under LAUS definitions.",
+            "In a borrower review centered on Washington, the employment and unemployment counts belong together because they establish the scale behind the published 5.2% rate. For mortgage planning, that state-level labor force describes the surrounding economy instead of the income or employment record of an applicant. It can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should therefore follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-wa-state-labor-market-source-latest-labor-force",
+            "news-wa-state-labor-market-source-latest-employment",
+            "news-wa-state-labor-market-source-latest-unemployment",
             "news-wa-state-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Planning context: why the rate needs its underlying counts",
           "body": [
-            "At 5.2%, Washington's unemployment rate summarizes 212,412 unemployed people within a 4,065,952 labor force; the rate should not be discussed without those counts. The 3,853,540 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 3,853,540 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 5.2% rate attached to 4,065,952, 3,853,540, and 212,412 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 5.2%, Washington's unemployment rate summarizes 212,412 unemployed people within a labor force of 4,065,952; the rate should not be discussed without those counts. For the decision at hand, the 3,853,540 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file.",
+            "For borrowers reviewing evidence from Washington, that makes 3,853,540 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. In practical terms, keeping the 5.2% rate attached to 4,065,952, 3,853,540, and 212,412 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -564,9 +576,10 @@
         },
         {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Where the evidence stops: labor statistics are not an income review",
           "body": [
-            "Neither 3,853,540 employed people nor a 5.2% unemployment rate tells a lender what one Washington applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.0% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.2% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.7% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 3,853,540 employed people nor an unemployment rate of 5.2% tells a lender what an applicant in Washington earns, whether that income is eligible, or whether it is likely to continue.",
+            "Applied to a decision in Washington, the monthly movement of 0.0 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.2% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For the decision at hand, that boundary protects borrowers from treating the year-over-year movement of 0.7 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -585,7 +598,7 @@
           "id": "documentation-next-step",
           "heading": "Turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Washington borrower is to note the latest 5.2% unemployment rate and the 0.7% year-over-year change, then move immediately to the records that describe the household. After noting the 5.2% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 4,065,952 local labor force and 3,853,540 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.0% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Washington's 5.2% LAUS rate in its proper role as dated local economic context."
+            "A practical next step for borrowers in Washington is to note the latest 5.2% unemployment rate and the year-over-year movement of 0.7 percentage points, then move immediately to the records that describe the household. After noting the 5.2% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 4,065,952 local labor force and 3,853,540 employment count can frame the economic conversation, but they should not alter verified borrower inputs. In practical terms, the monthly movement of 0.0 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Washington's 5.2% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -652,48 +665,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "4,065,952",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "3,853,540",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "212,412",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "5.2%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "5.2%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.5%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.0%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.0 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.7%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.7 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -708,7 +730,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -853,9 +875,11 @@
       "title": "Washington housing costs, ownership, and rent in the latest ACS",
       "dek": "Statewide evidence on home value, income, owner costs, housing stock, tenure, vacancy, and rent for borrower planning.",
       "previewText": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Washington with survey limitations and practical questions.",
-      "metaDescription": "Washington housing costs, ownership, and rent in the latest ACS. Read statewide housing-cost, ownership, vacancy, and rent evidence for Washington with survey.",
+      "metaDescription": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Washington with survey limitations and practical questions.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "State housing costs",
       "topicIds": [
         "state-housing",
@@ -874,11 +898,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "state median home value: $564,600.",
         "prior ACS state median home value: $339,000.",
-        "state median household income: $98,141.",
-        "median monthly owner cost with a mortgage: $2,445.",
-        "median gross rent: $1,760."
+        "state median household income: $98,141."
       ],
       "evidenceFacts": [
         {
@@ -973,25 +996,14 @@
             "news-wa-state-housing-costs-source-housing-units"
           ],
           "comparison": true
-        },
-        {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 66.5,
-          "display": "66.5%",
-          "sourceRecordIds": [
-            "news-wa-state-housing-costs-source-home-value",
-            "news-wa-state-housing-costs-source-home-value-prior"
-          ],
-          "comparison": true
         }
       ],
       "sections": [
         {
           "id": "state-cost-baseline",
-          "heading": "Statewide value, income, and owner costs",
+          "heading": "Evidence at a glance: statewide value, income, and owner costs",
           "body": [
-            "Washington's 2024 ACS housing baseline reports a median owner-occupied home value of $564,600, median household income of $98,141, and median selected monthly owner costs of $2,445 for owners with a mortgage. The $564,600, $98,141, and $2,445 values are separate statewide medians, so they should not be treated as the price, income, and monthly budget of one typical household. The $2,445 measure combines recurring ownership expenses and is not a real-estate-tax figure or a current mortgage quote. For planning, $564,600, $98,141, and $2,445 identify statewide reference points and cost categories, while a real decision still requires local property, borrower, tax, insurance, and loan information."
+            "Start with the dated local finding: Washington's 2024 ACS housing baseline reports a median owner-occupied home value of $564,600, median household income of $98,141, and median selected monthly owner costs of $2,445 for owners with a mortgage. Those three reference points may help a borrower identify which statewide value, income, and recurring-cost assumptions need local replacement first. They remain separate medians, not the price, income, and monthly budget of one typical household, and the $2,445 measure is not a real-estate-tax figure or a current mortgage quote. For borrower planning, a real decision continues to require local property evidence, borrower documentation, taxes, insurance, maintenance, association obligations, and current loan information."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1005,27 +1017,10 @@
           ]
         },
         {
-          "id": "owner-and-renter-costs",
-          "heading": "Keep owner costs and rent comparable",
-          "body": [
-            "The same Washington release reports $1,760 in median gross rent alongside $2,445 in median selected monthly owner costs for owners with a mortgage. The two measures cover different housing populations and cost definitions, so $1,760 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,760 and $2,445 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. The $98,141 statewide median can provide economic context, but dividing it by either $1,760 or $2,445 would still combine medians that do not represent the same household."
-          ],
-          "evidenceFactIds": [
-            "rent",
-            "owner-cost",
-            "income"
-          ],
-          "sourceRecordIds": [
-            "news-wa-state-housing-costs-source-rent",
-            "news-wa-state-housing-costs-source-owner-cost",
-            "news-wa-state-housing-costs-source-income"
-          ]
-        },
-        {
           "id": "state-tenure",
-          "heading": "How occupied housing is divided by tenure",
+          "heading": "Borrower view: how occupied housing is divided by tenure",
           "body": [
-            "Across Washington's measured housing stock of 3,306,620 units, the owner share of occupied housing is 63.8% and the renter share is 36.2%, making owner-occupied housing the larger statewide tenure group. The 63.8% and 36.2% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase. The 63.8% and 36.2% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. It remains too broad to select a product or characterize a particular city, county, property type, or household inside Washington."
+            "Across Washington's measured housing stock of 3,306,620 units, the owner share of occupied housing is 63.8% and the renter share is 36.2%, making owner-occupied housing the larger statewide tenure group. For borrower planning, the 63.8% and 36.2% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase. The 63.8% and 36.2% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. It remains too broad to select a product or characterize a particular city, county, property type, or household inside Washington."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -1040,10 +1035,28 @@
           ]
         },
         {
-          "id": "state-vacancy",
-          "heading": "Vacancy is broader than homes for sale",
+          "id": "owner-and-renter-costs",
+          "heading": "The dated finding: keep owner costs and rent comparable",
           "body": [
-            "Washington's vacant-unit share is 7.3% within a statewide stock of 3,306,620 housing units. ACS vacancy includes categories beyond property currently offered for sale or rent, so 7.3% is not a live inventory rate and cannot measure competition for a selected home. Read beside the 63.8% owner share and 36.2% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. Borrowers should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 7.3% and 3,306,620 were not designed to resolve."
+            "The same Washington release reports $1,760 in median gross rent alongside $2,445 in median selected monthly owner costs for owners with a mortgage. The two measures cover different housing populations and cost definitions, so $1,760 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,760 and $2,445 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. For borrower planning, the $98,141 statewide median can provide economic context, but dividing it by either $1,760 or $2,445 would still combine medians that do not represent the same household."
+          ],
+          "evidenceFactIds": [
+            "rent",
+            "owner-cost",
+            "income"
+          ],
+          "sourceRecordIds": [
+            "news-wa-state-housing-costs-source-rent",
+            "news-wa-state-housing-costs-source-owner-cost",
+            "news-wa-state-housing-costs-source-income"
+          ]
+        },
+        {
+          "id": "state-vacancy",
+          "heading": "Evidence check: vacancy is broader than homes for sale",
+          "body": [
+            "Washington's vacant-unit share is 7.3% within a statewide stock of 3,306,620 housing units. For borrower planning, ACS vacancy includes categories beyond property currently offered for sale or rent, so 7.3% is not a live inventory rate and cannot measure competition for a selected home.",
+            "In a borrower review centered on Washington, read beside the 63.8% owner share and 36.2% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. A borrower should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 7.3% and 3,306,620 were not designed to resolve."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -1060,15 +1073,15 @@
           ]
         },
         {
-          "id": "state-change",
-          "heading": "The statewide home-value estimate changed across periods",
+          "id": "state-vintage-observations",
+          "heading": "Evidence check: keep the statewide ACS vintages separate",
           "body": [
-            "Washington's median home-value estimate increased from $339,000 in the prior ACS period to $564,600 in the current release, a reported change of 66.5%. Because both estimates summarize multi-year survey windows, 66.5% is not a point-to-point appreciation rate for a property purchased at $339,000. The 66.5% comparison can show that an old statewide reference may need updating, but it cannot explain the value path in each local market or price segment. Margins of error, changes in the housing mix, and current property evidence should be reviewed before the move from $339,000 to $564,600 influences a purchase, refinance, or equity assumption."
+            "The 2019 ACS published $339,000 as Washington's median owner-occupied home-value estimate, while the 2024 ACS published $564,600. In practical terms, these nominal statewide observations may still help show why an older planning reference needs current local evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between the vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change.",
+            "Applied to a decision in Washington, both values summarize multi-year survey windows and carry sampling error. Keep $339,000 attached to 2019 and $564,600 attached to 2024, then use current local and property-specific evidence for purchase, refinance, or equity assumptions."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "home-value",
-            "home-value-change"
+            "home-value"
           ],
           "sourceRecordIds": [
             "news-wa-state-housing-costs-source-home-value-prior",
@@ -1079,7 +1092,8 @@
           "id": "state-to-local",
           "heading": "Move from statewide context to a local worksheet",
           "body": [
-            "A borrower can carry $564,600, $2,445, $1,760, and the 7.3% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. For ownership, replace the $564,600 and $2,445 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. For renting, replace the $1,760 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. The 36.2% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 63.8% tenure measure can help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one Washington household."
+            "As local context for Washington, a borrower may carry $564,600, $2,445, $1,760, and the 7.3% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. On the ownership side, replace the $564,600 and $2,445 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves.",
+            "For the rental budget, replace the $1,760 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. The 36.2% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 63.8% tenure measure can help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one Washington household."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1154,58 +1168,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "state median home value",
               "$564,600",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS state median home value",
               "$339,000",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "state median household income",
               "$98,141",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,445",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,760",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "total housing units",
               "3,306,620",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "63.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "36.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "7.3%",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "66.5%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -1224,14 +1243,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "owner-and-renter-costs",
+          "afterSectionId": "state-tenure",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a separate 2019 nominal home-value observation. It does not calculate a percentage change between home-value vintages. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The 2019 and 2024 home-value dollars are not inflation-adjusted, and their methodology is not directly comparable. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-wa-state-housing-costs-source-home-value",
@@ -1433,9 +1452,11 @@
       "title": "Washington 2026 county loan-limit landscape",
       "dek": "How conforming and FHA one-unit limits vary across Washington counties and how borrowers can use them responsibly.",
       "previewText": "See the range of 2026 conforming and FHA county limits across Washington without treating a limit as eligibility or pricing.",
-      "metaDescription": "Washington 2026 county loan-limit landscape. See the range of 2026 conforming and FHA county limits across Washington without treating a limit as eligibility.",
+      "metaDescription": "See the range of 2026 conforming and FHA county limits across Washington without treating a limit as eligibility or pricing.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "State loan-limit landscape",
       "topicIds": [
         "loan-limits",
@@ -1455,11 +1476,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "counties in the statewide limit summary: 39.",
         "lowest one-unit conforming limit: $832,750.",
-        "highest one-unit conforming limit: $1,063,750.",
-        "lowest one-unit FHA limit: $541,287.",
-        "highest one-unit FHA limit: $1,063,750."
+        "highest one-unit conforming limit: $1,063,750."
       ],
       "evidenceFacts": [
         {
@@ -1526,9 +1546,9 @@
       "sections": [
         {
           "id": "statewide-conforming-range",
-          "heading": "The conforming range across county records",
+          "heading": "Evidence at a glance: the conforming range across county records",
           "body": [
-            "Washington's statewide summary covers 39 county or county-equivalent records. Within those records, the 2026 one-unit conforming limit runs from $832,750 to $1,063,750. The $832,750 to $1,063,750 range confirms that one conforming ceiling does not apply uniformly across Washington. The 39 record count keeps the range tied to the statewide source coverage rather than an assumed national rule. The $832,750 to $1,063,750 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $1,063,750 statewide maximum, county, legal unit count, and expected base loan amount must be known."
+            "Start with the dated local finding: Washington's statewide summary covers 39 county or county-equivalent records. For borrower planning, within those records, the 2026 one-unit conforming limit runs from $832,750 to $1,063,750. That range can nevertheless help borrowers see why the property county must be identified before a loan amount is assigned a conforming or jumbo category. The $832,750 to $1,063,750 range confirms that one conforming ceiling does not apply uniformly across Washington. The 39 record count keeps the range tied to the statewide source coverage in place of an assumed national rule. The $832,750 to $1,063,750 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $1,063,750 statewide maximum, county, legal unit count, and expected base loan amount must be known."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1542,10 +1562,30 @@
           ]
         },
         {
-          "id": "statewide-fha-range",
-          "heading": "The FHA range follows its own county table",
+          "id": "program-comparison",
+          "heading": "Comparison view: conforming and FHA ranges answer different questions",
           "body": [
-            "Across the same 39 Washington records, the 2026 one-unit FHA limit spans $541,287 to $1,063,750. The $541,287 low and $1,063,750 high show that FHA's published boundary also varies within the state. The $541,287 floor and $1,063,750 high remain county-table values even when they match conforming amounts elsewhere. The FHA range should not be merged with the $832,750 to $1,063,750 conforming range, because the programs use different authorities and requirements. A $541,287 to $1,063,750 comparison can route loan-amount and product-category questions, but it cannot determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
+            "The highest one-unit conforming amount in Washington is $1,063,750, while the highest FHA amount is $1,063,750; at the low end, the figures are $832,750 and $541,287. In practical terms, these pairs show program boundaries, not competing offers. A requested amount below $1,063,750 may still fall outside the applicable county's conforming limit, and an amount below $1,063,750 may still face FHA borrower and property requirements.",
+            "Applied to a decision in Washington, comparing $832,750, $1,063,750, $541,287, and $1,063,750 is useful only when county and unit count are held constant. The $1,063,750 and $1,063,750 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
+          ],
+          "evidenceFactIds": [
+            "conforming-range-high",
+            "fha-range-high",
+            "conforming-range-low",
+            "fha-range-low"
+          ],
+          "sourceRecordIds": [
+            "news-wa-state-loan-limit-landscape-source-conforming-max",
+            "news-wa-state-loan-limit-landscape-source-fha-max",
+            "news-wa-state-loan-limit-landscape-source-conforming-min",
+            "news-wa-state-loan-limit-landscape-source-fha-min"
+          ]
+        },
+        {
+          "id": "statewide-fha-range",
+          "heading": "Start with the evidence: the FHA range follows its own county table",
+          "body": [
+            "Across the same 39 Washington records, the 2026 one-unit FHA limit spans $541,287 to $1,063,750. For the decision at hand, the $541,287 low and $1,063,750 high show that FHA's published boundary also varies within the state. The $541,287 floor and $1,063,750 high remain county-table values even when they match conforming amounts elsewhere. In practical terms, the FHA range should not be merged with the $832,750 to $1,063,750 conforming range, because the programs use different authorities and requirements. A $541,287 to $1,063,750 comparison can route loan-amount and product-category questions, but it does not determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1564,9 +1604,10 @@
         },
         {
           "id": "high-cost-counties",
-          "heading": "Why county verification matters",
+          "heading": "Evidence at a glance: why county verification matters",
           "body": [
-            "3 Washington counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $1,063,750. That count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 3 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. It only describes how many matched county rows exceed the baseline. The $1,063,750 maximum should therefore be treated as evidence that county lookup matters, not as the default Washington limit. Before treating $1,063,750 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
+            "3 Washington counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $1,063,750. For borrower planning, that count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750.",
+            "The 3 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. It only describes how many matched county rows exceed the baseline. The $1,063,750 maximum therefore should be treated as evidence that county lookup matters, not as the default Washington limit. Before treating $1,063,750 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
           ],
           "evidenceFactIds": [
             "counties-above",
@@ -1580,29 +1621,11 @@
           ]
         },
         {
-          "id": "program-comparison",
-          "heading": "Conforming and FHA ranges answer different questions",
-          "body": [
-            "The highest one-unit conforming amount in Washington is $1,063,750, while the highest FHA amount is $1,063,750; at the low end, the figures are $832,750 and $541,287. These pairs show program boundaries, not competing offers. A requested amount below $1,063,750 may still fall outside the applicable county's conforming limit, and an amount below $1,063,750 may still face FHA borrower and property requirements. Comparing $832,750, $1,063,750, $541,287, and $1,063,750 is useful only when county and unit count are held constant. The $1,063,750 and $1,063,750 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
-          ],
-          "evidenceFactIds": [
-            "conforming-range-high",
-            "fha-range-high",
-            "conforming-range-low",
-            "fha-range-low"
-          ],
-          "sourceRecordIds": [
-            "news-wa-state-loan-limit-landscape-source-conforming-max",
-            "news-wa-state-loan-limit-landscape-source-fha-max",
-            "news-wa-state-loan-limit-landscape-source-conforming-min",
-            "news-wa-state-loan-limit-landscape-source-fha-min"
-          ]
-        },
-        {
           "id": "state-limit-boundaries",
           "heading": "A larger county limit is not greater affordability",
           "body": [
-            "A $1,063,750 conforming ceiling or $1,063,750 FHA ceiling does not make that loan amount affordable to a Washington household, and the lower $832,750 or $541,287 figures do not describe home prices. Published $1,063,750 and $1,063,750 limits cannot establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $1,063,750 and $1,063,750 figures can also change with a new calendar year or corrected property geography. Keeping the 39 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
+            "A $1,063,750 conforming ceiling or $1,063,750 FHA ceiling does not make that loan amount affordable to a household in Washington, and the lower $832,750 or $541,287 figures do not describe home prices. For the decision at hand, published $1,063,750 and $1,063,750 limits does not establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval.",
+            "For borrowers reviewing evidence from Washington, the $1,063,750 and $1,063,750 figures can also change with a new calendar year or corrected property geography. In practical terms, keeping the 39 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
           ],
           "evidenceFactIds": [
             "conforming-range-high",
@@ -1621,9 +1644,10 @@
         },
         {
           "id": "county-lookup",
-          "heading": "Use the range to reach the correct county row",
+          "heading": "Borrower action: use the range to reach the correct county row",
           "body": [
-            "The next step is to verify the selected property's Washington county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. Then compare that amount with the exact official row, using the $832,750 to $1,063,750 conforming range and $541,287 to $1,063,750 FHA range only as orientation. The 3 above-baseline count explains why this lookup matters, but it does not replace it. Keep the selected county row with the worksheet so the $1,063,750 and $1,063,750 statewide maximums cannot be mistaken for property-specific figures. After the 3 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
+            "The next step is to verify the selected property's Washington county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. Then compare that amount with the exact official row, using the $832,750 to $1,063,750 conforming range and $541,287 to $1,063,750 FHA range only as orientation.",
+            "For the next comparison in Washington, the 3 above-baseline count explains why this lookup matters, but it does not replace it. For borrower planning, keep the selected county row with the worksheet so the $1,063,750 and $1,063,750 statewide maximums cannot be mistaken for property-specific figures. After the 3 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
           ],
           "evidenceFactIds": [
             "conforming-range-low",
@@ -1691,38 +1715,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "counties in the statewide limit summary",
               "39",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit conforming limit",
               "$1,063,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit FHA limit",
               "$1,063,750",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "counties above the conforming baseline",
               "3",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1738,7 +1769,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "statewide-fha-range",
+          "afterSectionId": "program-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

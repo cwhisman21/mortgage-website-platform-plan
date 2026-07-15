@@ -251,7 +251,7 @@ function installDom() {
   return { document, storage };
 }
 
-test("renders approved scenario controls, results, tabs, links, disclosure, and analytics hooks", async () => {
+test("renders the approved filter rail, utility bar, comparison rows, and bottom disclosure", async () => {
   const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
   const { renderRatesMarketplace } = await loadUiModule();
   const fixture = normalizeMarketplaceFixture(loadFixture());
@@ -265,16 +265,8 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     fixture,
     state: {
       ...MARKETPLACE_DEFAULTS,
-      expandedOfferId: companyOffer.id,
-      expandedTab: "payment",
-    },
-  });
-  const reviewsHtml = renderRatesMarketplace({
-    fixture,
-    state: {
-      ...MARKETPLACE_DEFAULTS,
-      expandedOfferId: companyOffer.id,
-      expandedTab: "reviews",
+      expandedOfferIds: [companyOffer.id],
+      expandedTabsByOffer: { [companyOffer.id]: "payment" },
     },
   });
   const loanOfficerHtml = renderRatesMarketplace({
@@ -282,11 +274,11 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     state: {
       ...MARKETPLACE_DEFAULTS,
       resultType: "loanOfficer",
-      expandedOfferId: loanOfficerOffer.id,
-      expandedTab: "details",
+      expandedOfferIds: [loanOfficerOffer.id],
+      expandedTabsByOffer: { [loanOfficerOffer.id]: "details" },
     },
   });
-  const combinedHtml = `${html}\n${paymentHtml}\n${reviewsHtml}\n${loanOfficerHtml}`;
+  const combinedHtml = `${html}\n${paymentHtml}\n${loanOfficerHtml}`;
   const text = textFromHtml(html);
 
   assert.match(html, /data-rates-marketplace/);
@@ -300,28 +292,55 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
   assert.match(text, /Loan officers/);
   for (const label of [
     "Lowest 8-year cost",
-    "Lowest APR",
+    "Lowest simplified APR",
     "Lowest rate",
     "Lowest monthly payment",
+    "Lowest points",
     "Lowest upfront cost",
-    "Highest rating",
   ]) {
     assert.match(text, new RegExp(label, "i"));
   }
-  assert.match(text, /Purchase \| 92109 \| \$1,060,000 price \| 20% down/);
-  assert.match(text, /illustrative examples, not live offers or commitments to lend/i);
+  assert.doesNotMatch(text, /Highest rating/i);
+  assert.doesNotMatch(text, /Your comparison filters/i);
+  assert.equal((html.match(/data-marketplace-sort/g) || []).length, 1);
+  assert.match(text, /illustrative results/i);
+  assert.match(textFromHtml(loanOfficerHtml), /illustrative results/i);
+  assert.doesNotMatch(combinedHtml, /illustrative lender scenarios/i);
+  assert.match(text, /About these illustrative results/i);
+  assert.ok(html.indexOf("data-rates-disclosure") > html.lastIndexOf("data-offer-id="));
+  assert.match(text, /Rate/i);
+  assert.match(text, /APR/i);
+  assert.match(text, /Payment/i);
+  assert.match(text, /Points/i);
+  assert.match(text, /Upfront/i);
+  assert.match(text, /8-year cost/i);
+  assert.match(html, /data-prequal-offer="[^"]+"[^>]*>Continue</i);
+  assert.doesNotMatch(text, /without a live provider feed/i);
+  assert.match(textFromHtml(combinedHtml), /interest paid through the first 96 payments/i);
   assert.doesNotMatch(text, /fixture data|UI development|fictional/i);
   assert.equal((html.match(/data-offer-id=/g) || []).length, 8);
   assert.match(text, /Show more offers/);
   assert.doesNotMatch(html, /<div hidden aria-hidden="true">/);
   assert.match(textFromHtml(loanOfficerHtml), /Details/);
   assert.match(textFromHtml(loanOfficerHtml), /Payment/);
-  assert.match(textFromHtml(loanOfficerHtml), /Reviews/);
-  assert.match(textFromHtml(reviewsHtml), /Read-only review source/);
+  assert.doesNotMatch(textFromHtml(loanOfficerHtml), /Customer reviews/);
+  assert.doesNotMatch(combinedHtml, /data-offer-tab="reviews"/);
+  assert.match(textFromHtml(loanOfficerHtml), /Complete illustrative assumptions/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Loan amount and LTV/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Credit assumption/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Geography assumption/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Lock assumption/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Points and credits/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Included costs/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Excluded costs/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Source and date/i);
+  assert.doesNotMatch(combinedHtml, /NMLS\s*\d|Rating|\/ 5|Taylor B\.|Jordan M\.|Morgan S\.|Avery L\./i);
   assert.equal(html.includes('href="/companies/'), false);
-  assert.match(loanOfficerHtml, new RegExp(`href="${loanOfficerOffer.profileRoute}"`));
+  assert.equal(loanOfficerHtml.includes('href="/loan-officers/'), false);
   assert.match(paymentHtml, /data-chart-segment/);
   assert.match(paymentHtml, /aria-describedby="[^"]*payment-detail/);
+  assert.match(combinedHtml, /role="tabpanel"/);
+  assert.match(combinedHtml, /aria-controls="rates-panel-/);
   for (const eventName of [
     "rates_marketplace_update",
     "rates_marketplace_reset",
@@ -329,6 +348,7 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
     "rates_marketplace_sort",
     "rates_marketplace_show_more",
     "rates_marketplace_expand_offer",
+    "rates_marketplace_expand_all",
     "rates_marketplace_tab",
     "rates_marketplace_payment_assumption",
     "rates_marketplace_chart_detail",
@@ -336,6 +356,129 @@ test("renders approved scenario controls, results, tabs, links, disclosure, and 
   ]) {
     assert.match(combinedHtml, new RegExp(`data-analytics-event="${eventName}"`));
   }
+});
+
+test("renders multiple expanded offers with independent tabs", async () => {
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const [first, second] = fixture.offers.filter(
+    (offer) => offer.resultType === "company" && offer.mortgageType === "purchase",
+  );
+
+  const html = renderRatesMarketplace({
+    fixture,
+    state: {
+      ...MARKETPLACE_DEFAULTS,
+      expandedOfferIds: [first.id, second.id],
+      expandedTabsByOffer: {
+        [first.id]: "payment",
+        [second.id]: "details",
+      },
+    },
+  });
+
+  assert.equal((html.match(/data-expanded-offer=/g) || []).length, 2);
+  assert.match(html, new RegExp(`data-expanded-offer="${first.id}"[\\s\\S]*data-payment-panel="${first.id}"`));
+  assert.match(html, new RegExp(`data-expanded-offer="${second.id}"[\\s\\S]*Listed upfront cost`));
+  assert.match(html, /data-expand-all/);
+  assert.match(textFromHtml(html), /Expand all/i);
+});
+
+test("uses a fixed provider media slot for company logos and loan-officer photos", async () => {
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const company = fixture.offers.find((offer) => offer.resultType === "company" && offer.mortgageType === "purchase");
+  const officer = fixture.offers.find((offer) => offer.resultType === "loanOfficer" && offer.mortgageType === "purchase");
+  company.logoUrl = "/assets/rates/company-mark.png";
+  officer.headshotUrl = "/assets/rates/loan-officer.jpg";
+  officer.companyName = "Harbor Ridge Mortgage";
+
+  const companyHtml = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
+  const officerHtml = renderRatesMarketplace({
+    fixture,
+    state: { ...MARKETPLACE_DEFAULTS, resultType: "loanOfficer" },
+  });
+
+  assert.match(companyHtml, /class="rates-provider-media company"/);
+  assert.match(companyHtml, /src="\/assets\/rates\/company-mark\.png"/);
+  assert.match(officerHtml, /class="rates-provider-media loan-officer"/);
+  assert.match(officerHtml, /src="\/assets\/rates\/loan-officer\.jpg"/);
+  assert.match(textFromHtml(officerHtml), /Harbor Ridge Mortgage/);
+});
+
+test("keeps edited down-payment dollars authoritative and synchronizes the percent", async () => {
+  installDom();
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace, wireRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const root = new TestElement("main");
+
+  root.innerHTML = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
+  wireRatesMarketplace(root, { fixture });
+
+  const marketplace = root.querySelector("[data-rates-marketplace]");
+  const amount = marketplace.querySelector('[name="downPaymentAmount"]');
+  amount.value = "106000";
+  amount.dispatchEvent(new TestEvent("input", { bubbles: true }));
+
+  assert.equal(marketplace.querySelector('[name="downPaymentPercent"]').value, "10");
+  marketplace.querySelector("[data-rates-form]").dispatchEvent(
+    new TestEvent("submit", { bubbles: true }),
+  );
+
+  const cached = JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState"));
+  assert.equal(cached.downPaymentAmount, 106000);
+  assert.equal(cached.downPaymentPercent, 10);
+});
+
+test("shows validation errors instead of replacing blank values with defaults", async () => {
+  installDom();
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace, wireRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const root = new TestElement("main");
+
+  root.innerHTML = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
+  wireRatesMarketplace(root, { fixture });
+
+  const marketplace = root.querySelector("[data-rates-marketplace]");
+  const price = marketplace.querySelector('[name="purchasePrice"]');
+  price.value = "";
+  marketplace.querySelector("[data-rates-form]").dispatchEvent(
+    new TestEvent("submit", { bubbles: true }),
+  );
+
+  const error = marketplace.querySelector("[data-rates-form-error]");
+  assert.equal(error.hidden, false);
+  assert.match(error.textContent, /purchase price greater than zero/i);
+  assert.equal(price.getAttribute("aria-invalid"), "true");
+  assert.equal(marketplace.querySelector('[name="purchasePrice"]').value, "");
+});
+
+test("applies URL, account, cache, and default state in the approved order", async () => {
+  installDom();
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace, wireRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const root = new TestElement("main");
+  globalThis.localStorage.setItem(
+    "snapRatesMarketplaceState",
+    JSON.stringify({ zip: "33602", creditRange: "680-719", occupancy: "secondary" }),
+  );
+  globalThis.window.location = { search: "?zip=02108" };
+
+  root.innerHTML = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
+  wireRatesMarketplace(root, {
+    fixture,
+    accountContext: { zip: "78701", creditRange: "740-779" },
+  });
+
+  const marketplace = root.querySelector("[data-rates-marketplace]");
+  assert.equal(marketplace.querySelector('[name="zip"]').value, "02108");
+  assert.equal(marketplace.querySelector('[name="creditRange"]').value, "740-779");
+  assert.equal(marketplace.querySelector('[name="occupancy"]').value, "secondary");
 });
 
 test("keeps marketplace stylesheet selectors aligned with rendered offer markup", async () => {
@@ -347,21 +490,25 @@ test("keeps marketplace stylesheet selectors aligned with rendered offer markup"
     fixture,
     state: {
       ...MARKETPLACE_DEFAULTS,
-      expandedOfferId: offer.id,
-      expandedTab: "payment",
+      expandedOfferIds: [offer.id],
+      expandedTabsByOffer: { [offer.id]: "payment" },
     },
   });
-  const styles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+  const styles = ["./styles.css", "./rates-marketplace.css"]
+    .map((file) => fs.readFileSync(new URL(file, import.meta.url), "utf8"))
+    .join("\n");
 
   for (const className of [
     "rates-form-grid",
     "rates-segmented",
-    "rates-results-heading",
-    "rates-summary-grid",
+    "rates-results-utility",
+    "rates-results-columns",
     "rates-offer",
     "rates-offer-row",
     "rates-offer-metrics",
     "rates-offer-profile",
+    "rates-provider-media",
+    "rates-offer-actions",
     "rates-expanded-panel",
     "rates-tabs",
     "rates-payment-panel",
@@ -372,7 +519,46 @@ test("keeps marketplace stylesheet selectors aligned with rendered offer markup"
     assert.match(styles, new RegExp(`\\.${className}(?:[\\s.#:[,{>]|$)`), `${className} is styled`);
   }
 
-  assert.doesNotMatch(styles, /\.rates-offer-card|\.rates-offer-main|\.rates-payment-chart/);
+  assert.doesNotMatch(styles, /\.rates-offer-card|\.rates-offer-main|\.rates-payment-chart|\.rates-scenario-summary/);
+  assert.doesNotMatch(html, /class="rates-offer-actions"\s+style=/);
+  assert.match(styles, /@media \(max-width: 480px\)[\s\S]*?\.rates-offer-actions \.button,[\s\S]*?white-space: normal/);
+});
+
+test("stages scenario controls until Update offers while result type and sort remain immediate", async () => {
+  installDom();
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const { renderRatesMarketplace, wireRatesMarketplace } = await loadUiModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const root = new TestElement("main");
+  const tracked = [];
+
+  root.innerHTML = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
+  wireRatesMarketplace(root, { fixture, track: (name, payload) => tracked.push({ name, payload }) });
+
+  const marketplace = root.querySelector("[data-rates-marketplace]");
+  marketplace.querySelector("[data-toggle-advanced-filters]").click();
+  marketplace.querySelector('[data-show-fha-option="false"]').click();
+  marketplace.querySelector('[data-mortgage-type-option="refinance"]').click();
+
+  assert.equal(marketplace.querySelector('[name="showFha"]').value, "false");
+  assert.equal(marketplace.querySelector('[name="mortgageType"]').value, "refinance");
+  assert.equal(marketplace.querySelector("[data-purchase-fields]").hidden, true);
+  assert.equal(marketplace.querySelector("[data-refinance-fields]").hidden, false);
+  assert.equal(JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState")).mortgageType, "purchase");
+  assert.equal(tracked.some((event) => event.name === "rates_marketplace_update"), false);
+
+  marketplace.querySelector("[data-rates-form]").dispatchEvent(new TestEvent("submit", { bubbles: true }));
+  const cached = JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState"));
+  assert.equal(cached.mortgageType, "refinance");
+  assert.equal(cached.showFha, false);
+  assert.equal(tracked.at(-1).name, "rates_marketplace_update");
+
+  marketplace.querySelector('[data-result-type-option="loanOfficer"]').click();
+  assert.equal(tracked.at(-1).name, "rates_marketplace_result_type");
+  const sort = marketplace.querySelector("[data-marketplace-sort]");
+  sort.value = "lowestPoints";
+  sort.dispatchEvent(new TestEvent("change", { bubbles: true }));
+  assert.equal(tracked.at(-1).name, "rates_marketplace_sort");
 });
 
 test("wires result type, sort, show-more, expansion, tabs, payment edits, chart details, persistence, and analytics", async () => {
@@ -411,11 +597,9 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   assert.equal(advancedPanel.hidden, false);
   const dti = marketplace.querySelector('[name="dti"]');
   dti.value = "40plus";
-  marketplace.querySelector('[data-show-fha-option="false"]').click();
   assert.equal(marketplace.querySelector('[name="dti"]').value, "40plus");
   assert.equal(marketplace.querySelector("[data-toggle-advanced-filters]").getAttribute("aria-expanded"), "true");
-  marketplace.querySelector('[data-show-fha-option="true"]').click();
-  assert.equal(marketplace.querySelector('[name="dti"]').value, "40plus");
+  marketplace.querySelector("[data-rates-form]").dispatchEvent(new TestEvent("submit", { bubbles: true }));
 
   marketplace.querySelector('[data-result-type-option="loanOfficer"]').click();
   assert.match(textFromHtml(marketplace.innerHTML), /Ava Martinez/);
@@ -423,7 +607,7 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["resultType"]);
 
   const sort = marketplace.querySelector("[data-marketplace-sort]");
-  sort.value = "highestRating";
+  sort.value = "lowestApr";
   sort.dispatchEvent(new TestEvent("change", { bubbles: true }));
   assert.equal(tracked.at(-1).name, "rates_marketplace_sort");
   assert.deepEqual(Object.keys(tracked.at(-1).payload).sort(), ["sort"]);
@@ -436,6 +620,16 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
   firstDetails.click();
   assert.equal(marketplace.querySelectorAll("[data-expanded-offer]").length, 1);
   assert.equal(tracked.at(-1).name, "rates_marketplace_expand_offer");
+
+  marketplace.querySelectorAll("[data-offer-details]")[1].click();
+  assert.equal(marketplace.querySelectorAll("[data-expanded-offer]").length, 2);
+  marketplace.querySelector("[data-expand-all]").click();
+  assert.equal(marketplace.querySelectorAll("[data-expanded-offer]").length, 10);
+  assert.equal(tracked.at(-1).name, "rates_marketplace_expand_all");
+  marketplace.querySelector("[data-expand-all]").click();
+  assert.equal(marketplace.querySelectorAll("[data-expanded-offer]").length, 0);
+
+  marketplace.querySelector("[data-offer-details]").click();
 
   marketplace.querySelector('[data-offer-tab="payment"]').click();
   assert.match(textFromHtml(marketplace.innerHTML), /Total monthly payment/);
@@ -490,7 +684,7 @@ test("wires result type, sort, show-more, expansion, tabs, payment edits, chart 
 
   const cached = JSON.parse(globalThis.localStorage.getItem("snapRatesMarketplaceState"));
   assert.equal(cached.resultType, "loanOfficer");
-  assert.equal(cached.sort, "highestRating");
+  assert.equal(cached.sort, "lowestApr");
   assert.equal("email" in cached, false);
 });
 

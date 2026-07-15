@@ -8,9 +8,14 @@ import {
 } from "/site/market-charts.mjs";
 import { renderLocationsHero } from "/site/locations-hero.mjs";
 import { renderCampaignHero } from "/site/campaign-hero.mjs";
-import { buildLearningCenterModel } from "/site/learning-center.mjs";
 import {
+  buildLearningCenterModel,
+  serializeLearningCenterSearch,
+} from "/site/learning-center.mjs";
+import {
+  CONTRIBUTOR_DISCLOSURE,
   applyArticleAuthorIds,
+  buildContributorArticleIndex,
   mergeEditorialArticles,
   normalizeEditorialContent,
   normalizeEditorialContentWithFallback,
@@ -27,6 +32,27 @@ import { productContentById, renderProductContent } from "/site/product-content.
 import { renderRatesMarketplace, wireRatesMarketplace } from "/site/rates-marketplace-ui.mjs";
 import { createFixtureMarketplaceAdapter } from "/site/rates-marketplace.mjs";
 import { buildPrequalHandoffRequest, createPrequalHandoffView, renderPrequalHandoffMarkup } from "/site/prequal-handoff.mjs";
+import { renderContentFreshness } from "/site/content-freshness.mjs";
+import {
+  normalizeTagRegistry,
+  tagRoute,
+  tagsForRoute,
+} from "/site/tag-registry.mjs";
+import { parseTagSearchState } from "/site/tag-state.mjs";
+import {
+  resolveLocationSearchRoute,
+  resolveTagRouteRequest,
+  shouldUseNativeTagFallbackNavigation,
+  shouldPreserveStaticTagPage,
+} from "/site/discovery-route-state.mjs";
+import {
+  renderTagSearchPage,
+  wireTagSearch,
+} from "/site/tag-search-ui.mjs";
+import {
+  renderAdditionalTagLinks,
+  renderPrimaryTagLinks,
+} from "/site/tag-presentation.mjs";
 
 const DATA_URL = "/mock-data/production-seed.json";
 const NEWS_INDEX_URL = "/mock-data/location-news-index.json";
@@ -37,7 +63,14 @@ const CONTRIBUTORS_URL = "/mock-data/editorial/contributors.json";
 const TOPIC_HUBS_URL = "/mock-data/editorial/topic-hubs.json";
 const EDITORIAL_CONTENT_URL = "/mock-data/editorial-content.json";
 const PRODUCT_COPY_URL = "/mock-data/product-copy.json";
+const PUBLIC_TAG_REGISTRY_URL = "/mock-data/public-tag-registry.json";
+const SEARCH_INDEX_URL = "/mock-data/search-index.json";
 const app = document.getElementById("app");
+const hasStaticTagPage = Boolean(app?.querySelector("[data-static-tag-page]"));
+const staticTagFallbackTagId = app?.querySelector("[data-static-tag-page]")?.getAttribute("data-selected-tag-id") || "";
+const staticTagFallbackHtml = Array.from(
+  app?.querySelectorAll("[data-static-tag-page] .static-tag-results") || [],
+).map((section) => section.outerHTML).join("");
 wireMarketChartInteractions(app);
 
 let data;
@@ -48,6 +81,11 @@ let marketChartFixtures = { sources: [], charts: [], snapshotSources: [] };
 let ratesMarketplaceFixture = null;
 let editorialContent = normalizeEditorialContent();
 let productCopyBundle = { products: [] };
+let publicTagRegistry = normalizeTagRegistry();
+let searchIndexRecords = null;
+let searchIndexLoadError = null;
+let searchIndexPromise = null;
+let activeTagSearchController = null;
 const articleBundlePromises = new Map();
 let articleModalReturnFocus = null;
 let articleModalOrigin = null;
@@ -60,6 +98,14 @@ const ASSETS = {
   mortgage: "/site/assets/images/mortgage.png",
   house: "/site/assets/images/house-icon.png"
 };
+
+const SEARCH_FALLBACK_IMAGES = Object.freeze({
+  articles: ASSETS.mortgage,
+  "topic-guides": ASSETS.mortgage,
+  "local-market-news": ASSETS.house,
+  "product-guides": ASSETS.borrower,
+  calculators: ASSETS.house,
+});
 
 const accentColors = ["#0b55ff", "#11bfb3", "#fdba22", "#21c983", "#dc475c", "#6f61a8"];
 const STORAGE_KEY = "snapMortgagePublicSession";
@@ -152,7 +198,7 @@ const sources = {
     name: "Personalized pricing review",
     url: "",
     cadence: "Discussed with your scenario",
-    date: "Available after review",
+    date: "Shown after lender review",
     use: "Personalized rate, APR, cost, and product availability"
   },
   nmls: {
@@ -168,16 +214,16 @@ const rateBenchmarks = [
   {
     label: "30-year fixed benchmark",
     rate: "6.49%",
-    apr: "Benchmark average",
-    points: "Survey average terms",
+    apr: "Not reported by PMMS",
+    points: "Not reported by PMMS",
     sourceId: "freddiePmms",
     next: "/calculators/mortgage-payment"
   },
   {
     label: "15-year fixed benchmark",
     rate: "5.82%",
-    apr: "Benchmark average",
-    points: "Survey average terms",
+    apr: "Not reported by PMMS",
+    points: "Not reported by PMMS",
     sourceId: "freddiePmms",
     next: "/calculators/mortgage-payment"
   },
@@ -225,14 +271,14 @@ const stateBriefs = {
 const productBriefs = {
   "product-purchase": {
     fit: "For buyers comparing payment, cash to close, documentation, and local market timing before choosing a home.",
-    tradeoff: "The right path can depend on down payment, credit profile, income, assets, property type, occupancy, and local costs."
+    tradeoff: "The right option can depend on down payment, credit profile, income, assets, property type, occupancy, and local costs."
   },
   "product-refinance": {
     fit: "For homeowners comparing a new mortgage against their current payment, term, closing costs, and long-term interest.",
     tradeoff: "A lower monthly payment can still increase total interest or extend the payoff timeline."
   },
   "product-fha": {
-    fit: "For buyers who may want to compare a lower down payment path with FHA mortgage insurance and county limits.",
+    fit: "For buyers who may want to compare a lower down payment option with FHA mortgage insurance and county limits.",
     tradeoff: "FHA can help with cash-to-close planning, but mortgage insurance and property standards matter."
   },
   "product-va": {
@@ -248,7 +294,7 @@ const productBriefs = {
     tradeoff: "Jumbo loans often require stronger reserves, documentation, and product review."
   },
   "product-home-equity": {
-    fit: "For homeowners comparing access to equity through a HELOC or home equity path.",
+    fit: "For homeowners comparing access to equity through a HELOC or home equity loan.",
     tradeoff: "Open-end credit terms, variable APRs, fees, draw periods, repayment terms, and lien position need careful review."
   },
   "product-cash-out-refinance": {
@@ -256,6 +302,61 @@ const productBriefs = {
     tradeoff: "Cash-out changes the loan balance and can change payment, equity, term, total interest, and risk."
   }
 };
+
+const productFitAnswers = {
+  "product-purchase": {
+    fitCriteria: "Home purchase financing is commonly evaluated by buyers who have a target price range, down-payment plan, expected closing timeline, and a budget for the full housing payment.",
+    costsAndTradeoffs: "The principal cost tradeoff includes interest, lender and third-party closing costs, possible mortgage insurance, and the cash you keep after closing.",
+    propertyAndOccupancy: "Property type, condition, location, intended occupancy, taxes, insurance, and HOA dues can change which options are considered and the full monthly obligation.",
+    lenderReview: "A lender must review credit, income, debts, assets, property details, occupancy, loan amount, current pricing, and program rules before stating eligibility or terms."
+  },
+  "product-refinance": {
+    fitCriteria: "Refinancing is commonly evaluated by homeowners comparing a current mortgage with a new rate, term, payment, cash-out goal, or payoff schedule.",
+    costsAndTradeoffs: "The principal cost tradeoff is paying closing costs and potentially restarting or extending the term; a lower payment can still increase total interest or delay payoff.",
+    propertyAndOccupancy: "Property value, lien position, equity, property type, occupancy, taxes, insurance, and the current loan all affect the comparison.",
+    lenderReview: "A lender must review credit, income, debts, equity, title, payoff details, property information, occupancy, pricing, and cost recovery before stating eligibility or terms."
+  },
+  "product-fha": {
+    fitCriteria: "FHA financing is commonly compared by buyers planning to occupy the home as a primary residence and weighing a lower down-payment option against conventional financing.",
+    costsAndTradeoffs: "The principal cost tradeoff is FHA mortgage insurance, including an upfront charge and an annual charge, alongside closing costs, interest, and county loan limits.",
+    propertyAndOccupancy: "The home must meet FHA property requirements, the transaction generally requires primary-residence occupancy, and eligible property types and county limits matter.",
+    lenderReview: "An FHA-approved lender must review credit, income, debts, assets, property eligibility, appraisal findings, occupancy, current limits, and current program rules before stating eligibility or terms."
+  },
+  "product-va": {
+    fitCriteria: "VA financing is commonly compared by eligible Veterans, service members, and qualifying surviving spouses who plan to use an eligible home as a primary residence.",
+    costsAndTradeoffs: "The principal cost tradeoff can include the VA funding fee when no exemption applies, plus closing costs, interest, and the effect of financing a fee into the loan balance.",
+    propertyAndOccupancy: "Entitlement, intended occupancy, appraisal requirements, property eligibility, and any existing VA loan can affect the transaction.",
+    lenderReview: "VA and the lender must confirm the Certificate of Eligibility, entitlement, funding-fee treatment, income, credit, debts, assets, property, occupancy, and current terms before stating eligibility or pricing."
+  },
+  "product-conventional": {
+    fitCriteria: "Conventional financing is commonly compared for purchases and refinances that may fit agency or lender guidelines and the applicable conforming loan limit.",
+    costsAndTradeoffs: "The principal cost tradeoff includes interest, closing costs, and possible private mortgage insurance when equity or down payment is below the lender's threshold.",
+    propertyAndOccupancy: "Primary residences, second homes, and investment properties can have different down-payment, reserve, pricing, and property requirements.",
+    lenderReview: "A lender must review credit, income, debts, assets, reserves, property type, occupancy, loan amount, current limits, and pricing before stating eligibility or terms."
+  },
+  "product-jumbo": {
+    fitCriteria: "Jumbo financing is commonly compared when the needed loan amount is above the conforming limit for the property's county.",
+    costsAndTradeoffs: "The principal cost tradeoff can include lender-specific pricing, larger reserve expectations, closing costs, and more extensive documentation.",
+    propertyAndOccupancy: "Property type, appraisal, location, occupancy, loan size, and liquidity can materially affect a jumbo review.",
+    lenderReview: "A lender must confirm the county limit, credit, income, debts, assets, reserves, property, occupancy, documentation, and current pricing before stating eligibility or terms."
+  },
+  "product-home-equity": {
+    fitCriteria: "Home-equity borrowing is commonly compared by homeowners who have equity and want to weigh a HELOC or home-equity loan against refinancing or leaving the first mortgage unchanged.",
+    costsAndTradeoffs: "The principal cost tradeoff can include a variable APR for a HELOC, fees, a draw period followed by repayment, a second lien, and a higher total debt obligation.",
+    propertyAndOccupancy: "Property value, current liens, combined loan-to-value, property type, occupancy, and state or lender restrictions can affect the options considered.",
+    lenderReview: "A lender must review credit, income, debts, equity, liens, property, occupancy, line or loan terms, fees, and current pricing before stating eligibility or terms."
+  },
+  "product-cash-out-refinance": {
+    fitCriteria: "Cash-out refinancing is commonly compared by homeowners who want to replace the current mortgage and convert part of their equity to cash.",
+    costsAndTradeoffs: "The principal cost tradeoff is a larger loan balance plus closing costs; payment, term, total interest, and the amount of equity left in the home can all change.",
+    propertyAndOccupancy: "Property value, current liens, equity, property type, occupancy, title, and any timing or seasoning rules can affect the transaction.",
+    lenderReview: "A lender must review credit, income, debts, equity, title, payoff details, property, occupancy, current program rules, and pricing before stating eligibility or terms."
+  }
+};
+
+function productFitAnswer(product) {
+  return productFitAnswers[product?.id] || productFitAnswers["product-purchase"];
+}
 
 function esc(value) {
   return String(value ?? "")
@@ -267,7 +368,7 @@ function esc(value) {
 
 function loadSessionState() {
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}");
     sessionState = {
       isLoggedIn: stored.isLoggedIn !== false,
       savedCount: Number.isFinite(Number(stored.savedCount)) ? Number(stored.savedCount) : 0,
@@ -279,7 +380,7 @@ function loadSessionState() {
 }
 
 function persistSessionState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionState));
+  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(sessionState));
 }
 
 function resetSessionStateForSignOut() {
@@ -306,6 +407,21 @@ function slugify(value) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function humanizePublicLabel(value) {
+  return String(value || "")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function formatDaysOnMarket(value) {
+  const label = String(value || "").trim();
+  if (!label) return "Not provided";
+  return /^\d+(?:\.\d+)?$/.test(label) ? `${label} days` : label;
 }
 
 function currentAnchor() {
@@ -358,7 +474,7 @@ function icon(name) {
   return `<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">${paths[name] || paths.home}</svg></span>`;
 }
 
-function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManifest = { media: [] }, editorialContent = {}) {
+function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManifest = { media: [] }, editorialContent = {}, tagRegistry = {}) {
   const built = {
     states: mapById(seed.states),
     cities: mapById(seed.cities),
@@ -375,6 +491,7 @@ function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManife
     newsMedia: mapById(compactMediaManifest.media || compactMediaManifest.assets),
     contributors: mapById(editorialContent.contributors),
     contributorsBySlug: Object.fromEntries((editorialContent.contributors || []).map((contributor) => [contributor.slug, contributor])),
+    contributorArticles: buildContributorArticleIndex(seed.articles || [], compactNewsIndex.articles || []),
     newsByLocation: {},
     modulesByParent: {},
     ctaRules: seed.ctaRules || [],
@@ -420,6 +537,22 @@ function buildMaps(seed, compactNewsIndex = { articles: [] }, compactMediaManife
   (editorialContent.authorRoutes || []).forEach((authorRoute) => {
     built.routes.set(normalizeRoute(authorRoute.route), authorRoute);
   });
+  const normalizedTagRegistry = tagRegistry?.tagsById
+    ? tagRegistry
+    : normalizeTagRegistry(tagRegistry);
+  normalizedTagRegistry.tags.forEach((tag) => {
+    const canonicalRoute = normalizeRoute(tagRoute(tag));
+    if (!canonicalRoute) return;
+    built.routes.set(canonicalRoute, { type: "tag", item: tag });
+    (tag.redirectSlugs || []).forEach((slug) => {
+      const historicalRoute = normalizeRoute(`/learning-center/tags/${slug}`);
+      built.routes.set(historicalRoute, {
+        type: "tag",
+        item: tag,
+        historicalSlug: slug,
+      });
+    });
+  });
   built.routes.set("/prequal/start", {
     type: "prequalHandoff",
     item: { route: "/prequal/start" }
@@ -439,8 +572,122 @@ function navigate(path, { replace = false, state = {} } = {}) {
   render();
 }
 
+function isTagSearchPath(path = currentPath()) {
+  return path === "/learning-center/search" || path.startsWith("/learning-center/tags/");
+}
+
+function tagContextForRoute(path) {
+  return tagsForRoute(publicTagRegistry, normalizeRoute(path));
+}
+
+function tagSearchStateFor(found) {
+  const state = parseTagSearchState(window.location.search, publicTagRegistry);
+  const routeTag = found?.type === "tag" ? found.item : undefined;
+  if (!routeTag || state.tagIds.includes(routeTag.id)) return state;
+
+  return {
+    ...state,
+    tagIds: [routeTag.id, ...state.tagIds],
+    operators: state.tagIds.length ? ["AND", ...state.operators] : [],
+  };
+}
+
+function safeSearchImageUrl(value) {
+  if (typeof value !== "string") return "";
+  const candidate = value.trim();
+  if (!candidate || /[\u0000-\u001f\u007f\\]/.test(candidate)) return "";
+  if (/^\/(?!\/)/.test(candidate)) return candidate;
+  try {
+    const parsed = new URL(candidate);
+    return parsed.protocol === "https:" || parsed.protocol === "http:" ? candidate : "";
+  } catch {
+    return "";
+  }
+}
+
+function resolveSearchImageReference(reference, family) {
+  const media = typeof reference === "string" ? maps?.newsMedia?.[reference] : undefined;
+  if (media?.approvalStatus === "approved") {
+    const approvedImage = safeSearchImageUrl(media.localPath) || safeSearchImageUrl(media.imageUrl);
+    if (approvedImage) return approvedImage;
+  }
+  return safeSearchImageUrl(reference) || SEARCH_FALLBACK_IMAGES[family] || ASSETS.mortgage;
+}
+
+function normalizeSearchRecords(payload) {
+  if (!Array.isArray(payload?.records)) throw new Error("Search resources are unavailable.");
+  return payload.records.map((record) => ({
+    ...record,
+    preview: /^(?:undefined|null|nan)\b/i.test(String(record.preview || "").trim())
+      ? ""
+      : record.preview,
+    image: resolveSearchImageReference(record.image, record.family),
+  }));
+}
+
+function resolveSearchAuthor(author) {
+  const authorId = typeof author === "string" ? author : author?.id;
+  return maps?.contributors?.[authorId]?.name || author?.displayName || author?.name || "";
+}
+
+function resolveSearchLocation(locationId, record) {
+  const city = maps?.cities?.[locationId];
+  if (city) {
+    const state = maps.states[city.stateId];
+    return state ? `${city.name}, ${state.abbr || state.name}` : city.name;
+  }
+  const state = maps?.states?.[locationId];
+  if (state) return state.name;
+
+  const locationType = locationId?.startsWith("city-")
+    ? "city"
+    : locationId?.startsWith("state-")
+      ? "state"
+      : "";
+  if (!locationType) return "";
+  return (record?.tagIds || [])
+    .map((tagId) => publicTagRegistry.tagsById.get(tagId))
+    .find((tag) => tag?.type === locationType)?.displayName || "";
+}
+
+async function loadSearchIndexForDiscoveryRoute() {
+  if (Array.isArray(searchIndexRecords)) return searchIndexRecords;
+  if (searchIndexPromise) return searchIndexPromise;
+
+  searchIndexPromise = fetch(SEARCH_INDEX_URL)
+    .then(async (response) => {
+      if (!response.ok) throw new Error("Search resources are unavailable.");
+      return normalizeSearchRecords(await response.json());
+    })
+    .then((records) => {
+      searchIndexRecords = records;
+      searchIndexLoadError = null;
+      return records;
+    })
+    .catch((error) => {
+      searchIndexRecords = [];
+      searchIndexLoadError = error;
+      return [];
+    })
+    .finally(() => {
+      searchIndexPromise = null;
+      if (isTagSearchPath()) render();
+    });
+  return searchIndexPromise;
+}
+
+function updateTagSearchHistory(url, { replace = true, state = {} } = {}) {
+  const nextUrl = new URL(url, window.location.origin);
+  const method = replace ? "replaceState" : "pushState";
+  window.history[method](state, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+  setDocumentMeta(maps.routes.get("/learning-center/search"), `${nextUrl.pathname}${nextUrl.search}`);
+}
+
 function trackPublicEvent(name, payload = {}) {
-  const allowedPayloadKeys = ["field", "offerId", "resultType", "sort", "tab", "visibleCount", "contributorId"];
+  const allowedPayloadKeys = [
+    "field", "offerId", "resultType", "sort", "tab", "visibleCount", "contributorId",
+    "family", "position", "tagId", "operator", "index", "hasQuery", "tagCount",
+  ];
   const safePayload = {};
   for (const key of allowedPayloadKeys) {
     if (payload[key] === undefined) continue;
@@ -471,7 +718,7 @@ function accountMenu() {
         </button>
         <div class="account-dropdown" data-account-menu hidden>
           <button type="button" data-auth-action="login">Log in</button>
-          <button type="button" data-cta-action="leadForm">Request mortgage guidance</button>
+          <button type="button" data-cta-action="leadForm">Review guidance options</button>
         </div>
       </div>
     `;
@@ -486,7 +733,7 @@ function accountMenu() {
       </button>
       <div class="account-dropdown" data-account-menu hidden>
         <button type="button" data-account-action="open">Open My Account</button>
-        <button type="button" data-cta-action="leadForm">Request mortgage guidance</button>
+        <button type="button" data-cta-action="leadForm">Review guidance options</button>
         <button type="button" data-cta-action="rateReview">Review rates</button>
         <button type="button" data-cta-action="compareOffer">Compare an offer</button>
         <button type="button" data-account-action="signout">Sign out</button>
@@ -516,7 +763,7 @@ function header() {
           ${navLink("/loan-options", "Loan Options")}
           ${navLink("/calculators", "Calculators")}
           ${navLink("/learning-center", "Learning")}
-          ${navLink("/loan-officers", "Experts")}
+          ${navLink("/loan-officers", "Loan officers")}
         </nav>
         <div class="header-actions">
           ${accountMenu()}
@@ -532,7 +779,7 @@ function footer() {
       <div class="footer-inner">
         <div>
           <h3>Snap Mortgage</h3>
-          <p>Local mortgage intelligence, rate details, market data, education, and licensed expert help.</p>
+          <p>Compare local housing costs and mortgage options, test visible assumptions, and choose a useful next step.</p>
           <p class="disclosure">Information is educational and does not replace a Loan Estimate, approval decision, or commitment to lend.</p>
         </div>
         <div>
@@ -553,7 +800,7 @@ function footer() {
           <h3>People</h3>
           <a href="${route("/loan-officers")}">Loan officers</a>
           <a href="${route("/branches")}">Branches</a>
-          <button type="button" data-cta-action="leadForm">Request guidance</button>
+          <button type="button" data-cta-action="leadForm">Review guidance options</button>
           <a href="${route("/learning-center/editorial-team")}">Editorial team</a>
         </div>
         <div>
@@ -567,12 +814,13 @@ function footer() {
   `;
 }
 
-function hero({ eyebrow, title, lead, actions = "", panel = "" }) {
+function hero({ eyebrow, title, lead, actions = "", panel = "", beforeTitle = "" }) {
   return `
     <section class="hero-band">
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">${esc(eyebrow)}</p>
+          ${beforeTitle}
           <h1>${esc(title)}</h1>
           <p class="lead">${esc(lead)}</p>
           ${actions ? `<div class="hero-actions">${actions}</div>` : ""}
@@ -615,7 +863,7 @@ function card({ title, text, href, iconName = "home", accent = "#0f6e67", linkLa
 
 function routeStrip(items) {
   return `
-    <section class="section compact route-strip-section" aria-label="Popular mortgage paths">
+    <section class="section compact route-strip-section" aria-label="Popular mortgage choices">
       <div class="route-strip">
         ${items.map((item, index) => `
           <a href="${route(item.href)}" style="--card-accent:${accentColors[index % accentColors.length]}">
@@ -695,21 +943,21 @@ function calculatedScenarioChart(calculatorId, title, summary, points, { chartTy
   </div>`;
 }
 
-function downPaymentReadinessBar({ required, available, productLabel = "Selected product", minDown = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = required }) {
+function downPaymentReadinessBar({ required, available, productLabel = "Selected product", downPaymentAssumption = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = required }) {
   const cleanRequired = Math.max(0, Math.round(Number(required) || 0));
   const cleanAvailable = Math.max(0, Math.round(Number(available) || 0));
   const cleanBaseRequired = Math.max(cleanRequired, Math.round(Number(baseRequired) || cleanRequired));
-  const cleanMinDown = Math.max(0, Math.round(Number(minDown) || 0));
+  const cleanDownPayment = Math.max(0, Math.round(Number(downPaymentAssumption) || 0));
   const cleanClosing = Math.max(0, Math.round(Number(closingCosts) || 0));
   const cleanDpa = Math.max(0, Math.round(Number(dpaAssistance) || 0));
   const max = Math.max(cleanAvailable, cleanBaseRequired, cleanRequired, 1);
   const availableWidth = Math.max((cleanAvailable / max) * 100, cleanAvailable > 0 ? 3 : 0);
   const neededWidth = Math.max((cleanRequired / max) * 100, cleanRequired > 0 ? 3 : 0);
-  const status = cleanAvailable >= cleanRequired ? "Cash available meets this illustrative planning estimate." : `${currency(cleanRequired - cleanAvailable)} estimated gap after the assumptions shown.`;
+  const status = cleanAvailable >= cleanRequired ? "Cash available covers this illustrative input total." : `${currency(cleanRequired - cleanAvailable)} difference after the assumptions shown.`;
   return `<div class="calculator-horizontal-chart">
     <div class="comparison-chart-header">
-      <strong>Cash available vs. cash needed</strong>
-      <p>${esc(productLabel)} view uses the down-payment input and an illustrative 4% closing-cost assumption. Assistance is not treated as available or included until a specific program is verified.</p>
+      <strong>Cash available vs. entered assumptions</strong>
+      <p>${esc(productLabel)} view uses the user-entered down payment and editable closing-cost assumption. It does not infer a minimum down payment, eligibility, or assistance availability.</p>
     </div>
     <div class="down-payment-bars" role="img" aria-label="Cash available ${currency(cleanAvailable)} compared with cash needed ${currency(cleanRequired)}">
       <div class="down-payment-bar-row have">
@@ -722,8 +970,8 @@ function downPaymentReadinessBar({ required, available, productLabel = "Selected
       </div>
     </div>
     <div class="down-payment-formula">
-      <span>Minimum down <strong>${currency(cleanMinDown)}</strong></span>
-      <span>Closing costs (4%) <strong>${currency(cleanClosing)}</strong></span>
+      <span>Down payment assumption <strong>${currency(cleanDownPayment)}</strong></span>
+      <span>Closing-cost assumption <strong>${currency(cleanClosing)}</strong></span>
       ${cleanDpa ? `<span>DPA estimate <strong>-${currency(cleanDpa)}</strong></span>` : ""}
     </div>
     <p class="chart-status-note">${esc(status)}</p>
@@ -750,10 +998,10 @@ function twoBarComparison({ title, summary, leftLabel, leftValue, rightLabel, ri
 function uploadMortgageStatementCta() {
   return `<div class="upload-statement-cta">
     <div>
-      <strong>Have the current mortgage statement?</strong>
-      <p>Upload it to prefill payoff, escrow, insurance, and MI details when the live integration is connected.</p>
+      <strong>Have your current mortgage statement nearby?</strong>
+      <p>Use it to check payoff, escrow, insurance, and mortgage-insurance inputs yourself. Nothing is uploaded or prefilled here.</p>
     </div>
-    <button class="button secondary" type="button" data-cta-action="prequal">Upload Mortgage Statement</button>
+    <button class="button secondary" type="button" data-cta-action="prequal">Review prequalification details</button>
   </div>`;
 }
 
@@ -836,137 +1084,81 @@ function loanBalanceAfterMonths(principal, monthlyRate, totalMonths, elapsedMont
   return Math.max(balance, 0);
 }
 
-function rentBuyLineComparison({ rent, buyPayment, rentGrowth, timeline, price, down, annualRate, termYears }) {
+function rentBuyLineComparison({ rent, buyPayment, rentGrowth, timeline }) {
   const years = Math.max(Math.round(Number(timeline) || 1), 1);
   const steps = Math.min(Math.max(years, 2), 8);
-  const monthlyRate = (Number(annualRate) || 0) / 100 / 12;
-  const totalMonths = Math.max((Number(termYears) || 30) * 12, 1);
-  const originalBalance = Math.max((Number(price) || 0) - (Number(down) || 0), 0);
-  const appreciationRate = 0.03;
   const series = Array.from({ length: steps + 1 }, (_, index) => {
     const year = Math.round((years * index) / steps);
-    const homeValue = (Number(price) || 0) * Math.pow(1 + appreciationRate, year);
-    const balance = loanBalanceAfterMonths(originalBalance, monthlyRate, totalMonths, year * 12);
-    return {
-      year,
-      rent: rent * Math.pow(1 + rentGrowth, year),
-      buy: buyPayment,
-      equity: Math.max(homeValue - balance, 0)
-    };
+    return { year, rent: rent * Math.pow(1 + rentGrowth, year), buy: buyPayment };
   });
   const values = series.flatMap((point) => [point.rent, point.buy]).map((value) => Number(value) || 0);
-  const min = Math.min(...values, 0);
   const max = Math.max(...values, 1);
-  const span = max - min || 1;
   const width = 620;
   const height = 250;
   const padX = 42;
   const padY = 34;
   const xy = (value, index) => {
     const x = padX + (index * (width - padX * 2)) / Math.max(series.length - 1, 1);
-    const y = height - padY - ((value - min) / span) * (height - padY * 2);
+    const y = height - padY - (value / max) * (height - padY * 2);
     return `${Math.round(x)},${Math.round(y)}`;
   };
   const rentPoints = series.map((point, index) => xy(point.rent, index)).join(" ");
   const buyPoints = series.map((point, index) => xy(point.buy, index)).join(" ");
   const last = series[series.length - 1];
-  const equityValues = series.map((point) => point.equity);
-  const equityMax = Math.max(...equityValues, 1);
-  const equityY = (value) => height - padY - (value / equityMax) * (height - padY * 2);
-  const equityPoints = series.map((point, index) => {
-    const x = padX + (index * (width - padX * 2)) / Math.max(series.length - 1, 1);
-    return `${Math.round(x)},${Math.round(equityY(point.equity))}`;
-  }).join(" ");
-  const equityArea = `${padX},${height - padY} ${equityPoints} ${width - padX},${height - padY}`;
   const comparisonYears = [5, 10, 15, 20, 25, 30];
   const selectedYear = comparisonYears.includes(years) ? years : 10;
-  const comparisonPanels = comparisonYears.map((year) => {
-    const projectedRent = rent * Math.pow(1 + rentGrowth, year);
-    const homeValue = (Number(price) || 0) * Math.pow(1 + appreciationRate, year);
-    const balance = loanBalanceAfterMonths(originalBalance, monthlyRate, totalMonths, year * 12);
-    const equity = Math.max(homeValue - balance, 0);
-    const cumulativeRent = rentGrowth > 0
-      ? rent * 12 * ((Math.pow(1 + rentGrowth, year) - 1) / rentGrowth)
-      : rent * 12 * year;
-    return `<div class="rent-buy-year-panel${year === selectedYear ? " active" : ""}" data-rent-buy-year-panel="${year}">
-      ${twoBarComparison({
-        title: `${year}-year monthly comparison`,
-        summary: "Projected rent is compared with the estimated ownership payment at the selected horizon.",
-        leftLabel: "Projected rent",
-        leftValue: projectedRent,
-        rightLabel: "Estimated buy payment",
-        rightValue: buyPayment,
-      })}
-      <div class="rent-buy-equity-snapshot">
-        <span>Estimated equity accumulated</span>
-        <strong>${currency(equity)}</strong>
-        <small>Compared with about ${currency(cumulativeRent)} in cumulative rent paid over ${year} years.</small>
-      </div>
-    </div>`;
-  }).join("");
+  const comparisonPanels = comparisonYears.map((year) => `<div class="rent-buy-year-panel${year === selectedYear ? " active" : ""}" data-rent-buy-year-panel="${year}">
+    ${twoBarComparison({
+      title: `${year}-year partial monthly comparison`,
+      summary: "Projected rent is compared only with the entered ownership payment components.",
+      leftLabel: "Projected rent",
+      leftValue: rent * Math.pow(1 + rentGrowth, year),
+      rightLabel: "Estimated buy payment",
+      rightValue: buyPayment,
+    })}
+  </div>`).join("");
   return `<div class="calculator-analysis-tabs" data-analysis-tabs>
-    <div class="calculator-analysis-tab-list" role="tablist" aria-label="Rent versus buy analysis views">
+    <div class="comparison-chart-header">
+      <strong>Partial rent-versus-buy payment comparison</strong>
+      <p>Includes monthly rent, editable rent growth, and entered ownership payment components. It excludes appreciation, maintenance, buying costs, selling costs, investment opportunity cost, tax treatment, and complete transaction economics.</p>
+    </div>
+    <div class="calculator-analysis-tab-list" role="tablist" aria-label="Partial rent versus buy payment views">
       <button class="active" type="button" data-analysis-tab="timeline">Timeline</button>
       <button type="button" data-analysis-tab="comparison">Compare horizon</button>
     </div>
     <div class="calculator-analysis-panel active" data-analysis-panel="timeline">
       <div class="calculator-comparison-chart">
-    <div class="comparison-chart-header">
-      <strong>Rent vs buy over time</strong>
-      <p>Projected rent uses the rent-growth assumption. Buy payment is held flat for this planning view.</p>
-    </div>
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Projected rent compared with estimated buy payment over ${years} years">
-      <path class="comparison-axis" d="M${padX} ${height - padY}H${width - padX}" />
-      <polyline class="comparison-line rent-line" points="${rentPoints}" />
-      <polyline class="comparison-line buy-line" points="${buyPoints}" />
-      ${series.map((point, index) => {
-        const [rx, ry] = xy(point.rent, index).split(",");
-        const [bx, by] = xy(point.buy, index).split(",");
-        return `<circle class="comparison-dot rent-dot" cx="${rx}" cy="${ry}" r="4"><title>Year ${point.year} rent: ${currency(point.rent)}</title></circle><circle class="comparison-dot buy-dot" cx="${bx}" cy="${by}" r="4"><title>Year ${point.year} buy payment: ${currency(point.buy)}</title></circle>`;
-      }).join("")}
-      <text x="${padX}" y="${height - 8}">Today</text>
-      <text x="${width - padX - 54}" y="${height - 8}">Year ${years}</text>
-    </svg>
-    <div class="comparison-legend">
-      <span><i class="rent-key"></i>Rent path <strong>${currency(rent)} &rarr; ${currency(last.rent)}</strong></span>
-      <span><i class="buy-key"></i>Estimated buy payment <strong>${currency(buyPayment)}</strong></span>
-    </div>
-    <div class="comparison-chart-header equity-header">
-      <strong>Estimated equity accumulated</strong>
-      <p>Planning estimate uses down payment, scheduled principal paydown, and a 3% annual home-value growth assumption.</p>
-    </div>
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Estimated home equity accumulated over ${years} years">
-      <path class="comparison-axis" d="M${padX} ${height - padY}H${width - padX}" />
-      <polygon class="equity-area" points="${equityArea}" />
-      <polyline class="comparison-line equity-line" points="${equityPoints}" />
-      ${series.map((point, index) => {
-        const [x, y] = equityPoints.split(" ")[index].split(",");
-        return `<circle class="comparison-dot equity-dot" cx="${x}" cy="${y}" r="4"><title>Year ${point.year} estimated equity: ${currency(point.equity)}</title></circle>`;
-      }).join("")}
-      <text x="${padX}" y="${height - 8}">Today</text>
-      <text x="${width - padX - 54}" y="${height - 8}">Year ${years}</text>
-    </svg>
-    <div class="comparison-legend">
-      <span><i class="equity-key"></i>Estimated equity <strong>${currency(series[0].equity)} &rarr; ${currency(last.equity)}</strong></span>
-    </div>
+        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Projected rent compared with entered buy payment over ${years} years">
+          <path class="comparison-axis" d="M${padX} ${height - padY}H${width - padX}" />
+          <polyline class="comparison-line rent-line" points="${rentPoints}" />
+          <polyline class="comparison-line buy-line" points="${buyPoints}" />
+          ${series.map((point, index) => {
+            const [rx, ry] = xy(point.rent, index).split(",");
+            const [bx, by] = xy(point.buy, index).split(",");
+            return `<circle class="comparison-dot rent-dot" cx="${rx}" cy="${ry}" r="4"><title>Year ${point.year} rent: ${currency(point.rent)}</title></circle><circle class="comparison-dot buy-dot" cx="${bx}" cy="${by}" r="4"><title>Year ${point.year} buy payment: ${currency(point.buy)}</title></circle>`;
+          }).join("")}
+          <text x="${padX}" y="${height - 8}">Today</text>
+          <text x="${width - padX - 54}" y="${height - 8}">Year ${years}</text>
+        </svg>
+        <div class="comparison-legend">
+          <span><i class="rent-key"></i>Rent path <strong>${currency(rent)} &rarr; ${currency(last.rent)}</strong></span>
+          <span><i class="buy-key"></i>Entered buy payment <strong>${currency(buyPayment)}</strong></span>
+        </div>
       </div>
     </div>
     <div class="calculator-analysis-panel" data-analysis-panel="comparison">
       <div class="rent-buy-year-tabs">
-      <div class="comparison-chart-header">
-        <strong>Horizon comparison</strong>
-        <p>Select a time horizon to compare the monthly payment view and the expected equity position.</p>
-      </div>
-      <div class="rent-buy-year-buttons" role="tablist" aria-label="Rent versus buy horizon">
-        ${comparisonYears.map((year) => `<button class="${year === selectedYear ? "active" : ""}" type="button" data-rent-buy-year="${year}">${year} years</button>`).join("")}
-      </div>
-      ${comparisonPanels}
+        <div class="comparison-chart-header"><strong>Partial horizon comparison</strong><p>This view compares monthly payments only; it is not a buy-versus-rent recommendation.</p></div>
+        <div class="rent-buy-year-buttons" role="tablist" aria-label="Rent versus buy payment horizon">
+          ${comparisonYears.map((year) => `<button class="${year === selectedYear ? "active" : ""}" type="button" data-rent-buy-year="${year}">${year} years</button>`).join("")}
+        </div>
+        ${comparisonPanels}
       </div>
     </div>
   </div>`;
 }
 
-function calculatorResultVisual({ title, payment, points, kind, metricLabel, note, principal = 0, monthlyRate = 0, months = 360, availableCash = 0, productLabel = "Selected product", minDown = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = payment }) {
+function calculatorResultVisual({ title, payment, points, kind, metricLabel, note, principal = 0, monthlyRate = 0, months = 360, availableCash = 0, productLabel = "Selected product", downPaymentAssumption = 0, closingCosts = 0, dpaAssistance = 0, baseRequired = payment }) {
   if (kind === "payment") {
     return calculatorTabbedPanel({
       kind,
@@ -976,7 +1168,7 @@ function calculatorResultVisual({ title, payment, points, kind, metricLabel, not
     });
   }
   if (kind === "downPayment") {
-    return downPaymentReadinessBar({ required: payment, available: availableCash, productLabel, minDown, closingCosts, dpaAssistance, baseRequired });
+    return downPaymentReadinessBar({ required: payment, available: availableCash, productLabel, downPaymentAssumption, closingCosts, dpaAssistance, baseRequired });
   }
   return `<div class="calculator-result-summary">
     <span>${esc(metricLabel)}</span>
@@ -1016,8 +1208,8 @@ function resultDonutMarkup({ title, payment, points, kind, metricLabel }) {
       </div>
     </div>
     <div class="calculator-donut-cta">
-      <strong>Hoping for a lower monthly payment?</strong>
-      <button class="button estimate-button" type="button" data-cta-action="prequal">Start a prequalification request &rsaquo;</button>
+      <strong>Want to compare this estimate with lender-reviewed terms?</strong>
+      <button class="button estimate-button" type="button" data-cta-action="prequal">Review prequalification details &rsaquo;</button>
     </div>
   </div>`;
 }
@@ -1026,12 +1218,12 @@ function disclosureFor(pageType, title = "Disclosure notes") {
   const copy = {
     city: "Market figures and payment scenarios are educational planning information. Actual taxes, insurance, HOA dues, loan terms, APR, cash to close, and eligibility require property-specific and borrower-specific review.",
     state: "State and city comparisons are informational. Product availability, licensing, loan limits, taxes, insurance, and pricing can vary by county, property, borrower profile, and date.",
-    product: "Loan products are subject to underwriting, program rules, property review, investor guidelines, and state or county limits. This page is not an approval or personalized credit offer.",
+    product: "Loan products are subject to underwriting, program rules, property review, investor guidelines, and state or county limits. The guidance shown is not an approval or personalized credit offer.",
     calculator: "Calculator outputs are estimates based on the inputs shown. They are not a Loan Estimate, credit approval, rate lock, or commitment to lend.",
-    article: "Editorial content is educational and works best when reviewed with a licensed professional before making mortgage decisions.",
-    loan_officer: "Loan officer availability, licensing, NMLS information, specialties, reviews, and service areas must remain controlled by approved licensing and compliance records.",
-    branch: "Branch information, team rosters, service areas, licensing, and contact options are subject to company records and state requirements.",
-    directory: "Directory results are organized by service area, loan type, language, and related markets or products. They are not rankings or endorsements."
+    article: "Editorial content is educational. A lender can review borrower, property, and loan details before you make a mortgage decision.",
+    loan_officer: "Only the name and neutral education links are shown. Official identifiers, service details, availability, and direct contact information are not published here.",
+    branch: "Only the branch name and neutral education links are shown. Public office and direct-contact details are not provided here.",
+    directory: "Results are provided for browsing and are not rankings, endorsements, availability statements, or proof of professional qualifications."
   };
   return disclosureBlock(title, copy[pageType] || copy.product);
 }
@@ -1051,7 +1243,7 @@ function faqBlock(items) {
 
 function ctaRule(pageType, sectionName) {
   return maps.ctaRules.find((rule) => rule.pageType === pageType && rule.section === sectionName) || {
-    primary: "Get guidance",
+    primary: "Review guidance options",
     secondary: "Compare options"
   };
 }
@@ -1060,55 +1252,55 @@ const CTA_TYPES = {
   account: {
     eyebrow: "Account",
     title: "Open My Account",
-    text: "Continue to Snap Homes when you are ready to manage saved mortgage research and account activity.",
+    text: "Review the Snap Homes continuation notice. Items saved for this browsing session may continue in Snap Homes after a connected handoff exists.",
     label: "Open My Account",
     action: "account",
     iconName: "account"
   },
   leadForm: {
     eyebrow: "Guidance",
-    title: "Ask for mortgage guidance",
-    text: "Get ready to connect with licensed help when your question needs a person.",
-    label: "Request guidance",
+    title: "Review mortgage guidance options",
+    text: "Open a notice explaining which details a mortgage professional may need. No message is sent.",
+    label: "Review guidance options",
     action: "leadForm",
     iconName: "leadForm"
   },
   prequal: {
     eyebrow: "Prequal",
-    title: "Start a prequalification conversation",
-    text: "Organize the borrower, property, and timing details a licensed loan officer may need to review next steps.",
-    label: "Start prequalification",
+    title: "Review prequalification details",
+    text: "See which borrower, property, and timing details a lender may review. The generic modal collects and submits nothing.",
+    label: "Review prequalification",
     action: "prequal",
     iconName: "prequal"
   },
   watchlist: {
     eyebrow: "Watchlist",
-    title: "Add to watchlist",
-    text: "Save this market, rate, calculator, product, or article to your account while you keep browsing.",
+    title: "Add to this session's watchlist",
+    text: "Keep this item for this browsing session. Saved research may continue in Snap Homes after a connected handoff exists.",
     label: "Add to watchlist",
     action: "watchlist",
     iconName: "watchlist"
   },
   loContact: {
     eyebrow: "Loan officer",
-    title: "Contact a licensed loan officer",
-    text: "Bring your market, product, and payment questions into a conversation with a licensed expert.",
-    label: "Contact an expert",
+    title: "Review loan officer contact options",
+    text: "Open a notice for market, product, and payment questions. No message is sent.",
+    label: "Review contact options",
     action: "loContact",
     iconName: "expert"
   },
   rateReview: {
     eyebrow: "Rate review",
-    title: "Request a rate review",
-    text: "Compare public benchmarks with the details that may affect rate, APR, points, and fees.",
-    label: "Review rates",
+    title: "Review rate details",
+    text: "See which details may affect rate, APR, points, and fees. No review request is sent.",
+    label: "Review rate details",
     action: "rateReview",
     iconName: "rates"
   },
   compareOffer: {
     eyebrow: "Compare offer",
     title: "Compare an existing offer",
-    text: "Organize rate, APR, points, fees, loan amount, and assumptions before discussing offer questions.",
+    text: "Organize rate, APR, points, fees, loan amount, and assumptions. No documents or questions are sent.",
     label: "Compare an offer",
     action: "compareOffer",
     iconName: "compare"
@@ -1118,32 +1310,32 @@ const CTA_TYPES = {
 const CTA_MODALS = {
   account: {
     title: "Continue to Snap Homes",
-    body: `${SNAP_CUSTOMER.name}, your saved mortgage research and account activity are available in Snap Homes.`,
+    body: `${SNAP_CUSTOMER.name}, this notice does not open or sync an account. Watchlist items remain in this browsing session and may continue in Snap Homes after a connected handoff exists.`,
     primary: "Close"
   },
   leadForm: {
-    title: "Connect with mortgage guidance",
-    body: "A licensed mortgage professional can help review your goals, property, timing, and questions. No information has been sent.",
+    title: "Mortgage guidance options",
+    body: "A mortgage professional may need your goals, property, timing, and questions to provide guidance. This modal collects nothing. No message is sent.",
     primary: "Close"
   },
   prequal: {
-    title: "Start a prequalification conversation",
-    body: "A loan officer may review borrower, property, income, asset, and timing details. This is not a credit decision, approval, rate lock, or commitment to lend.",
+    title: "Prequalification details",
+    body: "A lender may review borrower, property, income, asset, and timing details. No information is collected or submitted in this modal, and no credit decision, approval, rate lock, or commitment to lend occurs.",
     primary: "Close"
   },
   rateReview: {
-    title: "Review rates",
-    body: "Personalized rates, APR, points, fees, and payments depend on borrower facts, property details, loan terms, and market conditions. A licensed review can compare those details.",
+    title: "Rate review details",
+    body: "Personalized rates, APR, points, fees, and payments depend on borrower facts, property details, loan terms, and market conditions. This notice sends no rate-review request.",
     primary: "Close"
   },
   compareOffer: {
     title: "Compare an offer",
-    body: "Bring the rate, APR, points, fees, loan amount, and assumptions into a licensed conversation. Documents are not collected or reviewed here, and no savings are promised.",
+    body: "Compare the rate, APR, points, fees, loan amount, and assumptions. Documents are not collected or reviewed here, no request is sent, and no savings are promised.",
     primary: "Close"
   },
   loContact: {
-    title: "Connect with a licensed loan officer",
-    body: "Choose a loan officer who serves your market and mortgage goal. No message has been sent.",
+    title: "Loan officer contact options",
+    body: "Direct phone, email, and contact-form details are not provided in this experience. No message is sent.",
     primary: "Close"
   }
 };
@@ -1185,7 +1377,7 @@ function ctaTypeCard(type, overrides = {}) {
   `;
 }
 
-function ctaDeck(types, title = "Choose a next step", text = "Move from education into a saved account view, contact request, prequalification conversation, or offer comparison.") {
+function ctaDeck(types, title = "Choose a next step", text = "Keep an item for this session, review a guidance notice, or organize an offer comparison.") {
   return `
     <div class="cta-deck">
       <div class="cta-deck-copy">
@@ -1285,20 +1477,11 @@ function locationProductModules(parentRoute, contextLabel) {
     `;
   }).join("");
 
-  return section("Local loan guidance", { label: "Loan options by location", text: "Compare the loan path against local prices, taxes, insurance, and loan-limit details." }, `<div class="module-list">${cards}</div>`, "compact");
+  return section("Local loan guidance", { label: "Loan options by location", text: "Compare each loan option against local prices, taxes, insurance, and loan-limit details." }, `<div class="module-list">${cards}</div>`, "compact");
 }
 
-function findSpecialistsForProduct(productId, count = 3) {
-  const product = maps.products[productId];
-  const name = product?.name?.toLowerCase() || "";
-  const goal = product?.borrowerGoal?.toLowerCase() || "";
-  return uniqueById(data.loanOfficers
-    .filter((officer) => officer.specialties.some((specialty) => {
-      const value = specialty.toLowerCase();
-      return name.includes(value.split(" ")[0]) || goal.includes(value.split(" ")[0]) || value.includes("first-time") || value.includes("conventional");
-    }))
-    .concat(data.loanOfficers))
-    .slice(0, count);
+function loanOfficerProfiles(count = 3) {
+  return first(data.loanOfficers, count);
 }
 
 function editorialSection({ label = "Guide", title, intro, paragraphs = [], sideTitle = "What this helps with", sideItems = [], className = "" }) {
@@ -1392,7 +1575,6 @@ function newsCard(article) {
 function locationNewsFeed(location) {
   const articles = maps.newsByLocation[location.id] || [];
   if (articles.length !== 4 || articles.some((article) => !maps.newsMedia[article.imageId])) return "";
-  const localContext = articles.flatMap((article) => article.localContext || []);
   const title = location.id.startsWith("state-")
     ? `Latest ${location.name} mortgage and housing updates`
     : `Latest ${location.name} market updates`;
@@ -1405,7 +1587,6 @@ function locationNewsFeed(location) {
           <button type="button" class="icon-button" data-news-carousel="next" aria-label="Next updates">&rarr;</button>
         </div>
       </div>
-      ${localContext.length ? `<div class="location-evidence-summary" aria-label="Local evidence summary">${localContext.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div>` : ""}
       <div class="news-carousel" data-news-carousel-track tabindex="0">${articles.map(newsCard).join("")}</div>
     </section>`;
 }
@@ -1432,13 +1613,42 @@ function modalShell() {
   `;
 }
 
+function publicFreshnessRecord(found) {
+  if (!found || !["state", "city"].includes(found.type)) return found;
+  return {
+    ...found,
+    item: {
+      ...found.item,
+      marketSnapshot: {
+        ...(found.item?.marketSnapshot || {}),
+        lastUpdated: "",
+        governingEvidence: undefined,
+      },
+      snapshotEvidence: undefined,
+    },
+  };
+}
+
+function currentPageFreshness() {
+  const found = maps?.routes?.get(currentPath());
+  if (!found) return "";
+  const canonicalTopicHub = (editorialContent.topicHubs || []).find(
+    (hub) => hub.public === true && normalizeRoute(hub.route) === currentPath(),
+  );
+  return renderContentFreshness(publicFreshnessRecord(found), {
+    canonicalTopicHub,
+    productCopyBundle,
+    evergreen: true,
+  });
+}
+
 function pageShell(content) {
-  return `<div data-page-content data-design-system="snap-figma-v1">${header()}<main id="main" class="page" tabindex="-1">${content}</main>${footer()}</div>${modalShell()}`;
+  return `<div data-page-content data-design-system="snap-figma-v1">${header()}<main id="main" class="page" tabindex="-1">${content}${currentPageFreshness()}</main>${footer()}</div>${modalShell()}`;
 }
 
 function homePage() {
   const decisionCards = [
-    { title: "Buy a home", text: "Compare local costs, rates, and loan options before choosing a purchase path.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Explore buying options" },
+    { title: "Buy a home", text: "Compare local costs, rates, and loan options before choosing purchase financing.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Explore buying options" },
     { title: "Refinance", text: "Review your current payment, timing, closing costs, and market context together.", href: "/refinance", iconName: "rates", accent: accentColors[1], linkLabel: "Review refinance options" },
     { title: "Use home equity", text: "Learn how home equity options may change payment, cash flow, and long-term cost.", href: "/home-equity", iconName: "calculator", accent: accentColors[2], linkLabel: "Explore home equity" }
   ];
@@ -1446,10 +1656,10 @@ function homePage() {
   const leadCards = [
     { title: "Compare mortgage rates", text: "Review benchmark rates, APR details, assumptions, and payment next steps.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Compare rates" },
     { title: "Explore local markets", text: "Open state and city pages with price, payment, tax, insurance, and inventory details.", href: "/locations", iconName: "location", accent: accentColors[1], linkLabel: "Browse locations" },
-    { title: "Buy with less cash down", text: "Compare FHA, VA, and conventional paths before choosing a product direction.", href: "/loan-options/fha-loans", iconName: "home", accent: accentColors[2], linkLabel: "See options" },
+    { title: "Buy with less cash down", text: "Compare FHA, VA, and conventional options before choosing a product direction.", href: "/loan-options/fha-loans", iconName: "home", accent: accentColors[2], linkLabel: "See options" },
     { title: "Estimate a payment", text: "Model price, down payment, rate, taxes, insurance, and local assumptions.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[3], linkLabel: "Calculate" },
     { title: "First-time buyer guide", text: "Read checklists and market prep for the first conversation with a lender.", href: "/learning-center/buying-a-home", iconName: "guide", accent: accentColors[4], linkLabel: "Start learning" },
-    { title: "Talk with an expert", text: "Find a licensed loan officer by state, city, product focus, or language.", href: "/loan-officers", iconName: "expert", accent: accentColors[5], linkLabel: "Get matched" }
+    { title: "Browse loan officer profiles", text: "Review name-only profiles and mortgage education; official service and direct-contact details are not shown.", href: "/loan-officers", iconName: "expert", accent: accentColors[5], linkLabel: "Browse profiles" }
   ];
 
   const productCards = first(data.products, 4).map((product, index) =>
@@ -1465,13 +1675,20 @@ function homePage() {
 
   return pageShell(`
     ${renderCampaignHero()}
-    ${section("Compare with the numbers in view", { label: "Mortgage intelligence", text: "Start with public benchmarks, broad market coverage, and tools that keep assumptions visible." }, `<div class="grid three home-metrics">${metric("30-year fixed benchmark", rateBenchmarks[0].rate, "Public survey benchmark; personal terms require review.")}${metric("Local market coverage", `${data.states.length} state guides`, `${data.cities.length} city market pages available.`)}${metric("Planning tools", `${data.calculators.length} calculators`, "Estimate payment, affordability, refinance, and rent versus buy.")}</div>`, "compact")}
-    ${section("Choose your path", { label: "Your goals", text: "Begin with the mortgage goal that matches the decision in front of you." }, `<div class="grid three home-decision-grid">${decisionCards.map(card).join("")}</div>`, "compact")}
-    ${section("Research with the right context", { label: "Mortgage guidance", text: "Open deeper market data, rate details, calculators, education, or licensed help without losing your place." }, `<div class="grid three">${leadCards.map(card).join("")}</div>`, "home-paths")}
-    ${section("Loan paths", { label: "Products", text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby." }, `<div class="grid four">${productCards.join("")}</div>`, "compact product-shelf")}
-    ${section("Helpful next reads", { label: "Learning center", text: "Read guides that connect market questions, loan options, calculators, and licensed guidance." }, `<div class="grid three">${first(data.blogPages.filter((page) => page.route !== "/learning-center"), 3).map((page, index) => card({ title: page.name, text: page.purpose, href: page.route, iconName: "guide", accent: accentColors[(index + 2) % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`, "compact reading-shelf")}
-    ${section("Bring your research into one clear conversation", { label: "Your next step", text: "Save the path, compare an offer, or connect with licensed guidance when you are ready." }, contextualCta("Choose the next step that fits your situation.", "Use your account, offer-comparison questions, or licensed guidance to continue from the research you have already done.", ["compareOffer", "loContact", "account"]), "compact home-cta-section")}
+    ${section("Compare with the numbers in view", { label: "Mortgage intelligence", text: "Start with public benchmarks, broad market coverage, and tools that keep assumptions visible." }, `<div class="grid three home-metrics">${metric("30-year fixed benchmark", rateBenchmarks[0].rate, "Public survey benchmark; personal terms require review.")}${metric("Local market coverage", `${data.states.length} state guides`, `${data.cities.length} city guides available.`)}${metric("Planning tools", `${data.calculators.length} calculators`, "Estimate payment, affordability, refinance, and rent versus buy.")}</div>`, "compact")}
+    ${section("Choose your goal", { label: "Your goals", text: "Begin with the mortgage goal that matches the decision in front of you." }, `<div class="grid three home-decision-grid">${decisionCards.map(card).join("")}</div>`, "compact")}
+    ${section("Research with the right context", { label: "Mortgage guidance", text: "Open deeper market data, rate details, calculators, education, or lender-review information without losing your place." }, `<div class="grid three">${leadCards.map(card).join("")}</div>`, "home-paths")}
+    ${section("Loan options", { label: "Products", text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby." }, `<div class="grid four">${productCards.join("")}</div>`, "compact product-shelf")}
+    ${section("Helpful next reads", { label: "Learning center", text: "Read guides that connect market questions, loan options, calculators, and facts a lender may review." }, `<div class="grid three">${first(data.blogPages.filter((page) => page.route !== "/learning-center"), 3).map((page, index) => card({ title: page.name, text: page.purpose, href: page.route, iconName: "guide", accent: accentColors[(index + 2) % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`, "compact reading-shelf")}
+    ${section("Bring your research into one clear comparison", { label: "Your next step", text: "Organize an offer, review contact options, or read the Snap Homes continuation notice." }, contextualCta("Choose the next step that fits your situation.", "Each action opens a notice only; no question, document, or borrower information is sent.", ["compareOffer", "loContact", "account"]), "compact home-cta-section")}
   `);
+}
+
+function illustrativeLocationSnapshotNotice() {
+  return `<aside class="disclosure planning-assumption" data-location-snapshot-assumption>
+    <h3>Check current local costs before you decide</h3>
+    <p>The prices, payments, inventory, property taxes, insurance costs, and time-on-market figures shown here are examples for exploring how a mortgage may fit your budget. They are not current market facts, a rate quote, or property-specific costs. Confirm today's figures for the location and property you are considering before choosing a loan or making an offer.</p>
+  </aside>`;
 }
 
 function locationsPage() {
@@ -1493,7 +1710,7 @@ function locationsPage() {
       esc(city.marketSnapshot.medianHomePrice),
       esc(city.marketSnapshot.paymentScenario),
       esc(city.marketSnapshot.inventory),
-      esc(city.marketSnapshot.daysOnMarket)
+      esc(formatDaysOnMarket(city.marketSnapshot.daysOnMarket))
     ];
   });
 
@@ -1502,17 +1719,17 @@ function locationsPage() {
     ${editorialSection({
       label: "Compare markets with the payment in view",
       title: "Start broad, then narrow to the market that changes the payment.",
-      intro: "See the mortgage details before jumping into a quote or product choice.",
+      intro: "Compare how price, taxes, insurance, inventory, and loan limits may change the full housing payment before choosing a market.",
       paragraphs: [
-        "A mortgage payment can change quickly when price, taxes, insurance, inventory, and local loan-limit rules change. Use the locations hub to compare those variables before choosing a city.",
-        "Start with the statewide baseline, then go deeper into city price trends, payment scenarios, local loan options, branch coverage, articles, and licensed experts.",
-        "Every important data point includes source names, dates, and update cadence so you can tell how fresh the information is."
+        "A mortgage payment can change quickly when price, taxes, insurance, inventory, and local loan-limit rules change. Compare those variables across states before narrowing to a city.",
+        "Start with the statewide baseline, then review city price trends, payment scenarios, loan options, articles, and neutral professional-profile links.",
+        "The snapshot figures are illustrative examples. Use the dated local reporting and current property-specific information before relying on a price, payment, inventory, tax, or insurance figure."
       ],
       sideTitle: "Borrower questions",
       sideItems: [
         "How does this market affect monthly payment?",
         "Which loan paths may fit the local price range?",
-        "Who serves this city or state?",
+        "Which public guides and professional names can I review?",
         "What tax or insurance costs should I understand?"
       ]
     })}
@@ -1520,12 +1737,12 @@ function locationsPage() {
       { label: "Payment", value: "Monthly estimate", text: "Payment estimates pair price with taxes, insurance, rate assumptions, and loan type." },
       { label: "Inventory", value: "Market pace", text: "Inventory and days on market help borrowers understand timing without making predictions." },
       { label: "Local costs", value: "Tax and insurance", text: "Escrow assumptions stay close to payment scenarios." },
-      { label: "Next step", value: "Licensed guidance", text: "Connect with a loan officer or branch that serves the market." }
-    ]) + marketSnapshotReference("locations_snapshot", "locations"), "modern-band")}
-    ${section("State market entry", { label: "Market overview", text: "Open the statewide view before comparing individual city pages." }, `<div class="grid four">${stateCards.join("")}</div>`)}
-    ${section("City market links", { label: "Cities", text: "Open a city view for market snapshots, charts, local loan options, experts, branches, and updates." }, table(["City", "Median price", "Payment scenario", "Inventory", "DOM"], cityRows), "compact")}
-    ${section("Save market research", { label: "Watchlist", text: "Track cities, compare payment assumptions, and keep local questions connected to your account view." }, ctaDeck(["watchlist", "leadForm", "prequal"], "Keep location research organized.", "Save markets to Snap Homes, ask a local question, or start a prequalification conversation when a city becomes more than research."), "compact")}
-    ${section("Data sources behind locations", { label: "Sources", text: "Every chart and table pairs with source metadata." }, `${sourceNote(["fhfaHpi", "census", "bls", "hmda"], "Core location data sources")}`, "compact")}
+      { label: "Next step", value: "Lender review", text: "A lender must confirm borrower, property, product, and pricing details." }
+    ]) + illustrativeLocationSnapshotNotice(), "modern-band")}
+    ${section("Compare states", { label: "Market overview", text: "Review statewide costs before comparing individual city guides." }, `<div class="grid four">${stateCards.join("")}</div>`)}
+    ${section("Compare cities", { label: "Cities", text: "Compare example prices, payments, inventory, local reporting, loan options, and professional names for each city." }, table(["City", "Median price", "Payment scenario", "Inventory", "Days on market"], cityRows), "compact")}
+    ${section("Keep market research together", { label: "Watchlist", text: "Track cities and payment assumptions for this browsing session only." }, ctaDeck(["watchlist", "leadForm", "prequal"], "Keep location research organized.", "Add a market to this session's watchlist or open guidance and prequalification notices. The notices collect and send nothing."), "compact")}
+    ${section("Verify current market facts", { label: "Official sources", text: "Use these public sources to check current housing, employment, and mortgage-market conditions. The illustrative snapshot values above are not drawn from them." }, `${sourceNote(["fhfaHpi", "census", "bls", "hmda"], "Official market references")}`, "compact")}
   `);
 }
 
@@ -1551,7 +1768,7 @@ function ratesPage() {
       paragraphs: [
         "National averages are useful for understanding the direction of the market, but they are not the same thing as a quote for your loan. Use them as one input before you run a payment scenario.",
         "Your actual pricing can depend on credit profile, loan amount, property type, occupancy, location, down payment, discount points, lock period, and market conditions.",
-        "Once you have a benchmark, estimate the monthly payment and ask a licensed loan officer to review the details that may affect available options."
+        "Once you have a benchmark, estimate the monthly payment and compare it with lender-provided terms that reflect the borrower and property."
       ],
       sideTitle: "Compare these first",
       sideItems: [
@@ -1563,29 +1780,29 @@ function ratesPage() {
       ]
     })}
     ${section("Current rate benchmarks", { label: "Benchmarks", text: "Freddie Mac benchmark rates anchor the public market view; personalized quotes require lender review." }, `<div class="grid three">${rateBenchmarks.map((rate, index) => `<div class="metric"><span>${esc(rate.label)}</span><strong>${esc(rate.rate)}</strong><p>${esc(rate.apr)} | ${esc(rate.points)} | ${esc(sources[rate.sourceId].date)}</p></div>`).join("")}</div>${marketSnapshotReference("rates_snapshot", "rates-mortgage")}`)}
-    ${section("From benchmark to borrower scenario", { label: "Borrower path", text: "Move from market data into a payment scenario and licensed review." }, processRail([
+    ${section("From benchmark to borrower scenario", { label: "From averages to terms", text: "Move from market data into a payment scenario, then compare lender-provided terms." }, processRail([
       { title: "Read the benchmark", text: "Use national data to understand market direction and the difference between averages and offers." },
       { title: "Choose assumptions", text: "Set loan purpose, state, credit range, term, down payment, loan amount, occupancy, and property type." },
       { title: "Model the payment", text: "Move the rate into a payment estimate with taxes, insurance, and cash-to-close assumptions." },
-      { title: "Request review", text: "Ask a licensed loan officer to compare options using the borrower's actual facts." }
+      { title: "Compare lender terms", text: "A lender can compare options only after reviewing the borrower's and property's actual facts." }
     ]), "compact")}
     <section class="section compact" id="rate-table">
       <div class="content-layout">
         <div class="main-stack">
-          ${section("Compare rate types", { label: "Rate table", text: "Start with the benchmark, then move into a payment estimate or licensed review." }, table(["Loan type", "Rate", "APR", "Points", "Source", "Next step"], rows), "no-pad")}
+          ${section("Compare rate types", { label: "Rate table", text: "Start with the benchmark, then move into a payment estimate or lender review." }, table(["Loan type", "Rate", "APR", "Points", "Source", "Next step"], rows), "no-pad")}
           ${marketChart("rates.benchmark_trend", "rates-mortgage")}
         </div>
         <aside class="side-stack">
-          ${contextualCta("Review your rate question", "A licensed loan officer can review credit profile, loan amount, property type, occupancy, down payment, and location.", ["rateReview", "compareOffer", "loContact"])}
+          ${contextualCta("Review your rate question", "Open notices describing the credit, loan, property, occupancy, down-payment, and location details a lender may need. No request is sent.", ["rateReview", "compareOffer", "loContact"])}
           ${disclosureFor("calculator", "Rate and APR disclosure")}
         </aside>
       </div>
     </section>
     ${section("Get a borrower-specific rate review", { label: "Personalized review", text: "Benchmarks stay public; personalized pricing requires borrower and property details." }, `${gatedAnswer({
       title: "What rate could I receive?",
-      answer: "This page can explain benchmark movement, APR, points, fees, lock timing, and payment assumptions. It cannot show a personalized rate or APR without borrower, property, and lender review.",
-      unlockTitle: "Request a rate review",
-      unlockText: "Share loan purpose, state, credit range, down payment, loan amount, occupancy, and property type so a licensed team can discuss available options.",
+      answer: "The benchmark guidance explains market movement, APR, points, fees, lock timing, and payment assumptions. A personalized rate or APR requires borrower, property, and lender review.",
+      unlockTitle: "Review the facts a lender may need",
+      unlockText: "The notice lists loan purpose, state, credit range, down payment, loan amount, occupancy, and property type. It collects and sends nothing.",
       types: ["rateReview", "compareOffer"]
     })}`, "compact")}
     ${section("Local rate factors", { label: "Local factors", text: "Rate decisions are easier to review when paired with tax, insurance, and local market details." }, `<div class="grid four">${data.states.map((state, index) => card({ title: `${state.name} mortgage details`, text: stateBriefs[state.id] || state.stateNarrative, href: state.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Open location" })).join("")}</div>`, "compact")}
@@ -1594,7 +1811,7 @@ function ratesPage() {
       "Payment examples keep taxes, insurance, mortgage insurance, HOA dues, and closing-cost assumptions close to the result."
     ])}${miniEssay("Use a benchmark in your comparison", [
       "Use benchmarks to understand market direction, then use a calculator to test the payment impact.",
-      "A licensed review is the right next step when comparing products, buying in a high-cost market, or weighing refinance tradeoffs."
+      "Lender-provided terms are the useful next comparison when weighing products, high-cost purchases, or refinance tradeoffs."
     ])}</div>`, "modern-band")}
   `);
 }
@@ -1608,24 +1825,25 @@ function statePage(state) {
   const primaryLabel = cities.length ? stateCta.primary : "Review rates";
   const cityTable = cities.length
     ? table(["City", "Median price", "Payment", "Tax", "Insurance"], cities.map((city) => [`<a class="text-link" href="${route(city.route)}">${esc(city.name)}</a>`, esc(city.marketSnapshot.medianHomePrice), esc(city.marketSnapshot.paymentScenario), esc(city.marketSnapshot.taxRate), esc(city.marketSnapshot.insurance)]))
-    : `<div class="panel"><h2>Statewide planning</h2><p>Compare local price, payment, insurance, and loan options with a licensed team when there is not a qualifying city page for this state.</p></div>`;
+    : `<div class="panel"><h2>Statewide planning</h2><p>Compare local price, payment, insurance, and loan options when a city-level guide is not provided for this state.</p></div>`;
   return pageShell(`
     ${breadcrumb(["Locations", state.name], ["/locations", state.route])}
     ${hero({
       eyebrow: "State guide",
       title: `${state.name} mortgage guide`,
-      lead: `${stateBriefs[state.id] || state.stateNarrative} Compare cities, product paths, branches, experts, and local affordability factors.`,
+      lead: `${stateBriefs[state.id] || state.stateNarrative} Treat the price, payment, inventory, tax, and insurance figures below as illustrative examples rather than current market facts; branch and loan-officer names are browsing links only.`,
       actions: `<a class="button" href="${route(primaryRoute)}">${esc(primaryLabel)}</a><a class="button secondary" href="${route("/rates")}">${esc(stateCta.secondary)}</a>`,
-      panel: `<aside class="hero-panel"><h2>State snapshot</h2><div class="grid two">${metric("Median price", state.marketSnapshot.medianHomePrice)}${metric("Payment", state.marketSnapshot.paymentScenario)}${metric("Inventory", state.marketSnapshot.inventory)}${metric("Updated", state.marketSnapshot.lastUpdated)}</div>${marketSnapshotReference("state_snapshot", state.id)}</aside>`
+      panel: `<aside class="hero-panel"><h2>Example state costs</h2><div class="grid two">${metric("Median price", state.marketSnapshot.medianHomePrice)}${metric("Payment", state.marketSnapshot.paymentScenario)}${metric("Inventory", state.marketSnapshot.inventory)}${metric("Data status", "Illustrative example")}</div>${illustrativeLocationSnapshotNotice()}</aside>`
     })}
+    ${locationNewsFeed(state)}
     ${editorialSection({
       label: "State brief",
       title: `${state.name} mortgage planning starts with local cost drivers.`,
-      intro: "Use statewide housing data to compare local costs and identify the mortgage questions worth reviewing next.",
+      intro: "Use the statewide examples to identify the mortgage questions worth reviewing with current market and property information.",
       paragraphs: [
-        `${state.name} borrowers may compare the same loan product across very different city conditions. Use the statewide baseline for price, payment, property tax, insurance, inventory, and branch coverage before comparing individual cities.`,
+        `${state.name} borrowers may compare the same loan product across very different city conditions. Dated statewide evidence can put price, payment, property tax, insurance, and inventory beside individual cities.`,
         "Loan-limit details matter. Conventional, jumbo, FHA, and VA conversations can change when county limits, entitlement, property type, or borrower profile changes.",
-        "Each market figure includes its source and review date so you can distinguish a current benchmark from a property-specific estimate."
+        "Use the dated reporting below to understand broad conditions, then confirm the property's current price, taxes, insurance, association dues, and loan terms before making a comparison."
       ],
       sideTitle: "What to review",
       sideItems: [
@@ -1633,10 +1851,9 @@ function statePage(state) {
         "City comparison",
         "Tax and insurance costs",
         "Loan-limit table",
-        "Branches and licensed experts"
+        "Neutral branch and loan-officer links"
       ]
     })}
-    ${locationNewsFeed(state)}
     <section class="section">
       <div class="content-layout">
         <div class="main-stack">
@@ -1647,7 +1864,7 @@ function statePage(state) {
           </div>
         </div>
         <aside class="side-stack">
-          <div class="cta-panel"><h3>${cities.length ? "Compare a city" : "Review statewide options"}</h3><p>${cities.length ? "Open a city guide for payment scenarios, tax and insurance notes, and local experts." : "Use the statewide view to compare rates, product paths, and a payment estimate before a licensed review."}</p><div class="cta-inline-actions"><a class="button" href="${route(primaryRoute)}">${cities.length ? "Open city" : "Review rates"}</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
+          <div class="cta-panel"><h3>${cities.length ? "Compare a city" : "Review statewide options"}</h3><p>${cities.length ? "Open a city guide for payment scenarios plus tax and insurance notes." : "Use the statewide view to compare rates, loan options, and a payment estimate before lender review."}</p><div class="cta-inline-actions"><a class="button" href="${route(primaryRoute)}">${cities.length ? "Open city" : "Review rates"}</a>${ctaButton("watchlist", { variant: "secondary" })}</div></div>
           ${disclosureFor("state", "State disclosure")}
         </aside>
       </div>
@@ -1658,13 +1875,13 @@ function statePage(state) {
       { label: "Income", value: "ACS data", text: "Income and household data help frame affordability, not eligibility." },
       { label: "Labor", value: "BLS trend", text: "Employment data can help explain local income stability and housing demand." }
     ]) + sourceNote(["fhfaLimits", "hudFha", "census", "bls"], "State data sources"), "modern-band")}
-    ${section("State product guidance", { label: "Loan options", text: "Review the loan path, then compare how local factors may change the numbers." }, `<div class="grid four">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).join("")}</div>`, "compact")}
-    ${section("Save this state", { label: "Snap Homes", text: "Keep statewide market notes connected to rate, product, and prequalification questions." }, ctaDeck(["watchlist", "rateReview", "leadForm"], `${state.name} research can live in your Watchlist.`, "Track market movement, request a rate review, or ask for local guidance when the statewide view narrows to a city or property."), "compact")}
+    ${section("State product guidance", { label: "Loan options", text: "Review each loan option, then compare how local factors may change the numbers." }, `<div class="grid four">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).join("")}</div>`, "compact")}
+    ${section("Keep this state in view", { label: "Watchlist", text: "Keep statewide market notes for this browsing session." }, ctaDeck(["watchlist", "rateReview", "leadForm"], `Keep ${state.name} research in this session's Watchlist.`, "Track the market for this session or open rate and guidance notices. No review or message is sent."), "compact")}
     ${locationProductModules(state.route, state.name)}
-    ${section("Branches and local experts", { label: "Coverage", text: "Find branches and licensed experts serving the markets you are comparing." }, `<div class="grid three">${branches.map((branch, index) => card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[index % accentColors.length], linkLabel: "Open branch" })).join("")}</div>`, "compact")}
+    ${section("Branch names", { label: "Related links", text: "Browse name-only branch entries. Public office and direct-contact details are not provided." }, `<div class="grid three">${branches.map((branch, index) => card({ title: branch.name, text: "Open the name-only branch entry and neutral mortgage education links.", href: branch.route, iconName: "branch", accent: accentColors[index % accentColors.length], linkLabel: "Open branch" })).join("")}</div>`, "compact")}
     ${section("State FAQ", { label: "Borrower questions", text: "Get practical answers with source notes nearby." }, `${faqBlock([
-      { q: `How do I compare ${state.name} cities?`, a: "Start with payment, property tax, insurance, inventory, and local expert coverage before choosing a product path." },
-      { q: "Can statewide data tell me which loan I qualify for?", a: "No. It can explain product paths and local factors, but eligibility and pricing require borrower and property review." }
+      { q: `How do I compare ${state.name} cities?`, a: "Start with payment, property tax, insurance, inventory, and loan limits before comparing loan options." },
+      { q: "Can statewide data tell me which loan I qualify for?", a: "No. It can explain loan options and local factors, but eligibility and pricing require borrower, property, and lender review." }
     ])}`, "compact")}
   `);
 }
@@ -1676,25 +1893,25 @@ function cityPage(city) {
   const products = byIds(city.productIds, maps.products);
   const articles = byIds(city.articleIds, maps.articles);
   const nearby = byIds(city.nearbyCityIds, maps.cities);
-  const hasLocalPlacement = officers.length > 0 || branches.length > 0;
   const heroCta = ctaRule("city", "hero");
   return pageShell(`
     ${breadcrumb(["Locations", state.name, city.name], ["/locations", state.route, city.route])}
     ${hero({
       eyebrow: "City market guide",
-      title: `${city.name}, ${state.abbr} mortgage and housing market`,
-      lead: `${city.marketPositioning} Review local price, payment, inventory, taxes, insurance, loan options, and experts in one place.`,
+      title: `${city.name}, ${state.abbr} mortgage and housing planning guide`,
+      lead: `This planning guide organizes price, payment, inventory, tax, insurance, and days-on-market questions for ${city.name}. Every snapshot value is an illustrative example, not a quote, current market fact, or property-specific cost.`,
       actions: `${ctaButton("prequal", { label: heroCta.primary })}${ctaButton("watchlist", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel"><h2>Market snapshot</h2><div class="grid two">${metric("Median price", city.marketSnapshot.medianHomePrice)}${metric("Payment", city.marketSnapshot.paymentScenario)}${metric("Inventory", city.marketSnapshot.inventory)}${metric("DOM", city.marketSnapshot.daysOnMarket)}</div>${marketSnapshotReference("city_snapshot", city.id)}</aside>`
+      panel: `<aside class="hero-panel"><h2>Illustrative market snapshot</h2><div class="grid two">${metric("Median price", city.marketSnapshot.medianHomePrice)}${metric("Payment", city.marketSnapshot.paymentScenario)}${metric("Inventory", city.marketSnapshot.inventory)}${metric("Days on market", formatDaysOnMarket(city.marketSnapshot.daysOnMarket))}</div>${illustrativeLocationSnapshotNotice()}</aside>`
     })}
+    ${locationNewsFeed(city)}
     ${editorialSection({
       label: "Local cost read",
       title: `${city.name} costs can change the mortgage conversation.`,
-      intro: "Use the local snapshot to understand how price, inventory, taxes, and insurance can shape the next payment scenario.",
+      intro: "Use current local price, inventory, tax, and insurance information to understand how a market can shape a payment scenario.",
       paragraphs: [
         `In ${city.name}, the home price is only the starting point. Monthly cost can also depend on your rate, down payment, property taxes, insurance, mortgage insurance, HOA dues, and loan type.`,
         "Inventory and days on market can affect how early you prepare documents, compare payments, and talk through offer timing with your real estate and mortgage team.",
-        "Use this market view to compare nearby cities, estimate a payment, review relevant loan options, and request licensed guidance when you are ready to talk through the details."
+        "Compare dated evidence for nearby cities, estimate a payment with current property costs, and review relevant loan options. A lender must review borrower and property facts before stating terms."
       ],
       sideTitle: "Check before you choose",
       sideItems: [
@@ -1702,10 +1919,9 @@ function cityPage(city) {
         "Estimated monthly payment",
         "Tax and insurance pressure",
         "Relevant loan options",
-        "Local experts and branches"
+        "Neutral profile and branch links"
       ]
     })}
-    ${locationNewsFeed(city)}
     <section class="section">
       <div class="content-layout">
         <div class="main-stack">
@@ -1713,15 +1929,15 @@ function cityPage(city) {
             ${marketChart("market.price_trend", city.id)}
             ${marketChart("market.payment_breakdown", city.id)}
           </div>
-          ${table(["Scenario", "Price", "Down payment", "Estimated payment", "Planning note"], [
-            ["Entry buyer", esc(city.marketSnapshot.medianHomePrice), "5%", esc(city.marketSnapshot.paymentScenario), "Includes taxes and insurance assumptions"],
-            ["FHA path", esc(city.marketSnapshot.medianHomePrice), "3.5%", "Estimate in calculator", "Review HUD limits and mortgage insurance"],
-            ["Move-up buyer", "110% local median", "10%", "Estimate in calculator", "Compare sale proceeds and cash to close"]
+          ${table(["Planning path", "Illustrative price input", "Cash input", "Next calculation", "What to compare"], [
+            ["Starting budget", esc(city.marketSnapshot.medianHomePrice), "Enter your amount", "Run the payment calculator", "Taxes, insurance, HOA dues, and cash to close"],
+            ["Government-loan review", esc(city.marketSnapshot.medianHomePrice), "Enter your amount", "Run the payment calculator", "Program rules, mortgage insurance or funding fees, and local limits"],
+            ["Larger-home comparison", "Adjust the price", "Enter your amount", "Run the payment calculator", "Sale proceeds, reserves, and cash to close"]
           ])}
         </div>
         <aside class="side-stack">
-          ${contextualCta(hasLocalPlacement ? "Review this market" : "Request market guidance", hasLocalPlacement ? `A licensed expert connected to ${city.name} can help compare loan options and local assumptions.` : `Snap Mortgage can route your ${city.name} questions into a licensed guidance path when you are ready.`, [
-            { type: "loContact", href: officers[0]?.route || "/loan-officers", label: hasLocalPlacement ? "Contact expert" : "Find licensed help" },
+          ${contextualCta("Review market guidance options", `Open a notice describing the ${city.name} borrower and property details a lender may review. No message is sent.`, [
+            { type: "loContact", href: officers[0]?.route || "/loan-officers", label: "Review contact options" },
             { type: "watchlist" },
             "leadForm"
           ])}
@@ -1733,89 +1949,87 @@ function cityPage(city) {
       { label: "Payment", value: city.marketSnapshot.paymentScenario, text: "Review rate, taxes, insurance, PMI, HOA, and down payment assumptions." },
       { label: "Inventory", value: city.marketSnapshot.inventory, text: "Inventory can affect timing, preparation, and offer strategy." },
       { label: "Property tax", value: city.marketSnapshot.taxRate, text: "Tax assumptions belong inside payment planning rather than in a footnote." },
-      { label: "Insurance", value: city.marketSnapshot.insurance, text: "Insurance cost and availability can materially affect monthly obligations." }
-    ]) + sourceNote(["fhfaHpi", "census", "bls"], "City data sources"), "modern-band")}
-    ${section("Nearby city comparison", { label: "Compare", text: "Move through nearby markets before settling on a payment scenario." }, `<div class="grid two">${nearby.map((near, index) => card({ title: `${near.name}, ${maps.states[near.stateId].abbr}`, text: `${near.marketSnapshot.medianHomePrice} median price. ${near.marketSnapshot.inventory} inventory.`, href: near.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
+      { label: "Insurance", value: city.marketSnapshot.insurance, text: "Insurance cost and underwriting can materially affect monthly obligations." }
+    ]), "modern-band")}
+    ${section("Nearby city comparison", { label: "Compare", text: "Review nearby reporting and cost questions before settling on a payment scenario." }, `<div class="grid two">${nearby.map((near, index) => card({ title: `${near.name}, ${maps.states[near.stateId].abbr}`, text: "Compare sourced local reporting and illustrative cost inputs, then verify current property details.", href: near.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Compare" })).join("")}</div>`, "compact")}
     ${section("Review local answers", { label: "Personalized review", text: "Use citywide data for research; specific answers need borrower or account details." }, `${gatedAnswer({
       title: `How would ${city.name} affect my payment?`,
       answer: `This guide shows ${city.name} price, inventory, tax, insurance, and loan details. It cannot decide your exact payment, cash to close, product fit, or prequalification result.`,
-      unlockTitle: "Save or request a local review",
-      unlockText: "Save this market to Snap Homes or share your price range, down payment, timeline, and product questions for a licensed review path.",
+      unlockTitle: "Keep the market or review prequalification details",
+      unlockText: "Add this market to the watchlist for this browsing session, or open a prequalification notice. The notice collects and submits nothing.",
       types: ["watchlist", "prequal"]
     })}`, "compact")}
-    ${section("Loan options in this market", { label: "Products", text: "Compare loan paths against local price, tax, insurance, and loan-limit details." }, `<div class="grid four">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View guide" })).join("")}</div>`, "compact")}
+    ${section("Loan options in this market", { label: "Products", text: "Compare loan options against local price, tax, insurance, and loan-limit details." }, `<div class="grid four">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View guide" })).join("")}</div>`, "compact")}
     ${locationProductModules(city.route, `${city.name}, ${state.abbr}`)}
-    ${section("Experts, branches, and updates", { label: "Local help", text: hasLocalPlacement ? "Connect with local help tied to the market you are reviewing." : "Start with relevant guides, then request licensed help when your scenario is ready for review." }, `<div class="grid three">${officers.slice(0, 3).map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "View profile" })).concat(branches.map((branch, index) => card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "View branch" }))).concat(articles.slice(0, 2).map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review the latest local mortgage evidence and borrower questions.", href: article.route, iconName: "article", accent: accentColors[(index + 4) % accentColors.length], linkLabel: "Read" }))).join("")}</div>`, "compact")}
+    ${section("Profile names, branch names, and updates", { label: "Related links", text: "Profile and branch entries show names and neutral education only; they do not establish qualifications, service, or contactability." }, `<div class="grid three">${officers.slice(0, 3).map((officer, index) => card({ title: officer.name, text: "Open the name-only profile and neutral mortgage education links.", href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "View profile" })).concat(branches.map((branch, index) => card({ title: branch.name, text: "Open the name-only branch entry and neutral mortgage education links.", href: branch.route, iconName: "branch", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "View branch" }))).concat(articles.slice(0, 2).map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review dated local mortgage evidence and borrower questions.", href: article.route, iconName: "article", accent: accentColors[(index + 4) % accentColors.length], linkLabel: "Read" }))).join("")}</div>`, "compact")}
     ${section("City FAQ", { label: "Borrower questions", text: "Answers to practical questions, without turning education into personalized advice." }, `${faqBlock([
-      { q: `What makes ${city.name} different for mortgage planning?`, a: `${city.name} has its own mix of price, payment, inventory, taxes, insurance, products, and local expert coverage.` },
-      { q: "Where do I go next?", a: "Estimate payment, compare nearby cities, review local product guidance, or request licensed mortgage guidance when your scenario is ready for review." }
+      { q: `What makes ${city.name} different for mortgage planning?`, a: `${city.name} has its own mix of price, payment, inventory, taxes, insurance, and relevant loan options.` },
+      { q: "Where do I go next?", a: "Estimate payment, compare nearby cities, review local product guidance, or compare the result with lender-provided terms." }
     ])}`, "compact")}
   `);
 }
 
-function productPage(product) {
+function productPage(product, tagContext = tagContextForRoute(product.route)) {
   const relatedArticles = data.articles.filter((article) => (article.productIds || []).includes(product.id)).slice(0, 4);
   const relatedCities = data.cities.filter((city) => (city.productIds || []).includes(product.id)).slice(0, 4);
   const calculators = byIds(product.relatedCalculatorIds, maps.calculators);
-  const specialists = findSpecialistsForProduct(product.id);
+  const profiles = loanOfficerProfiles();
   const brief = productBriefs[product.id] || productBriefs["product-purchase"];
+  const fitAnswer = productFitAnswer(product);
   const productCopy = productContentById(productCopyBundle, product.id);
   return pageShell(`
     ${breadcrumb(["Loan Options", product.name], ["/loan-options", product.route])}
     ${hero({
       eyebrow: "Loan option",
       title: product.name,
-      lead: `${brief.fit} Compare requirements, tradeoffs, local factors, calculators, and licensed guidance.`,
-      actions: `${ctaButton("prequal", { label: "Talk through fit" })}${ctaButton("compareOffer", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel"><h2>Product fit</h2><p>${esc(brief.tradeoff)}</p><div class="tag-row"><span class="tag">Requirements</span><span class="tag">Scenarios</span><span class="tag">FAQs</span><span class="tag">Local experts</span></div></aside>`
+      lead: `${fitAnswer.fitCriteria} ${fitAnswer.costsAndTradeoffs}`,
+      actions: `${ctaButton("prequal", { label: "Review prequalification details" })}${ctaButton("compareOffer", { variant: "secondary" })}`,
+      panel: `<aside class="hero-panel"><h2>Key constraint</h2><p>${esc(fitAnswer.propertyAndOccupancy)}</p><div class="tag-row"><span class="tag">Fit criteria</span><span class="tag">Costs</span><span class="tag">Property</span><span class="tag">Lender review</span></div></aside>`,
+      beforeTitle: renderPrimaryTagLinks(tagContext.primaryTags, route),
     })}
-    ${renderProductContent(productCopy, { sources: editorialContent.sources, routeHref: route })}
+    ${renderProductContent(productCopy, { sources: editorialContent.sources, routeHref: route, tagContext })}
+    ${tagContext.additionalTags.length ? `<div class="section compact content-tag-band">${renderAdditionalTagLinks(tagContext.additionalTags, route)}</div>` : ""}
     ${section("Requirements and tradeoffs", { label: "Product intelligence", text: "Compare the details that can change payment, cash to close, and product fit." }, table(["Area", "What to review", "Next action"], [
-      ["Borrower fit", "Goal, timeline, property location, occupancy, and product constraints", `<a class="text-link" href="${route("/loan-officers")}">Ask an expert</a>`],
+      ["Borrower fit", "Goal, timeline, property location, occupancy, and product constraints", `<a class="text-link" href="${route("/loan-officers")}">Browse profiles</a>`],
       ["Requirements", "Credit, income, assets, down payment, property type, and loan amount", `<a class="text-link" href="${route("/calculators/mortgage-payment")}">Estimate payment</a>`],
       ["Tradeoffs", "APR, points, mortgage insurance, fees, term, flexibility, and total cost", `<a class="text-link" href="${route("/loan-options")}">Compare products</a>`],
       ["Existing offer", "Rate, APR, points, fees, loan amount, assumptions, and questions", `<button class="text-link text-button" type="button" data-cta-action="compareOffer">Organize offer questions</button>`]
     ]))}
     ${section("Compare a planning scenario", { label: "Payment structure", text: "Use a simple scenario to see which amounts belong in the conversation before you compare actual loan terms." }, marketChart("product.scenario_compare", product.id), "compact")}
-    ${section("Review product-fit answers", { label: "Personalized review", text: "Product education stays public; fit and availability need a reviewed scenario." }, `${gatedAnswer({
-      title: `Could ${product.name} fit my situation?`,
-      answer: `${product.name} may be worth comparing based on your goal, market, property type, occupancy, loan amount, down payment, and timeline. This page cannot determine eligibility or available terms.`,
-      unlockTitle: "Start a product review path",
-      unlockText: "Organize your scenario for prequalification, request a rate review, or compare offer terms with a licensed mortgage professional.",
+    ${section("Review product-fit answers", { label: "Public fit criteria", text: "Common fit indicators, principal costs, property constraints, and lender-review facts stay public before any action." }, `${gatedAnswer({
+      title: `What should I compare for ${product.name}?`,
+      answer: `${fitAnswer.fitCriteria} ${fitAnswer.costsAndTradeoffs} ${fitAnswer.propertyAndOccupancy} ${fitAnswer.lenderReview}`,
+      unlockTitle: "Review what a lender may need next",
+      unlockText: "The prequalification and offer-comparison notices collect and submit nothing. Use them only to organize the facts a lender may later request.",
       types: ["prequal", "compareOffer"]
     })}`, "compact")}
-    ${section("Before choosing this path", { label: "Comparison path", text: "Use the product guide to move from education into an informed next step." }, processRail([
+    ${section("Before choosing an option", { label: "Comparison steps", text: "Use the product guide to move from education into an informed comparison." }, processRail([
       { title: "Confirm the goal", text: "Purchase, refinance, cash-out, or equity access changes the questions to ask." },
-      { title: "Review basics", text: "Credit profile, income, assets, debt, occupancy, property type, and loan size can affect available options." },
+      { title: "Review basics", text: "Credit profile, income, assets, debt, occupancy, property type, and loan size can affect the options a lender considers." },
       { title: "Model total cost", text: "Monthly payment is only one part; APR, points, insurance, taxes, and closing costs matter." },
-      { title: "Compare with guidance", text: "A licensed loan officer can compare options using the user's actual scenario." }
+      { title: "Compare lender terms", text: "A lender can compare options only after reviewing the borrower's actual scenario." }
     ]), "compact")}
-    ${section("Calculators for this loan path", { label: "Tools", text: "Estimate the payment and cash questions that matter for this financing path, then compare the result with a written loan offer." }, `<div class="grid three">${calculators.map((calc, index) => card({ title: calc.name, text: `Inputs include ${calc.captures.slice(0, 3).join(", ")}.`, href: calc.route, iconName: "calculator", accent: accentColors[index % accentColors.length], linkLabel: "Open calculator" })).join("")}</div>`, "compact")}
-    ${section("Local product factors", { label: "Locations", text: "Property price, taxes, insurance, loan limits, and available local support can change the questions you bring to a lender." }, `<div class="grid four">${relatedCities.map((city, index) => card({ title: `${product.name} in ${city.name}`, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Open city" })).join("")}</div>`, "compact")}
+    ${section("Calculators for this loan option", { label: "Tools", text: "Estimate the payment and cash questions that matter for this financing choice, then compare the result with a written loan offer." }, `<div class="grid three">${calculators.map((calc, index) => card({ title: calc.name, text: `Inputs include ${calc.captures.slice(0, 3).map(humanizePublicLabel).join(", ")}.`, href: calc.route, iconName: "calculator", accent: accentColors[index % accentColors.length], linkLabel: "Open calculator" })).join("")}</div>`, "compact")}
+    ${section("Local product factors", { label: "Locations", text: "Property price, taxes, insurance, and loan limits can change the questions you bring to a lender." }, `<div class="grid four">${relatedCities.map((city, index) => card({ title: `${product.name} in ${city.name}`, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Open city" })).join("")}</div>`, "compact")}
     ${section("Related learning", { label: "Learn more", text: "Product education connects to related mortgage guides, calculators, and local market questions." }, `<div class="grid two">${relatedArticles.map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review the decision, tradeoffs, and next questions.", href: article.route, iconName: "article", accent: accentColors[index % accentColors.length], linkLabel: "Read" })).join("")}</div>`, "compact")}
-    ${section("Review this loan path", { label: "Next steps", text: "Move from product education into the review path that matches your question." }, ctaDeck(["prequal", "rateReview", "compareOffer", "loContact", "watchlist"], "Compare the product with your own scenario.", "Start prequalification, request rate review, compare offer terms, contact an expert, or save the product question to Snap Homes."), "compact")}
-    ${section("Specialists and disclosures", { label: "Next step", text: "The next step is licensed review without any promise of eligibility." }, `<div class="grid three">${specialists.map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Ask about fit" })).join("")}</div><div style="margin-top:18px">${sourceNote(productSources(product.id), "Product sources")}</div><div style="margin-top:18px">${disclosureFor("product", "Product disclosure")}</div>`, "compact")}
+    ${section("Review this loan option", { label: "Next steps", text: "Open a notice, organize an offer, or keep the question for this browsing session." }, ctaDeck(["prequal", "rateReview", "compareOffer", "loContact", "watchlist"], "Compare the product with your own scenario.", "The notices collect and send nothing; the watchlist lasts only for this browsing session."), "compact")}
+    ${section("Loan officer profiles and disclosures", { label: "Names only", text: "Profiles show names and neutral education links only; official identifiers, service details, and direct contact information are not published." }, `<div class="grid three">${profiles.map((officer, index) => card({ title: officer.name, text: "Open the name-only profile and general mortgage education links.", href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "View profile" })).join("")}</div><div style="margin-top:18px">${sourceNote(productSources(product.id), "Product sources")}</div><div style="margin-top:18px">${disclosureFor("product", "Product disclosure")}</div>`, "compact")}
   `);
 }
 
 function humanStatus(status) {
-  const labels = {
-    editor_reviewed: "Mortgage guide",
-    compliance_review_required: "Mortgage guide",
-    draft: "Mortgage guide"
-  };
-  return labels[status] || status;
+  return status ? "Mortgage guide" : "";
 }
 
 function learningDiscovery(model) {
   return `
     <section class="learning-discovery section compact" aria-label="Search and browse Learning Center topics">
-      <form class="learning-search search-form" data-search-form data-search-scope="learning">
-        <input name="query" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
+      <form class="learning-search search-form" action="/learning-center/search" method="get" data-search-form data-search-scope="learning">
+        <input name="q" aria-label="Search learning center" placeholder="Search FHA, taxes, Denver..." />
         <button class="button" type="submit">Search</button>
       </form>
       <nav class="learning-topic-tags tag-row" aria-label="Learning Center topics">
-        ${model.tags.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
+        ${model.topicLinks.map((topic) => `<a class="tag" href="${route(topic.route)}">${esc(topic.name)}</a>`).join("")}
       </nav>
     </section>
   `;
@@ -1829,13 +2043,15 @@ function renderContributorByline(article, { compact = false } = {}) {
 }
 
 function learningArticleCard(article, index) {
-  const beat = maps.contributors[article.authorId]?.beat || String(article.type || "Mortgage guide").replaceAll("_", " ");
+  const beat = maps.contributors[article.authorId]?.beat || humanizePublicLabel(article.articleType || article.type || "Mortgage guide");
+  const preview = article.previewText || article.summary || article.dek || "Review the evidence, assumptions, and borrower questions behind this mortgage guide.";
   return `
     <article class="card learning-article-card editorial-article-card" style="--card-accent:${accentColors[index % accentColors.length]}">
       <a class="editorial-article-visual" href="${route(article.route)}" aria-label="Read ${esc(article.title)}">${icon("rates")}</a>
       <p class="editorial-card-label">${esc(beat)}</p>
       <h3><a href="${route(article.route)}">${esc(article.title)}</a></h3>
-      <p class="editorial-card-meta">6 min read <span aria-hidden="true">|</span> ${esc(beat)}</p>
+      <p class="editorial-card-meta">${esc(beat)}</p>
+      <p>${esc(preview)}</p>
       ${renderContributorByline(article, { compact: true })}
       <a class="text-link editorial-card-link" href="${route(article.route)}">Read more <span aria-hidden="true">&rarr;</span></a>
     </article>
@@ -1851,6 +2067,7 @@ function renderContributorDirectoryCard(contributor) {
         <h2>${esc(contributor.name)}</h2>
         <p class="contributor-title">${esc(contributor.title)}</p>
         <p>${esc(contributor.shortBio)}</p>
+        <p class="contributor-disclosure">${esc(CONTRIBUTOR_DISCLOSURE)}</p>
         <span class="text-link">View contributor profile</span>
       </div>
     </a>
@@ -1871,7 +2088,7 @@ function learningTopicCard(topic, index) {
 function learningCalculatorCard(calculator, index) {
   return card({
     title: calculator.name,
-    text: `Inputs include ${(calculator.captures || []).slice(0, 3).join(", ")}.`,
+    text: `Inputs include ${(calculator.captures || []).slice(0, 3).map(humanizePublicLabel).join(", ")}.`,
     href: calculator.route,
     iconName: "calculator",
     accent: accentColors[index % accentColors.length],
@@ -1898,13 +2115,13 @@ function resolveTopicHubLink(id) {
 }
 
 function learningHome() {
-  const model = buildLearningCenterModel(data, editorialContent);
+  const model = buildLearningCenterModel(data, editorialContent, { tagRegistry: publicTagRegistry });
   const featuredArticles = model.featuredArticles.length
     ? section(
         "Featured articles",
         {
           label: "Related articles",
-          text: "Compare loan options, local market evidence, planning estimates, and questions for a licensed professional."
+          text: "Compare loan options, local market evidence, planning estimates, and questions to review with a lender."
         },
         `<div class="grid three learning-featured-grid">${model.featuredArticles.map(learningArticleCard).join("")}</div>`,
         "compact learning-featured-section"
@@ -1937,7 +2154,7 @@ function learningHome() {
         "Helpful next reads",
         {
           label: "Learning center",
-          text: "Read guides that connect market questions, loan options, calculators, and licensed guidance."
+          text: "Read guides that connect market questions, loan options, calculators, and facts a lender may review."
         },
         `<div class="grid three learning-article-grid">${model.additionalArticles.map(learningArticleCard).join("")}</div>`,
         "compact learning-article-section"
@@ -1945,7 +2162,7 @@ function learningHome() {
     : "";
   const loanPaths = model.loanPaths.length
     ? section(
-        "Loan paths",
+        "Loan options",
         {
           label: "Products",
           text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby."
@@ -1997,6 +2214,8 @@ function editorialTeamPage(topic) {
       ${renderProductionTopicHub(topic, {
         articlesById,
         contributors: editorialContent.contributors,
+        sources: editorialContent.sources,
+        tagContext: tagContextForRoute(topic.route),
         route,
         linkResolver: resolveTopicHubLink,
         featuredTitle: "Meet the contributors",
@@ -2019,9 +2238,10 @@ function editorialTeamPage(topic) {
 function contributorProfilePage(contributor) {
   const archive = renderContributorArchiveMarkup(
     editorialContent,
-    data.articles,
+    maps.contributorArticles,
     contributor,
     learningArticleCard,
+    { limit: 24, showCount: true },
   );
 
   return pageShell(`
@@ -2034,6 +2254,7 @@ function contributorProfilePage(contributor) {
             <h1>${esc(contributor.name)}</h1>
             <p class="contributor-profile-title">${esc(contributor.title)}</p>
             <p class="contributor-profile-bio">${esc(contributor.bio)}</p>
+            <p class="contributor-disclosure">${esc(CONTRIBUTOR_DISCLOSURE)}</p>
             <a class="text-link" href="#contributor-articles">Browse ${esc(contributor.name)}'s articles</a>
           </div>
         </div>
@@ -2055,16 +2276,25 @@ function blogTopicPage(topic) {
   const productionTopic = editorialContent.topicHubs.find((hub) => hub.public === true && normalizeRoute(hub.route) === normalizeRoute(topic.route)) || topic;
   if (topic.route === "/learning-center/editorial-team") return editorialTeamPage(productionTopic);
   const articlesById = new Map((data.articles || []).map((article) => [article.id, article]));
+  const tagContext = tagContextForRoute(productionTopic.route);
   return pageShell(`
     ${breadcrumb(["Learning Center", topic.name], ["/learning-center", topic.route])}
     ${renderProductionTopicHub(productionTopic, {
       articlesById,
       contributors: editorialContent.contributors,
+      sources: editorialContent.sources,
+      tagContext,
       route,
       renderArticleCard: learningArticleCard,
       linkResolver: resolveTopicHubLink,
     })}
   `);
+}
+
+function borrowerFacingArticleMarkup(markup) {
+  return String(markup || "")
+    .replace(/(<button\b[^>]*data-cta-action="leadForm"[^>]*>)[^<]*(<\/button>)/g, "$1Review guidance options$2")
+    .replace("bring borrower and property details into a licensed conversation.", "bring borrower and property details to a lender for verification.");
 }
 
 function articlePage(article) {
@@ -2073,79 +2303,83 @@ function articlePage(article) {
     const item = found?.item || {};
     return [href, {
       title: item.title || item.name || href,
-      text: item.summary || item.purpose || item.marketPositioning || item.borrowerGoal || item.stateNarrative || found?.type || "Related mortgage page",
-      type: found?.type ? found.type.replaceAll(/([a-z])([A-Z])/g, "$1 $2") : "Related",
+      text: item.summary || item.purpose || item.marketPositioning || item.borrowerGoal || item.stateNarrative || found?.type || "Related mortgage guide",
+      type: found?.type ? humanizePublicLabel(found.type) : "Related",
     }];
   }));
   return pageShell(`
     ${breadcrumb(["Learning Center", article.title], ["/learning-center", article.route])}
-    ${renderProductionArticle(article, {
+    ${borrowerFacingArticleMarkup(renderProductionArticle(article, {
       contributors: editorialContent.contributors,
       sources: editorialContent.sources,
       relatedRoutes,
+      tagContext: tagContextForRoute(article.route),
       route,
       evidenceMarkup: marketChart("article.evidence", article.id),
-    })}
+    }))}
   `);
 }
 
 function loanOfficerPage(officer) {
-  const branch = maps.branches[officer.branchId];
-  const cities = byIds(officer.priorityCityIds, maps.cities);
-  const products = uniqueById(data.products.filter((product) => officer.specialties.some((specialty) => product.name.toLowerCase().includes(specialty.split(" ")[0].toLowerCase()))).concat(first(data.products, 2))).slice(0, 3);
+  const firstName = officer.name.split(" ")[0];
+  const products = first(data.products, 3);
   return pageShell(`
     ${breadcrumb(["Loan Officers", officer.name], ["/loan-officers", officer.route])}
     ${hero({
       eyebrow: "Loan officer",
       title: officer.name,
-      lead: `${officer.specialties.join(", ")}. Licensed in ${officer.licensedStates.join(", ")}. ${officer.nmls}.`,
-      actions: `${ctaButton("loContact", { label: `Contact ${officer.name.split(" ")[0]}` })}${ctaButton("prequal", { variant: "secondary" })}`,
-      panel: `<div class="profile-hero-card"><div class="avatar">${esc(initials(officer.name))}</div><div><h2>${esc(officer.name)}</h2><p>${esc(officer.nmls)}</p><div class="tag-row">${officer.specialties.map((tag) => `<span class="tag">${esc(tag)}</span>`).join("")}</div></div></div>`
+      lead: `Only ${officer.name}'s name and profile card are public. Official identifiers, state authorization, language, specialty, market coverage, branch association, and direct-contact details are not shown. The links below provide neutral mortgage education; opening a contact notice sends no message.`,
+      actions: `${ctaButton("loContact", { label: "Review contact options" })}${ctaButton("prequal", { variant: "secondary" })}`,
+      panel: `<div class="profile-hero-card"><div class="avatar">${esc(initials(officer.name))}</div><div><h2>${esc(officer.name)}</h2><p>Name-only public profile</p><div class="tag-row"><span class="tag">Education links</span><span class="tag">Notice-only actions</span></div></div></div>`
     })}
     ${editorialSection({
-      label: "Working together",
-      title: `${officer.name.split(" ")[0]} helps borrowers turn a mortgage question into a reviewed next step.`,
-      intro: "A strong loan officer profile explains service style, licensed coverage, specialties, and what happens after a borrower reaches out.",
+      label: "Public information",
+      title: `${officer.name} is shown by name only.`,
+      intro: "Use the neutral education links below without treating the profile as proof of qualifications, market coverage, or contactability.",
       paragraphs: [
-        `${officer.name} serves borrowers in ${officer.licensedStates.join(", ")} with specialties including ${officer.specialties.join(", ")}. The profile helps visitors understand when this loan officer may be a relevant contact.`,
-        "Borrowers can prepare by sharing their goal, property location, timing, approximate price range, down payment plan, current loan details, and questions about available loan options.",
-        "Rates, approval, product fit, and timelines depend on borrower facts, property details, market conditions, and lender review."
+        "No regulatory identifier, state authorization, language, specialty, market coverage, branch relationship, phone number, email, schedule, or direct-contact form is published here.",
+        "You can still compare loan education, run a calculator, review public rate benchmarks, and organize the facts a lender may request.",
+        "The contact, prequalification, rate, and offer actions open notices only. They collect and send no borrower information."
       ],
-      sideTitle: "Profile includes",
+      sideTitle: "Useful public actions",
       sideItems: [
-        "Licensed states and NMLS ID",
-        "Specialties and languages",
-        "Markets served",
-        "Product paths supported",
-        "Consent-aware contact form"
+        "Compare loan education",
+        "Run a payment estimate",
+        "Review public benchmarks",
+        "Organize lender-review facts",
+        "Open notice-only actions"
       ]
     })}
-    ${section("Profile proof points", { label: "Borrower trust", text: "Review licensing, languages, specialties, markets, and clear next-step information." }, `<div class="grid four">${metric("Licensed", officer.licensedStates.join(", "))}${metric("Languages", officer.languages.join(", "))}${metric("Specialties", String(officer.specialties.length))}${metric("NMLS", officer.nmls)}</div>`)}
-    ${section("How the conversation flows", { label: "Service model", text: "Show what happens after a borrower reaches out." }, processRail([
-      { title: "Share the goal", text: "Purchase, refinance, home equity, or product comparison determines the first questions." },
-      { title: "Review the scenario", text: "Discuss income, assets, debt, credit, property, occupancy, and timing at a high level." },
-      { title: "Compare options", text: "Available options may differ by borrower facts, property details, market conditions, and lender guidelines." },
-      { title: "Choose a next step", text: "Move into prequalification, document collection, or a follow-up conversation when ready." }
+    ${section("What you can research now", { label: "Mortgage education", text: "Use public information before deciding whether to approach a lender." }, insightBand([
+      { label: "Goal", value: "Purchase or refinance", text: "Define the decision before comparing products." },
+      { label: "Payment", value: "Visible assumptions", text: "Model principal, interest, taxes, insurance, and other entered costs." },
+      { label: "Property", value: "Type and occupancy", text: "These details can change program and pricing review." },
+      { label: "Terms", value: "Written lender offer", text: "Compare APR, points, fees, payment, and cash to close." }
     ]), "compact")}
-    ${section("Markets and branch", { label: "Service area", text: "Explore the markets and branch coverage this loan officer serves." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "Market" })).concat(branch ? [card({ title: branch.name, text: branch.coverageNote, href: branch.route, iconName: "branch", accent: accentColors[3], linkLabel: "Branch" })] : []).join("")}</div>`)}
-    ${section("Loan paths this officer can discuss", { label: "Product fit", text: "Open product explainers and calculators from this profile." }, `<div class="grid three">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View path" })).join("")}</div>`, "compact")}
-    ${section("Choose how to reach out", { label: "Contact options", text: "Use the contact path that matches your question and timing." }, ctaDeck([
-      { type: "loContact", href: `${officer.route}#contact`, label: `Contact ${officer.name.split(" ")[0]}` },
+    ${section("Facts a lender commonly reviews", { label: "Education", text: "No information is collected in this experience." }, processRail([
+      { title: "Borrower goal", text: "Purchase, refinance, home equity, or product comparison changes the first questions." },
+      { title: "Property details", text: "Location, property type, occupancy, price, and current liens can affect the review." },
+      { title: "Financial details", text: "Income, assets, debts, credit, and down payment require lender review." },
+      { title: "Written terms", text: "Rate, APR, points, fees, payment, and cash to close belong in the final comparison." }
+    ]), "compact")}
+    ${section("Loan education", { label: "Product guides", text: "These general guides are not endorsements or statements about this named profile." }, `<div class="grid three">${products.map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View guide" })).join("")}</div>`, "compact")}
+    ${section("Review notice-only actions", { label: "No submission", text: "Every action below opens a notice; none sends a request or borrower information." }, ctaDeck([
+      { type: "loContact", href: `${officer.route}#contact`, label: "Review contact options" },
       "prequal",
       "rateReview",
       "compareOffer"
-    ], "Bring your question to a licensed expert.", "Contact the loan officer, start a prequalification conversation, request rate review, or organize an offer comparison."), "compact")}
+    ], "Organize the next comparison.", "Review contact, prequalification, rate, or offer details without submitting information."), "compact")}
     <section class="section compact" id="contact">
       <div class="content-layout">
         <div class="panel">
-          <h2>Contact ${esc(officer.name.split(" ")[0])}</h2>
-          <p>When you are ready, continue to the account or contact path to share your question with licensed help.</p>
+          <h2>Contact information for ${esc(firstName)}</h2>
+          <p>Phone, email, and a direct-contact form are not provided. Opening either notice below sends nothing.</p>
           <div class="cta-inline-actions">
-            ${ctaButton("loContact", { label: `Contact ${officer.name.split(" ")[0]}` })}
+            ${ctaButton("loContact", { label: "Review contact options" })}
             ${ctaButton("leadForm", { variant: "secondary" })}
           </div>
         </div>
-        <aside class="side-stack">${sourceNote(["nmls"], "Licensing source")}${disclosureFor("loan_officer", "Loan officer disclosure")}</aside>
+        <aside class="side-stack">${disclosureFor("loan_officer", "Loan officer disclosure")}</aside>
       </div>
     </section>
   `);
@@ -2162,84 +2396,120 @@ function branchPage(branch) {
     ${hero({
       eyebrow: "Branch",
       title: branch.name,
-      lead: `${branch.coverageNote} Meet the team, review local market coverage, and move into products, calculators, or licensed guidance.`,
-      actions: `<a class="button" href="${route(officers[0]?.route || "/loan-officers")}">Meet the team</a>${ctaButton("leadForm", { variant: "secondary" })}`,
-      panel: `<aside class="hero-panel"><h2>Where to find us</h2><div class="map-spot">${esc(state.abbr)}</div><p>${esc(state.name)} service area and branch coverage.</p></aside>`
+      lead: `Only the ${branch.name} name and neutral education links are shown. Public operational and direct-contact details are not provided, and no contact request is sent from this view.`,
+      actions: `<a class="button" href="${route(officers[0]?.route || "/loan-officers")}">Browse profile names</a>${ctaButton("leadForm", { variant: "secondary" })}`,
+      panel: `<aside class="hero-panel"><h2>Name-only branch entry</h2><p>Name and neutral mortgage education only. Location, operations, qualifications, and direct-contact details are not established here.</p></aside>`
     })}
     ${editorialSection({
-      label: "Local branch guide",
-      title: `${branch.name} connects office identity, local coverage, and mortgage next steps.`,
-      intro: "A local branch hub brings the team, market coverage, product paths, and contact options into one place.",
+      label: "Branch information",
+      title: `${branch.name} is shown by name only.`,
+      intro: "Use the general mortgage education below without treating the entry as proof of operations, qualifications, or contactability.",
       paragraphs: [
-        `${branch.name} brings office coverage, loan officer profiles, local markets, and product education together so a borrower can move from browsing to a useful conversation.`,
-        "Start with the service area, compare options, model a payment, gather documents, and talk with a licensed team member.",
-        `For ${state.name}, the branch can also connect borrowers with state and city guidance so tax, insurance, price, and inventory details stay visible before a form is submitted.`
+        "No official location, operating schedule, phone number, email, regulatory identifier, or direct-contact form is shown.",
+        "Loan officer names and market guides are neutral browsing links. They do not establish an employment relationship, qualification, or operating footprint.",
+        "The guidance and contact controls open notices only. They collect and send no borrower information."
       ],
-      sideTitle: "Branch details",
+      sideTitle: "Useful public links",
       sideItems: [
-        "Office and service area",
-        "Team roster with NMLS IDs",
-        "Markets served",
-        "Product and calculator links",
-        "Licensing disclosures"
+        "Name-only profiles",
+        "State and city guides",
+        "Product education",
+        "Payment calculator",
+        "Notice-only actions"
       ]
     })}
-    ${section("Branch snapshot", { label: "Office details", text: "Review practical contact, team, map, and licensing information." }, `<div class="grid four">${metric("State", state.name)}${metric("Cities served", String(cities.length))}${metric("Team members", String(officers.length))}${metric("Coverage", branch.coverageNote)}</div>`)}
-    ${section("Branch team", { label: "Loan officer roster", text: "Compare licensed loan officers by NMLS ID, specialty, language, and the markets they serve." }, `<div class="grid two">${officers.map((officer, index) => card({ title: officer.name, text: `${officer.nmls} | ${officer.specialties.join(", ")}`, href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Profile" })).join("")}</div>`)}
-    ${section("Coverage and services", { label: "Local office hub", text: "Move from the branch into city markets, products, calculators, articles, and licensing details." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: city.marketPositioning, href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "City" })).concat([card({ title: "Mortgage payment calculator", text: "Estimate payment with visible taxes, insurance, rate, and down payment assumptions.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[4], linkLabel: "Calculate" })]).join("")}</div>`, "compact")}
-    ${section("Branch next steps", { label: "Local support", text: "Contact the branch, save a market, or request a rate review when you are ready for the next step." }, ctaDeck(["leadForm", "loContact", "watchlist", "rateReview"], "Use branch details in your next step.", "Ask for guidance, contact a loan officer, save covered markets, or request a rate review."), "compact")}
-    ${section("Loan options and local updates", { label: "More to explore", text: "Compare relevant loan options, markets, articles, and planning tools." }, `<div class="grid three">${products.slice(0, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).concat(articles.map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review the latest local mortgage evidence.", href: article.route, iconName: "article", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "Read" }))).join("")}</div><div style="margin-top:18px">${sourceNote(["nmls"], "Branch and licensing source")}</div><div style="margin-top:18px">${disclosureFor("branch", "Branch disclosure")}</div>`, "compact")}
+    ${section("What is public", { label: "Name-only entry", text: "The remaining links are educational and do not establish branch operations." }, `<div class="grid four">${metric("Branch", branch.name)}${metric("Public details", "Name only")}${metric("Direct action", "Notice only")}${metric("Related state guide", state.name)}</div>`)}
+    ${section("Loan officer names", { label: "Neutral profile links", text: "The listed names are browsing links; association and qualifications are not established here." }, `<div class="grid two">${officers.map((officer, index) => card({ title: officer.name, text: "Open the name-only profile and general mortgage education links.", href: officer.route, iconName: "expert", accent: accentColors[index % accentColors.length], linkLabel: "Profile" })).join("")}</div>`)}
+    ${section("Related market guides", { label: "Education", text: "Compare market-level assumptions without inferring a branch operating footprint." }, `<div class="grid three">${cities.map((city, index) => card({ title: city.name, text: "Open the city planning guide, sourced local reporting, and illustrative cost examples.", href: city.route, iconName: "location", accent: accentColors[index % accentColors.length], linkLabel: "City guide" })).concat([card({ title: "Mortgage payment calculator", text: "Estimate payment with visible taxes, insurance, rate, and down-payment assumptions.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[4], linkLabel: "Calculate" })]).join("")}</div>`, "compact")}
+    ${section("Review notice-only actions", { label: "No submission", text: "Contact and rate controls open notices only; the watchlist lasts for this browsing session." }, ctaDeck(["leadForm", "loContact", "watchlist", "rateReview"], "Keep comparing without sending information.", "Open a guidance or rate notice, or add a market to this session's watchlist."), "compact")}
+    ${section("Loan options and local updates", { label: "More to explore", text: "Compare loan education, market guides, articles, and planning tools." }, `<div class="grid three">${products.slice(0, 3).map((product, index) => card({ title: product.name, text: productBriefs[product.id]?.fit || product.borrowerGoal, href: product.route, iconName: "rates", accent: accentColors[index % accentColors.length], linkLabel: "View product" })).concat(articles.map((article, index) => card({ title: article.title, text: article.summary || article.dek || "Review dated local mortgage evidence.", href: article.route, iconName: "article", accent: accentColors[(index + 3) % accentColors.length], linkLabel: "Read" }))).join("")}</div><div style="margin-top:18px">${disclosureFor("branch", "Branch disclosure")}</div>`, "compact")}
   `);
 }
 
+// These program-rule calculations stay pure so every calculator view uses the same matrix.
+const FHA_MIP_BASE_LOAN_THRESHOLD = 726200;
+
+function fhaAnnualMipAssumption({ termYears, baseLoanAmount, ltv }) {
+  const term = Math.max(Number(termYears) || 0, 0);
+  const amount = Math.max(Number(baseLoanAmount) || 0, 0);
+  const ratio = Math.max(Number(ltv) || 0, 0);
+  const standardBaseAmount = amount <= FHA_MIP_BASE_LOAN_THRESHOLD;
+
+  if (term > 15) {
+    if (standardBaseAmount) {
+      if (ratio <= 0.9) return { annualRate: 0.005, duration: "11 years" };
+      if (ratio <= 0.95) return { annualRate: 0.005, duration: "loan term" };
+      return { annualRate: 0.0055, duration: "loan term" };
+    }
+    if (ratio <= 0.9) return { annualRate: 0.007, duration: "11 years" };
+    if (ratio <= 0.95) return { annualRate: 0.007, duration: "loan term" };
+    return { annualRate: 0.0075, duration: "loan term" };
+  }
+
+  if (standardBaseAmount) {
+    if (ratio <= 0.9) return { annualRate: 0.0015, duration: "11 years" };
+    return { annualRate: 0.004, duration: "loan term" };
+  }
+  if (ratio <= 0.78) return { annualRate: 0.0015, duration: "11 years" };
+  if (ratio <= 0.9) return { annualRate: 0.004, duration: "11 years" };
+  return { annualRate: 0.0065, duration: "loan term" };
+}
+
+function vaFundingFeeRate({ transaction, use, downPaymentPercent, exempt }) {
+  if (exempt) return 0;
+  if (transaction === "irrrl") return 0.005;
+  if (transaction === "cash-out") return use === "subsequent" ? 0.033 : 0.0215;
+  const downPercent = Math.max(Number(downPaymentPercent) || 0, 0);
+  if (downPercent >= 10) return 0.0125;
+  if (downPercent >= 5) return 0.015;
+  return use === "subsequent" ? 0.033 : 0.0215;
+}
 const calculatorProductModules = {
   conventional: {
     label: "Conventional",
     shortLabel: "Conv.",
-    status: "Available",
+    status: "Planning comparison",
     className: "available",
-    minDownRate: 0.03,
-    miLabel: "PMI",
-    rule: "Conforming limit, LTV, and PMI assumptions apply.",
-    notes: ["PMI appears above 80% LTV.", "Higher loan amounts require confirmation against the current county conforming limit."]
+    miLabel: "Hypothetical PMI",
+    rule: "Uses the entered down payment and hypothetical PMI rate without inferring eligibility or a minimum down payment.",
+    notes: ["PMI is included only when a hypothetical annual rate is entered.", "Confirm product eligibility, pricing, and the current county conforming limit."]
   },
   fha: {
     label: "FHA",
     shortLabel: "FHA",
-    status: "Needs review",
+    status: "Planning comparison",
     className: "review",
-    minDownRate: 0.035,
     upfrontFeeRate: 0.0175,
-    annualMiRate: 0.0055,
-    miLabel: "FHA MIP",
-    rule: "HUD county limit, UFMIP, annual MIP, and minimum down payment assumptions apply.",
-    notes: ["Confirm the base loan amount against the current FHA county limit.", "Upfront mortgage insurance is shown as financed for planning."]
+    miLabel: "FHA annual MIP",
+    rule: "Uses 1.75% financed UFMIP and the current HUD annual MIP matrix by term, base loan amount, and LTV.",
+    notes: ["A 3.5% down pathway may apply with a minimum decision score of at least 580; complete FHA and lender review still applies.", "Confirm the base loan amount against the current FHA county limit."]
   },
   va: {
     label: "VA",
     shortLabel: "VA",
-    status: "Check eligibility",
+    status: "Planning comparison",
     className: "eligible",
-    minDownRate: 0,
-    upfrontFeeRate: 0.0215,
-    annualMiRate: 0,
-    miLabel: "Funding fee",
-    rule: "VA eligibility, occupancy, entitlement, and funding-fee assumptions apply.",
-    notes: ["No monthly mortgage insurance is shown.", "Funding fee can change by use type, down payment, service category, and exemption."]
+    miLabel: "Monthly mortgage insurance",
+    rule: "Uses the selected transaction, first or subsequent use, down payment, and funding-fee exemption scenario.",
+    notes: ["No monthly mortgage insurance is included.", "The IRRRL fee is 0.50%; other funding fees depend on the selected scenario and may be exempt."]
   },
   usda: {
     label: "USDA",
     shortLabel: "USDA",
-    status: "Location gated",
+    status: "Planning comparison",
     className: "limited",
-    minDownRate: 0,
     upfrontFeeRate: 0.01,
     annualMiRate: 0.0035,
-    miLabel: "Guarantee fee",
-    rule: "Location, income, 30-year term, upfront guarantee fee, and annual fee assumptions apply.",
-    notes: ["The ZIP entry is only a prompt to verify official property eligibility.", "Income and property eligibility must be verified."]
+    miLabel: "USDA annual fee",
+    rule: "Uses 1.00% upfront and 0.35% annual fee planning assumptions; official property and income verification is always required.",
+    notes: ["USDA property and income verification is required through the official tools.", "Confirm the current fee with USDA and the lender before relying on this estimate."]
   }
 };
+
+const vaUseScenarioFields = [
+  ["VA use scenario", "vaUse", "select", "first", [["first", "First use"], ["subsequent", "Subsequent use"]]],
+  ["VA funding-fee exemption", "vaFeeExempt", "checkbox", "false"]
+];
 
 const calculatorPresets = {
   "calc-payment": {
@@ -2251,14 +2521,17 @@ const calculatorPresets = {
     fields: [
       ["Purchase price", "price", "numeric", "515000"],
       ["Down payment", "down", "numeric", "25750"],
+      ["Editable closing-cost assumption %", "closingCostRate", "decimal", "4"],
       ["Interest rate", "rate", "decimal", "6.75"],
+      ["Hypothetical annual PMI rate %", "annualPmiRate", "decimal", "0"],
       ["Annual tax", "tax", "numeric", "9300"],
       ["Annual insurance", "insurance", "numeric", "2200"],
       ["HOA dues", "hoa", "numeric", "125"],
       ["Term years", "termYears", "numeric", "30"],
-      ["ZIP code", "zip", "numeric", "78704"]
+      ["ZIP code", "zip", "numeric", "78704"],
+      ...vaUseScenarioFields
     ],
-    explainer: "Estimate principal, interest, taxes, insurance, HOA, and product-specific mortgage insurance or funding fees."
+    explainer: "Estimate monthly cash flow from editable inputs without inferring eligibility, minimum down payment, PMI pricing, or a personalized rate."
   },
   "calc-affordability": {
     kind: "affordability",
@@ -2269,13 +2542,15 @@ const calculatorPresets = {
     fields: [
       ["Annual income", "income", "numeric", "145000"],
       ["Monthly debts", "debts", "numeric", "650"],
+      ["Editable DTI planning assumption %", "dtiAssumption", "decimal", "36"],
       ["Cash available", "down", "numeric", "35000"],
       ["Interest rate", "rate", "decimal", "6.75"],
       ["Annual tax and insurance", "taxInsurance", "numeric", "11500"],
       ["Term years", "termYears", "numeric", "30"],
-      ["ZIP code", "zip", "numeric", "78704"]
+      ["ZIP code", "zip", "numeric", "78704"],
+      ...vaUseScenarioFields
     ],
-    explainer: "Start from income, debts, cash available, and location costs, then show which product guardrails may constrain the result."
+    explainer: "Apply an editable DTI planning assumption to income and debts. The result is not an affordability, eligibility, or underwriting limit."
   },
   "calc-refinance": {
     kind: "refinance",
@@ -2284,10 +2559,11 @@ const calculatorPresets = {
     primaryMetricLabel: "New payment",
     primaryProgram: "va",
     fields: [
-      ["Current payment", "currentPayment", "numeric", "3650"],
+      ["Current principal and interest / mo", "currentPayment", "numeric", "3650"],
       ["Loan balance", "balance", "numeric", "428000"],
       ["Home value", "price", "numeric", "560000"],
-      ["Refinance type", "refinanceType", "text", "VA streamline / IRRRL style"],
+      ["VA refinance transaction", "vaTransaction", "select", "irrrl", [["irrrl", "IRRRL"], ["cash-out", "Cash-out refinance"]]],
+      ...vaUseScenarioFields,
       ["New interest rate", "rate", "decimal", "6.25"],
       ["Closing costs", "closingCosts", "numeric", "6200"],
       ["Current property tax / mo", "currentTax", "numeric", "280"],
@@ -2295,45 +2571,57 @@ const calculatorPresets = {
       ["Current MI / mo", "currentMi", "numeric", "0"],
       ["New property tax / mo", "newTax", "numeric", "280"],
       ["New insurance / mo", "newInsurance", "numeric", "110"],
-      ["New MI / mo", "newMi", "numeric", "0"],
+      ["New conventional PMI / mo (hypothetical)", "newMi", "numeric", "0"],
       ["New term years", "termYears", "numeric", "30"],
       ["ZIP code", "zip", "numeric", "78704"]
     ],
-    explainer: "Compare current payment, new payment, closing costs, break-even timing, and refinance-specific product rules."
+    explainer: "Compare entered current and new monthly cash flows. VA fees use the selected transaction, use history, and exemption scenario."
   },
   "calc-rent-vs-buy": {
     kind: "rentBuy",
     title: "Rent vs buy scenario",
-    resultTitle: "Estimated buy payment",
-    primaryMetricLabel: "Buy payment",
+    resultTitle: "Partial rent-versus-buy payment comparison",
+    primaryMetricLabel: "Partial buy payment",
     primaryProgram: "conventional",
     fields: [
       ["Monthly rent", "rent", "numeric", "2650"],
       ["Target home price", "price", "numeric", "515000"],
       ["Down payment", "down", "numeric", "25750"],
+      ["Editable closing-cost assumption %", "closingCostRate", "decimal", "4"],
       ["Interest rate", "rate", "decimal", "6.75"],
+      ["Hypothetical annual PMI rate %", "annualPmiRate", "decimal", "0"],
+      ["Annual tax", "tax", "numeric", "9300"],
+      ["Annual insurance", "insurance", "numeric", "2200"],
+      ["HOA dues", "hoa", "numeric", "125"],
+      ["Term years", "termYears", "numeric", "30"],
       ["Time horizon years", "timeline", "numeric", "7"],
       ["Annual rent increase %", "rentGrowth", "decimal", "3.5"],
-      ["ZIP code", "zip", "numeric", "78704"]
+      ["ZIP code", "zip", "numeric", "78704"],
+      ...vaUseScenarioFields
     ],
-    explainer: "Compare rent, ownership payment, estimated equity, transaction costs, and time horizon."
+    explainer: "Partial rent-versus-buy payment comparison using entered monthly costs and rent growth; it does not model full ownership economics or support a borrower decision."
   },
   "calc-down-payment": {
     kind: "downPayment",
     title: "Down payment scenario",
-    resultTitle: "Estimated cash needed",
-    primaryMetricLabel: "Cash needed",
+    resultTitle: "Illustrative cash assumptions",
+    primaryMetricLabel: "Illustrative cash total",
     primaryProgram: "fha",
     fields: [
       ["Target home price", "price", "numeric", "515000"],
-      ["Cash available", "down", "numeric", "35000"],
+      ["Down payment assumption", "down", "numeric", "25750"],
+      ["Cash available", "cashAvailable", "numeric", "35000"],
+      ["Editable closing-cost assumption %", "closingCostRate", "decimal", "4"],
       ["Apply DPA", "applyDpa", "checkbox", "false"],
       ["Interest rate", "rate", "decimal", "6.75"],
+      ["Hypothetical annual PMI rate %", "annualPmiRate", "decimal", "0"],
       ["Annual tax", "tax", "numeric", "9300"],
       ["Annual insurance", "insurance", "numeric", "2200"],
-      ["ZIP code", "zip", "numeric", "78704"]
+      ["Term years", "termYears", "numeric", "30"],
+      ["ZIP code", "zip", "numeric", "78704"],
+      ...vaUseScenarioFields
     ],
-    explainer: "Estimate minimum down payment, cash-to-close, and the payment effect of changing the selected product."
+    explainer: "Compare cash available with editable down-payment and closing-cost assumptions; no minimum down payment or cash-to-close result is inferred."
   }
 };
 
@@ -2344,7 +2632,7 @@ function calculatorHubCard(calculator, index, emphasis = "supporting") {
     <span class="calculator-hub-card-copy">
       <strong>${esc(calculator.name)}</strong>
       <small>${esc(preset.explainer)}</small>
-      <em>${esc(calculator.captures.slice(0, 5).join(" • "))}</em>
+      <em>${esc(calculator.captures.slice(0, 5).map(humanizePublicLabel).join(" • "))}</em>
     </span>
     <span class="calculator-hub-card-arrow" aria-hidden="true">→</span>
   </a>`;
@@ -2353,12 +2641,12 @@ function calculatorHubCard(calculator, index, emphasis = "supporting") {
 function calculatorsHubPage(directory) {
   const [payment, affordability, ...supporting] = data.calculators;
   return pageShell(`
-    <main class="calculator-hub-page">
+    <div class="calculator-hub-page">
       <section class="calculator-hub-mobile-stage" aria-labelledby="calculator-hub-title">
         <div class="calculator-hub-intro">
           <span class="eyebrow">Calculators</span>
           <h1 id="calculator-hub-title">${esc(directory?.name || "Mortgage calculators")}</h1>
-          <p>Choose a calculator, enter visible assumptions, and compare product-aware estimates before a licensed review.</p>
+          <p>Choose a calculator, enter visible assumptions, and compare planning estimates with selected program assumptions before lender review.</p>
         </div>
         <div class="calculator-hub-orbit" aria-hidden="true">
           <span class="calculator-hub-orbit-ring ring-one"></span>
@@ -2378,12 +2666,12 @@ function calculatorsHubPage(directory) {
       </section>
       <aside class="calculator-hub-prequal" aria-label="Prequalification next step">
         <div class="calculator-hub-prequal-copy">
-          <strong>Start a prequalification conversation</strong>
-          <p>Organize the borrower, property, and timing details a licensed loan officer may need to review next steps.</p>
+          <strong>Review prequalification details</strong>
+          <p>Organize the borrower, property, and timing details a lender may need to review next steps. The destination is a no-PII summary, not an application.</p>
         </div>
-        <a class="button" href="${route("/prequal/start")}">Start prequalification <span aria-hidden="true">→</span></a>
+        <a class="button" href="${route("/prequal/start")}">Review prequalification <span aria-hidden="true">→</span></a>
       </aside>
-    </main>
+    </div>
   `);
 }
 
@@ -2410,20 +2698,20 @@ function productToggleGroup(preset) {
     return `<label class="product-toggle ${product.className}${isActive ? " active" : ""}${isEnabled ? "" : " disabled"}">
       <input type="radio" name="program" value="${esc(key)}"${isActive ? " checked" : ""}${isEnabled ? "" : " disabled"} />
       <span>${esc(product.shortLabel)}</span>
-      <small>${esc(isEnabled ? product.status : "Unavailable")}</small>
+      <small>${esc(isEnabled ? product.status : "Not modeled")}</small>
     </label>`;
   }).join("");
 }
 
-const calculatorCurrencyFields = new Set(["price", "down", "tax", "insurance", "hoa", "income", "debts", "taxInsurance", "currentPayment", "balance", "closingCosts", "rent", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi"]);
-const calculatorPercentFields = new Set(["rate", "rentGrowth"]);
+const calculatorCurrencyFields = new Set(["price", "down", "cashAvailable", "tax", "insurance", "hoa", "income", "debts", "taxInsurance", "currentPayment", "balance", "closingCosts", "rent", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi"]);
+const calculatorPercentFields = new Set(["rate", "rentGrowth", "dtiAssumption", "annualPmiRate", "closingCostRate"]);
 const calculatorSliderFields = new Set(["price", "down", "income", "balance", "currentPayment", "rent"]);
 const calculatorAdvancedFieldsByKind = {
-  payment: new Set(["tax", "insurance", "hoa", "termYears", "zip"]),
-  affordability: new Set(["taxInsurance", "termYears", "zip"]),
-  refinance: new Set(["refinanceType", "closingCosts", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi", "termYears", "zip"]),
-  rentBuy: new Set(["timeline", "rentGrowth", "zip"]),
-  downPayment: new Set(["rate", "tax", "insurance", "zip"])
+  payment: new Set(["annualPmiRate", "tax", "insurance", "hoa", "termYears", "zip", "vaUse", "vaFeeExempt"]),
+  affordability: new Set(["taxInsurance", "termYears", "zip", "vaUse", "vaFeeExempt"]),
+  refinance: new Set(["closingCosts", "currentTax", "currentInsurance", "currentMi", "newTax", "newInsurance", "newMi", "termYears", "zip"]),
+  rentBuy: new Set(["annualPmiRate", "tax", "insurance", "hoa", "termYears", "timeline", "rentGrowth", "zip", "vaUse", "vaFeeExempt"]),
+  downPayment: new Set(["rate", "annualPmiRate", "tax", "insurance", "termYears", "zip", "vaUse", "vaFeeExempt"])
 };
 const calculatorRangeDefaults = {
   price: [50000, 1500000, 5000],
@@ -2452,15 +2740,28 @@ function calculatorRangeConfig(name, value) {
   return { min, max: Math.max(max, numericValue), step };
 }
 
-function calculatorInputField([label, name, mode, value], fields = []) {
+function calculatorInputField([label, name, mode, value, options = []], fields = []) {
   const id = `calculator-${name}`;
   if (mode === "checkbox") {
+    const helper = name === "applyDpa"
+      ? "Assistance is excluded until a specific program, amount, repayment structure, borrower, and property are verified."
+      : name === "vaFeeExempt"
+        ? "Select only as a scenario assumption. VA or the lender must confirm exemption status."
+        : "";
     return `<div class="calculator-input-row checkbox-row${name === "applyDpa" ? " dpa-option" : ""}"${name === "applyDpa" ? " data-dpa-option" : ""}>
       <label class="calculator-checkbox-control" for="${esc(id)}">
-        <input id="${esc(id)}" name="${esc(name)}" type="checkbox" value="yes" data-calculator-input="${esc(name)}" />
+        <input id="${esc(id)}" name="${esc(name)}" type="checkbox" value="yes" data-calculator-input="${esc(name)}"${value === "true" ? " checked" : ""} />
         <span>${esc(label)}</span>
       </label>
-      ${name === "applyDpa" ? `<p>Down payment assistance can help eligible borrowers cover some upfront cash through grants, forgivable seconds, deferred-payment seconds, or repayable assistance. Availability depends on program, income, location, property, occupancy, and lender review.</p>` : ""}
+      ${helper ? `<p>${esc(helper)}</p>` : ""}
+    </div>`;
+  }
+  if (mode === "select") {
+    return `<div class="calculator-input-row">
+      <div class="calculator-input-topline">
+        <label for="${esc(id)}">${esc(label)}</label>
+        <div class="calculator-value-box"><select id="${esc(id)}" name="${esc(name)}" data-calculator-input="${esc(name)}">${options.map(([optionValue, optionLabel]) => `<option value="${esc(optionValue)}"${optionValue === value ? " selected" : ""}>${esc(optionLabel)}</option>`).join("")}</select></div>
+      </div>
     </div>`;
   }
   const range = mode === "text" ? null : calculatorRangeConfig(name, value);
@@ -2503,7 +2804,49 @@ function calculatorFieldsMarkup(preset) {
   `;
 }
 
-function calculatorPage(calc) {
+function calculatorDefaultDisplay([, name, mode, value, options = []]) {
+  if (mode === "checkbox") return value === "true" ? "Selected" : "Not selected";
+  if (mode === "select") return options.find(([optionValue]) => optionValue === value)?.[1] || value;
+  if (calculatorCurrencyFields.has(name)) return currency(value);
+  if (calculatorPercentFields.has(name)) return `${value}%`;
+  return String(value);
+}
+
+function calculatorMethodologyMarkup(preset) {
+  const defaults = preset.fields.map((field) => `<li><strong>${esc(field[0])}:</strong> ${esc(calculatorDefaultDisplay(field))}</li>`).join("");
+  const partialComparisonBoundary = preset.kind === "rentBuy"
+    ? "This is a partial payment comparison. It does not model appreciation, maintenance, buying costs, selling costs, investment opportunity cost, tax treatment, renter's insurance, or a complete hold-period return."
+    : "It does not model every lender, settlement, property, tax, insurance, or borrower-specific charge.";
+  return `<div class="panel calculator-methodology">
+    <h2>Formulas and assumptions</h2>
+    <div class="grid two">
+      <div>
+        <h3>Monthly principal and interest</h3>
+        <p><code>P &times; r(1 + r)<sup>n</sup> / ((1 + r)<sup>n</sup> - 1)</code>, where P is financed principal, r is the monthly interest rate, and n is the number of monthly payments. At 0% interest, principal is divided by n.</p>
+        <p><code>Financed principal = base loan + (base loan &times; selected upfront-fee rate)</code>. FHA uses 1.75% UFMIP; VA uses the selected transaction/use/down-payment/exemption scenario; USDA uses a 1.00% planning assumption.</p>
+        <p><code>Monthly MI or annual fee = base loan &times; annual rate / 12</code>. FHA selects the annual rate from the current HUD term/base-loan/LTV matrix; USDA uses a 0.35% planning assumption; conventional PMI uses only the hypothetical rate entered by the user. Actual FHA and USDA periodic charges can change with the scheduled outstanding balance.</p>
+        <p><code>DTI planning target = gross monthly income &times; entered DTI assumption - entered monthly debts</code>. The entered percentage is never treated as an eligibility cap.</p>
+        <p><code>Illustrative cash total = entered down payment + (price &times; entered closing-cost percentage)</code>, less only assistance from a specifically verified program. This is not cash to close or a Loan Estimate.</p>
+        <h3>Included cash-flow components</h3>
+        <p>Principal and interest plus the entered taxes, homeowners insurance, HOA dues, and applicable entered or program-calculated mortgage insurance or annual fee. Financed FHA, VA, or USDA upfront fees are added to principal for the selected scenario.</p>
+        <h3>Result period and rounding</h3>
+        <p>Payment results are monthly and displayed to the nearest dollar. Calculations use unrounded values until display. Cash comparisons use the entered down payment and editable closing-cost assumption.</p>
+      </div>
+      <div>
+        <h3>Editable defaults</h3>
+        <ul>${defaults}</ul>
+        <h3>Not modeled</h3>
+        <p>${esc(partialComparisonBoundary)} PMI is excluded unless an annual hypothetical rate is entered. Taxes, insurance, HOA dues, fees, and program authority can change.</p>
+        <h3>Example-rate boundary</h3>
+        <p>The entered interest rate is an editable example, not a Freddie Mac benchmark, Snap offer, APR, or Loan Estimate. It excludes points, credits, lock terms, and lender-specific pricing.</p>
+      </div>
+    </div>
+    <p><strong>Lender verification can change the result.</strong> A lender must verify borrower facts, property details, program eligibility, current limits, fee exemptions, pricing, disclosures, and cash to close.</p>
+    <p>Program references: <a href="https://www.hud.gov/sites/dfiles/OCHCO/documents/2023-05hsgml.pdf" rel="noopener noreferrer">HUD FHA MIP schedule</a>, <a href="https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/" rel="noopener noreferrer">VA funding fees</a>, <a href="https://eligibility.sc.egov.usda.gov/eligibility/" rel="noopener noreferrer">official USDA property and income tools</a>, and <a href="https://www.consumerfinance.gov/owning-a-home/loan-estimate/" rel="noopener noreferrer">CFPB Loan Estimate explainer</a>.</p>
+  </div>`;
+}
+
+function calculatorPage(calc, tagContext = tagContextForRoute(calc.route)) {
   const preset = calculatorPresets[calc.id] || calculatorPresets["calc-payment"];
   return pageShell(`
     <section class="section calculator-page-shell" id="calculator">
@@ -2513,6 +2856,7 @@ function calculatorPage(calc) {
             <div class="calculator-form-title">
               ${breadcrumb(["Calculators", calc.name], ["/calculators", calc.route])}
               <span class="eyebrow">Calculator</span>
+              ${renderPrimaryTagLinks(tagContext.primaryTags, route)}
               <h1>${esc(calc.name)}</h1>
               <p>${esc(preset.explainer)}</p>
             </div>
@@ -2527,7 +2871,7 @@ function calculatorPage(calc) {
         <aside class="side-stack">
           <div class="panel calculator-result-panel" data-calculator-result>
             <h2>${esc(preset.resultTitle)}</h2>
-            <p>Enter a scenario to calculate a product-aware estimate.</p>
+            <p>Enter a scenario to calculate a planning estimate with the selected program assumptions.</p>
             <div class="calculator-placeholder-result">
               <strong>${esc(calculatorProductModules[preset.primaryProgram].label)}</strong>
               <span>${esc(calculatorProductModules[preset.primaryProgram].rule)}</span>
@@ -2537,9 +2881,25 @@ function calculatorPage(calc) {
           ${disclosureFor("calculator", "Calculator disclosure")}
         </aside>
       </div>
+      ${calculatorMethodologyMarkup(preset)}
     </section>
+    ${tagContext.additionalTags.length ? `<div class="section compact content-tag-band">${renderAdditionalTagLinks(tagContext.additionalTags, route)}</div>` : ""}
     ${section("Related calculators", { label: "More tools", text: "Compare another borrower question with the same visible-assumption approach." }, `<div class="grid four">${relatedCalculatorCards(calc.id)}</div>`, "compact")}
   `);
+}
+
+function directoryAnswer(routeValue, directoryNoun) {
+  if (routeValue === "/loan-officers") return "Browse loan officer names and neutral education links. Official identifiers, state authorization, qualifications, market coverage, and direct-contact details are not shown.";
+  if (routeValue === "/branches") return "Browse branch names and neutral education links. Operational, regulatory, and direct-contact details are not shown.";
+  if (routeValue === "/loan-options") return "Compare common fit indicators, principal costs, tradeoffs, property constraints, and the facts a lender must review for each loan option.";
+  if (routeValue === "/learning-center/search") return "Search borrower education by the mortgage decision, cost, product, or local question you want to understand.";
+  return `Search ${directoryNoun} and compare the public details shown before narrowing your research.`;
+}
+
+function directoryResultText(item, routeValue) {
+  if (routeValue === "/loan-officers") return "Open the name-only profile and neutral mortgage education links.";
+  if (routeValue === "/branches") return "Open the name-only branch entry and neutral mortgage education links.";
+  return item.stateNarrative || item.marketPositioning || item.purpose || productBriefs[item.id]?.fit || item.borrowerGoal || item.summary || item.dek || humanStatus(item.reviewStatus) || "Review the public details and related education.";
 }
 
 function directoryPage(directory) {
@@ -2551,35 +2911,52 @@ function directoryPage(directory) {
   };
   const results = resultSets[directory.route] || data.cities;
   const directoryNoun = directory.route.includes("loan-officer") ? "loan officers" : directory.route.includes("branch") ? "branches" : directory.route.includes("loan-options") ? "loan options" : directory.route.includes("learning") ? "articles and topics" : "locations";
+  const answer = directoryAnswer(directory.route, directoryNoun);
+  const iconName = directory.route.includes("branch") ? "branch" : directory.route.includes("loan-officer") ? "expert" : directory.route.includes("loan-options") ? "rates" : directory.route.includes("learning") ? "article" : "location";
+  const linkLabel = directory.route.includes("branch") ? "View branch" : directory.route.includes("loan-officer") ? "View profile" : directory.route.includes("loan-options") ? "View option" : directory.route.includes("learning") ? "Read guide" : "View location";
+  const resultCards = results.slice(0, 24).map((item, index) => {
+    const text = directoryResultText(item, directory.route);
+    return card({
+      title: item.name || item.title,
+      text,
+      href: item.route,
+      iconName,
+      accent: accentColors[index % accentColors.length],
+      linkLabel,
+      searchText: `${item.name || item.title} ${text}`
+    });
+  }).join("");
   return pageShell(`
     ${hero({
       eyebrow: "Directory",
       title: directory.name,
-      lead: `Search ${directoryNoun} by ${directory.filters.join(", ")} and open the result that best fits your next step.`,
-      actions: `<a class="button" href="${route(results[0]?.route || "/")}">Open first result</a>`,
-      panel: `<aside class="hero-panel"><h2>Filters</h2><div class="tag-row">${directory.filters.map((filter) => `<span class="tag">${esc(filter)}</span>`).join("")}</div><form class="search-form" data-directory-filter><input name="filter" aria-label="Filter results" placeholder="Filter these results..." /><button class="button" type="submit">Filter</button></form></aside>`
+      lead: answer,
+      actions: `<a class="button" href="#directory-results">Browse all results</a>`,
+      panel: `<aside class="hero-panel"><h2>Search by keyword</h2><p>Search the names and public card details shown below.</p><form class="search-form" data-directory-filter><input name="filter" aria-label="Filter results" placeholder="Enter a keyword..." /><button class="button" type="submit">Filter</button></form></aside>`
     })}
     ${editorialSection({
-      label: "Find your next step",
-      title: `${directory.name} helps borrowers choose a useful next click.`,
-      intro: "Use the filters to narrow a long list into the market, person, branch, topic, or loan path that matches the question.",
+      label: "Compare public details",
+      title: `How to compare ${directoryNoun}.`,
+      intro: answer,
       paragraphs: [
-        `This directory organizes ${directoryNoun} by ${directory.filters.join(", ")} so users can narrow the path based on intent, market, product, or service area.`,
-        `For ${directoryNoun}, result cards preview enough detail to make the next click meaningful: service area, product fit, update details, language, branch coverage, or borrower goal.`,
-        "Results stay practical and neutral. They are not rankings, endorsements, or a way to steer users based on protected-class characteristics."
+        "Use keyword search to match the names and details that are actually printed on each result card.",
+        "Open a result to review its public education and valid related links; do not infer omitted professional or operational facts.",
+        "Results are neutral browsing links, not rankings, endorsements, or recommendations based on protected-class characteristics."
       ],
-      sideTitle: "What you can find",
+      sideTitle: "How to compare",
       sideItems: [
-        "Clear filters",
-        "Helpful result details",
-        "No-match guidance",
-        "Fast next action",
-        "No unsupported rankings"
+        "Search visible details",
+        "Review a result directly",
+        "Clear a no-match filter",
+        "Browse a broader location",
+        "Treat ordering as neutral"
       ]
     })}
-    ${section("Results", { label: "Search", text: "Filter the results and open the option you want to review." }, `<div class="grid three" data-directory-results>${results.slice(0, 24).map((item, index) => card({ title: item.name || item.title, text: item.stateNarrative || item.marketPositioning || item.purpose || humanStatus(item.reviewStatus) || productBriefs[item.id]?.fit || item.borrowerGoal || "Result", href: item.route, iconName: directory.route.includes("branch") ? "branch" : directory.route.includes("loan-officer") ? "expert" : directory.route.includes("loan-options") ? "rates" : "article", accent: accentColors[index % accentColors.length], linkLabel: "Open", searchText: `${item.name || item.title} ${item.stateNarrative || ""} ${item.marketPositioning || ""} ${item.purpose || ""} ${humanStatus(item.reviewStatus) || ""} ${item.borrowerGoal || ""} ${(item.specialties || []).join(" ")} ${(item.filters || []).join(" ")}` })).join("")}</div><div class="result-note" data-directory-empty hidden>No matching results found.</div>`)}
-    ${section("Keep comparing", { label: "Helpful links", text: "Compare a result with rates, calculators, and local market details." }, `<div class="grid three">${card({ title: "Compare rates", text: "Review rate details, APR, and payment assumptions.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Rates" })}${card({ title: "Run a calculator", text: "Use a scenario before talking to an expert.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[1], linkLabel: "Calculate" })}${card({ title: "Browse locations", text: "Pair the result with local market details.", href: "/locations", iconName: "location", accent: accentColors[2], linkLabel: "Locations" })}</div><div style="margin-top:18px">${disclosureFor("directory", "Search disclosure")}</div>`, "compact")}
-    ${section("Save the path", { label: "Snap Homes", text: "Keep useful results connected to your saved research and next-step questions." }, ctaDeck(["watchlist", "leadForm", "account"], "Keep browsing while your research stays organized.", "Save the result to Snap Homes, ask for guidance, or open the account view for markets, searches, rates, and product availability."), "compact")}
+    <div id="directory-results">
+      ${section("Results", { label: "Search", text: "Filter the public details shown, then review the result you choose." }, `<div class="grid three" data-directory-results>${resultCards}</div><div class="result-note directory-empty-recovery" data-directory-empty hidden><strong>No results match that keyword.</strong><p>Clear the filter to browse all ${esc(directoryNoun)}, or browse a broader location for market and cost context.</p><div class="directory-empty-actions"><button class="button" type="button" data-directory-clear>Clear filter</button><a class="button secondary" href="${route("/locations")}">Browse a broader location</a></div></div>`)}
+    </div>
+    ${section("Keep comparing", { label: "Helpful links", text: "Compare a result with rates, calculators, and local market details." }, `<div class="grid three">${card({ title: "Compare rates", text: "Review rate details, APR, and payment assumptions.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Rates" })}${card({ title: "Run a calculator", text: "Use a scenario before lender review.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[1], linkLabel: "Calculate" })}${card({ title: "Browse locations", text: "Pair the result with local market details.", href: "/locations", iconName: "location", accent: accentColors[2], linkLabel: "Locations" })}</div><div style="margin-top:18px">${disclosureFor("directory", "Search disclosure")}</div>`, "compact")}
+    ${section("Keep a result in view", { label: "Session watchlist", text: "Keep useful results for this browsing session only." }, ctaDeck(["watchlist", "leadForm", "account"], "Keep browsing while this session stays organized.", "Add the result to this session's watchlist or open a guidance or account notice. No message or account data is sent."), "compact")}
   `);
 }
 
@@ -2606,7 +2983,7 @@ function articleLoadError(indexItem) {
 }
 
 function articleLoading(indexItem) {
-  return `<section class="news-article article-loading" role="status"><h1>${esc(indexItem.title)}</h1><p>Loading the latest sourced update...</p></section>`;
+  return `<section class="news-article article-loading" role="status"><h1>${esc(indexItem.title)}</h1><p>Loading this sourced market update...</p></section>`;
 }
 
 async function loadArticleContent(indexItem) {
@@ -2642,7 +3019,11 @@ async function hydrateDirectArticle(indexItem) {
     const article = await loadArticleContent(indexItem);
     const author = maps.contributors[article.authorId];
     if (!document.contains(target)) return;
-    target.innerHTML = renderArticleContent(article, maps.newsMedia[indexItem.imageId], { author });
+    target.innerHTML = renderArticleContent(article, maps.newsMedia[indexItem.imageId], {
+      author,
+      tagContext: tagContextForRoute(indexItem.route),
+      routeHref: route,
+    });
     setDocumentMeta({ type: "newsArticle", item: article }, indexItem.route);
   } catch {
     if (document.contains(target)) target.innerHTML = articleLoadError(indexItem);
@@ -2677,14 +3058,18 @@ async function openArticleModal(indexItem, trigger, { history = true, origin = c
     const author = maps.contributors[article.authorId];
     const content = document.querySelector("[data-article-modal-content]");
     if (!content || modal.hidden || requestId !== activeArticleRequestId || modal.dataset.articleId !== indexItem.id) return;
-    content.innerHTML = renderArticleContent(article, maps.newsMedia[indexItem.imageId], { author });
+    content.innerHTML = renderArticleContent(article, maps.newsMedia[indexItem.imageId], {
+      author,
+      tagContext: tagContextForRoute(indexItem.route),
+      routeHref: route,
+    });
     setDocumentMeta({ type: "newsArticle", item: article }, indexItem.route);
     const heading = content.querySelector("h1, h2");
     heading?.setAttribute("tabindex", "-1");
     heading?.focus();
   } catch {
     const content = document.querySelector("[data-article-modal-content]");
-    if (content && requestId === activeArticleRequestId && modal.dataset.articleId === indexItem.id) content.innerHTML = `${articleLoadError(indexItem)}<p><a href="${route(indexItem.route)}" data-article-direct-link>Open the complete article page</a></p>`;
+    if (content && requestId === activeArticleRequestId && modal.dataset.articleId === indexItem.id) content.innerHTML = `${articleLoadError(indexItem)}<p><a href="${route(indexItem.route)}" data-article-direct-link>Read the complete article</a></p>`;
     document.querySelector("[data-article-modal-close]")?.focus();
   }
 }
@@ -2728,6 +3113,8 @@ function setDocumentMeta(found, path) {
     productCopyBundle,
     mediaById: maps?.newsMedia,
     contributorsById: maps?.contributors,
+    tagRegistry: publicTagRegistry,
+    searchRecords: searchIndexRecords || [],
   });
   applyDocumentMetadata(document, metadata);
 }
@@ -2735,11 +3122,11 @@ function setDocumentMeta(found, path) {
 function notFoundPage(path) {
   return pageShell(`
     ${hero({
-      eyebrow: "Page not found",
-      title: "We could not find that page.",
+      eyebrow: "Address not found",
+      title: "We could not find that address.",
       lead: "The address may be outdated or mistyped. Use the navigation to keep exploring.",
       actions: `<a class="button" href="${route("/")}">Back home</a>`,
-      panel: `<aside class="hero-panel"><h2>Explore Snap Mortgage</h2><p>Find locations, rates, loan options, calculators, learning guides, and licensed experts.</p></aside>`
+      panel: `<aside class="hero-panel"><h2>Explore Snap Mortgage</h2><p>Compare locations, rates, loan options, calculators, learning guides, and lender-review information.</p></aside>`
     })}
   `);
 }
@@ -2754,11 +3141,71 @@ function prequalHandoffPage() {
   return pageShell(renderPrequalHandoffMarkup(view));
 }
 
+function tagSearchRenderOptions(found) {
+  return {
+    registry: publicTagRegistry,
+    records: searchIndexRecords || [],
+    state: tagSearchStateFor(found),
+    staticFallbackHtml: found?.type === "tag" ? staticTagFallbackHtml : "",
+    staticFallbackTagId: found?.type === "tag" ? staticTagFallbackTagId : "",
+    loadError: searchIndexLoadError,
+    loading: !Array.isArray(searchIndexRecords) && !searchIndexLoadError,
+    routeHref: route,
+    fallbackImages: SEARCH_FALLBACK_IMAGES,
+    resolveAuthor: resolveSearchAuthor,
+    resolveLocation: resolveSearchLocation,
+  };
+}
+
+function tagSearchPage(found) {
+  return pageShell(renderTagSearchPage(tagSearchRenderOptions(found)));
+}
+
+function wireCurrentTagSearch(found) {
+  const root = document.querySelector("[data-tag-search-page]");
+  if (!root) return null;
+  return wireTagSearch(root, {
+    ...tagSearchRenderOptions(found),
+    navigate: updateTagSearchHistory,
+    track: trackPublicEvent,
+  });
+}
+
 function render() {
-  const path = currentPath();
-  const found = maps.routes.get(path);
+  activeTagSearchController?.destroy();
+  activeTagSearchController = null;
+
+  let path = currentPath();
+  let found = maps.routes.get(path);
+  const tagRouteRequest = resolveTagRouteRequest({
+    pathname: path,
+    search: window.location.search,
+    hash: new URL(window.location.href).hash,
+    registry: publicTagRegistry,
+  });
+  const routeTag = tagRouteRequest.tag;
+  const canonicalTagRoute = tagRouteRequest.canonicalPath;
+  if (tagRouteRequest.historical) {
+    window.history.replaceState(
+      window.history.state || {},
+      "",
+      `${canonicalTagRoute}${window.location.search}${window.location.hash}`,
+    );
+    path = canonicalTagRoute;
+    found = maps.routes.get(path) || { type: "tag", item: routeTag };
+  }
+  if (tagRouteRequest.usesBaseSearch) {
+    window.history.replaceState(
+      window.history.state || {},
+      "",
+      tagRouteRequest.targetUrl,
+    );
+    path = tagRouteRequest.targetPath;
+    found = maps.routes.get(path);
+  }
   let html;
   if (!found) html = notFoundPage(path);
+  else if (path === "/learning-center/search" || found.type === "tag") html = tagSearchPage(found);
   else if (found.type === "home") html = homePage();
   else if (found.type === "locations") html = locationsPage();
   else if (found.type === "rates") html = ratesPage();
@@ -2776,10 +3223,16 @@ function render() {
   else if (found.type === "directory" && found.item.route === "/calculators") html = calculatorsHubPage(found.item);
   else if (found.type === "directory") html = directoryPage(found.item);
 
-  setDocumentMeta(found, path);
+  setDocumentMeta(found, `${path}${window.location.search}`);
   app.innerHTML = html;
   document.body.classList.remove("no-scroll");
   wireInteractions();
+  if (isTagSearchPath(path)) {
+    activeTagSearchController = wireCurrentTagSearch(found);
+    if (!Array.isArray(searchIndexRecords) && !searchIndexPromise) {
+      void loadSearchIndexForDiscoveryRoute();
+    }
+  }
   if (found?.type === "contributor") {
     trackPublicEvent("contributor_profile_view", { contributorId: found.item.id });
   } else if (found?.type === "blog" && found.item.route === "/learning-center/editorial-team") {
@@ -2835,14 +3288,14 @@ function openActionModal(action) {
   });
 }
 
-function openAuthModal(reason = "Create a Snap Homes account or log in to save this to your account.") {
+function openAuthModal(reason = "Account creation and login are not connected here. Continuing changes only the account-menu state for this browsing session.") {
   openModal({
     eyebrow: "Snap Homes",
-    title: "Continue with your account",
+    title: "Account connection notice",
     body: reason,
     actions: [
       {
-        label: "Create account",
+        label: "Continue for this session",
         onClick: () => {
           sessionState.isLoggedIn = true;
           persistSessionState();
@@ -2851,13 +3304,8 @@ function openAuthModal(reason = "Create a Snap Homes account or log in to save t
         }
       },
       {
-        label: "Log in",
-        onClick: () => {
-          sessionState.isLoggedIn = true;
-          persistSessionState();
-          closeModal();
-          render();
-        }
+        label: "Close",
+        onClick: closeModal
       }
     ]
   });
@@ -2910,7 +3358,7 @@ function animateSaveToAccount(trigger) {
 function saveToAccount(trigger, label = "Saved item") {
   if (!sessionState.isLoggedIn) {
     pendingSaveAfterLogin = { label };
-    openAuthModal("Create a Snap Homes account or log in to add this to your watchlist.");
+    openAuthModal("Continue with the browsing-session account view to add this item. Nothing is transferred to a Snap Homes account.");
     return;
   }
   sessionState.savedCount += 1;
@@ -2922,7 +3370,7 @@ function saveToAccount(trigger, label = "Saved item") {
   persistSessionState();
   animateSaveToAccount(trigger || document.querySelector("[data-account-toggle]"));
   updateAccountBadge();
-  showToast("Saved to your account");
+  showToast("Saved for this browsing session");
 }
 
 function flushPendingSave() {
@@ -2945,6 +3393,11 @@ function handleDocumentClick(event) {
   const anchor = event.target.closest?.("a[href]");
   if (anchor && event.button === 0 && !event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && !anchor.target && !anchor.hasAttribute("download")) {
     const url = new URL(anchor.href, window.location.origin);
+    if (shouldUseNativeTagFallbackNavigation({
+      loadError: searchIndexLoadError,
+      withinStaticResults: Boolean(anchor.closest(".static-tag-results")),
+      pathname: url.pathname,
+    })) return;
     if (anchor.hasAttribute("data-news-article-id")) {
       const article = maps.newsArticles[anchor.getAttribute("data-news-article-id")];
       if (article) {
@@ -3085,7 +3538,7 @@ function wireInteractions() {
       closeAccountMenu({ restoreFocus: false });
       if (action === "open") {
         if (sessionState.isLoggedIn) openActionModal("account");
-        else openAuthModal("Log in to continue to Snap Homes.");
+        else openAuthModal("Account login is not connected here. Continue only for this browsing session.");
       }
       if (action === "signout") {
         resetSessionStateForSignOut();
@@ -3107,7 +3560,7 @@ function wireInteractions() {
       openModal({
         eyebrow: "Snap prequal",
         title: `Continue with ${button.getAttribute("data-provider-name") || "your selected provider"}`,
-        body: "Snap is ready to carry your selected provider and saved comparison details into the connected prequalification path.",
+        body: "Review the selected provider and comparison summary. No name, email, phone number, application, or credit decision is submitted here.",
         actions: [{ label: "Continue", onClick: closeModal }]
       });
     });
@@ -3117,25 +3570,20 @@ function wireInteractions() {
     button.addEventListener("click", () => saveToAccount(button, button.getAttribute("data-save-label") || "Saved item"));
   });
 
-  document.querySelectorAll("[data-search-form]").forEach((form) => {
+  document.querySelectorAll("[data-search-form][data-search-scope=\"learning\"]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const query = new FormData(form).get("query")?.toString().trim().toLowerCase();
-      if (!query) return;
-      const allItems = form.getAttribute("data-search-scope") === "learning"
-        ? buildLearningCenterModel(data).searchItems
-        : [
-            ...data.states,
-            ...data.cities,
-            ...data.products,
-            ...data.blogPages,
-            ...data.articles,
-            ...data.loanOfficers,
-            ...data.branches
-          ];
-      const match = allItems.find((item) => `${item.name || item.title} ${item.stateNarrative || ""} ${item.marketPositioning || ""} ${item.purpose || ""} ${item.borrowerGoal || ""}`.toLowerCase().includes(query));
-      navigate(route(match?.route || "/learning-center/search"));
+      const query = new FormData(form).get("q")?.toString() || "";
+      navigate(serializeLearningCenterSearch(query));
     });
+  });
+
+  const locationSearchForm = document.querySelector(".locations-hero-search[data-search-form]");
+  locationSearchForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const query = new FormData(locationSearchForm).get("query")?.toString() || "";
+    const destination = resolveLocationSearchRoute(query, [...data.states, ...data.cities]);
+    navigate(route(destination));
   });
 
   const calcForm = document.querySelector("[data-calculator-form]");
@@ -3244,27 +3692,49 @@ function wireInteractions() {
     const tax = ((Number(form.get("tax")) || 0) + (Number(form.get("taxInsurance")) || 0)) / 12;
     const insurance = (Number(form.get("insurance")) || 0) / 12;
     const hoa = Number(form.get("hoa")) || 0;
-    const months = Math.max((Number(form.get("termYears")) || 30) * 12, 1);
+    const termYears = Number(form.get("termYears")) || 30;
+    const months = Math.max(termYears * 12, 1);
     const rawPrincipal = Math.max(price - down, 0);
-    const upfrontFee = rawPrincipal * (product.upfrontFeeRate || 0);
+    const ltv = price > 0 ? rawPrincipal / price : 0;
+    const refinanceBalance = Math.max(Number(form.get("balance")) || 0, 0);
+    const fhaBaseLoanAmount = kind === "refinance" ? refinanceBalance : rawPrincipal;
+    const fhaLtv = kind === "refinance" && price > 0 ? refinanceBalance / price : ltv;
+    const downPaymentPercent = price > 0 ? (down / price) * 100 : 0;
+    const vaTransaction = form.get("vaTransaction")?.toString() || (kind === "refinance" ? "irrrl" : "purchase");
+    const vaUse = form.get("vaUse")?.toString() || "first";
+    const vaFeeExempt = form.get("vaFeeExempt") === "yes";
+    const selectedVaFundingFeeRate = vaFundingFeeRate({ transaction: vaTransaction, use: vaUse, downPaymentPercent, exempt: vaFeeExempt });
+    const upfrontFeeRate = selectedProgram === "va" ? selectedVaFundingFeeRate : product.upfrontFeeRate || 0;
+    const upfrontFee = rawPrincipal * upfrontFeeRate;
     const principal = rawPrincipal + upfrontFee;
     const pi = rate > 0 ? (principal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : principal / months;
-    const ltv = price > 0 ? rawPrincipal / price : 0;
-    const monthlyMi = selectedProgram === "conventional" && ltv > 0.8
-      ? rawPrincipal * 0.0046 / 12
-      : rawPrincipal * (product.annualMiRate || 0) / 12;
-    const minDown = price * (product.minDownRate || 0);
-    const zip = form.get("zip")?.toString() || "";
-    const isUsdaEligibleZip = ["37601", "72712", "65201"].includes(zip);
+    const fhaMip = fhaAnnualMipAssumption({ termYears, baseLoanAmount: fhaBaseLoanAmount, ltv: fhaLtv });
+    const hypotheticalPmiRate = Math.max(Number(form.get("annualPmiRate")) || 0, 0) / 100;
+    const annualMiRate = selectedProgram === "conventional"
+      ? hypotheticalPmiRate
+      : selectedProgram === "fha"
+        ? fhaMip.annualRate
+        : product.annualMiRate || 0;
+    const monthlyMi = rawPrincipal * annualMiRate / 12;
+    const closingCostRate = Math.max(Number(form.get("closingCostRate")) || 0, 0) / 100;
+    const enteredClosingCosts = form.get("closingCosts") === null ? null : Math.max(Number(form.get("closingCosts")) || 0, 0);
+    const closingCostAssumption = enteredClosingCosts ?? price * closingCostRate;
     const guardrails = [];
-    if (down + 1 < minDown) guardrails.push(`Minimum down payment shown for ${product.label}: $${Math.round(minDown).toLocaleString()}.`);
-    if (selectedProgram === "conventional") guardrails.push("Confirm the current county conforming limit; higher loan amounts may require a jumbo comparison.");
-    if (selectedProgram === "fha") guardrails.push("Confirm the current HUD county limit and FHA mortgage-insurance treatment.");
-    if (selectedProgram === "va") guardrails.push("VA output requires eligibility, occupancy, entitlement, and funding-fee exemption review.");
-    if (selectedProgram === "usda" && !isUsdaEligibleZip) guardrails.push("USDA eligibility depends on property location and household income. Confirm both with official eligibility tools and a participating lender.");
+    if (selectedProgram === "conventional") guardrails.push("The calculator does not infer a conventional minimum down payment or PMI requirement. Confirm product eligibility, PMI pricing, and the current county conforming limit.");
+    if (selectedProgram === "fha") {
+      guardrails.push(kind === "affordability"
+        ? "FHA MIP is not calculated in this DTI planning target because no base loan amount or LTV is modeled. Use a payment scenario and confirm current HUD rules and the official county limit."
+        : `HUD matrix assumption: ${(fhaMip.annualRate * 100).toFixed(2)}% annual MIP for ${fhaMip.duration}, plus 1.75% financed UFMIP. Confirm current rules and the official county limit.`);
+    }
+    if (selectedProgram === "va") {
+      guardrails.push(kind === "affordability"
+        ? "VA funding fee is not calculated in this DTI planning target because no transaction loan amount is modeled. Use a payment or refinance scenario and confirm eligibility, entitlement, use history, and any exemption."
+        : `VA ${vaTransaction.toUpperCase()} funding-fee scenario: ${(selectedVaFundingFeeRate * 100).toFixed(2)}%${vaFeeExempt ? " because exemption is selected" : `, ${vaUse} use`}. VA and lender review must confirm eligibility, entitlement, occupancy, transaction type, use history, and exemption.`);
+    }
+    if (selectedProgram === "usda") guardrails.push("USDA property and income verification is required through the official eligibility tools and a participating lender. ZIP alone never determines eligibility. Confirm the current fee with USDA and the lender before relying on this estimate.");
     let title = "Estimated payment";
     let payment = pi + tax + insurance + hoa + monthlyMi;
-    let note = `Uses ${product.label} assumptions. Includes principal, interest, taxes, insurance, HOA, and ${product.miLabel}.`;
+    let note = `Uses ${product.label} planning assumptions. Includes principal and interest, entered taxes, insurance, HOA, and ${product.miLabel}. ${upfrontFee > 0 ? `${(upfrontFeeRate * 100).toFixed(2)}% upfront fee is financed in principal.` : "No upfront program fee is included."}`;
     let chartTitle = "Monthly estimate breakdown";
     let chartSummary = "This chart updates from the inputs shown in the calculator.";
     let chartPoints = [
@@ -3275,19 +3745,20 @@ function wireInteractions() {
       { label: product.miLabel, value: monthlyMi },
     ];
     let chartOptions = {};
-    let secondaryMetricLabel = "Cash to close";
-    let secondaryMetricValue = Math.max(down + (Number(form.get("closingCosts")) || price * 0.018), minDown);
+    let secondaryMetricLabel = "Entered down + closing costs";
+    let secondaryMetricValue = down + closingCostAssumption;
+    let availableCash = down;
     let comparisonVisual = "";
 
     if (kind === "affordability") {
       const monthlyIncome = (Number(form.get("income")) || 0) / 12;
       const debts = Number(form.get("debts")) || 0;
-      const dtiCap = selectedProgram === "fha" ? 0.43 : selectedProgram === "va" ? 0.41 : selectedProgram === "usda" ? 0.39 : 0.36;
-      payment = Math.max(monthlyIncome * dtiCap - debts, 0);
-      title = "Estimated target payment";
-      note = `Uses a simple ${Math.round(dtiCap * 100)}% ${product.label} debt-to-income planning assumption before lender review.`;
-      chartTitle = "Monthly affordability budget";
-      chartSummary = "This planning view separates the target housing amount from the income and debt inputs shown above.";
+      const dtiAssumption = Math.max(Math.min(Number(form.get("dtiAssumption")) || 0, 100), 0) / 100;
+      payment = Math.max(monthlyIncome * dtiAssumption - debts, 0);
+      title = "Planning housing-payment target";
+      note = `Uses the editable ${Math.round(dtiAssumption * 1000) / 10}% DTI planning assumption. This is not an eligibility cap, affordability decision, approval threshold, or program rule.`;
+      chartTitle = "Monthly DTI planning budget";
+      chartSummary = "This illustration applies the entered DTI assumption to gross monthly income, then subtracts entered monthly debts.";
       chartPoints = [
         { label: "Target housing payment", value: payment },
         { label: "Monthly debts", value: debts },
@@ -3297,23 +3768,34 @@ function wireInteractions() {
       secondaryMetricLabel = "Cash available";
       secondaryMetricValue = down;
     } else if (kind === "refinance") {
-      const balance = Number(form.get("balance")) || 0;
-      const refiUpfrontFee = balance * (product.upfrontFeeRate || 0);
+      const balance = refinanceBalance;
+      const refiUpfrontFee = balance * upfrontFeeRate;
       const refinancePrincipal = balance + refiUpfrontFee;
       const refinancePi = rate > 0 ? (refinancePrincipal * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1) : refinancePrincipal / months;
       const currentPayment = Number(form.get("currentPayment")) || 0;
       const closingCosts = Number(form.get("closingCosts")) || 0;
       const currentEscrow = (Number(form.get("currentTax")) || 0) + (Number(form.get("currentInsurance")) || 0) + (Number(form.get("currentMi")) || 0);
-      const newEscrow = (Number(form.get("newTax")) || 0) + (Number(form.get("newInsurance")) || 0) + (Number(form.get("newMi")) || 0);
-      const refinanceType = form.get("refinanceType")?.toString() || "standard refinance";
+      const enteredNewMi = Number(form.get("newMi")) || 0;
+      const calculatedNewMi = selectedProgram === "fha"
+        ? balance * fhaMip.annualRate / 12
+        : selectedProgram === "usda"
+          ? balance * (product.annualMiRate || 0) / 12
+          : selectedProgram === "va"
+            ? 0
+            : enteredNewMi;
+      const newEscrow = (Number(form.get("newTax")) || 0) + (Number(form.get("newInsurance")) || 0) + calculatedNewMi;
+      const refinanceType = selectedProgram === "va" ? (vaTransaction === "irrrl" ? "IRRRL" : "cash-out refinance") : "refinance";
       const currentTotal = currentPayment + currentEscrow;
       const newTotal = refinancePi + newEscrow;
       const savings = currentTotal - newTotal;
+      const comparisonCosts = closingCosts + refiUpfrontFee;
       payment = newTotal;
       title = "Estimated new payment";
-      note = savings > 0 ? `${product.label} ${refinanceType} estimate shows an approximate $${Math.round(savings).toLocaleString()} monthly reduction. Estimated cost-recovery period: ${Math.max(Math.ceil(closingCosts / savings), 1)} months.` : `${product.label} ${refinanceType} estimate does not show a lower total monthly payment with the current inputs.`;
+      note = savings > 0
+        ? `${product.label} ${refinanceType} inputs show an approximate $${Math.round(savings).toLocaleString()} monthly difference. Simple cost-recovery period: ${Math.max(Math.ceil(comparisonCosts / savings), 1)} months using entered closing costs plus the modeled upfront fee.`
+        : `${product.label} ${refinanceType} inputs do not show a lower total monthly payment. This comparison does not determine refinance benefit or eligibility.`;
       chartTitle = "Refinance payment comparison";
-      chartSummary = "Compare current and new mortgage payments with taxes, insurance, and MI assumptions included from Advanced settings.";
+      chartSummary = "Uses entered current costs; new FHA MIP or USDA annual fee is program-calculated, VA monthly MI is zero, and conventional PMI is entered in Advanced settings.";
       chartPoints = [
         { label: "Current mortgage", value: currentTotal },
         { label: "New mortgage", value: newTotal },
@@ -3335,42 +3817,42 @@ function wireInteractions() {
       const timeline = Number(form.get("timeline")) || 1;
       const rentGrowth = (Number(form.get("rentGrowth")) || 0) / 100;
       const futureRent = rent * Math.pow(1 + rentGrowth, timeline);
-      title = "Estimated buy payment";
-      note = `Compare ${product.label} ownership assumptions against $${Math.round(rent).toLocaleString()} rent today and about $${Math.round(futureRent).toLocaleString()} after ${timeline} years.`;
-      chartTitle = "Rent and buy payment comparison";
-      chartSummary = "Compare the monthly rent and estimated purchase payment from the inputs shown.";
+      title = "Partial rent-versus-buy payment comparison";
+      note = `Compares $${Math.round(rent).toLocaleString()} rent today, about $${Math.round(futureRent).toLocaleString()} rent after ${timeline} years, and the entered ${product.label} monthly payment components. It excludes appreciation, maintenance, buying costs, selling costs, investment opportunity cost, tax treatment, and full transaction economics.`;
+      chartTitle = "Partial rent-versus-buy monthly comparison";
+      chartSummary = "Monthly payment illustration only; it does not support a buy-versus-rent decision.";
       chartPoints = [
         { label: "Monthly rent", value: rent },
         { label: "Estimated buy payment", value: payment },
         { label: "Future rent", value: futureRent },
       ];
       chartOptions = { chartType: "bar", valueHeader: "Monthly amount" };
-      comparisonVisual = rentBuyLineComparison({ rent, buyPayment: payment, rentGrowth, timeline, price, down, annualRate, termYears: Number(form.get("termYears")) || 30 });
+      comparisonVisual = rentBuyLineComparison({ rent, buyPayment: payment, rentGrowth, timeline });
       secondaryMetricLabel = "Time horizon";
       secondaryMetricValue = timeline;
     } else if (kind === "downPayment") {
-      title = "Estimated cash needed";
-      const closingCostEstimate = price * 0.04;
+      title = "Illustrative cash assumptions";
       const applyDpa = form.get("applyDpa") === "yes";
       const dpaAssistance = 0;
-      const baseCashNeeded = minDown + closingCostEstimate;
+      const baseCashNeeded = down + closingCostAssumption;
       payment = Math.max(baseCashNeeded - dpaAssistance, 0);
-      note = `${product.label} estimate combines the down-payment input with an illustrative 4% closing-cost assumption. Assistance is not included${applyDpa ? " because a specific program has not been verified" : ""}. Taxes, insurance, prepaid items, reserves, and lender or settlement charges can differ. Estimated monthly payment: $${Math.round(pi + tax + insurance + monthlyMi).toLocaleString()}.`;
-      chartTitle = "Cash needed by component";
-      chartSummary = "Estimate product-dependent cash needed before lender, property, and assistance-program review.";
+      note = `${product.label} illustration combines the entered down payment with an editable ${Math.round(closingCostRate * 1000) / 10}% closing-cost assumption. It is not a minimum down payment, local fee estimate, cash-to-close result, or Loan Estimate. Assistance is excluded${applyDpa ? " because no specific program has been verified" : ""}. Estimated monthly payment from the other entered assumptions: $${Math.round(pi + tax + insurance + monthlyMi).toLocaleString()}.`;
+      chartTitle = "Entered cash assumptions by component";
+      chartSummary = "User-controlled down-payment and closing-cost assumptions; no eligibility or program minimum is inferred.";
       chartPoints = [
-        { label: "Minimum down payment", value: minDown },
-        { label: "Closing costs (4%)", value: closingCostEstimate },
-        { label: "DPA estimate", value: dpaAssistance },
+        { label: "Down payment assumption", value: down },
+        { label: "Closing-cost assumption", value: closingCostAssumption },
+        { label: "Verified assistance included", value: dpaAssistance },
       ];
       chartOptions = { chartType: "bar", valueHeader: "Estimated cash" };
+      availableCash = Math.max(Number(form.get("cashAvailable")) || 0, 0);
       secondaryMetricLabel = "Cash available";
-      secondaryMetricValue = down;
+      secondaryMetricValue = availableCash;
       comparisonVisual = "";
       var downPaymentVisualMeta = {
         productLabel: product.label,
-        minDown,
-        closingCosts: closingCostEstimate,
+        downPaymentAssumption: down,
+        closingCosts: closingCostAssumption,
         dpaAssistance,
         baseRequired: baseCashNeeded,
       };
@@ -3382,7 +3864,7 @@ function wireInteractions() {
         : `<div class="guardrail-list ok"><h3>Items to verify</h3><p>The visible assumptions do not trigger an additional warning. A lender still needs to review the borrower, property, program rules, and current limits.</p></div>`;
       result.innerHTML = `
         <h2>${esc(title)}</h2>
-        ${calculatorResultVisual({ title, payment, points: chartPoints, kind, metricLabel: kind === "downPayment" ? "Estimated cash needed" : title, note, principal, monthlyRate: rate, months, availableCash: down, ...(downPaymentVisualMeta || {}) })}
+        ${calculatorResultVisual({ title, payment, points: chartPoints, kind, metricLabel: kind === "downPayment" ? "Illustrative cash total" : title, note, principal, monthlyRate: rate, months, availableCash, ...(downPaymentVisualMeta || {}) })}
         ${comparisonVisual}
         <div class="product-status ${esc(product.className)}"><strong>${esc(product.label)}: ${esc(product.status)}</strong><span>${esc(product.notes.join(" "))}</span></div>
         ${guardrailMarkup}
@@ -3418,6 +3900,7 @@ function wireDirectoryFilters() {
   const input = form.querySelector("input[name='filter']");
   const results = Array.from(document.querySelectorAll("[data-directory-result]"));
   const empty = document.querySelector("[data-directory-empty]");
+  const clearButton = document.querySelector("[data-directory-clear]");
   const applyFilter = () => {
     const query = input?.value.trim().toLowerCase() || "";
     let shown = 0;
@@ -3434,6 +3917,12 @@ function wireDirectoryFilters() {
     applyFilter();
   });
   input?.addEventListener("input", applyFilter);
+  clearButton?.addEventListener("click", () => {
+    if (input) input.value = "";
+    applyFilter();
+    input?.focus();
+    trackPublicEvent("directory_filter_cleared", { route: currentPath() });
+  });
 }
 
 function wireRentBuyComparisonTabs(root = document) {
@@ -3481,7 +3970,7 @@ function scrollToCurrentAnchor() {
 
 async function boot() {
   try {
-    const [response, optionalNews, optionalMedia, optionalMarketCharts, optionalRatesMarketplace, optionalContributors, optionalTopicHubs, optionalEditorialBundle, optionalProductCopy] = await Promise.all([
+    const [response, optionalNews, optionalMedia, optionalMarketCharts, optionalRatesMarketplace, optionalContributors, optionalTopicHubs, optionalEditorialBundle, optionalProductCopy, optionalPublicTagRegistry] = await Promise.all([
       fetch(DATA_URL),
       fetchOptionalJson(NEWS_INDEX_URL),
       fetchOptionalJson(NEWS_MEDIA_URL),
@@ -3490,12 +3979,14 @@ async function boot() {
       fetchOptionalJson(CONTRIBUTORS_URL),
       fetchOptionalJson(TOPIC_HUBS_URL),
       fetchOptionalJson(EDITORIAL_CONTENT_URL),
-      fetchOptionalJson(PRODUCT_COPY_URL)
+      fetchOptionalJson(PRODUCT_COPY_URL),
+      fetchOptionalJson(PUBLIC_TAG_REGISTRY_URL)
     ]);
     if (!response.ok) throw new Error("The requested content could not be loaded.");
     const loadedData = await response.json();
     editorialContent = loadOptionalEditorialContent(optionalEditorialBundle, optionalContributors, optionalTopicHubs);
     productCopyBundle = optionalProductCopy || { products: [] };
+    publicTagRegistry = normalizeTagRegistry(optionalPublicTagRegistry || {});
     const mergedArticles = mergeEditorialArticles(loadedData.articles, optionalEditorialBundle);
     data = {
       ...loadedData,
@@ -3505,16 +3996,20 @@ async function boot() {
     mediaManifest = optionalMedia || { media: [] };
     marketChartFixtures = loadOptionalMarketChartFixtures(optionalMarketCharts);
     ratesMarketplaceFixture = optionalRatesMarketplace;
-    maps = buildMaps(data, newsIndex, mediaManifest, editorialContent);
+    maps = buildMaps(data, newsIndex, mediaManifest, editorialContent, publicTagRegistry);
     loadSessionState();
+    if (shouldPreserveStaticTagPage({
+      registry: publicTagRegistry,
+      hasStaticTagPage,
+    })) return;
     render();
     window.addEventListener("popstate", handlePopstate);
   } catch {
     app.innerHTML = `
       <main class="error-state" id="main">
         <div>
-          <h1>We could not open this page.</h1>
-          <p>Refresh and try again. If the problem continues, return to the home page.</p>
+          <h1>We could not load Snap Mortgage.</h1>
+          <p>Refresh and try again. If the problem continues, return home.</p>
         </div>
       </main>
     `;

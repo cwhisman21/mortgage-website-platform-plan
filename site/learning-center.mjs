@@ -1,3 +1,6 @@
+import { tagRoute, tagsForRoute } from "./tag-registry.mjs";
+import { serializeTagSearchState } from "./tag-state.mjs";
+
 const LEARNING_HOME_ROUTE = "/learning-center";
 const EDITORIAL_TEAM_ID = "blog-editorial-team";
 const LOAN_PATH_IDS = [
@@ -9,7 +12,23 @@ const LOAN_PATH_IDS = [
 
 const byId = (items = []) => new Map(items.map((item) => [item.id, item]));
 
-export function buildLearningCenterModel(seed, editorialContent = {}) {
+function normalizedDisplayName(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function canonicalTopicLink(topic, tagRegistry) {
+  const primaryTags = tagsForRoute(tagRegistry, topic.route).primaryTags;
+  const matchingTag = primaryTags.find((tag) => (
+    normalizedDisplayName(tag.displayName) === normalizedDisplayName(topic.name)
+  ));
+  return matchingTag ? { ...topic, route: tagRoute(matchingTag) } : topic;
+}
+
+export function serializeLearningCenterSearch(query = "") {
+  return `/learning-center/search${serializeTagSearchState({ query })}`;
+}
+
+export function buildLearningCenterModel(seed, editorialContent = {}, { tagRegistry } = {}) {
   const blogPages = seed.blogPages || [];
   const articles = seed.articles || [];
   const products = seed.products || [];
@@ -26,7 +45,7 @@ export function buildLearningCenterModel(seed, editorialContent = {}) {
   return {
     home,
     tags,
-    searchItems: [...tags, ...articles],
+    topicLinks: tags.map((topic) => canonicalTopicLink(topic, tagRegistry)),
     topicCards: tags.filter((page) => page.id !== EDITORIAL_TEAM_ID),
     featuredArticles,
     additionalArticles: articles

@@ -73,7 +73,9 @@ function chartInteractionHarness() {
       ["[data-chart-tooltip-label]", { textContent: "" }],
       ["[data-chart-tooltip-value]", { textContent: "" }],
       ["[data-chart-tooltip-source]", { textContent: "" }],
-      ["[data-chart-tooltip-as-of]", { textContent: "" }],
+      ["[data-chart-tooltip-context]", { textContent: "" }],
+      ["[data-chart-tooltip-status]", { textContent: "" }],
+      ["[data-chart-tooltip-as-of]", { textContent: "", hidden: false }],
     ]);
     return {
       hidden: true,
@@ -89,7 +91,14 @@ function chartInteractionHarness() {
   const mark = (chartFigure, label) => {
     const attributes = new Map();
     return {
-      dataset: { chartLabel: label, chartValue: "$100", chartSource: "Source", chartAsOf: "2026-07-11" },
+      dataset: {
+        chartLabel: label,
+        chartValue: "$100",
+        chartSource: "Source",
+        chartContext: "United States | Rate | Weekly",
+        chartStatus: "Official observation",
+        chartAsOf: "July 9, 2026",
+      },
       closest(selector) {
         if (selector === ".market-chart-mark") return this;
         return selector === "[data-market-chart]" ? chartFigure : null;
@@ -131,7 +140,7 @@ test("fixtures are coherent and retain visible movement", () => {
     assert.ok(fixture.frequency);
     assert.ok(fixture.sourceId);
     assert.ok(fixture.integrationKey);
-    assert.ok(fixture.asOf);
+    assert.equal(Boolean(fixture.asOf), fixture.dataMode === "official_observation");
     assert.ok(fixture.table.headers.length);
     assert.equal(fixture.table.rows.length, fixture.points.length);
     if (fixture.chartType === "line" || fixture.chartType === "bar") {
@@ -155,32 +164,76 @@ test("fixtures are coherent and retain visible movement", () => {
   }
 });
 
-test("chart figures keep the reference, date, and data table in public markup", () => {
+test("the rate trend uses exact Freddie Mac PMMS releases through July 9, 2026", () => {
   const fixture = chartFixtureFor(fixtures, "rates.benchmark_trend", "rates-mortgage");
+  assert.equal(fixture.dataMode, "official_observation");
+  assert.equal(fixture.sourceId, "freddie-pmms");
+  assert.equal(fixture.asOf, "July 9, 2026");
+  assert.equal(fixture.geography, "United States");
+  assert.deepEqual(fixture.points.map(({ label, value }) => ({ label, value })), [
+    { label: "May 14, 2026", value: 6.36 },
+    { label: "May 28, 2026", value: 6.53 },
+    { label: "June 11, 2026", value: 6.52 },
+    { label: "June 25, 2026", value: 6.49 },
+    { label: "July 2, 2026", value: 6.43 },
+    { label: "July 9, 2026", value: 6.49 },
+  ]);
+  assert.equal(fixture._source.url, "https://www.freddiemac.com/pmms/archive");
+
   const html = renderChartFigure(fixture);
   assert.match(html, /<figure/);
-  assert.match(html, /Planning illustration\. Reference:/);
-  assert.match(html, /href="https:\/\//);
-  assert.match(html, /As of:/);
+  assert.match(html, /Source:/);
+  assert.match(html, /As of: July 9, 2026/);
+  assert.match(html, /national weekly average/i);
+  assert.match(html, /not a Snap offer, APR, or personalized rate/i);
   assert.match(html, /<details/);
   assert.match(html, /<table/);
   assert.match(html, /role="img"/);
-  assert.doesNotMatch(html, /placeholder|fixture|integrationKey|status|Source unavailable/i);
+  assert.doesNotMatch(html, /placeholder|fixture|integrationKey|Source unavailable/i);
 });
 
-test("snapshot source note exposes reference dates without internal fields", () => {
+test("the ACS registry carries the correct 2020-2024 vintage and release date", () => {
+  const source = fixtures.sources.find(({ id }) => id === "census-acs");
+  assert.equal(source.asOf, "2024 ACS 5-year estimates (2020-2024), released January 29, 2026");
+});
+
+test("synthetic charts attribute values to internal assumptions and agencies only as background", () => {
+  const planningFixtures = fixtures.charts.filter(({ dataMode }) => dataMode === "planning_illustration");
+  assert.ok(planningFixtures.length > 0);
+
+  for (const fixture of planningFixtures) {
+    assert.equal(fixture.sourceId, "illustrative-assumptions");
+    assert.equal(fixture._source.kind, "internal_assumption");
+    assert.equal(fixture.asOf, undefined);
+    assert.ok(fixture.backgroundSourceIds?.length, `${fixture.chartId}/${fixture.entityId} needs a background reference`);
+    assert.ok(fixture.points.every(({ status }) => status === "illustrative_assumption"));
+    assert.ok(fixture.table.headers.some((header) => /example|illustrative/i.test(header)), `${fixture.chartId}/${fixture.entityId} must label table values as examples`);
+
+    const html = renderChartFigure(fixture);
+    assert.match(html, /Example values:/);
+    assert.match(html, /not observed market data/i);
+    assert.match(html, /Background references:/);
+    assert.match(html, /did not publish the displayed examples/i);
+    assert.doesNotMatch(html, /As of:/);
+    assert.match(html, /data-chart-status="Illustrative assumption; not observed market data\."/);
+  }
+});
+
+test("snapshot source note separates assumptions from official background references", () => {
   const html = renderSnapshotSourceNote(fixtures, "city_snapshot", "city-austin-tx");
-  assert.match(html, /Market planning references:/);
-  assert.match(html, /Reference dates:/);
+  assert.match(html, /Example values:/);
+  assert.match(html, /not observed local market data/i);
+  assert.match(html, /Background references:/);
+  assert.match(html, /did not publish the displayed examples/i);
   assert.doesNotMatch(html, /vintage|cadence|status|integrationKey|fixture/i);
 });
 
 test("fixture loader rejects invalid chart contracts", () => {
   const invalid = {
-    sources: [{ id: "source", label: "Source", cadence: "Annual", asOf: "2026" }],
+    sources: [{ id: "source", kind: "official_observation", label: "Source", cadence: "Annual", asOf: "2026" }],
     charts: [{
       chartId: "chart", entityId: "entity", scope: "scope", title: "Title", summary: "Summary",
-      chartType: "unknown", unit: "Unit", frequency: "Annual", sourceId: "source", asOf: "2026", integrationKey: "key",
+      chartType: "unknown", unit: "Unit", frequency: "Annual", geography: "United States", sourceId: "source", asOf: "2026", integrationKey: "key",
       points: [], table: { headers: ["A", "B"], rows: [] },
     }],
     snapshotSources: [],
@@ -201,7 +254,9 @@ test("line, bar, and payment charts expose the shared tooltip contract", () => {
     assert.equal((html.match(/data-chart-label=/g) || []).length, fixture.points.length);
     assert.equal((html.match(/data-chart-value=/g) || []).length, fixture.points.length);
     assert.equal((html.match(/data-chart-source=/g) || []).length, fixture.points.length);
-    assert.equal((html.match(/data-chart-as-of=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-context=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-status=/g) || []).length, fixture.points.length);
+    assert.equal((html.match(/data-chart-as-of=/g) || []).length, fixture.dataMode === "official_observation" ? fixture.points.length : 0);
     assert.equal((html.match(/data-chart-tooltip(?:\s|>)/g) || []).length, 1);
     assert.match(html, /role="tooltip" hidden/);
     assert.doesNotMatch(html, /<title>/);

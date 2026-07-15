@@ -13,9 +13,11 @@
       "title": "Valdosta, GA home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Valdosta, GA.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Valdosta, GA.",
-      "metaDescription": "Valdosta, GA home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Valdosta, GA.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Valdosta, GA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $182,800.",
         "prior ACS median owner-occupied home value: $121,800.",
-        "ACS median household income: $45,925.",
-        "median monthly owner cost with a mortgage: $1,340.",
-        "change from the prior ACS home-value estimate: 50.1%."
+        "ACS median household income: $45,925."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 50.1,
-          "display": "50.1%",
-          "sourceRecordIds": [
-            "news-valdosta-ga-affordability-home-values-source-city-home-value-current",
-            "news-valdosta-ga-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Georgia median home value",
           "value": 303300,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Evidence at a glance: the local value, income, and owner-cost baseline",
           "body": [
-            "In Valdosta, GA, the 2024 ACS reports a median owner-occupied home value of $182,800 and median household income of $45,925; these are separate medians, not the finances of one representative household. The same release reports $1,340 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Valdosta, GA, reading $182,800, $45,925, and $1,340 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $182,800, $45,925, and $1,340 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "Start with the dated local finding: In Valdosta, GA, the 2024 ACS reports a median owner-occupied home value of $182,800, median household income of $45,925, and median selected monthly owner costs of $1,340 for owners with a mortgage. Together, those three reference points may help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,340 measure combines recurring ownership expenses in place of real estate taxes alone. For borrower planning, a useful affordability review starts with $182,800, $45,925, and $1,340, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,15 +122,15 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
+          "id": "vintage-observations",
+          "heading": "Evidence check: read the ACS vintages as separate nominal observations",
           "body": [
-            "Valdosta, GA's median home-value estimate increased from $121,800 in the prior ACS period to $182,800 in the current release, a reported change of 50.1%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 50.1% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $121,800 to $182,800 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Valdosta, GA. Before the 50.1% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+            "The 2019 ACS published $121,800 as Valdosta, GA's median owner-occupied home-value estimate, while the 2024 ACS published $182,800. In practical terms, these dated nominal observations can still help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change.",
+            "Applied to a decision in Valdosta, GA, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $121,800 attached to 2019 and $182,800 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "median-home-value",
-            "home-value-change"
+            "median-home-value"
           ],
           "sourceRecordIds": [
             "news-valdosta-ga-affordability-home-values-source-city-home-value-prior",
@@ -149,9 +139,10 @@
         },
         {
           "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
+          "heading": "Comparison view: how the city estimate sits within the state",
           "body": [
-            "Valdosta, GA's $182,800 median home-value estimate is below the statewide $303,300 estimate, with a reported city-to-state gap of 39.7%. That 39.7% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Valdosta, GA. It does not mean every local property is 39.7% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $182,800 and $303,300 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Valdosta, GA's $182,800 median home-value estimate is below the statewide $303,300 estimate, with a reported city-to-state gap of 39.7%.",
+            "That 39.7% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Valdosta, GA. It does not mean every local property is 39.7% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For borrower planning, borrowers can apply $182,800 and $303,300 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -164,10 +155,30 @@
           ]
         },
         {
-          "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "id": "decision-limits",
+          "heading": "Keep the boundary clear: what these local medians cannot decide",
           "body": [
-            "The $1,340 owner-cost estimate gives Valdosta, GA borrowers a broader monthly reference than principal and interest alone, while the $45,925 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $45,925 is the owner household at $1,340. The $182,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $182,800, $45,925, and $1,340 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "Neither the 2024 $182,800 estimate nor the $1,340 owner-cost median determines the value of a specific Valdosta, GA home, a borrower's payment, or an underwriting result. For borrower planning, the $45,925 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income.",
+            "In a borrower review centered on Valdosta, GA, the separate 2019 observation of $121,800 also cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-valdosta-ga-affordability-home-values-source-city-home-value-current",
+            "news-valdosta-ga-affordability-home-values-source-city-home-value-prior",
+            "news-valdosta-ga-affordability-home-values-source-city-owner-cost-current",
+            "news-valdosta-ga-affordability-home-values-source-city-income-current"
+          ]
+        },
+        {
+          "id": "owner-cost-boundary",
+          "heading": "Keep the boundary clear: what the owner-cost estimate includes and excludes",
+          "body": [
+            "The $1,340 owner-cost estimate gives Valdosta, GA borrowers a broader monthly reference than principal and interest alone, while the $45,925 income estimate supplies separate household context. In practical terms, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $45,925 is the owner household at $1,340. The $182,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. For the decision at hand, keeping $182,800, $45,925, and $1,340 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +192,25 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
-          "body": [
-            "Neither $182,800 nor $1,340 determines the value of a specific Valdosta, GA home, what a borrower will pay each month, or an underwriting result. The $45,925 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 50.1% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $182,800, $1,340, and $45,925 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-valdosta-ga-affordability-home-values-source-city-home-value-current",
-            "news-valdosta-ga-affordability-home-values-source-city-owner-cost-current",
-            "news-valdosta-ga-affordability-home-values-source-city-income-current",
-            "news-valdosta-ga-affordability-home-values-source-city-home-value-prior"
-          ]
-        },
-        {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Next step: build a property-specific comparison",
           "body": [
-            "A practical Valdosta, GA worksheet can begin with $182,800 as broad value context, $1,340 as a reminder to include recurring ownership expenses, and $45,925 as a local economic reference. After noting those $182,800, $1,340, and $45,925 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 39.7% city-to-state difference is a prompt to keep the analysis local, while the 50.1% period change is a prompt to date every assumption. A licensed professional can use the 39.7% and 50.1% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "One practical Valdosta, GA worksheet can begin with $182,800 as dated value context, $1,340 as a reminder to include recurring ownership expenses, and $45,925 as a local economic reference.",
+            "In a borrower review centered on Valdosta, GA, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 39.7% city-to-state difference is a prompt to keep the analysis local, while the separate $121,800 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. A licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-valdosta-ga-affordability-home-values-source-city-home-value-current",
+            "news-valdosta-ga-affordability-home-values-source-city-home-value-prior",
             "news-valdosta-ga-affordability-home-values-source-city-owner-cost-current",
             "news-valdosta-ga-affordability-home-values-source-city-income-current",
-            "news-valdosta-ga-affordability-home-values-source-state-home-value-current",
-            "news-valdosta-ga-affordability-home-values-source-city-home-value-prior"
+            "news-valdosta-ga-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +248,9 @@
               "display": "$1,340"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 50.1,
-              "display": "50.1%"
+              "label": "Georgia median home value",
+              "value": 303300,
+              "display": "$303,300"
             }
           ]
         }
@@ -269,43 +262,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$182,800",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$121,800",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$45,925",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,340",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "50.1%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Georgia median home value",
               "$303,300",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "39.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +314,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "vintage-observations",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-valdosta-ga-affordability-home-values-source-city-home-value-current",
@@ -452,9 +447,11 @@
       "title": "Valdosta, GA housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Valdosta, GA.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Valdosta, GA.",
-      "metaDescription": "Valdosta, GA housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Valdosta, GA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +469,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 25,667.",
         "occupied housing units: 22,532.",
-        "vacant housing units: 3,135.",
-        "prior ACS vacant housing units: 3,656.",
-        "vacant-unit share of housing stock: 12.2%."
+        "vacant housing units: 3,135."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +573,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Start with the evidence: the size and use of the local housing stock",
           "body": [
-            "Valdosta, GA's current ACS housing baseline includes 25,667 total housing units, 22,532 occupied units, and 3,135 vacant units. Those counts describe the housing stock across the survey period; they do not say that 3,135 homes were listed for sale or available to rent at one moment. The difference between 25,667 total units and 22,532 occupied units is useful for checking the internal scale of the release, while 3,135 provides the numerator for a more careful vacancy reading. For a borrower researching Valdosta, GA, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "The local figures answer the first question: Valdosta, GA's current ACS housing baseline includes 25,667 total housing units, 22,532 occupied units, and 3,135 vacant units. For the decision at hand, those counts can help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 3,135 homes were listed for sale or available to rent at one moment. In practical terms, reading 25,667 total units with 22,532 occupied and 3,135 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +589,30 @@
           ]
         },
         {
-          "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "id": "rent-context",
+          "heading": "Planning context: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Vacant units in Valdosta, GA decreased from 3,656 in the prior ACS period to 3,135 in the current release, a reported change of -14.3%. In the current housing stock, 3,135 units equal 12.2% of the 25,667 total. ACS vacancy covers several statuses, so the 12.2% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 3,656 to 3,135 can still prompt better questions about current for-sale and rental inventory in Valdosta, GA, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Valdosta, GA's ACS median gross rent is $1,054, while renter-occupied units account for 58.3% of occupied housing and owner-occupied units account for 41.7%.",
+            "For borrower planning, the $1,054 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,054 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Valdosta, GA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-valdosta-ga-housing-supply-tenure-source-median-rent",
+            "news-valdosta-ga-housing-supply-tenure-source-renter-units",
+            "news-valdosta-ga-housing-supply-tenure-source-occupied-units",
+            "news-valdosta-ga-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
+          "id": "vacancy-comparison",
+          "heading": "Read the comparison: vacancy changed, but it is not listing inventory",
+          "body": [
+            "Vacant units in Valdosta, GA decreased from 3,656 in the prior ACS period to 3,135 in the current release, a reported movement of 14.3%.",
+            "In the current housing stock, 3,135 units equal 12.2% of the 25,667 total. ACS vacancy covers several statuses, so the 12.2% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 3,656 to 3,135 can nevertheless prompt better questions about current for-sale and rental inventory in Valdosta, GA, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +629,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Evidence check: ownership and renting within occupied housing",
           "body": [
-            "Among 22,532 occupied units in Valdosta, GA, the ACS-derived owner share is 41.7% and the renter share is 58.3%, making renter-occupied housing the larger measured tenure group. The 41.7% and 58.3% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Valdosta, GA. The 41.7% and 58.3% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 22,532 occupied units in Valdosta, GA, the ACS-derived owner share is 41.7% and the renter share is 58.3%, making renter-occupied housing the larger measured tenure group. In practical terms, the 41.7% and 58.3% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage.",
+            "This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Valdosta, GA. For the decision at hand, the 41.7% and 58.3% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon instead of used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +646,11 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Valdosta, GA's ACS median gross rent is $1,054, while renter-occupied units account for 58.3% of occupied housing and owner-occupied units account for 41.7%. The $1,054 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,054 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Valdosta, GA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-valdosta-ga-housing-supply-tenure-source-median-rent",
-            "news-valdosta-ga-housing-supply-tenure-source-renter-units",
-            "news-valdosta-ga-housing-supply-tenure-source-occupied-units",
-            "news-valdosta-ga-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Where the evidence stops: what the housing-stock evidence cannot show",
           "body": [
-            "The 12.2% vacant-unit share and 41.7% owner share cannot determine competition for a specific Valdosta, GA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 25,667 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 12.2% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 3,135 vacant units separate from active inventory and keep the $1,054 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 12.2% vacant-unit share and 41.7% owner share cannot determine competition for a specific Valdosta, GA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. In practical terms, likewise, 25,667 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements.",
+            "Applied to a decision in Valdosta, GA, the ACS period behind the 12.2% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. For the decision at hand, the borrower should, as a result, keep 3,135 vacant units separate from active inventory and keep the $1,054 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +669,10 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Put the evidence to work: compare current local choices on the same terms",
           "body": [
-            "A grounded Valdosta, GA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 25,667 total units, a 12.2% vacancy share, and a 41.7% owner share. For renting, replace the $1,054 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 41.7% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 58.3% or 41.7% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Valdosta, GA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 25,667 total units, a vacancy share of 12.2%, and an owner share of 41.7%.",
+            "In a borrower review centered on Valdosta, GA, on the rental side, replace the $1,054 median with the actual lease, utilities, deposits, and expected changes. For the ownership budget, keep the 41.7% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 58.3% or 41.7% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +741,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "25,667",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "22,532",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "3,135",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "3,656",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "12.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-14.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "41.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "58.3%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,054",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +813,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "rent-context",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +977,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Valdosta, GA labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Valdosta, GA.",
-      "previewText": "See what changed in Valdosta, GA, GA's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Valdosta, GA labor market: latest employment evidence. See what changed in Valdosta, GA, GA's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Valdosta, GA's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Valdosta, GA's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +1000,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 23,056.",
-        "employment: 22,182.",
-        "unemployment: 874.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.8%.",
-        "previous-month unemployment rate: 3.3%."
+        "change in unemployment rate from the prior month: 0.5 percentage points.",
+        "change in unemployment rate from a year earlier: -0.3 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1070,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0.5,
-          "display": "0.5%",
+          "display": "0.5 percentage points",
           "sourceRecordIds": [
             "news-valdosta-ga-local-labor-market-source-latest-unemployment-rate",
             "news-valdosta-ga-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1081,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.3,
-          "display": "-0.3%",
+          "display": "-0.3 percentage points",
           "sourceRecordIds": [
             "news-valdosta-ga-local-labor-market-source-latest-unemployment-rate",
             "news-valdosta-ga-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1091,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Valdosta, GA labor force of 23,056, with 22,182 people employed and 874 unemployed under the program's definitions. Those three counts belong together: 22,182 plus 874 explains the scale behind the published 3.8% unemployment rate. For mortgage planning, the 23,056 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 23,056 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-valdosta-ga-local-labor-market-source-latest-labor-force",
-            "news-valdosta-ga-local-labor-market-source-latest-employment",
-            "news-valdosta-ga-local-labor-market-source-latest-unemployment",
-            "news-valdosta-ga-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Read the comparison: what changed in the latest month",
           "body": [
-            "Valdosta, GA's unemployment rate rose from 3.3% in the prior month to 3.8% in the latest month, a change of 0.5%. A 0.5% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 874 unemployment count and 23,056 labor force. The 0.5% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Valdosta, GA borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The local figures answer the first question: As of May 2026, Valdosta, GA's unemployment rate rose from 3.3% in April 2026 to 3.8% in May 2026, a change of 0.5 percentage points. For borrower planning, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it cannot establish one applicant's income stability, mortgage eligibility, or loan price. The release also estimates 874 people unemployed within a labor force of 23,056, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,19 +1112,39 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Comparison view: what changed over the year",
           "body": [
-            "Compared with 4.1% a year earlier, the latest Valdosta, GA unemployment rate of 3.8% fell by -0.3%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.3% difference still describes a population estimate rather than an individual's job stability. Reading 4.1%, 3.3%, and 3.8% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Valdosta, GA pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Valdosta, GA's unemployment rate fell from 4.1% in May 2025 to 3.8%, a change of 0.3 percentage points.",
+            "For borrower planning, that wider window helps show whether Valdosta, GA's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.5 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Valdosta, GA or describes the stability of one household's earnings. For mortgage planning in Valdosta, GA, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Valdosta, GA's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-valdosta-ga-local-labor-market-source-yearago-year-ago-rate",
-            "news-valdosta-ga-local-labor-market-source-previous-previous-rate",
+            "news-valdosta-ga-local-labor-market-source-latest-unemployment-rate",
+            "news-valdosta-ga-local-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "The dated finding: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 23,056 people in the Valdosta, GA labor force, including 22,182 employed and 874 unemployed under LAUS definitions. For the decision at hand, the employment and unemployment counts belong together because they establish the scale behind the published 3.8% rate. In mortgage planning, that city-level labor force describes the surrounding economy rather than the income or employment record of an applicant. In practical terms, it can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-valdosta-ga-local-labor-market-source-latest-labor-force",
+            "news-valdosta-ga-local-labor-market-source-latest-employment",
+            "news-valdosta-ga-local-labor-market-source-latest-unemployment",
             "news-valdosta-ga-local-labor-market-source-latest-unemployment-rate"
           ]
         },
@@ -1139,7 +1152,7 @@
           "id": "counts-and-rate",
           "heading": "Why the rate needs its underlying counts",
           "body": [
-            "At 3.8%, Valdosta, GA's unemployment rate summarizes 874 unemployed people within a 23,056 labor force; the rate should not be discussed without those counts. The 22,182 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 22,182 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.8% rate attached to 23,056, 22,182, and 874 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.8%, Valdosta, GA's unemployment rate summarizes 874 unemployed people within a labor force of 23,056; the rate should not be discussed without those counts. The 22,182 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 22,182 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For borrower planning, keeping the 3.8% rate attached to 23,056, 22,182, and 874 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1158,7 +1171,8 @@
           "id": "borrower-boundary",
           "heading": "Labor statistics are not an income review",
           "body": [
-            "Neither 22,182 employed people nor a 3.8% unemployment rate tells a lender what one Valdosta, GA applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.5% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.3% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 22,182 employed people nor an unemployment rate of 3.8% tells a lender what an applicant in Valdosta, GA earns, whether that income is eligible, or whether it is likely to continue. For borrower planning, the monthly movement of 0.5 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "In a borrower review centered on Valdosta, GA, the 3.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating the year-over-year movement of 0.3 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1189,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Next step: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Valdosta, GA borrower is to note the latest 3.8% unemployment rate and the -0.3% year-over-year change, then move immediately to the records that describe the household. After noting the 3.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 23,056 local labor force and 22,182 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.5% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Valdosta, GA's 3.8% LAUS rate in its proper role as dated local economic context."
+            "A practical next step for borrowers in Valdosta, GA is to note the latest 3.8% unemployment rate and the year-over-year movement of 0.3 percentage points, then move immediately to the records that describe the household.",
+            "After noting the 3.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 23,056 local labor force and 22,182 employment count can frame the economic conversation, but they should not alter verified borrower inputs. For borrower planning, the monthly movement of 0.5 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Valdosta, GA's 3.8% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1259,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "23,056",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "22,182",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "874",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "3.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.1%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.5%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.5 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-0.3%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-0.3 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1324,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1473,11 @@
       "title": "Valdosta, GA loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Valdosta, GA, including unit-count differences and important limits.",
-      "metaDescription": "Valdosta, GA loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Valdosta, GA, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Valdosta, GA, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1497,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $541,287.",
-        "four-unit FHA limit: $1,041,125.",
-        "difference between one-unit conforming and FHA limits: $291,463."
+        "one-unit FHA limit: $541,287."
       ],
       "evidenceFacts": [
         {
@@ -1535,7 +1560,7 @@
           "id": "published-limits",
           "heading": "The published one-unit limits for the matched area",
           "body": [
-            "Valdosta, GA is connected to Lowndes County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Valdosta, GA, starting with Lowndes County keeps the limits attached to the county or county-equivalent area used in the official files. A Valdosta, GA borrower still needs to confirm the selected property's location and legal unit count, because the relevant Lowndes County row follows the property rather than the city label or mailing address alone. Around Valdosta, GA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Lowndes County as Valdosta, GA's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
+            "Valdosta, GA is connected to Lowndes County for this 2026 source comparison. For the decision at hand, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Valdosta, GA, starting with Lowndes County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Valdosta, GA still need to confirm the selected property's location and legal unit count, because the relevant Lowndes County row follows the property instead of the city label or mailing address alone. Around Valdosta, GA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Lowndes County as Valdosta, GA's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,26 +1572,10 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
-          "body": [
-            "For the matched Valdosta, GA area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. The $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-valdosta-ga-county-loan-limits-source-conforming-oneunit",
-            "news-valdosta-ga-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "unit-count",
           "heading": "Unit count changes the published ceiling",
           "body": [
-            "Lowndes County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Valdosta, GA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "Lowndes County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Valdosta, GA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. For borrower planning, the $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1585,7 +1594,25 @@
           "id": "category-boundary",
           "heading": "A limit is a category boundary, not borrowing power",
           "body": [
-            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Valdosta, GA household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Valdosta, GA or reduces household debts.",
+            "For borrowers reviewing evidence from Valdosta, GA, a borrower seeking less than $832,750 can nevertheless have important conventional requirements to review, and a request below $541,287 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. In practical terms, regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules in place of the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-valdosta-ga-county-loan-limits-source-conforming-oneunit",
+            "news-valdosta-ga-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "one-unit-comparison",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
+          "body": [
+            "For the matched Valdosta, GA area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463.",
+            "For borrowers reviewing evidence from Valdosta, GA, the $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. In practical terms, even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1599,9 +1626,9 @@
         },
         {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Evidence limits: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Valdosta, GA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Valdosta, GA's connection to Lowndes County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Valdosta, GA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. For borrower planning, that is why Valdosta, GA's connection to Lowndes County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1620,7 +1647,8 @@
           "id": "verify-next",
           "heading": "Verify the property before comparing products",
           "body": [
-            "A useful Valdosta, GA next step is to document the property address, Lowndes County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Valdosta, GA next step is to document the property address, Lowndes County geography, legal unit count, price, down-payment plan, and expected base loan amount. For the decision at hand, compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable.",
+            "For borrowers reviewing evidence from Valdosta, GA, after the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. In practical terms, the $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1716,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,041,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$291,463",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1765,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "unit-count",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

@@ -1,6 +1,8 @@
 import {
   renderContributorBylineMarkup,
 } from "./editorial-content.mjs";
+import { renderContentFreshness } from "./content-freshness.mjs";
+import { renderAdditionalTagLinks, renderPrimaryTagLinks } from "./tag-presentation.mjs";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -46,6 +48,7 @@ function routeFor(routeHref, href) {
 }
 
 function sourceMap(sources = []) {
+  if (sources instanceof Map) return sources;
   return new Map(sources.map((source) => [source.id, source]));
 }
 
@@ -152,6 +155,34 @@ function renderSourceDetails(article, sources) {
   `;
 }
 
+function renderTopicHubSources(hub, sources) {
+  if (hub.public !== true) return "";
+  const citedSources = sourceList(hub.sourceIds, sources)
+    .filter((source) => source.authoritative === true);
+  if (!citedSources.length) return "";
+
+  return `
+    <section class="production-article-sources production-topic-sources" id="topic-sources" aria-labelledby="topic-sources-title">
+      <h2 id="topic-sources-title">Sources and limitations</h2>
+      <p>These authoritative sources support the claims identified for this guide. Volatile figures still require their own evidence periods and as-of dates.</p>
+      <div class="production-source-list production-topic-source-list">
+        ${citedSources.map((source) => `
+          <article class="production-source-card production-topic-source-card">
+            <p class="eyebrow">Authoritative source</p>
+            <h3><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.publisher)}: ${escapeHtml(source.title)}</a></h3>
+            <dl>
+              ${source.dataPeriod ? `<div><dt>Evidence period</dt><dd>${escapeHtml(source.dataPeriod)}</dd></div>` : ""}
+              ${source.reviewedAt || source.accessedAt ? `<div><dt>Reviewed</dt><dd>${escapeHtml(source.reviewedAt || source.accessedAt)}</dd></div>` : ""}
+              ${source.claimSupported ? `<div><dt>Supports</dt><dd>${escapeHtml(source.claimSupported)}</dd></div>` : ""}
+              ${source.limitation ? `<div><dt>Limitation</dt><dd>${escapeHtml(source.limitation)}</dd></div>` : ""}
+            </dl>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function relatedRouteCard(routeEntry, href, routeHref) {
   const title = routeEntry?.title || routeEntry?.name || href;
   const text = routeEntry?.text || routeEntry?.purpose || routeEntry?.marketPositioning || routeEntry?.borrowerGoal || routeEntry?.type || "Related mortgage page";
@@ -171,6 +202,7 @@ export function renderProductionArticle(article, {
   relatedRoutes = new Map(),
   route = (href) => href,
   evidenceMarkup = "",
+  tagContext,
 } = {}) {
   const sectionEntries = (article.sections || []).map((section, index) => ({
     ...section,
@@ -198,12 +230,15 @@ export function renderProductionArticle(article, {
     if (value && label) dateDetailsByValue.set(value, label);
   });
   const dateDetails = [...dateDetailsByValue.values()];
+  const primaryTagMarkup = renderPrimaryTagLinks(tagContext?.primaryTags, route);
+  const additionalTagMarkup = renderAdditionalTagLinks(tagContext?.additionalTags, route);
 
   return `
     <article class="production-article-page" data-production-article="${escapeHtml(article.id)}">
       <header class="production-article-hero">
         <div class="production-article-hero-inner">
           <p class="eyebrow">${escapeHtml(articleType)}</p>
+          ${primaryTagMarkup}
           <h1>${escapeHtml(article.title)}</h1>
           ${article.dek ? `<p class="production-article-dek">${escapeHtml(article.dek)}</p>` : ""}
           ${renderContributorBylineMarkup(article, contributors, { routeHref: route, showDate: false })}
@@ -211,7 +246,7 @@ export function renderProductionArticle(article, {
         </div>
       </header>
       <div class="production-article-shell">
-        <main class="production-article-main">
+        <div class="production-article-main">
           <section class="production-article-intro" id="article-introduction">
             ${article.summary ? `<p>${escapeHtml(article.summary)}</p>` : ""}
             ${(article.introduction || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
@@ -251,7 +286,8 @@ export function renderProductionArticle(article, {
             </section>
           ` : ""}
           ${renderSourceDetails(article, sources)}
-        </main>
+          ${additionalTagMarkup}
+        </div>
         <aside class="production-article-rail">
           ${articleToc(article, sectionEntries)}
           <aside class="production-article-rail-cta">
@@ -299,28 +335,34 @@ function defaultFeaturedLinkRenderer(link, context, routeHref, index) {
 export function renderProductionTopicHub(hub, {
   articlesById = new Map(),
   contributors = [],
+  sources = [],
   route = (href) => href,
   renderArticleCard,
   linkResolver,
   featuredTitle = "Featured mortgage guides",
   renderFeaturedLink,
+  tagContext,
 } = {}) {
   const context = { articlesById, contributors, renderArticleCard, linkResolver };
   const featuredLinks = resolveFeaturedLinks(hub.featuredLinkIds || [], context);
   const contributorList = (hub.contributorIds || [hub.contributorId])
     .map((id) => contributors.find((contributor) => contributor.id === id))
     .filter(Boolean);
+  const primaryTagMarkup = renderPrimaryTagLinks(tagContext?.primaryTags, route);
+  const additionalTagMarkup = renderAdditionalTagLinks(tagContext?.additionalTags, route);
 
   return `
     <div class="production-topic-hub" data-production-topic-hub="${escapeHtml(hub.id)}">
       <section class="production-topic-hero">
         <div>
           <p class="eyebrow">Mortgage guide</p>
+          ${primaryTagMarkup}
           <h1>${escapeHtml(hub.name)}</h1>
           ${hub.heroSummary ? `<p class="production-topic-summary">${escapeHtml(hub.heroSummary)}</p>` : ""}
           ${contributorList.length ? `<p class="production-topic-byline">Covered by ${contributorList.map((contributor) => `<a href="${escapeHtml(route(contributor.route))}">${escapeHtml(contributor.name)}</a>`).join(", ")}</p>` : ""}
         </div>
       </section>
+      ${renderContentFreshness({ type: "topicHub", item: hub })}
       <section class="production-topic-content" aria-labelledby="topic-overview-title">
         <div class="production-topic-main">
           <h2 id="topic-overview-title">Overview</h2>
@@ -355,6 +397,8 @@ export function renderProductionTopicHub(hub, {
           ` : ""}
         </div>
       </section>
+      ${renderTopicHubSources(hub, sources)}
+      ${additionalTagMarkup}
       ${featuredLinks.length ? `
         <section class="production-topic-featured" aria-labelledby="topic-featured-title">
           <h2 id="topic-featured-title">${escapeHtml(featuredTitle)}</h2>

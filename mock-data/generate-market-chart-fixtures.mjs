@@ -37,19 +37,20 @@ const displayMoney = (value) => "$" + Math.round(value).toLocaleString("en-US");
 const validMoney = (displayValue, fallback) => Number.isFinite(moneyValue(displayValue)) ? moneyValue(displayValue) : fallback;
 const roundedDollar = (value) => Math.max(0, Math.round(value / 1000) * 1000);
 const asRows = (points, formatter = (value) => String(value)) => points.map((point) => [point.label, formatter(point.value)]);
+const illustrativePoints = (points) => points.map((point) => ({ ...point, status: "illustrative_assumption" }));
 
 const sources = [
-  { id: "fhfa-hpi", label: "FHFA House Price Index", url: "https://www.fhfa.gov/house-price-index?tab=HPI+Datasets", cadence: "Monthly and quarterly releases", asOf: "2026 Q1", integrationKey: "market.hpi" },
-  { id: "freddie-pmms", label: "Freddie Mac Primary Mortgage Market Survey", url: "https://www.freddiemac.com/pmms", cadence: "Weekly", asOf: "July 2026", integrationKey: "rates.pmms" },
-  { id: "census-acs", label: "U.S. Census Bureau American Community Survey", url: "https://www.census.gov/programs-surveys/acs", cadence: "Annual", asOf: "2025 ACS release", integrationKey: "market.demographics" },
-  { id: "bls-laus", label: "BLS Local Area Unemployment Statistics", url: "https://www.bls.gov/lau/", cadence: "Monthly", asOf: "May 2026", integrationKey: "market.employment" },
-  { id: "fhfa-conforming-limits", label: "FHFA Conforming Loan Limits", url: "https://www.fhfa.gov/data/conforming-loan-limit", cadence: "Annual", asOf: "2026 limits", integrationKey: "limits.conforming" },
-  { id: "hud-fha-limits", label: "HUD FHA Mortgage Limits", url: "https://entp.hud.gov/idapp/html/hicostlook.cfm", cadence: "Annual", asOf: "2026 limits", integrationKey: "limits.fha" },
-  { id: "calculator-assumptions", label: "Mortgage planning assumptions", url: "https://www.consumerfinance.gov/owning-a-home/loan-estimate/", cadence: "Updated with calculator assumptions", asOf: "July 2026", integrationKey: "calculator.assumptions" },
+  { id: "illustrative-assumptions", kind: "internal_assumption", label: "Illustrative example values", cadence: "Scenario-specific", integrationKey: "planning.assumptions" },
+  { id: "fhfa-hpi", kind: "background_reference", label: "FHFA House Price Index", url: "https://www.fhfa.gov/reports/house-price-index/2026/Q1", cadence: "Quarterly release", asOf: "2026 Q1", integrationKey: "market.hpi" },
+  { id: "freddie-pmms", kind: "official_observation", label: "Freddie Mac Primary Mortgage Market Survey archive", url: "https://www.freddiemac.com/pmms/archive", cadence: "Weekly", asOf: "July 9, 2026", integrationKey: "rates.pmms" },
+  { id: "census-acs", kind: "background_reference", label: "U.S. Census Bureau American Community Survey", url: "https://www.census.gov/programs-surveys/acs/news/updates/2026.html", cadence: "Annual", asOf: "2024 ACS 5-year estimates (2020-2024), released January 29, 2026", integrationKey: "market.demographics" },
+  { id: "bls-laus", kind: "background_reference", label: "BLS Local Area Unemployment Statistics", url: "https://www.bls.gov/lau/", cadence: "Monthly", asOf: "May 2026", integrationKey: "market.employment" },
+  { id: "fhfa-conforming-limits", kind: "background_reference", label: "FHFA 2026 conforming loan limits", url: "https://www.fhfa.gov/news/news-release/fhfa-announces-conforming-loan-limit-values-for-2026", cadence: "Annual", asOf: "2026 limits", integrationKey: "limits.conforming" },
+  { id: "hud-fha-limits", kind: "background_reference", label: "HUD 2026 FHA mortgage limits", url: "https://www.hud.gov/sites/dfiles/hudclips/documents/2025-23hsgml.pdf", cadence: "Annual", asOf: "2026 limits", integrationKey: "limits.fha" },
+  { id: "cfpb-loan-estimate", kind: "background_reference", label: "CFPB Loan Estimate explainer", url: "https://www.consumerfinance.gov/owning-a-home/loan-estimate/", cadence: "Consumer reference", asOf: "Reviewed July 13, 2026", integrationKey: "calculator.background" },
 ];
 
 const quarterLabels = ["2024 Q2", "2024 Q3", "2024 Q4", "2025 Q1", "2025 Q2", "2025 Q3", "2025 Q4", "2026 Q1"];
-const rateLabels = ["May 15", "May 29", "Jun 12", "Jun 26", "Jul 10"];
 const planningMode = "planning_illustration";
 
 function priceTrendFixture(scope, location) {
@@ -62,11 +63,12 @@ function priceTrendFixture(scope, location) {
   });
   return {
     chartId: "market.price_trend", entityId: location.id, scope,
-    title: `${location.name} home price planning pattern`,
-    summary: "A broad index can show direction over time; it is not a property valuation or a current market release.",
-    chartType: "line", unit: "Index", frequency: "Quarterly", sourceId: "fhfa-hpi", asOf: "2026 Q1",
-    integrationKey: `market.hpi.${scope}`, dataMode: planningMode, points,
-    table: { headers: ["Period", "Index"], rows: asRows(points) },
+    title: `How an example home-price index can move in ${location.name}`,
+    summary: "These example values show how a home-price index can move over time. They are not observed prices, an FHFA series, or a property valuation.",
+    chartType: "line", unit: "Example index", frequency: "Example quarterly periods", geography: location.name,
+    sourceId: "illustrative-assumptions", backgroundSourceIds: ["fhfa-hpi"],
+    integrationKey: `market.hpi.${scope}`, dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Example period", "Example index value"], rows: asRows(points) },
   };
 }
 
@@ -76,20 +78,21 @@ function locationCompareFixture(scope, location) {
   const points = scope === "state"
     ? [
       { label: location.name, value: roundedDollar(local) },
-      { label: "U.S. planning baseline", value: national },
+      { label: "U.S. example baseline", value: national },
     ]
     : [
       { label: location.name, value: roundedDollar(local) },
-      { label: "State planning baseline", value: roundedDollar(local * seededValue(`state|${location.id}`, 0.78, 1.22)) },
-      { label: "U.S. planning baseline", value: national },
+      { label: "State example baseline", value: roundedDollar(local * seededValue(`state|${location.id}`, 0.78, 1.22)) },
+      { label: "U.S. example baseline", value: national },
     ];
   return {
     chartId: "market.location_compare", entityId: location.id, scope,
-    title: `${location.name} home price comparison`,
-    summary: "Broad planning values help compare markets; they are not appraisals or property-specific values.",
-    chartType: "bar", unit: "Median home price", frequency: "Annual", sourceId: "census-acs", asOf: "2025 ACS release",
-    integrationKey: `market.comparison.${scope}`, dataMode: planningMode, points,
-    table: { headers: ["Area", "Median home price"], rows: asRows(points, displayMoney) },
+    title: `${location.name} example home-price comparison`,
+    summary: "These example values compare hypothetical areas. They are not ACS estimates, observed local prices, or appraisals.",
+    chartType: "bar", unit: "Example dollars", frequency: "Example annual comparison", geography: location.name,
+    sourceId: "illustrative-assumptions", backgroundSourceIds: ["census-acs"],
+    integrationKey: `market.comparison.${scope}`, dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Example area", "Example home-price value"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -103,29 +106,35 @@ function paymentBreakdownFixture(city) {
   ];
   return {
     chartId: "market.payment_breakdown", entityId: city.id, scope: "city",
-    title: `${city.name} sample monthly payment breakdown`,
-    summary: "This planning example uses assumptions that should be confirmed for a specific property and loan.",
-    chartType: "payment", unit: "Monthly payment", frequency: "Scenario estimate", sourceId: "calculator-assumptions", asOf: "July 2026",
-    integrationKey: "market.payment.city", dataMode: planningMode, points,
-    table: { headers: ["Payment component", "Monthly estimate"], rows: asRows(points, displayMoney) },
+    title: `${city.name} example monthly payment breakdown`,
+    summary: "This example payment is not a local cost estimate, quote, APR, or Loan Estimate.",
+    chartType: "payment", unit: "Example monthly dollars", frequency: "One example scenario", geography: city.name,
+    sourceId: "illustrative-assumptions", backgroundSourceIds: ["cfpb-loan-estimate"],
+    integrationKey: "market.payment.city", dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Payment component", "Example monthly amount"], rows: asRows(points, displayMoney) },
   };
 }
 
 function ratesBenchmarkFixture() {
-  const points = trendPoints("rates-benchmark", rateLabels, {
-    startMin: 6.15,
-    startMax: 6.75,
-    movementMin: -0.14,
-    movementMax: 0.12,
-    decimals: 2,
-  });
+  const points = [
+    { label: "May 14, 2026", value: 6.36, status: "official_observation" },
+    { label: "May 28, 2026", value: 6.53, status: "official_observation" },
+    { label: "June 11, 2026", value: 6.52, status: "official_observation" },
+    { label: "June 25, 2026", value: 6.49, status: "official_observation" },
+    { label: "July 2, 2026", value: 6.43, status: "official_observation" },
+    { label: "July 9, 2026", value: 6.49, status: "official_observation" },
+  ];
   return {
     chartId: "rates.benchmark_trend", entityId: "rates-mortgage", scope: "rates",
-    title: "30-year fixed planning trend",
-    summary: "Weekly market patterns can frame a payment conversation; this is not a current rate quote.",
-    chartType: "line", unit: "Rate", frequency: "Weekly", sourceId: "freddie-pmms", asOf: "July 2026",
-    integrationKey: "rates.benchmark", dataMode: planningMode, points,
-    table: { headers: ["Week", "Rate"], rows: asRows(points, (value) => value.toFixed(2) + "%") },
+    title: "National 30-year fixed mortgage rate benchmark",
+    summary: "Freddie Mac PMMS national weekly averages. This public benchmark is not a Snap offer, APR, or personalized rate.",
+    chartType: "line", unit: "30-year fixed rate (%)", frequency: "Weekly", geography: "United States",
+    geographyType: "national", geographyId: "US", seriesId: "PMMS 30-year fixed-rate mortgage average",
+    sourceId: "freddie-pmms", asOf: "July 9, 2026", reviewedAt: "July 13, 2026",
+    revisionStatus: "Official weekly archive releases",
+    methodologyOrLimitation: "National survey averages are not loan offers, APRs, personalized rates, or local quotes.",
+    integrationKey: "rates.benchmark", dataMode: "official_observation", points,
+    table: { headers: ["Freddie Mac release date", "National weekly average"], rows: asRows(points, (value) => value.toFixed(2) + "%") },
   };
 }
 
@@ -164,11 +173,12 @@ function productScenarioFixture(product) {
 
   return {
     chartId: "product.scenario_compare", entityId: product.id, scope: "product",
-    title: `${product.name} planning scenario`,
-    summary: "This comparison supports product planning and is not a loan approval or quote.",
-    chartType: "bar", unit: "Dollars", frequency: "Scenario estimate", sourceId: product.id.includes("fha") ? "hud-fha-limits" : "fhfa-conforming-limits", asOf: "2026 limits",
-    integrationKey: "product.scenario", dataMode: planningMode, points,
-    table: { headers: ["Scenario measure", "Amount"], rows: asRows(points, displayMoney) },
+    title: `${product.name} example financing scenario`,
+    summary: "These values illustrate one financing scenario. They are not program eligibility, a loan approval, or a quote.",
+    chartType: "bar", unit: "Example dollars", frequency: "One example scenario", geography: "Example scenario (not a geographic observation)",
+    sourceId: "illustrative-assumptions", backgroundSourceIds: [product.id.includes("fha") ? "hud-fha-limits" : "fhfa-conforming-limits"],
+    integrationKey: "product.scenario", dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Scenario measure", "Example amount"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -181,11 +191,12 @@ function calculatorBreakdownFixture(calculator) {
   ];
   return {
     chartId: "calculator.payment_breakdown", entityId: calculator.id, scope: "calculator",
-    title: `${calculator.name} estimate breakdown`,
-    summary: "The calculator updates this estimate when you change the inputs shown on the page.",
-    chartType: "payment", unit: "Monthly payment", frequency: "Calculated from current inputs", sourceId: "calculator-assumptions", asOf: "July 2026",
-    integrationKey: "calculator.breakdown", dataMode: planningMode, points,
-    table: { headers: ["Payment component", "Monthly estimate"], rows: asRows(points, displayMoney) },
+    title: `${calculator.name} example breakdown`,
+    summary: "The starting values show how the monthly components fit together. Change the inputs to see how the estimate moves.",
+    chartType: "payment", unit: "Example monthly dollars", frequency: "One example scenario", geography: "Example scenario (not a geographic observation)",
+    sourceId: "illustrative-assumptions", backgroundSourceIds: ["cfpb-loan-estimate"],
+    integrationKey: "calculator.breakdown", dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Payment component", "Example monthly amount"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -199,16 +210,17 @@ function articleEvidenceFixture(article) {
   });
   return {
     chartId: "article.evidence", entityId: article.id, scope: "article",
-    title: `${article.title} supporting market pattern`,
-    summary: "This chart adds broad market context to the article; it is not a current local valuation.",
-    chartType: "line", unit: "Index", frequency: "Quarterly", sourceId: "fhfa-hpi", asOf: "2026 Q1",
-    integrationKey: "article.evidence", dataMode: planningMode, points,
-    table: { headers: ["Period", "Index"], rows: asRows(points) },
+    title: `Example chart for ${article.title}`,
+    summary: "These index values illustrate a possible pattern. They are not article evidence, an FHFA series, or a local valuation.",
+    chartType: "line", unit: "Example index", frequency: "Example quarterly periods", geography: "Example scenario (not a geographic observation)",
+    sourceId: "illustrative-assumptions", backgroundSourceIds: ["fhfa-hpi"],
+    integrationKey: "article.evidence", dataMode: planningMode, points: illustrativePoints(points),
+    table: { headers: ["Example period", "Example index value"], rows: asRows(points) },
   };
 }
 
 function snapshotSource(scope, entityId) {
-  return { scope, entityId, sourceIds: ["fhfa-hpi", "census-acs", "bls-laus"], integrationKey: `market.${scope}`, dataMode: planningMode };
+  return { scope, entityId, sourceIds: ["illustrative-assumptions"], backgroundSourceIds: ["fhfa-hpi", "census-acs", "bls-laus"], integrationKey: `market.${scope}`, dataMode: planningMode };
 }
 
 const charts = [
@@ -221,10 +233,10 @@ const charts = [
 ];
 
 const snapshotSources = [
-  { scope: "locations_snapshot", entityId: "locations", sourceIds: ["fhfa-hpi", "census-acs", "bls-laus"], integrationKey: "market.locations.snapshot", dataMode: planningMode },
+  { scope: "locations_snapshot", entityId: "locations", sourceIds: ["illustrative-assumptions"], backgroundSourceIds: ["fhfa-hpi", "census-acs", "bls-laus"], integrationKey: "market.locations.snapshot", dataMode: planningMode },
   ...seed.states.map((state) => snapshotSource("state_snapshot", state.id)),
   ...seed.cities.map((city) => snapshotSource("city_snapshot", city.id)),
-  { scope: "rates_snapshot", entityId: "rates-mortgage", sourceIds: ["freddie-pmms"], integrationKey: "rates.benchmarks", dataMode: planningMode },
+  { scope: "rates_snapshot", entityId: "rates-mortgage", sourceIds: ["freddie-pmms"], integrationKey: "rates.benchmarks", dataMode: "official_observation" },
 ];
 
 await fs.writeFile(new URL("market-chart-fixtures.json", root), JSON.stringify({ version: "market-chart-fixtures-v1", sources, charts, snapshotSources }, null, 2) + "\n");

@@ -18,8 +18,9 @@ test("every state and city receives at least 250 words of evidence-led local con
   assert.deepEqual(failures, [], `Location context below 250 words:\n${failures.map(([id, words]) => `${id}: ${words}`).join("\n")}`);
 });
 
-test("location pages render the evidence-led context rather than name-swapped filler", () => {
-  assert.match(appSource, /article\.localContext/);
-  assert.match(appSource, /location-evidence-summary/);
+test("location pages render the concise four-card carousel without a duplicated context wall", () => {
+  assert.match(appSource, /function locationNewsFeed\(location\)/);
+  assert.match(appSource, /articles\.length !== 4/);
+  assert.doesNotMatch(appSource, /article\.localContext/);
+  assert.doesNotMatch(appSource, /location-evidence-summary/);
 });
-

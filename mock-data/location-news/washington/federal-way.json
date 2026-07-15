@@ -13,9 +13,11 @@
       "title": "Federal Way, WA home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Federal Way, WA.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Federal Way, WA.",
-      "metaDescription": "Federal Way, WA home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Federal.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Federal Way, WA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $552,800.",
         "prior ACS median owner-occupied home value: $328,800.",
-        "ACS median household income: $86,909.",
-        "median monthly owner cost with a mortgage: $2,351.",
-        "change from the prior ACS home-value estimate: 68.1%."
+        "ACS median household income: $86,909."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 68.1,
-          "display": "68.1%",
-          "sourceRecordIds": [
-            "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
-            "news-federal-way-wa-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Washington median home value",
           "value": 564600,
@@ -118,7 +108,7 @@
           "id": "local-baseline",
           "heading": "The local value, income, and owner-cost baseline",
           "body": [
-            "In Federal Way, WA, the 2024 ACS reports a median owner-occupied home value of $552,800 and median household income of $86,909; these are separate medians, not the finances of one representative household. The same release reports $2,351 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Federal Way, WA, reading $552,800, $86,909, and $2,351 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $552,800, $86,909, and $2,351 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "In Federal Way, WA, the 2024 ACS reports a median owner-occupied home value of $552,800, median household income of $86,909, and median selected monthly owner costs of $2,351 for owners with a mortgage. For the decision at hand, together, those three reference points can help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $2,351 measure combines recurring ownership expenses in place of real estate taxes alone. In practical terms, a useful affordability review starts with $552,800, $86,909, and $2,351, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,15 +122,15 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
+          "id": "vintage-observations",
+          "heading": "Read the ACS vintages as separate nominal observations",
           "body": [
-            "Federal Way, WA's median home-value estimate increased from $328,800 in the prior ACS period to $552,800 in the current release, a reported change of 68.1%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 68.1% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $328,800 to $552,800 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Federal Way, WA. Before the 68.1% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+            "The 2019 ACS published $328,800 as Federal Way, WA's median owner-occupied home-value estimate, while the 2024 ACS published $552,800. For borrower planning, these dated nominal observations can still help a borrower notice that a search budget built around the older release needs current property evidence.",
+            "In a borrower review centered on Federal Way, WA, they are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. Each estimate also summarizes a multi-year survey window and carries sampling error. Keep $328,800 attached to 2019 and $552,800 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "median-home-value",
-            "home-value-change"
+            "median-home-value"
           ],
           "sourceRecordIds": [
             "news-federal-way-wa-affordability-home-values-source-city-home-value-prior",
@@ -148,26 +138,10 @@
           ]
         },
         {
-          "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
-          "body": [
-            "Federal Way, WA's $552,800 median home-value estimate is below the statewide $564,600 estimate, with a reported city-to-state gap of 2.1%. That 2.1% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Federal Way, WA. It does not mean every local property is 2.1% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $552,800 and $564,600 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "state-home-value",
-            "state-home-value-gap"
-          ],
-          "sourceRecordIds": [
-            "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
-            "news-federal-way-wa-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Keep the boundary clear: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $2,351 owner-cost estimate gives Federal Way, WA borrowers a broader monthly reference than principal and interest alone, while the $86,909 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $86,909 is the owner household at $2,351. The $552,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $552,800, $86,909, and $2,351 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $2,351 owner-cost estimate gives Federal Way, WA borrowers a broader monthly reference than principal and interest alone, while the $86,909 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $86,909 is the owner household at $2,351. The $552,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. For borrower planning, keeping $552,800, $86,909, and $2,351 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +155,61 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "state-comparison",
+          "heading": "Comparison view: how the city estimate sits within the state",
           "body": [
-            "Neither $552,800 nor $2,351 determines the value of a specific Federal Way, WA home, what a borrower will pay each month, or an underwriting result. The $86,909 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 68.1% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $552,800, $2,351, and $86,909 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Federal Way, WA's $552,800 median home-value estimate is below the statewide $564,600 estimate, with a reported city-to-state gap of 2.1%. For the decision at hand, that 2.1% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Federal Way, WA. It does not mean every local property is 2.1% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. In practical terms, a borrower can use $552,800 and $564,600 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "state-home-value",
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
+            "news-federal-way-wa-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "Keep the boundary clear: what these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $552,800 estimate nor the $2,351 owner-cost median determines the value of a specific Federal Way, WA home, a borrower's payment, or an underwriting result.",
+            "For borrowers reviewing evidence from Federal Way, WA, the $86,909 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $328,800 also cannot forecast the next market move or establish a safe purchase horizon. In practical terms, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
+            "news-federal-way-wa-affordability-home-values-source-city-home-value-prior",
             "news-federal-way-wa-affordability-home-values-source-city-owner-cost-current",
-            "news-federal-way-wa-affordability-home-values-source-city-income-current",
-            "news-federal-way-wa-affordability-home-values-source-city-home-value-prior"
+            "news-federal-way-wa-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Borrower action: build a property-specific comparison",
           "body": [
-            "A practical Federal Way, WA worksheet can begin with $552,800 as broad value context, $2,351 as a reminder to include recurring ownership expenses, and $86,909 as a local economic reference. After noting those $552,800, $2,351, and $86,909 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 2.1% city-to-state difference is a prompt to keep the analysis local, while the 68.1% period change is a prompt to date every assumption. A licensed professional can use the 2.1% and 68.1% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "One practical Federal Way, WA worksheet can begin with $552,800 as dated value context, $2,351 as a reminder to include recurring ownership expenses, and $86,909 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves.",
+            "For borrowers reviewing evidence from Federal Way, WA, the 2.1% city-to-state difference is a prompt to keep the analysis local, while the separate $328,800 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. In practical terms, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
+            "news-federal-way-wa-affordability-home-values-source-city-home-value-prior",
             "news-federal-way-wa-affordability-home-values-source-city-owner-cost-current",
             "news-federal-way-wa-affordability-home-values-source-city-income-current",
-            "news-federal-way-wa-affordability-home-values-source-state-home-value-current",
-            "news-federal-way-wa-affordability-home-values-source-city-home-value-prior"
+            "news-federal-way-wa-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +247,9 @@
               "display": "$2,351"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 68.1,
-              "display": "68.1%"
+              "label": "Washington median home value",
+              "value": 564600,
+              "display": "$564,600"
             }
           ]
         }
@@ -269,43 +261,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$552,800",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$328,800",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$86,909",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,351",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "68.1%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Washington median home value",
               "$564,600",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "2.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +313,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "vintage-observations",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-federal-way-wa-affordability-home-values-source-city-home-value-current",
@@ -452,9 +446,11 @@
       "title": "Federal Way, WA housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Federal Way, WA.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Federal Way, WA.",
-      "metaDescription": "Federal Way, WA housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Federal Way, WA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +468,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 37,479.",
         "occupied housing units: 35,717.",
-        "vacant housing units: 1,762.",
-        "prior ACS vacant housing units: 1,605.",
-        "vacant-unit share of housing stock: 4.7%."
+        "vacant housing units: 1,762."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +572,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "The dated finding: the size and use of the local housing stock",
           "body": [
-            "Federal Way, WA's current ACS housing baseline includes 37,479 total housing units, 35,717 occupied units, and 1,762 vacant units. Those counts describe the housing stock across the survey period; they do not say that 1,762 homes were listed for sale or available to rent at one moment. The difference between 37,479 total units and 35,717 occupied units is useful for checking the internal scale of the release, while 1,762 provides the numerator for a more careful vacancy reading. For a borrower researching Federal Way, WA, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "The published evidence provides the starting point: Federal Way, WA's current ACS housing baseline includes 37,479 total housing units, 35,717 occupied units, and 1,762 vacant units. Those counts can still help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 1,762 homes were listed for sale or available to rent at one moment. For borrower planning, reading 37,479 total units with 35,717 occupied and 1,762 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -594,9 +589,10 @@
         },
         {
           "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Federal Way, WA increased from 1,605 in the prior ACS period to 1,762 in the current release, a reported change of 9.8%. In the current housing stock, 1,762 units equal 4.7% of the 37,479 total. ACS vacancy covers several statuses, so the 4.7% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 1,605 to 1,762 can still prompt better questions about current for-sale and rental inventory in Federal Way, WA, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Federal Way, WA increased from 1,605 in the prior ACS period to 1,762 in the current release, a reported movement of 9.8%.",
+            "In the current housing stock, 1,762 units equal 4.7% of the 37,479 total. ACS vacancy covers several statuses, so the 4.7% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For the decision at hand, the movement from 1,605 to 1,762 may still prompt better questions about current for-sale and rental inventory in Federal Way, WA, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +609,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "Among 35,717 occupied units in Federal Way, WA, the ACS-derived owner share is 55.3% and the renter share is 44.7%, making owner-occupied housing the larger measured tenure group. The 55.3% and 44.7% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Federal Way, WA. The 55.3% and 44.7% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 35,717 occupied units in Federal Way, WA, the ACS-derived owner share is 55.3% and the renter share is 44.7%, making owner-occupied housing the larger measured tenure group. For borrower planning, the 55.3% and 44.7% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage.",
+            "This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Federal Way, WA. The 55.3% and 44.7% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon in place of used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -630,9 +627,10 @@
         },
         {
           "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
+          "heading": "Planning context: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Federal Way, WA's ACS median gross rent is $1,797, while renter-occupied units account for 44.7% of occupied housing and owner-occupied units account for 55.3%. The $1,797 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,797 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Federal Way, WA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+            "Federal Way, WA's ACS median gross rent is $1,797, while renter-occupied units account for 44.7% of occupied housing and owner-occupied units account for 55.3%. In practical terms, the $1,797 median includes rent and certain utilities for the measured rental stock; it does not reveal a lease offer comparable to a home under consideration.",
+            "Comparing $1,797 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For the decision at hand, a more useful Federal Way, WA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
           ],
           "evidenceFactIds": [
             "median-rent",
@@ -648,9 +646,10 @@
         },
         {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Where the evidence stops: what the housing-stock evidence cannot show",
           "body": [
-            "The 4.7% vacant-unit share and 55.3% owner share cannot determine competition for a specific Federal Way, WA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 37,479 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.7% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 1,762 vacant units separate from active inventory and keep the $1,797 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 4.7% vacant-unit share and 55.3% owner share cannot determine competition for a specific Federal Way, WA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "For the next comparison in Federal Way, WA, likewise, 37,479 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.7% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. For borrower planning, borrowers should, as a result, keep 1,762 vacant units separate from active inventory and keep the $1,797 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +668,10 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Put the evidence to work: compare current local choices on the same terms",
           "body": [
-            "A grounded Federal Way, WA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 37,479 total units, a 4.7% vacancy share, and a 55.3% owner share. For renting, replace the $1,797 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 55.3% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 44.7% or 55.3% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Federal Way, WA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 37,479 total units, a vacancy share of 4.7%, and an owner share of 55.3%. For the rental budget, replace the $1,797 median with the actual lease, utilities, deposits, and expected changes.",
+            "For borrowers reviewing evidence from Federal Way, WA, for ownership, keep the 55.3% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. In practical terms, the resulting worksheet will not turn 44.7% or 55.3% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +740,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "37,479",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "35,717",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "1,762",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "1,605",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "4.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "9.8%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "55.3%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "44.7%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,797",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +976,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Federal Way, WA labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Federal Way, WA.",
-      "previewText": "See what changed in Federal Way, WA, WA's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Federal Way, WA labor market: latest employment evidence. See what changed in Federal Way, WA, WA's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Federal Way, WA's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Federal Way, WA's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +999,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 52,182.",
-        "employment: 49,400.",
-        "unemployment: 2,782.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 5.3%.",
-        "previous-month unemployment rate: 5.7%."
+        "change in unemployment rate from the prior month: -0.4 percentage points.",
+        "change in unemployment rate from a year earlier: 0.5 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1069,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.4,
-          "display": "-0.4%",
+          "display": "-0.4 percentage points",
           "sourceRecordIds": [
             "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate",
             "news-federal-way-wa-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1080,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.5,
-          "display": "0.5%",
+          "display": "0.5 percentage points",
           "sourceRecordIds": [
             "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate",
             "news-federal-way-wa-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1090,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Federal Way, WA labor force of 52,182, with 49,400 people employed and 2,782 unemployed under the program's definitions. Those three counts belong together: 49,400 plus 2,782 explains the scale behind the published 5.3% unemployment rate. For mortgage planning, the 52,182 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 52,182 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-federal-way-wa-local-labor-market-source-latest-labor-force",
-            "news-federal-way-wa-local-labor-market-source-latest-employment",
-            "news-federal-way-wa-local-labor-market-source-latest-unemployment",
-            "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What changed in the latest month",
           "body": [
-            "Federal Way, WA's unemployment rate fell from 5.7% in the prior month to 5.3% in the latest month, a change of -0.4%. A -0.4% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 2,782 unemployment count and 52,182 labor force. The -0.4% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Federal Way, WA borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "As of May 2026, Federal Way, WA's unemployment rate fell from 5.7% in April 2026 to 5.3% in May 2026, a change of 0.4 percentage points. For the decision at hand, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot reveal that a particular employer is hiring or cutting jobs, and it cannot establish one applicant's income stability, mortgage eligibility, or loan price. In practical terms, the release also estimates 2,782 people unemployed within a labor force of 52,182, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1111,28 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Comparison view: what changed over the year",
           "body": [
-            "Compared with 4.8% a year earlier, the latest Federal Way, WA unemployment rate of 5.3% rose by 0.5%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.5% difference still describes a population estimate rather than an individual's job stability. Reading 4.8%, 5.7%, and 5.3% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Federal Way, WA pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Federal Way, WA's unemployment rate rose from 4.8% in May 2025 to 5.3%, a change of 0.5 percentage points. In practical terms, that wider window helps show whether Federal Way, WA's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.4 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Federal Way, WA or describes the stability of one household's earnings. For mortgage planning in Federal Way, WA, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Federal Way, WA's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-federal-way-wa-local-labor-market-source-yearago-year-ago-rate",
-            "news-federal-way-wa-local-labor-market-source-previous-previous-rate",
-            "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate"
+            "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate",
+            "news-federal-way-wa-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Evidence check: why the rate needs its underlying counts",
           "body": [
-            "At 5.3%, Federal Way, WA's unemployment rate summarizes 2,782 unemployed people within a 52,182 labor force; the rate should not be discussed without those counts. The 49,400 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 49,400 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 5.3% rate attached to 52,182, 49,400, and 2,782 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 5.3%, Federal Way, WA's unemployment rate summarizes 2,782 unemployed people within a labor force of 52,182; the rate should not be discussed without those counts. For the decision at hand, the 49,400 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file.",
+            "For borrowers reviewing evidence from Federal Way, WA, that makes 49,400 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. In practical terms, keeping the 5.3% rate attached to 52,182, 49,400, and 2,782 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1148,30 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "Start with the evidence: the counts behind the published rate",
           "body": [
-            "Neither 49,400 employed people nor a 5.3% unemployment rate tells a lender what one Federal Way, WA applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.4% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.3% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.5% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 52,182 people in the Federal Way, WA labor force, including 49,400 employed and 2,782 unemployed under LAUS definitions.",
+            "In a borrower review centered on Federal Way, WA, the employment and unemployment counts belong together because they establish the scale behind the published 5.3% rate. For a mortgage decision, that city-level labor force describes the surrounding economy rather than the income or employment record of an applicant. It may help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-federal-way-wa-local-labor-market-source-latest-labor-force",
+            "news-federal-way-wa-local-labor-market-source-latest-employment",
+            "news-federal-way-wa-local-labor-market-source-latest-unemployment",
+            "news-federal-way-wa-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Keep the boundary clear: labor statistics are not an income review",
+          "body": [
+            "Neither 49,400 employed people nor an unemployment rate of 5.3% tells a lender what an applicant in Federal Way, WA earns, whether that income is eligible, or whether it is likely to continue. In practical terms, the monthly movement of 0.4 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.3% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For the decision at hand, that boundary protects borrowers from treating the year-over-year movement of 0.5 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1188,9 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Put the evidence to work: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Federal Way, WA borrower is to note the latest 5.3% unemployment rate and the 0.5% year-over-year change, then move immediately to the records that describe the household. After noting the 5.3% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 52,182 local labor force and 49,400 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.4% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Federal Way, WA's 5.3% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Federal Way, WA is to note the latest 5.3% unemployment rate and the year-over-year movement of 0.5 percentage points, then move immediately to the records that describe the household. After noting the 5.3% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 52,182 local labor force and 49,400 employment count can frame the economic conversation, but they should not alter verified borrower inputs. In practical terms, the monthly movement of 0.4 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Federal Way, WA's 5.3% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1257,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "52,182",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "49,400",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "2,782",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "5.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "5.7%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.4%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.4 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.5%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.5 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1322,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1471,11 @@
       "title": "Federal Way, WA loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Federal Way, WA, including unit-count differences and important limits.",
-      "metaDescription": "Federal Way, WA loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Federal Way, WA, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Federal Way, WA, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1495,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $1,063,750.",
         "four-unit conforming limit: $2,045,700.",
-        "one-unit FHA limit: $1,063,750.",
-        "four-unit FHA limit: $2,045,700.",
-        "difference between one-unit conforming and FHA limits: $0."
+        "one-unit FHA limit: $1,063,750."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1556,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Evidence limits: the published one-unit limits for the matched area",
           "body": [
-            "Federal Way, WA is connected to King County for this 2026 source comparison. The published one-unit conforming limit is $1,063,750, while the published one-unit FHA limit is $1,063,750. Those figures organize different program categories; $1,063,750 is not a conventional loan offer, and $1,063,750 is not an FHA eligibility finding. For Federal Way, WA, starting with King County keeps the limits attached to the county or county-equivalent area used in the official files. A Federal Way, WA borrower still needs to confirm the selected property's location and legal unit count, because the relevant King County row follows the property rather than the city label or mailing address alone. Around Federal Way, WA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep King County as Federal Way, WA's confirmed county row before comparing the $1,063,750 and $1,063,750 program boundaries."
+            "The local figures answer the first question: Federal Way, WA is connected to King County for this 2026 source comparison. For borrower planning, the published one-unit conforming limit is $1,063,750, while the published one-unit FHA limit is $1,063,750. Those figures organize different program categories; $1,063,750 is not a conventional loan offer, and $1,063,750 is not an FHA eligibility finding. For Federal Way, WA, starting with King County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Federal Way, WA still need to confirm the selected property's location and legal unit count, because the relevant King County row follows the property rather than the city label or mailing address alone. Around Federal Way, WA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep King County as Federal Way, WA's confirmed county row before comparing the $1,063,750 and $1,063,750 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1571,9 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Federal Way, WA area, the difference between the $1,063,750 one-unit conforming limit and the $1,063,750 one-unit FHA limit is $0. In this release the two one-unit figures are equal at $1,063,750, so the comparison does not create a larger published boundary for either program. A needed loan amount can be compared with $1,063,750 and $1,063,750 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $0 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Federal Way, WA area, the difference between the $1,063,750 one-unit conforming limit and the $1,063,750 one-unit FHA limit is $0. In this release the two one-unit figures are equal at $1,063,750, so the comparison does not create a larger published boundary for either program. A needed loan amount can be compared with $1,063,750 and $1,063,750 only after price, down payment, financed items, and the applicable base-loan definition are established. For borrower planning, even when $0 is material, it cannot decide approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1566,7 +1589,8 @@
           "id": "unit-count",
           "heading": "Unit count changes the published ceiling",
           "body": [
-            "King County's conforming limit rises from $1,063,750 for one unit to $2,045,700 for four units, while the FHA figures move from $1,063,750 to $2,045,700. The higher $2,045,700 and $2,045,700 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Federal Way, WA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $2,045,700 and $2,045,700 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "For a decision in Federal Way, WA, King County's conforming limit rises from $1,063,750 for one unit to $2,045,700 for four units, while the FHA figures move from $1,063,750 to $2,045,700.",
+            "In practical terms, the higher $2,045,700 and $2,045,700 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Federal Way, WA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. For the decision at hand, the $2,045,700 and $2,045,700 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,26 +1606,11 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
-          "body": [
-            "The $1,063,750 conforming ceiling and $1,063,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Federal Way, WA household's income or reduces its debts. A borrower seeking less than $1,063,750 can still have important conventional requirements to review, and a request below $1,063,750 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $0 program gap is therefore best used to route questions, not to rank products. Regardless of the $0 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-federal-way-wa-county-loan-limits-source-conforming-oneunit",
-            "news-federal-way-wa-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "limit-boundaries",
           "heading": "What the county limits cannot decide",
           "body": [
-            "Neither $2,045,700 nor $2,045,700 indicates what a four-unit property in Federal Way, WA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $1,063,750 and $1,063,750 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $1,063,750 and $1,063,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Federal Way, WA's connection to King County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $2,045,700 nor $2,045,700 indicates what a four-unit property in Federal Way, WA is worth, what income its units may produce, or whether a borrower can qualify to purchase it.",
+            "In practical terms, the one-unit $1,063,750 and $1,063,750 limits likewise does not establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $1,063,750 and $1,063,750 official limits can change by year, and a corrected property geography or unit count can change the applicable row. For the decision at hand, that is why Federal Way, WA's connection to King County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1617,10 +1626,28 @@
           ]
         },
         {
-          "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "id": "category-boundary",
+          "heading": "Where the evidence stops: a limit is a category boundary, not borrowing power",
           "body": [
-            "A useful Federal Way, WA next step is to document the property address, King County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $1,063,750 and $1,063,750 for a one-unit property, or with $2,045,700 and $2,045,700 only when the four-unit category is actually applicable. After the $1,063,750 and $1,063,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $1,063,750 conforming figure and $1,063,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $0 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "The $1,063,750 conforming ceiling and $1,063,750 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Federal Way, WA or reduces household debts. A borrower seeking less than $1,063,750 can still have important conventional requirements to review, and a request below $1,063,750 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis.",
+            "For the next comparison in Federal Way, WA, the $0 program gap is therefore best used to route questions, not to rank products. For borrower planning, regardless of the $0 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-federal-way-wa-county-loan-limits-source-conforming-oneunit",
+            "news-federal-way-wa-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "verify-next",
+          "heading": "Put the evidence to work: verify the property before comparing products",
+          "body": [
+            "A useful Federal Way, WA next step is to document the property address, King County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $1,063,750 and $1,063,750 for a one-unit property, or with $2,045,700 and $2,045,700 only when the four-unit category is actually applicable. After the $1,063,750 and $1,063,750 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option.",
+            "For the next comparison in Federal Way, WA, the $1,063,750 conforming figure and $1,063,750 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $0 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1715,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$1,063,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$2,045,700",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$1,063,750",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$2,045,700",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$0",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

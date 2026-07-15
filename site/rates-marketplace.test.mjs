@@ -165,12 +165,42 @@ test("flags impossible purchase and refinance amounts", async () => {
 
 test("normalizes the fixture contract", async () => {
   const { normalizeMarketplaceFixture } = await loadMarketplaceModule();
-  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const rawFixture = loadFixture();
+  const fixture = normalizeMarketplaceFixture(rawFixture);
 
   assert.equal(fixture.version, "snap-rates-marketplace-v1");
   assert.equal(fixture.offers.length, 40);
-  assert.match(fixture.disclosure, /illustrative examples, not live offers or commitments to lend/i);
+  assert.match(fixture.disclosure, /illustrative comparison inputs, not personalized pricing/i);
+  assert.match(fixture.disclosure, /reviewed 2026-07-13/i);
+  assert.match(fixture.sampleOfferDisclosure, /No application is submitted/i);
   assert.doesNotMatch(`${fixture.disclosure} ${fixture.sampleOfferDisclosure}`, /fixture data|UI development|fictional/i);
+  assert.equal("reviewTemplates" in rawFixture, false);
+  assert.equal(rawFixture.allowedValues.sort.includes("highestRating"), false);
+  assert.equal(rawFixture.offers.every((offer) => offer.rating === 0 && offer.reviewCount === 0), true);
+  assert.equal(rawFixture.offers.every((offer) => !offer.nmlsDisplay && !offer.reviewsKey && !offer.profileRoute), true);
+  assert.equal(fixture.offers.every((offer) => offer.reviews.items.length === 0), true);
+
+  const sampleScenario = fixture.offers[0].details.sampleScenario;
+  for (const field of [
+    "purpose",
+    "loanAmount",
+    "ltv",
+    "creditRange",
+    "zip",
+    "propertyType",
+    "occupancy",
+    "lockAssumption",
+    "lenderCredits",
+    "paymentIncludes",
+    "includedCosts",
+    "excludedCosts",
+    "comparisonHorizon",
+    "source",
+    "reviewedDate",
+  ]) {
+    assert.notEqual(sampleScenario[field], undefined, `sample scenario includes ${field}`);
+  }
+  assert.equal(sampleScenario.reviewedDate, "2026-07-13");
 });
 
 test("rejects duplicate offer ids in the fixture schema", async () => {
@@ -308,7 +338,7 @@ test("rejects invalid nested payment assumptions in the fixture schema", async (
   );
 });
 
-test("filters by company or loan officer and applies all six approved sorts", async () => {
+test("filters by company or loan officer and applies all six evidence-backed sorts", async () => {
   const { MARKETPLACE_DEFAULTS, filterAndSortOffers, normalizeMarketplaceFixture } =
     await loadMarketplaceModule();
   const fixture = normalizeMarketplaceFixture(loadFixture());
@@ -317,8 +347,8 @@ test("filters by company or loan officer and applies all six approved sorts", as
     lowestApr: "apr",
     lowestRate: "rate",
     lowestMonthlyPayment: "principalAndInterest",
+    lowestPoints: "points",
     lowestUpfrontCost: "upfrontCost",
-    highestRating: "rating",
   };
 
   const companies = filterAndSortOffers({
@@ -349,12 +379,142 @@ test("filters by company or loan officer and applies all six approved sorts", as
     const [first, second] = results;
     assert.ok(first);
     assert.ok(second);
-    if (sort === "highestRating") {
-      assert.ok(first[field] >= second[field], sort);
-    } else {
-      assert.ok(first[field] <= second[field], sort);
-    }
+    assert.ok(first[field] <= second[field], sort);
   }
+});
+
+test("derives one reproducible cost scenario from the entered loan amount and term", async () => {
+  const {
+    MARKETPLACE_DEFAULTS,
+    createFixtureMarketplaceAdapter,
+    normalizeMarketplaceFixture,
+  } = await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
+  const scenario = {
+    ...MARKETPLACE_DEFAULTS,
+    purchasePrice: 1060000,
+    downPaymentAmount: 212000,
+    downPaymentPercent: 20,
+    term: 30,
+  };
+  const result = adapter.listOffers({ scenario, resultType: "company", sort: "lowestRate" });
+  const offer = result.items.find((item) => item.id === "company-harbor-purchase-30");
+
+  assert.equal(offer.calculation.loanAmount, 848000);
+  assert.equal(offer.calculation.termMonths, 360);
+  assert.equal(offer.principalAndInterest, Math.round(offer.calculation.monthlyPrincipalAndInterest));
+  assert.equal(
+    offer.upfrontCost,
+    Math.round(offer.calculation.pointCost + offer.calculation.listedLenderFees),
+  );
+  assert.equal(
+    offer.eightYearCost,
+    Math.round(offer.calculation.interestThroughHorizon + offer.upfrontCost),
+  );
+  assert.equal(offer.calculation.horizonMonths, 96);
+  assert.ok(offer.apr > offer.rate);
+  assert.match(offer.calculation.aprMethod, /listed points and lender fees/i);
+});
+
+test("purchase and refinance amounts recalculate costs without inventing unsupported terms", async () => {
+  const {
+    MARKETPLACE_DEFAULTS,
+    createFixtureMarketplaceAdapter,
+    normalizeMarketplaceFixture,
+  } = await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
+  const purchase = (scenario) => adapter.listOffers({ scenario, resultType: "company", sort: "lowestRate" }).items[0];
+  const smallerPurchase = purchase({
+    ...MARKETPLACE_DEFAULTS,
+    purchasePrice: 600000,
+    downPaymentAmount: 120000,
+    downPaymentPercent: 20,
+  });
+  const largerPurchase = purchase({
+    ...MARKETPLACE_DEFAULTS,
+    purchasePrice: 900000,
+    downPaymentAmount: 180000,
+    downPaymentPercent: 20,
+  });
+  const fifteenYear = adapter.listOffers({
+    scenario: {
+      ...MARKETPLACE_DEFAULTS,
+      purchasePrice: 600000,
+      downPaymentAmount: 120000,
+      downPaymentPercent: 20,
+      term: 15,
+    },
+    resultType: "company",
+    sort: "lowestRate",
+  });
+  const refinance = adapter.listOffers({
+    scenario: {
+      ...MARKETPLACE_DEFAULTS,
+      mortgageType: "refinance",
+      propertyValue: 880000,
+      loanBalance: 510000,
+    },
+    resultType: "company",
+    sort: "lowestRate",
+  }).items[0];
+
+  assert.ok(largerPurchase.principalAndInterest > smallerPurchase.principalAndInterest);
+  assert.ok(largerPurchase.upfrontCost > smallerPurchase.upfrontCost);
+  assert.equal(fifteenYear.items.length, 0);
+  assert.equal(fifteenYear.total, 0);
+  assert.equal(refinance.calculation.loanAmount, 510000);
+});
+
+test("keeps an offer's source term and product label when deriving a scenario", async () => {
+  const {
+    MARKETPLACE_DEFAULTS,
+    deriveOfferForScenario,
+    normalizeMarketplaceFixture,
+  } = await loadMarketplaceModule();
+  const fixture = normalizeMarketplaceFixture(loadFixture());
+  const source = fixture.offers.find((offer) => offer.id === "company-harbor-purchase-30");
+
+  const derived = deriveOfferForScenario(source, {
+    ...MARKETPLACE_DEFAULTS,
+    term: 15,
+  });
+
+  assert.equal(derived.term, 30);
+  assert.equal(derived.productLabel, "30-year fixed purchase");
+  assert.equal(derived.calculation.termMonths, 360);
+});
+
+test("keeps every source fixture headline value reproducible from its documented scenario", async () => {
+  const {
+    MARKETPLACE_DEFAULTS,
+    deriveOfferForScenario,
+    normalizeMarketplaceFixture,
+  } = await loadMarketplaceModule();
+  const rawFixture = loadFixture();
+  const fixture = normalizeMarketplaceFixture(rawFixture);
+
+  fixture.offers.forEach((offer, index) => {
+    const sample = offer.details.sampleScenario;
+    const scenario = {
+      ...MARKETPLACE_DEFAULTS,
+      mortgageType: offer.mortgageType,
+      term: offer.term,
+      zip: sample.zip,
+      creditRange: sample.creditRange,
+      purchasePrice: sample.price,
+      downPaymentAmount: sample.downPayment,
+      downPaymentPercent: sample.ltv == null ? undefined : 100 - sample.ltv,
+      propertyValue: sample.propertyValue,
+      loanBalance: sample.loanAmount,
+    };
+    const derived = deriveOfferForScenario(offer, scenario);
+    const raw = rawFixture.offers[index];
+
+    assert.equal(raw.principalAndInterest, derived.principalAndInterest, `${offer.id} payment`);
+    assert.equal(raw.upfrontCost, derived.upfrontCost, `${offer.id} upfront cost`);
+    assert.equal(raw.eightYearCost, derived.eightYearCost, `${offer.id} horizon cost`);
+    assert.equal(raw.apr, derived.apr, `${offer.id} APR`);
+  });
 });
 
 test("uses eight-item first-page pagination and exhausts show-more offers", async () => {
@@ -432,7 +592,7 @@ test("parses explicit URL query state without local storage and ignores private 
 
   const parsed = parseMarketplaceState(
     new URLSearchParams(
-      "mortgageType=refinance&zip=33602&creditRange=740-779&term=15&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&propertyValue=880000&loanBalance=510000&cashOut=true&sort=highestRating&resultType=loanOfficer&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
+      "mortgageType=refinance&zip=33602&creditRange=740-779&term=15&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&propertyValue=880000&loanBalance=510000&cashOut=true&sort=lowestApr&resultType=loanOfficer&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
     ),
   );
 
@@ -450,7 +610,7 @@ test("parses explicit URL query state without local storage and ignores private 
     propertyValue: 880000,
     loanBalance: 510000,
     cashOut: true,
-    sort: "highestRating",
+    sort: "lowestApr",
     resultType: "loanOfficer",
     visibleCount: 16,
     expandedOfferId: "loan-officer-ava-purchase-30",

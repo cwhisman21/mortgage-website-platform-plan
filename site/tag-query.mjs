@@ -71,6 +71,56 @@ export function suggestTags(tags, input, selectedIds = []) {
     .sort((left, right) => left.displayName.localeCompare(right.displayName) || left.id.localeCompare(right.id));
 }
 
+function boundedInputIndex(value, index, fallback) {
+  const candidate = Number.isInteger(index) ? index : fallback;
+  return Math.min(Math.max(candidate, 0), value.length);
+}
+
+function trimmedRange(value, start, end) {
+  let rangeStart = start;
+  let rangeEnd = end;
+  while (rangeStart < rangeEnd && /\s/.test(value[rangeStart])) rangeStart += 1;
+  while (rangeEnd > rangeStart && /\s/.test(value[rangeEnd - 1])) rangeEnd -= 1;
+  return { start: rangeStart, end: rangeEnd };
+}
+
+export function activeTagSuggestion(tags, input, selectedIds = [], selectionStart, selectionEnd) {
+  const value = typeof input === "string" ? input : "";
+  const start = boundedInputIndex(value, selectionStart, value.length);
+  const end = boundedInputIndex(value, selectionEnd, start);
+  const selectedRange = trimmedRange(value, Math.min(start, end), Math.max(start, end));
+  const ranges = [];
+
+  if (selectedRange.start < selectedRange.end) {
+    ranges.push(selectedRange);
+  } else {
+    const cursor = start;
+    const starts = [0];
+    for (const match of value.slice(0, cursor).matchAll(/\s+/g)) starts.push(match.index + match[0].length);
+    for (const rangeStart of starts) {
+      const range = trimmedRange(value, rangeStart, cursor);
+      if (range.start < range.end) ranges.push(range);
+    }
+  }
+
+  for (const range of ranges) {
+    const prefix = value.slice(range.start, range.end);
+    const suggestions = suggestTags(tags, prefix, selectedIds);
+    if (suggestions.length) return { ...range, prefix, suggestions };
+  }
+
+  return { start, end: start, prefix: "", suggestions: [] };
+}
+
+export function queryWithoutTagSuggestion(input, range) {
+  const value = typeof input === "string" ? input : "";
+  const start = boundedInputIndex(value, range?.start, value.length);
+  const end = boundedInputIndex(value, range?.end, start);
+  return `${value.slice(0, Math.min(start, end))} ${value.slice(Math.max(start, end))}`
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function compileTagExpression(tagIds = [], operators = []) {
   const ids = asArray(tagIds).filter((id) => typeof id === "string" && id);
   if (!ids.length) return [];

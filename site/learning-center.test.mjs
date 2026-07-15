@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildLearningCenterModel } from "./learning-center.mjs";
+import {
+  buildLearningCenterModel,
+  serializeLearningCenterSearch,
+} from "./learning-center.mjs";
+import { normalizeTagRegistry } from "./tag-registry.mjs";
 
 const seed = {
   blogPages: [
@@ -77,17 +81,49 @@ test("builds navigation tags from every canonical topic", () => {
   ]);
 });
 
-test("limits Learning Center search to canonical topics and articles", () => {
-  const model = buildLearningCenterModel({
-    ...seed,
-    states: [{ id: "state-al", name: "Alabama" }],
-  });
+test("serializes Learning Center free text into shared tagged-search state", () => {
+  assert.equal(
+    serializeLearningCenterSearch("  FHA closing costs  "),
+    "/learning-center/search?q=FHA+closing+costs",
+  );
+  assert.equal(serializeLearningCenterSearch(""), "/learning-center/search");
+  assert.equal(buildLearningCenterModel(seed).searchItems, undefined);
+});
 
-  assert.deepEqual(model.searchItems.map(({ id }) => id), [
-    "blog-buying-a-home",
-    "blog-editorial-team",
-    "article-featured",
-    "article-next",
+test("uses canonical tag routes only for topic links with an exact registered display-name match", () => {
+  const tagRegistry = normalizeTagRegistry({
+    tags: [
+      {
+        id: "buy-a-home",
+        displayName: "Buying a Home",
+        slug: "buying-a-home",
+        canonicalRoute: "/learning-center/tags/buying-a-home",
+      },
+      {
+        id: "editorial-standards",
+        displayName: "Editorial Standards",
+        slug: "editorial-standards",
+        canonicalRoute: "/learning-center/tags/editorial-standards",
+      },
+    ],
+    assignments: [
+      {
+        route: "/learning-center/buying-a-home",
+        primaryTagIds: ["buy-a-home"],
+        additionalTagIds: [],
+      },
+      {
+        route: "/learning-center/editorial-team",
+        primaryTagIds: ["editorial-standards"],
+        additionalTagIds: [],
+      },
+    ],
+  });
+  const model = buildLearningCenterModel(seed, {}, { tagRegistry });
+
+  assert.deepEqual(model.topicLinks.map(({ id, route }) => [id, route]), [
+    ["blog-buying-a-home", "/learning-center/tags/buying-a-home"],
+    ["blog-editorial-team", "/learning-center/editorial-team"],
   ]);
 });
 

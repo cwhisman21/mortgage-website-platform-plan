@@ -13,9 +13,11 @@
       "title": "Utah home-price movement in the latest FHFA HPI",
       "dek": "Quarterly, annual, and longer-run state HPI comparisons with a clear boundary between market movement and property value.",
       "previewText": "Review the latest FHFA home-price movement for Utah and why an index cannot value a specific property.",
-      "metaDescription": "Utah home-price movement in the latest FHFA HPI. Review the latest FHFA home-price movement for Utah and why an index cannot value a specific property.",
+      "metaDescription": "Review the latest FHFA home-price movement for Utah and why an index cannot value a specific property.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 Q1",
+      "sourcePeriod": "2026Q1",
       "relevanceLabel": "Home-price movement",
       "topicIds": [
         "home-price-index",
@@ -33,7 +35,7 @@
       ],
       "imageId": "home_values-07",
       "keyTakeaways": [
-        "FHFA purchase-only HPI: 723.3.",
+        "As of: 2026 Q1. Source period: 2026Q1.",
         "quarterly HPI change: 0.8%.",
         "annual HPI change: -0.0%.",
         "five-year HPI change: 32.9%."
@@ -82,25 +84,10 @@
       ],
       "sections": [
         {
-          "id": "latest-index",
-          "heading": "The latest statewide index reading",
-          "body": [
-            "Utah's latest FHFA purchase-only HPI is 723.3, accompanied by a quarterly change of 0.8%. For Utah, the 723.3 index level is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price. A quarter in which the index rose by 0.8% can help a borrower date the statewide market context, but it cannot identify the value or asking price of a selected property. Reading 723.3 with 0.8% also keeps the level separate from the rate of change. Alongside the 723.3 state index, local inventory, property type, condition, concessions, taxes, insurance, and financing costs still need current evidence before the trend informs a decision."
-          ],
-          "evidenceFactIds": [
-            "hpi-index",
-            "quarterly-change"
-          ],
-          "sourceRecordIds": [
-            "news-ut-state-home-price-movement-source-hpi-index",
-            "news-ut-state-home-price-movement-source-quarterly-change"
-          ]
-        },
-        {
           "id": "short-and-annual",
-          "heading": "Quarterly and annual windows tell different stories",
+          "heading": "Evidence check: what changed over the quarter and year",
           "body": [
-            "Over the latest quarter, Utah's purchase-only HPI rose by 0.8%; over the latest year, it fell by -0.0%. The 0.8% figure is more sensitive to recent movement, while -0.0% compares the latest quarter with the matching quarter a year earlier. A borrower should not choose between the 0.8% and -0.0% windows based only on which looks more favorable, because the comparisons answer different timing questions. Together they show whether recent statewide movement is aligned with or different from the broader year without predicting the next quarter, a local bidding environment, or the price path of one home in Utah."
+            "Start with the dated local finding: As of 2026 Q1, Utah's purchase-only HPI rose 0.8% over the latest quarter and fell 0.0% over the year. In practical terms, the quarterly window is more sensitive to recent movement, while the annual window compares the latest quarter with the matching quarter one year earlier. That difference may matter when a borrower checks whether search, offer, or refinance assumptions still fit the broad direction of the state market. For the decision at hand, if the two windows diverge, timing is part of the answer; if they align, local variation still remains. Neither change identifies a home's value, a competitive offer, an affordable payment, or what the index will do next, so current property and financing evidence must carry the decision."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -113,9 +100,9 @@
         },
         {
           "id": "longer-run",
-          "heading": "Place the latest movement in a longer sequence",
+          "heading": "Evidence check: place the latest movement in a longer sequence",
           "body": [
-            "Across the five-year comparison, the Utah HPI rose by 32.9%, compared with the latest annual movement of -0.0%. The 32.9% change places the current 723.3 index reading in a longer repeat-sale sequence, but it can span very different rate, inventory, and economic conditions. The 32.9% change should not be applied to an old purchase price to estimate a current property value. For a borrower, the contrast between 32.9% and -0.0% is most useful as a reminder that search assumptions can age at different speeds. Even when the 32.9% direction is clear, current comparable properties and a property-specific payment worksheet remain necessary."
+            "Over the five years ending 2026 Q1, the Utah HPI rose 32.9%, compared with the latest annual movement of 0.0%. The longer window shows how far the repeat-sale index moved across several market cycles, while the one-year figure gives more weight to recent conditions. That contrast may help a borrower recognize when an older search budget, equity assumption, or comparable sale needs fresh evidence. For borrower planning, it does not justify applying the five-year percentage to an old purchase price, and it cannot forecast a future sale. Even when the long and short directions agree, current comparable properties, taxes, insurance, financing costs, condition, and a property-specific payment worksheet remain necessary before the trend informs a mortgage decision."
           ],
           "evidenceFactIds": [
             "five-year-change",
@@ -130,9 +117,9 @@
         },
         {
           "id": "market-context",
-          "heading": "Use the index to test local assumptions",
+          "heading": "Borrower view: use the index to test local assumptions",
           "body": [
-            "The combination of a 0.8% quarterly change, -0.0% annual change, and 32.9% five-year change gives Utah borrowers three dated views of the same statewide index. If the 0.8%, -0.0%, and 32.9% windows point in different directions, the divergence shows that timing matters; if they point together, statewide consistency still does not erase local variation. A Utah search plan can use those three changes to ask whether current listings, seller concessions, and property types resemble the broad state movement. It should not use 723.3 as a sale price or use any of the percentage changes as a forecast, because FHFA HPI measures repeat-sale movement rather than the complete set of homes available to one borrower."
+            "A Utah search plan can apply the quarterly, annual, and five-year windows to ask whether current listings, seller concessions, and property types resemble the broad state movement. At an annual movement of 0.0%, the dated 723.3 index level provides a reference point for that question without supplying a sale price. If the windows point in different directions, the divergence shows why the selected period matters; if they point together, statewide consistency still does not erase local variation. For the decision at hand, the plan therefore should compare the broad pattern with current listings and recent property-level evidence rather than treating any percentage as a forecast. FHFA HPI measures repeat-sale movement, not the complete set of homes available to one borrower."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -148,10 +135,26 @@
           ]
         },
         {
+          "id": "latest-index",
+          "heading": "Start with the evidence: the index level is context, not a home price",
+          "body": [
+            "Utah's latest FHFA purchase-only HPI level is 723.3.",
+            "Applied to a decision in Utah, that number is a benchmark for repeat-sale price movement, not a dollar-denominated typical home price, listing price, or appraisal. Reading the 723.3 level with the 0.8% quarterly change keeps the index itself separate from its rate of movement. For the decision at hand, a borrower can apply the dated level to identify the release being discussed, but not to value a selected property. Local inventory, property type, condition, concessions, taxes, insurance, maintenance, association costs, and financing terms still need current evidence. This boundary is especially important when broad statewide movement differs from the neighborhood, price band, or property type involved in an actual purchase, refinance, or equity review."
+          ],
+          "evidenceFactIds": [
+            "hpi-index",
+            "quarterly-change"
+          ],
+          "sourceRecordIds": [
+            "news-ut-state-home-price-movement-source-hpi-index",
+            "news-ut-state-home-price-movement-source-quarterly-change"
+          ]
+        },
+        {
           "id": "valuation-boundary",
           "heading": "The HPI cannot value a property or set a payment",
           "body": [
-            "An HPI level of 723.3 does not establish a Utah property's dollar value, and an -0.0% annual movement does not establish how much any home gained or lost. The 723.3 index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the 0.8% and 32.9% comparisons should retain their release period. The 723.3 index level must remain separate from the dollar figures used in a property review. Those limits make the 723.3 state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
+            "An HPI level of 723.3 does not establish the dollar value of a property in Utah, and an annual movement of 0.0% does not establish how much any home gained or lost. For the decision at hand, the index excludes the borrower's down payment, loan amount, interest rate, taxes, insurance, association costs, repairs, and time horizon. FHFA can also revise published values, so the 0.8% and 32.9% comparisons should retain their source period. In practical terms, the 723.3 level must remain separate from the dollar figures used in a property review. Those limits make the state index useful for orientation but unsuitable as an appraisal, offer recommendation, equity calculation, promised appreciation claim, payment quote, or underwriting conclusion."
           ],
           "evidenceFactIds": [
             "hpi-index",
@@ -170,7 +173,8 @@
           "id": "local-next-step",
           "heading": "Connect the state trend to current property evidence",
           "body": [
-            "A practical Utah borrower review can record 0.8%, -0.0%, and 32.9% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the 0.8% state change as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures. For a refinance or equity question, begin with a defensible property review rather than multiplying a prior value by -0.0% or 32.9%. This approach preserves the information in the 723.3 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
+            "A practical Utah borrower review can record 0.8%, 0.0%, and 32.9% as statewide trend markers, then compare them with current local listings and recent property-level evidence. For a purchase, keep the 0.8% state movement as context while adding the selected price, inspection findings, appraisal process, taxes, insurance, cash-to-close, and loan disclosures.",
+            "Applied to a decision in Utah, for a refinance or equity question, begin with a defensible property review instead of multiplying a prior value by 0.0% or 32.9%. For the decision at hand, this approach preserves the information in the 723.3 HPI while giving current local and borrower-specific facts the decision-making role that a statewide repeat-sale index cannot fill."
           ],
           "evidenceFactIds": [
             "quarterly-change",
@@ -228,28 +232,33 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "FHFA purchase-only HPI",
               "723.3",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "quarterly HPI change",
               "0.8%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "annual HPI change",
               "-0.0%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ],
             [
               "five-year HPI change",
               "32.9%",
-              "Federal Housing Finance Agency, 2026Q1"
+              "Federal Housing Finance Agency, 2026Q1",
+              "2026 Q1"
             ]
           ],
           "sourceRecordIds": [
@@ -262,7 +271,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "short-and-annual",
+          "afterSectionId": "longer-run",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -375,9 +384,11 @@
       "title": "Utah statewide labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Utah.",
       "previewText": "See what changed in Utah's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Utah statewide labor market: latest employment evidence. See what changed in Utah's labor market and why broad employment data cannot determine mortgage.",
+      "metaDescription": "See what changed in Utah's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -395,11 +406,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 1,825,206.",
-        "employment: 1,757,343.",
-        "unemployment: 67,863.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.7%.",
-        "previous-month unemployment rate: 3.8%."
+        "change in unemployment rate from the prior month: -0.1 percentage points.",
+        "change in unemployment rate from a year earlier: 0.2 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -466,7 +476,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.1,
-          "display": "-0.1%",
+          "display": "-0.1 percentage points",
           "sourceRecordIds": [
             "news-ut-state-labor-market-source-latest-unemployment-rate",
             "news-ut-state-labor-market-source-previous-previous-rate"
@@ -477,7 +487,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0.2,
-          "display": "0.2%",
+          "display": "0.2 percentage points",
           "sourceRecordIds": [
             "news-ut-state-labor-market-source-latest-unemployment-rate",
             "news-ut-state-labor-market-source-yearago-year-ago-rate"
@@ -487,29 +497,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Utah labor force of 1,825,206, with 1,757,343 people employed and 67,863 unemployed under the program's definitions. Those three counts belong together: 1,757,343 plus 67,863 explains the scale behind the published 3.7% unemployment rate. For mortgage planning, the 1,825,206 state-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 1,825,206 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-ut-state-labor-market-source-latest-labor-force",
-            "news-ut-state-labor-market-source-latest-employment",
-            "news-ut-state-labor-market-source-latest-unemployment",
-            "news-ut-state-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Comparison view: what changed in the latest month",
           "body": [
-            "Utah's unemployment rate fell from 3.8% in the prior month to 3.7% in the latest month, a change of -0.1%. A -0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 67,863 unemployment count and 1,825,206 labor force. The -0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Utah borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "Start with the dated local finding: As of May 2026, Utah's unemployment rate fell from 3.8% in April 2026 to 3.7% in May 2026, a change of 0.1 percentage points. That movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it cannot prove one applicant's income stability, mortgage eligibility, or loan price. For borrower planning, the release also estimates 67,863 people unemployed within a labor force of 1,825,206, which shows the scale of the movement without turning a state-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -527,19 +518,39 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Comparison view: what changed over the year",
           "body": [
-            "Compared with 3.5% a year earlier, the latest Utah unemployment rate of 3.7% rose by 0.2%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.2% difference still describes a population estimate rather than an individual's job stability. Reading 3.5%, 3.8%, and 3.7% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Utah pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Utah's unemployment rate rose from 3.5% in May 2025 to 3.7%, a change of 0.2 percentage points.",
+            "That wider window helps show whether Utah's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.1 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Utah or describes the stability of one household's earnings. For mortgage planning in Utah, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Utah's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-ut-state-labor-market-source-yearago-year-ago-rate",
-            "news-ut-state-labor-market-source-previous-previous-rate",
+            "news-ut-state-labor-market-source-latest-unemployment-rate",
+            "news-ut-state-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "Evidence at a glance: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 1,825,206 people in the Utah labor force, including 1,757,343 employed and 67,863 unemployed under LAUS definitions. In practical terms, the employment and unemployment counts belong together because they establish the scale behind the published 3.7% rate. For mortgage planning, that state-level labor force describes the surrounding economy rather than the income or employment record of an applicant. For the decision at hand, it can nevertheless help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should, as a result, follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-ut-state-labor-market-source-latest-labor-force",
+            "news-ut-state-labor-market-source-latest-employment",
+            "news-ut-state-labor-market-source-latest-unemployment",
             "news-ut-state-labor-market-source-latest-unemployment-rate"
           ]
         },
@@ -547,7 +558,8 @@
           "id": "counts-and-rate",
           "heading": "Why the rate needs its underlying counts",
           "body": [
-            "At 3.7%, Utah's unemployment rate summarizes 67,863 unemployed people within a 1,825,206 labor force; the rate should not be discussed without those counts. The 1,757,343 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 1,757,343 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.7% rate attached to 1,825,206, 1,757,343, and 67,863 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.7%, Utah's unemployment rate summarizes 67,863 unemployed people within a labor force of 1,825,206; the rate should not be discussed without those counts.",
+            "In a borrower review centered on Utah, the 1,757,343 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 1,757,343 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.7% rate attached to 1,825,206, 1,757,343, and 67,863 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -564,9 +576,9 @@
         },
         {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Keep the boundary clear: labor statistics are not an income review",
           "body": [
-            "Neither 1,757,343 employed people nor a 3.7% unemployment rate tells a lender what one Utah applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.7% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.2% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 1,757,343 employed people nor an unemployment rate of 3.7% tells a lender what an applicant in Utah earns, whether that income is eligible, or whether it is likely to continue. The monthly movement of 0.1 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.7% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For borrower planning, that boundary protects borrowers from treating the year-over-year movement of 0.2 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -583,9 +595,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Next step: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Utah borrower is to note the latest 3.7% unemployment rate and the 0.2% year-over-year change, then move immediately to the records that describe the household. After noting the 3.7% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 1,825,206 local labor force and 1,757,343 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Utah's 3.7% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Utah is to note the latest 3.7% unemployment rate and the year-over-year movement of 0.2 percentage points, then move immediately to the records that describe the household. After noting the 3.7% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path.",
+            "The 1,825,206 local labor force and 1,757,343 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The monthly movement of 0.1 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Utah's 3.7% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -652,48 +665,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "1,825,206",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "1,757,343",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "67,863",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.7%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "3.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "3.5%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.2%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.2 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -708,7 +730,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -853,9 +875,11 @@
       "title": "Utah housing costs, ownership, and rent in the latest ACS",
       "dek": "Statewide evidence on home value, income, owner costs, housing stock, tenure, vacancy, and rent for borrower planning.",
       "previewText": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Utah with survey limitations and practical questions.",
-      "metaDescription": "Utah housing costs, ownership, and rent in the latest ACS. Read statewide housing-cost, ownership, vacancy, and rent evidence for Utah with survey limitations.",
+      "metaDescription": "Read statewide housing-cost, ownership, vacancy, and rent evidence for Utah with survey limitations and practical questions.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "State housing costs",
       "topicIds": [
         "state-housing",
@@ -874,11 +898,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "state median home value: $489,400.",
         "prior ACS state median home value: $279,100.",
-        "state median household income: $95,166.",
-        "median monthly owner cost with a mortgage: $2,009.",
-        "median gross rent: $1,496."
+        "state median household income: $95,166."
       ],
       "evidenceFacts": [
         {
@@ -973,25 +996,14 @@
             "news-ut-state-housing-costs-source-housing-units"
           ],
           "comparison": true
-        },
-        {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 75.3,
-          "display": "75.3%",
-          "sourceRecordIds": [
-            "news-ut-state-housing-costs-source-home-value",
-            "news-ut-state-housing-costs-source-home-value-prior"
-          ],
-          "comparison": true
         }
       ],
       "sections": [
         {
           "id": "state-cost-baseline",
-          "heading": "Statewide value, income, and owner costs",
+          "heading": "The dated finding: statewide value, income, and owner costs",
           "body": [
-            "Utah's 2024 ACS housing baseline reports a median owner-occupied home value of $489,400, median household income of $95,166, and median selected monthly owner costs of $2,009 for owners with a mortgage. The $489,400, $95,166, and $2,009 values are separate statewide medians, so they should not be treated as the price, income, and monthly budget of one typical household. The $2,009 measure combines recurring ownership expenses and is not a real-estate-tax figure or a current mortgage quote. For planning, $489,400, $95,166, and $2,009 identify statewide reference points and cost categories, while a real decision still requires local property, borrower, tax, insurance, and loan information."
+            "The published evidence provides the starting point: Utah's 2024 ACS housing baseline reports a median owner-occupied home value of $489,400, median household income of $95,166, and median selected monthly owner costs of $2,009 for owners with a mortgage. For the decision at hand, those three reference points may help a borrower identify which statewide value, income, and recurring-cost assumptions need local replacement first. They remain separate medians, not the price, income, and monthly budget of one typical household, and the $2,009 measure is not a real-estate-tax figure or a current mortgage quote. In practical terms, a real decision continues to require local property evidence, borrower documentation, taxes, insurance, maintenance, association obligations, and current loan information."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1006,9 +1018,9 @@
         },
         {
           "id": "owner-and-renter-costs",
-          "heading": "Keep owner costs and rent comparable",
+          "heading": "Start with the evidence: keep owner costs and rent comparable",
           "body": [
-            "The same Utah release reports $1,496 in median gross rent alongside $2,009 in median selected monthly owner costs for owners with a mortgage. The two measures cover different housing populations and cost definitions, so $1,496 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,496 and $2,009 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. The $95,166 statewide median can provide economic context, but dividing it by either $1,496 or $2,009 would still combine medians that do not represent the same household."
+            "The same Utah release reports $1,496 in median gross rent alongside $2,009 in median selected monthly owner costs for owners with a mortgage. In practical terms, the two measures cover different housing populations and cost definitions, so $1,496 should not be compared with only principal and interest or used to declare a statewide break-even point. A useful comparison replaces the $1,496 and $2,009 medians with a current lease and a current property budget, including utilities, taxes, insurance, maintenance, association obligations, transaction costs, and the expected time horizon. For the decision at hand, the $95,166 statewide median can provide economic context, but dividing it by either $1,496 or $2,009 would still combine medians that do not represent the same household."
           ],
           "evidenceFactIds": [
             "rent",
@@ -1022,28 +1034,11 @@
           ]
         },
         {
-          "id": "state-tenure",
-          "heading": "How occupied housing is divided by tenure",
-          "body": [
-            "Across Utah's measured housing stock of 1,223,468 units, the owner share of occupied housing is 70.2% and the renter share is 29.8%, making owner-occupied housing the larger statewide tenure group. The 70.2% and 29.8% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase. The 70.2% and 29.8% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. It remains too broad to select a product or characterize a particular city, county, property type, or household inside Utah."
-          ],
-          "evidenceFactIds": [
-            "housing-units",
-            "owner-share",
-            "renter-share"
-          ],
-          "sourceRecordIds": [
-            "news-ut-state-housing-costs-source-housing-units",
-            "news-ut-state-housing-costs-source-owner-units",
-            "news-ut-state-housing-costs-source-occupied-units",
-            "news-ut-state-housing-costs-source-renter-units"
-          ]
-        },
-        {
           "id": "state-vacancy",
-          "heading": "Vacancy is broader than homes for sale",
+          "heading": "Planning context: vacancy is broader than homes for sale",
           "body": [
-            "Utah's vacant-unit share is 8.1% within a statewide stock of 1,223,468 housing units. ACS vacancy includes categories beyond property currently offered for sale or rent, so 8.1% is not a live inventory rate and cannot measure competition for a selected home. Read beside the 70.2% owner share and 29.8% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. Borrowers should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 8.1% and 1,223,468 were not designed to resolve."
+            "Utah's vacant-unit share is 8.1% within a statewide stock of 1,223,468 housing units. In practical terms, ACS vacancy includes categories beyond property currently offered for sale or rent, so 8.1% is not a live inventory rate and cannot measure competition for a selected home.",
+            "Applied to a decision in Utah, read beside the 70.2% owner share and 29.8% renter share, the vacancy figure helps describe how the broad stock was classified without predicting near-term supply. For the decision at hand, a borrower should use current listings, property condition, days on market, concessions, and local professional context to answer transaction questions that 8.1% and 1,223,468 were not designed to resolve."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -1060,15 +1055,34 @@
           ]
         },
         {
-          "id": "state-change",
-          "heading": "The statewide home-value estimate changed across periods",
+          "id": "state-tenure",
+          "heading": "Borrower view: how occupied housing is divided by tenure",
           "body": [
-            "Utah's median home-value estimate increased from $279,100 in the prior ACS period to $489,400 in the current release, a reported change of 75.3%. Because both estimates summarize multi-year survey windows, 75.3% is not a point-to-point appreciation rate for a property purchased at $279,100. The 75.3% comparison can show that an old statewide reference may need updating, but it cannot explain the value path in each local market or price segment. Margins of error, changes in the housing mix, and current property evidence should be reviewed before the move from $279,100 to $489,400 influences a purchase, refinance, or equity assumption."
+            "Across Utah's measured housing stock of 1,223,468 units, the owner share of occupied housing is 70.2% and the renter share is 29.8%, making owner-occupied housing the larger statewide tenure group. For the decision at hand, the 70.2% and 29.8% shares describe how occupied units were distributed during the survey period; they do not measure current buyer demand, owner willingness to sell, or renter readiness to purchase.",
+            "The 70.2% and 29.8% statewide tenure split is useful for understanding scale and checking assumptions about the housing mix. In practical terms, it remains too broad to select a product or characterize a particular city, county, property type, or household inside Utah."
+          ],
+          "evidenceFactIds": [
+            "housing-units",
+            "owner-share",
+            "renter-share"
+          ],
+          "sourceRecordIds": [
+            "news-ut-state-housing-costs-source-housing-units",
+            "news-ut-state-housing-costs-source-owner-units",
+            "news-ut-state-housing-costs-source-occupied-units",
+            "news-ut-state-housing-costs-source-renter-units"
+          ]
+        },
+        {
+          "id": "state-vintage-observations",
+          "heading": "Keep the statewide ACS vintages separate",
+          "body": [
+            "The 2019 ACS published $279,100 as Utah's median owner-occupied home-value estimate, while the 2024 ACS published $489,400.",
+            "For the next comparison in Utah, these nominal statewide observations may still help show why an older planning reference needs current local evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between the vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. For borrower planning, both values summarize multi-year survey windows and carry sampling error. Keep $279,100 attached to 2019 and $489,400 attached to 2024, then use current local and property-specific evidence for purchase, refinance, or equity assumptions."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "home-value",
-            "home-value-change"
+            "home-value"
           ],
           "sourceRecordIds": [
             "news-ut-state-housing-costs-source-home-value-prior",
@@ -1077,9 +1091,9 @@
         },
         {
           "id": "state-to-local",
-          "heading": "Move from statewide context to a local worksheet",
+          "heading": "Borrower action: move from statewide context to a local worksheet",
           "body": [
-            "A borrower can carry $489,400, $2,009, $1,496, and the 8.1% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. For ownership, replace the $489,400 and $2,009 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. For renting, replace the $1,496 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. The 29.8% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 70.2% tenure measure can help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one Utah household."
+            "A borrower may carry $489,400, $2,009, $1,496, and the 8.1% vacancy share into a local comparison as dated statewide context, then replace each with evidence matched to the actual decision. For ownership, replace the $489,400 and $2,009 medians with a selected price, down payment, current loan disclosures, taxes, insurance, maintenance, association obligations, and cash reserves. For the rental budget, replace the $1,496 median with a comparable lease, utilities, deposits, and expected changes over the same horizon. In practical terms, the 29.8% renter share is useful for describing the statewide tenure mix, not for predicting which local option will be available. The 70.2% tenure measure may help explain the statewide housing mix, but it cannot decide whether buying, renting, refinancing, or using equity is suitable for one Utah household."
           ],
           "evidenceFactIds": [
             "home-value",
@@ -1154,58 +1168,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "state median home value",
               "$489,400",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS state median home value",
               "$279,100",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "state median household income",
               "$95,166",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,009",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,496",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "total housing units",
               "1,223,468",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "70.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "29.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "8.1%",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "75.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -1230,8 +1249,8 @@
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a 2019 value comparison. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 ACS 5-year state estimates for home value, household income, selected owner costs, rent, total and occupied housing units, vacancy, and owner and renter tenure, plus a separate 2019 nominal home-value observation. It does not calculate a percentage change between home-value vintages. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates cover multi-year survey periods, carry margins of error, and do not measure current listings, current financing terms, or a specific household's housing costs. The 2019 and 2024 home-value dollars are not inflation-adjusted, and their methodology is not directly comparable. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-ut-state-housing-costs-source-home-value",
@@ -1433,9 +1452,11 @@
       "title": "Utah 2026 county loan-limit landscape",
       "dek": "How conforming and FHA one-unit limits vary across Utah counties and how borrowers can use them responsibly.",
       "previewText": "See the range of 2026 conforming and FHA county limits across Utah without treating a limit as eligibility or pricing.",
-      "metaDescription": "Utah 2026 county loan-limit landscape. See the range of 2026 conforming and FHA county limits across Utah without treating a limit as eligibility or pricing.",
+      "metaDescription": "See the range of 2026 conforming and FHA county limits across Utah without treating a limit as eligibility or pricing.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "State loan-limit landscape",
       "topicIds": [
         "loan-limits",
@@ -1455,11 +1476,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "counties in the statewide limit summary: 29.",
         "lowest one-unit conforming limit: $832,750.",
-        "highest one-unit conforming limit: $1,150,000.",
-        "lowest one-unit FHA limit: $541,287.",
-        "highest one-unit FHA limit: $1,163,800."
+        "highest one-unit conforming limit: $1,150,000."
       ],
       "evidenceFacts": [
         {
@@ -1528,7 +1548,7 @@
           "id": "statewide-conforming-range",
           "heading": "The conforming range across county records",
           "body": [
-            "Utah's statewide summary covers 29 county or county-equivalent records. Within those records, the 2026 one-unit conforming limit runs from $832,750 to $1,150,000. The $832,750 to $1,150,000 range confirms that one conforming ceiling does not apply uniformly across Utah. The 29 record count keeps the range tied to the statewide source coverage rather than an assumed national rule. The $832,750 to $1,150,000 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $1,150,000 statewide maximum, county, legal unit count, and expected base loan amount must be known."
+            "Utah's statewide summary covers 29 county or county-equivalent records. In practical terms, within those records, the 2026 one-unit conforming limit runs from $832,750 to $1,150,000. That range may help borrowers see why the property county must be identified before a loan amount is assigned a conforming or jumbo category. For the decision at hand, the $832,750 to $1,150,000 range confirms that one conforming ceiling does not apply uniformly across Utah. The 29 record count keeps the range tied to the statewide source coverage instead of an assumed national rule. The $832,750 to $1,150,000 amounts classify loan size within the published program table; they do not establish a borrower's capacity, a property's value, or the price of financing. Before using the $1,150,000 statewide maximum, county, legal unit count, and expected base loan amount must be known."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1543,9 +1563,10 @@
         },
         {
           "id": "statewide-fha-range",
-          "heading": "The FHA range follows its own county table",
+          "heading": "Evidence at a glance: the FHA range follows its own county table",
           "body": [
-            "Across the same 29 Utah records, the 2026 one-unit FHA limit spans $541,287 to $1,163,800. The $541,287 low and $1,163,800 high show that FHA's published boundary also varies within the state. The $541,287 floor and $1,163,800 high remain county-table values even when they match conforming amounts elsewhere. The FHA range should not be merged with the $832,750 to $1,150,000 conforming range, because the programs use different authorities and requirements. A $541,287 to $1,163,800 comparison can route loan-amount and product-category questions, but it cannot determine FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
+            "Across the same 29 Utah records, the 2026 one-unit FHA limit spans $541,287 to $1,163,800. For borrower planning, the $541,287 low and $1,163,800 high show that FHA's published boundary also varies within the state.",
+            "In a borrower review centered on Utah, the $541,287 floor and $1,163,800 high remain county-table values even when they match conforming amounts elsewhere. The FHA range should not be merged with the $832,750 to $1,150,000 conforming range, because the programs use different authorities and requirements. A $541,287 to $1,163,800 comparison can route loan-amount and product-category questions, but it cannot decide FHA eligibility, mortgage insurance, appraisal acceptability, occupancy compliance, cash needs, or approval."
           ],
           "evidenceFactIds": [
             "county-count",
@@ -1563,27 +1584,11 @@
           ]
         },
         {
-          "id": "high-cost-counties",
-          "heading": "Why county verification matters",
-          "body": [
-            "4 Utah counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $1,150,000. That count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 4 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan. It only describes how many matched county rows exceed the baseline. The $1,150,000 maximum should therefore be treated as evidence that county lookup matters, not as the default Utah limit. Before treating $1,150,000 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
-          ],
-          "evidenceFactIds": [
-            "counties-above",
-            "conforming-range-low",
-            "conforming-range-high"
-          ],
-          "sourceRecordIds": [
-            "news-ut-state-loan-limit-landscape-source-conforming-above",
-            "news-ut-state-loan-limit-landscape-source-conforming-min",
-            "news-ut-state-loan-limit-landscape-source-conforming-max"
-          ]
-        },
-        {
           "id": "program-comparison",
-          "heading": "Conforming and FHA ranges answer different questions",
+          "heading": "Comparison view: conforming and FHA ranges answer different questions",
           "body": [
-            "The highest one-unit conforming amount in Utah is $1,150,000, while the highest FHA amount is $1,163,800; at the low end, the figures are $832,750 and $541,287. These pairs show program boundaries, not competing offers. A requested amount below $1,150,000 may still fall outside the applicable county's conforming limit, and an amount below $1,163,800 may still face FHA borrower and property requirements. Comparing $832,750, $1,150,000, $541,287, and $1,163,800 is useful only when county and unit count are held constant. The $1,150,000 and $1,163,800 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
+            "The highest one-unit conforming amount in Utah is $1,150,000, while the highest FHA amount is $1,163,800; at the low end, the figures are $832,750 and $541,287. For borrower planning, these pairs show program boundaries, not competing offers.",
+            "In a borrower review centered on Utah, a requested amount below $1,150,000 may still fall outside the applicable county's conforming limit, and an amount below $1,163,800 may still face FHA borrower and property requirements. Comparing $832,750, $1,150,000, $541,287, and $1,163,800 is useful only when county and unit count are held constant. The $1,150,000 and $1,163,800 ceilings leave rates, fees, mortgage insurance, appraisal, reserves, debt capacity, and product suitability as separate questions for the documented transaction."
           ],
           "evidenceFactIds": [
             "conforming-range-high",
@@ -1599,10 +1604,28 @@
           ]
         },
         {
-          "id": "state-limit-boundaries",
-          "heading": "A larger county limit is not greater affordability",
+          "id": "high-cost-counties",
+          "heading": "Start with the evidence: why county verification matters",
           "body": [
-            "A $1,150,000 conforming ceiling or $1,163,800 FHA ceiling does not make that loan amount affordable to a Utah household, and the lower $832,750 or $541,287 figures do not describe home prices. Published $1,150,000 and $1,163,800 limits cannot establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $1,150,000 and $1,163,800 figures can also change with a new calendar year or corrected property geography. Keeping the 29 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
+            "4 Utah counties sit above the conforming baseline in this summary, while the full conforming range reaches from $832,750 to $1,150,000. In practical terms, that count shows where a statewide shortcut can fail: a property in a higher-limit county may use a different published ceiling than one at $832,750. The 4 figure does not mean those counties are more affordable, more desirable, or more likely to approve a loan.",
+            "For the decision at hand, it only describes how many matched county rows exceed the baseline. The $1,150,000 maximum should therefore be treated as evidence that county lookup matters, not as the default Utah limit. Before treating $1,150,000 as relevant, a borrower should identify the property's official county or county-equivalent area and then attach conventional, jumbo, or FHA labels to the desired loan amount."
+          ],
+          "evidenceFactIds": [
+            "counties-above",
+            "conforming-range-low",
+            "conforming-range-high"
+          ],
+          "sourceRecordIds": [
+            "news-ut-state-loan-limit-landscape-source-conforming-above",
+            "news-ut-state-loan-limit-landscape-source-conforming-min",
+            "news-ut-state-loan-limit-landscape-source-conforming-max"
+          ]
+        },
+        {
+          "id": "state-limit-boundaries",
+          "heading": "Evidence limits: a larger county limit is not greater affordability",
+          "body": [
+            "A $1,150,000 conforming ceiling or $1,163,800 FHA ceiling does not make that loan amount affordable to a household in Utah, and the lower $832,750 or $541,287 figures do not describe home prices. Published $1,150,000 and $1,163,800 limits cannot establish borrower income, debts, credit, assets, occupancy, property condition, appraisal, insurance, reserves, rates, fees, or final approval. The $1,150,000 and $1,163,800 figures can also change with a new calendar year or corrected property geography. For borrower planning, keeping the 29 county-record scope and 2026 period attached to the figures prevents the statewide summary from being mistaken for a personalized product recommendation or a single amount that applies everywhere."
           ],
           "evidenceFactIds": [
             "conforming-range-high",
@@ -1621,9 +1644,10 @@
         },
         {
           "id": "county-lookup",
-          "heading": "Use the range to reach the correct county row",
+          "heading": "Put the evidence to work: use the range to reach the correct county row",
           "body": [
-            "The next step is to verify the selected property's Utah county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. Then compare that amount with the exact official row, using the $832,750 to $1,150,000 conforming range and $541,287 to $1,163,800 FHA range only as orientation. The 4 above-baseline count explains why this lookup matters, but it does not replace it. Keep the selected county row with the worksheet so the $1,150,000 and $1,163,800 statewide maximums cannot be mistaken for property-specific figures. After the 4 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
+            "A useful next step is to verify the selected property's Utah county or county-equivalent area, legal unit count, price, down-payment plan, and expected base loan amount. In practical terms, then compare that amount with the exact official row, using the $832,750 to $1,150,000 conforming range and $541,287 to $1,163,800 FHA range only as orientation.",
+            "Applied to a decision in Utah, the 4 above-baseline count explains why this lookup matters, but it does not replace it. For the decision at hand, keep the selected county row with the worksheet so the $1,150,000 and $1,163,800 statewide maximums cannot be mistaken for property-specific figures. After the 4 count prompts that county lookup, a licensed professional can explain current limits and borrower, property, mortgage-insurance, and documentation rules without presenting the largest statewide figure as available borrowing power."
           ],
           "evidenceFactIds": [
             "conforming-range-low",
@@ -1691,38 +1715,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "counties in the statewide limit summary",
               "29",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit conforming limit",
               "$1,150,000",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "lowest one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "highest one-unit FHA limit",
               "$1,163,800",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "counties above the conforming baseline",
               "4",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

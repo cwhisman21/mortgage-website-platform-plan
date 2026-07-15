@@ -4,13 +4,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createPublicRouteManifest } from "./public-route-manifest.mjs";
+import * as staticRouteDocuments from "./static-route-document.mjs";
+import { normalizeTagRegistry, tagForSlug } from "./tag-registry.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(siteDir, "..");
 const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(repoRoot, relativePath), "utf8"));
 const seed = readJson("mock-data/production-seed.json");
 const editorialContent = readJson("mock-data/editorial-content.json");
-const manifest = createPublicRouteManifest({ seed, editorialContent });
+const tagRegistry = readJson("mock-data/public-tag-registry.json");
+const manifest = createPublicRouteManifest({ seed, editorialContent, tagRegistry });
 
 function matchRewrite(source, route) {
   if (source === route) return {};
@@ -68,4 +71,51 @@ test("Vercel rewrite ownership serves generated HTML at every clean non-news rou
     false,
     "non-root public routes must not serve the homepage shell",
   );
+});
+
+test("canonical tag routes use generated rewrites", () => {
+  const config = readJson("vercel.json");
+  const rewrites = config.rewrites || [];
+  const canonicalTagEntries = manifest.filter(({ type }) => type === "tag");
+
+  assert.equal(canonicalTagEntries.length, tagRegistry.tags.length);
+  for (const entry of canonicalTagEntries) {
+    const resolved = resolveRewrite(rewrites, entry.route);
+    assert.ok(resolved, `${entry.route} must have a generated-route rewrite`);
+    assert.equal(resolved.destination, `/site/generated/routes${entry.route}/index.html`);
+  }
+});
+
+test("historical tag slugs resolve canonically without entering the manifest", () => {
+  const config = readJson("vercel.json");
+  const rewrites = config.rewrites || [];
+  const florida = tagRegistry.tags.find(({ slug }) => slug === "florida");
+  const historicalSlug = "florida-mortgage-guides";
+  const registry = normalizeTagRegistry({
+    version: 1,
+    updatedAt: tagRegistry.updatedAt,
+    tags: [{ ...florida, redirectSlugs: [historicalSlug] }],
+    assignments: [],
+  });
+  const currentMatch = tagForSlug(registry, florida.slug);
+  const historicalMatch = tagForSlug(registry, historicalSlug);
+  assert.equal(currentMatch, historicalMatch);
+
+  const redirect = {
+    type: "tagRedirect",
+    route: `/learning-center/tags/${historicalSlug}`,
+    canonicalRoute: florida.canonicalRoute,
+    tag: florida,
+  };
+  assert.equal(manifest.some(({ route }) => route === redirect.route), false, "historical slugs must stay outside the canonical manifest");
+  assert.equal(resolveRewrite(rewrites, redirect.route).destination, `/site/generated/routes${redirect.route}/index.html`);
+  assert.equal(typeof staticRouteDocuments.renderStaticRouteRedirectDocument, "function");
+
+  const html = staticRouteDocuments.renderStaticRouteRedirectDocument(redirect, { siteOrigin: "https://mortgage.example" });
+  assert.match(html, /<link rel="canonical" href="https:\/\/mortgage\.example\/learning-center\/tags\/florida" \/>/);
+  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.match(html, /<meta http-equiv="refresh" content="0; url=\/learning-center\/tags\/florida" \/>/);
+  assert.match(html, /window\.location\.replace\("\/learning-center\/tags\/florida"\)/);
+  assert.match(html, /href="\/learning-center\/tags\/florida"/);
+  assert.doesNotMatch(html, /site\/app\.js|data-static-route/);
 });

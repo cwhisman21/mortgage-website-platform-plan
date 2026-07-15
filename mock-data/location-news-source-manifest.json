@@ -25,6 +25,10 @@
     },
     {
       "dataset": "ACS 2024 5-year B01003",
+      "variables": [
+        "B01003_001E",
+        "B01003_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b01003.dat",
@@ -33,6 +37,10 @@
     },
     {
       "dataset": "ACS 2024 5-year B19013",
+      "variables": [
+        "B19013_001E",
+        "B19013_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b19013.dat",
@@ -41,6 +49,10 @@
     },
     {
       "dataset": "ACS 2024 5-year B25001",
+      "variables": [
+        "B25001_001E",
+        "B25001_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25001.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25001.dat",
@@ -49,6 +61,12 @@
     },
     {
       "dataset": "ACS 2024 5-year B25002",
+      "variables": [
+        "B25002_002E",
+        "B25002_002M",
+        "B25002_003E",
+        "B25002_003M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25002.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25002.dat",
@@ -57,6 +75,12 @@
     },
     {
       "dataset": "ACS 2024 5-year B25003",
+      "variables": [
+        "B25003_002E",
+        "B25003_002M",
+        "B25003_003E",
+        "B25003_003M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25003.dat",
@@ -65,6 +89,10 @@
     },
     {
       "dataset": "ACS 2024 5-year B25064",
+      "variables": [
+        "B25064_001E",
+        "B25064_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25064.dat",
@@ -73,6 +101,10 @@
     },
     {
       "dataset": "ACS 2024 5-year B25077",
+      "variables": [
+        "B25077_001E",
+        "B25077_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25077.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
       "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25077.dat",
@@ -80,84 +112,124 @@
       "sha256": "89eb2153764a2330b23959d8bbc29b3a8f3016f087b990f2a8ea0d5096d9a816"
     },
     {
-      "dataset": "ACS 2024 5-year B25103",
-      "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25103.dat",
+      "dataset": "ACS 2024 5-year B25088",
+      "variables": [
+        "B25088_002E",
+        "B25088_002M"
+      ],
+      "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25088.dat",
       "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
-      "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25103.dat",
-      "bytes": 15291783,
-      "sha256": "ba3a7cd0955d1d94d8e34632ba9e5e41780a97d4820fa7c534d23da7dfe2e1c8"
+      "cachePath": "source-cache/census-summary/2024/acsdt5y2024-b25088.dat",
+      "bytes": 27427351,
+      "sha256": "bb2dde4a590f54e98ecba3a1e9f7c6f282a20a28a8db6ff5dff9638646b11f34"
     },
     {
       "dataset": "ACS 2019 5-year geography labels",
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/Geos20195YR.csv",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/Geos20195YR.csv",
       "bytes": 101337142,
       "sha256": "a11e047765ba003c6b49de8ec50d2e054befcb6a0b7f566693fefac3befe18a1"
     },
     {
       "dataset": "ACS 2019 5-year B01003",
+      "variables": [
+        "B01003_001E",
+        "B01003_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b01003.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b01003.dat",
       "bytes": 17185601,
       "sha256": "70e30fd7fdcef3aba956b174baca16ab1dc7b1bd23902b77882abe87e51912da"
     },
     {
       "dataset": "ACS 2019 5-year B19013",
+      "variables": [
+        "B19013_001E",
+        "B19013_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b19013.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b19013.dat",
       "bytes": 16449559,
       "sha256": "623266bf4541f2ab90c8541b0741aa509e2d612b0926de04fd58f0e08dffbc8f"
     },
     {
       "dataset": "ACS 2019 5-year B25001",
+      "variables": [
+        "B25001_001E",
+        "B25001_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25001.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25001.dat",
       "bytes": 16587589,
       "sha256": "db9ca73647b42d803aa5879e92a9dcaca8ef83e6592b2241376c31613148dc72"
     },
     {
       "dataset": "ACS 2019 5-year B25002",
+      "variables": [
+        "B25002_002E",
+        "B25002_002M",
+        "B25002_003E",
+        "B25002_003M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25002.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25002.dat",
       "bytes": 21777907,
       "sha256": "9e85a760eb18d28d4068571717ed3ed0145e82e0f9bcf3e5eede90122dcb7dd1"
     },
     {
       "dataset": "ACS 2019 5-year B25003",
+      "variables": [
+        "B25003_002E",
+        "B25003_002M",
+        "B25003_003E",
+        "B25003_003M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25003.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25003.dat",
       "bytes": 25076793,
       "sha256": "d416222de290f8e9f305d6b3adaf45da4c9531c3f1713cbddc9478f8afbb7f4e"
     },
     {
       "dataset": "ACS 2019 5-year B25064",
+      "variables": [
+        "B25064_001E",
+        "B25064_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25064.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25064.dat",
       "bytes": 15497243,
       "sha256": "23178fb81858c663859191d5649736b8de9c4c21ea6cfdb90445dc96e55a1616"
     },
     {
       "dataset": "ACS 2019 5-year B25077",
+      "variables": [
+        "B25077_001E",
+        "B25077_001M"
+      ],
       "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25077.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
       "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25077.dat",
       "bytes": 17000487,
       "sha256": "4e57bc394123ad36d05d46fc80df02921502494c235fc5bdfce1d129248cbfbe"
     },
     {
-      "dataset": "ACS 2019 5-year B25103",
-      "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25103.dat",
-      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2024.html",
-      "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25103.dat",
-      "bytes": 14137273,
-      "sha256": "c7f61bad7e3342e5877489c1f5a3ddded12d0ca7bac6d2d46de753a087b458ee"
+      "dataset": "ACS 2019 5-year B25088",
+      "variables": [
+        "B25088_002E",
+        "B25088_002M"
+      ],
+      "sourceUrl": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25088.dat",
+      "sourcePage": "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html",
+      "cachePath": "source-cache/census-summary/2019/acsdt5y2019-b25088.dat",
+      "bytes": 24490106,
+      "sha256": "13f7c611fe9dd78eb796492e84520005b3756eb12c2d17dcc726157c1fb92973"
     },
     {
       "dataset": "areas",
@@ -218,12 +290,80 @@
     "articles": 3152,
     "bundles": 788,
     "batches": 40,
-    "mediaAssets": 7
+    "mediaAssets": 7,
+    "staleBundlesRemoved": 0
   },
   "validation": {
     "articles": 3152,
     "locations": 788,
-    "paragraphHashes": 18912
+    "paragraphHashes": 24619,
+    "substantiveSentences": 588,
+    "similarity": [
+      {
+        "articleType": "state_home_price_movement",
+        "articles": 51,
+        "meanShingleSimilarity": 0.7005090214975803,
+        "p95ShingleSimilarity": 0.8292397660818713,
+        "structuralSignatures": 51,
+        "largestSignatureShare": 0.0196078431372549
+      },
+      {
+        "articleType": "state_labor_market",
+        "articles": 51,
+        "meanShingleSimilarity": 0.5992226986896426,
+        "p95ShingleSimilarity": 0.7200447928331467,
+        "structuralSignatures": 51,
+        "largestSignatureShare": 0.0196078431372549
+      },
+      {
+        "articleType": "state_housing_costs",
+        "articles": 51,
+        "meanShingleSimilarity": 0.6875841612104641,
+        "p95ShingleSimilarity": 0.8489388264669163,
+        "structuralSignatures": 51,
+        "largestSignatureShare": 0.0196078431372549
+      },
+      {
+        "articleType": "state_loan_limit_landscape",
+        "articles": 51,
+        "meanShingleSimilarity": 0.6618073872449223,
+        "p95ShingleSimilarity": 0.8182857142857143,
+        "structuralSignatures": 51,
+        "largestSignatureShare": 0.0196078431372549
+      },
+      {
+        "articleType": "affordability_home_values",
+        "articles": 737,
+        "meanShingleSimilarity": 0.7159246087076453,
+        "p95ShingleSimilarity": 0.8615196078431373,
+        "structuralSignatures": 718,
+        "largestSignatureShare": 0.0027137042062415195
+      },
+      {
+        "articleType": "housing_supply_tenure",
+        "articles": 737,
+        "meanShingleSimilarity": 0.7101197034050574,
+        "p95ShingleSimilarity": 0.838107098381071,
+        "structuralSignatures": 723,
+        "largestSignatureShare": 0.0027137042062415195
+      },
+      {
+        "articleType": "local_labor_market",
+        "articles": 737,
+        "meanShingleSimilarity": 0.7151695457727554,
+        "p95ShingleSimilarity": 0.8426698450536353,
+        "structuralSignatures": 715,
+        "largestSignatureShare": 0.0027137042062415195
+      },
+      {
+        "articleType": "county_loan_limits",
+        "articles": 737,
+        "meanShingleSimilarity": 0.6512802070369026,
+        "p95ShingleSimilarity": 0.7816091954022989,
+        "structuralSignatures": 715,
+        "largestSignatureShare": 0.0027137042062415195
+      }
+    ]
   },
   "batches": [
     {
@@ -25106,6 +25246,10 @@
       "status": "validated"
     }
   ],
+  "cleanup": {
+    "expectedBundles": 788,
+    "staleBundlesRemoved": []
+  },
   "exceptions": [
     {
       "cityId": "city-bridgeport-ct",

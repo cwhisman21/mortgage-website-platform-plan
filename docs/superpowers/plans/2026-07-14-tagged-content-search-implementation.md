@@ -478,9 +478,11 @@ Run: `node mock-data/generate-location-news.mjs`
 
 Run: `node mock-data/build-tagged-content-search.mjs`
 
+Run: `node mock-data/generate-location-news.mjs --attribution-only`
+
 Run: `node mock-data/generate-static-routes.mjs`
 
-Expected: every command exits 0. Review generated diffs to confirm they are deterministic consequences of canonical sources; do not hand-edit generated HTML or unrelated location content.
+Expected: every command exits 0. The attribution-only pass must follow the final tag build so standalone article JSON-LD, visible tag links, and sitemap dates use the final registry. Review generated diffs to confirm they are deterministic consequences of canonical sources; do not hand-edit generated HTML or unrelated location content.
 
 - [ ] **Step 4: Apply the customer-useful content review to tag-page copy**
 

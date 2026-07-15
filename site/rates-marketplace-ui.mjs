@@ -19,12 +19,13 @@ const RESULT_TYPES = [
 ];
 const SORTS = [
   ["lowestEightYearCost", "Lowest 8-year cost"],
-  ["lowestApr", "Lowest APR"],
+  ["lowestApr", "Lowest simplified APR"],
   ["lowestRate", "Lowest rate"],
   ["lowestMonthlyPayment", "Lowest monthly payment"],
+  ["lowestPoints", "Lowest points"],
   ["lowestUpfrontCost", "Lowest upfront cost"],
-  ["highestRating", "Highest rating"],
 ];
+const PUBLIC_SORT_VALUES = new Set(SORTS.map(([value]) => value));
 const CREDIT_RANGES = ["620-679", "680-719", "720-739", "740-779", "780+"];
 const TERMS = [10, 15, 20, 30];
 const PROPERTY_TYPES = [
@@ -61,6 +62,7 @@ const ANALYTICS_EVENTS = [
   "rates_marketplace_sort",
   "rates_marketplace_show_more",
   "rates_marketplace_expand_offer",
+  "rates_marketplace_expand_all",
   "rates_marketplace_tab",
   "rates_marketplace_payment_assumption",
   "rates_marketplace_chart_detail",
@@ -85,10 +87,48 @@ function normalizeFixtureSafe(fixture) {
 }
 
 function normalizeState(state = {}) {
-  return resolveScenarioContext({
+  const normalized = resolveScenarioContext({
     account: state,
     defaults: MARKETPLACE_DEFAULTS,
   });
+  if (!PUBLIC_SORT_VALUES.has(normalized.sort)) {
+    normalized.sort = MARKETPLACE_DEFAULTS.sort;
+  }
+  return normalized;
+}
+
+function normalizeExpandedOfferIds(value, legacyOfferId = null) {
+  const source = Array.isArray(value) ? value : legacyOfferId ? [legacyOfferId] : [];
+  return [...new Set(source.filter((id) => typeof id === "string" && id.trim()))];
+}
+
+function normalizeExpandedTabs(value = {}, legacyOfferId = null, legacyTab = "details") {
+  const tabs = {};
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    for (const [offerId, tab] of Object.entries(value)) {
+      if (typeof offerId === "string" && ["details", "payment", "reviews"].includes(tab)) {
+        tabs[offerId] = tab;
+      }
+    }
+  }
+  if (legacyOfferId && !tabs[legacyOfferId]) tabs[legacyOfferId] = legacyTab || "details";
+  return tabs;
+}
+
+function normalizeUiState(state = {}, previous = {}) {
+  const normalized = normalizeState(state);
+  const hasExpandedIds = Object.hasOwn(state, "expandedOfferIds");
+  const legacyOfferId = hasExpandedIds ? null : state.expandedOfferId || previous.expandedOfferId || null;
+  const expandedSource = hasExpandedIds ? state.expandedOfferIds : previous.expandedOfferIds;
+  normalized.expandedOfferIds = normalizeExpandedOfferIds(expandedSource, legacyOfferId);
+  normalized.expandedTabsByOffer = normalizeExpandedTabs(
+    state.expandedTabsByOffer ?? previous.expandedTabsByOffer,
+    legacyOfferId,
+    state.expandedTab || previous.expandedTab || "details",
+  );
+  normalized.advancedFiltersOpen = Boolean(state.advancedFiltersOpen ?? previous.advancedFiltersOpen);
+  normalized.mobileFiltersOpen = Boolean(state.mobileFiltersOpen ?? previous.mobileFiltersOpen);
+  return normalized;
 }
 
 function formatCurrency(value) {
@@ -97,6 +137,10 @@ function formatCurrency(value) {
 
 function formatRate(value) {
   return `${Number(value).toFixed(3).replace(/0$/, "").replace(/0$/, "")}%`;
+}
+
+function formatPoints(value) {
+  return Number(value).toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
 }
 
 function initials(name) {
@@ -164,9 +208,21 @@ function scenarioForm(state) {
   const advancedOpen = Boolean(state.advancedFiltersOpen);
   const advancedId = "rates-advanced-filters";
   return `
+    <button
+      class="rates-mobile-scenario"
+      type="button"
+      aria-expanded="${state.mobileFiltersOpen ? "true" : "false"}"
+      data-toggle-mobile-filters
+    >
+      <span><small>Your scenario</small><strong>${esc(summarizeScenario(state))}</strong></span>
+      <em>${state.mobileFiltersOpen ? "Close" : "Edit"}</em>
+    </button>
     <form class="rates-marketplace-form" data-rates-form>
       <div class="rates-form-heading">
-        <h2>Tell us what you are comparing</h2>
+        <div>
+          <h2>Your scenario</h2>
+          <p>Changes are applied together when you select Update offers.</p>
+        </div>
         <button type="button" class="text-button" data-reset-marketplace data-analytics-event="rates_marketplace_reset">Reset filters</button>
       </div>
       <div class="rates-form-grid">
@@ -175,7 +231,6 @@ function scenarioForm(state) {
           ${segmented("mortgage-type", [["purchase", "Purchase"], ["refinance", "Refinance"]], state.mortgageType)}
           <input type="hidden" name="mortgageType" data-marketplace-field="mortgageType" value="${esc(state.mortgageType)}" />
         </label>
-        ${selectField({ label: "Sort by", name: "sort", value: state.sort, options: SORTS })}
         <label class="rates-field">
           <span>ZIP code</span>
           <input name="zip" data-marketplace-field="zip" inputmode="numeric" maxlength="5" value="${esc(state.zip)}" />
@@ -183,18 +238,19 @@ function scenarioForm(state) {
         <div data-purchase-fields${purchaseHidden}>
           ${numberInput({ label: "Purchase price", name: "purchasePrice", value: state.purchasePrice })}
         </div>
-        <div data-purchase-fields${purchaseHidden}>
-          ${numberInput({ label: "Down payment", name: "downPaymentAmount", value: state.downPaymentAmount })}
-        </div>
-        <div data-purchase-fields${purchaseHidden}>
-          <label class="rates-field">
-            <span>Down payment percent</span>
+        <fieldset class="rates-field rates-linked-field" data-purchase-fields${purchaseHidden}>
+          <legend>Down payment</legend>
+          <div class="rates-linked-inputs">
             <span class="rates-input-shell">
-              <input name="downPaymentPercent" data-marketplace-field="downPaymentPercent" inputmode="decimal" min="0" max="100" step="0.1" value="${esc(state.downPaymentPercent)}" type="number" />
+              <span aria-hidden="true">$</span>
+              <input aria-label="Down payment amount" name="downPaymentAmount" data-marketplace-field="downPaymentAmount" inputmode="numeric" min="0" step="1000" value="${esc(state.downPaymentAmount)}" type="number" />
+            </span>
+            <span class="rates-input-shell">
+              <input aria-label="Down payment percent" name="downPaymentPercent" data-marketplace-field="downPaymentPercent" inputmode="decimal" min="0" max="100" step="0.1" value="${esc(state.downPaymentPercent)}" type="number" />
               <span aria-hidden="true">%</span>
             </span>
-          </label>
-        </div>
+          </div>
+        </fieldset>
         <div data-refinance-fields${refinanceHidden}>
           ${numberInput({ label: "Property value", name: "propertyValue", value: state.propertyValue })}
         </div>
@@ -206,8 +262,10 @@ function scenarioForm(state) {
           ${segmented("cash-out", [["false", "No"], ["true", "Yes"]], String(Boolean(state.cashOut)))}
           <input type="hidden" name="cashOut" data-marketplace-field="cashOut" value="${esc(String(Boolean(state.cashOut)))}" />
         </label>
-        ${selectField({ label: "Credit range", name: "creditRange", value: state.creditRange, options: CREDIT_RANGES.map((item) => [item, item]) })}
-        ${selectField({ label: "Loan term", name: "term", value: String(state.term), options: TERMS.map((item) => [String(item), `${item}-year fixed`]) })}
+        <div class="rates-field-pair">
+          ${selectField({ label: "Credit score", name: "creditRange", value: state.creditRange, options: CREDIT_RANGES.map((item) => [item, item]) })}
+          ${selectField({ label: "Loan term", name: "term", value: String(state.term), options: TERMS.map((item) => [String(item), `${item}-year fixed`]) })}
+        </div>
       </div>
       <button
         class="text-button rates-advanced-toggle"
@@ -227,104 +285,94 @@ function scenarioForm(state) {
           ${segmented("show-va", [["true", "Yes"], ["false", "No"]], String(Boolean(state.showVa)))}
           <input type="hidden" name="showVa" data-marketplace-field="showVa" value="${esc(String(Boolean(state.showVa)))}" />
         </label>
-        ${selectField({ label: "Debt-to-income ratio", name: "dti", value: state.dti, options: DTI_BANDS })}
-        ${selectField({ label: "Points", name: "points", value: state.points, options: POINT_BUCKETS })}
+        <label class="rates-field rates-field-wide">
+          <span>Debt-to-income ratio</span>
+          ${segmented("dti", DTI_BANDS, state.dti)}
+          <input type="hidden" name="dti" data-marketplace-field="dti" value="${esc(state.dti)}" />
+        </label>
+        <label class="rates-field rates-field-wide">
+          <span>Points</span>
+          ${segmented("points", POINT_BUCKETS, state.points)}
+          <input type="hidden" name="points" data-marketplace-field="points" value="${esc(state.points)}" />
+        </label>
         ${selectField({ label: "Property type", name: "propertyType", value: state.propertyType, options: PROPERTY_TYPES })}
-        ${selectField({ label: "Property use", name: "occupancy", value: state.occupancy, options: OCCUPANCIES })}
+        <label class="rates-field rates-field-wide">
+          <span>Property use</span>
+          ${segmented("occupancy", OCCUPANCIES, state.occupancy)}
+          <input type="hidden" name="occupancy" data-marketplace-field="occupancy" value="${esc(state.occupancy)}" />
+        </label>
       </div>
       <div class="rates-form-actions">
         <button class="button" type="submit" data-update-marketplace data-analytics-event="rates_marketplace_update">Update offers</button>
       </div>
+      <p class="rates-form-error" id="rates-form-error" role="alert" data-rates-form-error hidden></p>
     </form>
-  `;
-}
-
-function scenarioSummaryItems(state) {
-  const common = [
-    ["Purpose", state.mortgageType === "refinance" ? "Refinance" : "Purchase"],
-    ["Location", state.zip],
-    ["Credit", `${state.creditRange}`],
-    ["Term", `${state.term}-year fixed`],
-  ];
-  if (state.mortgageType === "refinance") {
-    common.splice(2, 0, ["Property value", formatCurrency(state.propertyValue)]);
-    common.splice(3, 0, ["Loan balance", formatCurrency(state.loanBalance)]);
-  } else {
-    common.splice(2, 0, ["Price", formatCurrency(state.purchasePrice)]);
-    common.splice(3, 0, ["Down payment", `${formatCurrency(state.downPaymentAmount)} | ${state.downPaymentPercent}%`]);
-  }
-  return common;
-}
-
-function scenarioSummary(state) {
-  return `
-    <section class="rates-scenario-summary" aria-label="Your mortgage scenario">
-      <div class="rates-summary-top">
-        <h3>Your mortgage scenario</h3>
-        <button type="button" class="text-button" data-edit-marketplace>Edit answers</button>
-      </div>
-      <div class="rates-summary-grid">
-        ${scenarioSummaryItems(state)
-          .map(([label, value]) => `<div><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`)
-          .join("")}
-      </div>
-      <p>${esc(summarizeScenario(state))}</p>
-    </section>
   `;
 }
 
 function disclosure(fixture) {
   return `
-    <aside class="rates-disclosure">
-      <span aria-hidden="true">i</span>
-      <div>
-        <strong>Illustrative comparison results</strong>
+    <details class="rates-disclosure" data-rates-disclosure>
+      <summary>About these illustrative results <span aria-hidden="true">⌄</span></summary>
+      <div class="rates-disclosure-body">
         <p>${esc(fixture.disclosure)}</p>
         ${fixture.sampleOfferDisclosure ? `<p>${esc(fixture.sampleOfferDisclosure)}</p>` : ""}
       </div>
-    </aside>
+    </details>
   `;
 }
 
 function offerProfile(offer) {
-  const typeLabel = offer.resultType === "loanOfficer" ? "Loan officer" : "Company";
-  const profile = offer.resultType === "loanOfficer" && offer.profileRoute
-    ? `<a href="${esc(offer.profileRoute)}">${esc(offer.displayName)}</a>`
+  const isLoanOfficer = offer.resultType === "loanOfficer";
+  const mediaUrl = isLoanOfficer ? offer.headshotUrl : offer.logoUrl;
+  const mediaClass = isLoanOfficer ? "loan-officer" : "company";
+  const media = mediaUrl
+    ? `<img class="rates-provider-media ${mediaClass}" src="${esc(mediaUrl)}" alt="" loading="lazy" />`
+    : `<span class="rates-provider-media ${mediaClass}" aria-hidden="true">${esc(initials(offer.displayName))}</span>`;
+  const safeProfileRoute = typeof offer.profileRoute === "string" && offer.profileRoute.startsWith("/")
+    ? offer.profileRoute
+    : "";
+  const name = safeProfileRoute
+    ? `<a href="${esc(safeProfileRoute)}">${esc(offer.displayName)}</a>`
     : `<strong>${esc(offer.displayName)}</strong>`;
+  const identityLine = isLoanOfficer
+    ? offer.companyName || "Loan officer result"
+    : "Company result";
   return `
-    <div class="rates-offer-profile">
-      <span class="rates-avatar" aria-hidden="true">${esc(initials(offer.displayName))}</span>
+    <div class="rates-offer-profile" data-provider-kind="${esc(offer.resultType)}">
+      ${media}
       <div>
-        <span>${esc(typeLabel)}</span>
-        ${profile}
-        <small>${esc(offer.sponsoringCompany || offer.nmlsDisplay || "")}${offer.sponsoringCompany ? ` | ${esc(offer.nmlsDisplay)}` : ""}</small>
+        ${name}
+        <span>${esc(identityLine)}</span>
+        <small>${esc(offer.productLabel)}</small>
       </div>
     </div>
   `;
 }
 
-function offerMetric(label, value, strong = true) {
-  return `<div class="rates-offer-metric"><span>${esc(label)}</span><${strong ? "strong" : "em"}>${esc(value)}</${strong ? "strong" : "em"}></div>`;
+function offerMetric(label, value, sortValue, activeSort) {
+  const active = sortValue === activeSort ? " active-sort" : "";
+  return `<div class="rates-offer-metric${active}" data-sort-metric="${esc(sortValue)}"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`;
 }
 
 function offerRow(offer, state) {
-  const expanded = state.expandedOfferId === offer.id;
+  const expanded = state.expandedOfferIds.includes(offer.id);
+  const panelId = `rates-panel-${offer.id}`;
   return `
     <article class="rates-offer ${expanded ? "active" : ""}" data-offer-id="${esc(offer.id)}">
       <div class="rates-offer-row">
         ${offerProfile(offer)}
         <div class="rates-offer-metrics">
-          ${offerMetric("Rate", formatRate(offer.rate))}
-          ${offerMetric("APR", formatRate(offer.apr))}
-          ${offerMetric("Points", Number(offer.points).toFixed(3).replace(/0+$/, "").replace(/\.$/, ""), false)}
-          ${offerMetric("Payment", formatCurrency(offer.principalAndInterest))}
-          ${offerMetric("Upfront", formatCurrency(offer.upfrontCost))}
-          ${offerMetric("8-year cost", formatCurrency(offer.eightYearCost))}
-          ${offerMetric("Rating", `${offer.rating} / 5`, false)}
+          ${offerMetric("Rate", formatRate(offer.rate), "lowestRate", state.sort)}
+          ${offerMetric("APR", formatRate(offer.apr), "lowestApr", state.sort)}
+          ${offerMetric("Payment", formatCurrency(offer.principalAndInterest), "lowestMonthlyPayment", state.sort)}
+          ${offerMetric("Points", formatPoints(offer.points), "lowestPoints", state.sort)}
+          ${offerMetric("Upfront", formatCurrency(offer.upfrontCost), "lowestUpfrontCost", state.sort)}
+          ${offerMetric("8-year cost", formatCurrency(offer.eightYearCost), "lowestEightYearCost", state.sort)}
         </div>
         <div class="rates-offer-actions">
-          <button class="button" type="button" data-prequal-offer="${esc(offer.id)}" data-analytics-event="rates_provider_next">Next</button>
-          <button class="text-button" type="button" data-offer-details="${esc(offer.id)}" aria-expanded="${expanded ? "true" : "false"}" data-analytics-event="rates_marketplace_expand_offer">${expanded ? "Hide details" : "Show details"}</button>
+          <button class="button" type="button" data-prequal-offer="${esc(offer.id)}" data-analytics-event="rates_provider_next">Continue</button>
+          <button class="text-button" type="button" data-offer-details="${esc(offer.id)}" aria-expanded="${expanded ? "true" : "false"}" aria-controls="${esc(panelId)}" data-analytics-event="rates_marketplace_expand_offer">${expanded ? "Hide details" : "View details"}</button>
         </div>
       </div>
       ${expanded ? expandedPanel(offer, state) : ""}
@@ -333,18 +381,24 @@ function offerRow(offer, state) {
 }
 
 function detailPanel(offer) {
+  const calculation = offer.calculation || {};
   return `
     <div class="rates-expanded-grid">
       <div>
-        <h4>Upfront costs for this offer: ${esc(formatCurrency(offer.upfrontCost))}</h4>
+        <h4>Listed upfront cost: ${esc(formatCurrency(offer.upfrontCost))}</h4>
         <p>${esc(offer.details.summary)}</p>
         <dl class="rates-fee-list">
+          <div><dt>Points (${esc(formatPoints(offer.points))})</dt><dd>${esc(formatCurrency(calculation.pointCost))}</dd></div>
           ${offer.details.feeLines.map((line) => `<div><dt>${esc(line.label)}</dt><dd>${esc(formatCurrency(line.amount))}</dd></div>`).join("")}
+          ${calculation.lenderCredits ? `<div><dt>Lender credit</dt><dd>-${esc(formatCurrency(calculation.lenderCredits))}</dd></div>` : ""}
         </dl>
       </div>
       <div>
-        <h4>8-year cost: ${esc(formatCurrency(offer.eightYearCost))}</h4>
+        <h4>8-year borrowing cost: ${esc(formatCurrency(offer.eightYearCost))}</h4>
+        <p>This adds ${esc(formatCurrency(calculation.interestThroughHorizon))} of calculated interest through ${esc(calculation.horizonMonths)} payments to ${esc(formatCurrency(offer.upfrontCost))} of listed upfront cost. Principal repaid is not counted as a borrowing cost.</p>
         <ul class="rates-plain-list">
+          <li><strong>Loan amount:</strong> ${esc(formatCurrency(calculation.loanAmount))}</li>
+          <li><strong>Simplified APR:</strong> ${esc(calculation.aprMethod)}</li>
           ${offer.details.assumptions.map((item) => `<li>${esc(item)}</li>`).join("")}
           ${offer.details.footnotes.map((item) => `<li>${esc(item)}</li>`).join("")}
         </ul>
@@ -371,7 +425,7 @@ function paymentPanel(offer, state) {
   return `
     <div class="rates-payment-panel" data-payment-panel="${esc(offer.id)}">
       <div class="rates-payment-editor">
-        <h4>Calculate your monthly payment</h4>
+        <h4>Edit illustrative monthly payment assumptions</h4>
         <div class="rates-payment-line fixed"><span>Principal and interest</span><strong>${esc(formatCurrency(offer.principalAndInterest))}</strong></div>
         ${PAYMENT_FIELDS
           .map(
@@ -430,50 +484,142 @@ function donutChart(offer, assumptions, detailId) {
   `;
 }
 
-function reviewsPanel(offer) {
-  const reviewEntries = Object.entries(offer.reviews.distribution || {}).sort((a, b) => Number(b[0]) - Number(a[0]));
-  const max = Math.max(...reviewEntries.map(([, value]) => Number(value)), 1);
+function reviewsPanel() {
   return `
     <div class="rates-reviews-panel">
       <div>
-        <h4>Customer reviews</h4>
-        <p><strong>${esc(offer.rating)} / 5</strong> across ${esc(offer.reviewCount)} illustrative review entries</p>
-        <p>Read-only review source: ${esc(offer.reviews.source)}</p>
+        <h4>Review evidence checklist</h4>
+        <p>These illustrative providers include no customer testimony, customer identities, scores, or provider review claims.</p>
+        <p>Use attributable evidence before relying on public review signals.</p>
       </div>
-      <div class="rates-rating-bars" aria-label="Review distribution">
-        ${reviewEntries
-          .map(([stars, count]) => `<div><span>${esc(stars)} stars</span><meter min="0" max="${esc(max)}" value="${esc(count)}">${esc(count)}</meter><strong>${esc(count)}</strong></div>`)
-          .join("")}
+      <div>
+        <h4>Source, date, and volume</h4>
+        <ul class="rates-plain-list">
+          <li><strong>Review source:</strong> Identify the publisher and whether the record is first-party, independent, or syndicated.</li>
+          <li><strong>Most recent review date:</strong> Confirm when the newest entry was published and the date range represented.</li>
+          <li><strong>Total review count:</strong> Confirm the attributable total and whether filtered or removed entries are disclosed.</li>
+        </ul>
       </div>
-      <div class="rates-review-list">
-        ${(offer.reviews.items || [])
-          .map((item) => `<blockquote><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p><cite>${esc(item.author)} | ${esc(item.date)}</cite></blockquote>`)
-          .join("")}
+      <div>
+        <h4>Quality and relevance</h4>
+        <ul class="rates-plain-list">
+          <li><strong>Verification method:</strong> Check how the source confirms a real customer or completed transaction.</li>
+          <li><strong>Moderation policy:</strong> Review how disputes, incentives, removals, and provider responses are handled.</li>
+          <li><strong>Scenario relevance:</strong> Compare loan purpose, product, geography, and time period with your own search.</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+function hasAttributableReviews(offer) {
+  const source = String(offer.reviews?.source || "");
+  return Boolean(
+    offer.reviews?.items?.length &&
+    source &&
+    !/fixture|sample marketplace/i.test(source),
+  );
+}
+
+function completeAssumptions(offer) {
+  const sample = offer.details?.sampleScenario || {};
+  const propertyBasis = sample.price
+    ? `${formatCurrency(sample.price)} purchase price and ${formatCurrency(sample.downPayment)} down payment`
+    : `${formatCurrency(sample.propertyValue)} property value; ${sample.cashOut || "no cash out included"}`;
+  const reviewDate = sample.reviewedDate || "review date unavailable";
+  return `
+    <div class="rates-expanded-grid rates-assumptions-grid" aria-label="Complete illustrative assumptions">
+      <div>
+        <h4>Complete illustrative assumptions</h4>
+        <ul class="rates-plain-list">
+          <li><strong>Purpose and product:</strong> ${esc(sample.purpose || offer.mortgageType)}; ${esc(offer.productLabel)}.</li>
+          <li><strong>Term:</strong> ${esc(offer.term)}-year fixed sample.</li>
+          <li><strong>Loan amount and LTV:</strong> ${esc(formatCurrency(sample.loanAmount))}; ${esc(sample.ltv)}% illustrative LTV.</li>
+          <li><strong>Credit assumption:</strong> ${esc(sample.creditRange)} self-selected range; no credit report is requested.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pricing assumptions</h4>
+        <ul class="rates-plain-list">
+          <li><strong>Geography assumption:</strong> ZIP ${esc(sample.zip)} for sample context only; no local pricing or provider availability is claimed.</li>
+          <li><strong>Property and occupancy:</strong> ${esc(propertyBasis)}; ${esc(sample.propertyType)}, ${esc(sample.occupancy)}.</li>
+          <li><strong>Lock assumption:</strong> ${esc(sample.lockAssumption)}</li>
+          <li><strong>Points and credits:</strong> ${esc(formatPoints(offer.points))} sample discount points; ${esc(formatCurrency(sample.lenderCredits))} lender credits.</li>
+          <li><strong>APR treatment:</strong> ${esc(sample.aprTreatment)}</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Costs and source</h4>
+        <ul class="rates-plain-list">
+          <li><strong>Payment includes:</strong> ${esc(sample.paymentIncludes)}</li>
+          <li><strong>Included costs:</strong> ${esc(sample.includedCosts)}</li>
+          <li><strong>Excluded costs:</strong> ${esc(sample.excludedCosts)}</li>
+          <li><strong>Comparison horizon:</strong> ${esc(sample.comparisonHorizon)}</li>
+          <li><strong>Source and date:</strong> ${esc(sample.source)} Inputs reviewed ${esc(reviewDate)}; this is not a live pricing timestamp.</li>
+        </ul>
       </div>
     </div>
   `;
 }
 
 function expandedPanel(offer, state) {
-  const tab = state.expandedTab || "details";
-  const body = tab === "payment" ? paymentPanel(offer, state) : tab === "reviews" ? reviewsPanel(offer) : detailPanel(offer);
+  const tabs = ["details", "payment"];
+  if (hasAttributableReviews(offer)) tabs.push("reviews");
+  const requestedTab = state.expandedTabsByOffer?.[offer.id] || "details";
+  const tab = tabs.includes(requestedTab) ? requestedTab : "details";
+  const body = tab === "payment" ? paymentPanel(offer, state) : tab === "reviews" ? reviewsPanel() : detailPanel(offer);
+  const panelId = `rates-panel-${offer.id}`;
+  const tabPanelId = `${panelId}-content`;
+  const selectedTabId = `rates-tab-${offer.id}-${tab}`;
   return `
-    <section class="rates-expanded-panel" data-expanded-offer="${esc(offer.id)}">
-      <div class="rates-tabs" role="tablist" aria-label="Offer details">
-        ${["details", "payment", "reviews"]
-          .map((item) => `<button type="button" role="tab" class="${tab === item ? "active" : ""}" aria-selected="${tab === item ? "true" : "false"}" data-offer-tab="${esc(item)}" data-offer-id="${esc(offer.id)}" data-analytics-event="rates_marketplace_tab">${esc(item[0].toUpperCase() + item.slice(1))}</button>`)
+    <section class="rates-expanded-panel" id="${esc(panelId)}" data-expanded-offer="${esc(offer.id)}">
+        <div class="rates-tabs" role="tablist" aria-label="Illustrative comparison details">
+        ${tabs
+          .map((item) => `<button type="button" role="tab" id="rates-tab-${esc(offer.id)}-${esc(item)}" class="${tab === item ? "active" : ""}" aria-selected="${tab === item ? "true" : "false"}" aria-controls="${esc(tabPanelId)}" tabindex="${tab === item ? "0" : "-1"}" data-offer-tab="${esc(item)}" data-offer-id="${esc(offer.id)}" data-analytics-event="rates_marketplace_tab">${esc(item[0].toUpperCase() + item.slice(1))}</button>`)
           .join("")}
       </div>
-      <div class="rates-tab-panel">${body}</div>
+      <div class="rates-tab-panel" id="${esc(tabPanelId)}" role="tabpanel" aria-labelledby="${esc(selectedTabId)}">${body}</div>
+      ${completeAssumptions(offer)}
     </section>
   `;
 }
 
-function resultsHeader(state, totalVisibleLabel) {
+function resultsHeader(state, result) {
+  const visibleIds = result.items.map((offer) => offer.id);
+  const allExpanded = visibleIds.length > 0 && visibleIds.every((id) => state.expandedOfferIds.includes(id));
   return `
-    <div class="rates-results-heading">
-      <h2>${esc(totalVisibleLabel)} illustrative lender scenarios</h2>
-      ${segmented("result-type", RESULT_TYPES, state.resultType, "rates_marketplace_result_type")}
+    <div class="rates-results-utility">
+      <div class="rates-results-count">
+        <h2>${esc(result.total)} illustrative results</h2>
+        ${visibleIds.length ? `<button class="text-button" type="button" data-expand-all aria-expanded="${allExpanded ? "true" : "false"}" data-analytics-event="rates_marketplace_expand_all">${allExpanded ? "Collapse all" : "Expand all"}</button>` : ""}
+      </div>
+      <div class="rates-results-controls">
+        ${segmented("result-type", RESULT_TYPES, state.resultType, "rates_marketplace_result_type")}
+        <label class="rates-sort-field">
+          <span>Sort by</span>
+          <select name="sort" value="${esc(state.sort)}" data-marketplace-sort data-analytics-event="rates_marketplace_sort">
+            ${optionList(SORTS, state.sort)}
+          </select>
+        </label>
+      </div>
+    </div>
+  `;
+}
+
+function resultsColumns(state) {
+  const columns = [
+    ["Provider", ""],
+    ["Rate", "lowestRate"],
+    ["APR", "lowestApr"],
+    ["Payment", "lowestMonthlyPayment"],
+    ["Points", "lowestPoints"],
+    ["Upfront", "lowestUpfrontCost"],
+    ["8-year cost", "lowestEightYearCost"],
+    ["Actions", ""],
+  ];
+  return `
+    <div class="rates-results-columns" aria-hidden="true">
+      ${columns.map(([label, sort]) => `<span class="${sort === state.sort ? "active-sort" : ""}">${esc(label)}${sort === state.sort ? " ↓" : ""}</span>`).join("")}
     </div>
   `;
 }
@@ -491,32 +637,33 @@ function renderBody(fixture, state) {
   return `
     <section class="rates-marketplace-hero">
       <div>
-        <p class="eyebrow">Rates and offers</p>
-        <h1>Compare mortgage offers with your priorities in view</h1>
-        <p>Start with illustrative lender scenarios, refine the details that matter to you, and review the full cost before choosing who to contact.</p>
+        <p class="eyebrow">Compare mortgage costs</p>
+        <h1>Compare sample mortgage costs across companies and loan officers</h1>
+        <p>Start with anonymous illustrative results, refine the details that matter to you, and compare the same cost measures across companies or loan officers before choosing a next step.</p>
       </div>
     </section>
     <section class="rates-marketplace-workspace">
-      <aside class="rates-filter-rail">
+      <aside class="rates-filter-rail" data-mobile-open="${state.mobileFiltersOpen ? "true" : "false"}">
         ${scenarioForm(state)}
       </aside>
       <div class="rates-results-panel" data-rates-results>
-        ${resultsHeader(state, String(Math.min(result.items.length, state.visibleCount || DEFAULT_VISIBLE_COUNT)))}
-        ${scenarioSummary(state)}
-        ${disclosure(fixture)}
+        ${resultsHeader(state, result)}
         ${validation.valid ? "" : `<div class="rates-empty-state"><strong>Review the scenario fields before comparing offers.</strong><p>${esc(Object.values(validation.errors)[0] || "Some fields need attention.")}</p></div>`}
-        ${hasOffers ? result.items.map((offer) => offerRow(offer, state)).join("") : noMatchState()}
-        ${result.hasMore ? `<button class="button secondary" type="button" data-show-more-offers data-analytics-event="rates_marketplace_show_more">Show more offers</button>` : ""}
+        ${hasOffers ? resultsColumns(state) : ""}
+        ${hasOffers ? result.items.map((offer) => offerRow(offer, state)).join("") : noMatchState(state.resultType)}
+        ${result.hasMore ? `<button class="button secondary rates-show-more" type="button" data-show-more-offers data-analytics-event="rates_marketplace_show_more">Show more offers</button>` : ""}
+        ${disclosure(fixture)}
       </div>
     </section>
   `;
 }
 
-function noMatchState() {
+function noMatchState(resultType) {
+  const resultLabel = resultType === "loanOfficer" ? "loan officers" : "companies";
   return `
     <div class="rates-empty-state">
-      <strong>No illustrative lender scenarios match those filters yet.</strong>
-      <p>Try a broader loan term, include FHA or VA options, or read the public rate education below before contacting a loan officer.</p>
+      <strong>No illustrative ${esc(resultLabel)} match those filters yet.</strong>
+      <p>The current examples use 30-year terms. Choose 30-year, include FHA or VA options, or read the public rate education below before contacting a loan officer.</p>
       <a href="/learning-center">Review mortgage education</a>
       <a href="/loan-officers">Find loan officer guidance</a>
     </div>
@@ -528,7 +675,7 @@ function errorState(message) {
     <section class="rates-marketplace" data-rates-marketplace>
       <div class="rates-empty-state">
         <strong>Rate comparison is temporarily unavailable.</strong>
-        <p>${esc(message || "The illustrative lender scenarios could not be read.")}</p>
+        <p>${esc(message || "The illustrative sample results could not be read.")}</p>
         <a href="/rates#rate-table">Continue to rate education</a>
         <a href="/loan-officers">Find loan officer guidance</a>
       </div>
@@ -539,15 +686,13 @@ function errorState(message) {
 export function renderRatesMarketplace({ fixture, state = MARKETPLACE_DEFAULTS } = {}) {
   try {
     const normalizedFixture = normalizeFixtureSafe(fixture);
-    const normalizedState = normalizeState({
+    const normalizedState = normalizeUiState({
       ...MARKETPLACE_DEFAULTS,
       ...state,
       visibleCount: state.visibleCount || DEFAULT_VISIBLE_COUNT,
       resultType: state.resultType || MARKETPLACE_DEFAULTS.resultType,
       sort: state.sort || MARKETPLACE_DEFAULTS.sort,
-      expandedTab: state.expandedTab || "details",
     });
-    normalizedState.advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
     return `
       <section class="rates-marketplace" data-rates-marketplace>
         ${renderBody(normalizedFixture, normalizedState)}
@@ -604,7 +749,7 @@ function emitAnalytics(track, name, payload = {}) {
   }
 }
 
-function formState(container, currentState) {
+function formState(container, currentState, downPaymentSource = "downPaymentPercent") {
   const next = { ...currentState };
   container.querySelectorAll("[data-marketplace-field]").forEach((field) => {
     const name = field.getAttribute("name") || field.getAttribute("data-marketplace-field");
@@ -613,12 +758,50 @@ function formState(container, currentState) {
     else next[name] = field.value;
   });
   if (next.mortgageType === "purchase") {
-    Object.assign(next, updateDownPayment(next, {
-      downPaymentAmount: next.downPaymentAmount,
-      downPaymentPercent: next.downPaymentPercent,
-    }));
+    const change = downPaymentSource === "downPaymentAmount"
+      ? { downPaymentAmount: next.downPaymentAmount }
+      : { downPaymentPercent: next.downPaymentPercent };
+    Object.assign(next, updateDownPayment(next, change));
   }
-  return normalizeState(next);
+  return next;
+}
+
+function syncDownPaymentInputs(form, sourceName) {
+  const price = form?.querySelector?.('[name="purchasePrice"]');
+  const amount = form?.querySelector?.('[name="downPaymentAmount"]');
+  const percent = form?.querySelector?.('[name="downPaymentPercent"]');
+  if (!price || !amount || !percent) return;
+  const next = updateDownPayment(
+    {
+      purchasePrice: price.value,
+      downPaymentAmount: amount.value,
+      downPaymentPercent: percent.value,
+    },
+    sourceName === "downPaymentAmount"
+      ? { downPaymentAmount: amount.value }
+      : { downPaymentPercent: percent.value },
+  );
+  if (sourceName === "downPaymentAmount" && Number.isFinite(Number(next.downPaymentPercent))) {
+    percent.value = String(next.downPaymentPercent);
+  }
+  if (sourceName === "downPaymentPercent" && Number.isFinite(Number(next.downPaymentAmount))) {
+    amount.value = String(next.downPaymentAmount);
+  }
+}
+
+function showFormErrors(form, errors = {}) {
+  const firstMessage = Object.values(errors)[0] || "";
+  const error = form?.querySelector?.("[data-rates-form-error]");
+  if (error) {
+    error.textContent = firstMessage;
+    if (firstMessage) error.removeAttribute("hidden");
+    else error.setAttribute("hidden", "");
+  }
+  form?.querySelectorAll?.("[data-marketplace-field]").forEach((field) => {
+    const name = field.getAttribute("name") || field.getAttribute("data-marketplace-field");
+    if (errors[name]) field.setAttribute("aria-invalid", "true");
+    else field.removeAttribute("aria-invalid");
+  });
 }
 
 function setAdvancedFiltersOpen(container, isOpen) {
@@ -627,6 +810,35 @@ function setAdvancedFiltersOpen(container, isOpen) {
   toggle?.setAttribute("aria-expanded", String(isOpen));
   if (toggle) toggle.textContent = isOpen ? "Show fewer filters" : "Show more filters";
   if (panel) panel.hidden = !isOpen;
+}
+
+function setSegmentedControl(button, value) {
+  button.parentNode?.querySelectorAll?.("button").forEach((item) => {
+    const active = item === button;
+    item.setAttribute("aria-pressed", String(active));
+    item.setAttribute("class", active ? "active" : "");
+  });
+  const field = button.parentNode?.parentNode?.querySelector?.("input[type=\"hidden\"]");
+  if (field) field.value = value;
+  return field;
+}
+
+function setMortgageTypeFields(form, mortgageType) {
+  form?.querySelectorAll?.("[data-purchase-fields]").forEach((field) => {
+    field.hidden = mortgageType !== "purchase";
+  });
+  form?.querySelectorAll?.("[data-refinance-fields]").forEach((field) => {
+    field.hidden = mortgageType !== "refinance";
+  });
+}
+
+function ancestorWithAttribute(node, attribute) {
+  let current = node;
+  while (current) {
+    if (current.hasAttribute?.(attribute)) return current;
+    current = current.parentNode;
+  }
+  return null;
 }
 
 function updatePaymentPanel(panel, offerId, track) {
@@ -682,27 +894,32 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     return;
   }
 
-  let state = normalizeState({
-    ...MARKETPLACE_DEFAULTS,
-    ...accountContext,
-    ...readCache(),
-    ...readUrlState(),
-  });
+  let state = normalizeUiState(resolveScenarioContext({
+    url: readUrlState(),
+    account: accountContext,
+    cache: readCache(),
+    defaults: MARKETPLACE_DEFAULTS,
+  }));
   state.visibleCount = state.visibleCount || DEFAULT_VISIBLE_COUNT;
-  state.expandedTab = state.expandedTab || "details";
-  let advancedFiltersOpen = false;
+  let advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
+  let mobileFiltersOpen = false;
+  let downPaymentSource = "downPaymentPercent";
 
   const rerender = () => {
     persistState(state);
-    container.innerHTML = renderBody(normalizedFixture, { ...state, advancedFiltersOpen });
+    container.innerHTML = renderBody(normalizedFixture, {
+      ...state,
+      advancedFiltersOpen,
+      mobileFiltersOpen,
+    });
     bind();
   };
 
   const setState = (next, eventName, payload = {}) => {
-    state = normalizeState({ ...state, ...next });
+    state = normalizeUiState({ ...state, ...next }, state);
     state.visibleCount = next.visibleCount || state.visibleCount || DEFAULT_VISIBLE_COUNT;
-    state.expandedOfferId = next.expandedOfferId === undefined ? state.expandedOfferId : next.expandedOfferId;
-    state.expandedTab = next.expandedTab || state.expandedTab || "details";
+    advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
+    mobileFiltersOpen = Boolean(state.mobileFiltersOpen);
     emitAnalytics(track, eventName, payload);
     rerender();
   };
@@ -711,8 +928,31 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     const form = container.querySelector("[data-rates-form]");
     form?.addEventListener("submit", (event) => {
       event.preventDefault();
-      const next = formState(form, state);
-      setState({ ...next, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null }, "rates_marketplace_update");
+      const rawNext = formState(form, state, downPaymentSource);
+      const validation = validateScenario(rawNext);
+      if (!validation.valid) {
+        showFormErrors(form, validation.errors);
+        return;
+      }
+      showFormErrors(form);
+      const next = normalizeState(rawNext);
+      setState({
+        ...next,
+        visibleCount: DEFAULT_VISIBLE_COUNT,
+        expandedOfferIds: [],
+        expandedTabsByOffer: {},
+        mobileFiltersOpen: false,
+      }, "rates_marketplace_update");
+    });
+
+    for (const name of ["downPaymentAmount", "downPaymentPercent"]) {
+      form?.querySelector?.(`[name="${name}"]`)?.addEventListener("input", () => {
+        downPaymentSource = name;
+        syncDownPaymentInputs(form, name);
+      });
+    }
+    form?.querySelector?.('[name="purchasePrice"]')?.addEventListener("input", () => {
+      syncDownPaymentInputs(form, downPaymentSource);
     });
 
     container.querySelector("[data-toggle-advanced-filters]")?.addEventListener("click", () => {
@@ -720,45 +960,64 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
       setAdvancedFiltersOpen(container, advancedFiltersOpen);
     });
 
+    container.querySelector("[data-toggle-mobile-filters]")?.addEventListener("click", (event) => {
+      mobileFiltersOpen = !mobileFiltersOpen;
+      const rail = container.querySelector(".rates-filter-rail");
+      rail?.setAttribute("data-mobile-open", String(mobileFiltersOpen));
+      event.currentTarget?.setAttribute?.("aria-expanded", String(mobileFiltersOpen));
+      const action = event.currentTarget?.querySelector?.("em");
+      if (action) action.textContent = mobileFiltersOpen ? "Close" : "Edit";
+    });
+
     container.querySelectorAll("[data-mortgage-type-option]").forEach((button) => {
       button.addEventListener("click", () => {
         const value = button.getAttribute("data-mortgage-type-option");
-        setState({ mortgageType: value, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null }, "rates_marketplace_update");
+        setSegmentedControl(button, value);
+        setMortgageTypeFields(form, value);
       });
     });
 
-    for (const name of ["show-fha", "show-va", "cash-out"]) {
+    for (const name of ["show-fha", "show-va", "cash-out", "dti", "points", "occupancy"]) {
       container.querySelectorAll(`[data-${name}-option]`).forEach((button) => {
         button.addEventListener("click", () => {
-          const hidden = button.parentNode?.parentNode?.querySelector?.("input[type=\"hidden\"]");
-          if (hidden) hidden.value = button.getAttribute(`data-${name}-option`);
-          if (typeof Event === "function") {
-            try {
-              form?.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
-              return;
-            } catch {
-              // Lightweight DOM test harnesses may not accept native Event objects.
-            }
-          }
-          form?.dispatchEvent({ type: "submit", preventDefault() {} });
+          const value = button.getAttribute(`data-${name}-option`);
+          setSegmentedControl(button, value);
         });
       });
     }
 
     container.querySelector("[data-reset-marketplace]")?.addEventListener("click", () => {
       advancedFiltersOpen = false;
-      setState({ ...MARKETPLACE_DEFAULTS, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null, expandedTab: "details" }, "rates_marketplace_reset");
+      mobileFiltersOpen = false;
+      setState({
+        ...MARKETPLACE_DEFAULTS,
+        visibleCount: DEFAULT_VISIBLE_COUNT,
+        expandedOfferIds: [],
+        expandedTabsByOffer: {},
+        advancedFiltersOpen: false,
+        mobileFiltersOpen: false,
+      }, "rates_marketplace_reset");
     });
 
     container.querySelectorAll("[data-result-type-option]").forEach((button) => {
       button.addEventListener("click", () => {
         const resultType = button.getAttribute("data-result-type-option");
-        setState({ resultType, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null }, "rates_marketplace_result_type", { resultType });
+        setState({
+          resultType,
+          visibleCount: DEFAULT_VISIBLE_COUNT,
+          expandedOfferIds: [],
+          expandedTabsByOffer: {},
+        }, "rates_marketplace_result_type", { resultType });
       });
     });
 
     container.querySelector("[data-marketplace-sort]")?.addEventListener("change", (event) => {
-      setState({ sort: event.target.value, visibleCount: DEFAULT_VISIBLE_COUNT, expandedOfferId: null }, "rates_marketplace_sort", { sort: event.target.value });
+      setState({
+        sort: event.target.value,
+        visibleCount: DEFAULT_VISIBLE_COUNT,
+        expandedOfferIds: [],
+        expandedTabsByOffer: {},
+      }, "rates_marketplace_sort", { sort: event.target.value });
     });
 
     container.querySelector("[data-show-more-offers]")?.addEventListener("click", () => {
@@ -769,26 +1028,81 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     container.querySelectorAll("[data-offer-details]").forEach((button) => {
       button.addEventListener("click", () => {
         const offerId = button.getAttribute("data-offer-details");
+        const expandedOfferIds = new Set(state.expandedOfferIds);
+        if (expandedOfferIds.has(offerId)) expandedOfferIds.delete(offerId);
+        else expandedOfferIds.add(offerId);
         setState(
-          { expandedOfferId: state.expandedOfferId === offerId ? null : offerId, expandedTab: state.expandedTab || "details" },
+          {
+            expandedOfferIds: [...expandedOfferIds],
+            expandedTabsByOffer: {
+              ...state.expandedTabsByOffer,
+              [offerId]: state.expandedTabsByOffer?.[offerId] || "details",
+            },
+          },
           "rates_marketplace_expand_offer",
           { offerId },
         );
       });
     });
 
+    container.querySelector("[data-expand-all]")?.addEventListener("click", () => {
+      const visibleIds = [...container
+        .querySelectorAll("article[data-offer-id]")]
+        .map((offer) => offer.getAttribute("data-offer-id"))
+        .filter(Boolean);
+      const allExpanded = visibleIds.length > 0 && visibleIds.every((id) => state.expandedOfferIds.includes(id));
+      const expandedTabsByOffer = { ...state.expandedTabsByOffer };
+      visibleIds.forEach((id) => {
+        expandedTabsByOffer[id] ||= "details";
+      });
+      setState(
+        {
+          expandedOfferIds: allExpanded ? [] : visibleIds,
+          expandedTabsByOffer,
+        },
+        "rates_marketplace_expand_all",
+        { visibleCount: visibleIds.length },
+      );
+    });
+
     container.querySelectorAll("[data-offer-tab]").forEach((button) => {
-      button.addEventListener("click", () => {
+      const activate = () => {
         const tab = button.getAttribute("data-offer-tab");
-        const offerId = button.getAttribute("data-offer-id") || state.expandedOfferId;
-        setState({ expandedOfferId: offerId, expandedTab: tab }, "rates_marketplace_tab", { offerId, tab });
+        const offerId = button.getAttribute("data-offer-id");
+        setState({
+          expandedOfferIds: state.expandedOfferIds.includes(offerId)
+            ? state.expandedOfferIds
+            : [...state.expandedOfferIds, offerId],
+          expandedTabsByOffer: {
+            ...state.expandedTabsByOffer,
+            [offerId]: tab,
+          },
+        }, "rates_marketplace_tab", { offerId, tab });
+        container.querySelectorAll("[data-offer-tab]").find?.((item) =>
+          item.getAttribute("data-offer-tab") === tab && item.getAttribute("data-offer-id") === offerId
+        )?.focus?.();
+      };
+      button.addEventListener("click", activate);
+      button.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault?.();
+        const offerId = button.getAttribute("data-offer-id");
+        const tabs = [...container.querySelectorAll("[data-offer-tab]")]
+          .filter((item) => item.getAttribute("data-offer-id") === offerId);
+        const current = tabs.indexOf(button);
+        let target = current;
+        if (event.key === "Home") target = 0;
+        if (event.key === "End") target = tabs.length - 1;
+        if (event.key === "ArrowLeft") target = (current - 1 + tabs.length) % tabs.length;
+        if (event.key === "ArrowRight") target = (current + 1) % tabs.length;
+        tabs[target]?.click?.();
       });
     });
 
     container.querySelectorAll("[data-payment-assumption]").forEach((input) => {
       input.addEventListener("input", () => {
         const offerId = input.getAttribute("data-offer-payment");
-        const panel = input.parentNode?.parentNode?.parentNode || container.querySelector(`[data-payment-panel="${offerId}"]`);
+        const panel = ancestorWithAttribute(input, "data-payment-panel") || container.querySelector(`[data-payment-panel="${offerId}"]`);
         input.focus?.();
         updatePaymentPanel(panel, offerId, track);
       });
@@ -796,8 +1110,9 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
 
     container.querySelectorAll("[data-chart-segment]").forEach((button) => {
       const activate = () => {
-        const detail = container.querySelector("[data-chart-detail-text]");
-        container.querySelectorAll("[data-chart-segment]").forEach((item) => item.setAttribute("aria-pressed", "false"));
+        const expanded = ancestorWithAttribute(button, "data-expanded-offer") || container;
+        const detail = expanded.querySelector("[data-chart-detail-text]");
+        expanded.querySelectorAll("[data-chart-segment]").forEach((item) => item.setAttribute("aria-pressed", "false"));
         button.setAttribute("aria-pressed", "true");
         if (detail) {
           detail.textContent = `${button.getAttribute("data-chart-label") || button.querySelector?.("span")?.textContent || "Payment segment"}: ${button.getAttribute("data-chart-value")}.`;
@@ -824,7 +1139,7 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
           offerId,
           resultType: handoff?.resultType || state.resultType,
           sort: handoff?.scenario?.sort || state.sort,
-          tab: handoff?.scenario?.expandedTab || state.expandedTab,
+          tab: state.expandedTabsByOffer?.[offerId] || handoff?.scenario?.expandedTab || "details",
           visibleCount: handoff?.scenario?.visibleCount || state.visibleCount,
         });
         if (typeof navigate === "function") {

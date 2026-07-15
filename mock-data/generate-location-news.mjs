@@ -11,12 +11,14 @@ import { createVerifiedMediaManifest, loadMediaLibrary, materializeMediaAssets }
 import { validateArticle, validateCorpus } from "./location-news/lib/validate.mjs";
 import { authorIdForLocationNews } from "./location-news/lib/author-assignment.mjs";
 import { DEFAULT_SITE_ORIGIN, renderArticleDocument, renderRobots, renderSitemap } from "../site/location-news-static.mjs";
+import { normalizeTagRegistry, tagsForRoute } from "../site/tag-registry.mjs";
 
 const mockDataDir = path.dirname(fileURLToPath(import.meta.url));
 const seedPath = path.join(mockDataDir, "production-seed.json");
 const indexPath = path.join(mockDataDir, "location-news-index.json");
 const sourceManifestPath = path.join(mockDataDir, "location-news-source-manifest.json");
 const mediaManifestPath = path.join(mockDataDir, "location-news-media-manifest.json");
+const tagRegistryPath = path.join(mockDataDir, "tag-registry.json");
 const bundleRoot = path.join(mockDataDir, "location-news");
 const repoRoot = path.resolve(mockDataDir, "..");
 
@@ -37,6 +39,7 @@ function parseArgs(argv) {
     censusSummaryFile: values.get("census-summary-file") ? path.resolve(String(values.get("census-summary-file"))) : null,
     attributionOnly: values.has("attribution-only"),
     contentOnly: values.has("content-only"),
+    corpusOnly: values.has("corpus-only"),
     repoRoot: path.resolve(String(values.get("repo-root") || repoRoot)),
   };
 }
@@ -71,6 +74,33 @@ async function writeTextIfChanged(filePath, value) {
   return true;
 }
 
+function correctSourceDatasetPages(sources) {
+  return sources.map((source) => /^ACS 2019 5-year\b/.test(source.dataset || "")
+    ? { ...source, sourcePage: "https://www.census.gov/programs-surveys/acs/data/summary-file.2019.html" }
+    : source);
+}
+
+async function removeStaleLocationBundles(expectedContentPaths) {
+  const expected = new Set(
+    expectedContentPaths.map((contentPath) => path.resolve(repoRoot, ...contentPath.split("/"))),
+  );
+  const removed = [];
+  const stateDirectories = await fs.readdir(bundleRoot, { withFileTypes: true });
+  for (const directory of stateDirectories) {
+    if (!directory.isDirectory() || directory.name === "lib") continue;
+    const directoryPath = path.join(bundleRoot, directory.name);
+    const entries = await fs.readdir(directoryPath, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isFile() || !entry.name.endsWith(".json")) continue;
+      const filePath = path.resolve(directoryPath, entry.name);
+      if (expected.has(filePath)) continue;
+      await fs.rm(filePath);
+      removed.push(path.relative(repoRoot, filePath).replaceAll("\\", "/"));
+    }
+  }
+  return removed.sort();
+}
+
 function sitemapOrigin(sitemap) {
   const firstLocation = String(sitemap || "").match(/<loc>([^<]+)<\/loc>/i)?.[1];
   try {
@@ -80,35 +110,25 @@ function sitemapOrigin(sitemap) {
   }
 }
 
-function addContributorRoutesToSitemap(sitemap, contributors, siteOrigin) {
-  const source = String(sitemap || "");
-  const missingEntries = contributors
-    .map((contributor) => new URL(contributor.route, siteOrigin).toString())
-    .filter((absoluteRoute) => !source.includes(`<loc>${absoluteRoute}</loc>`))
-    .map((absoluteRoute) => `  <url><loc>${absoluteRoute}</loc></url>`);
-  if (!missingEntries.length) return source;
-
-  const closingIndex = source.lastIndexOf("</urlset>");
-  if (closingIndex < 0) throw new Error("Sitemap is missing </urlset>");
-  const before = source.slice(0, closingIndex);
-  const after = source.slice(closingIndex);
-  return `${before}${before.endsWith("\n") ? "" : "\n"}${missingEntries.join("\n")}\n${after}`;
-}
-
 async function runAttributionOnly({ repoRoot: requestedRepoRoot }) {
   const root = path.resolve(requestedRepoRoot);
   const attributionPaths = {
     index: path.join(root, "mock-data", "location-news-index.json"),
     contributors: path.join(root, "mock-data", "editorial", "contributors.json"),
     media: path.join(root, "mock-data", "location-news-media-manifest.json"),
+    seed: path.join(root, "mock-data", "production-seed.json"),
+    tagRegistry: path.join(root, "mock-data", "tag-registry.json"),
     sitemap: path.join(root, "site", "sitemap.xml"),
   };
-  const [indexDocument, contributorDocument, mediaDocument, sitemapSource] = await Promise.all([
+  const [indexDocument, contributorDocument, mediaDocument, seed, rawTagRegistry, sitemapSource] = await Promise.all([
     fs.readFile(attributionPaths.index, "utf8").then(JSON.parse),
     fs.readFile(attributionPaths.contributors, "utf8").then(JSON.parse),
     fs.readFile(attributionPaths.media, "utf8").then(JSON.parse),
+    fs.readFile(attributionPaths.seed, "utf8").then(JSON.parse),
+    fs.readFile(attributionPaths.tagRegistry, "utf8").then(JSON.parse),
     fs.readFile(attributionPaths.sitemap, "utf8"),
   ]);
+  const tagRegistry = normalizeTagRegistry(rawTagRegistry);
   const indexArticles = Array.isArray(indexDocument.articles) ? indexDocument.articles : [];
   const contributors = Array.isArray(contributorDocument.contributors) ? contributorDocument.contributors : [];
   if (!indexArticles.length) throw new Error("Location-news index has no articles");
@@ -184,13 +204,21 @@ async function runAttributionOnly({ repoRoot: requestedRepoRoot }) {
     );
     staticWriteCount += Number(await writeTextIfChanged(
       outputPath,
-      renderArticleDocument(article, mediaById[article.imageId], { siteOrigin: origin, author }),
+      renderArticleDocument(article, mediaById[article.imageId], {
+        siteOrigin: origin,
+        author,
+        tagContext: tagsForRoute(tagRegistry, article.route),
+      }),
     ));
   }
 
+  const lastmodByRoute = Object.fromEntries([
+    ...updatedIndexArticles.map((article) => [article.route, article.updatedAt || article.publishedAt]),
+    ...tagRegistry.tags.map((tag) => [tag.canonicalRoute, tag.updatedAt || tag.reviewedAt]),
+  ]);
   const sitemapWriteCount = Number(await writeTextIfChanged(
     attributionPaths.sitemap,
-    addContributorRoutesToSitemap(sitemapSource, contributors, origin),
+    renderSitemap(publicRoutes(seed, updatedIndexArticles, contributors, tagRegistry), { siteOrigin: origin, lastmodByRoute }),
   ));
   console.log(JSON.stringify({
     mode: "attribution-only",
@@ -218,6 +246,37 @@ function contentPathFor(location, statesById) {
   return `mock-data/location-news/${stateSlug}/${locationSlugFor(location)}.json`;
 }
 
+function compactLocalContext(article, limit = 2) {
+  const paragraphs = (article.sections || [])
+    .flatMap((section) => section.body || section.paragraphs || [])
+    .filter(Boolean);
+  const factDisplays = (article.evidenceFacts || []).map((fact) => ({
+    id: fact.id,
+    displays: fact.value < 0 ? [String(fact.display), String(fact.display).replace(/^-/, "")] : [String(fact.display)],
+  }));
+  const factIds = (paragraph) => new Set(
+    factDisplays.filter((fact) => fact.displays.some((display) => paragraph.includes(display))).map((fact) => fact.id),
+  );
+  const selected = paragraphs.length ? [paragraphs[0]] : [];
+  const covered = selected.length ? factIds(selected[0]) : new Set();
+  const remaining = paragraphs.slice(1);
+  while (selected.length < limit && remaining.length) {
+    let bestIndex = 0;
+    let bestGain = -1;
+    for (let index = 0; index < remaining.length; index += 1) {
+      const gain = [...factIds(remaining[index])].filter((id) => !covered.has(id)).length;
+      if (gain > bestGain) {
+        bestIndex = index;
+        bestGain = gain;
+      }
+    }
+    const [paragraph] = remaining.splice(bestIndex, 1);
+    selected.push(paragraph);
+    for (const id of factIds(paragraph)) covered.add(id);
+  }
+  return selected;
+}
+
 function compactIndexItem(article, contentPath) {
   const slug = article.route.split("/").at(-1);
   return {
@@ -230,13 +289,12 @@ function compactIndexItem(article, contentPath) {
     title: article.title,
     dek: article.dek,
     previewText: article.previewText,
-    localContext: (article.sections || [])
-      .flatMap((section) => section.body || section.paragraphs || [])
-      .filter(Boolean)
-      .slice(0, 2),
+    localContext: compactLocalContext(article),
     metaDescription: article.metaDescription,
     publishedAt: article.publishedAt,
     updatedAt: article.updatedAt,
+    asOf: article.asOf,
+    sourcePeriod: article.sourcePeriod,
     relevanceLabel: article.relevanceLabel,
     topicIds: article.topicIds,
     productIds: article.productIds,
@@ -326,7 +384,7 @@ async function sourceRecordsWithChecksums(sourceGroups) {
   return output;
 }
 
-function publicRoutes(seed, articles, contributors = []) {
+function publicRoutes(seed, articles, contributors = [], tagRegistry = {}) {
   const collections = [
     seed.siteEntryPages,
     seed.states,
@@ -347,30 +405,37 @@ function publicRoutes(seed, articles, contributors = []) {
     ...collections.flatMap((collection) => (collection || []).map((item) => item.route).filter(Boolean)),
     ...contributors.map((contributor) => contributor.route).filter(Boolean),
     ...articles.map((article) => article.route),
+    ...(tagRegistry.tags || []).map((tag) => tag.canonicalRoute).filter(Boolean),
   ])].sort();
 }
 
-async function publishStaticArticles({ seed, articles, indexItems, mediaById, contributors = [], sitemapArticles = articles, writeRobots = true }) {
+async function publishStaticArticles({ seed, articles, indexItems, mediaById, contributors = [], tagRegistry, sitemapArticles = articles, writeSitemap = true, writeRobots = true }) {
   const indexByArticleId = new Map(indexItems.map((item) => [item.id, item]));
   const contributorsById = new Map(contributors.map((contributor) => [contributor.id, contributor]));
   for (const article of articles) {
     const indexItem = indexByArticleId.get(article.id);
     if (!indexItem?.standalonePath) throw new Error(`Missing standalone path for ${article.id}`);
     const outputPath = path.resolve(repoRoot, indexItem.standalonePath);
-    await writeTextAtomic(
+    await writeTextIfChanged(
       outputPath,
       renderArticleDocument(article, mediaById[article.imageId], {
         siteOrigin: DEFAULT_SITE_ORIGIN,
         author: contributorsById.get(article.authorId),
+        tagContext: tagsForRoute(tagRegistry, article.route),
       }),
     );
   }
 
-  const lastmodByRoute = Object.fromEntries(sitemapArticles.map((article) => [article.route, article.updatedAt || article.publishedAt]));
-  await writeTextAtomic(
-    path.join(repoRoot, "site", "sitemap.xml"),
-    renderSitemap(publicRoutes(seed, sitemapArticles, contributors), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
-  );
+  if (writeSitemap) {
+    const lastmodByRoute = Object.fromEntries([
+      ...sitemapArticles.map((article) => [article.route, article.updatedAt || article.publishedAt]),
+      ...(tagRegistry?.tags || []).map((tag) => [tag.canonicalRoute, tag.updatedAt || tag.reviewedAt]),
+    ]);
+    await writeTextIfChanged(
+      path.join(repoRoot, "site", "sitemap.xml"),
+      renderSitemap(publicRoutes(seed, sitemapArticles, contributors, tagRegistry), { siteOrigin: DEFAULT_SITE_ORIGIN, lastmodByRoute }),
+    );
+  }
   if (writeRobots) {
     await writeTextAtomic(
       path.join(repoRoot, "site", "robots.txt"),
@@ -387,9 +452,10 @@ async function main() {
   }
   if (!Number.isInteger(options.batchSize) || options.batchSize < 1) throw new Error("--batch-size must be a positive integer");
   const seed = JSON.parse(await fs.readFile(seedPath, "utf8"));
+  const tagRegistry = normalizeTagRegistry(JSON.parse(await fs.readFile(tagRegistryPath, "utf8")));
   const contributorDocument = JSON.parse(await fs.readFile(path.join(mockDataDir, "editorial", "contributors.json"), "utf8"));
   const contributors = contributorDocument.contributors || [];
-  const validRoutes = new Set(publicRoutes(seed, [], contributors));
+  const validRoutes = new Set(publicRoutes(seed, [], contributors, tagRegistry));
   const statesById = new Map(seed.states.map((state) => [state.id, state]));
   const allLocations = [...seed.states, ...seed.cities];
   const selectedLocations = options.locationId ? allLocations.filter((location) => location.id === options.locationId) : allLocations;
@@ -399,10 +465,10 @@ async function main() {
   const existingSourceManifest = options.locationId ? JSON.parse(await fs.readFile(sourceManifestPath, "utf8")) : null;
 
   const approvedManifest = createVerifiedMediaManifest("2026-07-10");
-  if (!options.contentOnly) await writeJsonAtomic(mediaManifestPath, approvedManifest);
+  if (!options.contentOnly && !options.corpusOnly) await writeJsonAtomic(mediaManifestPath, approvedManifest);
   const media = await loadMediaLibrary({ manifestPath: mediaManifestPath, refresh: options.refreshMedia });
   const mediaAssets = Object.values(media.assetsById);
-  await materializeMediaAssets({ assets: mediaAssets, repoRoot, refresh: options.refreshMedia });
+  if (!options.corpusOnly) await materializeMediaAssets({ assets: mediaAssets, repoRoot, refresh: options.refreshMedia });
 
   console.log(`Loading official Census ACS evidence into ${options.sourceCache}${options.censusSummaryFile ? ` from ${options.censusSummaryFile}` : ""}`);
   const census = await loadCensusEvidence({
@@ -461,7 +527,12 @@ async function main() {
     minimumArticles: selectedLocations.length * 4,
     validRoutes,
   });
-  const sourceDatasets = await sourceRecordsWithChecksums([census.sources, bls.sources, loans.sources]);
+  const staleBundlesRemoved = options.locationId
+    ? []
+    : await removeStaleLocationBundles([...new Set(indexItems.map((item) => item.contentPath))]);
+  const sourceDatasets = correctSourceDatasetPages(
+    await sourceRecordsWithChecksums([census.sources, bls.sources, loans.sources]),
+  );
   const generatedIndex = {
     version: "location-news-index-v1",
     generatedAt: "2026-07-10",
@@ -485,9 +556,14 @@ async function main() {
       bundles: selectedLocations.length,
       batches: batches.length,
       mediaAssets: mediaAssets.length,
+      staleBundlesRemoved: staleBundlesRemoved.length,
     },
     validation,
     batches,
+    cleanup: {
+      expectedBundles: selectedLocations.length,
+      staleBundlesRemoved,
+    },
     exceptions: loans.countyLimitAliases,
     legacyArticleMetadata: {
       preservedCount: seed.articles?.length || 0,
@@ -500,9 +576,18 @@ async function main() {
     await writeJsonAtomic(indexPath, generatedIndex);
     if (!options.contentOnly) {
       await writeJsonAtomic(sourceManifestPath, generatedSourceManifest);
-      await writeJsonIfChanged(seedPath, seed);
+      if (!options.corpusOnly) await writeJsonIfChanged(seedPath, seed);
     }
-    await publishStaticArticles({ seed, articles: corpus, indexItems, mediaById: media.assetsById, contributors, writeRobots: !options.contentOnly });
+    await publishStaticArticles({
+      seed,
+      articles: corpus,
+      indexItems,
+      mediaById: media.assetsById,
+      contributors,
+      tagRegistry,
+      writeSitemap: !options.corpusOnly,
+      writeRobots: !options.contentOnly && !options.corpusOnly,
+    });
   } else {
     const locationId = selectedLocations[0].id;
     const retained = existingIndex.articles.filter((article) => article.locationId !== locationId);
@@ -512,8 +597,10 @@ async function main() {
     const mergedBatches = [...retainedBatches, ...batches]
       .map((batch, index) => ({ ...batch, batch: index + 1 }));
     const sourceIdentity = (source) => source.datasetUrl || source.sourceUrl || source.cachePath;
-    const sourceDatasets = [...(existingSourceManifest.sourceDatasets || []), ...generatedSourceManifest.sourceDatasets]
-      .filter((source, index, sources) => sources.findIndex((candidate) => sourceIdentity(candidate) === sourceIdentity(source)) === index);
+    const sourceDatasets = correctSourceDatasetPages(
+      [...(existingSourceManifest.sourceDatasets || []), ...generatedSourceManifest.sourceDatasets]
+        .filter((source, index, sources) => sources.findIndex((candidate) => sourceIdentity(candidate) === sourceIdentity(source)) === index),
+    );
     const mergedIndex = {
       ...existingIndex,
       generatedAt: generatedIndex.generatedAt,
@@ -548,7 +635,7 @@ async function main() {
     await writeJsonAtomic(indexPath, mergedIndex);
     if (!options.contentOnly) {
       await writeJsonAtomic(sourceManifestPath, mergedSourceManifest);
-      await writeJsonIfChanged(seedPath, seed);
+      if (!options.corpusOnly) await writeJsonIfChanged(seedPath, seed);
     }
     await publishStaticArticles({
       seed,
@@ -556,8 +643,10 @@ async function main() {
       indexItems,
       mediaById: media.assetsById,
       contributors,
+      tagRegistry,
       sitemapArticles: mergedArticles,
-      writeRobots: !options.contentOnly,
+      writeSitemap: !options.corpusOnly,
+      writeRobots: !options.contentOnly && !options.corpusOnly,
     });
   }
   console.log(`Generated ${indexItems.length} articles for ${selectedLocations.length} locations in ${batches.length} validated batches.`);

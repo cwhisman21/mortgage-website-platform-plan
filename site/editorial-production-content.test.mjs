@@ -4,6 +4,8 @@ import fs from "node:fs";
 
 const compiledPath = new URL("../mock-data/editorial-content.json", import.meta.url);
 const productionSeedPath = new URL("../mock-data/production-seed.json", import.meta.url);
+const sourceLedgerPath = new URL("../mock-data/editorial/source-ledger.json", import.meta.url);
+const topicHubSourcePath = new URL("../mock-data/editorial/topic-hubs.json", import.meta.url);
 
 const auditedArticles = [
   { id: "article-austin-market-update", route: "/learning-center/austin-mortgage-market-update", kind: "local" },
@@ -57,6 +59,14 @@ function loadCompiled() {
 
 function loadProductionSeed() {
   return JSON.parse(fs.readFileSync(productionSeedPath, "utf8"));
+}
+
+function loadSourceLedger() {
+  return JSON.parse(fs.readFileSync(sourceLedgerPath, "utf8"));
+}
+
+function loadTopicHubSource() {
+  return JSON.parse(fs.readFileSync(topicHubSourcePath, "utf8"));
 }
 
 function collectRoutes(value, routes = new Set()) {
@@ -265,5 +275,59 @@ test("resolves every cited article source to an authoritative direct source reco
       assert.ok(sourceMap.has(sourceId), `${article.id} cites missing source ${sourceId}`);
       assert.ok(article.sourceClaims?.some((sourceClaim) => sourceClaim.sourceId === sourceId && sourceClaim.claim?.trim().length >= 40), `${article.id} needs a visible claim for ${sourceId}`);
     }
+  }
+});
+
+test("preserves factual review, limitation, and approval metadata for every material source", () => {
+  const canonicalSources = loadSourceLedger().sources;
+  const compiledSources = new Map(loadCompiled().sources.map((source) => [source.id, source]));
+  const preservedFields = [
+    "publisher",
+    "dataPeriod",
+    "accessedAt",
+    "reviewedAt",
+    "geographicScope",
+    "limitation",
+    "approvalState",
+  ];
+
+  assert.equal(compiledSources.size, canonicalSources.length, "compiled content must preserve the complete source ledger");
+
+  for (const source of canonicalSources) {
+    assert.equal(source.reviewedAt, "2026-07-13", `${source.id} needs the factual review date`);
+    assert.ok(source.limitation?.trim().length >= 40, `${source.id} needs a material-use limitation`);
+    assert.equal(
+      source.approvalState,
+      "research_reviewed_not_publication_approved",
+      `${source.id} must not imply publication approval`,
+    );
+
+    const compiledSource = compiledSources.get(source.id);
+    assert.ok(compiledSource, `${source.id} is missing from compiled editorial content`);
+    for (const field of preservedFields) {
+      assert.deepEqual(compiledSource[field], source[field], `${source.id}.${field} changed during compilation`);
+    }
+  }
+});
+
+test("preserves factual dates and attributable source IDs for all nine public topic hubs", () => {
+  const sourceIds = new Set(loadSourceLedger().sources.map((source) => source.id));
+  const canonicalHubs = loadTopicHubSource().topicHubs.filter((hub) => hub.public === true);
+  const compiledHubs = new Map(loadCompiled().topicHubs.map((hub) => [hub.id, hub]));
+
+  assert.equal(canonicalHubs.length, 9, "expected nine public topic hubs");
+
+  for (const hub of canonicalHubs) {
+    assert.equal(hub.lastUpdated, "2026-07-13", `${hub.id} needs its factual Last updated date`);
+    assert.ok(Array.isArray(hub.sourceIds) && hub.sourceIds.length > 0, `${hub.id} needs claim-level source IDs`);
+    assert.equal(new Set(hub.sourceIds).size, hub.sourceIds.length, `${hub.id} repeats a source ID`);
+    for (const sourceId of hub.sourceIds) {
+      assert.ok(sourceIds.has(sourceId), `${hub.id} cites missing source ${sourceId}`);
+    }
+
+    const compiledHub = compiledHubs.get(hub.id);
+    assert.ok(compiledHub, `${hub.id} is missing from compiled editorial content`);
+    assert.equal(compiledHub.lastUpdated, hub.lastUpdated, `${hub.id}.lastUpdated changed during compilation`);
+    assert.deepEqual(compiledHub.sourceIds, hub.sourceIds, `${hub.id}.sourceIds changed during compilation`);
   }
 });

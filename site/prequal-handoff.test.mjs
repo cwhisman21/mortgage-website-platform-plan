@@ -23,7 +23,7 @@ test("builds a handoff request from explicit query state without cache dependenc
 
   const request = buildPrequalHandoffRequest({
     search: new URLSearchParams(
-      "offerId=loan-officer-ava-purchase-30&mortgageType=purchase&zip=02108&resultType=loanOfficer&sort=highestRating&showFha=false&showVa=true&points=0-1&propertyType=condo&occupancy=secondary&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
+      "offerId=loan-officer-ava-purchase-30&mortgageType=purchase&zip=02108&resultType=loanOfficer&sort=lowestApr&showFha=false&showVa=true&points=0-1&propertyType=condo&occupancy=secondary&visibleCount=16&expandedOfferId=loan-officer-ava-purchase-30&expandedTab=payment&email=hidden@example.com&token=secret&bogus=1",
     ),
     cachedState: {},
   });
@@ -32,7 +32,7 @@ test("builds a handoff request from explicit query state without cache dependenc
   assert.equal(request.scenario.mortgageType, "purchase");
   assert.equal(request.scenario.zip, "02108");
   assert.equal(request.scenario.resultType, "loanOfficer");
-  assert.equal(request.scenario.sort, "highestRating");
+  assert.equal(request.scenario.sort, "lowestApr");
   assert.equal(request.scenario.showFha, false);
   assert.equal(request.scenario.showVa, true);
   assert.equal(request.scenario.points, "0-1");
@@ -63,15 +63,15 @@ test("creates known-offer and unknown-offer handoff views plus restorable return
         downPaymentAmount: 116250,
         downPaymentPercent: 15,
         creditRange: "740-779",
-        term: 15,
+        term: 30,
         occupancy: "secondary",
         showFha: false,
         showVa: true,
         dti: "40plus",
         points: "0-1",
         propertyType: "condo",
-        sort: "highestRating",
-        resultType: "loanOfficer",
+        sort: "lowestApr",
+        resultType: "company",
         visibleCount: 16,
         expandedOfferId: "company-harbor-purchase-30",
         expandedTab: "payment",
@@ -110,7 +110,7 @@ test("creates known-offer and unknown-offer handoff views plus restorable return
   assert.equal(knownView.productLabel, "30-year fixed purchase");
   assert.match(knownView.scenarioSummary, /02108/);
   assert.equal(knownView.scenarioRows[0][1], "Purchase");
-  assert.equal(returnToRatesUrl(knownView), "/rates?mortgageType=purchase&zip=02108&creditRange=740-779&term=15&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&purchasePrice=775000&downPaymentAmount=116250&downPaymentPercent=15&sort=highestRating&resultType=loanOfficer&visibleCount=16&expandedOfferId=company-harbor-purchase-30&expandedTab=payment");
+  assert.equal(returnToRatesUrl(knownView), "/rates?mortgageType=purchase&zip=02108&creditRange=740-779&term=30&showFha=false&showVa=true&dti=40plus&points=0-1&propertyType=condo&occupancy=secondary&purchasePrice=775000&downPaymentAmount=116250&downPaymentPercent=15&sort=lowestApr&resultType=company&visibleCount=16&expandedOfferId=company-harbor-purchase-30&expandedTab=payment");
 
   assert.equal(unknownView.status, "recovery");
   assert.match(unknownView.recoveryTitle, /Return to your saved rate results/);
@@ -121,6 +121,28 @@ test("creates known-offer and unknown-offer handoff views plus restorable return
   assert.match(recoveryHtml, /We could not reopen that selected option/);
   assert.match(recoveryHtml, /href="\/rates\?/);
   assert.doesNotMatch(recoveryHtml, /<form|<input|data-provider-start|upload|eligib|approv|underwrit|decision|lock/i);
+});
+
+test("rejects stale handoff URLs whose offer no longer matches the saved scenario", async () => {
+  const { createPrequalHandoffView } = await loadHandoffModule();
+  const { createFixtureMarketplaceAdapter, normalizeMarketplaceFixture } = await loadMarketplaceModule();
+  const adapter = createFixtureMarketplaceAdapter(normalizeMarketplaceFixture(loadFixture()));
+
+  for (const scenario of [
+    { mortgageType: "refinance", resultType: "company", term: 30 },
+    { mortgageType: "purchase", resultType: "loanOfficer", term: 30 },
+    { mortgageType: "purchase", resultType: "company", term: 15 },
+  ]) {
+    const view = createPrequalHandoffView({
+      adapter,
+      request: {
+        offerId: "company-harbor-purchase-30",
+        scenario: { ...scenario, zip: "92109" },
+      },
+    });
+    assert.equal(view.status, "recovery");
+    assert.equal(view.hasStartAction, false);
+  }
 });
 
 test("renders borrower-safe handoff markup without forms or decision language", async () => {
@@ -145,7 +167,7 @@ test("renders borrower-safe handoff markup without forms or decision language", 
         dti: "below40",
         points: "all",
         propertyType: "singleFamily",
-        sort: "highestRating",
+        sort: "lowestApr",
         resultType: "loanOfficer",
         visibleCount: 16,
         expandedOfferId: "loan-officer-ava-purchase-30",
@@ -158,8 +180,8 @@ test("renders borrower-safe handoff markup without forms or decision language", 
 
   assert.match(html, /Your selected option is ready to continue/);
   assert.match(html, /Continue with Ava Martinez/);
-  assert.match(html, /NMLS 200001/);
-  assert.match(html, /No name, email, or phone number has been requested on this comparison page\./);
+  assert.doesNotMatch(html, /NMLS|200001/);
+  assert.match(html, /No name, email, phone number, application, document, or credit request has been collected or sent from this page\./);
   assert.match(html, /Return to rate results/);
   assert.doesNotMatch(html, /<form|<input|upload|eligib|approv|underwrit|decision|lock/i);
 });
@@ -178,7 +200,7 @@ test("round-trips the complete comparison view through URL values alone", async 
     mortgageType: "purchase",
     zip: "02108",
     creditRange: "740-779",
-    term: 15,
+    term: 30,
     showFha: false,
     showVa: true,
     dti: "40plus",
@@ -188,8 +210,8 @@ test("round-trips the complete comparison view through URL values alone", async 
     purchasePrice: 775000,
     downPaymentAmount: 116250,
     downPaymentPercent: 15,
-    sort: "highestRating",
-    resultType: "loanOfficer",
+    sort: "lowestApr",
+    resultType: "company",
     visibleCount: 16,
     expandedOfferId: "company-harbor-purchase-30",
     expandedTab: "payment",

@@ -13,9 +13,11 @@
       "title": "Fresno, CA home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Fresno, CA.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Fresno, CA.",
-      "metaDescription": "Fresno, CA home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Fresno, CA.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Fresno, CA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-07",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $374,800.",
         "prior ACS median owner-occupied home value: $242,000.",
-        "ACS median household income: $70,991.",
-        "median monthly owner cost with a mortgage: $1,981.",
-        "change from the prior ACS home-value estimate: 54.9%."
+        "ACS median household income: $70,991."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 54.9,
-          "display": "54.9%",
-          "sourceRecordIds": [
-            "news-fresno-ca-affordability-home-values-source-city-home-value-current",
-            "news-fresno-ca-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "California median home value",
           "value": 734700,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "The dated finding: the local value, income, and owner-cost baseline",
           "body": [
-            "In Fresno, CA, the 2024 ACS reports a median owner-occupied home value of $374,800 and median household income of $70,991; these are separate medians, not the finances of one representative household. The same release reports $1,981 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Fresno, CA, reading $374,800, $70,991, and $1,981 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $374,800, $70,991, and $1,981 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The published evidence provides the starting point: In Fresno, CA, the 2024 ACS reports a median owner-occupied home value of $374,800, median household income of $70,991, and median selected monthly owner costs of $1,981 for owners with a mortgage. In practical terms, together, those three reference points can nevertheless help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,981 measure combines recurring ownership expenses instead of real estate taxes alone. For the decision at hand, a useful affordability review starts with $374,800, $70,991, and $1,981, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,26 +122,11 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Fresno, CA's median home-value estimate increased from $242,000 in the prior ACS period to $374,800 in the current release, a reported change of 54.9%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 54.9% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $242,000 to $374,800 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Fresno, CA. Before the 54.9% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-fresno-ca-affordability-home-values-source-city-home-value-prior",
-            "news-fresno-ca-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
           "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
+          "heading": "Comparison view: how the city estimate sits within the state",
           "body": [
-            "Fresno, CA's $374,800 median home-value estimate is below the statewide $734,700 estimate, with a reported city-to-state gap of 49.0%. That 49.0% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Fresno, CA. It does not mean every local property is 49.0% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $374,800 and $734,700 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Fresno, CA's $374,800 median home-value estimate is below the statewide $734,700 estimate, with a reported city-to-state gap of 49.0%.",
+            "In practical terms, that 49.0% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Fresno, CA. It does not mean every local property is 49.0% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For the decision at hand, a borrower may use $374,800 and $734,700 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -165,9 +140,10 @@
         },
         {
           "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "heading": "Where the evidence stops: what the owner-cost estimate includes and excludes",
           "body": [
-            "The $1,981 owner-cost estimate gives Fresno, CA borrowers a broader monthly reference than principal and interest alone, while the $70,991 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $70,991 is the owner household at $1,981. The $374,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $374,800, $70,991, and $1,981 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $1,981 owner-cost estimate gives Fresno, CA borrowers a broader monthly reference than principal and interest alone, while the $70,991 income estimate supplies separate household context. For borrower planning, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $70,991 is the owner household at $1,981.",
+            "In a borrower review centered on Fresno, CA, the $374,800 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $374,800, $70,991, and $1,981 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +157,60 @@
           ]
         },
         {
+          "id": "vintage-observations",
+          "heading": "Read the ACS vintages as separate nominal observations",
+          "body": [
+            "The 2019 ACS published $242,000 as Fresno, CA's median owner-occupied home-value estimate, while the 2024 ACS published $374,800.",
+            "For the next comparison in Fresno, CA, these dated nominal observations can nevertheless help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. For borrower planning, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $242,000 attached to 2019 and $374,800 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-fresno-ca-affordability-home-values-source-city-home-value-prior",
+            "news-fresno-ca-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
           "id": "decision-limits",
           "heading": "What these local medians cannot decide",
           "body": [
-            "Neither $374,800 nor $1,981 determines the value of a specific Fresno, CA home, what a borrower will pay each month, or an underwriting result. The $70,991 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 54.9% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $374,800, $1,981, and $70,991 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Neither the 2024 $374,800 estimate nor the $1,981 owner-cost median determines the value of a specific Fresno, CA home, a borrower's payment, or an underwriting result. In practical terms, the $70,991 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $242,000 also cannot forecast the next market move or establish a safe purchase horizon. For the decision at hand, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "median-household-income"
           ],
           "sourceRecordIds": [
             "news-fresno-ca-affordability-home-values-source-city-home-value-current",
+            "news-fresno-ca-affordability-home-values-source-city-home-value-prior",
             "news-fresno-ca-affordability-home-values-source-city-owner-cost-current",
-            "news-fresno-ca-affordability-home-values-source-city-income-current",
-            "news-fresno-ca-affordability-home-values-source-city-home-value-prior"
+            "news-fresno-ca-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Borrower action: build a property-specific comparison",
           "body": [
-            "A practical Fresno, CA worksheet can begin with $374,800 as broad value context, $1,981 as a reminder to include recurring ownership expenses, and $70,991 as a local economic reference. After noting those $374,800, $1,981, and $70,991 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 49.0% city-to-state difference is a prompt to keep the analysis local, while the 54.9% period change is a prompt to date every assumption. A licensed professional can use the 49.0% and 54.9% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A practical Fresno, CA worksheet can begin with $374,800 as dated value context, $1,981 as a reminder to include recurring ownership expenses, and $70,991 as a local economic reference.",
+            "Applied to a decision in Fresno, CA, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 49.0% city-to-state difference is a prompt to keep the analysis local, while the separate $242,000 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For the decision at hand, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-fresno-ca-affordability-home-values-source-city-home-value-current",
+            "news-fresno-ca-affordability-home-values-source-city-home-value-prior",
             "news-fresno-ca-affordability-home-values-source-city-owner-cost-current",
             "news-fresno-ca-affordability-home-values-source-city-income-current",
-            "news-fresno-ca-affordability-home-values-source-state-home-value-current",
-            "news-fresno-ca-affordability-home-values-source-city-home-value-prior"
+            "news-fresno-ca-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +248,9 @@
               "display": "$1,981"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 54.9,
-              "display": "54.9%"
+              "label": "California median home value",
+              "value": 734700,
+              "display": "$734,700"
             }
           ]
         }
@@ -269,43 +262,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$374,800",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$242,000",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$70,991",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,981",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "54.9%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "California median home value",
               "$734,700",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "49.0%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +314,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "state-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-fresno-ca-affordability-home-values-source-city-home-value-current",
@@ -452,9 +447,11 @@
       "title": "Fresno, CA housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Fresno, CA.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Fresno, CA.",
-      "metaDescription": "Fresno, CA housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Fresno, CA.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +469,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 189,098.",
         "occupied housing units: 180,450.",
-        "vacant housing units: 8,648.",
-        "prior ACS vacant housing units: 10,206.",
-        "vacant-unit share of housing stock: 4.6%."
+        "vacant housing units: 8,648."
       ],
       "evidenceFacts": [
         {
@@ -579,7 +575,7 @@
           "id": "stock-baseline",
           "heading": "The size and use of the local housing stock",
           "body": [
-            "Fresno, CA's current ACS housing baseline includes 189,098 total housing units, 180,450 occupied units, and 8,648 vacant units. Those counts describe the housing stock across the survey period; they do not say that 8,648 homes were listed for sale or available to rent at one moment. The difference between 189,098 total units and 180,450 occupied units is useful for checking the internal scale of the release, while 8,648 provides the numerator for a more careful vacancy reading. For a borrower researching Fresno, CA, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Fresno, CA's current ACS housing baseline includes 189,098 total housing units, 180,450 occupied units, and 8,648 vacant units. For borrower planning, those counts can help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 8,648 homes were listed for sale or available to rent at one moment. Reading 189,098 total units with 180,450 occupied and 8,648 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -594,9 +590,9 @@
         },
         {
           "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "heading": "Read the comparison: vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Fresno, CA decreased from 10,206 in the prior ACS period to 8,648 in the current release, a reported change of -15.3%. In the current housing stock, 8,648 units equal 4.6% of the 189,098 total. ACS vacancy covers several statuses, so the 4.6% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 10,206 to 8,648 can still prompt better questions about current for-sale and rental inventory in Fresno, CA, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Fresno, CA decreased from 10,206 in the prior ACS period to 8,648 in the current release, a reported movement of 15.3%. In the current housing stock, 8,648 units equal 4.6% of the 189,098 total. ACS vacancy covers several statuses, so the 4.6% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. In practical terms, the movement from 10,206 to 8,648 can nevertheless prompt better questions about current for-sale and rental inventory in Fresno, CA, provided those questions are answered with timely listing and property data instead of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -612,27 +608,11 @@
           ]
         },
         {
-          "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
-          "body": [
-            "Among 180,450 occupied units in Fresno, CA, the ACS-derived owner share is 50.1% and the renter share is 49.9%, making owner-occupied housing the larger measured tenure group. The 50.1% and 49.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Fresno, CA. The 50.1% and 49.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
-          ],
-          "evidenceFactIds": [
-            "occupied-units",
-            "owner-share",
-            "renter-share"
-          ],
-          "sourceRecordIds": [
-            "news-fresno-ca-housing-supply-tenure-source-occupied-units",
-            "news-fresno-ca-housing-supply-tenure-source-owner-units",
-            "news-fresno-ca-housing-supply-tenure-source-renter-units"
-          ]
-        },
-        {
           "id": "rent-context",
           "heading": "Use rent as a matched comparison, not a shortcut",
           "body": [
-            "Fresno, CA's ACS median gross rent is $1,421, while renter-occupied units account for 49.9% of occupied housing and owner-occupied units account for 50.1%. The $1,421 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,421 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Fresno, CA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+            "Fresno, CA's ACS median gross rent is $1,421, while renter-occupied units account for 49.9% of occupied housing and owner-occupied units account for 50.1%.",
+            "For the decision at hand, the $1,421 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,421 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. In practical terms, a more useful Fresno, CA comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
           ],
           "evidenceFactIds": [
             "median-rent",
@@ -647,10 +627,28 @@
           ]
         },
         {
-          "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "id": "tenure-mix",
+          "heading": "Planning context: ownership and renting within occupied housing",
           "body": [
-            "The 4.6% vacant-unit share and 50.1% owner share cannot determine competition for a specific Fresno, CA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 189,098 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.6% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 8,648 vacant units separate from active inventory and keep the $1,421 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "Among 180,450 occupied units in Fresno, CA, the ACS-derived owner share is 50.1% and the renter share is 49.9%, making owner-occupied housing the larger measured tenure group.",
+            "The 50.1% and 49.9% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Fresno, CA. For borrower planning, the 50.1% and 49.9% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+          ],
+          "evidenceFactIds": [
+            "occupied-units",
+            "owner-share",
+            "renter-share"
+          ],
+          "sourceRecordIds": [
+            "news-fresno-ca-housing-supply-tenure-source-occupied-units",
+            "news-fresno-ca-housing-supply-tenure-source-owner-units",
+            "news-fresno-ca-housing-supply-tenure-source-renter-units"
+          ]
+        },
+        {
+          "id": "supply-limits",
+          "heading": "Keep the boundary clear: what the housing-stock evidence cannot show",
+          "body": [
+            "The 4.6% vacant-unit share and 50.1% owner share cannot determine competition for a specific Fresno, CA listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. For borrower planning, likewise, 189,098 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 4.6% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should, as a result, keep 8,648 vacant units separate from active inventory and keep the $1,421 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -671,7 +669,8 @@
           "id": "matched-options",
           "heading": "Compare current local choices on the same terms",
           "body": [
-            "A grounded Fresno, CA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 189,098 total units, a 4.6% vacancy share, and a 50.1% owner share. For renting, replace the $1,421 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 50.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 49.9% or 50.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Fresno, CA comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 189,098 total units, a vacancy share of 4.6%, and an owner share of 50.1%. For renting, replace the $1,421 median with the actual lease, utilities, deposits, and expected changes.",
+            "Applied to a decision in Fresno, CA, for ownership, keep the 50.1% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For the decision at hand, the resulting worksheet will not turn 49.9% or 50.1% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +739,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "189,098",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "180,450",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "8,648",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "10,206",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "4.6%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-15.3%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "50.1%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "49.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,421",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +975,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Fresno, CA labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Fresno, CA.",
-      "previewText": "See what changed in Fresno, CA, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Fresno, CA labor market: latest employment evidence. See what changed in Fresno, CA, CA's labor market and why broad employment data cannot determine mortgage.",
+      "previewText": "See what changed in Fresno, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Fresno, CA's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +998,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 256,300.",
-        "employment: 242,264.",
-        "unemployment: 14,036.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 5.5%.",
-        "previous-month unemployment rate: 5.8%."
+        "change in unemployment rate from the prior month: -0.3 percentage points.",
+        "change in unemployment rate from a year earlier: -0.6 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1068,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.3,
-          "display": "-0.3%",
+          "display": "-0.3 percentage points",
           "sourceRecordIds": [
             "news-fresno-ca-local-labor-market-source-latest-unemployment-rate",
             "news-fresno-ca-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1079,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -0.6,
-          "display": "-0.6%",
+          "display": "-0.6 percentage points",
           "sourceRecordIds": [
             "news-fresno-ca-local-labor-market-source-latest-unemployment-rate",
             "news-fresno-ca-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1089,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Fresno, CA labor force of 256,300, with 242,264 people employed and 14,036 unemployed under the program's definitions. Those three counts belong together: 242,264 plus 14,036 explains the scale behind the published 5.5% unemployment rate. For mortgage planning, the 256,300 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 256,300 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-fresno-ca-local-labor-market-source-latest-labor-force",
-            "news-fresno-ca-local-labor-market-source-latest-employment",
-            "news-fresno-ca-local-labor-market-source-latest-unemployment",
-            "news-fresno-ca-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What the comparison adds: what changed in the latest month",
           "body": [
-            "Fresno, CA's unemployment rate fell from 5.8% in the prior month to 5.5% in the latest month, a change of -0.3%. A -0.3% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 14,036 unemployment count and 256,300 labor force. The -0.3% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Fresno, CA borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The published evidence provides the starting point: As of May 2026, Fresno, CA's unemployment rate fell from 5.8% in April 2026 to 5.5% in May 2026, a change of 0.3 percentage points. In practical terms, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It cannot show that a particular employer is hiring or cutting jobs, and it does not establish one applicant's income stability, mortgage eligibility, or loan price. For the decision at hand, the release also estimates 14,036 people unemployed within a labor force of 256,300, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1110,27 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "Comparison view: what changed over the year",
           "body": [
-            "Compared with 6.1% a year earlier, the latest Fresno, CA unemployment rate of 5.5% fell by -0.6%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -0.6% difference still describes a population estimate rather than an individual's job stability. Reading 6.1%, 5.8%, and 5.5% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Fresno, CA pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Fresno, CA's unemployment rate fell from 6.1% in May 2025 to 5.5%, a change of 0.6 percentage points. For the decision at hand, that wider window helps show whether Fresno, CA's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.3 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Fresno, CA or describes the stability of one household's earnings. For mortgage planning in Fresno, CA, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Fresno, CA's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-fresno-ca-local-labor-market-source-yearago-year-ago-rate",
-            "news-fresno-ca-local-labor-market-source-previous-previous-rate",
-            "news-fresno-ca-local-labor-market-source-latest-unemployment-rate"
+            "news-fresno-ca-local-labor-market-source-latest-unemployment-rate",
+            "news-fresno-ca-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Borrower view: why the rate needs its underlying counts",
           "body": [
-            "At 5.5%, Fresno, CA's unemployment rate summarizes 14,036 unemployed people within a 256,300 labor force; the rate should not be discussed without those counts. The 242,264 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 242,264 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 5.5% rate attached to 256,300, 242,264, and 14,036 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 5.5%, Fresno, CA's unemployment rate summarizes 14,036 unemployed people within a labor force of 256,300; the rate should not be discussed without those counts. In practical terms, the 242,264 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 242,264 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For the decision at hand, keeping the 5.5% rate attached to 256,300, 242,264, and 14,036 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1146,31 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "Evidence at a glance: the counts behind the published rate",
           "body": [
-            "Neither 242,264 employed people nor a 5.5% unemployment rate tells a lender what one Fresno, CA applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.3% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 5.5% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -0.6% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 256,300 people in the Fresno, CA labor force, including 242,264 employed and 14,036 unemployed under LAUS definitions.",
+            "For the next comparison in Fresno, CA, the employment and unemployment counts belong together because they establish the scale behind the published 5.5% rate. For a mortgage decision, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. For borrower planning, it may help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should, as a result, follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-fresno-ca-local-labor-market-source-latest-labor-force",
+            "news-fresno-ca-local-labor-market-source-latest-employment",
+            "news-fresno-ca-local-labor-market-source-latest-unemployment",
+            "news-fresno-ca-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Keep the boundary clear: labor statistics are not an income review",
+          "body": [
+            "Neither 242,264 employed people nor an unemployment rate of 5.5% tells a lender what an applicant in Fresno, CA earns, whether that income is eligible, or whether it is likely to continue. For the decision at hand, the monthly movement of 0.3 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "For borrowers reviewing evidence from Fresno, CA, the 5.5% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. In practical terms, that boundary protects borrowers from treating the year-over-year movement of 0.6 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1187,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Next step: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Fresno, CA borrower is to note the latest 5.5% unemployment rate and the -0.6% year-over-year change, then move immediately to the records that describe the household. After noting the 5.5% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 256,300 local labor force and 242,264 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.3% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Fresno, CA's 5.5% LAUS rate in its proper role as dated local economic context."
+            "One practical next step for borrowers in Fresno, CA is to note the latest 5.5% unemployment rate and the year-over-year movement of 0.6 percentage points, then move immediately to the records that describe the household. After noting the 5.5% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 256,300 local labor force and 242,264 employment count can frame the economic conversation, but they should not alter verified borrower inputs.",
+            "For the decision at hand, the monthly movement of 0.3 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Fresno, CA's 5.5% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1257,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "256,300",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "242,264",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "14,036",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "5.5%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "5.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "6.1%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.3%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.3 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-0.6%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-0.6 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1322,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1471,11 @@
       "title": "Fresno, CA loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Fresno, CA, including unit-count differences and important limits.",
-      "metaDescription": "Fresno, CA loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Fresno, CA, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Fresno, CA, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1495,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $541,287.",
-        "four-unit FHA limit: $1,041,125.",
-        "difference between one-unit conforming and FHA limits: $291,463."
+        "one-unit FHA limit: $541,287."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1556,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Keep the boundary clear: the published one-unit limits for the matched area",
           "body": [
-            "Fresno, CA is connected to Fresno County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Fresno, CA, starting with Fresno County keeps the limits attached to the county or county-equivalent area used in the official files. A Fresno, CA borrower still needs to confirm the selected property's location and legal unit count, because the relevant Fresno County row follows the property rather than the city label or mailing address alone. Around Fresno, CA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Fresno County as Fresno, CA's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
+            "Start with the dated local finding: Fresno, CA is connected to Fresno County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Fresno, CA, starting with Fresno County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Fresno, CA still need to confirm the selected property's location and legal unit count, because the relevant Fresno County row follows the property rather than the city label or mailing address alone. Around Fresno, CA, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Fresno County as Fresno, CA's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,26 +1570,11 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
-          "body": [
-            "For the matched Fresno, CA area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. The $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-fresno-ca-county-loan-limits-source-conforming-oneunit",
-            "news-fresno-ca-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Planning context: unit count changes the published ceiling",
           "body": [
-            "Fresno County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Fresno, CA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "For borrowers in Fresno, CA, Fresno County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. For the decision at hand, the higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Fresno, CA, a legal unit count should be verified from reliable property information before a multi-unit limit is used. In practical terms, the $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,10 +1590,28 @@
           ]
         },
         {
+          "id": "one-unit-comparison",
+          "heading": "How the one-unit program boundaries compare",
+          "body": [
+            "For the matched Fresno, CA area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. For borrower planning, the $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more.",
+            "In a borrower review centered on Fresno, CA, a needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-fresno-ca-county-loan-limits-source-conforming-oneunit",
+            "news-fresno-ca-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
           "id": "category-boundary",
           "heading": "A limit is a category boundary, not borrowing power",
           "body": [
-            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Fresno, CA household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Fresno, CA or reduces household debts.",
+            "In a borrower review centered on Fresno, CA, a borrower seeking less than $832,750 can nevertheless have important conventional requirements to review, and a request below $541,287 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules in place of the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1599,9 +1625,9 @@
         },
         {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Keep the boundary clear: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Fresno, CA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Fresno, CA's connection to Fresno County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Fresno, CA is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For the decision at hand, the one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. In practical terms, that is why Fresno, CA's connection to Fresno County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1618,9 +1644,9 @@
         },
         {
           "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "heading": "Borrower action: verify the property before comparing products",
           "body": [
-            "A useful Fresno, CA next step is to document the property address, Fresno County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Fresno, CA next step is to document the property address, Fresno County geography, legal unit count, price, down-payment plan, and expected base loan amount. For borrower planning, compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1714,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,041,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$291,463",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1763,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "unit-count",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

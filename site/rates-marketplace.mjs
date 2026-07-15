@@ -6,8 +6,8 @@ const ALLOWED_VALUES = {
     "lowestApr",
     "lowestRate",
     "lowestMonthlyPayment",
+    "lowestPoints",
     "lowestUpfrontCost",
-    "highestRating",
   ],
   creditRange: ["620-679", "680-719", "720-739", "740-779", "780+"],
   term: [10, 15, 20, 30],
@@ -22,8 +22,8 @@ const SORT_FIELD_MAP = {
   lowestApr: { field: "apr", direction: "asc" },
   lowestRate: { field: "rate", direction: "asc" },
   lowestMonthlyPayment: { field: "principalAndInterest", direction: "asc" },
+  lowestPoints: { field: "points", direction: "asc" },
   lowestUpfrontCost: { field: "upfrontCost", direction: "asc" },
-  highestRating: { field: "rating", direction: "desc" },
 };
 
 const STATE_FIELD_ORDER = [
@@ -351,6 +351,179 @@ function normalizeOffer(rawOffer, templates = {}) {
   return offer;
 }
 
+function monthlyPrincipalAndInterest(principal, annualRatePercent, termMonths) {
+  if (!(principal > 0) || !(termMonths > 0)) return 0;
+  const monthlyRate = Number(annualRatePercent) / 100 / 12;
+  if (!(monthlyRate > 0)) return principal / termMonths;
+  const growth = (1 + monthlyRate) ** termMonths;
+  return (principal * monthlyRate * growth) / (growth - 1);
+}
+
+function remainingBalance(principal, annualRatePercent, termMonths, paymentsMade) {
+  if (!(principal > 0) || !(termMonths > 0)) return 0;
+  const elapsed = Math.min(Math.max(Number(paymentsMade) || 0, 0), termMonths);
+  if (elapsed >= termMonths) return 0;
+  const monthlyRate = Number(annualRatePercent) / 100 / 12;
+  if (!(monthlyRate > 0)) {
+    return principal * (1 - elapsed / termMonths);
+  }
+  const payment = monthlyPrincipalAndInterest(principal, annualRatePercent, termMonths);
+  const growth = (1 + monthlyRate) ** elapsed;
+  return principal * growth - payment * ((growth - 1) / monthlyRate);
+}
+
+function presentValueOfPayments(payment, monthlyRate, termMonths) {
+  if (!(monthlyRate > 0)) return payment * termMonths;
+  return payment * ((1 - (1 + monthlyRate) ** -termMonths) / monthlyRate);
+}
+
+function simplifiedAprPercent({ principal, payment, termMonths, prepaidFinanceCharge }) {
+  const amountFinanced = principal - prepaidFinanceCharge;
+  if (!(principal > 0) || !(payment > 0) || !(termMonths > 0) || !(amountFinanced > 0)) {
+    return 0;
+  }
+  if (!(prepaidFinanceCharge > 0)) {
+    return 0;
+  }
+
+  let low = 0;
+  let high = 1;
+  for (let index = 0; index < 100; index += 1) {
+    const middle = (low + high) / 2;
+    const presentValue = presentValueOfPayments(payment, middle, termMonths);
+    if (presentValue > amountFinanced) low = middle;
+    else high = middle;
+  }
+  return ((low + high) / 2) * 12 * 100;
+}
+
+function readableScenarioValue(field, value) {
+  const labels = {
+    propertyType: {
+      singleFamily: "single-family home",
+      condo: "condo",
+      townhome: "townhome",
+      multiFamily: "2-4 unit property",
+    },
+    occupancy: {
+      primary: "primary residence",
+      secondary: "second home",
+      rental: "investment property",
+    },
+  };
+  return labels[field]?.[value] || value;
+}
+
+export function deriveOfferForScenario(rawOffer, scenario = MARKETPLACE_DEFAULTS) {
+  const offer = clone(rawOffer);
+  const resolvedScenario = resolveScenarioContext({
+    account: scenario,
+    defaults: MARKETPLACE_DEFAULTS,
+  });
+  const isRefinance = resolvedScenario.mortgageType === "refinance";
+  const propertyBasis = Number(
+    isRefinance ? resolvedScenario.propertyValue : resolvedScenario.purchasePrice,
+  ) || 0;
+  const loanAmount = Math.max(
+    0,
+    Number(
+      isRefinance
+        ? resolvedScenario.loanBalance
+        : resolvedScenario.purchasePrice - resolvedScenario.downPaymentAmount,
+    ) || 0,
+  );
+  const term = Number(offer.term) || 30;
+  const termMonths = term * 12;
+  const horizonMonths = Math.min(96, termMonths);
+  const monthlyPayment = monthlyPrincipalAndInterest(loanAmount, offer.rate, termMonths);
+  const balanceAtHorizon = remainingBalance(
+    loanAmount,
+    offer.rate,
+    termMonths,
+    horizonMonths,
+  );
+  const principalRepaid = Math.max(0, loanAmount - balanceAtHorizon);
+  const interestThroughHorizon = Math.max(
+    0,
+    monthlyPayment * horizonMonths - principalRepaid,
+  );
+  const pointCost = loanAmount * (Number(offer.points) || 0) / 100;
+  const listedLenderFees = (offer.details?.feeLines || []).reduce(
+    (total, line) => total + (Number(line.amount) || 0),
+    0,
+  );
+  const lenderCredits = Number(offer.details?.sampleScenario?.lenderCredits) || 0;
+  const exactUpfrontCost = Math.max(0, pointCost + listedLenderFees - lenderCredits);
+  const displayedUpfrontCost = Math.round(exactUpfrontCost);
+  const apr = simplifiedAprPercent({
+    principal: loanAmount,
+    payment: monthlyPayment,
+    termMonths,
+    prepaidFinanceCharge: exactUpfrontCost,
+  });
+  const ltv = propertyBasis > 0 ? roundTo((loanAmount / propertyBasis) * 100, 2) : 0;
+
+  offer.term = term;
+  offer.productLabel = String(offer.productLabel || `${term}-year fixed`);
+  offer.principalAndInterest = Math.round(monthlyPayment);
+  offer.upfrontCost = displayedUpfrontCost;
+  offer.eightYearCost = Math.round(interestThroughHorizon + displayedUpfrontCost);
+  offer.apr = roundTo(apr || Number(offer.rate) || 0, 3);
+  offer.calculation = {
+    loanAmount,
+    termMonths,
+    horizonMonths,
+    monthlyPrincipalAndInterest: monthlyPayment,
+    remainingBalanceAtHorizon: Math.max(0, balanceAtHorizon),
+    principalRepaid,
+    interestThroughHorizon,
+    pointCost,
+    listedLenderFees,
+    lenderCredits,
+    upfrontCost: exactUpfrontCost,
+    aprMethod:
+      "Simplified APR calculated from the sample note rate, sample term, and listed points and lender fees.",
+  };
+
+  const sample = offer.details?.sampleScenario || {};
+  offer.details = {
+    ...offer.details,
+    sampleScenario: {
+      ...sample,
+      purpose: isRefinance ? "Refinance" : "Purchase",
+      ...(isRefinance
+        ? {
+            propertyValue: resolvedScenario.propertyValue,
+            cashOut: resolvedScenario.cashOut
+              ? "cash-out requested; proceeds and program limits are not calculated"
+              : "no cash-out proceeds included",
+          }
+        : {
+            price: resolvedScenario.purchasePrice,
+            downPayment: resolvedScenario.downPaymentAmount,
+          }),
+      loanAmount,
+      ltv,
+      creditRange: resolvedScenario.creditRange,
+      zip: resolvedScenario.zip,
+      propertyType: readableScenarioValue("propertyType", resolvedScenario.propertyType),
+      occupancy: readableScenarioValue("occupancy", resolvedScenario.occupancy),
+      aprTreatment:
+        "A simplified APR is recalculated from the sample note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
+      paymentIncludes:
+        "Principal and interest are recalculated from the entered loan amount, sample note rate, and selected term. Tax, insurance, HOA, and mortgage-insurance entries remain editable planning assumptions.",
+      includedCosts:
+        "Upfront cost equals the points charge for the entered loan amount plus the listed lender fee lines, less any stated lender credit.",
+      comparisonHorizon:
+        "The cost comparison adds interest paid through the first 96 payments, or the full term if shorter, to the listed upfront cost. Principal repayment is not counted as a borrowing cost.",
+      source:
+        "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+    },
+  };
+
+  return offer;
+}
+
 export function normalizeMarketplaceFixture(raw) {
   if (!raw || typeof raw !== "object") {
     throw new Error("Marketplace fixture must be an object.");
@@ -537,13 +710,14 @@ export function filterAndSortOffers({
   return offers
     .filter((offer) => offer.resultType === normalizedResultType)
     .filter((offer) => offer.mortgageType === normalizedScenario.mortgageType)
-    .filter((offer) => Number(offer.term) === normalizedScenario.term)
+    .filter((offer) => Number(offer.term) === Number(normalizedScenario.term))
     .filter((offer) => offer.propertyTypes.includes(normalizedScenario.propertyType))
     .filter((offer) => offer.occupancyTypes.includes(normalizedScenario.occupancy))
     .filter((offer) => offer.dtiBands.includes(normalizedScenario.dti))
     .filter((offer) => normalizedScenario.showFha || offer.loanFamily !== "fha")
     .filter((offer) => normalizedScenario.showVa || offer.loanFamily !== "va")
     .filter((offer) => offerMatchesPoints(offer.points, normalizedScenario.points))
+    .map((offer) => deriveOfferForScenario(offer, normalizedScenario))
     .sort((left, right) => {
       const leftValue = left[sortConfig.field];
       const rightValue = right[sortConfig.field];
@@ -678,12 +852,19 @@ export function createFixtureMarketplaceAdapter(fixture) {
     },
 
     createPrequalHandoff({ offerId, scenario }) {
-      const offer = offersById.get(offerId);
-      if (!offer) return null;
+      const sourceOffer = offersById.get(offerId);
+      if (!sourceOffer) return null;
       const resolvedScenario = resolveScenarioContext({
         account: scenario,
         defaults: MARKETPLACE_DEFAULTS,
       });
+      const offer = filterAndSortOffers({
+        offers: [sourceOffer],
+        scenario: resolvedScenario,
+        resultType: resolvedScenario.resultType,
+        sort: resolvedScenario.sort,
+      })[0];
+      if (!offer) return null;
 
       return {
         offerId: offer.id,

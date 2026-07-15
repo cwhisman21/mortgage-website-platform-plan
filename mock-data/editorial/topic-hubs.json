@@ -85,6 +85,12 @@
       "metaDescription": "Learn how to read dated city and state housing, labor, affordability, and loan-limit data before applying it to a mortgage decision.",
       "topic": "local_market_updates",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "fhfa-hpi-2026q1",
+        "freddie-mac-pmms-2026-07-09",
+        "cfpb-loan-estimate"
+      ],
       "contributorId": "contributor-maya-brooks",
       "contributorIds": [
         "contributor-maya-brooks",
@@ -151,6 +157,13 @@
       "metaDescription": "Plan a home purchase from budget and cash to close through property search, offer, underwriting, and closing.",
       "topic": "buying",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-homebuying-budget-2026",
+        "cfpb-find-right-home-2024",
+        "freddie-mac-homebuying-budget-2025",
+        "cfpb-compare-loan-estimates"
+      ],
       "contributorId": "contributor-jordan-avery",
       "contributorIds": [
         "contributor-jordan-avery"
@@ -217,6 +230,13 @@
       "metaDescription": "Compare refinance goals, payments, closing costs, cost-recovery timing, loan term, and long-run borrowing cost.",
       "topic": "refinance",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-mortgage-key-terms",
+        "cfpb-should-i-refinance-2020",
+        "freddie-mac-refinance-costs",
+        "cfpb-loan-estimate"
+      ],
       "contributorId": "contributor-elena-park",
       "contributorIds": [
         "contributor-elena-park"
@@ -282,6 +302,13 @@
       "metaDescription": "Understand FHA down payments, mortgage insurance, loan limits, property standards, costs, and alternatives.",
       "topic": "fha",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-fha-loans",
+        "hud-fha-handbook-4000-1",
+        "hud-fha-loan-limits-2026",
+        "cfpb-loan-estimate"
+      ],
       "contributorId": "contributor-marcus-lane",
       "contributorIds": [
         "contributor-marcus-lane"
@@ -348,6 +375,16 @@
       "metaDescription": "Understand VA eligibility, COE, entitlement, funding fees, occupancy, appraisal, costs, and lender review.",
       "topic": "va",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "va-home-loans",
+        "va-purchase-loan-2026",
+        "va-home-loan-eligibility-2025",
+        "va-home-loan-entitlement-limits-2025",
+        "va-funding-fee-closing-costs-2026",
+        "va-home-buying-process-2026",
+        "cfpb-loan-estimate"
+      ],
       "contributorId": "contributor-marcus-lane",
       "contributorIds": [
         "contributor-marcus-lane"
@@ -414,6 +451,13 @@
       "metaDescription": "Learn how conforming limits, reserves, documentation, property review, and lender-specific terms shape jumbo financing.",
       "topic": "jumbo",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "fhfa-conforming-loan-limits-2026",
+        "cfpb-jumbo-loan",
+        "cfpb-conventional-loans-2024",
+        "cfpb-loan-estimate"
+      ],
       "contributorId": "contributor-marcus-lane",
       "contributorIds": [
         "contributor-marcus-lane"
@@ -480,6 +524,15 @@
       "metaDescription": "Compare HELOCs, home equity loans, and cash-out refinancing by rate structure, payment, fees, lien, and repayment risk.",
       "topic": "home_equity",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-home-equity-loan-vs-heloc-2025",
+        "cfpb-heloc-overview-2024",
+        "cfpb-home-equity-loan-2024",
+        "cfpb-heloc-brochure",
+        "cfpb-heloc-first-mortgage-refinance-2024",
+        "cfpb-cashout-research-2025"
+      ],
       "contributorId": "contributor-elena-park",
       "contributorIds": [
         "contributor-elena-park"
@@ -545,6 +598,13 @@
       "metaDescription": "Understand property assessments, escrow, homeowners insurance, exemptions, reassessment, and local cost sources.",
       "topic": "taxes_insurance",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-escrow-account-2024",
+        "cfpb-total-monthly-mortgage-payment-2023",
+        "fema-floodsmart",
+        "naic-homeowners-insurance"
+      ],
       "contributorId": "contributor-maya-brooks",
       "contributorIds": [
         "contributor-maya-brooks",
@@ -612,6 +672,11 @@
       "metaDescription": "Meet the Snap Mortgage contributors and learn how sources, dates, tradeoffs, and corrections support borrower guidance.",
       "topic": "editorial_trust",
       "public": true,
+      "lastUpdated": "2026-07-13",
+      "sourceIds": [
+        "cfpb-owning-a-home",
+        "cfpb-loan-estimate"
+      ],
       "contributorIds": [
         "contributor-rowan-hale",
         "contributor-maya-brooks",

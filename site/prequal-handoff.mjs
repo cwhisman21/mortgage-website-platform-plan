@@ -107,7 +107,7 @@ export function createPrequalHandoffView({ adapter, request } = {}) {
       scenarioSummary: summarizeScenario(safeRequest.scenario || {}),
       scenarioRows: scenarioRows(safeRequest.scenario || {}),
       recoveryTitle: "Return to your saved rate results",
-      recoveryBody: "We could not reopen that selected option. Return to rate results to pick an available provider again without rebuilding your scenario.",
+      recoveryBody: "We could not reopen that selected option. Return to rate results to choose another result without rebuilding your scenario.",
       providerName: "Selected provider",
       providerInitials: initials("Selected provider"),
       providerSubline: "Your saved rate results stay ready to reopen.",
@@ -123,12 +123,12 @@ export function createPrequalHandoffView({ adapter, request } = {}) {
     scenarioRows: scenarioRows(handoff.scenario),
     providerName: handoff.displayName,
     providerInitials: initials(handoff.displayName),
-    providerSubline: [offer.nmlsDisplay, handoff.productLabel].filter(Boolean).join(" / "),
+    providerSubline: handoff.productLabel,
     productLabel: handoff.productLabel,
     detailMetrics: [
-      ["Rate", formatRatePercent(handoff.rate)],
-      ["APR", formatRatePercent(handoff.apr)],
-      ["Points", String(handoff.points)],
+      ["Illustrative rate", formatRatePercent(handoff.rate)],
+      ["Simplified APR", formatRatePercent(handoff.apr)],
+      ["Illustrative points", String(handoff.points)],
       ["Monthly P&I", formatMoney(handoff.principalAndInterest)],
     ],
     returnUrl: returnToRatesUrl({ scenario: handoff.scenario }),
@@ -137,9 +137,9 @@ export function createPrequalHandoffView({ adapter, request } = {}) {
 }
 
 export function renderPrequalHandoffMarkup(view) {
-  const lead = "When you continue, Snap carries the selected provider and your comparison details into that provider's prequalification path. You can return to rate results without losing your comparison view.";
+  const lead = "Your selected illustrative option and comparison details are shown below before you open a separate prequalification experience. Nothing has been sent to the provider, and you can return to rate results without losing your comparison view.";
   const body = view.status === "known"
-    ? "Review the provider, product, and mortgage scenario you selected before continuing into the connected Snap prequalification path."
+    ? "Review the provider name, product, and mortgage scenario you selected. Starting prequalification opens a notice only; this page does not submit an application or send borrower information."
     : "Your comparison scenario is still available. Reopen your rate results and choose the provider you want to carry forward.";
   const detailSummary = view.status === "known"
     ? `
@@ -174,7 +174,7 @@ export function renderPrequalHandoffMarkup(view) {
           </div>
           ${detailSummary}
           <div class="prequal-handoff-scenario-head">
-            <h3>Your submitted scenario</h3>
+            <h3>Your comparison scenario</h3>
           </div>
           <div class="prequal-handoff-scenario-grid">
             ${view.scenarioRows.map(([label, value]) => `
@@ -185,7 +185,7 @@ export function renderPrequalHandoffMarkup(view) {
             `).join("")}
           </div>
           <div class="prequal-handoff-note">
-            <p>No name, email, or phone number has been requested on this comparison page.</p>
+            <p>No name, email, phone number, application, document, or credit request has been collected or sent from this page.</p>
           </div>
           <div class="prequal-handoff-actions">
             ${view.hasStartAction ? `<button class="button" type="button" data-provider-start data-provider-name="${esc(view.providerName)}">Start prequal</button>` : ""}

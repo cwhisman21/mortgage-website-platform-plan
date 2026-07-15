@@ -13,9 +13,11 @@
       "title": "Rock Hill, SC home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Rock Hill, SC.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Rock Hill, SC.",
-      "metaDescription": "Rock Hill, SC home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Rock Hill.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Rock Hill, SC.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-07",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $295,100.",
         "prior ACS median owner-occupied home value: $155,800.",
-        "ACS median household income: $68,771.",
-        "median monthly owner cost with a mortgage: $1,525.",
-        "change from the prior ACS home-value estimate: 89.4%."
+        "ACS median household income: $68,771."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 89.4,
-          "display": "89.4%",
-          "sourceRecordIds": [
-            "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
-            "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "South Carolina median home value",
           "value": 259000,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "The dated finding: the local value, income, and owner-cost baseline",
           "body": [
-            "In Rock Hill, SC, the 2024 ACS reports a median owner-occupied home value of $295,100 and median household income of $68,771; these are separate medians, not the finances of one representative household. The same release reports $1,525 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Rock Hill, SC, reading $295,100, $68,771, and $1,525 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $295,100, $68,771, and $1,525 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The published evidence provides the starting point: In Rock Hill, SC, the 2024 ACS reports a median owner-occupied home value of $295,100, median household income of $68,771, and median selected monthly owner costs of $1,525 for owners with a mortgage. In practical terms, together, those three reference points can nevertheless help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,525 measure combines recurring ownership expenses in place of real estate taxes alone. For the decision at hand, a useful affordability review starts with $295,100, $68,771, and $1,525, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,15 +122,15 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
+          "id": "vintage-observations",
+          "heading": "Evidence check: read the ACS vintages as separate nominal observations",
           "body": [
-            "Rock Hill, SC's median home-value estimate increased from $155,800 in the prior ACS period to $295,100 in the current release, a reported change of 89.4%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 89.4% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $155,800 to $295,100 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Rock Hill, SC. Before the 89.4% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
+            "The 2019 ACS published $155,800 as Rock Hill, SC's median owner-occupied home-value estimate, while the 2024 ACS published $295,100.",
+            "For the next comparison in Rock Hill, SC, these dated nominal observations may help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. For borrower planning, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $155,800 attached to 2019 and $295,100 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
           ],
           "evidenceFactIds": [
             "prior-home-value",
-            "median-home-value",
-            "home-value-change"
+            "median-home-value"
           ],
           "sourceRecordIds": [
             "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior",
@@ -148,26 +138,11 @@
           ]
         },
         {
-          "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
-          "body": [
-            "Rock Hill, SC's $295,100 median home-value estimate is above the statewide $259,000 estimate, with a reported city-to-state gap of 13.9%. That 13.9% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Rock Hill, SC. It does not mean every local property is 13.9% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $295,100 and $259,000 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
-          ],
-          "evidenceFactIds": [
-            "median-home-value",
-            "state-home-value",
-            "state-home-value-gap"
-          ],
-          "sourceRecordIds": [
-            "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
-            "news-rock-hill-sc-affordability-home-values-source-state-home-value-current"
-          ]
-        },
-        {
           "id": "owner-cost-boundary",
           "heading": "What the owner-cost estimate includes and excludes",
           "body": [
-            "The $1,525 owner-cost estimate gives Rock Hill, SC borrowers a broader monthly reference than principal and interest alone, while the $68,771 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $68,771 is the owner household at $1,525. The $295,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $295,100, $68,771, and $1,525 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The $1,525 owner-cost estimate gives Rock Hill, SC borrowers a broader monthly reference than principal and interest alone, while the $68,771 income estimate supplies separate household context.",
+            "In a borrower review centered on Rock Hill, SC, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $68,771 is the owner household at $1,525. The $295,100 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $295,100, $68,771, and $1,525 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -181,43 +156,62 @@
           ]
         },
         {
-          "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "id": "state-comparison",
+          "heading": "How the city estimate sits within the state",
           "body": [
-            "Neither $295,100 nor $1,525 determines the value of a specific Rock Hill, SC home, what a borrower will pay each month, or an underwriting result. The $68,771 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 89.4% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $295,100, $1,525, and $68,771 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Rock Hill, SC's $295,100 median home-value estimate is above the statewide $259,000 estimate, with a reported city-to-state gap of 13.9%. In practical terms, that 13.9% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Rock Hill, SC.",
+            "Applied to a decision in Rock Hill, SC, it does not mean every local property is 13.9% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. For the decision at hand, borrowers may use $295,100 and $259,000 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
-            "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "state-home-value",
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
+            "news-rock-hill-sc-affordability-home-values-source-state-home-value-current"
+          ]
+        },
+        {
+          "id": "decision-limits",
+          "heading": "Keep the boundary clear: what these local medians cannot decide",
+          "body": [
+            "Neither the 2024 $295,100 estimate nor the $1,525 owner-cost median determines the value of a specific Rock Hill, SC home, a borrower's payment, or an underwriting result.",
+            "Applied to a decision in Rock Hill, SC, the $68,771 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $155,800 also cannot forecast the next market move or establish a safe purchase horizon. For the decision at hand, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+          ],
+          "evidenceFactIds": [
+            "median-home-value",
+            "prior-home-value",
+            "median-owner-cost",
+            "median-household-income"
+          ],
+          "sourceRecordIds": [
+            "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
+            "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior",
             "news-rock-hill-sc-affordability-home-values-source-city-owner-cost-current",
-            "news-rock-hill-sc-affordability-home-values-source-city-income-current",
-            "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior"
+            "news-rock-hill-sc-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Next step: build a property-specific comparison",
           "body": [
-            "A practical Rock Hill, SC worksheet can begin with $295,100 as broad value context, $1,525 as a reminder to include recurring ownership expenses, and $68,771 as a local economic reference. After noting those $295,100, $1,525, and $68,771 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 13.9% city-to-state difference is a prompt to keep the analysis local, while the 89.4% period change is a prompt to date every assumption. A licensed professional can use the 13.9% and 89.4% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "A practical Rock Hill, SC worksheet can begin with $295,100 as dated value context, $1,525 as a reminder to include recurring ownership expenses, and $68,771 as a local economic reference.",
+            "Applied to a decision in Rock Hill, SC, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 13.9% city-to-state difference is a prompt to keep the analysis local, while the separate $155,800 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For the decision at hand, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
+            "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior",
             "news-rock-hill-sc-affordability-home-values-source-city-owner-cost-current",
             "news-rock-hill-sc-affordability-home-values-source-city-income-current",
-            "news-rock-hill-sc-affordability-home-values-source-state-home-value-current",
-            "news-rock-hill-sc-affordability-home-values-source-city-home-value-prior"
+            "news-rock-hill-sc-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +249,9 @@
               "display": "$1,525"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 89.4,
-              "display": "89.4%"
+              "label": "South Carolina median home value",
+              "value": 259000,
+              "display": "$259,000"
             }
           ]
         }
@@ -269,43 +263,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$295,100",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$155,800",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$68,771",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,525",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "89.4%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "South Carolina median home value",
               "$259,000",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap above the state estimate",
               "13.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +315,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "vintage-observations",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-rock-hill-sc-affordability-home-values-source-city-home-value-current",
@@ -452,9 +448,11 @@
       "title": "Rock Hill, SC housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Rock Hill, SC.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Rock Hill, SC.",
-      "metaDescription": "Rock Hill, SC housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Rock Hill, SC.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +470,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 33,877.",
         "occupied housing units: 31,307.",
-        "vacant housing units: 2,570.",
-        "prior ACS vacant housing units: 1,954.",
-        "vacant-unit share of housing stock: 7.6%."
+        "vacant housing units: 2,570."
       ],
       "evidenceFacts": [
         {
@@ -579,7 +576,7 @@
           "id": "stock-baseline",
           "heading": "The size and use of the local housing stock",
           "body": [
-            "Rock Hill, SC's current ACS housing baseline includes 33,877 total housing units, 31,307 occupied units, and 2,570 vacant units. Those counts describe the housing stock across the survey period; they do not say that 2,570 homes were listed for sale or available to rent at one moment. The difference between 33,877 total units and 31,307 occupied units is useful for checking the internal scale of the release, while 2,570 provides the numerator for a more careful vacancy reading. For a borrower researching Rock Hill, SC, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Rock Hill, SC's current ACS housing baseline includes 33,877 total housing units, 31,307 occupied units, and 2,570 vacant units. For borrower planning, those counts can still help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 2,570 homes were listed for sale or available to rent at one moment. Reading 33,877 total units with 31,307 occupied and 2,570 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -596,7 +593,8 @@
           "id": "vacancy-comparison",
           "heading": "Vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Rock Hill, SC increased from 1,954 in the prior ACS period to 2,570 in the current release, a reported change of 31.5%. In the current housing stock, 2,570 units equal 7.6% of the 33,877 total. ACS vacancy covers several statuses, so the 7.6% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 1,954 to 2,570 can still prompt better questions about current for-sale and rental inventory in Rock Hill, SC, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Rock Hill, SC increased from 1,954 in the prior ACS period to 2,570 in the current release, a reported movement of 31.5%.",
+            "In the current housing stock, 2,570 units equal 7.6% of the 33,877 total. ACS vacancy covers several statuses, so the 7.6% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. In practical terms, the movement from 1,954 to 2,570 can nevertheless prompt better questions about current for-sale and rental inventory in Rock Hill, SC, provided those questions are answered with timely listing and property data instead of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -612,27 +610,10 @@
           ]
         },
         {
-          "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
-          "body": [
-            "Among 31,307 occupied units in Rock Hill, SC, the ACS-derived owner share is 54.2% and the renter share is 45.8%, making owner-occupied housing the larger measured tenure group. The 54.2% and 45.8% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Rock Hill, SC. The 54.2% and 45.8% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
-          ],
-          "evidenceFactIds": [
-            "occupied-units",
-            "owner-share",
-            "renter-share"
-          ],
-          "sourceRecordIds": [
-            "news-rock-hill-sc-housing-supply-tenure-source-occupied-units",
-            "news-rock-hill-sc-housing-supply-tenure-source-owner-units",
-            "news-rock-hill-sc-housing-supply-tenure-source-renter-units"
-          ]
-        },
-        {
           "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
+          "heading": "Evidence check: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Rock Hill, SC's ACS median gross rent is $1,341, while renter-occupied units account for 45.8% of occupied housing and owner-occupied units account for 54.2%. The $1,341 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,341 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Rock Hill, SC comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+            "Rock Hill, SC's ACS median gross rent is $1,341, while renter-occupied units account for 45.8% of occupied housing and owner-occupied units account for 54.2%. For the decision at hand, the $1,341 median includes rent and certain utilities for the measured rental stock; it does not reveal a lease offer comparable to a home under consideration. Comparing $1,341 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. In practical terms, a more useful Rock Hill, SC comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
           ],
           "evidenceFactIds": [
             "median-rent",
@@ -647,10 +628,29 @@
           ]
         },
         {
-          "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "id": "tenure-mix",
+          "heading": "Borrower view: ownership and renting within occupied housing",
           "body": [
-            "The 7.6% vacant-unit share and 54.2% owner share cannot determine competition for a specific Rock Hill, SC listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 33,877 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 7.6% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 2,570 vacant units separate from active inventory and keep the $1,341 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "Among 31,307 occupied units in Rock Hill, SC, the ACS-derived owner share is 54.2% and the renter share is 45.8%, making owner-occupied housing the larger measured tenure group.",
+            "The 54.2% and 45.8% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Rock Hill, SC. For borrower planning, the 54.2% and 45.8% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon instead of used as a signal to buy or rent by itself."
+          ],
+          "evidenceFactIds": [
+            "occupied-units",
+            "owner-share",
+            "renter-share"
+          ],
+          "sourceRecordIds": [
+            "news-rock-hill-sc-housing-supply-tenure-source-occupied-units",
+            "news-rock-hill-sc-housing-supply-tenure-source-owner-units",
+            "news-rock-hill-sc-housing-supply-tenure-source-renter-units"
+          ]
+        },
+        {
+          "id": "supply-limits",
+          "heading": "Evidence limits: what the housing-stock evidence cannot show",
+          "body": [
+            "The 7.6% vacant-unit share and 54.2% owner share does not determine competition for a specific Rock Hill, SC listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "In a borrower review centered on Rock Hill, SC, likewise, 33,877 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 7.6% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. A borrower should therefore keep 2,570 vacant units separate from active inventory and keep the $1,341 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -671,7 +671,8 @@
           "id": "matched-options",
           "heading": "Compare current local choices on the same terms",
           "body": [
-            "A grounded Rock Hill, SC comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 33,877 total units, a 7.6% vacancy share, and a 54.2% owner share. For renting, replace the $1,341 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 54.2% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 45.8% or 54.2% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Rock Hill, SC comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 33,877 total units, a vacancy share of 7.6%, and an owner share of 54.2%. On the rental side, replace the $1,341 median with the actual lease, utilities, deposits, and expected changes.",
+            "Applied to a decision in Rock Hill, SC, for ownership, keep the 54.2% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For the decision at hand, the resulting worksheet will not turn 45.8% or 54.2% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +741,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "33,877",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "31,307",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "2,570",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "1,954",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "7.6%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "31.5%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "54.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "45.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,341",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +977,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Rock Hill, SC labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Rock Hill, SC.",
-      "previewText": "See what changed in Rock Hill, SC, SC's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Rock Hill, SC labor market: latest employment evidence. See what changed in Rock Hill, SC, SC's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Rock Hill, SC's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Rock Hill, SC's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +1000,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 41,737.",
-        "employment: 39,744.",
-        "unemployment: 1,993.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 4.8%.",
-        "previous-month unemployment rate: 4.4%."
+        "change in unemployment rate from the prior month: 0.4 percentage points.",
+        "change in unemployment rate from a year earlier: 0.0 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1070,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0.4,
-          "display": "0.4%",
+          "display": "0.4 percentage points",
           "sourceRecordIds": [
             "news-rock-hill-sc-local-labor-market-source-latest-unemployment-rate",
             "news-rock-hill-sc-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1081,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": 0,
-          "display": "0.0%",
+          "display": "0.0 percentage points",
           "sourceRecordIds": [
             "news-rock-hill-sc-local-labor-market-source-latest-unemployment-rate",
             "news-rock-hill-sc-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1091,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Rock Hill, SC labor force of 41,737, with 39,744 people employed and 1,993 unemployed under the program's definitions. Those three counts belong together: 39,744 plus 1,993 explains the scale behind the published 4.8% unemployment rate. For mortgage planning, the 41,737 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 41,737 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-rock-hill-sc-local-labor-market-source-latest-labor-force",
-            "news-rock-hill-sc-local-labor-market-source-latest-employment",
-            "news-rock-hill-sc-local-labor-market-source-latest-unemployment",
-            "news-rock-hill-sc-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "What the comparison adds: what changed in the latest month",
           "body": [
-            "Rock Hill, SC's unemployment rate rose from 4.4% in the prior month to 4.8% in the latest month, a change of 0.4%. A 0.4% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,993 unemployment count and 41,737 labor force. The 0.4% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Rock Hill, SC borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "The published evidence provides the starting point: As of May 2026, Rock Hill, SC's unemployment rate rose from 4.4% in April 2026 to 4.8% in May 2026, a change of 0.4 percentage points. In practical terms, that movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not show that a particular employer is hiring or cutting jobs, and it cannot establish one applicant's income stability, mortgage eligibility, or loan price. For the decision at hand, the release also estimates 1,993 people unemployed within a labor force of 41,737, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1112,47 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What the comparison adds: what changed over the year",
           "body": [
-            "Compared with 4.8% a year earlier, the latest Rock Hill, SC unemployment rate of 4.8% was unchanged by 0.0%. The year-over-year window reduces the risk of interpreting only one monthly step, but the 0.0% difference still describes a population estimate rather than an individual's job stability. Reading 4.8%, 4.4%, and 4.8% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Rock Hill, SC pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Rock Hill, SC's unemployment rate was unchanged from 4.8% in May 2025 to 4.8%, a change of 0.0 percentage points. For the decision at hand, that wider window helps show whether Rock Hill, SC's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.4 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Rock Hill, SC or describes the stability of one household's earnings. For mortgage planning in Rock Hill, SC, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Rock Hill, SC's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-rock-hill-sc-local-labor-market-source-yearago-year-ago-rate",
-            "news-rock-hill-sc-local-labor-market-source-previous-previous-rate",
+            "news-rock-hill-sc-local-labor-market-source-latest-unemployment-rate",
+            "news-rock-hill-sc-local-labor-market-source-previous-previous-rate"
+          ]
+        },
+        {
+          "id": "labor-baseline",
+          "heading": "Evidence at a glance: the counts behind the published rate",
+          "body": [
+            "For the May 2026 source period, BLS estimated 41,737 people in the Rock Hill, SC labor force, including 39,744 employed and 1,993 unemployed under LAUS definitions.",
+            "For the next comparison in Rock Hill, SC, the employment and unemployment counts belong together because they establish the scale behind the published 4.8% rate. In mortgage planning, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. For borrower planning, it can still help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts should, as a result, follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-rock-hill-sc-local-labor-market-source-latest-labor-force",
+            "news-rock-hill-sc-local-labor-market-source-latest-employment",
+            "news-rock-hill-sc-local-labor-market-source-latest-unemployment",
             "news-rock-hill-sc-local-labor-market-source-latest-unemployment-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Borrower view: why the rate needs its underlying counts",
           "body": [
-            "At 4.8%, Rock Hill, SC's unemployment rate summarizes 1,993 unemployed people within a 41,737 labor force; the rate should not be discussed without those counts. The 39,744 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 39,744 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.8% rate attached to 41,737, 39,744, and 1,993 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 4.8%, Rock Hill, SC's unemployment rate summarizes 1,993 unemployed people within a labor force of 41,737; the rate should not be discussed without those counts. In practical terms, the 39,744 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 39,744 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. For the decision at hand, keeping the 4.8% rate attached to 41,737, 39,744, and 1,993 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1156,9 +1169,10 @@
         },
         {
           "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "heading": "Evidence limits: labor statistics are not an income review",
           "body": [
-            "Neither 39,744 employed people nor a 4.8% unemployment rate tells a lender what one Rock Hill, SC applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.4% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 4.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable 0.0% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "Neither 39,744 employed people nor an unemployment rate of 4.8% tells a lender what an applicant in Rock Hill, SC earns, whether that income is eligible, or whether it is likely to continue. For the decision at hand, the monthly movement of 0.4 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "For borrowers reviewing evidence from Rock Hill, SC, the 4.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. In practical terms, that boundary protects borrowers from treating the year-over-year movement of 0.0 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1189,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Next step: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Rock Hill, SC borrower is to note the latest 4.8% unemployment rate and the 0.0% year-over-year change, then move immediately to the records that describe the household. After noting the 4.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 41,737 local labor force and 39,744 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.4% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Rock Hill, SC's 4.8% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Rock Hill, SC is to note the latest 4.8% unemployment rate and the year-over-year movement of 0.0 percentage points, then move immediately to the records that describe the household. After noting the 4.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 41,737 local labor force and 39,744 employment count can frame the economic conversation, but they should not alter verified borrower inputs.",
+            "For the decision at hand, the monthly movement of 0.4 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Rock Hill, SC's 4.8% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1259,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "41,737",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "39,744",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,993",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.4%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.4%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.4 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "0.0%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "0.0 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1324,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1473,11 @@
       "title": "Rock Hill, SC loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Rock Hill, SC, including unit-count differences and important limits.",
-      "metaDescription": "Rock Hill, SC loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Rock Hill, SC, including.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Rock Hill, SC, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1497,10 @@
       ],
       "imageId": "loan_limits-06",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $541,287.",
-        "four-unit FHA limit: $1,041,125.",
-        "difference between one-unit conforming and FHA limits: $291,463."
+        "one-unit FHA limit: $541,287."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1558,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Keep the boundary clear: the published one-unit limits for the matched area",
           "body": [
-            "Rock Hill, SC is connected to York County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Rock Hill, SC, starting with York County keeps the limits attached to the county or county-equivalent area used in the official files. A Rock Hill, SC borrower still needs to confirm the selected property's location and legal unit count, because the relevant York County row follows the property rather than the city label or mailing address alone. Around Rock Hill, SC, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep York County as Rock Hill, SC's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
+            "Start with the dated local finding: Rock Hill, SC is connected to York County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Rock Hill, SC, starting with York County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Rock Hill, SC still need to confirm the selected property's location and legal unit count, because the relevant York County row follows the property in place of the city label or mailing address alone. Around Rock Hill, SC, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep York County as Rock Hill, SC's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1547,10 +1572,26 @@
           ]
         },
         {
-          "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "id": "category-boundary",
+          "heading": "A limit is a category boundary, not borrowing power",
           "body": [
-            "For the matched Rock Hill, SC area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. The $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Rock Hill, SC or reduces household debts. For borrower planning, a borrower seeking less than $832,750 can nevertheless have important conventional requirements to review, and a request below $541,287 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules in place of the largest number available in a public limit file."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-rock-hill-sc-county-loan-limits-source-conforming-oneunit",
+            "news-rock-hill-sc-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "one-unit-comparison",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
+          "body": [
+            "For the matched Rock Hill, SC area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. For borrower planning, the $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it does not determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1564,9 +1605,10 @@
         },
         {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Borrower view: unit count changes the published ceiling",
           "body": [
-            "York County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Rock Hill, SC, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "For borrowers in Rock Hill, SC, York County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125.",
+            "For the decision at hand, the higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Rock Hill, SC, a legal unit count should be verified from reliable property information before a multi-unit limit is used. In practical terms, the $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,26 +1624,11 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
-          "body": [
-            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Rock Hill, SC household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-rock-hill-sc-county-loan-limits-source-conforming-oneunit",
-            "news-rock-hill-sc-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Keep the boundary clear: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Rock Hill, SC is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Rock Hill, SC's connection to York County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Rock Hill, SC is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For the decision at hand, the one-unit $832,750 and $541,287 limits likewise cannot prove a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval.",
+            "The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. In practical terms, that is why Rock Hill, SC's connection to York County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1620,7 +1647,8 @@
           "id": "verify-next",
           "heading": "Verify the property before comparing products",
           "body": [
-            "A useful Rock Hill, SC next step is to document the property address, York County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Rock Hill, SC next step is to document the property address, York County geography, legal unit count, price, down-payment plan, and expected base loan amount. For borrower planning, compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable.",
+            "In a borrower review centered on Rock Hill, SC, after the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1716,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,041,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$291,463",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
@@ -1731,7 +1765,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "one-unit-comparison",
+          "afterSectionId": "category-boundary",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"

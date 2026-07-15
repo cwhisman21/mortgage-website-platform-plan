@@ -9,6 +9,8 @@ const FALLBACK_AUTHOR = {
   },
 };
 
+export const CONTRIBUTOR_DISCLOSURE = "Snap editorial voice, not a loan officer or licensed mortgage professional.";
+
 const silhouetteDataUri = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23eef3f8'/%3E%3Ccircle cx='40' cy='31' r='15' fill='%2393a4b8'/%3E%3Cpath d='M15 72c4-17 14-26 25-26s21 9 25 26' fill='%2393a4b8'/%3E%3C/svg%3E`;
 
 function unwrapList(raw, key) {
@@ -155,7 +157,37 @@ export function mergeEditorialArticles(baseArticles = [], overlayRaw) {
   }));
 }
 
+export function buildContributorArticleIndex(...articleCollections) {
+  const index = new Map();
+  const seenByContributor = new Map();
+
+  for (const articles of articleCollections) {
+    if (!Array.isArray(articles)) continue;
+    for (const article of articles) {
+      if (!article?.authorId || (!article.id && !article.route)) continue;
+      const seen = seenByContributor.get(article.authorId) || new Set();
+      const key = article.id || article.route;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      seenByContributor.set(article.authorId, seen);
+      const contributorArticles = index.get(article.authorId) || [];
+      contributorArticles.push(article);
+      index.set(article.authorId, contributorArticles);
+    }
+  }
+
+  for (const contributorArticles of index.values()) {
+    contributorArticles.sort((left, right) => {
+      const leftDate = left.updatedAt || left.publishedAt || "";
+      const rightDate = right.updatedAt || right.publishedAt || "";
+      return rightDate.localeCompare(leftDate);
+    });
+  }
+  return index;
+}
+
 export function articlesForContributor(content, articles = [], id) {
+  if (articles instanceof Map) return [...(articles.get(id) || [])];
   return articles.filter((article) => article.authorId === id);
 }
 
@@ -216,6 +248,9 @@ export function renderContributorBylineMarkup(
     ? ""
     : `<span class="article-byline-title">${escapeHtml(byline.title)}</span>`;
   const dateMarkup = showDate && dateLabel ? `<time>${escapeHtml(dateLabel)}</time>` : "";
+  const disclosureMarkup = !compact && !byline.isFallback
+    ? `<span class="article-byline-disclosure">${escapeHtml(CONTRIBUTOR_DISCLOSURE)}</span>`
+    : "";
   const contributorHref = /^\/learning-center\/authors\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(byline.href || "")
     ? byline.href
     : "";
@@ -228,6 +263,7 @@ export function renderContributorBylineMarkup(
         <span class="article-byline-name${byline.isFallback ? " article-byline-fallback" : ""}">${escapeHtml(byline.name)}</span>
         ${titleMarkup}
         ${dateMarkup}
+        ${disclosureMarkup}
       </span>`;
 
   if (contributorHref) {
@@ -244,10 +280,16 @@ export function renderContributorArchiveMarkup(
   articles,
   contributor,
   renderArticle,
+  { limit = Number.POSITIVE_INFINITY, showCount = false } = {},
 ) {
   const relatedArticles = articlesForContributor(content, articles, contributor.id);
   if (relatedArticles.length) {
-    return `<div class="editorial-article-grid">${relatedArticles.map(renderArticle).join("")}</div>`;
+    const normalizedLimit = Number.isFinite(limit) ? Math.max(0, Math.floor(limit)) : relatedArticles.length;
+    const visibleArticles = relatedArticles.slice(0, normalizedLimit);
+    const countMarkup = showCount
+      ? `<p class="contributor-archive-summary" data-contributor-article-count="${relatedArticles.length}">${visibleArticles.length < relatedArticles.length ? `Showing ${visibleArticles.length} of ${relatedArticles.length}` : `${relatedArticles.length}`} published articles, including borrower guides and local market updates.</p>`
+      : "";
+    return `${countMarkup}<div class="editorial-article-grid">${visibleArticles.map(renderArticle).join("")}</div>`;
   }
   return `<p class="contributor-empty-archive">Guidance from ${escapeHtml(contributor.name)} will appear here as it is published.</p>`;
 }

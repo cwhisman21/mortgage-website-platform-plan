@@ -13,9 +13,11 @@
       "title": "Dayton, OH home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Dayton, OH.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Dayton, OH.",
-      "metaDescription": "Dayton, OH home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Dayton, OH.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Dayton, OH.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-07",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $100,600.",
         "prior ACS median owner-occupied home value: $66,800.",
-        "ACS median household income: $45,247.",
-        "median monthly owner cost with a mortgage: $1,147.",
-        "change from the prior ACS home-value estimate: 50.6%."
+        "ACS median household income: $45,247."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 50.6,
-          "display": "50.6%",
-          "sourceRecordIds": [
-            "news-dayton-oh-affordability-home-values-source-city-home-value-current",
-            "news-dayton-oh-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "Ohio median home value",
           "value": 214800,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Start with the evidence: the local value, income, and owner-cost baseline",
           "body": [
-            "In Dayton, OH, the 2024 ACS reports a median owner-occupied home value of $100,600 and median household income of $45,247; these are separate medians, not the finances of one representative household. The same release reports $1,147 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Dayton, OH, reading $100,600, $45,247, and $1,147 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $100,600, $45,247, and $1,147 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The local figures answer the first question: In Dayton, OH, the 2024 ACS reports a median owner-occupied home value of $100,600, median household income of $45,247, and median selected monthly owner costs of $1,147 for owners with a mortgage. For borrower planning, together, those three reference points may help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $1,147 measure combines recurring ownership expenses in place of real estate taxes alone. A useful affordability review starts with $100,600, $45,247, and $1,147, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,26 +122,10 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Dayton, OH's median home-value estimate increased from $66,800 in the prior ACS period to $100,600 in the current release, a reported change of 50.6%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 50.6% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $66,800 to $100,600 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Dayton, OH. Before the 50.6% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-dayton-oh-affordability-home-values-source-city-home-value-prior",
-            "news-dayton-oh-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
           "id": "state-comparison",
-          "heading": "How the city estimate sits within the state",
+          "heading": "Read the comparison: how the city estimate sits within the state",
           "body": [
-            "Dayton, OH's $100,600 median home-value estimate is below the statewide $214,800 estimate, with a reported city-to-state gap of 53.2%. That 53.2% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Dayton, OH. It does not mean every local property is 53.2% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $100,600 and $214,800 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Dayton, OH's $100,600 median home-value estimate is below the statewide $214,800 estimate, with a reported city-to-state gap of 53.2%. For borrower planning, that 53.2% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Dayton, OH. It does not mean every local property is 53.2% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $100,600 and $214,800 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -164,10 +138,26 @@
           ]
         },
         {
-          "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "id": "vintage-observations",
+          "heading": "Evidence check: read the ACS vintages as separate nominal observations",
           "body": [
-            "The $1,147 owner-cost estimate gives Dayton, OH borrowers a broader monthly reference than principal and interest alone, while the $45,247 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $45,247 is the owner household at $1,147. The $100,600 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $100,600, $45,247, and $1,147 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The 2019 ACS published $66,800 as Dayton, OH's median owner-occupied home-value estimate, while the 2024 ACS published $100,600. For the decision at hand, these dated nominal observations can still help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. In practical terms, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $66,800 attached to 2019 and $100,600 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-dayton-oh-affordability-home-values-source-city-home-value-prior",
+            "news-dayton-oh-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "owner-cost-boundary",
+          "heading": "Keep the boundary clear: what the owner-cost estimate includes and excludes",
+          "body": [
+            "The $1,147 owner-cost estimate gives Dayton, OH borrowers a broader monthly reference than principal and interest alone, while the $45,247 income estimate supplies separate household context. For the decision at hand, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $45,247 is the owner household at $1,147.",
+            "For borrowers reviewing evidence from Dayton, OH, the $100,600 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. In practical terms, keeping $100,600, $45,247, and $1,147 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -182,42 +172,44 @@
         },
         {
           "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "heading": "Evidence limits: what these local medians cannot decide",
           "body": [
-            "Neither $100,600 nor $1,147 determines the value of a specific Dayton, OH home, what a borrower will pay each month, or an underwriting result. The $45,247 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 50.6% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $100,600, $1,147, and $45,247 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Neither the 2024 $100,600 estimate nor the $1,147 owner-cost median determines the value of a specific Dayton, OH home, a borrower's payment, or an underwriting result.",
+            "For the next comparison in Dayton, OH, the $45,247 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $66,800 also cannot forecast the next market move or establish a safe purchase horizon. For borrower planning, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "median-household-income"
           ],
           "sourceRecordIds": [
             "news-dayton-oh-affordability-home-values-source-city-home-value-current",
+            "news-dayton-oh-affordability-home-values-source-city-home-value-prior",
             "news-dayton-oh-affordability-home-values-source-city-owner-cost-current",
-            "news-dayton-oh-affordability-home-values-source-city-income-current",
-            "news-dayton-oh-affordability-home-values-source-city-home-value-prior"
+            "news-dayton-oh-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Next step: build a property-specific comparison",
           "body": [
-            "A practical Dayton, OH worksheet can begin with $100,600 as broad value context, $1,147 as a reminder to include recurring ownership expenses, and $45,247 as a local economic reference. After noting those $100,600, $1,147, and $45,247 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 53.2% city-to-state difference is a prompt to keep the analysis local, while the 50.6% period change is a prompt to date every assumption. A licensed professional can use the 53.2% and 50.6% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "One practical Dayton, OH worksheet can begin with $100,600 as dated value context, $1,147 as a reminder to include recurring ownership expenses, and $45,247 as a local economic reference.",
+            "For the next comparison in Dayton, OH, after noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 53.2% city-to-state difference is a prompt to keep the analysis local, while the separate $66,800 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For borrower planning, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-dayton-oh-affordability-home-values-source-city-home-value-current",
+            "news-dayton-oh-affordability-home-values-source-city-home-value-prior",
             "news-dayton-oh-affordability-home-values-source-city-owner-cost-current",
             "news-dayton-oh-affordability-home-values-source-city-income-current",
-            "news-dayton-oh-affordability-home-values-source-state-home-value-current",
-            "news-dayton-oh-affordability-home-values-source-city-home-value-prior"
+            "news-dayton-oh-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +247,9 @@
               "display": "$1,147"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 50.6,
-              "display": "50.6%"
+              "label": "Ohio median home value",
+              "value": 214800,
+              "display": "$214,800"
             }
           ]
         }
@@ -269,43 +261,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$100,600",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$66,800",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$45,247",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$1,147",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "50.6%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "Ohio median home value",
               "$214,800",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "53.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +313,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "state-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-dayton-oh-affordability-home-values-source-city-home-value-current",
@@ -452,9 +446,11 @@
       "title": "Dayton, OH housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Dayton, OH.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Dayton, OH.",
-      "metaDescription": "Dayton, OH housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Dayton, OH.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +468,10 @@
       ],
       "imageId": "housing_supply-03",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 70,335.",
         "occupied housing units: 58,477.",
-        "vacant housing units: 11,858.",
-        "prior ACS vacant housing units: 15,769.",
-        "vacant-unit share of housing stock: 16.9%."
+        "vacant housing units: 11,858."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +572,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Evidence at a glance: the size and use of the local housing stock",
           "body": [
-            "Dayton, OH's current ACS housing baseline includes 70,335 total housing units, 58,477 occupied units, and 11,858 vacant units. Those counts describe the housing stock across the survey period; they do not say that 11,858 homes were listed for sale or available to rent at one moment. The difference between 70,335 total units and 58,477 occupied units is useful for checking the internal scale of the release, while 11,858 provides the numerator for a more careful vacancy reading. For a borrower researching Dayton, OH, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Start with the dated local finding: Dayton, OH's current ACS housing baseline includes 70,335 total housing units, 58,477 occupied units, and 11,858 vacant units. In practical terms, those counts may still help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 11,858 homes were listed for sale or available to rent at one moment. For the decision at hand, reading 70,335 total units with 58,477 occupied and 11,858 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -593,10 +588,29 @@
           ]
         },
         {
-          "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "id": "rent-context",
+          "heading": "Borrower view: use rent as a matched comparison, not a shortcut",
           "body": [
-            "Vacant units in Dayton, OH decreased from 15,769 in the prior ACS period to 11,858 in the current release, a reported change of -24.8%. In the current housing stock, 11,858 units equal 16.9% of the 70,335 total. ACS vacancy covers several statuses, so the 16.9% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 15,769 to 11,858 can still prompt better questions about current for-sale and rental inventory in Dayton, OH, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Dayton, OH's ACS median gross rent is $918, while renter-occupied units account for 51.6% of occupied housing and owner-occupied units account for 48.4%. The $918 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $918 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For borrower planning, a more useful Dayton, OH comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-dayton-oh-housing-supply-tenure-source-median-rent",
+            "news-dayton-oh-housing-supply-tenure-source-renter-units",
+            "news-dayton-oh-housing-supply-tenure-source-occupied-units",
+            "news-dayton-oh-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
+          "id": "vacancy-comparison",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
+          "body": [
+            "Vacant units in Dayton, OH decreased from 15,769 in the prior ACS period to 11,858 in the current release, a reported movement of 24.8%.",
+            "In the current housing stock, 11,858 units equal 16.9% of the 70,335 total. ACS vacancy covers several statuses, so the 16.9% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For borrower planning, the movement from 15,769 to 11,858 can still prompt better questions about current for-sale and rental inventory in Dayton, OH, provided those questions are answered with timely listing and property data instead of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -615,7 +629,8 @@
           "id": "tenure-mix",
           "heading": "Ownership and renting within occupied housing",
           "body": [
-            "Among 58,477 occupied units in Dayton, OH, the ACS-derived owner share is 48.4% and the renter share is 51.6%, making renter-occupied housing the larger measured tenure group. The 48.4% and 51.6% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Dayton, OH. The 48.4% and 51.6% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 58,477 occupied units in Dayton, OH, the ACS-derived owner share is 48.4% and the renter share is 51.6%, making renter-occupied housing the larger measured tenure group.",
+            "For the decision at hand, the 48.4% and 51.6% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Dayton, OH. In practical terms, the 48.4% and 51.6% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon in place of used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +644,10 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Dayton, OH's ACS median gross rent is $918, while renter-occupied units account for 51.6% of occupied housing and owner-occupied units account for 48.4%. The $918 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $918 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Dayton, OH comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-dayton-oh-housing-supply-tenure-source-median-rent",
-            "news-dayton-oh-housing-supply-tenure-source-renter-units",
-            "news-dayton-oh-housing-supply-tenure-source-occupied-units",
-            "news-dayton-oh-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
           "heading": "What the housing-stock evidence cannot show",
           "body": [
-            "The 16.9% vacant-unit share and 48.4% owner share cannot determine competition for a specific Dayton, OH listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 70,335 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 16.9% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 11,858 vacant units separate from active inventory and keep the $918 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 16.9% vacant-unit share and 48.4% owner share cannot decide competition for a specific Dayton, OH listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. For the decision at hand, likewise, 70,335 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 16.9% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. In practical terms, borrowers should therefore keep 11,858 vacant units separate from active inventory and keep the $918 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -669,9 +666,9 @@
         },
         {
           "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "heading": "Borrower action: compare current local choices on the same terms",
           "body": [
-            "A grounded Dayton, OH comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 70,335 total units, a 16.9% vacancy share, and a 48.4% owner share. For renting, replace the $918 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 48.4% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 51.6% or 48.4% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "A grounded Dayton, OH comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 70,335 total units, a vacancy share of 16.9%, and an owner share of 48.4%. For the rental budget, replace the $918 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 48.4% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For borrower planning, the resulting worksheet will not turn 51.6% or 48.4% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +737,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "70,335",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "58,477",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "11,858",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "15,769",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "16.9%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-24.8%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "48.4%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "51.6%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$918",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -802,7 +809,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "vacancy-comparison",
+          "afterSectionId": "rent-context",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -966,10 +973,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Dayton, OH labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Dayton, OH.",
-      "previewText": "See what changed in Dayton, OH, OH's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Dayton, OH labor market: latest employment evidence. See what changed in Dayton, OH, OH's labor market and why broad employment data cannot determine mortgage.",
+      "previewText": "See what changed in Dayton, OH's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Dayton, OH's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +996,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 58,245.",
-        "employment: 56,095.",
-        "unemployment: 2,150.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 3.7%.",
-        "previous-month unemployment rate: 3.9%."
+        "change in unemployment rate from the prior month: -0.2 percentage points.",
+        "change in unemployment rate from a year earlier: -2.1 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1066,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": -0.2,
-          "display": "-0.2%",
+          "display": "-0.2 percentage points",
           "sourceRecordIds": [
             "news-dayton-oh-local-labor-market-source-latest-unemployment-rate",
             "news-dayton-oh-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1077,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -2.1,
-          "display": "-2.1%",
+          "display": "-2.1 percentage points",
           "sourceRecordIds": [
             "news-dayton-oh-local-labor-market-source-latest-unemployment-rate",
             "news-dayton-oh-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1087,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Dayton, OH labor force of 58,245, with 56,095 people employed and 2,150 unemployed under the program's definitions. Those three counts belong together: 56,095 plus 2,150 explains the scale behind the published 3.7% unemployment rate. For mortgage planning, the 58,245 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 58,245 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-dayton-oh-local-labor-market-source-latest-labor-force",
-            "news-dayton-oh-local-labor-market-source-latest-employment",
-            "news-dayton-oh-local-labor-market-source-latest-unemployment",
-            "news-dayton-oh-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Comparison view: what changed in the latest month",
           "body": [
-            "Dayton, OH's unemployment rate fell from 3.9% in the prior month to 3.7% in the latest month, a change of -0.2%. A -0.2% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 2,150 unemployment count and 58,245 labor force. The -0.2% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Dayton, OH borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "Start with the dated local finding: As of May 2026, Dayton, OH's unemployment rate fell from 3.9% in April 2026 to 3.7% in May 2026, a change of 0.2 percentage points. That movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not show that a particular employer is hiring or cutting jobs, and it cannot prove one applicant's income stability, mortgage eligibility, or loan price. For borrower planning, the release also estimates 2,150 people unemployed within a labor force of 58,245, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1108,28 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What the comparison adds: what changed over the year",
           "body": [
-            "Compared with 5.8% a year earlier, the latest Dayton, OH unemployment rate of 3.7% fell by -2.1%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -2.1% difference still describes a population estimate rather than an individual's job stability. Reading 5.8%, 3.9%, and 3.7% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Dayton, OH pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Dayton, OH's unemployment rate fell from 5.8% in May 2025 to 3.7%, a change of 2.1 percentage points.",
+            "That wider window helps show whether Dayton, OH's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.2 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Dayton, OH or describes the stability of one household's earnings. For mortgage planning in Dayton, OH, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Dayton, OH's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-dayton-oh-local-labor-market-source-yearago-year-ago-rate",
-            "news-dayton-oh-local-labor-market-source-previous-previous-rate",
-            "news-dayton-oh-local-labor-market-source-latest-unemployment-rate"
+            "news-dayton-oh-local-labor-market-source-latest-unemployment-rate",
+            "news-dayton-oh-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
           "heading": "Why the rate needs its underlying counts",
           "body": [
-            "At 3.7%, Dayton, OH's unemployment rate summarizes 2,150 unemployed people within a 58,245 labor force; the rate should not be discussed without those counts. The 56,095 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 56,095 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.7% rate attached to 58,245, 56,095, and 2,150 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 3.7%, Dayton, OH's unemployment rate summarizes 2,150 unemployed people within a labor force of 58,245; the rate should not be discussed without those counts. For borrower planning, the 56,095 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 56,095 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 3.7% rate attached to 58,245, 56,095, and 2,150 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1145,29 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "The counts behind the published rate",
           "body": [
-            "Neither 56,095 employed people nor a 3.7% unemployment rate tells a lender what one Dayton, OH applicant earns, whether that income is eligible, or whether it is likely to continue. The -0.2% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.7% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -2.1% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 58,245 people in the Dayton, OH labor force, including 56,095 employed and 2,150 unemployed under LAUS definitions. In practical terms, the employment and unemployment counts belong together because they establish the scale behind the published 3.7% rate. In mortgage planning, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. For the decision at hand, it can still help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-dayton-oh-local-labor-market-source-latest-labor-force",
+            "news-dayton-oh-local-labor-market-source-latest-employment",
+            "news-dayton-oh-local-labor-market-source-latest-unemployment",
+            "news-dayton-oh-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Keep the boundary clear: labor statistics are not an income review",
+          "body": [
+            "Neither 56,095 employed people nor an unemployment rate of 3.7% tells a lender what an applicant in Dayton, OH earns, whether that income is eligible, or whether it is likely to continue. The monthly movement of 0.2 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 3.7% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For borrower planning, that boundary protects borrowers from treating the year-over-year movement of 2.1 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1184,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Borrower action: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Dayton, OH borrower is to note the latest 3.7% unemployment rate and the -2.1% year-over-year change, then move immediately to the records that describe the household. After noting the 3.7% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 58,245 local labor force and 56,095 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The -0.2% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Dayton, OH's 3.7% LAUS rate in its proper role as dated local economic context."
+            "A practical next step for borrowers in Dayton, OH is to note the latest 3.7% unemployment rate and the year-over-year movement of 2.1 percentage points, then move immediately to the records that describe the household. After noting the 3.7% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path.",
+            "The 58,245 local labor force and 56,095 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The monthly movement of 0.2 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Dayton, OH's 3.7% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1254,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "58,245",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "56,095",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "2,150",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "3.7%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "3.9%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "5.8%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "-0.2%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "-0.2 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-2.1%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-2.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1319,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1468,11 @@
       "title": "Dayton, OH loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Dayton, OH, including unit-count differences and important limits.",
-      "metaDescription": "Dayton, OH loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Dayton, OH, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Dayton, OH, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1492,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $832,750.",
         "four-unit conforming limit: $1,601,750.",
-        "one-unit FHA limit: $541,287.",
-        "four-unit FHA limit: $1,041,125.",
-        "difference between one-unit conforming and FHA limits: $291,463."
+        "one-unit FHA limit: $541,287."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1553,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Where the evidence stops: the published one-unit limits for the matched area",
           "body": [
-            "Dayton, OH is connected to Montgomery County for this 2026 source comparison. The published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Dayton, OH, starting with Montgomery County keeps the limits attached to the county or county-equivalent area used in the official files. A Dayton, OH borrower still needs to confirm the selected property's location and legal unit count, because the relevant Montgomery County row follows the property rather than the city label or mailing address alone. Around Dayton, OH, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Montgomery County as Dayton, OH's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
+            "The published evidence provides the starting point: Dayton, OH is connected to Montgomery County for this 2026 source comparison. In practical terms, the published one-unit conforming limit is $832,750, while the published one-unit FHA limit is $541,287. Those figures organize different program categories; $832,750 is not a conventional loan offer, and $541,287 is not an FHA eligibility finding. For Dayton, OH, starting with Montgomery County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Dayton, OH still need to confirm the selected property's location and legal unit count, because the relevant Montgomery County row follows the property rather than the city label or mailing address alone. Around Dayton, OH, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Montgomery County as Dayton, OH's confirmed county row before comparing the $832,750 and $541,287 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1568,27 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Dayton, OH area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. The $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Dayton, OH area, the difference between the $832,750 one-unit conforming limit and the $541,287 one-unit FHA limit is $291,463. In practical terms, the $291,463 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more.",
+            "Applied to a decision in Dayton, OH, a needed loan amount can be compared with $832,750 and $541,287 only after price, down payment, financed items, and the applicable base-loan definition are established. For the decision at hand, even when $291,463 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+          ],
+          "evidenceFactIds": [
+            "conforming-one",
+            "fha-one",
+            "one-unit-difference"
+          ],
+          "sourceRecordIds": [
+            "news-dayton-oh-county-loan-limits-source-conforming-oneunit",
+            "news-dayton-oh-county-loan-limits-source-fha-oneunit"
+          ]
+        },
+        {
+          "id": "category-boundary",
+          "heading": "Where the evidence stops: a limit is a category boundary, not borrowing power",
+          "body": [
+            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Dayton, OH or reduces household debts.",
+            "Applied to a decision in Dayton, OH, a borrower seeking less than $832,750 can nevertheless have important conventional requirements to review, and a request below $541,287 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. For the decision at hand, regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1564,9 +1602,10 @@
         },
         {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Planning context: unit count changes the published ceiling",
           "body": [
-            "Montgomery County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. The higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Dayton, OH, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "As local context for Dayton, OH, Montgomery County's conforming limit rises from $832,750 for one unit to $1,601,750 for four units, while the FHA figures move from $541,287 to $1,041,125. For borrower planning, the higher $1,601,750 and $1,041,125 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan.",
+            "In Dayton, OH, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $1,601,750 and $1,041,125 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1582,26 +1621,11 @@
           ]
         },
         {
-          "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
-          "body": [
-            "The $832,750 conforming ceiling and $541,287 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Dayton, OH household's income or reduces its debts. A borrower seeking less than $832,750 can still have important conventional requirements to review, and a request below $541,287 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $291,463 program gap is therefore best used to route questions, not to rank products. Regardless of the $291,463 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
-          ],
-          "evidenceFactIds": [
-            "conforming-one",
-            "fha-one",
-            "one-unit-difference"
-          ],
-          "sourceRecordIds": [
-            "news-dayton-oh-county-loan-limits-source-conforming-oneunit",
-            "news-dayton-oh-county-loan-limits-source-fha-oneunit"
-          ]
-        },
-        {
           "id": "limit-boundaries",
-          "heading": "What the county limits cannot decide",
+          "heading": "Keep the boundary clear: what the county limits cannot decide",
           "body": [
-            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Dayton, OH is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $832,750 and $541,287 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Dayton, OH's connection to Montgomery County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $1,601,750 nor $1,041,125 indicates what a four-unit property in Dayton, OH is worth, what income its units may produce, or whether a borrower can qualify to purchase it. For borrower planning, the one-unit $832,750 and $541,287 limits likewise cannot prove a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval.",
+            "The $832,750 and $541,287 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Dayton, OH's connection to Montgomery County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1620,7 +1644,8 @@
           "id": "verify-next",
           "heading": "Verify the property before comparing products",
           "body": [
-            "A useful Dayton, OH next step is to document the property address, Montgomery County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Dayton, OH next step is to document the property address, Montgomery County geography, legal unit count, price, down-payment plan, and expected base loan amount. In practical terms, compare that amount with $832,750 and $541,287 for a one-unit property, or with $1,601,750 and $1,041,125 only when the four-unit category is actually applicable. After the $832,750 and $541,287 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option.",
+            "Applied to a decision in Dayton, OH, the $832,750 conforming figure and $541,287 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $291,463 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1713,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$832,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$1,601,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$541,287",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$1,041,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$291,463",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [

@@ -7,6 +7,7 @@ import {
   renderProductionArticle,
   renderProductionTopicHub,
 } from "./editorial-renderer.mjs";
+import { renderSearchResultCard } from "./tag-presentation.mjs";
 
 const contributor = {
   id: "contributor-maya-brooks",
@@ -55,6 +56,195 @@ function count(markup, fragment) {
   return markup.split(fragment).length - 1;
 }
 
+const tagContext = {
+  primaryTags: [{ id: "florida", slug: "florida", displayName: "Florida" }],
+  additionalTags: Array.from({ length: 9 }, (_, index) => ({
+    id: `tag-${index + 1}`,
+    slug: `tag-${index + 1}`,
+    displayName: `Tag ${index + 1}`,
+  })),
+};
+
+test("renders primary and additional tags around production article content", () => {
+  const html = renderProductionArticle({
+    id: "tagged-production-article",
+    title: "Tagged production article",
+    sections: [],
+    sourceIds: [source.id],
+    relatedRoutes: ["/locations/texas/austin"],
+  }, {
+    sources: [source],
+    relatedRoutes,
+    route,
+    tagContext,
+  });
+
+  assert.match(html, /class="content-primary-tags"[\s\S]*href="\/learning-center\/tags\/florida"[\s\S]*<h1>/);
+  assert.match(html, /<div class="production-article-main">/);
+  assert.doesNotMatch(html, /<main\b/);
+  assert.equal(count(html, "data-additional-tag="), 9);
+  assert.match(html, /<details class="content-additional-tags-more">/);
+  assert.ok(html.indexOf("production-article-sources") < html.indexOf("content-additional-tags"));
+  assert.ok(html.indexOf("content-additional-tags") < html.indexOf("production-related-section"));
+});
+
+test("keeps production article output unchanged when tag context is omitted", () => {
+  const article = {
+    id: "untagged-production-article",
+    title: "Untagged production article",
+    sections: [],
+  };
+  const html = renderProductionArticle(article);
+
+  assert.doesNotMatch(html, /content-(?:primary|additional)-tags/);
+  assert.match(html, /<h1>Untagged production article<\/h1>/);
+});
+
+test("renders a canonical search result card with matched tags first and safe public fields", () => {
+  const registry = {
+    tags: [
+      { id: "florida", slug: "florida", displayName: "Florida" },
+      { id: "fha", slug: "fha-loans", displayName: "FHA Loans" },
+      { id: "hidden", slug: "hidden", displayName: "Hidden" },
+    ],
+  };
+  const html = renderSearchResultCard({
+    id: "internal-record-id",
+    route: "/learning-center/florida-fha",
+    title: "Florida & FHA planning",
+    preview: "Compare <payment> questions.",
+    image: "",
+    author: "Snap Mortgage Editorial",
+    publishedAt: "2026-07-14",
+    tagIds: ["fha", "florida", "hidden"],
+    reviewStatus: "internal-only",
+  }, {
+    registry,
+    matchedTagIds: ["florida"],
+    routeHref: (href) => `/app${href}`,
+    fallbackImage: "/site/assets/fallback.jpg",
+    tagLimit: 2,
+  });
+
+  assert.match(html, /href="\/app\/learning-center\/florida-fha"/);
+  assert.match(html, /src="\/site\/assets\/fallback\.jpg"/);
+  assert.match(html, /Florida &amp; FHA planning/);
+  assert.match(html, /Compare &lt;payment&gt; questions\./);
+  assert.match(html, /Matched topic: Florida/);
+  assert.ok(html.indexOf(">Florida<") < html.indexOf(">FHA Loans<"));
+  assert.doesNotMatch(html, /internal-record-id|internal-only|>Hidden</);
+});
+
+test("uses only safe display-ready record and fallback image URLs", () => {
+  const record = {
+    route: "/learning-center/market-news/austin-home-values",
+    title: "Austin home values",
+    image: "home_values-07",
+  };
+  const withFallback = renderSearchResultCard(record, {
+    registry: { tags: [] },
+    fallbackImage: "/site/assets/search-fallback.jpg",
+  });
+  const withoutSafeImage = renderSearchResultCard(record, {
+    registry: { tags: [] },
+    fallbackImage: "javascript:alert(1)",
+  });
+
+  assert.match(withFallback, /src="\/site\/assets\/search-fallback\.jpg"/);
+  assert.doesNotMatch(withFallback, /home_values-07/);
+  assert.doesNotMatch(withoutSafeImage, /search-result-card-image|javascript:/);
+});
+
+test("resolves canonical contributor IDs and omits unresolved internal author IDs", () => {
+  const record = {
+    route: "/learning-center/market-news/austin-home-values",
+    title: "Austin home values",
+    author: "contributor-maya-brooks",
+  };
+  const resolved = renderSearchResultCard(record, {
+    registry: { tags: [] },
+    resolveAuthor: (authorId) => authorId === "contributor-maya-brooks" ? "Maya Brooks" : "",
+  });
+  const unresolved = renderSearchResultCard(record, { registry: { tags: [] } });
+
+  assert.match(resolved, /class="search-result-card-byline">Maya Brooks</);
+  assert.doesNotMatch(resolved, /contributor-maya-brooks/);
+  assert.doesNotMatch(unresolved, /search-result-card-byline|contributor-maya-brooks/);
+});
+
+test("maps every canonical family to a borrower-facing content type", () => {
+  const labels = new Map([
+    ["articles", "Article"],
+    ["topic-guides", "Topic guide"],
+    ["local-market-news", "Local market news"],
+    ["product-guides", "Loan option guide"],
+    ["calculators", "Calculator"],
+  ]);
+
+  for (const [family, label] of labels) {
+    const html = renderSearchResultCard({
+      route: `/search/${family}`,
+      title: `${label} title`,
+      family,
+    }, { registry: { tags: [] } });
+
+    assert.match(html, new RegExp(`class="search-result-card-type">${label}<`));
+    assert.doesNotMatch(html, new RegExp(`>${family}<`));
+  }
+});
+
+test("resolves the first applicable location without exposing location IDs", () => {
+  const record = {
+    route: "/learning-center/market-news/austin-home-values",
+    title: "Austin home values",
+    family: "local-market-news",
+    locationIds: ["city-austin-tx", "state-tx"],
+  };
+  const locations = new Map([
+    ["city-austin-tx", "Austin, Texas"],
+    ["state-tx", "Texas"],
+  ]);
+  const resolved = renderSearchResultCard(record, {
+    registry: { tags: [] },
+    resolveLocation: (locationId) => locations.get(locationId),
+  });
+  const unresolved = renderSearchResultCard(record, { registry: { tags: [] } });
+
+  assert.match(resolved, /class="search-result-card-location">Austin, Texas</);
+  assert.doesNotMatch(resolved, /city-austin-tx|state-tx/);
+  assert.doesNotMatch(unresolved, /search-result-card-location|city-austin-tx|state-tx/);
+});
+
+test("renders topic hub tag context before the title and before footer content when sources are absent", () => {
+  const html = renderProductionTopicHub({
+    id: "topic-tag-test",
+    name: "Mortgage planning",
+    public: false,
+    closingCta: {
+      title: "Choose a next step",
+      text: "Review the guidance that fits your plans.",
+      label: "Browse guidance",
+      href: "/learning-center",
+    },
+  }, { route, tagContext });
+
+  assert.match(html, /class="content-primary-tags"[\s\S]*href="\/learning-center\/tags\/florida"[\s\S]*<h1>/);
+  assert.doesNotMatch(html, /production-topic-sources/);
+  assert.ok(html.indexOf("content-additional-tags") < html.indexOf("production-topic-closing"));
+});
+
+test("places article tags before related content when sources are absent", () => {
+  const html = renderProductionArticle({
+    id: "source-free-article",
+    title: "Source-free planning guide",
+    sections: [],
+    relatedRoutes: ["/locations/texas/austin"],
+  }, { relatedRoutes, route, tagContext });
+
+  assert.doesNotMatch(html, /production-article-sources/);
+  assert.ok(html.indexOf("content-additional-tags") < html.indexOf("production-related-section"));
+});
+
 test("topic hub normalization preserves every production hub field for rendering", () => {
   const content = normalizeEditorialContent({
     contributors: [contributor],
@@ -98,6 +288,9 @@ test("renders a public topic hub with all unique production fields and featured 
     id: "blog-local-market-updates",
     name: "Local Market Updates",
     route: "/learning-center/local-market-updates",
+    public: true,
+    lastUpdated: "2026-07-13",
+    sourceIds: [source.id],
     heroSummary: "Follow dated housing evidence for cities and states before deciding what to compare next.",
     overviewParagraphs: ["Use the evidence date before carrying a market figure into a budget.", "Compare the local facts with a property-specific payment before acting."],
     whyItMatters: "The same loan amount can feel different once taxes and insurance enter the monthly payment.",
@@ -121,6 +314,7 @@ test("renders a public topic hub with all unique production fields and featured 
       authorId: contributor.id,
     }]]),
     contributors: [contributor],
+    sources: [source],
     route,
     renderArticleCard: (article) => `<article class="editorial-article-card"><a href="${article.route}">${article.title}</a></article>`,
   });
@@ -132,6 +326,14 @@ test("renders a public topic hub with all unique production fields and featured 
   assert.match(html, /Price and supply/);
   assert.match(html, /Austin market update/);
   assert.match(html, /Browse locations/);
+  assert.match(html, /Last updated/);
+  assert.match(html, /datetime="2026-07-13"/);
+  assert.match(html, /Topic guidance reviewed through this date/);
+  assert.match(html, /Time-sensitive figures show their own as-of dates/i);
+  assert.match(html, /Sources and limitations/);
+  assert.match(html, /href="https:\/\/www\.freddiemac\.com\/pmms"/);
+  assert.match(html, /Freddie Mac/);
+  assert.match(html, /National weekly benchmark context/);
 });
 
 test("renders the compiled Editorial Team hub with all public fields and six contributor cards", () => {
@@ -142,6 +344,7 @@ test("renders the compiled Editorial Team hub with all public fields and six con
 
   const html = renderProductionTopicHub(hub, {
     contributors: content.contributors,
+    sources: content.sources,
     route,
     linkResolver: (id) => {
       if (contributorsById.has(id)) return { kind: "contributor", item: contributorsById.get(id) };
@@ -193,6 +396,36 @@ test("renders the compiled Editorial Team hub with all public fields and six con
   assert.ok(html.includes(escapeHtml(hub.closingCta.text)), "missing closing CTA text");
   assert.ok(html.includes(escapeHtml(hub.closingCta.label)), "missing closing CTA label");
   assert.ok(html.includes(`href="${escapeHtml(hub.closingCta.href)}"`), "missing closing CTA href");
+});
+
+test("every public compiled topic hub renders only its inherited authoritative ledger sources", () => {
+  const content = JSON.parse(fs.readFileSync(compiledEditorialPath, "utf8"));
+  const sourcesById = new Map(content.sources.map((entry) => [entry.id, entry]));
+  const publicHubs = content.topicHubs.filter((hub) => hub.public === true);
+
+  assert.ok(publicHubs.length > 0, "compiled public topic hubs are missing");
+  for (const hub of publicHubs) {
+    const html = renderProductionTopicHub(hub, {
+      contributors: content.contributors,
+      sources: content.sources,
+      route,
+    });
+    const inheritedSources = hub.sourceIds.map((sourceId) => sourcesById.get(sourceId));
+
+    assert.ok(hub.lastUpdated, `${hub.id} is missing canonical lastUpdated`);
+    assert.ok(inheritedSources.length > 0, `${hub.id} has no inherited sources`);
+    assert.equal(count(html, "production-topic-source-card"), inheritedSources.length, `${hub.id} source count mismatch`);
+    assert.match(html, new RegExp(`datetime="${hub.lastUpdated}"`));
+
+    for (const inheritedSource of inheritedSources) {
+      assert.ok(inheritedSource, `${hub.id} references a missing compiled source`);
+      assert.equal(inheritedSource.authoritative, true, `${hub.id} inherits a non-authoritative source`);
+      assert.ok(html.includes(`href="${escapeHtml(inheritedSource.url)}"`), `${hub.id} omits source link ${inheritedSource.id}`);
+      assert.ok(html.includes(escapeHtml(inheritedSource.publisher)), `${hub.id} omits source publisher ${inheritedSource.id}`);
+      assert.ok(html.includes(escapeHtml(inheritedSource.title)), `${hub.id} omits source title ${inheritedSource.id}`);
+      assert.ok(html.includes(escapeHtml(inheritedSource.limitation)), `${hub.id} omits source limitation ${inheritedSource.id}`);
+    }
+  }
 });
 
 test("renders structured production article content with citations, CTAs, TOC, dates, FAQs, and related routes", () => {

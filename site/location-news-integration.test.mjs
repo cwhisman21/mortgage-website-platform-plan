@@ -51,12 +51,13 @@ test("modal and direct article rendering receive the assigned contributor", () =
   }
 });
 
-test("SPA Article JSON-LD identifies the assigned contributor as a linked Person", () => {
+test("SPA Article JSON-LD uses Snap editorial organization authorship", () => {
   const metadataSource = sourceBetween("function setDocumentMeta", "function notFoundPage");
 
   assert.match(metadataSource, /contributors/);
   assert.match(metadataSource, /resolveDocumentMetadata/);
-  assert.match(documentMetadataSource, /authorId/);
-  assert.match(documentMetadataSource, /"@type":\s*"Person"/);
-  assert.match(documentMetadataSource, /contributor\.route/);
+  assert.match(documentMetadataSource, /"@type":\s*"Organization"/);
+  assert.match(documentMetadataSource, /Snap Mortgage Editorial/);
+  assert.match(documentMetadataSource, /learning-center\/editorial-team/);
+  assert.doesNotMatch(documentMetadataSource, /"@type":\s*"Person"/);
 });

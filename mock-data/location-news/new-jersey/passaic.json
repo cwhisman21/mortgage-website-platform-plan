@@ -13,9 +13,11 @@
       "title": "Passaic, NJ home values, income, and owner costs",
       "dek": "A borrower-focused reading of the latest ACS value, income, and owner-cost evidence for Passaic, NJ.",
       "previewText": "See how home value, household income, and owner-cost estimates frame a payment conversation in Passaic, NJ.",
-      "metaDescription": "Passaic, NJ home values, income, and owner costs. See how home value, household income, and owner-cost estimates frame a payment conversation in Passaic, NJ.",
+      "metaDescription": "See how home value, household income, and owner-cost estimates frame a payment conversation in Passaic, NJ.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Affordability evidence",
       "topicIds": [
         "affordability",
@@ -33,11 +35,10 @@
       ],
       "imageId": "home_values-01",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "ACS median owner-occupied home value: $429,900.",
         "prior ACS median owner-occupied home value: $332,700.",
-        "ACS median household income: $55,371.",
-        "median monthly owner cost with a mortgage: $2,905.",
-        "change from the prior ACS home-value estimate: 29.2%."
+        "ACS median household income: $55,371."
       ],
       "evidenceFacts": [
         {
@@ -81,17 +82,6 @@
           "comparison": false
         },
         {
-          "id": "home-value-change",
-          "label": "change from the prior ACS home-value estimate",
-          "value": 29.2,
-          "display": "29.2%",
-          "sourceRecordIds": [
-            "news-passaic-nj-affordability-home-values-source-city-home-value-current",
-            "news-passaic-nj-affordability-home-values-source-city-home-value-prior"
-          ],
-          "comparison": true
-        },
-        {
           "id": "state-home-value",
           "label": "New Jersey median home value",
           "value": 454400,
@@ -116,9 +106,9 @@
       "sections": [
         {
           "id": "local-baseline",
-          "heading": "The local value, income, and owner-cost baseline",
+          "heading": "Start with the evidence: the local value, income, and owner-cost baseline",
           "body": [
-            "In Passaic, NJ, the 2024 ACS reports a median owner-occupied home value of $429,900 and median household income of $55,371; these are separate medians, not the finances of one representative household. The same release reports $2,905 in median selected monthly owner costs for owners with a mortgage, a measure that combines recurring ownership expenses rather than real estate taxes alone. For Passaic, NJ, reading $429,900, $55,371, and $2,905 together identifies the cost categories that deserve verification without converting public medians into a payment quote. An affordability review can start with the local $429,900, $55,371, and $2,905 reference points, then replace them with the borrower's income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
+            "The local figures answer the first question: In Passaic, NJ, the 2024 ACS reports a median owner-occupied home value of $429,900, median household income of $55,371, and median selected monthly owner costs of $2,905 for owners with a mortgage. For borrower planning, together, those three reference points can nevertheless help a borrower identify which search-price, income, and recurring-cost assumptions need current verification first. They remain separate medians, not the finances of one representative household, and the $2,905 measure combines recurring ownership expenses instead of real estate taxes alone. A useful affordability review starts with $429,900, $55,371, and $2,905, then replaces them with the borrower's documented income, cash, debts, property taxes, insurance, association charges, loan terms, and intended occupancy."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -132,26 +122,11 @@
           ]
         },
         {
-          "id": "change-over-time",
-          "heading": "What changed between the ACS periods",
-          "body": [
-            "Passaic, NJ's median home-value estimate increased from $332,700 in the prior ACS period to $429,900 in the current release, a reported change of 29.2%. Because each ACS 5-year estimate summarizes a multi-year survey window, the 29.2% comparison describes a change between published estimates rather than appreciation for a particular home. The move from $332,700 to $429,900 can help a borrower test whether an older search budget still reflects the broad local evidence, but it cannot identify a current asking price or future resale value in Passaic, NJ. Before the 29.2% change is treated as precise, the analysis still needs margins of error, property type, neighborhood, condition, and the timing of an actual transaction."
-          ],
-          "evidenceFactIds": [
-            "prior-home-value",
-            "median-home-value",
-            "home-value-change"
-          ],
-          "sourceRecordIds": [
-            "news-passaic-nj-affordability-home-values-source-city-home-value-prior",
-            "news-passaic-nj-affordability-home-values-source-city-home-value-current"
-          ]
-        },
-        {
           "id": "state-comparison",
           "heading": "How the city estimate sits within the state",
           "body": [
-            "Passaic, NJ's $429,900 median home-value estimate is below the statewide $454,400 estimate, with a reported city-to-state gap of 5.4%. That 5.4% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Passaic, NJ. It does not mean every local property is 5.4% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $429,900 and $454,400 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
+            "Passaic, NJ's $429,900 median home-value estimate is below the statewide $454,400 estimate, with a reported city-to-state gap of 5.4%.",
+            "For borrower planning, that 5.4% gap is useful for showing that a statewide midpoint may be a poor substitute for a local search range in Passaic, NJ. It does not mean every local property is 5.4% away from a comparable property elsewhere in the state, because the medians reflect different housing mixes and geographies. A borrower can use $429,900 and $454,400 to decide which assumptions need local replacement first, then compare actual properties and current financing disclosures on the same basis."
           ],
           "evidenceFactIds": [
             "median-home-value",
@@ -164,10 +139,26 @@
           ]
         },
         {
-          "id": "owner-cost-boundary",
-          "heading": "What the owner-cost estimate includes and excludes",
+          "id": "vintage-observations",
+          "heading": "Evidence check: read the ACS vintages as separate nominal observations",
           "body": [
-            "The $2,905 owner-cost estimate gives Passaic, NJ borrowers a broader monthly reference than principal and interest alone, while the $55,371 income estimate supplies separate household context. The two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $55,371 is the owner household at $2,905. The $429,900 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. Keeping $429,900, $55,371, and $2,905 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
+            "The 2019 ACS published $332,700 as Passaic, NJ's median owner-occupied home-value estimate, while the 2024 ACS published $429,900. For the decision at hand, these dated nominal observations may help a borrower notice that a search budget built around the older release needs current property evidence. They are not inflation-adjusted, and the ACS home-value methodology changed between these vintages, so the two dollar figures are not a like-for-like appreciation series and should not be converted into a precise percentage change. In practical terms, each estimate also summarizes a multi-year survey window and carries sampling error. Keep $332,700 attached to 2019 and $429,900 attached to 2024, then use current listings, comparable properties, and financing disclosures for the decision at hand."
+          ],
+          "evidenceFactIds": [
+            "prior-home-value",
+            "median-home-value"
+          ],
+          "sourceRecordIds": [
+            "news-passaic-nj-affordability-home-values-source-city-home-value-prior",
+            "news-passaic-nj-affordability-home-values-source-city-home-value-current"
+          ]
+        },
+        {
+          "id": "owner-cost-boundary",
+          "heading": "Where the evidence stops: what the owner-cost estimate includes and excludes",
+          "body": [
+            "The $2,905 owner-cost estimate gives Passaic, NJ borrowers a broader monthly reference than principal and interest alone, while the $55,371 income estimate supplies separate household context. For the decision at hand, the two medians should not be divided to claim that a typical household spends a particular share of income, because ACS does not say the household at $55,371 is the owner household at $2,905.",
+            "For borrowers reviewing evidence from Passaic, NJ, the $429,900 local home-value estimate adds market context, but it also cannot supply a down payment, interest rate, mortgage insurance amount, tax bill, or insurance quote. In practical terms, keeping $429,900, $55,371, and $2,905 in their published roles prevents a local affordability worksheet from acquiring false precision before a property and borrower are known."
           ],
           "evidenceFactIds": [
             "median-owner-cost",
@@ -182,42 +173,43 @@
         },
         {
           "id": "decision-limits",
-          "heading": "What these local medians cannot decide",
+          "heading": "Where the evidence stops: what these local medians cannot decide",
           "body": [
-            "Neither $429,900 nor $2,905 determines the value of a specific Passaic, NJ home, what a borrower will pay each month, or an underwriting result. The $55,371 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. Even the observed 29.2% between ACS periods cannot forecast the next market move or establish a safe purchase horizon. Those boundaries keep the accurate $429,900, $2,905, and $55,371 statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
+            "Neither the 2024 $429,900 estimate nor the $2,905 owner-cost median determines the value of a specific Passaic, NJ home, a borrower's payment, or an underwriting result. The $55,371 median describes the local household distribution, not the stability, continuity, documentation, or eligible amount of an applicant's income. The separate 2019 observation of $332,700 also cannot forecast the next market move or establish a safe purchase horizon. For borrower planning, those boundaries keep the published value, owner-cost, and income statistics from being misused as an appraisal, rate quote, underwriting result, or recommendation about how much debt one household should carry."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
-            "median-household-income",
-            "home-value-change"
+            "median-household-income"
           ],
           "sourceRecordIds": [
             "news-passaic-nj-affordability-home-values-source-city-home-value-current",
+            "news-passaic-nj-affordability-home-values-source-city-home-value-prior",
             "news-passaic-nj-affordability-home-values-source-city-owner-cost-current",
-            "news-passaic-nj-affordability-home-values-source-city-income-current",
-            "news-passaic-nj-affordability-home-values-source-city-home-value-prior"
+            "news-passaic-nj-affordability-home-values-source-city-income-current"
           ]
         },
         {
           "id": "next-comparison",
-          "heading": "Build a property-specific comparison",
+          "heading": "Put the evidence to work: build a property-specific comparison",
           "body": [
-            "A practical Passaic, NJ worksheet can begin with $429,900 as broad value context, $2,905 as a reminder to include recurring ownership expenses, and $55,371 as a local economic reference. After noting those $429,900, $2,905, and $55,371 medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves. The 5.4% city-to-state difference is a prompt to keep the analysis local, while the 29.2% period change is a prompt to date every assumption. A licensed professional can use the 5.4% and 29.2% comparisons to explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
+            "One practical Passaic, NJ worksheet can begin with $429,900 as dated value context, $2,905 as a reminder to include recurring ownership expenses, and $55,371 as a local economic reference. After noting those published medians, substitute a real property price, down-payment plan, current loan disclosures, taxes, insurance, association obligations, maintenance allowance, and cash reserves.",
+            "For the next comparison in Passaic, NJ, the 5.4% city-to-state difference is a prompt to keep the analysis local, while the separate $332,700 2019 observation is a prompt to date every assumption without calculating a cross-vintage growth rate. For borrower planning, a licensed professional can explain which inputs are verified, which may change, and which loan options fit the documented borrower and property without presenting the ACS figures as an outcome."
           ],
           "evidenceFactIds": [
             "median-home-value",
+            "prior-home-value",
             "median-owner-cost",
             "median-household-income",
-            "state-home-value-gap",
-            "home-value-change"
+            "state-home-value-gap"
           ],
           "sourceRecordIds": [
             "news-passaic-nj-affordability-home-values-source-city-home-value-current",
+            "news-passaic-nj-affordability-home-values-source-city-home-value-prior",
             "news-passaic-nj-affordability-home-values-source-city-owner-cost-current",
             "news-passaic-nj-affordability-home-values-source-city-income-current",
-            "news-passaic-nj-affordability-home-values-source-state-home-value-current",
-            "news-passaic-nj-affordability-home-values-source-city-home-value-prior"
+            "news-passaic-nj-affordability-home-values-source-state-home-value-current"
           ]
         }
       ],
@@ -255,9 +247,9 @@
               "display": "$2,905"
             },
             {
-              "label": "change from the prior ACS home-value estimate",
-              "value": 29.2,
-              "display": "29.2%"
+              "label": "New Jersey median home value",
+              "value": 454400,
+              "display": "$454,400"
             }
           ]
         }
@@ -269,43 +261,45 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "ACS median owner-occupied home value",
               "$429,900",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS median owner-occupied home value",
               "$332,700",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "ACS median household income",
               "$55,371",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median monthly owner cost with a mortgage",
               "$2,905",
-              "U.S. Census Bureau, 2024"
-            ],
-            [
-              "change from the prior ACS home-value estimate",
-              "29.2%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "New Jersey median home value",
               "$454,400",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "local median home-value gap below the state estimate",
               "5.4%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -319,14 +313,14 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "change-over-time",
+          "afterSectionId": "state-comparison",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
         }
       ],
-      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
-      "limitations": "ACS estimates represent survey periods rather than point-in-time prices, and apparent changes may not be statistically meaningful without a margin-of-error test. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
+      "methodology": "This article uses 2024 and 2019 ACS 5-year estimates for the Census place and a 2024 parent-state comparison, including published margins of error. The two home-value vintages are retained as separate nominal observations rather than converted into a percentage change. Figures are reported as published for each cited geography and period. Derived percentages and differences use only the displayed source values; unavailable figures are omitted rather than estimated.",
+      "limitations": "ACS estimates represent survey periods rather than point-in-time prices. The 2019 and 2024 dollar values are not inflation-adjusted, and the home-value methodology changed between vintages, so they are not a like-for-like appreciation series. The evidence is broad market context, not a property valuation, rate or payment quote, eligibility finding, underwriting decision, product recommendation, or prediction.",
       "sourceRecords": [
         {
           "sourceId": "news-passaic-nj-affordability-home-values-source-city-home-value-current",
@@ -452,9 +446,11 @@
       "title": "Passaic, NJ housing supply, ownership, and rent",
       "dek": "What the latest ACS housing mix can and cannot tell buyers and renters comparing options in Passaic, NJ.",
       "previewText": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Passaic, NJ.",
-      "metaDescription": "Passaic, NJ housing supply, ownership, and rent. Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in.",
+      "metaDescription": "Review housing units, occupancy, tenure, vacancy, and rent evidence before comparing buying and renting in Passaic, NJ.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2024 ACS 5-year estimates",
+      "sourcePeriod": "2024",
       "relevanceLabel": "Housing mix",
       "topicIds": [
         "housing-supply",
@@ -472,11 +468,10 @@
       ],
       "imageId": "housing_supply-02",
       "keyTakeaways": [
+        "As of: 2024 ACS 5-year estimates. Source period: 2024.",
         "total housing units: 21,693.",
         "occupied housing units: 21,151.",
-        "vacant housing units: 542.",
-        "prior ACS vacant housing units: 1,368.",
-        "vacant-unit share of housing stock: 2.5%."
+        "vacant housing units: 542."
       ],
       "evidenceFacts": [
         {
@@ -577,9 +572,9 @@
       "sections": [
         {
           "id": "stock-baseline",
-          "heading": "The size and use of the local housing stock",
+          "heading": "Evidence at a glance: the size and use of the local housing stock",
           "body": [
-            "Passaic, NJ's current ACS housing baseline includes 21,693 total housing units, 21,151 occupied units, and 542 vacant units. Those counts describe the housing stock across the survey period; they do not say that 542 homes were listed for sale or available to rent at one moment. The difference between 21,693 total units and 21,151 occupied units is useful for checking the internal scale of the release, while 542 provides the numerator for a more careful vacancy reading. For a borrower researching Passaic, NJ, the counts establish how large the measured housing base is before tenure, rent, current listings, property condition, and financing questions are added."
+            "Start with the dated local finding: Passaic, NJ's current ACS housing baseline includes 21,693 total housing units, 21,151 occupied units, and 542 vacant units. In practical terms, those counts may help a borrower establish the scale of the measured housing base before comparing tenure, rent, current listings, property condition, and financing. The figures describe stock across the survey period; they do not say that 542 homes were listed for sale or available to rent at one moment. For the decision at hand, reading 21,693 total units with 21,151 occupied and 542 vacant units keeps the release internally grounded while leaving live availability to current listing and property evidence."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -594,9 +589,9 @@
         },
         {
           "id": "vacancy-comparison",
-          "heading": "Vacancy changed, but it is not listing inventory",
+          "heading": "Comparison view: vacancy changed, but it is not listing inventory",
           "body": [
-            "Vacant units in Passaic, NJ decreased from 1,368 in the prior ACS period to 542 in the current release, a reported change of -60.4%. In the current housing stock, 542 units equal 2.5% of the 21,693 total. ACS vacancy covers several statuses, so the 2.5% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. The movement from 1,368 to 542 can still prompt better questions about current for-sale and rental inventory in Passaic, NJ, provided those questions are answered with timely listing and property data rather than the survey count alone."
+            "Vacant units in Passaic, NJ decreased from 1,368 in the prior ACS period to 542 in the current release, a reported movement of 60.4%. In the current housing stock, 542 units equal 2.5% of the 21,693 total. ACS vacancy covers several statuses, so the 2.5% share cannot be read as the share of homes a buyer can purchase today or the share of rentals immediately available. For borrower planning, the movement from 1,368 to 542 can still prompt better questions about current for-sale and rental inventory in Passaic, NJ, provided those questions are answered with timely listing and property data in place of the survey count alone."
           ],
           "evidenceFactIds": [
             "prior-vacant-units",
@@ -613,9 +608,10 @@
         },
         {
           "id": "tenure-mix",
-          "heading": "Ownership and renting within occupied housing",
+          "heading": "Evidence check: ownership and renting within occupied housing",
           "body": [
-            "Among 21,151 occupied units in Passaic, NJ, the ACS-derived owner share is 23.8% and the renter share is 76.2%, making renter-occupied housing the larger measured tenure group. The 23.8% and 76.2% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Passaic, NJ. The 23.8% and 76.2% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon rather than used as a signal to buy or rent by itself."
+            "Among 21,151 occupied units in Passaic, NJ, the ACS-derived owner share is 23.8% and the renter share is 76.2%, making renter-occupied housing the larger measured tenure group.",
+            "For the decision at hand, the 23.8% and 76.2% figures describe how occupied units were distributed; they do not measure how many households are ready to buy, how many owners plan to sell, or which properties can qualify for a mortgage. This local tenure mix helps a borrower avoid assuming that one housing path dominates every segment of Passaic, NJ. In practical terms, the 23.8% and 76.2% mix is most useful when paired with actual choices at a similar property type, location, condition, and time horizon instead of used as a signal to buy or rent by itself."
           ],
           "evidenceFactIds": [
             "occupied-units",
@@ -629,28 +625,11 @@
           ]
         },
         {
-          "id": "rent-context",
-          "heading": "Use rent as a matched comparison, not a shortcut",
-          "body": [
-            "Passaic, NJ's ACS median gross rent is $1,465, while renter-occupied units account for 76.2% of occupied housing and owner-occupied units account for 23.8%. The $1,465 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,465 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. A more useful Passaic, NJ comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
-          ],
-          "evidenceFactIds": [
-            "median-rent",
-            "renter-share",
-            "owner-share"
-          ],
-          "sourceRecordIds": [
-            "news-passaic-nj-housing-supply-tenure-source-median-rent",
-            "news-passaic-nj-housing-supply-tenure-source-renter-units",
-            "news-passaic-nj-housing-supply-tenure-source-occupied-units",
-            "news-passaic-nj-housing-supply-tenure-source-owner-units"
-          ]
-        },
-        {
           "id": "supply-limits",
-          "heading": "What the housing-stock evidence cannot show",
+          "heading": "Keep the boundary clear: what the housing-stock evidence cannot show",
           "body": [
-            "The 2.5% vacant-unit share and 23.8% owner share cannot determine competition for a specific Passaic, NJ listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply. Likewise, 21,693 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 2.5% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. Borrowers should therefore keep 542 vacant units separate from active inventory and keep the $1,465 median separate from a current lease quote, using each figure only for the question its definition can answer."
+            "The 2.5% vacant-unit share and 23.8% owner share cannot decide competition for a specific Passaic, NJ listing, seller flexibility, inspection risk, appraisal results, insurance availability, or future supply.",
+            "For borrowers reviewing evidence from Passaic, NJ, likewise, 21,693 total units say nothing about how many properties fit a borrower's price, location, accessibility, unit-count, or condition requirements. The ACS period behind the 2.5% vacancy share can accurately describe the broad stock while lagging a fast-moving listing market. In practical terms, borrowers should therefore keep 542 vacant units separate from active inventory and keep the $1,465 median separate from a current lease quote, using each figure only for the question its definition can answer."
           ],
           "evidenceFactIds": [
             "vacancy-share",
@@ -668,10 +647,30 @@
           ]
         },
         {
-          "id": "matched-options",
-          "heading": "Compare current local choices on the same terms",
+          "id": "rent-context",
+          "heading": "Use rent as a matched comparison, not a shortcut",
           "body": [
-            "A grounded Passaic, NJ comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 21,693 total units, a 2.5% vacancy share, and a 23.8% owner share. For renting, replace the $1,465 median with the actual lease, utilities, deposits, and expected changes. For ownership, keep the 23.8% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. The resulting worksheet will not turn 76.2% or 23.8% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
+            "Passaic, NJ's ACS median gross rent is $1,465, while renter-occupied units account for 76.2% of occupied housing and owner-occupied units account for 23.8%.",
+            "The $1,465 median includes rent and certain utilities for the measured rental stock; it does not identify a lease offer comparable to a home under consideration. Comparing $1,465 with only a mortgage's principal and interest would omit taxes, insurance, maintenance, association charges, transaction costs, and differences between the properties. For borrower planning, a more useful Passaic, NJ comparison matches real lease and ownership choices over the same expected horizon, then treats the tenure shares as market context instead of a break-even calculation."
+          ],
+          "evidenceFactIds": [
+            "median-rent",
+            "renter-share",
+            "owner-share"
+          ],
+          "sourceRecordIds": [
+            "news-passaic-nj-housing-supply-tenure-source-median-rent",
+            "news-passaic-nj-housing-supply-tenure-source-renter-units",
+            "news-passaic-nj-housing-supply-tenure-source-occupied-units",
+            "news-passaic-nj-housing-supply-tenure-source-owner-units"
+          ]
+        },
+        {
+          "id": "matched-options",
+          "heading": "Put the evidence to work: compare current local choices on the same terms",
+          "body": [
+            "A grounded Passaic, NJ comparison starts with current listings and lease offers, then uses the ACS evidence to check whether the sample is being interpreted in the context of 21,693 total units, a vacancy share of 2.5%, and an owner share of 23.8%. On the rental side, replace the $1,465 median with the actual lease, utilities, deposits, and expected changes.",
+            "For the next comparison in Passaic, NJ, for the ownership budget, keep the 23.8% share as market context while adding the selected property's price, taxes, insurance, maintenance, association obligations, loan disclosures, and cash-to-close. For borrower planning, the resulting worksheet will not turn 76.2% or 23.8% into a recommendation, but it will keep the two paths comparable and make the remaining assumptions visible before a decision."
           ],
           "evidenceFactIds": [
             "housing-units",
@@ -740,53 +739,63 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "total housing units",
               "21,693",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "occupied housing units",
               "21,151",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "vacant housing units",
               "542",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "prior ACS vacant housing units",
               "1,368",
-              "U.S. Census Bureau, 2019"
+              "U.S. Census Bureau, 2019",
+              "2019 ACS 5-year estimates"
             ],
             [
               "vacant-unit share of housing stock",
               "2.5%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "change in vacant units from the prior ACS period",
               "-60.4%",
-              "U.S. Census Bureau, 2019 and 2024"
+              "U.S. Census Bureau, 2019 and 2024",
+              "2024 ACS 5-year estimates; 2019 ACS 5-year estimates"
             ],
             [
               "owner share of occupied units",
               "23.8%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "renter share of occupied units",
               "76.2%",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ],
             [
               "median gross rent",
               "$1,465",
-              "U.S. Census Bureau, 2024"
+              "U.S. Census Bureau, 2024",
+              "2024 ACS 5-year estimates"
             ]
           ],
           "sourceRecordIds": [
@@ -966,10 +975,12 @@
       "authorId": "contributor-rowan-hale",
       "title": "Passaic, NJ labor market: latest employment evidence",
       "dek": "A borrower-focused reading of the latest BLS labor-force, employment, unemployment, and rate measures for Passaic, NJ.",
-      "previewText": "See what changed in Passaic, NJ, NJ's labor market and why broad employment data cannot determine mortgage eligibility.",
-      "metaDescription": "Passaic, NJ labor market: latest employment evidence. See what changed in Passaic, NJ, NJ's labor market and why broad employment data cannot determine.",
+      "previewText": "See what changed in Passaic, NJ's labor market and why broad employment data cannot determine mortgage eligibility.",
+      "metaDescription": "See what changed in Passaic, NJ's labor market and why broad employment data cannot determine mortgage eligibility.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "May 2026",
+      "sourcePeriod": "2026-M05",
       "relevanceLabel": "Labor market",
       "topicIds": [
         "labor-market",
@@ -987,11 +998,10 @@
       ],
       "imageId": "local_economy-04",
       "keyTakeaways": [
-        "labor force: 32,864.",
-        "employment: 31,295.",
-        "unemployment: 1,569.",
+        "As of: May 2026. Source period: 2026-M05.",
         "unemployment rate: 4.8%.",
-        "previous-month unemployment rate: 4.7%."
+        "change in unemployment rate from the prior month: 0.1 percentage points.",
+        "change in unemployment rate from a year earlier: -1.0 percentage points."
       ],
       "evidenceFacts": [
         {
@@ -1058,7 +1068,7 @@
           "id": "monthly-rate-change",
           "label": "change in unemployment rate from the prior month",
           "value": 0.1,
-          "display": "0.1%",
+          "display": "0.1 percentage points",
           "sourceRecordIds": [
             "news-passaic-nj-local-labor-market-source-latest-unemployment-rate",
             "news-passaic-nj-local-labor-market-source-previous-previous-rate"
@@ -1069,7 +1079,7 @@
           "id": "annual-rate-change",
           "label": "change in unemployment rate from a year earlier",
           "value": -1,
-          "display": "-1.0%",
+          "display": "-1.0 percentage points",
           "sourceRecordIds": [
             "news-passaic-nj-local-labor-market-source-latest-unemployment-rate",
             "news-passaic-nj-local-labor-market-source-yearago-year-ago-rate"
@@ -1079,29 +1089,10 @@
       ],
       "sections": [
         {
-          "id": "labor-baseline",
-          "heading": "The latest labor-force counts",
-          "body": [
-            "The latest LAUS release reports a Passaic, NJ labor force of 32,864, with 31,295 people employed and 1,569 unemployed under the program's definitions. Those three counts belong together: 31,295 plus 1,569 explains the scale behind the published 4.8% unemployment rate. For mortgage planning, the 32,864 city-level labor force describes the surrounding market rather than the income or employment record of an applicant. A borrower can use the 32,864 labor-force baseline to understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, and the rules of the loan being considered."
-          ],
-          "evidenceFactIds": [
-            "labor-force",
-            "employment",
-            "unemployment",
-            "unemployment-rate"
-          ],
-          "sourceRecordIds": [
-            "news-passaic-nj-local-labor-market-source-latest-labor-force",
-            "news-passaic-nj-local-labor-market-source-latest-employment",
-            "news-passaic-nj-local-labor-market-source-latest-unemployment",
-            "news-passaic-nj-local-labor-market-source-latest-unemployment-rate"
-          ]
-        },
-        {
           "id": "monthly-movement",
-          "heading": "What changed from the prior month",
+          "heading": "Comparison view: what changed in the latest month",
           "body": [
-            "Passaic, NJ's unemployment rate rose from 4.7% in the prior month to 4.8% in the latest month, a change of 0.1%. A 0.1% move can reflect current conditions, normal sampling movement, and later revisions, so it should be read with the underlying 1,569 unemployment count and 32,864 labor force. The 0.1% comparison does not show that a particular employer is hiring or cutting jobs, and it cannot predict the next release. For a Passaic, NJ borrower, the monthly change is a prompt to date economic assumptions and verify personal employment documentation, not a reason to assume approval, denial, or a particular loan price."
+            "Start with the dated local finding: As of May 2026, Passaic, NJ's unemployment rate rose from 4.7% in April 2026 to 4.8% in May 2026, a change of 0.1 percentage points. That movement may matter when a borrower is pressure-testing timing, reserves, or the documentation needed after a job or income change. It does not show that a particular employer is hiring or cutting jobs, and it does not establish one applicant's income stability, mortgage eligibility, or loan price. For borrower planning, the release also estimates 1,569 people unemployed within a labor force of 32,864, which shows the scale of the movement without turning a city-level statistic into a borrower-level conclusion. Because LAUS values can be revised, keep the May 2026 source period attached to the comparison and verify household records separately."
           ],
           "evidenceFactIds": [
             "previous-rate",
@@ -1119,27 +1110,29 @@
         },
         {
           "id": "annual-movement",
-          "heading": "The year-over-year comparison",
+          "heading": "What the comparison adds: what changed over the year",
           "body": [
-            "Compared with 5.8% a year earlier, the latest Passaic, NJ unemployment rate of 4.8% fell by -1.0%. The year-over-year window reduces the risk of interpreting only one monthly step, but the -1.0% difference still describes a population estimate rather than an individual's job stability. Reading 5.8%, 4.7%, and 4.8% together shows whether the latest month sits within a wider movement without forecasting what follows. A borrower should keep that broad Passaic, NJ pattern separate from pay history, variable compensation, self-employment records, contracts, leave, job changes, and other facts a lender may need to document."
+            "Over the year ending May 2026, Passaic, NJ's unemployment rate fell from 5.8% in May 2025 to 4.8%, a change of 1.0 percentage points.",
+            "That wider window helps show whether Passaic, NJ's latest monthly movement sits inside a longer pattern, while the one-month movement of 0.1 percentage points answers a shorter timing question. Neither comparison predicts the next labor-market release for Passaic, NJ or describes the stability of one household's earnings. For mortgage planning in Passaic, NJ, the practical consequence is to date broad economic assumptions and then return to current pay history, variable compensation, self-employment records, contracts, leave, job changes, assets, and debts. Those borrower records carry more weight in a loan review than movement in Passaic, NJ's broad labor-market estimates."
           ],
           "evidenceFactIds": [
             "year-ago-rate",
-            "previous-rate",
             "unemployment-rate",
-            "annual-rate-change"
+            "annual-rate-change",
+            "monthly-rate-change"
           ],
           "sourceRecordIds": [
             "news-passaic-nj-local-labor-market-source-yearago-year-ago-rate",
-            "news-passaic-nj-local-labor-market-source-previous-previous-rate",
-            "news-passaic-nj-local-labor-market-source-latest-unemployment-rate"
+            "news-passaic-nj-local-labor-market-source-latest-unemployment-rate",
+            "news-passaic-nj-local-labor-market-source-previous-previous-rate"
           ]
         },
         {
           "id": "counts-and-rate",
-          "heading": "Why the rate needs its underlying counts",
+          "heading": "Evidence check: why the rate needs its underlying counts",
           "body": [
-            "At 4.8%, Passaic, NJ's unemployment rate summarizes 1,569 unemployed people within a 32,864 labor force; the rate should not be discussed without those counts. The 31,295 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file. That makes 31,295 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.8% rate attached to 32,864, 31,295, and 1,569 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
+            "At 4.8%, Passaic, NJ's unemployment rate summarizes 1,569 unemployed people within a labor force of 32,864; the rate should not be discussed without those counts. For borrower planning, the 31,295 employment estimate is an economic measure and does not distinguish borrowers by hours, tenure, pay structure, industry, or the documentation available for a loan file.",
+            "In a borrower review centered on Passaic, NJ, that makes 31,295 useful for local context but unsuitable as evidence that one household's income is stable or sufficient. Keeping the 4.8% rate attached to 32,864, 31,295, and 1,569 prevents a small percentage movement from carrying more borrower-level meaning than the LAUS release supports."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1155,10 +1148,30 @@
           ]
         },
         {
-          "id": "borrower-boundary",
-          "heading": "Labor statistics are not an income review",
+          "id": "labor-baseline",
+          "heading": "Evidence at a glance: the counts behind the published rate",
           "body": [
-            "Neither 31,295 employed people nor a 4.8% unemployment rate tells a lender what one Passaic, NJ applicant earns, whether that income is eligible, or whether it is likely to continue. The 0.1% monthly rate change also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition. The 4.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. That boundary protects borrowers from treating a favorable -1.0% year-over-year change as an approval signal or an unfavorable movement as a conclusion about their own documented capacity."
+            "For the May 2026 source period, BLS estimated 32,864 people in the Passaic, NJ labor force, including 31,295 employed and 1,569 unemployed under LAUS definitions. In practical terms, the employment and unemployment counts belong together because they establish the scale behind the published 4.8% rate. For mortgage planning, that city-level labor force describes the surrounding economy in place of the income or employment record of an applicant. For the decision at hand, it can help a borrower understand the size of the measured market, but qualification still depends on documented income, employment continuity, debts, assets, property facts, and the rules of the loan being considered. The counts therefore should follow the change summary instead of replacing the borrower answer."
+          ],
+          "evidenceFactIds": [
+            "labor-force",
+            "employment",
+            "unemployment",
+            "unemployment-rate"
+          ],
+          "sourceRecordIds": [
+            "news-passaic-nj-local-labor-market-source-latest-labor-force",
+            "news-passaic-nj-local-labor-market-source-latest-employment",
+            "news-passaic-nj-local-labor-market-source-latest-unemployment",
+            "news-passaic-nj-local-labor-market-source-latest-unemployment-rate"
+          ]
+        },
+        {
+          "id": "borrower-boundary",
+          "heading": "Evidence limits: labor statistics are not an income review",
+          "body": [
+            "Neither 31,295 employed people nor an unemployment rate of 4.8% tells a lender what an applicant in Passaic, NJ earns, whether that income is eligible, or whether it is likely to continue. The monthly movement of 0.1 percentage points also cannot substitute for pay stubs, tax returns, business records, contracts, benefit documentation, or an explanation of a recent job transition.",
+            "For the next comparison in Passaic, NJ, the 4.8% rate can be relevant to timing and local economic questions while remaining outside the underwriting decision. For borrower planning, that boundary protects borrowers from treating the year-over-year movement of 1.0 percentage points in either direction as an approval signal or as a conclusion about their own documented capacity."
           ],
           "evidenceFactIds": [
             "employment",
@@ -1175,9 +1188,10 @@
         },
         {
           "id": "documentation-next-step",
-          "heading": "Turn the trend into documentation questions",
+          "heading": "Next step: turn the trend into documentation questions",
           "body": [
-            "A practical next step for a Passaic, NJ borrower is to note the latest 4.8% unemployment rate and the -1.0% year-over-year change, then move immediately to the records that describe the household. After noting the 4.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path. The 32,864 local labor force and 31,295 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The 0.1% monthly movement remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Passaic, NJ's 4.8% LAUS rate in its proper role as dated local economic context."
+            "A useful next step for borrowers in Passaic, NJ is to note the latest 4.8% unemployment rate and the year-over-year movement of 1.0 percentage points, then move immediately to the records that describe the household. After noting the 4.8% rate, compare current base pay, variable earnings, self-employment history, contracts, assets, debts, and expected changes with the documentation requirements for the loan path.",
+            "The 32,864 local labor force and 31,295 employment count can frame the economic conversation, but they should not alter verified borrower inputs. The monthly movement of 0.1 percentage points remains a population measure even when it appears consistent with a borrower's personal experience. A licensed professional can explain which documents and time periods matter while keeping Passaic, NJ's 4.8% LAUS rate in its proper role as dated local economic context."
           ],
           "evidenceFactIds": [
             "unemployment-rate",
@@ -1244,48 +1258,57 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "labor force",
               "32,864",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "employment",
               "31,295",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment",
               "1,569",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "unemployment rate",
               "4.8%",
-              "U.S. Bureau of Labor Statistics, 2026-M05"
+              "U.S. Bureau of Labor Statistics, 2026-M05",
+              "May 2026"
             ],
             [
               "previous-month unemployment rate",
               "4.7%",
-              "U.S. Bureau of Labor Statistics, 2026-M04"
+              "U.S. Bureau of Labor Statistics, 2026-M04",
+              "April 2026"
             ],
             [
               "year-ago unemployment rate",
               "5.8%",
-              "U.S. Bureau of Labor Statistics, 2025-M05"
+              "U.S. Bureau of Labor Statistics, 2025-M05",
+              "May 2025"
             ],
             [
               "change in unemployment rate from the prior month",
-              "0.1%",
-              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05"
+              "0.1 percentage points",
+              "U.S. Bureau of Labor Statistics, 2026-M04 and 2026-M05",
+              "May 2026; April 2026"
             ],
             [
               "change in unemployment rate from a year earlier",
-              "-1.0%",
-              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05"
+              "-1.0 percentage points",
+              "U.S. Bureau of Labor Statistics, 2025-M05 and 2026-M05",
+              "May 2026; May 2025"
             ]
           ],
           "sourceRecordIds": [
@@ -1300,7 +1323,7 @@
       ],
       "ctaPlacements": [
         {
-          "afterSectionId": "monthly-movement",
+          "afterSectionId": "annual-movement",
           "type": "review_options",
           "label": "Review loan options",
           "route": "/loan-options"
@@ -1449,9 +1472,11 @@
       "title": "Passaic, NJ loan limits: 2026 conforming and FHA context",
       "dek": "How 2026 conforming and FHA loan-limit figures organize conventional, jumbo, and FHA questions without determining eligibility.",
       "previewText": "Compare 2026 conforming and FHA loan-limit figures associated with Passaic, NJ, including unit-count differences and important limits.",
-      "metaDescription": "Passaic, NJ loan limits: 2026 conforming and FHA context. Compare 2026 conforming and FHA loan-limit figures associated with Passaic, NJ, including unit-count.",
+      "metaDescription": "Compare 2026 conforming and FHA loan-limit figures associated with Passaic, NJ, including unit-count differences and important limits.",
       "publishedAt": "2026-07-10",
       "updatedAt": "2026-07-10",
+      "asOf": "2026 limits",
+      "sourcePeriod": "2026",
       "relevanceLabel": "2026 loan limits",
       "topicIds": [
         "loan-limits",
@@ -1471,11 +1496,10 @@
       ],
       "imageId": "loan_limits-05",
       "keyTakeaways": [
+        "As of: 2026 limits. Source period: 2026.",
         "one-unit conforming limit: $1,209,750.",
         "four-unit conforming limit: $2,326,875.",
-        "one-unit FHA limit: $1,249,125.",
-        "four-unit FHA limit: $2,402,625.",
-        "difference between one-unit conforming and FHA limits: $-39,375."
+        "one-unit FHA limit: $1,249,125."
       ],
       "evidenceFacts": [
         {
@@ -1533,9 +1557,9 @@
       "sections": [
         {
           "id": "published-limits",
-          "heading": "The published one-unit limits for the matched area",
+          "heading": "Where the evidence stops: the published one-unit limits for the matched area",
           "body": [
-            "Passaic, NJ is connected to Passaic County for this 2026 source comparison. The published one-unit conforming limit is $1,209,750, while the published one-unit FHA limit is $1,249,125. Those figures organize different program categories; $1,209,750 is not a conventional loan offer, and $1,249,125 is not an FHA eligibility finding. For Passaic, NJ, starting with Passaic County keeps the limits attached to the county or county-equivalent area used in the official files. A Passaic, NJ borrower still needs to confirm the selected property's location and legal unit count, because the relevant Passaic County row follows the property rather than the city label or mailing address alone. Around Passaic, NJ, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Passaic County as Passaic, NJ's confirmed county row before comparing the $1,209,750 and $1,249,125 program boundaries."
+            "The published evidence provides the starting point: Passaic, NJ is connected to Passaic County for this 2026 source comparison. In practical terms, the published one-unit conforming limit is $1,209,750, while the published one-unit FHA limit is $1,249,125. Those figures organize different program categories; $1,209,750 is not a conventional loan offer, and $1,249,125 is not an FHA eligibility finding. For Passaic, NJ, starting with Passaic County keeps the limits attached to the county or county-equivalent area used in the official files. Borrowers in Passaic, NJ still need to confirm the selected property's location and legal unit count, because the relevant Passaic County row follows the property instead of the city label or mailing address alone. Around Passaic, NJ, mailing cities and ZIP codes can cross county boundaries, so the official property jurisdiction should be verified instead of inferred from a familiar place name. Keep Passaic County as Passaic, NJ's confirmed county row before comparing the $1,209,750 and $1,249,125 program boundaries."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1548,9 +1572,9 @@
         },
         {
           "id": "one-unit-comparison",
-          "heading": "How the one-unit program boundaries compare",
+          "heading": "Comparison view: how the one-unit program boundaries compare",
           "body": [
-            "For the matched Passaic, NJ area, the difference between the $1,209,750 one-unit conforming limit and the $1,249,125 one-unit FHA limit is $-39,375. The $-39,375 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $1,209,750 and $1,249,125 only after price, down payment, financed items, and the applicable base-loan definition are established. Even when $-39,375 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
+            "For the matched Passaic, NJ area, the difference between the $1,209,750 one-unit conforming limit and the $1,249,125 one-unit FHA limit is $-39,375. In practical terms, the $-39,375 gap marks different published program boundaries, not a pricing advantage or a recommendation to borrow more. A needed loan amount can be compared with $1,209,750 and $1,249,125 only after price, down payment, financed items, and the applicable base-loan definition are established. For the decision at hand, even when $-39,375 is material, it cannot determine approval, mortgage insurance, cash requirements, rates, fees, or whether either program suits the borrower."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1564,9 +1588,10 @@
         },
         {
           "id": "unit-count",
-          "heading": "Unit count changes the published ceiling",
+          "heading": "Borrower view: unit count changes the published ceiling",
           "body": [
-            "Passaic County's conforming limit rises from $1,209,750 for one unit to $2,326,875 for four units, while the FHA figures move from $1,249,125 to $2,402,625. The higher $2,326,875 and $2,402,625 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Passaic, NJ, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $2,326,875 and $2,402,625 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
+            "As local context for Passaic, NJ, Passaic County's conforming limit rises from $1,209,750 for one unit to $2,326,875 for four units, while the FHA figures move from $1,249,125 to $2,402,625.",
+            "For borrower planning, the higher $2,326,875 and $2,402,625 amounts apply to the published four-unit category; they do not apply to a one-unit home merely because a borrower wants a larger loan. In Passaic, NJ, a legal unit count should be verified from reliable property information before a multi-unit limit is used. The $2,326,875 and $2,402,625 ceilings do not resolve occupancy, appraisal, rental-income treatment, reserves, or other multi-unit program rules, so the amount in the table is only one part of the product discussion."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1583,9 +1608,9 @@
         },
         {
           "id": "category-boundary",
-          "heading": "A limit is a category boundary, not borrowing power",
+          "heading": "Evidence limits: a limit is a category boundary, not borrowing power",
           "body": [
-            "The $1,209,750 conforming ceiling and $1,249,125 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases a Passaic, NJ household's income or reduces its debts. A borrower seeking less than $1,209,750 can still have important conventional requirements to review, and a request below $1,249,125 can still require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $-39,375 program gap is therefore best used to route questions, not to rank products. Regardless of the $-39,375 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
+            "The $1,209,750 conforming ceiling and $1,249,125 FHA ceiling classify a loan amount within their respective 2026 county tables; neither amount increases household income in Passaic, NJ or reduces household debts. In practical terms, a borrower seeking less than $1,209,750 can nevertheless have important conventional requirements to review, and a request below $1,249,125 can nevertheless require FHA-specific eligibility, property, mortgage-insurance, and occupancy analysis. The $-39,375 program gap is therefore best used to route questions, not to rank products. For the decision at hand, regardless of the $-39,375 gap, borrowing capacity comes from the documented borrower, property, transaction, and current underwriting rules rather than the largest number available in a public limit file."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1601,7 +1626,8 @@
           "id": "limit-boundaries",
           "heading": "What the county limits cannot decide",
           "body": [
-            "Neither $2,326,875 nor $2,402,625 indicates what a four-unit property in Passaic, NJ is worth, what income its units may produce, or whether a borrower can qualify to purchase it. The one-unit $1,209,750 and $1,249,125 limits likewise cannot establish a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $1,209,750 and $1,249,125 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Passaic, NJ's connection to Passaic County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
+            "Neither $2,326,875 nor $2,402,625 indicates what a four-unit property in Passaic, NJ is worth, what income its units may produce, or whether a borrower can qualify to purchase it.",
+            "For borrower planning, the one-unit $1,209,750 and $1,249,125 limits likewise cannot prove a down payment, debt-to-income result, appraisal, reserves, mortgage insurance, interest rate, fees, or final approval. The $1,209,750 and $1,249,125 official limits can change by year, and a corrected property geography or unit count can change the applicable row. That is why Passaic, NJ's connection to Passaic County and the 2026 period must remain visible whenever these figures are carried into a planning worksheet or product conversation."
           ],
           "evidenceFactIds": [
             "conforming-four",
@@ -1618,9 +1644,10 @@
         },
         {
           "id": "verify-next",
-          "heading": "Verify the property before comparing products",
+          "heading": "Next step: verify the property before comparing products",
           "body": [
-            "A useful Passaic, NJ next step is to document the property address, Passaic County geography, legal unit count, price, down-payment plan, and expected base loan amount. Compare that amount with $1,209,750 and $1,249,125 for a one-unit property, or with $2,326,875 and $2,402,625 only when the four-unit category is actually applicable. After the $1,209,750 and $1,249,125 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. The $1,209,750 conforming figure and $1,249,125 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $-39,375 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
+            "A useful Passaic, NJ next step is to document the property address, Passaic County geography, legal unit count, price, down-payment plan, and expected base loan amount. In practical terms, compare that amount with $1,209,750 and $1,249,125 for a one-unit property, or with $2,326,875 and $2,402,625 only when the four-unit category is actually applicable.",
+            "Applied to a decision in Passaic, NJ, after the $1,209,750 and $1,249,125 comparison, ask a licensed professional to verify the current official row and explain the borrower, property, occupancy, insurance, and documentation rules attached to each option. For the decision at hand, the $1,209,750 conforming figure and $1,249,125 FHA figure should remain dated to 2026 throughout that review. This sequence uses the $-39,375 one-unit gap as planning context while avoiding any promise that a published ceiling is available, affordable, or appropriate."
           ],
           "evidenceFactIds": [
             "conforming-one",
@@ -1688,33 +1715,39 @@
           "columns": [
             "Measure",
             "Value",
-            "Source"
+            "Source",
+            "As of"
           ],
           "rows": [
             [
               "one-unit conforming limit",
               "$1,209,750",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "four-unit conforming limit",
               "$2,326,875",
-              "Federal Housing Finance Agency, 2026"
+              "Federal Housing Finance Agency, 2026",
+              "2026 limits"
             ],
             [
               "one-unit FHA limit",
               "$1,249,125",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "four-unit FHA limit",
               "$2,402,625",
-              "U.S. Department of Housing and Urban Development, 2026"
+              "U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ],
             [
               "difference between one-unit conforming and FHA limits",
               "$-39,375",
-              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026"
+              "Federal Housing Finance Agency, 2026; U.S. Department of Housing and Urban Development, 2026",
+              "2026 limits"
             ]
           ],
           "sourceRecordIds": [
