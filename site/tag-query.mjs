@@ -53,10 +53,11 @@ function compareCanonicalOrder(left, right) {
 }
 
 function sortableDate(record) {
-  const value = record?.publishedAt || record?.updatedAt;
-  if (typeof value !== "string" || !value) return Number.NEGATIVE_INFINITY;
-  const timestamp = Date.parse(value);
-  return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
+  const dates = [record?.publishedAt, record?.updatedAt]
+    .filter((value) => typeof value === "string" && value)
+    .map((value) => Date.parse(value))
+    .filter((timestamp) => !Number.isNaN(timestamp));
+  return dates.length ? Math.max(...dates) : Number.NEGATIVE_INFINITY;
 }
 
 export function suggestTags(tags, input, selectedIds = []) {

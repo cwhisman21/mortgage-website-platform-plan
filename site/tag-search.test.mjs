@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -91,6 +92,18 @@ test("normalizes canonical object assignments for build and static callers", () 
   });
 });
 
+test("normalizes the complete public registry artifact and resolves representative routes", () => {
+  const raw = JSON.parse(readFileSync(new URL("../mock-data/public-tag-registry.json", import.meta.url), "utf8"));
+  const publicRegistry = normalizeTagRegistry(raw);
+
+  assert.equal(publicRegistry.tags.length, 824);
+  assert.equal(publicRegistry.assignments.length, 3197);
+  assert.deepEqual(
+    tagsForRoute(publicRegistry, "/buy").primaryTags.map(({ id }) => id),
+    ["tag-loan-program-home-purchase-loans", "tag-borrower-goal-buy-a-home"],
+  );
+});
+
 test("suggestions use only exact display-name prefixes", () => {
   assert.deepEqual(suggestTags(tags, "do", []), [tags[1]]);
   assert.deepEqual(suggestTags(tags, "assistance", []), []);
@@ -117,7 +130,7 @@ test("state recovery repairs connector gaps and defaults malformed connectors to
 
   assert.deepEqual(repaired, {
     tagIds: ["fha", "va"],
-    operators: ["OR"],
+    operators: ["AND"],
     query: "closing costs",
     sortBySection: { articles: "newest" },
     carouselPositions: { articles: 3 },
@@ -126,6 +139,10 @@ test("state recovery repairs connector gaps and defaults malformed connectors to
   assert.deepEqual(
     sanitizeTagSearchState({ tagIds: ["fha", "dpa", "va"], operators: ["OR"] }, registry).operators,
     ["OR", "AND"],
+  );
+  assert.deepEqual(
+    sanitizeTagSearchState({ tagIds: ["fha", "va", "missing"], operators: ["OR", "AND"] }, registry).operators,
+    ["OR"],
   );
 });
 
@@ -227,15 +244,15 @@ test("result grouping follows the fixed content-family order and skips empty fam
 test("Newest sorts dated records first and keeps undated records deterministically last", () => {
   const records = [
     { id: "undated", canonicalOrder: 0, publishedAt: null, updatedAt: null, relevance: 99 },
-    { id: "older", canonicalOrder: 2, publishedAt: "2026-01-01", updatedAt: "2026-03-01", relevance: 1 },
-    { id: "newer", canonicalOrder: 3, publishedAt: null, updatedAt: "2026-04-01", relevance: 0 },
+    { id: "materially-updated", canonicalOrder: 2, publishedAt: "2025-12-01", updatedAt: "2026-05-01", relevance: 1 },
+    { id: "recently-published", canonicalOrder: 3, publishedAt: "2026-04-01", updatedAt: null, relevance: 0 },
     { id: "same-date", canonicalOrder: 1, publishedAt: "2026-01-01", updatedAt: null, relevance: 10 },
   ];
 
   assert.deepEqual(sortSearchResults(records, "newest").map(({ id }) => id), [
-    "newer",
+    "materially-updated",
+    "recently-published",
     "same-date",
-    "older",
     "undated",
   ]);
 });

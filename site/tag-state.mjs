@@ -50,7 +50,9 @@ export function sanitizeTagSearchState(state = {}, registry) {
   const tagIds = validEntries.map(({ id }) => id);
   const operators = validEntries.slice(1).map(({ index }, validIndex) => {
     const previousIndex = validEntries[validIndex].index;
-    return normalizedOperator(inputOperators[previousIndex]);
+    return index === previousIndex + 1
+      ? normalizedOperator(inputOperators[previousIndex])
+      : "AND";
   });
 
   return {
