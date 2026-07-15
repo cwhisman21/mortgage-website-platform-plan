@@ -45,6 +45,12 @@ test("Vercel rewrite ownership serves generated HTML at every clean non-news rou
   const config = readJson("vercel.json");
   const rewrites = config.rewrites || [];
 
+  assert.equal(
+    fs.existsSync(path.join(repoRoot, "index.html")),
+    false,
+    "a root index file must not shadow the homepage rewrite in production",
+  );
+
   assert.deepEqual(rewrites[0], {
     source: "/learning-center/market-news/:slug",
     destination: "/site/generated/learning-center/market-news/:slug.html",
