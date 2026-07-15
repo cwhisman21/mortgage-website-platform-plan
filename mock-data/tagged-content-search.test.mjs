@@ -6,6 +6,7 @@ import {
   buildPublicTagRegistry,
   buildTaggedContentSearch,
   LOCATION_NEWS_TOPIC_TAGS,
+  rankPublicRelatedTagIds,
   validatePublicTagRegistry,
   validateSearchIndex,
   validateTagRegistry,
@@ -203,4 +204,36 @@ test("excludes team navigation labels from taxonomy and keeps non-direct reviews
   const nonDirect = registry.tags.flatMap((tag) => tag.competingPageReview.routes).filter(({ relationship }) => relationship !== "DIRECT");
   assert.ok(nonDirect.length > 0);
   assert.ok(nonDirect.every(({ disposition, rationale }) => disposition === "KEEP DISTINCT" && rationale.length > 0));
+});
+
+test("ranks public related tags by semantic primary co-occurrence deterministically", () => {
+  const city = { id: "tag-city-austin-texas", displayName: "Austin, Texas", type: "city", relatedTagIds: ["tag-loan-program-fha-loans", "tag-market-topic-affordability", "tag-market-topic-home-values"] };
+  const registry = {
+    tags: [
+      city,
+      { id: "tag-loan-program-fha-loans", displayName: "FHA Loans", type: "loan-program", relatedTagIds: [city.id] },
+      { id: "tag-market-topic-affordability", displayName: "Affordability", type: "market-topic", relatedTagIds: [city.id] },
+      { id: "tag-market-topic-home-values", displayName: "Home Values", type: "market-topic", relatedTagIds: [city.id] },
+    ],
+    assignments: [
+      { route: "/learning-center/austin-values", primaryTagIds: [city.id, "tag-market-topic-home-values"], additionalTagIds: ["tag-loan-program-fha-loans"] },
+      { route: "/learning-center/austin-affordability", primaryTagIds: [city.id, "tag-market-topic-affordability"], additionalTagIds: ["tag-loan-program-fha-loans"] },
+    ],
+  };
+
+  const expected = ["tag-market-topic-affordability", "tag-market-topic-home-values", "tag-loan-program-fha-loans"];
+  assert.deepEqual(rankPublicRelatedTagIds(registry, city), expected);
+  assert.deepEqual(rankPublicRelatedTagIds(registry, city), expected);
+});
+
+test("prioritizes Austin's own controlled market subjects in public related links", () => {
+  const { publicTagRegistry } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  const austin = publicTagRegistry.tags.find(({ id }) => id === "tag-city-austin-texas");
+
+  assert.ok(austin.relatedTagIds.includes("tag-market-topic-home-values"));
+  assert.ok(austin.relatedTagIds.includes("tag-mortgage-topic-affordability"));
+  assert.ok(austin.relatedTagIds.includes("tag-market-topic-housing-supply"));
+  assert.ok(!austin.relatedTagIds.includes("tag-loan-program-home-purchase-loans"));
+  assert.ok(!austin.relatedTagIds.includes("tag-loan-program-refinance"));
+  assert.ok(austin.relatedTagIds.length <= 8);
 });

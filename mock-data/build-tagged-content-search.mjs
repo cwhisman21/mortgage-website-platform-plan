@@ -321,12 +321,71 @@ function buildCompactIndex(catalog, registry, updatedAt) {
   return { version: 1, updatedAt, records };
 }
 
+function assignmentRole(assignment, tagId) {
+  if (assignment.primaryTagIds.includes(tagId)) return "primary";
+  if (assignment.additionalTagIds.includes(tagId)) return "additional";
+  return null;
+}
+
+function coOccurrenceWeight(leftRole, rightRole) {
+  if (leftRole === "primary" && rightRole === "primary") return 9;
+  if (leftRole === "primary" || rightRole === "primary") return 3;
+  return 1;
+}
+
+function isLocationTag(tag) {
+  return tag.type === "city" || tag.type === "state";
+}
+
+function isLocalMarketNewsRoute(route) {
+  return String(route || "").startsWith("/learning-center/market-news/");
+}
+
+export function rankPublicRelatedTagIds(registry, tag) {
+  const tagById = new Map(registry.tags.map((candidate) => [candidate.id, candidate]));
+  const allowed = new Set(tag.relatedTagIds.filter((id) => tagById.has(id)));
+  const scores = new Map([...allowed].map((id) => [id, { score: 0, tier: 0 }]));
+  for (const assignment of registry.assignments) {
+    const sourceRole = assignmentRole(assignment, tag.id);
+    if (!sourceRole) continue;
+    for (const candidateId of [...assignment.primaryTagIds, ...assignment.additionalTagIds]) {
+      if (candidateId === tag.id || !allowed.has(candidateId)) continue;
+      const candidateRole = assignmentRole(assignment, candidateId);
+      const candidate = tagById.get(candidateId);
+      const existing = scores.get(candidateId);
+      let score = coOccurrenceWeight(sourceRole, candidateRole);
+      let tier = 0;
+      if (isLocationTag(tag)) {
+        if (sourceRole === "primary" && candidateRole === "primary" && !isLocationTag(candidate) && isLocalMarketNewsRoute(assignment.route)) {
+          tier = 3;
+          score += 100;
+        } else if (!isLocationTag(candidate) && candidate.type !== "loan-program" && candidate.type !== "borrower-goal") {
+          tier = 2;
+          score += 20;
+        } else if (sourceRole === "primary" && candidateRole === "primary") {
+          tier = 1;
+        }
+      } else if (sourceRole === "primary" && candidateRole === "primary" && isLocationTag(candidate)) {
+        tier = 1;
+        score += 20;
+      }
+      scores.set(candidateId, { score: existing.score + score, tier: Math.max(existing.tier, tier) });
+    }
+  }
+  return [...scores]
+    .sort(([leftId, left], [rightId, right]) => right.tier - left.tier
+      || right.score - left.score
+      || tagById.get(leftId).displayName.localeCompare(tagById.get(rightId).displayName)
+      || leftId.localeCompare(rightId))
+    .map(([id]) => id);
+}
+
 export function buildPublicTagRegistry(registry) {
   validateTagRegistry(registry);
   const publicTagIds = new Set(registry.tags.map(({ id }) => id));
   const tags = registry.tags.map(({ id, displayName, slug, type, description, relatedTagIds, canonicalRoute, reviewedAt, updatedAt, redirectSlugs }) => ({
     id, displayName, slug, type, description,
-    relatedTagIds: relatedTagIds.filter((relatedId) => publicTagIds.has(relatedId)).slice(0, MAX_PUBLIC_RELATED_TAGS),
+    relatedTagIds: rankPublicRelatedTagIds(registry, { id, relatedTagIds: relatedTagIds.filter((relatedId) => publicTagIds.has(relatedId)), type }).slice(0, MAX_PUBLIC_RELATED_TAGS),
     canonicalRoute, reviewedAt, updatedAt, redirectSlugs,
   }));
   const tagIndexes = new Map(tags.map(({ id }, index) => [id, index]));
