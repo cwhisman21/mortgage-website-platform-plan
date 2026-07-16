@@ -5,14 +5,20 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
+  renderSellerNetSheet,
   renderSellerWorkspace,
   transitionSellerAccountUnlock,
   transitionSellerObligations,
 } from "./seller-workspace-ui.mjs";
 import {
+  applySellerRowEdit,
+  calculateSellerNetSheet,
+  formatSellerCurrency,
   normalizeSellerObligations,
+  resetSellerAssumptions,
   resolveSellerCostRows,
   selectSellerValue,
+  setSellerOptionalRow,
 } from "./seller-workspace.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
@@ -48,6 +54,20 @@ function lockedSellerState({ costRows } = {}) {
     accountPending: false,
     netSheet: null,
     error: "",
+  };
+}
+
+function unlockedSellerState() {
+  const state = {
+    ...lockedSellerState(),
+    phase: "unlocked",
+    analysisUnlocked: true,
+    editingRowId: "",
+    status: "",
+  };
+  return {
+    ...state,
+    netSheet: calculateSellerNetSheet(state),
   };
 }
 
@@ -164,6 +184,123 @@ test("unlocked preview alone contains the net sheet", () => {
   assert.match(unlocked, /data-seller-net-sheet/);
   assert.match(unlocked, /data-seller-projected-result/);
 });
+
+test("unlocked analysis renders the grouped statement totals and one approved disclaimer", () => {
+  const html = renderSellerWorkspace(page, fixture, { preview: "unlocked", costRegistry });
+  const disclaimer = "This seller net sheet is a planning estimate based on the property value, obligations, closing date, and editable cost assumptions shown. Actual charges, payoff amounts, taxes, credits, compensation, and proceeds can change through closing. Compensation is negotiable and is not set by law.";
+
+  assert.match(html, /data-seller-net-sheet/);
+  assert.match(html, />Selling expenses</);
+  assert.match(html, />Existing obligations</);
+  assert.match(html, />Total selling expenses</);
+  assert.match(html, />Net before obligations</);
+  assert.match(html, />Total obligations</);
+  assert.match(html, /Projected (?:net proceeds|shortfall)/);
+  assert.match(html, /data-seller-low-proceeds/);
+  assert.match(html, /data-seller-high-proceeds/);
+  assert.equal(html.split(disclaimer).length - 1, 1);
+});
+
+test("selected value is dominant and low high appear only as final comparison figures", () => {
+  const html = renderSellerNetSheet(unlockedSellerState());
+
+  assert.match(html, /data-seller-selected-sale-price[^>]*>\$725,000</);
+  assert.match(html, /data-seller-low-proceeds/);
+  assert.match(html, /data-seller-high-proceeds/);
+  assert.equal((html.match(/Listing-side compensation/g) || []).length, 1);
+  assert.doesNotMatch(html, /data-seller-(?:low|high)-column|<table/);
+});
+
+test("optional costs stay absent until selected and then render in the correct group", () => {
+  const original = unlockedSellerState();
+  const hidden = renderSellerNetSheet(original);
+  const activeState = setSellerOptionalRow(original, "homeWarranty", true);
+  const active = renderSellerNetSheet(activeState);
+
+  assert.match(hidden, />Add another cost</);
+  assert.doesNotMatch(hidden, /data-seller-row="homeWarranty"/);
+  assert.match(hidden, /data-seller-add-row="homeWarranty"/);
+  assert.match(active, /data-seller-group="sellingExpenses"[\s\S]*data-seller-row="homeWarranty"/);
+  assert.match(active, /data-seller-remove-row="homeWarranty"/);
+  assert.doesNotMatch(active, /data-seller-add-row="homeWarranty"/);
+});
+
+test("row editors use percent currency date and bounded sale-price controls", () => {
+  const state = unlockedSellerState();
+  const percent = renderSellerNetSheet({ ...state, editingRowId: "listingCompensation" });
+  const fixed = renderSellerNetSheet({ ...state, editingRowId: "buyerClosingCostCredit" });
+  const statutory = renderSellerNetSheet({ ...state, editingRowId: "stateCountyTransferTax" });
+  const proration = renderSellerNetSheet({ ...state, editingRowId: "propertyTaxProration" });
+  const obligation = renderSellerNetSheet({ ...state, editingRowId: "firstMortgagePayoff" });
+  const date = renderSellerNetSheet({ ...state, editingRowId: "expectedClosingDate" });
+  const salePrice = renderSellerNetSheet({ ...state, editingRowId: "salePrice" });
+
+  assert.match(percent, /data-seller-edit-mode="percent_of_sale_price"/);
+  assert.match(percent, /type="number"[^>]*min="0"[^>]*step="0.01"[^>]*value="2.5"/);
+  assert.match(percent, /data-seller-live-amount[^>]*>\$18,125</);
+  for (const currency of [fixed, statutory, proration, obligation]) {
+    assert.match(currency, /data-seller-currency-input/);
+    assert.match(currency, /class="seller-prefixed-input"/);
+  }
+  assert.match(date, /type="date"[^>]*value="2026-08-15"/);
+  assert.match(salePrice, /type="range"[^>]*min="69500000"[^>]*max="75500000"[^>]*step="100000"[^>]*value="72500000"/);
+  assert.match(salePrice, /data-seller-edit-sale-price/);
+});
+
+test("a production edit recalculates the rendered row totals and final comparison", () => {
+  const original = unlockedSellerState();
+  const edited = applySellerRowEdit(original, {
+    rowId: "listingCompensation",
+    mode: "percent_of_sale_price",
+    value: 3,
+  });
+  const html = renderSellerNetSheet(edited);
+
+  assert.match(html, /data-seller-row="listingCompensation"[\s\S]*\$21,750/);
+  assert.match(html, new RegExp(`data-seller-low-proceeds[^>]*>${formatForPattern(edited.netSheet.scenarios.low.amountCents)}<`));
+  assert.match(html, new RegExp(`data-seller-high-proceeds[^>]*>${formatForPattern(edited.netSheet.scenarios.high.amountCents)}<`));
+});
+
+test("reset output removes active rows and overrides while retaining seller inputs", () => {
+  const original = unlockedSellerState();
+  const active = setSellerOptionalRow(original, "homeWarranty", true);
+  const edited = applySellerRowEdit(active, { rowId: "homeWarranty", mode: "fixed_amount", value: 75_000 });
+  const reset = resetSellerAssumptions(edited);
+  const html = renderSellerNetSheet(reset);
+
+  assert.doesNotMatch(html, /data-seller-row="homeWarranty"/);
+  assert.match(html, /data-seller-add-row="homeWarranty"/);
+  assert.match(html, /data-seller-selected-sale-price[^>]*>\$725,000</);
+  assert.match(html, /data-seller-edit-date[^>]*>2026-08-15</);
+  assert.match(html, /data-seller-row="firstMortgagePayoff"[\s\S]*\$418,000/);
+});
+
+test("rendered result changes to projected shortfall when obligations exceed value", () => {
+  const edited = applySellerRowEdit(unlockedSellerState(), {
+    rowId: "firstMortgagePayoff",
+    mode: "customer_entered",
+    value: 80_000_000,
+  });
+  const html = renderSellerNetSheet(edited);
+
+  assert.equal(edited.netSheet.projected.kind, "shortfall");
+  assert.match(html, />Projected shortfall</);
+  assert.doesNotMatch(html, /Projected net proceeds/);
+});
+
+test("the live controller routes edits optional rows and reset through production helpers", () => {
+  const source = fs.readFileSync(path.join(siteDir, "seller-workspace-ui.mjs"), "utf8");
+
+  assert.match(source, /Object\.assign\(state, applySellerRowEdit\(state,/);
+  assert.match(source, /Object\.assign\(state, setSellerOptionalRow\(state,/);
+  assert.match(source, /Object\.assign\(state, resetSellerAssumptions\(state\)\)/);
+  assert.match(source, /if \(state\.editingRowId\)[\s\S]*data-seller-cancel-edit/);
+  assert.match(source, /event\.key === "Enter"[\s\S]*applyInlineEdit\(form, new FormData\(form\)\)/);
+});
+
+function formatForPattern(cents) {
+  return formatSellerCurrency(cents).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 test("completed account handoff unlocks the seller analysis with resolved cost rows", async () => {
   const requests = [];
@@ -305,4 +442,8 @@ test("seller stylesheet contains responsive modal and reduced-motion protections
   assert.match(css, /\.seller-result-workspace,[\s\S]*\.seller-pro-forma-row > div\s*\{\s*min-width:\s*0/);
   assert.match(css, /\.seller-base-result\s*\{\s*font-size:\s*clamp\(42px, 14vw, 52px\);\s*white-space:\s*nowrap/);
   assert.match(css, /\.seller-result-range strong\s*\{\s*font-size:\s*clamp\(18px, 6vw, 25px\);\s*overflow-wrap:\s*normal;\s*white-space:\s*nowrap/);
+  assert.match(css, /\.seller-net-row\s*\{[\s\S]*grid-template-columns:\s*minmax\(0, 1fr\) auto/);
+  assert.match(css, /\.seller-inline-edit input[\s\S]*max-width:\s*100%/);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.seller-net-row\s*\{[\s\S]*grid-template-columns:\s*1fr/);
+  assert.match(css, /\.seller-statement,[\s\S]*\.seller-net-row > \*\s*\{[\s\S]*min-width:\s*0/);
 });

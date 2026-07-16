@@ -1,16 +1,27 @@
 import {
+  applySellerRowEdit,
   calculateSellerNetSheet,
   createFixtureSellerAdapters,
   defaultExpectedCloseDate,
   formatSellerCurrency,
   normalizeSellerObligations,
+  resetSellerAssumptions,
   resolveSellerCostRows,
   selectSellerValue,
+  setSellerOptionalRow,
 } from "./seller-workspace.mjs";
 import { renderPrimaryTagLinks } from "./tag-presentation.mjs";
 
 const SELLER_ANALYSIS_RETRY_MESSAGE = "Your seller analysis is still here. Try opening your account again.";
 const SELLER_COSTS_UNAVAILABLE_MESSAGE = "Your seller cost details are unavailable right now. Try again soon.";
+const SELLER_NET_SHEET_DISCLAIMER = "This seller net sheet is a planning estimate based on the property value, obligations, closing date, and editable cost assumptions shown. Actual charges, payoff amounts, taxes, credits, compensation, and proceeds can change through closing. Compensation is negotiable and is not set by law.";
+const EDIT_INPUT_KIND = Object.freeze({
+  percent_of_sale_price: "percent",
+  fixed_amount: "currency",
+  statutory_transfer_tax: "currency",
+  prorated_annual: "currency",
+  customer_entered: "currency",
+});
 
 function esc(value) {
   return String(value ?? "")
@@ -220,31 +231,153 @@ function renderLockedSummary(state) {
     ${sellerEducation()}`;
 }
 
-function renderUnlockedAnalysis(state) {
-  const projected = state.netSheet?.projected;
-  const projectedLabel = projected?.kind === "shortfall" ? "Projected shortfall" : "Projected net proceeds";
+function rowDefinition(state, rowId) {
+  return (state.costRows || []).find((row) => row.id === rowId);
+}
+
+function percentValueForRow(state, row) {
+  const effective = state.overrides?.[row.id];
+  const rate = effective?.mode === "percent_of_sale_price" ? effective.value : row.value;
+  return Number((Number(rate) * 100).toFixed(4));
+}
+
+function renderEditActions(row, definition) {
+  return `
+    <button class="seller-row-edit" type="button" data-seller-edit-row="${esc(row.id)}" data-seller-edit-mode="${esc(row.mode)}">Edit</button>
+    ${definition?.optional ? `<button class="seller-row-remove" type="button" aria-label="Remove ${esc(row.label)}" data-seller-remove-row="${esc(row.id)}">Remove</button>` : ""}`;
+}
+
+function renderCurrencyEditor(row) {
+  return `
+    <form class="seller-inline-edit" data-seller-edit-form data-seller-edit-row-id="${esc(row.id)}" data-seller-edit-mode="${esc(row.mode)}">
+      <label><span class="visually-hidden">${esc(row.label)}</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="value" inputmode="decimal" value="${esc((row.amountCents / 100).toFixed(2))}" data-seller-edit-input data-seller-currency-input /></span></label>
+      <button class="text-button" type="submit">Apply</button>
+      <button class="text-button" type="button" data-seller-cancel-edit>Cancel</button>
+    </form>`;
+}
+
+function renderPercentEditor(state, row, definition) {
+  return `
+    <form class="seller-inline-edit seller-percent-edit" data-seller-edit-form data-seller-edit-row-id="${esc(row.id)}" data-seller-edit-mode="percent_of_sale_price">
+      <label><span class="visually-hidden">${esc(row.label)} percentage</span><input name="value" type="number" min="0" step="0.01" value="${esc(percentValueForRow(state, definition))}" data-seller-edit-input data-seller-percent-input /><span aria-hidden="true">%</span></label>
+      <output data-seller-live-amount>${esc(formatSellerCurrency(row.amountCents))}</output>
+      <button class="text-button" type="submit">Apply</button>
+      <button class="text-button" type="button" data-seller-cancel-edit>Cancel</button>
+    </form>`;
+}
+
+function renderNetSheetRow(state, row) {
+  const definition = rowDefinition(state, row.id);
+  const inputKind = EDIT_INPUT_KIND[row.mode];
+  const isEditing = state.editingRowId === row.id;
+  return `
+    <div class="seller-net-row" data-seller-row="${esc(row.id)}">
+      <dt>${esc(row.label)}</dt>
+      <dd>${isEditing
+    ? (inputKind === "percent" ? renderPercentEditor(state, row, definition) : renderCurrencyEditor(row))
+    : `<span class="seller-row-amount">${esc(formatSellerCurrency(row.amountCents))}</span>${renderEditActions(row, definition)}`}</dd>
+    </div>`;
+}
+
+function renderOptionalRows(state, group) {
+  const inactive = (state.costRows || []).filter((row) => row.optional
+    && row.group === group
+    && !(state.activeOptionalIds || []).includes(row.id));
+  if (!inactive.length) return "";
+  return `
+    <details class="seller-add-cost" data-seller-add-cost="${esc(group)}">
+      <summary>Add another cost</summary>
+      <div>${inactive.map((row) => `<button type="button" data-seller-add-row="${esc(row.id)}">${esc(row.label)}</button>`).join("")}</div>
+    </details>`;
+}
+
+function renderDateEditor(state) {
+  if (state.editingRowId !== "expectedClosingDate") {
+    return `<time datetime="${esc(state.expectedClosingDate)}" data-seller-edit-date>${esc(state.expectedClosingDate)}</time><button class="seller-row-edit" type="button" data-seller-edit-row="expectedClosingDate" data-seller-edit-mode="date">Edit</button>`;
+  }
+  return `
+    <form class="seller-inline-edit" data-seller-edit-form data-seller-edit-row-id="expectedClosingDate" data-seller-edit-mode="date">
+      <label><span class="visually-hidden">Expected closing date</span><input name="value" type="date" value="${esc(state.expectedClosingDate)}" data-seller-edit-input /></label>
+      <button class="text-button" type="submit">Apply</button>
+      <button class="text-button" type="button" data-seller-cancel-edit>Cancel</button>
+    </form>`;
+}
+
+function renderSalePriceEditor(state) {
+  const { valueRange } = state;
+  if (state.editingRowId !== "salePrice") {
+    return `<strong class="seller-selected-price" data-seller-selected-sale-price>${esc(formatSellerCurrency(valueRange.selectedCents))}</strong><button class="seller-row-edit" type="button" data-seller-edit-row="salePrice" data-seller-edit-mode="sale_price" data-seller-edit-sale-price>Edit</button>`;
+  }
+  return `
+    <form class="seller-sale-price-edit" data-seller-edit-form data-seller-edit-row-id="salePrice" data-seller-edit-mode="sale_price" data-seller-edit-sale-price>
+      <label class="seller-range-field" for="seller-net-sheet-value-range"><span>Selected property value</span>
+        <output for="seller-net-sheet-value-range" data-seller-edit-sale-price-output>${esc(formatSellerCurrency(valueRange.selectedCents))}</output>
+        <input id="seller-net-sheet-value-range" type="range" min="${esc(valueRange.lowCents)}" max="${esc(valueRange.highCents)}" step="${esc(valueRange.stepCents)}" value="${esc(valueRange.selectedCents)}" name="value" data-seller-edit-input data-seller-edit-sale-price-range />
+      </label>
+      <div class="seller-value-endpoints"><span>Low <strong>${esc(formatSellerCurrency(valueRange.lowCents))}</strong></span><span>High <strong>${esc(formatSellerCurrency(valueRange.highCents))}</strong></span></div>
+      <div class="seller-edit-actions"><button class="text-button" type="submit">Apply</button><button class="text-button" type="button" data-seller-cancel-edit>Cancel</button></div>
+    </form>`;
+}
+
+function renderSummaryRow(label, amountCents, className = "") {
+  return `<div class="seller-net-row seller-net-total ${esc(className)}"><dt>${esc(label)}</dt><dd><strong>${esc(formatSellerCurrency(amountCents))}</strong></dd></div>`;
+}
+
+export function renderSellerNetSheet(state) {
+  if (state?.phase !== "unlocked" || !state.netSheet) throw new Error("Seller net sheet requires unlocked calculated state");
+  const { netSheet } = state;
+  const projectedLabel = netSheet.projected.kind === "shortfall" ? "Projected shortfall" : "Projected net proceeds";
+  const lowLabel = netSheet.scenarios.low.kind === "shortfall" ? "Low-value shortfall" : "Low-value proceeds";
+  const highLabel = netSheet.scenarios.high.kind === "shortfall" ? "High-value shortfall" : "High-value proceeds";
   return `
     <section class="seller-results" data-seller-net-sheet tabindex="-1" aria-labelledby="seller-net-sheet-title">
-      <div class="seller-result-heading">
-        <div>
-          <p class="eyebrow">Seller analysis</p>
-          <h1 id="seller-net-sheet-title">Your seller analysis is ready.</h1>
-          <p>${esc(state.address.displayAddress)}</p>
+      <header class="seller-result-heading">
+        <div><p class="eyebrow">Seller analysis</p><h1 id="seller-net-sheet-title">Seller net sheet</h1><p>${esc(state.address.displayAddress)}</p></div>
+        <button class="text-button seller-reset" type="button" data-seller-reset-assumptions>Reset assumptions</button>
+      </header>
+      <div class="seller-result-workspace">
+        <section class="seller-result-summary" aria-labelledby="seller-selected-value-heading">
+          <p class="eyebrow" id="seller-selected-value-heading">Selected property value</p>
+          <div class="seller-selected-price-line">${renderSalePriceEditor(state)}</div>
+          <div class="seller-close-date"><span>Expected closing date</span><div>${renderDateEditor(state)}</div></div>
+          <div class="seller-projected-result" data-seller-projected-result>
+            <span>${esc(projectedLabel)}</span>
+            <strong id="seller-projected-result-title">${esc(formatSellerCurrency(netSheet.projected.amountCents))}</strong>
+          </div>
+          <dl class="seller-final-comparison" aria-label="Low and high final comparison">
+            <div><dt>${esc(lowLabel)}</dt><dd data-seller-low-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.low.amountCents))}</dd></div>
+            <div><dt>${esc(highLabel)}</dt><dd data-seller-high-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.high.amountCents))}</dd></div>
+          </dl>
+        </section>
+        <div class="seller-statement">
+          <section class="seller-net-group" data-seller-group="sellingExpenses" aria-labelledby="seller-selling-expenses-title">
+            <h2 id="seller-selling-expenses-title">Selling expenses</h2>
+            <dl>${netSheet.groups.sellingExpenses.map((row) => renderNetSheetRow(state, row)).join("")}</dl>
+            ${renderOptionalRows(state, "sellingExpenses")}
+          </section>
+          <section class="seller-net-group" data-seller-group="obligations" aria-labelledby="seller-obligations-title">
+            <h2 id="seller-obligations-title">Existing obligations</h2>
+            <dl>${netSheet.groups.obligations.map((row) => renderNetSheetRow(state, row)).join("")}</dl>
+            ${renderOptionalRows(state, "obligations")}
+          </section>
+          <section class="seller-net-summary" aria-labelledby="seller-net-summary-title">
+            <h2 id="seller-net-summary-title">Summary</h2>
+            <dl>
+              ${renderSummaryRow("Total selling expenses", netSheet.totalSellingExpensesCents)}
+              ${renderSummaryRow("Net before obligations", netSheet.netBeforeObligationsCents)}
+              ${renderSummaryRow("Total obligations", netSheet.totalObligationsCents)}
+              ${renderSummaryRow(projectedLabel, netSheet.projected.amountCents, "seller-net-projected")}
+            </dl>
+          </section>
         </div>
       </div>
-      <div class="seller-result-workspace">
-        <section class="seller-result-summary" data-seller-projected-result aria-labelledby="seller-projected-result-title">
-          <p class="eyebrow">${esc(projectedLabel)}</p>
-          <strong class="seller-base-result" id="seller-projected-result-title">${esc(formatSellerCurrency(projected?.amountCents || 0))}</strong>
-          <p>Based on your selected property value of ${esc(formatSellerCurrency(state.valueRange.selectedCents))}.</p>
-        </section>
-        <section class="seller-pro-forma" aria-labelledby="seller-unlocked-summary-title">
-          <h2 id="seller-unlocked-summary-title">Seller net sheet</h2>
-          <p>Detailed selling expenses, obligations, editing controls, and download are added in the next workspace release.</p>
-        </section>
-      </div>
-    </section>
-    ${sellerEducation()}`;
+      <p class="seller-net-disclaimer">${esc(SELLER_NET_SHEET_DISCLAIMER)}</p>
+      <p class="visually-hidden" aria-live="polite" data-seller-net-sheet-status>${esc(state.status)}</p>
+    </section>`;
+}
+
+function renderUnlockedAnalysis(state) {
+  return `${renderSellerNetSheet(state)}${sellerEducation()}`;
 }
 
 function renderAddressStep(state) {
@@ -334,6 +467,7 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
     costRows: previewState?.costRows || [],
     activeOptionalIds: [],
     overrides: {},
+    editingRowId: "",
     netSheet: null,
     analysisUnlocked: preview === "unlocked",
     accountPending: false,
@@ -588,6 +722,57 @@ export function wireSellerWorkspace(root, {
     }
     redraw("[data-seller-account]");
   };
+  const beginInlineEdit = (rowId) => {
+    state.editingRowId = rowId;
+    state.status = "";
+    redraw("[data-seller-edit-input]");
+  };
+  const cancelInlineEdit = () => {
+    const rowId = state.editingRowId;
+    state.editingRowId = "";
+    state.status = "Edit cancelled.";
+    redraw(`[data-seller-edit-row="${rowId}"]`);
+  };
+  const applyInlineEdit = (form, values) => {
+    const rowId = form.dataset.sellerEditRowId;
+    const mode = form.dataset.sellerEditMode;
+    const rawValue = values.get("value");
+    const value = mode === "percent_of_sale_price"
+      ? Number(rawValue)
+      : mode === "date"
+        ? String(rawValue || "")
+        : mode === "sale_price"
+          ? Number(rawValue)
+          : dollarsToCents(rawValue);
+    try {
+      Object.assign(state, applySellerRowEdit(state, { rowId, mode, value }));
+      state.editingRowId = "";
+      state.status = "Seller net sheet updated.";
+      redraw(`[data-seller-edit-row="${rowId}"]`);
+    } catch {
+      state.status = "Enter a valid value before applying this edit.";
+      redraw("[data-seller-edit-input]");
+    }
+  };
+  const addOptionalRow = (rowId) => {
+    Object.assign(state, setSellerOptionalRow(state, rowId, true));
+    state.editingRowId = "";
+    state.status = "Cost added.";
+    redraw(`[data-seller-edit-row="${rowId}"]`);
+  };
+  const removeOptionalRow = (rowId) => {
+    const group = rowDefinition(state, rowId)?.group;
+    Object.assign(state, setSellerOptionalRow(state, rowId, false));
+    state.editingRowId = "";
+    state.status = "Cost removed.";
+    redraw(`[data-seller-add-cost="${group}"] summary`);
+  };
+  const resetNetSheet = () => {
+    Object.assign(state, resetSellerAssumptions(state));
+    state.editingRowId = "";
+    state.status = "Seller assumptions reset.";
+    redraw("[data-seller-reset-assumptions]");
+  };
 
   const handleClick = (event) => {
     const target = event.target.closest("button, [data-seller-open-address]");
@@ -597,6 +782,11 @@ export function wireSellerWorkspace(root, {
     else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
     else if (target.matches("[data-seller-use-value]")) useSelectedValue();
     else if (target.matches("[data-seller-open-account]")) void unlockSellerAnalysis();
+    else if (target.matches("[data-seller-edit-row]")) beginInlineEdit(target.dataset.sellerEditRow);
+    else if (target.matches("[data-seller-cancel-edit]")) cancelInlineEdit();
+    else if (target.matches("[data-seller-add-row]")) addOptionalRow(target.dataset.sellerAddRow);
+    else if (target.matches("[data-seller-remove-row]")) removeOptionalRow(target.dataset.sellerRemoveRow);
+    else if (target.matches("[data-seller-reset-assumptions]")) resetNetSheet();
     else if (target.matches("[data-seller-dialog-back]")) {
       state.dialogStep = state.dialogStep === "obligations" ? "value" : "address";
       state.error = "";
@@ -608,10 +798,22 @@ export function wireSellerWorkspace(root, {
     if (!form || !root.contains(form)) return;
     event.preventDefault();
     const values = new FormData(form);
-    if (form.matches("[data-seller-address-form]")) void findHome();
+    if (form.matches("[data-seller-edit-form]")) applyInlineEdit(form, values);
+    else if (form.matches("[data-seller-address-form]")) void findHome();
     else if (form.matches("[data-seller-obligations-form]")) confirmObligations(values);
   };
   const handleInput = async (event) => {
+    if (event.target.matches("[data-seller-edit-sale-price-range]")) {
+      const output = root.querySelector("[data-seller-edit-sale-price-output]");
+      if (output) output.textContent = formatSellerCurrency(Number(event.target.value));
+      return;
+    }
+    if (event.target.matches("[data-seller-percent-input]")) {
+      const output = root.querySelector("[data-seller-live-amount]");
+      const rate = Number(event.target.value) / 100;
+      if (output) output.textContent = formatSellerCurrency(Math.round(state.valueRange.selectedCents * rate));
+      return;
+    }
     if (event.target.matches("[data-seller-value-range]")) {
       state.valueRange.selectedCents = Number(event.target.value);
       const output = root.querySelector("[data-seller-selected-value]");
@@ -653,6 +855,12 @@ export function wireSellerWorkspace(root, {
     }
   };
   const handleKeydown = (event) => {
+    const form = event.target.closest("[data-seller-edit-form]");
+    if (event.key === "Enter" && state.editingRowId && form) {
+      event.preventDefault();
+      applyInlineEdit(form, new FormData(form));
+      return;
+    }
     const input = event.target.closest("[data-seller-address-input]");
     if (input && state.suggestions.length && ["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) {
       event.preventDefault();
@@ -665,6 +873,12 @@ export function wireSellerWorkspace(root, {
       return;
     }
     if (event.key === "Escape") {
+      if (state.editingRowId) {
+        event.preventDefault();
+        root.querySelector("[data-seller-cancel-edit]");
+        cancelInlineEdit();
+        return;
+      }
       if (state.modalOpen) {
         event.preventDefault();
         closeDialog();

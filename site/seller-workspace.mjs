@@ -463,3 +463,87 @@ export function calculateSellerNetSheet({
     },
   };
 }
+
+function recalculateSellerState(state, changes = {}) {
+  const next = {
+    ...state,
+    ...changes,
+  };
+  next.netSheet = calculateSellerNetSheet({
+    valueRange: next.valueRange,
+    obligations: next.obligations,
+    expectedClosingDate: next.expectedClosingDate,
+    costRows: next.costRows,
+    activeOptionalIds: next.activeOptionalIds,
+    overrides: next.overrides,
+  });
+  return next;
+}
+
+const OBLIGATION_EDIT_KEYS = Object.freeze({
+  firstMortgagePayoff: "firstMortgageCents",
+  secondMortgageHelocPayoff: "secondMortgageHelocCents",
+  otherLiens: "otherLiensCents",
+});
+
+export function applySellerRowEdit(state, edit = {}) {
+  const rowId = String(edit.rowId || "");
+  if (!state?.valueRange || !rowId) throw new Error("A seller row edit requires state and a row id");
+
+  if (rowId === "salePrice") {
+    const valueRange = selectSellerValue({
+      lowCents: state.valueRange.lowCents,
+      baseCents: state.valueRange.selectedCents,
+      highCents: state.valueRange.highCents,
+    }, edit.value, state.valueRange.stepCents);
+    return recalculateSellerState(state, { valueRange });
+  }
+
+  if (rowId === "expectedClosingDate") {
+    const overrides = { ...(state.overrides || {}) };
+    for (const row of state.costRows || []) {
+      if (row.mode === "prorated_annual") delete overrides[row.id];
+    }
+    return recalculateSellerState(state, {
+      expectedClosingDate: String(edit.value || ""),
+      overrides,
+    });
+  }
+
+  const obligationKey = OBLIGATION_EDIT_KEYS[rowId];
+  if (obligationKey) {
+    return recalculateSellerState(state, {
+      obligations: {
+        ...state.obligations,
+        [obligationKey]: integerCents(edit.value, `${rowId} amount`),
+      },
+    });
+  }
+
+  const row = (state.costRows || []).find((candidate) => candidate.id === rowId);
+  if (!row || (row.optional && !(state.activeOptionalIds || []).includes(rowId))) {
+    throw new Error(`Unknown or inactive seller-cost row ${rowId}`);
+  }
+  const overrides = { ...(state.overrides || {}) };
+  overrides[rowId] = row.mode === "percent_of_sale_price"
+    ? { mode: "percent_of_sale_price", value: decimalRate(edit.value, `${rowId} percentage`) / 100 }
+    : { mode: "fixed_amount", value: integerCents(edit.value, `${rowId} amount`) };
+  return recalculateSellerState(state, { overrides });
+}
+
+export function setSellerOptionalRow(state, rowId, active) {
+  const row = (state?.costRows || []).find((candidate) => candidate.id === rowId);
+  if (!row?.optional) throw new Error(`Unknown optional seller-cost row ${rowId}`);
+  const activeOptionalIds = [...new Set(state.activeOptionalIds || [])].filter((id) => id !== rowId);
+  if (active) activeOptionalIds.push(rowId);
+  const overrides = { ...(state.overrides || {}) };
+  if (!active) delete overrides[rowId];
+  return recalculateSellerState(state, { activeOptionalIds, overrides });
+}
+
+export function resetSellerAssumptions(state) {
+  return recalculateSellerState(state, {
+    activeOptionalIds: [],
+    overrides: {},
+  });
+}

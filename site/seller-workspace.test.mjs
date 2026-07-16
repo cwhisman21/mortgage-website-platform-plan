@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  applySellerRowEdit,
   calculateSellerNetSheet,
   calculateStatutoryTransferTax,
   calculateSellerProceeds,
@@ -11,9 +12,11 @@ import {
   formatSellerCurrency,
   normalizeSellerObligations,
   prorateAnnualCents,
+  resetSellerAssumptions,
   resolveSellerCostRows,
   resolveSellerAssumptions,
   selectSellerValue,
+  setSellerOptionalRow,
 } from "./seller-workspace.mjs";
 
 const fixture = {
@@ -201,6 +204,137 @@ test("low selected and high scenarios reuse the same assumptions", () => {
   assert.equal(result.scenarios.high.amountCents, 28_587_500);
   assert.equal(result.totalSellingExpensesCents, 2_537_500);
   assert.equal(result.totalObligationsCents, 44_300_000);
+});
+
+function editableSellerState() {
+  const state = {
+    valueRange: { lowCents: 69_500_000, selectedCents: 72_500_000, highCents: 75_500_000, stepCents: 100_000 },
+    obligations: { firstMortgageCents: 41_800_000, secondMortgageHelocCents: 2_000_000, otherLiensCents: 500_000 },
+    expectedClosingDate: "2026-08-15",
+    activeOptionalIds: [],
+    overrides: {},
+    costRows: [
+      { id: "listing", group: "sellingExpenses", label: "Listing-side compensation", mode: "percent_of_sale_price", value: 0.025, optional: false },
+      { id: "transfer", group: "sellingExpenses", label: "Transfer tax", mode: "statutory_transfer_tax", incrementCents: 50_000, rateCentsPerIncrement: 55, optional: false },
+      { id: "proration", group: "obligations", label: "Property-tax proration", mode: "prorated_annual", annualCents: 870_000, periodStartMonthDay: "07-01", optional: false },
+      { id: "warranty", group: "sellingExpenses", label: "Home warranty", mode: "fixed_amount", value: 60_000, optional: true },
+      { id: "hoaPastDue", group: "obligations", label: "HOA past-due assessments", mode: "fixed_amount", value: 0, optional: true },
+    ],
+  };
+  return { ...state, netSheet: calculateSellerNetSheet(state) };
+}
+
+test("applySellerRowEdit converts a displayed percentage and recalculates every scenario", () => {
+  const original = editableSellerState();
+  const edited = applySellerRowEdit(original, {
+    rowId: "listing",
+    mode: "percent_of_sale_price",
+    value: 3,
+  });
+
+  assert.deepEqual(edited.overrides.listing, { mode: "percent_of_sale_price", value: 0.03 });
+  assert.equal(edited.netSheet.groups.sellingExpenses[0].amountCents, 2_175_000);
+  assert.equal(edited.netSheet.scenarios.low.amountCents - original.netSheet.scenarios.low.amountCents, -347_500);
+  assert.equal(edited.netSheet.scenarios.high.amountCents - original.netSheet.scenarios.high.amountCents, -377_500);
+  assert.deepEqual(original.overrides, {});
+});
+
+test("applySellerRowEdit turns statutory and proration amounts into fixed local overrides", () => {
+  const statutory = applySellerRowEdit(editableSellerState(), {
+    rowId: "transfer",
+    mode: "statutory_transfer_tax",
+    value: 123_456,
+  });
+  const prorated = applySellerRowEdit(statutory, {
+    rowId: "proration",
+    mode: "prorated_annual",
+    value: 222_222,
+  });
+
+  assert.deepEqual(prorated.overrides.transfer, { mode: "fixed_amount", value: 123_456 });
+  assert.deepEqual(prorated.overrides.proration, { mode: "fixed_amount", value: 222_222 });
+  assert.equal(prorated.netSheet.groups.obligations.at(-1).amountCents, 222_222);
+});
+
+test("applySellerRowEdit updates confirmed obligations without creating cost overrides", () => {
+  const edited = applySellerRowEdit(editableSellerState(), {
+    rowId: "secondMortgageHelocPayoff",
+    mode: "customer_entered",
+    value: 3_250_000,
+  });
+
+  assert.equal(edited.obligations.secondMortgageHelocCents, 3_250_000);
+  assert.equal(edited.netSheet.groups.obligations[1].amountCents, 3_250_000);
+  assert.deepEqual(edited.overrides, {});
+});
+
+test("close-date edits clear proration overrides and recalculate from the registry row", () => {
+  const overridden = applySellerRowEdit(editableSellerState(), {
+    rowId: "proration",
+    mode: "prorated_annual",
+    value: 222_222,
+  });
+  const edited = applySellerRowEdit(overridden, {
+    rowId: "expectedClosingDate",
+    mode: "date",
+    value: "2026-09-15",
+  });
+
+  assert.equal(edited.expectedClosingDate, "2026-09-15");
+  assert.equal(Object.hasOwn(edited.overrides, "proration"), false);
+  assert.notEqual(edited.netSheet.groups.obligations.at(-1).amountCents, 222_222);
+});
+
+test("sale-price edits reuse the bounded slider rules", () => {
+  const edited = applySellerRowEdit(editableSellerState(), {
+    rowId: "salePrice",
+    mode: "sale_price",
+    value: 74_460_000,
+  });
+
+  assert.equal(edited.valueRange.selectedCents, 74_500_000);
+  assert.equal(edited.netSheet.selectedSalePriceCents, 74_500_000);
+});
+
+test("optional rows add to their registry group and removal also clears the override", () => {
+  const original = editableSellerState();
+  const added = setSellerOptionalRow(original, "hoaPastDue", true);
+  const edited = applySellerRowEdit(added, {
+    rowId: "hoaPastDue",
+    mode: "fixed_amount",
+    value: 75_000,
+  });
+  const removed = setSellerOptionalRow(edited, "hoaPastDue", false);
+
+  assert.deepEqual(added.activeOptionalIds, ["hoaPastDue"]);
+  assert.equal(added.netSheet.groups.obligations.at(-1).id, "hoaPastDue");
+  assert.deepEqual(edited.overrides.hoaPastDue, { mode: "fixed_amount", value: 75_000 });
+  assert.deepEqual(removed.activeOptionalIds, []);
+  assert.equal(Object.hasOwn(removed.overrides, "hoaPastDue"), false);
+  assert.equal(removed.netSheet.groups.obligations.some((row) => row.id === "hoaPastDue"), false);
+  assert.deepEqual(original.activeOptionalIds, []);
+});
+
+test("reset clears optional rows and overrides while preserving confirmed seller inputs", () => {
+  const address = { id: "property-harbor-view", displayAddress: "1842 Harbor View Drive" };
+  const original = {
+    ...setSellerOptionalRow(editableSellerState(), "warranty", true),
+    address,
+  };
+  const overridden = applySellerRowEdit(original, {
+    rowId: "warranty",
+    mode: "fixed_amount",
+    value: 80_000,
+  });
+  const reset = resetSellerAssumptions(overridden);
+
+  assert.deepEqual(reset.activeOptionalIds, []);
+  assert.deepEqual(reset.overrides, {});
+  assert.equal(reset.address, address);
+  assert.equal(reset.valueRange, overridden.valueRange);
+  assert.equal(reset.expectedClosingDate, "2026-08-15");
+  assert.equal(reset.obligations, overridden.obligations);
+  assert.equal(reset.netSheet.groups.sellingExpenses.some((row) => row.id === "warranty"), false);
 });
 
 test("fixture adapters return exact matching addresses without mutating fixtures", async () => {

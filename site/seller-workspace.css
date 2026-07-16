@@ -499,6 +499,279 @@
   color: var(--muted);
 }
 
+.seller-result-workspace {
+  align-items: start;
+  gap: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.seller-statement,
+.seller-result-summary,
+.seller-net-row > * {
+  min-width: 0;
+}
+
+.seller-result-summary {
+  position: sticky;
+  top: 104px;
+  gap: 20px;
+  border-radius: 8px;
+}
+
+.seller-selected-price-line,
+.seller-close-date > div,
+.seller-net-row dd,
+.seller-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seller-selected-price-line {
+  flex-wrap: wrap;
+}
+
+.seller-selected-price {
+  font-family: var(--display-font);
+  font-size: 54px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.seller-result-summary .seller-row-edit {
+  color: #fff;
+}
+
+.seller-close-date {
+  display: grid;
+  gap: 5px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(220, 232, 251, 0.28);
+}
+
+.seller-close-date > span,
+.seller-projected-result > span {
+  color: #dce8fb;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.seller-close-date time {
+  font-weight: 800;
+}
+
+.seller-projected-result {
+  display: grid;
+  gap: 5px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(220, 232, 251, 0.28);
+}
+
+.seller-projected-result strong {
+  color: var(--snap-teal);
+  font-family: var(--display-font);
+  font-size: 42px;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.seller-final-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(220, 232, 251, 0.28);
+}
+
+.seller-final-comparison div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.seller-final-comparison dt {
+  color: #dce8fb;
+  font-size: 12px;
+}
+
+.seller-final-comparison dd {
+  margin: 0;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.seller-statement {
+  display: grid;
+  gap: 34px;
+}
+
+.seller-net-group,
+.seller-net-summary {
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+}
+
+.seller-net-group h2,
+.seller-net-summary h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.seller-net-group dl,
+.seller-net-summary dl {
+  margin: 0;
+}
+
+.seller-net-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 54px;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.seller-net-row dt,
+.seller-net-row dd {
+  margin: 0;
+}
+
+.seller-net-row dt {
+  overflow-wrap: anywhere;
+}
+
+.seller-net-row dd {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.seller-row-amount,
+.seller-net-total strong {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.seller-row-edit,
+.seller-row-remove {
+  min-width: 44px;
+  padding: 4px 7px;
+  border: 0;
+  background: transparent;
+  color: var(--snap-blue-700);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.seller-row-remove {
+  color: var(--muted);
+}
+
+.seller-inline-edit {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.seller-inline-edit label {
+  min-width: 0;
+}
+
+.seller-inline-edit input {
+  max-width: 100%;
+}
+
+.seller-inline-edit .seller-prefixed-input {
+  width: 160px;
+  max-width: 100%;
+  border-color: var(--snap-blue);
+}
+
+.seller-inline-edit .seller-prefixed-input input {
+  width: 100%;
+  padding-left: 8px;
+}
+
+.seller-percent-edit label > input {
+  width: 100px;
+  padding-left: 10px;
+}
+
+.seller-percent-edit output {
+  min-width: 88px;
+  color: var(--ink-soft);
+  font-weight: 800;
+  text-align: right;
+}
+
+.seller-sale-price-edit {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+}
+
+.seller-sale-price-edit .seller-range-field output {
+  color: var(--snap-teal);
+}
+
+.seller-add-cost {
+  margin-top: 10px;
+}
+
+.seller-add-cost summary {
+  min-height: 44px;
+  color: var(--snap-blue-700);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.seller-add-cost > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 18px;
+  padding-bottom: 8px;
+}
+
+.seller-add-cost button {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 700;
+  text-align: left;
+}
+
+.seller-net-summary {
+  border-top-color: var(--snap-blue);
+}
+
+.seller-net-total {
+  font-size: 17px;
+}
+
+.seller-net-projected {
+  border-bottom: 0;
+  color: var(--snap-teal-dark);
+  font-size: 21px;
+}
+
+.seller-net-disclaimer {
+  max-width: 900px;
+  margin: 32px 0 0 auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .seller-allocation {
   grid-column: 1 / -1;
   padding-top: 4px;
@@ -881,7 +1154,7 @@
   }
 
   .seller-entry-hero { gap: 28px; }
-  .seller-result-summary { min-height: auto; }
+  .seller-result-summary { position: static; min-height: auto; }
   .seller-step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -939,7 +1212,7 @@
   .seller-obligation-confirmation dl div { align-items: start; flex-direction: column; gap: 4px; }
   .seller-obligation-confirmation dd { text-align: left; }
 
-  .seller-result-workspace { padding: 12px; }
+  .seller-result-workspace { gap: 30px; padding: 0; }
   .seller-result-summary,
   .seller-pro-forma { padding: 20px; }
   .seller-base-result {
@@ -963,6 +1236,27 @@
   .seller-inline-edit { flex-wrap: wrap; }
   .seller-inline-edit label { flex: 1 1 150px; }
   .seller-inline-edit input { width: 100%; }
+
+  .seller-selected-price { font-size: 42px; }
+  .seller-projected-result strong { font-size: 34px; }
+  .seller-net-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    align-items: start;
+    padding-block: 11px;
+  }
+  .seller-net-row dd {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+  }
+  .seller-inline-edit {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .seller-add-cost > div { grid-template-columns: 1fr; }
+  .seller-final-comparison { gap: 10px; }
 
   .seller-allocation-legend {
     display: grid;
