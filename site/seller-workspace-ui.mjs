@@ -1,0 +1,550 @@
+import {
+  createFixtureSellerAdapters,
+  defaultExpectedCloseDate,
+  formatSellerCurrency,
+  normalizeSellerObligations,
+  resolveSellerCostRows,
+  selectSellerValue,
+} from "./seller-workspace.mjs";
+import { renderPrimaryTagLinks } from "./tag-presentation.mjs";
+
+function esc(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function dollarsToCents(value) {
+  const cleaned = String(value ?? "").replace(/[^0-9.-]/g, "");
+  if (!cleaned) return Number.NaN;
+  const dollars = Number(cleaned);
+  return Number.isFinite(dollars) ? Math.round(dollars * 100) : Number.NaN;
+}
+
+function firstPreviewState(fixture, costRegistry = {}) {
+  const address = fixture?.addressSuggestions?.[0];
+  const valuation = address && fixture?.valuations?.[address.id];
+  if (!address || !valuation) return null;
+  const valueRange = selectSellerValue(valuation);
+  const obligations = normalizeSellerObligations({
+    firstMortgageCents: Number(fixture?.statementExtraction?.suggestedPayoffCents) || 0,
+    secondMortgageHelocCents: 0,
+    otherLiensCents: 0,
+  });
+  return {
+    address,
+    sourceValuation: valuation,
+    valueRange,
+    obligations,
+    expectedClosingDate: defaultExpectedCloseDate(),
+    costRows: costRegistry?.defaultRows?.length ? resolveSellerCostRows(costRegistry, address) : [],
+  };
+}
+
+function sellerSteps() {
+  const steps = [
+    ["01", "Understand value", "Compare the estimate with property details and current market evidence."],
+    ["02", "Estimate costs", "Review payoff, compensation, transfer, title, repair, and concession assumptions."],
+    ["03", "Prepare to list", "Prioritize work that supports marketability without losing sight of likely proceeds."],
+    ["04", "Compare offers", "Evaluate financing, concessions, contingencies, timing, and expected net proceeds."],
+    ["05", "Plan closing", "Confirm the payoff statement, final seller costs, required documents, and timing."],
+  ];
+  return `<div class="seller-step-grid">${steps.map(([number, title, text]) => `
+    <article class="seller-step-card">
+      <span>${number}</span>
+      <h3>${esc(title)}</h3>
+      <p>${esc(text)}</p>
+    </article>`).join("")}</div>`;
+}
+
+function sellerGuides() {
+  const guides = [
+    ["Net proceeds", "How to estimate what you may receive after a sale", "Build a seller net sheet from value, payoff, transaction costs, repairs, concessions, and timing.", "/learning-center/home-equity-options-guide"],
+    ["Mortgage payoff", "Why your payoff can differ from your loan balance", "Understand daily interest, fees, escrow, and the requested payoff date before relying on a displayed balance.", "/learning-center/refinance-basics"],
+    ["Offer review", "Compare offers beyond the headline price", "Review financing, contingencies, credits, timing, and expected proceeds on consistent assumptions.", "/learning-center/buying-a-home"],
+  ];
+  return `<div class="seller-guide-grid">${guides.map(([label, title, text, href]) => `
+    <article class="seller-guide-card">
+      <p class="eyebrow">${esc(label)}</p>
+      <h3><a href="${esc(href)}">${esc(title)}</a></h3>
+      <p>${esc(text)}</p>
+      <a class="text-link" href="${esc(href)}">Read guide</a>
+    </article>`).join("")}</div>`;
+}
+
+function sellerFaq() {
+  const items = [
+    ["Is the estimated home value an appraisal?", "No. Use an online estimate as a starting point, then compare it with property condition, recent comparable sales, and current market evidence."],
+    ["Why can my mortgage payoff differ from my loan balance?", "A payoff can include daily interest and other amounts through a requested payoff date. Confirm the current payoff before relying on estimated proceeds."],
+    ["How are selling-cost assumptions selected?", "The tool starts with editable assumptions associated with the property's state when available and uses a national starting point otherwise."],
+    ["Can I see the estimate without creating an account?", "Yes. The complete estimate remains visible. Snap Homes account actions appear afterward so you can choose whether to continue."],
+  ];
+  return `<div class="faq-list seller-faq">${items.map(([question, answer]) => `
+    <details>
+      <summary>${esc(question)}</summary>
+      <p>${esc(answer)}</p>
+    </details>`).join("")}</div>`;
+}
+
+function sellerEducation() {
+  return `
+    <section class="section seller-process-section" aria-labelledby="seller-process-title">
+      <p class="eyebrow">Selling step by step</p>
+      <h2 id="seller-process-title">Prepare the home and the numbers together.</h2>
+      <p class="seller-section-lead">A useful selling plan connects value, condition, marketing, offer terms, mortgage payoff, and closing costs.</p>
+      ${sellerSteps()}
+    </section>
+    <section class="section seller-guidance-section" aria-labelledby="seller-guidance-title">
+      <p class="eyebrow">Seller guidance</p>
+      <h2 id="seller-guidance-title">Make the next decision with the full transaction in view.</h2>
+      ${sellerGuides()}
+    </section>
+    <section class="section seller-faq-section" aria-labelledby="seller-faq-title">
+      <p class="eyebrow">Common questions</p>
+      <h2 id="seller-faq-title">Questions sellers ask before listing.</h2>
+      ${sellerFaq()}
+    </section>
+    <section class="section compact seller-methodology" aria-labelledby="seller-methodology-title">
+      <h2 id="seller-methodology-title">Methodology and sources</h2>
+      <p>The result keeps the confirmed property value, mortgage payoff, address-aware cost assumptions when available, and any edits together. Review the dates and methods attached to each starting figure.</p>
+      <nav aria-label="Seller topics">
+        <a href="/learning-center/search?tags=home-values">Home values</a>
+        <a href="/learning-center/search?tags=home-equity">Home equity</a>
+        <a href="/learning-center/search?tags=borrower-planning">Seller planning</a>
+      </nav>
+      <p class="seller-updated">Last updated <time datetime="2026-07-16">July 16, 2026</time></p>
+    </section>`;
+}
+
+function renderEntry(primaryTags = []) {
+  const outcomes = [
+    ["Choose a property value", "Use the returned range to select a working value."],
+    ["Confirm known obligations", "Add payoff balances and your expected closing date."],
+    ["Open your seller analysis", "Review selling costs and projected proceeds in Snap Homes."],
+  ];
+  const how = [
+    ["01 Home value", "Find and confirm the property", "Use the address to retrieve an estimated value range, then choose a value within it."],
+    ["02 Obligations", "Confirm the balances and timing", "Select a statement for a suggested first-mortgage payoff or enter each known balance directly."],
+    ["03 Analysis", "Review the full seller analysis", "Open your Snap Homes account to review selling costs, obligations, and projected proceeds together."],
+  ];
+  const topics = [
+    ["Value", "How to think about an online home-value estimate", "Compare broad estimates with property condition, recent comparable sales, and current market evidence."],
+    ["Costs", "Selling costs that can change net proceeds", "Review transaction costs, repairs, concessions, payoff figures, and timing on consistent assumptions."],
+    ["Offers", "Compare offers beyond the headline price", "Look beyond price to financing, contingencies, credits, closing timing, and the amount expected at settlement."],
+  ];
+  return `
+    <section class="seller-entry-hero">
+      <div class="seller-entry-copy">
+        <p class="eyebrow">Sell a home</p>
+        ${renderPrimaryTagLinks(primaryTags)}
+        <h1>Start with what your sale could leave you.</h1>
+        <p class="lead">Enter your home address to see a property-value range, choose a working value, and confirm the obligations you already know.</p>
+        <button class="button" type="button" data-seller-open-address>Explore my property value range</button>
+        <p class="seller-helper">Seller guidance remains available while you consider your next move.</p>
+      </div>
+      <aside class="seller-outcome-preview">
+        <p class="eyebrow">Your estimate</p>
+        <h2>See the sale in one clear breakdown.</h2>
+        <ol>${outcomes.map(([title, text]) => `<li><strong>${esc(title)}</strong><span>${esc(text)}</span></li>`).join("")}</ol>
+      </aside>
+    </section>
+    <section class="section seller-how-section" aria-labelledby="seller-how-title">
+      <p class="eyebrow">How it works</p>
+      <h2 id="seller-how-title">A seller estimate built around the numbers that matter.</h2>
+      <p class="seller-section-lead">Begin with the property, then replace broad assumptions with the information you know.</p>
+      <div class="seller-how-grid">${how.map(([label, title, text]) => `
+        <article><p class="eyebrow">${esc(label)}</p><h3>${esc(title)}</h3><p>${esc(text)}</p></article>`).join("")}</div>
+    </section>
+    <section class="section seller-topic-section" aria-labelledby="seller-topic-title">
+      <p class="eyebrow">Seller guidance</p>
+      <h2 id="seller-topic-title">Know the decisions behind the estimate.</h2>
+      <div class="seller-how-grid">${topics.map(([label, title, text]) => `
+        <article><p class="eyebrow">${esc(label)}</p><h3>${esc(title)}</h3><p>${esc(text)}</p></article>`).join("")}</div>
+    </section>
+    <section class="section compact seller-entry-cta">
+      <div><p class="eyebrow">Ready to start?</p><h2>Start with your property value and known obligations.</h2><p>Enter the address first, then choose a value within the returned range.</p></div>
+      <button class="button" type="button" data-seller-open-address>Enter my home address</button>
+    </section>`;
+}
+
+function renderLockedSummary(state) {
+  const { valueRange, obligations } = state;
+  return `
+    <section class="seller-locked-summary" data-seller-locked-summary tabindex="-1" aria-labelledby="seller-locked-summary-title">
+      <div class="seller-locked-heading">
+        <p class="eyebrow">Sell a home</p>
+        <h1 id="seller-locked-summary-title">Your property details are confirmed.</h1>
+        <p>${esc(state.address.displayAddress)}</p>
+      </div>
+      <div class="seller-locked-grid">
+        <section class="seller-selected-value" aria-labelledby="seller-selected-value-title">
+          <p class="eyebrow">Selected property value</p>
+          <strong id="seller-selected-value-title">${esc(formatSellerCurrency(valueRange.selectedCents))}</strong>
+          <div class="seller-value-endpoints"><span>Low <strong>${esc(formatSellerCurrency(valueRange.lowCents))}</strong></span><span>High <strong>${esc(formatSellerCurrency(valueRange.highCents))}</strong></span></div>
+        </section>
+        <section class="seller-obligation-confirmation" aria-labelledby="seller-obligation-confirmation-title">
+          <h2 id="seller-obligation-confirmation-title">Confirmed obligations</h2>
+          <dl>
+            <div><dt>First mortgage payoff</dt><dd>${esc(formatSellerCurrency(obligations.firstMortgageCents))}</dd></div>
+            <div><dt>Second mortgage or HELOC payoff</dt><dd>${esc(formatSellerCurrency(obligations.secondMortgageHelocCents))}</dd></div>
+            <div><dt>Other liens</dt><dd>${esc(formatSellerCurrency(obligations.otherLiensCents))}</dd></div>
+            <div><dt>Expected closing date</dt><dd>${esc(state.expectedClosingDate)}</dd></div>
+          </dl>
+        </section>
+      </div>
+    </section>
+    ${sellerEducation()}`;
+}
+
+function renderAddressStep(state) {
+  return `
+    <form data-seller-address-form>
+      <label class="seller-field" for="seller-home-address"><span>Home address</span>
+        <input id="seller-home-address" name="address" value="${esc(state.addressQuery)}" autocomplete="street-address" data-seller-address-input role="combobox" aria-autocomplete="list" aria-controls="seller-address-suggestions" aria-expanded="${state.suggestions.length ? "true" : "false"}" />
+      </label>
+      <ul class="seller-address-suggestions" id="seller-address-suggestions" role="listbox"${state.suggestions.length ? "" : " hidden"}>
+        ${state.suggestions.map((suggestion, index) => `<li role="option" aria-selected="${index === state.activeSuggestionIndex ? "true" : "false"}"><button type="button" data-seller-address-option="${esc(suggestion.id)}">${esc(suggestion.displayAddress)}</button></li>`).join("")}
+      </ul>
+      <button class="button" type="submit" data-seller-find-home>Find my home</button>
+    </form>`;
+}
+
+function renderValueStep(state) {
+  const { valueRange } = state;
+  return `
+    <div class="seller-value-confirmation">
+      <p class="eyebrow">Estimated home value</p>
+      <strong>${esc(formatSellerCurrency(valueRange.selectedCents))}</strong>
+      <p>As of ${esc(state.sourceValuation.asOf)}. Choose a value within the returned range before continuing.</p>
+    </div>
+    <label class="seller-range-field" for="seller-value-range"><span>Selected property value</span>
+      <output data-seller-selected-value for="seller-value-range">${esc(formatSellerCurrency(valueRange.selectedCents))}</output>
+      <input id="seller-value-range" type="range" min="${esc(valueRange.lowCents)}" max="${esc(valueRange.highCents)}" step="${esc(valueRange.stepCents)}" value="${esc(valueRange.selectedCents)}" data-seller-value-range />
+    </label>
+    <div class="seller-value-endpoints"><span>Low <strong>${esc(formatSellerCurrency(valueRange.lowCents))}</strong></span><span>High <strong>${esc(formatSellerCurrency(valueRange.highCents))}</strong></span></div>
+    <div class="seller-dialog-actions"><button class="button" type="button" data-seller-use-value>Use this value</button></div>`;
+}
+
+function renderObligationsStep(state) {
+  return `
+    <form data-seller-obligations-form>
+      <label class="seller-upload-field"><span>Mortgage statement</span><input type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg" data-seller-statement /><strong>Select mortgage statement</strong><small>The suggested payoff remains editable and must be confirmed.</small></label>
+      ${state.statement ? `<p class="seller-file-status">${esc(state.statement.fileName)}: suggested amount ready to confirm.</p>` : ""}
+      <div class="seller-divider"><span>or enter the amount</span></div>
+      <label class="seller-field"><span>First mortgage payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="firstMortgage" inputmode="decimal" value="${esc(state.firstMortgageInput)}" /></span></label>
+      <label class="seller-field"><span>Second mortgage or HELOC payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="secondMortgageHeloc" inputmode="decimal" value="${esc(state.secondMortgageHelocInput)}" /></span></label>
+      <label class="seller-field"><span>Other liens</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="otherLiens" inputmode="decimal" value="${esc(state.otherLiensInput)}" /></span></label>
+      <label class="seller-field"><span>Expected closing date</span><input name="expectedClosingDate" type="date" value="${esc(state.expectedClosingDate)}" /></label>
+      <button class="button" type="submit">Confirm property details</button>
+    </form>`;
+}
+
+function dialogTitle(step) {
+  return step === "value" ? "Choose the property value" : step === "obligations" ? "Confirm obligations and timing" : "What is your home address?";
+}
+
+function renderDialog(state) {
+  const stepNumber = state.dialogStep === "value" ? 2 : state.dialogStep === "obligations" ? 3 : 1;
+  const body = state.dialogStep === "value" ? renderValueStep(state) : state.dialogStep === "obligations" ? renderObligationsStep(state) : renderAddressStep(state);
+  return `
+    <div class="seller-dialog-backdrop" data-seller-dialog role="dialog" aria-modal="true" aria-labelledby="seller-dialog-title"${state.modalOpen ? "" : " hidden"}>
+      <section class="seller-dialog-panel">
+        <button class="seller-dialog-close" type="button" aria-label="Close seller estimate" data-seller-dialog-close>&times;</button>
+        <p class="eyebrow">Step ${stepNumber} of 3</p>
+        <h2 id="seller-dialog-title">${esc(dialogTitle(state.dialogStep))}</h2>
+        <p>${state.dialogStep === "address" ? "We will use the address to find the property and return a value range when available." : state.dialogStep === "value" ? "Review the range and choose the value you want to use." : "Select a statement for a suggested first-mortgage payoff or enter the balances directly, then add your expected closing date."}</p>
+        ${body}
+        <p class="seller-dialog-error" data-seller-dialog-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+        <p class="visually-hidden" data-seller-dialog-status aria-live="polite">${esc(state.status)}</p>
+        ${stepNumber > 1 ? `<button class="text-link text-button seller-dialog-back" type="button" data-seller-dialog-back>Back</button>` : ""}
+      </section>
+    </div>`;
+}
+
+function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags = [] }) {
+  const previewState = ["value", "obligations", "locked", "unlocked"].includes(preview)
+    ? firstPreviewState(fixture, costRegistry)
+    : null;
+  return {
+    phase: preview === "unlocked" ? "unlocked" : preview === "locked" ? "locked" : "entry",
+    modalOpen: ["value", "obligations"].includes(preview),
+    dialogStep: preview === "obligations" ? "obligations" : preview === "value" ? "value" : "address",
+    addressQuery: "",
+    suggestions: [],
+    activeSuggestionIndex: -1,
+    address: previewState?.address || null,
+    sourceValuation: previewState?.sourceValuation || null,
+    valueRange: previewState?.valueRange || null,
+    obligations: previewState?.obligations || null,
+    firstMortgageInput: previewState ? (previewState.obligations.firstMortgageCents / 100).toFixed(2) : "",
+    secondMortgageHelocInput: previewState ? (previewState.obligations.secondMortgageHelocCents / 100).toFixed(2) : "",
+    otherLiensInput: previewState ? (previewState.obligations.otherLiensCents / 100).toFixed(2) : "",
+    expectedClosingDate: previewState?.expectedClosingDate || "",
+    costRows: previewState?.costRows || [],
+    netSheet: null,
+    analysisUnlocked: false,
+    statement: null,
+    error: "",
+    status: "",
+    isLoggedIn: Boolean(isLoggedIn),
+    primaryTags,
+  };
+}
+
+function renderInner(state) {
+  return `${state.phase === "entry" ? renderEntry(state.primaryTags) : renderLockedSummary(state)}${renderDialog(state)}`;
+}
+
+export function renderSellerWorkspace(page = {}, fixture = {}, options = {}) {
+  const state = initialState({ fixture, costRegistry: options.costRegistry, preview: options.preview, isLoggedIn: options.isLoggedIn, primaryTags: options.primaryTags });
+  return `<div class="seller-workspace" data-seller-workspace data-seller-page-id="${esc(page.id || "seller-home")}">${renderInner(state)}</div>`;
+}
+
+function focusableElements(dialog) {
+  return [...dialog.querySelectorAll("button, input, select, textarea, [href], [tabindex]:not([tabindex='-1'])")]
+    .filter((element) => !element.disabled && !element.hidden && element.offsetParent !== null);
+}
+
+function isValidExpectedCloseDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
+  if (!match) return false;
+  const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  return date.getFullYear() === Number(match[1])
+    && date.getMonth() === Number(match[2]) - 1
+    && date.getDate() === Number(match[3]);
+}
+
+export function wireSellerWorkspace(root, {
+  fixture = {},
+  costRegistry = {},
+  isLoggedIn = false,
+  primaryTags = [],
+  track = () => {},
+} = {}) {
+  if (!root) return { destroy() {} };
+  const adapters = createFixtureSellerAdapters(fixture);
+  const state = initialState({ fixture, costRegistry, isLoggedIn, primaryTags });
+  let returnFocus = null;
+  let suggestionRequest = 0;
+
+  const emit = (name, payload = {}) => track(name, payload);
+  const redraw = (focusSelector = "") => {
+    root.innerHTML = renderInner(state);
+    document.body.classList.toggle("no-scroll", state.modalOpen);
+    if (focusSelector) requestAnimationFrame(() => root.querySelector(focusSelector)?.focus());
+  };
+  const clearFileReference = () => {
+    state.statement = null;
+  };
+  const closeDialog = () => {
+    state.modalOpen = false;
+    state.error = "";
+    clearFileReference();
+    redraw();
+    if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
+  };
+  const openDialog = (trigger, step = "address") => {
+    returnFocus = trigger || document.activeElement;
+    state.modalOpen = true;
+    state.dialogStep = step;
+    state.error = "";
+    redraw(step === "address" ? "[data-seller-address-input]" : ".seller-dialog-panel button");
+    emit("seller_flow_opened", { step });
+  };
+  const selectAddress = (id) => {
+    const selected = state.suggestions.find((suggestion) => suggestion.id === id);
+    if (!selected) return;
+    state.address = selected;
+    state.addressQuery = selected.displayAddress;
+    state.suggestions = [];
+    state.activeSuggestionIndex = -1;
+    const input = root.querySelector("[data-seller-address-input]");
+    if (input) input.value = selected.displayAddress;
+    const list = root.querySelector("#seller-address-suggestions");
+    if (list) list.hidden = true;
+    input?.setAttribute("aria-expanded", "false");
+  };
+  const findHome = async () => {
+    state.error = "";
+    if (!state.address || state.address.displayAddress !== state.addressQuery) {
+      const matches = await adapters.address.search(state.addressQuery);
+      if (matches.length === 1) state.address = matches[0];
+    }
+    if (!state.address) {
+      state.error = "Choose an address from the suggestions or enter more of the street address.";
+      redraw("[data-seller-address-input]");
+      return;
+    }
+    state.status = "Finding the property value estimate.";
+    redraw();
+    const valuation = await adapters.valuation.get(state.address.id);
+    if (!valuation) {
+      state.error = "A value estimate is not available for this address. Please try another address.";
+      state.status = "";
+      redraw("[data-seller-address-input]");
+      return;
+    }
+    state.sourceValuation = valuation;
+    state.valueRange = selectSellerValue(valuation);
+    state.costRows = costRegistry?.defaultRows?.length ? resolveSellerCostRows(costRegistry, state.address) : [];
+    state.dialogStep = "value";
+    state.status = "Estimated value ready to confirm.";
+    redraw("[data-seller-value-range]");
+    emit("seller_flow_advanced", { step: "value" });
+  };
+  const useSelectedValue = () => {
+    state.expectedClosingDate ||= defaultExpectedCloseDate();
+    state.dialogStep = "obligations";
+    state.error = "";
+    redraw("[data-seller-obligations-form] input[name='firstMortgage']");
+    emit("seller_flow_advanced", { step: "obligations" });
+  };
+  const confirmObligations = (formValues) => {
+    const firstMortgageCents = dollarsToCents(formValues.get("firstMortgage"));
+    const secondMortgageHelocCents = dollarsToCents(formValues.get("secondMortgageHeloc"));
+    const otherLiensCents = dollarsToCents(formValues.get("otherLiens"));
+    const expectedClosingDate = String(formValues.get("expectedClosingDate") || "");
+    let obligations;
+    try {
+      obligations = normalizeSellerObligations({ firstMortgageCents, secondMortgageHelocCents, otherLiensCents });
+    } catch {
+      state.error = "Enter each known payoff or lien amount. Use 0 when a balance does not apply.";
+      redraw("[data-seller-obligations-form] input[name='firstMortgage']");
+      return;
+    }
+    if (!isValidExpectedCloseDate(expectedClosingDate)) {
+      state.error = "Enter a valid expected closing date.";
+      redraw("[data-seller-obligations-form] input[name='expectedClosingDate']");
+      return;
+    }
+    state.obligations = obligations;
+    state.firstMortgageInput = (obligations.firstMortgageCents / 100).toFixed(2);
+    state.secondMortgageHelocInput = (obligations.secondMortgageHelocCents / 100).toFixed(2);
+    state.otherLiensInput = (obligations.otherLiensCents / 100).toFixed(2);
+    state.expectedClosingDate = expectedClosingDate;
+    state.phase = "locked";
+    state.analysisUnlocked = false;
+    state.netSheet = null;
+    state.modalOpen = false;
+    state.error = "";
+    clearFileReference();
+    redraw();
+    requestAnimationFrame(() => root.querySelector("[data-seller-locked-summary]")?.focus());
+    emit("seller_flow_completed", { step: "locked", status: "confirmed" });
+  };
+
+  const handleClick = (event) => {
+    const target = event.target.closest("button, [data-seller-open-address]");
+    if (!target || !root.contains(target)) return;
+    if (target.matches("[data-seller-open-address], [data-seller-edit-address]")) openDialog(target, "address");
+    else if (target.matches("[data-seller-dialog-close]")) closeDialog();
+    else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
+    else if (target.matches("[data-seller-use-value]")) useSelectedValue();
+    else if (target.matches("[data-seller-dialog-back]")) {
+      state.dialogStep = state.dialogStep === "obligations" ? "value" : "address";
+      state.error = "";
+      redraw(state.dialogStep === "address" ? "[data-seller-address-input]" : "[data-seller-use-value]");
+    }
+  };
+  const handleSubmit = (event) => {
+    const form = event.target.closest("form");
+    if (!form || !root.contains(form)) return;
+    event.preventDefault();
+    const values = new FormData(form);
+    if (form.matches("[data-seller-address-form]")) void findHome();
+    else if (form.matches("[data-seller-obligations-form]")) confirmObligations(values);
+  };
+  const handleInput = async (event) => {
+    if (event.target.matches("[data-seller-value-range]")) {
+      state.valueRange.selectedCents = Number(event.target.value);
+      const output = root.querySelector("[data-seller-selected-value]");
+      if (output) output.textContent = formatSellerCurrency(state.valueRange.selectedCents);
+      return;
+    }
+    if (!event.target.matches("[data-seller-address-input]")) return;
+    state.addressQuery = event.target.value;
+    state.address = null;
+    const requestId = ++suggestionRequest;
+    const suggestions = state.addressQuery.trim().length >= 3
+      ? await adapters.address.search(state.addressQuery)
+      : [];
+    if (requestId !== suggestionRequest) return;
+    state.suggestions = suggestions.slice(0, 5);
+    state.activeSuggestionIndex = state.suggestions.length ? 0 : -1;
+    const list = root.querySelector("#seller-address-suggestions");
+    if (!list) return;
+    list.innerHTML = state.suggestions.map((suggestion, index) => `<li role="option" aria-selected="${index === state.activeSuggestionIndex ? "true" : "false"}"><button type="button" data-seller-address-option="${esc(suggestion.id)}">${esc(suggestion.displayAddress)}</button></li>`).join("");
+    list.hidden = !state.suggestions.length;
+    event.target.setAttribute("aria-expanded", String(Boolean(state.suggestions.length)));
+  };
+  const handleChange = async (event) => {
+    if (!event.target.matches("[data-seller-statement]")) return;
+    const file = event.target.files?.[0];
+    if (!file) return;
+    state.error = "";
+    state.status = "Reading the suggested payoff amount.";
+    try {
+      state.statement = await adapters.statement.read(file);
+      state.firstMortgageInput = (state.statement.suggestedPayoffCents / 100).toFixed(2);
+      state.status = "Suggested payoff ready to confirm.";
+      redraw("[data-seller-obligations-form] input[name='firstMortgage']");
+      emit("seller_statement_suggestion_ready", { step: "obligations", status: "suggested" });
+    } catch (error) {
+      state.statement = null;
+      state.error = error.message;
+      redraw("[data-seller-statement]");
+    }
+  };
+  const handleKeydown = (event) => {
+    const input = event.target.closest("[data-seller-address-input]");
+    if (input && state.suggestions.length && ["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) {
+      event.preventDefault();
+      if (event.key === "ArrowDown") state.activeSuggestionIndex = (state.activeSuggestionIndex + 1) % state.suggestions.length;
+      else if (event.key === "ArrowUp") state.activeSuggestionIndex = (state.activeSuggestionIndex - 1 + state.suggestions.length) % state.suggestions.length;
+      else selectAddress(state.suggestions[Math.max(0, state.activeSuggestionIndex)].id);
+      if (event.key !== "Enter") {
+        root.querySelectorAll("#seller-address-suggestions [role='option']").forEach((option, index) => option.setAttribute("aria-selected", String(index === state.activeSuggestionIndex)));
+      }
+      return;
+    }
+    if (event.key === "Escape") {
+      if (state.modalOpen) {
+        event.preventDefault();
+        closeDialog();
+      }
+      return;
+    }
+    if (event.key !== "Tab" || !state.modalOpen) return;
+    const dialog = root.querySelector("[data-seller-dialog]");
+    const focusable = focusableElements(dialog);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
+  const handleUnload = () => clearFileReference();
+
+  root.addEventListener("click", handleClick);
+  root.addEventListener("submit", handleSubmit);
+  root.addEventListener("input", handleInput);
+  root.addEventListener("change", handleChange);
+  root.addEventListener("keydown", handleKeydown);
+  window.addEventListener("pagehide", handleUnload);
+
+  return {
+    destroy() {
+      clearFileReference();
+      document.body.classList.remove("no-scroll");
+      root.removeEventListener("click", handleClick);
+      root.removeEventListener("submit", handleSubmit);
+      root.removeEventListener("input", handleInput);
+      root.removeEventListener("change", handleChange);
+      root.removeEventListener("keydown", handleKeydown);
+      window.removeEventListener("pagehide", handleUnload);
+    },
+  };
+}
