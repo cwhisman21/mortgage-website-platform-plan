@@ -122,6 +122,14 @@ test("annual proration uses UTC calendar days and the closing date", () => {
   }), 107_260);
 });
 
+test("annual proration rounds a fractional cent at the row level", () => {
+  assert.equal(prorateAnnualCents({
+    annualCents: 1,
+    periodStartDate: "2026-01-01",
+    closingDate: "2026-07-03",
+  }), 1);
+});
+
 test("cost rows prefer city rules and materialize annual tax data", () => {
   const rows = resolveSellerCostRows({
     defaultRows: [{ id: "settlement", group: "sellingExpenses", label: "Settlement", mode: "fixed_amount", value: 100, optional: false }],

@@ -363,7 +363,7 @@ export function prorateAnnualCents({ annualCents, periodStartDate, closingDate }
   const nextPeriodStart = new Date(Date.UTC(start.getUTCFullYear() + 1, start.getUTCMonth(), start.getUTCDate()));
   const elapsedDays = (closing - start) / 86_400_000;
   const periodDays = (nextPeriodStart - start) / 86_400_000;
-  return Math.floor((annual * elapsedDays) / periodDays);
+  return Math.round((annual * elapsedDays) / periodDays);
 }
 
 export function calculateStatutoryTransferTax({ taxableCents, incrementCents, rateCentsPerIncrement } = {}) {
