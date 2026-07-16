@@ -9,6 +9,9 @@ import {
 } from "./seller-workspace.mjs";
 import { renderPrimaryTagLinks } from "./tag-presentation.mjs";
 
+const SELLER_ANALYSIS_RETRY_MESSAGE = "Your seller analysis is still here. Try opening your account again.";
+const SELLER_COSTS_UNAVAILABLE_MESSAGE = "Your seller cost details are unavailable right now. Try again soon.";
+
 function esc(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -426,12 +429,55 @@ export function transitionSellerObligations(state, input = {}) {
   };
 }
 
+function preserveLockedSellerState(state, error) {
+  return {
+    ...state,
+    phase: "locked",
+    analysisUnlocked: false,
+    accountPending: false,
+    netSheet: null,
+    error,
+  };
+}
+
+export async function transitionSellerAccountUnlock(state, {
+  openAccount = async () => ({ status: "unavailable" }),
+} = {}) {
+  if (!Array.isArray(state?.costRows) || !state.costRows.length) {
+    return { ok: false, state: preserveLockedSellerState(state, SELLER_COSTS_UNAVAILABLE_MESSAGE) };
+  }
+  try {
+    const completion = await openAccount({
+      mode: state.isLoggedIn ? "open" : "create",
+      intent: "seller-net-sheet",
+    });
+    if (completion?.status !== "completed") throw new Error("Account handoff did not complete");
+  } catch {
+    return { ok: false, state: preserveLockedSellerState(state, SELLER_ANALYSIS_RETRY_MESSAGE) };
+  }
+  try {
+    return {
+      ok: true,
+      state: {
+        ...state,
+        analysisUnlocked: true,
+        accountPending: false,
+        netSheet: calculateSellerNetSheet(buildCalculationInput(state)),
+        phase: "unlocked",
+        error: "",
+      },
+    };
+  } catch {
+    return { ok: false, state: preserveLockedSellerState(state, SELLER_COSTS_UNAVAILABLE_MESSAGE) };
+  }
+}
+
 export function wireSellerWorkspace(root, {
   fixture = {},
   costRegistry = {},
   isLoggedIn = false,
   primaryTags = [],
-  openAccount = async () => ({ status: "completed" }),
+  openAccount = async () => ({ status: "unavailable" }),
   track = () => {},
 } = {}) {
   if (!root) return { destroy() {} };
@@ -533,23 +579,14 @@ export function wireSellerWorkspace(root, {
     state.accountPending = true;
     state.error = "";
     redraw("[data-seller-account]");
-    try {
-      const completion = await openAccount({
-        mode: state.isLoggedIn ? "open" : "create",
-        intent: "seller-net-sheet",
-      });
-      if (completion?.status !== "completed") throw new Error("Account handoff did not complete");
-      state.analysisUnlocked = true;
-      state.netSheet = calculateSellerNetSheet(buildCalculationInput(state));
-      state.phase = "unlocked";
-      state.accountPending = false;
+    const transition = await transitionSellerAccountUnlock(state, { openAccount });
+    Object.assign(state, transition.state);
+    if (transition.ok) {
       redraw("[data-seller-net-sheet]");
       emit("seller_analysis_unlocked", { step: "account", status: "completed" });
-    } catch {
-      state.accountPending = false;
-      state.error = "Your seller analysis is still here. Try opening your account again.";
-      redraw("[data-seller-account]");
+      return;
     }
+    redraw("[data-seller-account]");
   };
 
   const handleClick = (event) => {

@@ -4,7 +4,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { renderSellerWorkspace, transitionSellerObligations } from "./seller-workspace-ui.mjs";
+import {
+  renderSellerWorkspace,
+  transitionSellerAccountUnlock,
+  transitionSellerObligations,
+} from "./seller-workspace-ui.mjs";
+import {
+  normalizeSellerObligations,
+  resolveSellerCostRows,
+  selectSellerValue,
+} from "./seller-workspace.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const fixture = JSON.parse(fs.readFileSync(path.join(siteDir, "..", "mock-data", "seller-workspace-fixtures.json"), "utf8"));
@@ -19,6 +28,28 @@ const page = {
   name: "Sell a Home",
   updatedAt: "2026-07-16",
 };
+
+function lockedSellerState({ costRows } = {}) {
+  const address = fixture.addressSuggestions[0];
+  return {
+    phase: "locked",
+    address,
+    valueRange: selectSellerValue(fixture.valuations[address.id]),
+    obligations: normalizeSellerObligations({
+      firstMortgageCents: fixture.statementExtraction.suggestedPayoffCents,
+      secondMortgageHelocCents: 0,
+      otherLiensCents: 0,
+    }),
+    expectedClosingDate: "2026-08-15",
+    costRows: costRows ?? resolveSellerCostRows(costRegistry, address),
+    activeOptionalIds: [],
+    overrides: {},
+    analysisUnlocked: false,
+    accountPending: false,
+    netSheet: null,
+    error: "",
+  };
+}
 
 test("seller entry renders an address-first CTA and crawlable seller guidance", () => {
   const html = renderSellerWorkspace(page, fixture);
@@ -134,14 +165,90 @@ test("unlocked preview alone contains the net sheet", () => {
   assert.match(unlocked, /data-seller-projected-result/);
 });
 
-test("account handoff awaits completion before calculating the seller net sheet", () => {
-  const source = fs.readFileSync(path.join(siteDir, "seller-workspace-ui.mjs"), "utf8");
+test("completed account handoff unlocks the seller analysis with resolved cost rows", async () => {
+  const requests = [];
+  const result = await transitionSellerAccountUnlock(lockedSellerState(), {
+    openAccount: async (request) => {
+      requests.push(request);
+      return { status: "completed" };
+    },
+  });
 
-  assert.match(source, /const completion = await openAccount\(\{[\s\S]*?intent:\s*"seller-net-sheet"[\s\S]*?\}\);/);
-  assert.match(source, /completion\?\.status !== "completed"/);
-  assert.match(source, /state\.analysisUnlocked = true;[\s\S]*?state\.netSheet = calculateSellerNetSheet\(/);
-  assert.match(source, /Your seller analysis is still here\. Try opening your account again\./);
-  assert.doesNotMatch(source, /track\([^\n]*(?:address|payoff|proceeds|cost|value)/i);
+  assert.deepEqual(requests, [{ mode: "create", intent: "seller-net-sheet" }]);
+  assert.equal(result.ok, true);
+  assert.equal(result.state.phase, "unlocked");
+  assert.equal(result.state.analysisUnlocked, true);
+  assert.equal(result.state.error, "");
+  assert.equal(result.state.netSheet.totalSellingExpensesCents > 0, true);
+  assert.equal(result.state.netSheet.projected.amountCents > 0, true);
+});
+
+test("rejected account handoff preserves the locked seller inputs", async () => {
+  const state = lockedSellerState();
+  const result = await transitionSellerAccountUnlock(state, {
+    openAccount: async () => {
+      throw new Error("Account service unavailable");
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.state.phase, "locked");
+  assert.equal(result.state.analysisUnlocked, false);
+  assert.equal(result.state.netSheet, null);
+  assert.equal(result.state.error, "Your seller analysis is still here. Try opening your account again.");
+  assert.equal(result.state.address, state.address);
+  assert.equal(result.state.valueRange, state.valueRange);
+  assert.equal(result.state.obligations, state.obligations);
+  assert.equal(result.state.expectedClosingDate, state.expectedClosingDate);
+  assert.equal(result.state.costRows, state.costRows);
+});
+
+test("non-completed account handoff preserves the locked seller inputs", async () => {
+  const state = lockedSellerState();
+  const result = await transitionSellerAccountUnlock(state, {
+    openAccount: async () => ({ status: "cancelled" }),
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.state.phase, "locked");
+  assert.equal(result.state.analysisUnlocked, false);
+  assert.equal(result.state.netSheet, null);
+  assert.equal(result.state.error, "Your seller analysis is still here. Try opening your account again.");
+  assert.equal(result.state.address, state.address);
+  assert.equal(result.state.valueRange, state.valueRange);
+  assert.equal(result.state.obligations, state.obligations);
+});
+
+test("empty seller cost registry refuses the account unlock before calculation", async () => {
+  let accountOpened = false;
+  const state = lockedSellerState({ costRows: [] });
+  const result = await transitionSellerAccountUnlock(state, {
+    openAccount: async () => {
+      accountOpened = true;
+      return { status: "completed" };
+    },
+  });
+
+  assert.equal(accountOpened, false);
+  assert.equal(result.ok, false);
+  assert.equal(result.state.phase, "locked");
+  assert.equal(result.state.analysisUnlocked, false);
+  assert.equal(result.state.netSheet, null);
+  assert.equal(result.state.error, "Your seller cost details are unavailable right now. Try again soon.");
+  assert.equal(result.state.address, state.address);
+  assert.equal(result.state.valueRange, state.valueRange);
+  assert.equal(result.state.obligations, state.obligations);
+  assert.equal(result.state.expectedClosingDate, state.expectedClosingDate);
+});
+
+test("default account handoff is unavailable and does not unlock seller analysis", async () => {
+  const result = await transitionSellerAccountUnlock(lockedSellerState());
+
+  assert.equal(result.ok, false);
+  assert.equal(result.state.phase, "locked");
+  assert.equal(result.state.analysisUnlocked, false);
+  assert.equal(result.state.netSheet, null);
+  assert.equal(result.state.error, "Your seller analysis is still here. Try opening your account again.");
 });
 
 test("obligation transition locks explicit zero balances without calculating a net sheet", () => {
