@@ -159,8 +159,10 @@ test("locked seller analysis exposes entered details but no calculated costs or 
   ]);
   const calculatedAmounts = [...new Set([
     ...unlockedState.netSheet.groups.sellingExpenses.map((row) => row.amountCents),
+    ...unlockedState.netSheet.groups.obligations.map((row) => row.amountCents),
     unlockedState.netSheet.totalSellingExpensesCents,
     unlockedState.netSheet.netBeforeObligationsCents,
+    unlockedState.netSheet.totalObligationsCents,
     unlockedState.netSheet.projected.amountCents,
     unlockedState.netSheet.scenarios.low.amountCents,
     unlockedState.netSheet.scenarios.high.amountCents,
@@ -168,6 +170,8 @@ test("locked seller analysis exposes entered details but no calculated costs or 
     .filter((amountCents) => amountCents > 0 && !enteredAmounts.has(amountCents))
     .map(formatSellerCurrency);
 
+  assert.equal(calculatedAmounts.includes("$1,072.60"), true);
+  assert.equal(calculatedAmounts.includes("$419,072.60"), true);
   assert.equal(calculatedAmounts.length >= 8, true);
   for (const amount of calculatedAmounts) {
     assert.equal(unlockedHtml.includes(amount), true, `${amount} must be a fixture-calculated unlocked amount`);
