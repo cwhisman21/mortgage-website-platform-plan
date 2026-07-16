@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { renderSellerWorkspace } from "./seller-workspace-ui.mjs";
+import { renderSellerWorkspace, transitionSellerObligations } from "./seller-workspace-ui.mjs";
 
 const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const fixture = JSON.parse(fs.readFileSync(path.join(siteDir, "..", "mock-data", "seller-workspace-fixtures.json"), "utf8"));
@@ -73,6 +73,15 @@ test("missing valuation copy asks for another address", () => {
   assert.doesNotMatch(source, /Enter your own value to continue/i);
 });
 
+test("seller FAQ preserves the property value while reserving detailed analysis for Snap Homes", () => {
+  const source = fs.readFileSync(path.join(siteDir, "seller-workspace-ui.mjs"), "utf8");
+
+  assert.match(source, /Property value remains visible/i);
+  assert.match(source, /Detailed selling costs and projected proceeds open through Snap Homes/i);
+  assert.doesNotMatch(source, /The complete estimate remains visible/i);
+  assert.doesNotMatch(source, /Snap Homes account actions appear afterward/i);
+});
+
 test("locked preview confirms property and obligations without a public result", () => {
   const html = renderSellerWorkspace(page, fixture, { preview: "locked", costRegistry });
 
@@ -82,6 +91,36 @@ test("locked preview confirms property and obligations without a public result",
   assert.match(html, /First mortgage payoff/);
   assert.match(html, /Expected closing date/);
   assert.doesNotMatch(html, /data-seller-results|Estimated proceeds statement|data-seller-net-sheet|data-seller-projected-result/);
+});
+
+test("obligation transition locks explicit zero balances without calculating a net sheet", () => {
+  const previousState = {
+    phase: "entry",
+    modalOpen: true,
+    statement: { fileName: "payoff.pdf", suggestedPayoffCents: 41_800_000 },
+    analysisUnlocked: true,
+    netSheet: { projected: { amountCents: 1 } },
+  };
+  const transition = transitionSellerObligations(previousState, {
+    firstMortgage: "0",
+    secondMortgageHeloc: "0",
+    otherLiens: "0",
+    expectedClosingDate: "2026-08-15",
+  });
+
+  assert.equal(transition.ok, true);
+  assert.equal(previousState.statement.fileName, "payoff.pdf");
+  assert.deepEqual(transition.state.obligations, {
+    firstMortgageCents: 0,
+    secondMortgageHelocCents: 0,
+    otherLiensCents: 0,
+  });
+  assert.equal(transition.state.statement, null);
+  assert.equal(transition.state.phase, "locked");
+  assert.equal(transition.state.analysisUnlocked, false);
+  assert.equal(transition.state.netSheet, null);
+  assert.equal(transition.state.modalOpen, false);
+  assert.equal(transition.state.expectedClosingDate, "2026-08-15");
 });
 
 test("seller UI source does not persist private seller inputs", () => {
@@ -102,6 +141,7 @@ test("seller stylesheet contains responsive modal and reduced-motion protections
   assert.match(css, /min-height:\s*44px/);
   assert.match(css, /\.seller-range-field input\[type="range"\]/);
   assert.match(css, /\.seller-range-field input\[type="range"\]::-webkit-slider-thumb/);
+  assert.match(css, /\.seller-range-field input\[type="range"\]::-moz-range-thumb\s*\{[\s\S]*width:\s*(?:4[4-9]|[5-9]\d|\d{3,})px;[\s\S]*height:\s*(?:4[4-9]|[5-9]\d|\d{3,})px/);
   assert.match(css, /\.seller-value-endpoints\s*\{\s*display:\s*grid/);
   assert.match(css, /\.seller-locked-summary/);
   assert.match(css, /\.seller-result-workspace,[\s\S]*\.seller-pro-forma-row > div\s*\{\s*min-width:\s*0/);

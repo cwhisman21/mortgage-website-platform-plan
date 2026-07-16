@@ -80,7 +80,7 @@ function sellerFaq() {
     ["Is the estimated home value an appraisal?", "No. Use an online estimate as a starting point, then compare it with property condition, recent comparable sales, and current market evidence."],
     ["Why can my mortgage payoff differ from my loan balance?", "A payoff can include daily interest and other amounts through a requested payoff date. Confirm the current payoff before relying on estimated proceeds."],
     ["How are selling-cost assumptions selected?", "The tool starts with editable assumptions associated with the property's state when available and uses a national starting point otherwise."],
-    ["Can I see the estimate without creating an account?", "Yes. The complete estimate remains visible. Snap Homes account actions appear afterward so you can choose whether to continue."],
+    ["Can I see the property value before creating an account?", "Yes. Property value remains visible after you select an address. Detailed selling costs and projected proceeds open through Snap Homes."],
   ];
   return `<div class="faq-list seller-faq">${items.map(([question, answer]) => `
     <details>
@@ -317,6 +317,47 @@ function isValidExpectedCloseDate(value) {
     && date.getDate() === Number(match[3]);
 }
 
+export function transitionSellerObligations(state, input = {}) {
+  const firstMortgageCents = dollarsToCents(input.firstMortgage);
+  const secondMortgageHelocCents = dollarsToCents(input.secondMortgageHeloc);
+  const otherLiensCents = dollarsToCents(input.otherLiens);
+  const expectedClosingDate = String(input.expectedClosingDate || "");
+  let obligations;
+  try {
+    obligations = normalizeSellerObligations({ firstMortgageCents, secondMortgageHelocCents, otherLiensCents });
+  } catch {
+    return {
+      ok: false,
+      error: "Enter each known payoff or lien amount. Use 0 when a balance does not apply.",
+      focusSelector: "[data-seller-obligations-form] input[name='firstMortgage']",
+    };
+  }
+  if (!isValidExpectedCloseDate(expectedClosingDate)) {
+    return {
+      ok: false,
+      error: "Enter a valid expected closing date.",
+      focusSelector: "[data-seller-obligations-form] input[name='expectedClosingDate']",
+    };
+  }
+  return {
+    ok: true,
+    state: {
+      ...state,
+      obligations,
+      firstMortgageInput: (obligations.firstMortgageCents / 100).toFixed(2),
+      secondMortgageHelocInput: (obligations.secondMortgageHelocCents / 100).toFixed(2),
+      otherLiensInput: (obligations.otherLiensCents / 100).toFixed(2),
+      expectedClosingDate,
+      phase: "locked",
+      analysisUnlocked: false,
+      netSheet: null,
+      modalOpen: false,
+      statement: null,
+      error: "",
+    },
+  };
+}
+
 export function wireSellerWorkspace(root, {
   fixture = {},
   costRegistry = {},
@@ -403,34 +444,18 @@ export function wireSellerWorkspace(root, {
     emit("seller_flow_advanced", { step: "obligations" });
   };
   const confirmObligations = (formValues) => {
-    const firstMortgageCents = dollarsToCents(formValues.get("firstMortgage"));
-    const secondMortgageHelocCents = dollarsToCents(formValues.get("secondMortgageHeloc"));
-    const otherLiensCents = dollarsToCents(formValues.get("otherLiens"));
-    const expectedClosingDate = String(formValues.get("expectedClosingDate") || "");
-    let obligations;
-    try {
-      obligations = normalizeSellerObligations({ firstMortgageCents, secondMortgageHelocCents, otherLiensCents });
-    } catch {
-      state.error = "Enter each known payoff or lien amount. Use 0 when a balance does not apply.";
-      redraw("[data-seller-obligations-form] input[name='firstMortgage']");
+    const transition = transitionSellerObligations(state, {
+      firstMortgage: formValues.get("firstMortgage"),
+      secondMortgageHeloc: formValues.get("secondMortgageHeloc"),
+      otherLiens: formValues.get("otherLiens"),
+      expectedClosingDate: formValues.get("expectedClosingDate"),
+    });
+    if (!transition.ok) {
+      state.error = transition.error;
+      redraw(transition.focusSelector);
       return;
     }
-    if (!isValidExpectedCloseDate(expectedClosingDate)) {
-      state.error = "Enter a valid expected closing date.";
-      redraw("[data-seller-obligations-form] input[name='expectedClosingDate']");
-      return;
-    }
-    state.obligations = obligations;
-    state.firstMortgageInput = (obligations.firstMortgageCents / 100).toFixed(2);
-    state.secondMortgageHelocInput = (obligations.secondMortgageHelocCents / 100).toFixed(2);
-    state.otherLiensInput = (obligations.otherLiensCents / 100).toFixed(2);
-    state.expectedClosingDate = expectedClosingDate;
-    state.phase = "locked";
-    state.analysisUnlocked = false;
-    state.netSheet = null;
-    state.modalOpen = false;
-    state.error = "";
-    clearFileReference();
+    Object.assign(state, transition.state);
     redraw();
     requestAnimationFrame(() => root.querySelector("[data-seller-locked-summary]")?.focus());
     emit("seller_flow_completed", { step: "locked", status: "confirmed" });

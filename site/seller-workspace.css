@@ -717,8 +717,8 @@
 }
 
 .seller-range-field input[type="range"]::-moz-range-thumb {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border: 3px solid #fff;
   border-radius: 50%;
   background: var(--snap-blue);
