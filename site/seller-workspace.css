@@ -256,6 +256,80 @@
   text-align: right;
 }
 
+.seller-locked-account {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 28px;
+  border-radius: var(--radius);
+  background: var(--snap-navy);
+  color: #fff;
+}
+
+.seller-locked-account .eyebrow {
+  color: var(--snap-teal);
+}
+
+.seller-locked-account h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.seller-locked-account p {
+  margin: 0;
+  color: #dce8fb;
+}
+
+.seller-locked-categories {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.seller-locked-categories div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(220, 232, 251, 0.28);
+}
+
+.seller-locked-categories div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.seller-locked-categories dt {
+  font-weight: 800;
+}
+
+.seller-locked-categories dd {
+  margin: 0;
+  color: #dce8fb;
+  font-size: 14px;
+  text-align: right;
+}
+
+.seller-account-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.seller-account-error {
+  max-width: 240px;
+  color: #ffd6db !important;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.seller-account-error[hidden] {
+  display: none;
+}
+
 .seller-result-heading {
   display: flex;
   align-items: end;
@@ -801,7 +875,8 @@
 @media (max-width: 1040px) {
   .seller-entry-hero,
   .seller-result-workspace,
-  .seller-locked-grid {
+  .seller-locked-grid,
+  .seller-locked-account {
     grid-template-columns: 1fr;
   }
 
@@ -857,6 +932,9 @@
   .seller-locked-grid { padding: 12px; }
   .seller-selected-value,
   .seller-obligation-confirmation { padding: 20px; }
+  .seller-locked-account { padding: 20px; }
+  .seller-locked-categories div { align-items: start; flex-direction: column; gap: 4px; }
+  .seller-locked-categories dd { text-align: left; }
   .seller-selected-value > strong { font-size: clamp(42px, 14vw, 52px); }
   .seller-obligation-confirmation dl div { align-items: start; flex-direction: column; gap: 4px; }
   .seller-obligation-confirmation dd { text-align: left; }

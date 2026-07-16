@@ -1,4 +1,5 @@
 import {
+  calculateSellerNetSheet,
   createFixtureSellerAdapters,
   defaultExpectedCloseDate,
   formatSellerCurrency,
@@ -172,6 +173,7 @@ function renderEntry(primaryTags = []) {
 
 function renderLockedSummary(state) {
   const { valueRange, obligations } = state;
+  const accountLabel = state.isLoggedIn ? "Open My Account" : "Create My Account";
   return `
     <section class="seller-locked-summary" data-seller-locked-summary tabindex="-1" aria-labelledby="seller-locked-summary-title">
       <div class="seller-locked-heading">
@@ -193,6 +195,49 @@ function renderLockedSummary(state) {
             <div><dt>Other liens</dt><dd>${esc(formatSellerCurrency(obligations.otherLiensCents))}</dd></div>
             <div><dt>Expected closing date</dt><dd>${esc(state.expectedClosingDate)}</dd></div>
           </dl>
+        </section>
+      </div>
+      <section class="seller-locked-account" data-seller-account aria-labelledby="seller-locked-account-title">
+        <div>
+          <p class="eyebrow">Seller analysis</p>
+          <h2 id="seller-locked-account-title">Open the details in Snap Homes.</h2>
+          <p>Your seller analysis includes the cost categories and proceeds view below.</p>
+        </div>
+        <dl class="seller-locked-categories">
+          <div><dt>Selling expenses</dt><dd>Available in your seller analysis</dd></div>
+          <div><dt>Existing obligations</dt><dd>Available in your seller analysis</dd></div>
+          <div><dt>Projected proceeds</dt><dd>Available in your seller analysis</dd></div>
+        </dl>
+        <div class="seller-account-actions">
+          <button class="button" type="button" data-seller-open-account${state.accountPending ? " disabled" : ""}>${esc(state.accountPending ? "Opening account..." : accountLabel)}</button>
+          <p class="seller-account-error" data-seller-account-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+        </div>
+      </section>
+    </section>
+    ${sellerEducation()}`;
+}
+
+function renderUnlockedAnalysis(state) {
+  const projected = state.netSheet?.projected;
+  const projectedLabel = projected?.kind === "shortfall" ? "Projected shortfall" : "Projected net proceeds";
+  return `
+    <section class="seller-results" data-seller-net-sheet tabindex="-1" aria-labelledby="seller-net-sheet-title">
+      <div class="seller-result-heading">
+        <div>
+          <p class="eyebrow">Seller analysis</p>
+          <h1 id="seller-net-sheet-title">Your seller analysis is ready.</h1>
+          <p>${esc(state.address.displayAddress)}</p>
+        </div>
+      </div>
+      <div class="seller-result-workspace">
+        <section class="seller-result-summary" data-seller-projected-result aria-labelledby="seller-projected-result-title">
+          <p class="eyebrow">${esc(projectedLabel)}</p>
+          <strong class="seller-base-result" id="seller-projected-result-title">${esc(formatSellerCurrency(projected?.amountCents || 0))}</strong>
+          <p>Based on your selected property value of ${esc(formatSellerCurrency(state.valueRange.selectedCents))}.</p>
+        </section>
+        <section class="seller-pro-forma" aria-labelledby="seller-unlocked-summary-title">
+          <h2 id="seller-unlocked-summary-title">Seller net sheet</h2>
+          <p>Detailed selling expenses, obligations, editing controls, and download are added in the next workspace release.</p>
         </section>
       </div>
     </section>
@@ -268,7 +313,7 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
   const previewState = ["value", "obligations", "locked", "unlocked"].includes(preview)
     ? firstPreviewState(fixture, costRegistry)
     : null;
-  return {
+  const state = {
     phase: preview === "unlocked" ? "unlocked" : preview === "locked" ? "locked" : "entry",
     modalOpen: ["value", "obligations"].includes(preview),
     dialogStep: preview === "obligations" ? "obligations" : preview === "value" ? "value" : "address",
@@ -284,18 +329,41 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
     otherLiensInput: previewState ? (previewState.obligations.otherLiensCents / 100).toFixed(2) : "",
     expectedClosingDate: previewState?.expectedClosingDate || "",
     costRows: previewState?.costRows || [],
+    activeOptionalIds: [],
+    overrides: {},
     netSheet: null,
-    analysisUnlocked: false,
+    analysisUnlocked: preview === "unlocked",
+    accountPending: false,
     statement: null,
     error: "",
     status: "",
     isLoggedIn: Boolean(isLoggedIn),
     primaryTags,
   };
+  if (preview === "unlocked" && previewState) {
+    state.netSheet = calculateSellerNetSheet(buildCalculationInput(state));
+  }
+  return state;
 }
 
 function renderInner(state) {
-  return `${state.phase === "entry" ? renderEntry(state.primaryTags) : renderLockedSummary(state)}${renderDialog(state)}`;
+  const content = state.phase === "entry"
+    ? renderEntry(state.primaryTags)
+    : state.phase === "unlocked"
+      ? renderUnlockedAnalysis(state)
+      : renderLockedSummary(state);
+  return `${content}${renderDialog(state)}`;
+}
+
+function buildCalculationInput(state) {
+  return {
+    valueRange: state.valueRange,
+    obligations: state.obligations,
+    expectedClosingDate: state.expectedClosingDate,
+    costRows: state.costRows,
+    activeOptionalIds: state.activeOptionalIds,
+    overrides: state.overrides,
+  };
 }
 
 export function renderSellerWorkspace(page = {}, fixture = {}, options = {}) {
@@ -363,6 +431,7 @@ export function wireSellerWorkspace(root, {
   costRegistry = {},
   isLoggedIn = false,
   primaryTags = [],
+  openAccount = async () => ({ status: "completed" }),
   track = () => {},
 } = {}) {
   if (!root) return { destroy() {} };
@@ -460,6 +529,28 @@ export function wireSellerWorkspace(root, {
     requestAnimationFrame(() => root.querySelector("[data-seller-locked-summary]")?.focus());
     emit("seller_flow_completed", { step: "locked", status: "confirmed" });
   };
+  const unlockSellerAnalysis = async () => {
+    state.accountPending = true;
+    state.error = "";
+    redraw("[data-seller-account]");
+    try {
+      const completion = await openAccount({
+        mode: state.isLoggedIn ? "open" : "create",
+        intent: "seller-net-sheet",
+      });
+      if (completion?.status !== "completed") throw new Error("Account handoff did not complete");
+      state.analysisUnlocked = true;
+      state.netSheet = calculateSellerNetSheet(buildCalculationInput(state));
+      state.phase = "unlocked";
+      state.accountPending = false;
+      redraw("[data-seller-net-sheet]");
+      emit("seller_analysis_unlocked", { step: "account", status: "completed" });
+    } catch {
+      state.accountPending = false;
+      state.error = "Your seller analysis is still here. Try opening your account again.";
+      redraw("[data-seller-account]");
+    }
+  };
 
   const handleClick = (event) => {
     const target = event.target.closest("button, [data-seller-open-address]");
@@ -468,6 +559,7 @@ export function wireSellerWorkspace(root, {
     else if (target.matches("[data-seller-dialog-close]")) closeDialog();
     else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
     else if (target.matches("[data-seller-use-value]")) useSelectedValue();
+    else if (target.matches("[data-seller-open-account]")) void unlockSellerAnalysis();
     else if (target.matches("[data-seller-dialog-back]")) {
       state.dialogStep = state.dialogStep === "obligations" ? "value" : "address";
       state.error = "";

@@ -93,6 +93,57 @@ test("locked preview confirms property and obligations without a public result",
   assert.doesNotMatch(html, /data-seller-results|Estimated proceeds statement|data-seller-net-sheet|data-seller-projected-result/);
 });
 
+test("locked seller analysis exposes entered details but no calculated costs or proceeds", () => {
+  const html = renderSellerWorkspace(page, fixture, {
+    preview: "locked",
+    isLoggedIn: false,
+    costRegistry,
+  });
+
+  assert.match(html, /data-seller-locked-summary/);
+  assert.match(html, /1842 Harbor View Drive, San Diego, CA 92109/);
+  assert.match(html, /\$725,000/);
+  assert.match(html, /First mortgage payoff/);
+  assert.match(html, /Selling expenses/);
+  assert.match(html, /Existing obligations/);
+  assert.match(html, /Projected proceeds/);
+  assert.match(html, /Available in your seller analysis/);
+  assert.match(html, /data-seller-account/);
+  assert.match(html, />Create My Account</);
+  assert.doesNotMatch(html, /data-seller-net-sheet|data-seller-projected-result|data-seller-download/);
+  assert.doesNotMatch(html, /filter:\s*blur|aria-hidden="true"[^>]*data-seller-cost/);
+});
+
+test("logged-in locked state uses the account action", () => {
+  const html = renderSellerWorkspace(page, fixture, {
+    preview: "locked",
+    isLoggedIn: true,
+    costRegistry,
+  });
+
+  assert.match(html, />Open My Account</);
+  assert.doesNotMatch(html, />Create My Account</);
+});
+
+test("unlocked preview alone contains the net sheet", () => {
+  const locked = renderSellerWorkspace(page, fixture, { preview: "locked", costRegistry });
+  const unlocked = renderSellerWorkspace(page, fixture, { preview: "unlocked", costRegistry });
+
+  assert.doesNotMatch(locked, /data-seller-net-sheet/);
+  assert.match(unlocked, /data-seller-net-sheet/);
+  assert.match(unlocked, /data-seller-projected-result/);
+});
+
+test("account handoff awaits completion before calculating the seller net sheet", () => {
+  const source = fs.readFileSync(path.join(siteDir, "seller-workspace-ui.mjs"), "utf8");
+
+  assert.match(source, /const completion = await openAccount\(\{[\s\S]*?intent:\s*"seller-net-sheet"[\s\S]*?\}\);/);
+  assert.match(source, /completion\?\.status !== "completed"/);
+  assert.match(source, /state\.analysisUnlocked = true;[\s\S]*?state\.netSheet = calculateSellerNetSheet\(/);
+  assert.match(source, /Your seller analysis is still here\. Try opening your account again\./);
+  assert.doesNotMatch(source, /track\([^\n]*(?:address|payoff|proceeds|cost|value)/i);
+});
+
 test("obligation transition locks explicit zero balances without calculating a net sheet", () => {
   const previousState = {
     phase: "entry",
