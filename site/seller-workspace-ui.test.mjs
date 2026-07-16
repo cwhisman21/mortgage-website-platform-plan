@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
+  reduceSellerNetSheetInteraction,
   renderSellerNetSheet,
   renderSellerWorkspace,
   transitionSellerAccountUnlock,
@@ -145,24 +146,45 @@ test("locked preview confirms property and obligations without a public result",
 });
 
 test("locked seller analysis exposes entered details but no calculated costs or proceeds", () => {
-  const html = renderSellerWorkspace(page, fixture, {
+  const lockedHtml = renderSellerWorkspace(page, fixture, {
     preview: "locked",
     isLoggedIn: false,
     costRegistry,
   });
+  const unlockedState = unlockedSellerState();
+  const unlockedHtml = renderSellerNetSheet(unlockedState);
+  const enteredAmounts = new Set([
+    unlockedState.valueRange.selectedCents,
+    ...Object.values(unlockedState.obligations),
+  ]);
+  const calculatedAmounts = [...new Set([
+    ...unlockedState.netSheet.groups.sellingExpenses.map((row) => row.amountCents),
+    unlockedState.netSheet.totalSellingExpensesCents,
+    unlockedState.netSheet.netBeforeObligationsCents,
+    unlockedState.netSheet.projected.amountCents,
+    unlockedState.netSheet.scenarios.low.amountCents,
+    unlockedState.netSheet.scenarios.high.amountCents,
+  ])]
+    .filter((amountCents) => amountCents > 0 && !enteredAmounts.has(amountCents))
+    .map(formatSellerCurrency);
 
-  assert.match(html, /data-seller-locked-summary/);
-  assert.match(html, /1842 Harbor View Drive, San Diego, CA 92109/);
-  assert.match(html, /\$725,000/);
-  assert.match(html, /First mortgage payoff/);
-  assert.match(html, /Selling expenses/);
-  assert.match(html, /Existing obligations/);
-  assert.match(html, /Projected proceeds/);
-  assert.match(html, /Available in your seller analysis/);
-  assert.match(html, /data-seller-account/);
-  assert.match(html, />Create My Account</);
-  assert.doesNotMatch(html, /data-seller-net-sheet|data-seller-projected-result|data-seller-download/);
-  assert.doesNotMatch(html, /filter:\s*blur|aria-hidden="true"[^>]*data-seller-cost/);
+  assert.equal(calculatedAmounts.length >= 8, true);
+  for (const amount of calculatedAmounts) {
+    assert.equal(unlockedHtml.includes(amount), true, `${amount} must be a fixture-calculated unlocked amount`);
+    assert.equal(lockedHtml.includes(amount), false, `${amount} leaked into locked HTML`);
+  }
+  assert.match(lockedHtml, /data-seller-locked-summary/);
+  assert.match(lockedHtml, /1842 Harbor View Drive, San Diego, CA 92109/);
+  assert.match(lockedHtml, /\$725,000/);
+  assert.match(lockedHtml, /First mortgage payoff/);
+  assert.match(lockedHtml, /Selling expenses/);
+  assert.match(lockedHtml, /Existing obligations/);
+  assert.match(lockedHtml, /Projected proceeds/);
+  assert.match(lockedHtml, /Available in your seller analysis/);
+  assert.match(lockedHtml, /data-seller-account/);
+  assert.match(lockedHtml, />Create My Account</);
+  assert.doesNotMatch(lockedHtml, /data-seller-net-sheet|data-seller-projected-result|data-seller-download/);
+  assert.doesNotMatch(lockedHtml, /filter:\s*blur|aria-hidden="true"[^>]*data-seller-cost/);
 });
 
 test("logged-in locked state uses the account action", () => {
@@ -288,14 +310,118 @@ test("rendered result changes to projected shortfall when obligations exceed val
   assert.doesNotMatch(html, /Projected net proceeds/);
 });
 
-test("the live controller routes edits optional rows and reset through production helpers", () => {
-  const source = fs.readFileSync(path.join(siteDir, "seller-workspace-ui.mjs"), "utf8");
+test("edit actions switch the single active editor and request input focus", () => {
+  const original = { ...unlockedSellerState(), editingRowId: "listingCompensation" };
+  const result = reduceSellerNetSheetInteraction(original, {
+    type: "action",
+    action: "start-edit",
+    rowId: "buyerClosingCostCredit",
+  });
 
-  assert.match(source, /Object\.assign\(state, applySellerRowEdit\(state,/);
-  assert.match(source, /Object\.assign\(state, setSellerOptionalRow\(state,/);
-  assert.match(source, /Object\.assign\(state, resetSellerAssumptions\(state\)\)/);
-  assert.match(source, /if \(state\.editingRowId\)[\s\S]*data-seller-cancel-edit/);
-  assert.match(source, /event\.key === "Enter"[\s\S]*applyInlineEdit\(form, new FormData\(form\)\)/);
+  assert.equal(result.handled, true);
+  assert.equal(result.state.editingRowId, "buyerClosingCostCredit");
+  assert.equal(result.state.status, "");
+  assert.deepEqual(result.effect, {
+    type: "redraw",
+    focusSelector: "[data-seller-edit-input]",
+  });
+});
+
+test("Enter applies the active edit through the net-sheet calculation", () => {
+  const original = { ...unlockedSellerState(), editingRowId: "listingCompensation" };
+  const result = reduceSellerNetSheetInteraction(original, {
+    type: "keydown",
+    key: "Enter",
+    edit: {
+      rowId: "listingCompensation",
+      mode: "percent_of_sale_price",
+      rawValue: "3",
+    },
+  });
+
+  assert.equal(result.handled, true);
+  assert.equal(result.preventDefault, true);
+  assert.equal(result.state.editingRowId, "");
+  assert.equal(result.state.status, "Seller net sheet updated.");
+  assert.equal(result.state.overrides.listingCompensation.value, 0.03);
+  assert.equal(
+    result.state.netSheet.groups.sellingExpenses.find((row) => row.id === "listingCompensation").amountCents,
+    2_175_000,
+  );
+  assert.deepEqual(result.effect, {
+    type: "redraw",
+    focusSelector: '[data-seller-edit-row="listingCompensation"]',
+  });
+});
+
+test("Escape cancels the active edit and routes focus back to its Edit button", () => {
+  const original = { ...unlockedSellerState(), editingRowId: "listingCompensation" };
+  const result = reduceSellerNetSheetInteraction(original, {
+    type: "keydown",
+    key: "Escape",
+  });
+
+  assert.equal(result.handled, true);
+  assert.equal(result.preventDefault, true);
+  assert.equal(result.state.editingRowId, "");
+  assert.equal(result.state.status, "Edit cancelled.");
+  assert.deepEqual(result.effect, {
+    type: "redraw",
+    focusSelector: '[data-seller-edit-row="listingCompensation"]',
+  });
+  assert.deepEqual(result.state.overrides, original.overrides);
+});
+
+test("optional-row actions add and remove through their group focus routes", () => {
+  const added = reduceSellerNetSheetInteraction(unlockedSellerState(), {
+    type: "action",
+    action: "add-optional-row",
+    rowId: "homeWarranty",
+  });
+
+  assert.equal(added.state.activeOptionalIds.includes("homeWarranty"), true);
+  assert.equal(added.state.status, "Cost added.");
+  assert.deepEqual(added.effect, {
+    type: "redraw",
+    focusSelector: '[data-seller-edit-row="homeWarranty"]',
+  });
+
+  const removed = reduceSellerNetSheetInteraction(added.state, {
+    type: "action",
+    action: "remove-optional-row",
+    rowId: "homeWarranty",
+  });
+
+  assert.equal(removed.state.activeOptionalIds.includes("homeWarranty"), false);
+  assert.equal(removed.state.status, "Cost removed.");
+  assert.deepEqual(removed.effect, {
+    type: "redraw",
+    focusSelector: '[data-seller-add-cost="sellingExpenses"] summary',
+  });
+});
+
+test("reset action clears editable assumptions and routes focus to reset", () => {
+  const withOptional = setSellerOptionalRow(unlockedSellerState(), "homeWarranty", true);
+  const edited = applySellerRowEdit(withOptional, {
+    rowId: "homeWarranty",
+    mode: "fixed_amount",
+    value: 75_000,
+  });
+  const result = reduceSellerNetSheetInteraction(
+    { ...edited, editingRowId: "homeWarranty" },
+    { type: "action", action: "reset" },
+  );
+
+  assert.deepEqual(result.state.activeOptionalIds, []);
+  assert.deepEqual(result.state.overrides, {});
+  assert.equal(result.state.editingRowId, "");
+  assert.equal(result.state.status, "Seller assumptions reset.");
+  assert.equal(result.state.address, edited.address);
+  assert.equal(result.state.valueRange.selectedCents, edited.valueRange.selectedCents);
+  assert.deepEqual(result.effect, {
+    type: "redraw",
+    focusSelector: "[data-seller-reset-assumptions]",
+  });
 });
 
 function formatForPattern(cents) {

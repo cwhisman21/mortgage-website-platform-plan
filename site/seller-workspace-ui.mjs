@@ -606,6 +606,98 @@ export async function transitionSellerAccountUnlock(state, {
   }
 }
 
+function sellerEditValue({ mode, rawValue } = {}) {
+  if (mode === "percent_of_sale_price" || mode === "sale_price") return Number(rawValue);
+  if (mode === "date") return String(rawValue || "");
+  return dollarsToCents(rawValue);
+}
+
+function sellerInteractionResult(state, focusSelector, { preventDefault = false } = {}) {
+  return {
+    handled: true,
+    preventDefault,
+    state,
+    effect: { type: "redraw", focusSelector },
+  };
+}
+
+export function reduceSellerNetSheetInteraction(state, descriptor = {}) {
+  const isKeydown = descriptor.type === "keydown";
+  const action = descriptor.type === "action" ? descriptor.action : "";
+
+  if ((isKeydown && descriptor.key === "Escape") || action === "cancel-edit") {
+    if (!state.editingRowId) return { handled: false, preventDefault: false, state, effect: null };
+    const rowId = state.editingRowId;
+    return sellerInteractionResult({
+      ...state,
+      editingRowId: "",
+      status: "Edit cancelled.",
+    }, `[data-seller-edit-row="${rowId}"]`, { preventDefault: isKeydown });
+  }
+
+  if ((isKeydown && descriptor.key === "Enter") || action === "apply-edit") {
+    if (!state.editingRowId || !descriptor.edit) {
+      return { handled: false, preventDefault: false, state, effect: null };
+    }
+    const { rowId, mode } = descriptor.edit;
+    try {
+      const edited = applySellerRowEdit(state, {
+        rowId,
+        mode,
+        value: sellerEditValue(descriptor.edit),
+      });
+      return sellerInteractionResult({
+        ...edited,
+        editingRowId: "",
+        status: "Seller net sheet updated.",
+      }, `[data-seller-edit-row="${rowId}"]`, { preventDefault: isKeydown });
+    } catch {
+      return sellerInteractionResult({
+        ...state,
+        status: "Enter a valid value before applying this edit.",
+      }, "[data-seller-edit-input]", { preventDefault: isKeydown });
+    }
+  }
+
+  if (action === "start-edit") {
+    return sellerInteractionResult({
+      ...state,
+      editingRowId: descriptor.rowId,
+      status: "",
+    }, "[data-seller-edit-input]");
+  }
+
+  if (action === "add-optional-row") {
+    const edited = setSellerOptionalRow(state, descriptor.rowId, true);
+    return sellerInteractionResult({
+      ...edited,
+      editingRowId: "",
+      status: "Cost added.",
+    }, `[data-seller-edit-row="${descriptor.rowId}"]`);
+  }
+
+  if (action === "remove-optional-row") {
+    const group = rowDefinition(state, descriptor.rowId)?.group;
+    const edited = setSellerOptionalRow(state, descriptor.rowId, false);
+    return sellerInteractionResult({
+      ...edited,
+      editingRowId: "",
+      status: "Cost removed.",
+    }, `[data-seller-add-cost="${group}"] summary`);
+  }
+
+  if (action === "reset") {
+    const edited = resetSellerAssumptions(state);
+    return sellerInteractionResult({
+      ...edited,
+      editingRowId: "",
+      status: "Seller assumptions reset.",
+    }, "[data-seller-reset-assumptions]");
+  }
+
+  return { handled: false, preventDefault: false, state, effect: null };
+}
+
 export function wireSellerWorkspace(root, {
   fixture = {},
   costRegistry = {},
@@ -722,57 +814,18 @@ export function wireSellerWorkspace(root, {
     }
     redraw("[data-seller-account]");
   };
-  const beginInlineEdit = (rowId) => {
-    state.editingRowId = rowId;
-    state.status = "";
-    redraw("[data-seller-edit-input]");
+  const dispatchNetSheetInteraction = (descriptor) => {
+    const result = reduceSellerNetSheetInteraction(state, descriptor);
+    if (!result.handled) return result;
+    Object.assign(state, result.state);
+    if (result.effect?.type === "redraw") redraw(result.effect.focusSelector);
+    return result;
   };
-  const cancelInlineEdit = () => {
-    const rowId = state.editingRowId;
-    state.editingRowId = "";
-    state.status = "Edit cancelled.";
-    redraw(`[data-seller-edit-row="${rowId}"]`);
-  };
-  const applyInlineEdit = (form, values) => {
-    const rowId = form.dataset.sellerEditRowId;
-    const mode = form.dataset.sellerEditMode;
-    const rawValue = values.get("value");
-    const value = mode === "percent_of_sale_price"
-      ? Number(rawValue)
-      : mode === "date"
-        ? String(rawValue || "")
-        : mode === "sale_price"
-          ? Number(rawValue)
-          : dollarsToCents(rawValue);
-    try {
-      Object.assign(state, applySellerRowEdit(state, { rowId, mode, value }));
-      state.editingRowId = "";
-      state.status = "Seller net sheet updated.";
-      redraw(`[data-seller-edit-row="${rowId}"]`);
-    } catch {
-      state.status = "Enter a valid value before applying this edit.";
-      redraw("[data-seller-edit-input]");
-    }
-  };
-  const addOptionalRow = (rowId) => {
-    Object.assign(state, setSellerOptionalRow(state, rowId, true));
-    state.editingRowId = "";
-    state.status = "Cost added.";
-    redraw(`[data-seller-edit-row="${rowId}"]`);
-  };
-  const removeOptionalRow = (rowId) => {
-    const group = rowDefinition(state, rowId)?.group;
-    Object.assign(state, setSellerOptionalRow(state, rowId, false));
-    state.editingRowId = "";
-    state.status = "Cost removed.";
-    redraw(`[data-seller-add-cost="${group}"] summary`);
-  };
-  const resetNetSheet = () => {
-    Object.assign(state, resetSellerAssumptions(state));
-    state.editingRowId = "";
-    state.status = "Seller assumptions reset.";
-    redraw("[data-seller-reset-assumptions]");
-  };
+  const editDescriptor = (form, values) => ({
+    rowId: form.dataset.sellerEditRowId,
+    mode: form.dataset.sellerEditMode,
+    rawValue: values.get("value"),
+  });
 
   const handleClick = (event) => {
     const target = event.target.closest("button, [data-seller-open-address]");
@@ -782,11 +835,11 @@ export function wireSellerWorkspace(root, {
     else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
     else if (target.matches("[data-seller-use-value]")) useSelectedValue();
     else if (target.matches("[data-seller-open-account]")) void unlockSellerAnalysis();
-    else if (target.matches("[data-seller-edit-row]")) beginInlineEdit(target.dataset.sellerEditRow);
-    else if (target.matches("[data-seller-cancel-edit]")) cancelInlineEdit();
-    else if (target.matches("[data-seller-add-row]")) addOptionalRow(target.dataset.sellerAddRow);
-    else if (target.matches("[data-seller-remove-row]")) removeOptionalRow(target.dataset.sellerRemoveRow);
-    else if (target.matches("[data-seller-reset-assumptions]")) resetNetSheet();
+    else if (target.matches("[data-seller-edit-row]")) dispatchNetSheetInteraction({ type: "action", action: "start-edit", rowId: target.dataset.sellerEditRow });
+    else if (target.matches("[data-seller-cancel-edit]")) dispatchNetSheetInteraction({ type: "action", action: "cancel-edit" });
+    else if (target.matches("[data-seller-add-row]")) dispatchNetSheetInteraction({ type: "action", action: "add-optional-row", rowId: target.dataset.sellerAddRow });
+    else if (target.matches("[data-seller-remove-row]")) dispatchNetSheetInteraction({ type: "action", action: "remove-optional-row", rowId: target.dataset.sellerRemoveRow });
+    else if (target.matches("[data-seller-reset-assumptions]")) dispatchNetSheetInteraction({ type: "action", action: "reset" });
     else if (target.matches("[data-seller-dialog-back]")) {
       state.dialogStep = state.dialogStep === "obligations" ? "value" : "address";
       state.error = "";
@@ -798,7 +851,7 @@ export function wireSellerWorkspace(root, {
     if (!form || !root.contains(form)) return;
     event.preventDefault();
     const values = new FormData(form);
-    if (form.matches("[data-seller-edit-form]")) applyInlineEdit(form, values);
+    if (form.matches("[data-seller-edit-form]")) dispatchNetSheetInteraction({ type: "action", action: "apply-edit", edit: editDescriptor(form, values) });
     else if (form.matches("[data-seller-address-form]")) void findHome();
     else if (form.matches("[data-seller-obligations-form]")) confirmObligations(values);
   };
@@ -857,9 +910,13 @@ export function wireSellerWorkspace(root, {
   const handleKeydown = (event) => {
     const form = event.target.closest("[data-seller-edit-form]");
     if (event.key === "Enter" && state.editingRowId && form) {
-      event.preventDefault();
-      applyInlineEdit(form, new FormData(form));
-      return;
+      const result = dispatchNetSheetInteraction({
+        type: "keydown",
+        key: event.key,
+        edit: editDescriptor(form, new FormData(form)),
+      });
+      if (result.preventDefault) event.preventDefault();
+      if (result.handled) return;
     }
     const input = event.target.closest("[data-seller-address-input]");
     if (input && state.suggestions.length && ["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) {
@@ -873,12 +930,9 @@ export function wireSellerWorkspace(root, {
       return;
     }
     if (event.key === "Escape") {
-      if (state.editingRowId) {
-        event.preventDefault();
-        root.querySelector("[data-seller-cancel-edit]");
-        cancelInlineEdit();
-        return;
-      }
+      const result = dispatchNetSheetInteraction({ type: "keydown", key: event.key });
+      if (result.preventDefault) event.preventDefault();
+      if (result.handled) return;
       if (state.modalOpen) {
         event.preventDefault();
         closeDialog();
