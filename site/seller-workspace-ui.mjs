@@ -11,9 +11,11 @@ import {
   setSellerOptionalRow,
 } from "./seller-workspace.mjs";
 import { renderPrimaryTagLinks } from "./tag-presentation.mjs";
+import { downloadSellerNetSheetPdf } from "./seller-net-sheet-pdf.mjs";
 
 const SELLER_ANALYSIS_RETRY_MESSAGE = "Your seller analysis is still here. Try opening your account again.";
 const SELLER_COSTS_UNAVAILABLE_MESSAGE = "Your seller cost details are unavailable right now. Try again soon.";
+const SELLER_PDF_ERROR_MESSAGE = "The net sheet could not be downloaded. Try again.";
 const SELLER_NET_SHEET_DISCLAIMER = "This seller net sheet is a planning estimate based on the property value, obligations, closing date, and editable cost assumptions shown. Actual charges, payoff amounts, taxes, credits, compensation, and proceeds can change through closing. Compensation is negotiable and is not set by law.";
 const EDIT_INPUT_KIND = Object.freeze({
   percent_of_sale_price: "percent",
@@ -371,6 +373,10 @@ export function renderSellerNetSheet(state) {
           </section>
         </div>
       </div>
+      <div class="seller-download-actions">
+        <button class="button seller-download" type="button" data-seller-download${state.downloadPending ? " disabled aria-busy=\"true\"" : ""}>${state.downloadPending ? "Preparing PDF..." : "Download net sheet"}</button>
+        ${state.downloadError ? `<p class="seller-download-error" data-seller-download-error>${esc(state.downloadError)}</p>` : ""}
+      </div>
       <p class="seller-net-disclaimer">${esc(SELLER_NET_SHEET_DISCLAIMER)}</p>
       <p class="visually-hidden" aria-live="polite" data-seller-net-sheet-status>${esc(state.status)}</p>
     </section>`;
@@ -471,6 +477,8 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
     netSheet: null,
     analysisUnlocked: preview === "unlocked",
     accountPending: false,
+    downloadPending: false,
+    downloadError: "",
     statement: null,
     error: "",
     status: "",
@@ -606,6 +614,53 @@ export async function transitionSellerAccountUnlock(state, {
   }
 }
 
+function localDateString(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+export async function transitionSellerPdfDownload(state, {
+  downloadPdf = downloadSellerNetSheetPdf,
+  generatedDate = localDateString(),
+} = {}) {
+  if (state?.phase !== "unlocked" || !state.analysisUnlocked || !state.netSheet) {
+    return { ok: false, state };
+  }
+
+  const input = {
+    address: state.address.displayAddress,
+    generatedDate,
+    expectedClosingDate: state.expectedClosingDate,
+    valueRange: state.valueRange,
+    netSheet: state.netSheet,
+  };
+
+  try {
+    await downloadPdf(input);
+    return {
+      ok: true,
+      state: {
+        ...state,
+        downloadPending: false,
+        downloadError: "",
+        status: "Seller net sheet downloaded.",
+      },
+    };
+  } catch {
+    return {
+      ok: false,
+      state: {
+        ...state,
+        downloadPending: false,
+        downloadError: SELLER_PDF_ERROR_MESSAGE,
+        status: SELLER_PDF_ERROR_MESSAGE,
+      },
+    };
+  }
+}
+
 function sellerEditValue({ mode, rawValue } = {}) {
   if (mode === "percent_of_sale_price" || mode === "sale_price") return Number(rawValue);
   if (mode === "date") return String(rawValue || "");
@@ -704,6 +759,7 @@ export function wireSellerWorkspace(root, {
   isLoggedIn = false,
   primaryTags = [],
   openAccount = async () => ({ status: "unavailable" }),
+  downloadPdf = downloadSellerNetSheetPdf,
   track = () => {},
 } = {}) {
   if (!root) return { destroy() {} };
@@ -814,6 +870,20 @@ export function wireSellerWorkspace(root, {
     }
     redraw("[data-seller-account]");
   };
+  const downloadSellerAnalysis = async () => {
+    if (state.phase !== "unlocked" || !state.analysisUnlocked || !state.netSheet || state.downloadPending) return;
+    state.downloadPending = true;
+    state.downloadError = "";
+    state.status = "Preparing the seller net sheet PDF.";
+    redraw("[data-seller-download]");
+    const transition = await transitionSellerPdfDownload(state, { downloadPdf });
+    Object.assign(state, transition.state);
+    redraw("[data-seller-download]");
+    emit("seller_net_sheet_downloaded", {
+      step: "unlocked",
+      status: transition.ok ? "completed" : "failed",
+    });
+  };
   const dispatchNetSheetInteraction = (descriptor) => {
     const result = reduceSellerNetSheetInteraction(state, descriptor);
     if (!result.handled) return result;
@@ -835,6 +905,7 @@ export function wireSellerWorkspace(root, {
     else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
     else if (target.matches("[data-seller-use-value]")) useSelectedValue();
     else if (target.matches("[data-seller-open-account]")) void unlockSellerAnalysis();
+    else if (target.matches("[data-seller-download]")) void downloadSellerAnalysis();
     else if (target.matches("[data-seller-edit-row]")) dispatchNetSheetInteraction({ type: "action", action: "start-edit", rowId: target.dataset.sellerEditRow });
     else if (target.matches("[data-seller-cancel-edit]")) dispatchNetSheetInteraction({ type: "action", action: "cancel-edit" });
     else if (target.matches("[data-seller-add-row]")) dispatchNetSheetInteraction({ type: "action", action: "add-optional-row", rowId: target.dataset.sellerAddRow });

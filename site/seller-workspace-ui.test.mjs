@@ -9,6 +9,7 @@ import {
   renderSellerNetSheet,
   renderSellerWorkspace,
   transitionSellerAccountUnlock,
+  transitionSellerPdfDownload,
   transitionSellerObligations,
 } from "./seller-workspace-ui.mjs";
 import {
@@ -209,6 +210,62 @@ test("unlocked preview alone contains the net sheet", () => {
   assert.doesNotMatch(locked, /data-seller-net-sheet/);
   assert.match(unlocked, /data-seller-net-sheet/);
   assert.match(unlocked, /data-seller-projected-result/);
+  assert.match(unlocked, /data-seller-download[^>]*>Download net sheet</);
+  assert.doesNotMatch(locked, /data-seller-download/);
+});
+
+test("PDF action renders a disabled busy state only in the unlocked analysis", () => {
+  const html = renderSellerNetSheet({ ...unlockedSellerState(), downloadPending: true });
+
+  assert.match(html, /data-seller-download[^>]*disabled[^>]*aria-busy="true"[^>]*>Preparing PDF/);
+});
+
+test("PDF download transition passes only the normalized unlocked model and announces success", async () => {
+  const state = unlockedSellerState();
+  let received;
+  const result = await transitionSellerPdfDownload(state, {
+    generatedDate: "2026-07-16",
+    downloadPdf: async (input) => {
+      received = input;
+      return { filename: "seller.pdf" };
+    },
+  });
+
+  assert.deepEqual(Object.keys(received).sort(), ["address", "expectedClosingDate", "generatedDate", "netSheet", "valueRange"]);
+  assert.equal(received.address, state.address.displayAddress);
+  assert.equal(received.generatedDate, "2026-07-16");
+  assert.equal(received.netSheet, state.netSheet);
+  assert.equal(result.ok, true);
+  assert.equal(result.state.downloadPending, false);
+  assert.equal(result.state.downloadError, "");
+  assert.equal(result.state.status, "Seller net sheet downloaded.");
+});
+
+test("PDF download is never invoked while locked", async () => {
+  const state = lockedSellerState();
+  let invoked = false;
+
+  const result = await transitionSellerPdfDownload(state, {
+    downloadPdf: async () => { invoked = true; },
+  });
+
+  assert.equal(invoked, false);
+  assert.equal(result.ok, false);
+  assert.equal(result.state, state);
+});
+
+test("PDF download failure preserves the unlocked analysis and exposes a retry message", async () => {
+  const state = unlockedSellerState();
+  const result = await transitionSellerPdfDownload(state, {
+    downloadPdf: async () => { throw new Error("PDF unavailable"); },
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.state.phase, "unlocked");
+  assert.equal(result.state.netSheet, state.netSheet);
+  assert.equal(result.state.downloadPending, false);
+  assert.equal(result.state.downloadError, "The net sheet could not be downloaded. Try again.");
+  assert.match(renderSellerNetSheet(result.state), /data-seller-download-error[^>]*>The net sheet could not be downloaded\. Try again\.</);
 });
 
 test("unlocked analysis renders the grouped statement totals and one approved disclaimer", () => {
@@ -576,4 +633,7 @@ test("seller stylesheet contains responsive modal and reduced-motion protections
   assert.match(css, /\.seller-inline-edit input[\s\S]*max-width:\s*100%/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.seller-net-row\s*\{[\s\S]*grid-template-columns:\s*1fr/);
   assert.match(css, /\.seller-statement,[\s\S]*\.seller-net-row > \*\s*\{[\s\S]*min-width:\s*0/);
+  assert.match(css, /\.seller-download-actions\s*\{[\s\S]*max-width:\s*900px/);
+  assert.match(css, /\.seller-download-error\s*\{[\s\S]*color:/);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.seller-download\s*\{[\s\S]*width:\s*100%/);
 });

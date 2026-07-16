@@ -762,6 +762,26 @@
   font-size: 21px;
 }
 
+.seller-download-actions {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  max-width: 900px;
+  margin: 32px 0 0 auto;
+}
+
+.seller-download[aria-busy="true"] {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.seller-download-error {
+  margin: 0;
+  color: #8f2030;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .seller-net-disclaimer {
   max-width: 900px;
   margin: 32px 0 0 auto;
@@ -1257,6 +1277,7 @@
   }
   .seller-add-cost > div { grid-template-columns: 1fr; }
   .seller-final-comparison { gap: 10px; }
+  .seller-download { width: 100%; }
 
   .seller-allocation-legend {
     display: grid;
