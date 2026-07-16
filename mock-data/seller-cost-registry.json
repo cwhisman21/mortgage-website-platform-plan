@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-07-16",
+  "defaultRows": [
+    { "id": "sellerTitleEscrowSettlement", "group": "sellingExpenses", "label": "Seller title, escrow, and settlement services", "mode": "percent_of_sale_price", "value": 0.01, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },
+    { "id": "listingCompensation", "group": "sellingExpenses", "label": "Listing-side compensation", "mode": "percent_of_sale_price", "value": 0.025, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable negotiated assumption", "asOf": "2026-07-16" },
+    { "id": "buyerAgentCompensation", "group": "sellingExpenses", "label": "Buyer-agent compensation", "mode": "percent_of_sale_price", "value": 0.025, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable negotiated assumption", "asOf": "2026-07-16" },
+    { "id": "buyerClosingCostCredit", "group": "sellingExpenses", "label": "Buyer closing-cost credit", "mode": "fixed_amount", "value": 0, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },
+    { "id": "inspectionRepairs", "group": "sellingExpenses", "label": "Inspection and negotiated repairs", "mode": "percent_of_sale_price", "value": 0.01, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },
+    { "id": "otherSellerCosts", "group": "sellingExpenses", "label": "Other seller costs", "mode": "fixed_amount", "value": 0, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },
+    { "id": "propertyTaxProration", "group": "obligations", "label": "Property-tax proration", "mode": "prorated_annual", "valueKey": "annualPropertyTaxCents", "periodStartMonthDay": "07-01", "optional": false, "sourceType": "property_fixture", "sourceLabel": "Property tax planning basis", "sourceUrl": "https://www.boe.ca.gov/lawguides/property/current/ptlg/annt/170-0087.html", "asOf": "2026-07-16" }
+  ],
+  "optionalRows": [
+    { "id": "municipalTransferTax", "group": "sellingExpenses", "label": "Municipal transfer tax", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "hoaClosingPackage", "group": "sellingExpenses", "label": "HOA resale or closing package", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "survey", "group": "sellingExpenses", "label": "Survey", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "termitePest", "group": "sellingExpenses", "label": "Termite or pest inspection and repairs", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "fhaVaSellerCosts", "group": "sellingExpenses", "label": "FHA or VA required seller costs", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "homeWarranty", "group": "sellingExpenses", "label": "Home warranty", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "attorneyLegal", "group": "sellingExpenses", "label": "Attorney or legal fees", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "radon", "group": "sellingExpenses", "label": "Radon retest or mitigation", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "wellSeptic", "group": "sellingExpenses", "label": "Well and septic inspection", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "pastDueMortgage", "group": "obligations", "label": "Past-due mortgage or equity-loan payments", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "hoaPastDue", "group": "obligations", "label": "HOA past-due assessments", "mode": "fixed_amount", "value": 0, "optional": true },
+    { "id": "otherObligations", "group": "obligations", "label": "Other obligations", "mode": "fixed_amount", "value": 0, "optional": true }
+  ],
+  "jurisdictions": {
+    "CA:SAN-DIEGO": {
+      "rows": [
+        { "id": "stateCountyTransferTax", "group": "sellingExpenses", "label": "State and county transfer tax", "mode": "statutory_transfer_tax", "incrementCents": 50000, "rateCentsPerIncrement": 55, "taxableBase": "sale_price", "optional": false, "sourceType": "official", "sourceLabel": "San Diego County Recorder documentary transfer tax", "sourceUrl": "https://www.sdarcc.gov/content/arcc/home/divisions/recorder-clerk/recording.html", "asOf": "2026-07-16" }
+      ]
+    }
+  }
+}

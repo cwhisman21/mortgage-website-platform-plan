@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-07-16",
+  "addressSuggestions": [
+    {
+      "id": "property-harbor-view",
+      "displayAddress": "1842 Harbor View Drive, San Diego, CA 92109",
+      "stateCode": "CA",
+      "countyKey": "SAN-DIEGO",
+      "cityKey": "SAN-DIEGO",
+      "annualPropertyTaxCents": 870000,
+      "searchTerms": ["1842 harbor", "harbor view drive", "san diego", "92109"]
+    },
+    {
+      "id": "property-barton-springs",
+      "displayAddress": "915 Barton Springs Road, Austin, TX 78704",
+      "stateCode": "TX",
+      "countyKey": "TRAVIS",
+      "cityKey": "AUSTIN",
+      "annualPropertyTaxCents": 1098000,
+      "searchTerms": ["915 barton", "barton springs road", "austin", "78704"]
+    },
+    {
+      "id": "property-orange-grove",
+      "displayAddress": "402 Orange Grove Avenue, Orlando, FL 32801",
+      "stateCode": "FL",
+      "countyKey": "ORANGE",
+      "cityKey": "ORLANDO",
+      "annualPropertyTaxCents": 624000,
+      "searchTerms": ["402 orange", "orange grove avenue", "orlando", "32801"]
+    }
+  ],
+  "valuations": {
+    "property-harbor-view": {
+      "propertyId": "property-harbor-view",
+      "lowCents": 69500000,
+      "baseCents": 72500000,
+      "highCents": 75500000,
+      "asOf": "2026-07-16",
+      "sourceLabel": "Property value estimate",
+      "methodologyKey": "property.estimated-value"
+    },
+    "property-barton-springs": {
+      "propertyId": "property-barton-springs",
+      "lowCents": 58800000,
+      "baseCents": 61200000,
+      "highCents": 63700000,
+      "asOf": "2026-07-16",
+      "sourceLabel": "Property value estimate",
+      "methodologyKey": "property.estimated-value"
+    },
+    "property-orange-grove": {
+      "propertyId": "property-orange-grove",
+      "lowCents": 42600000,
+      "baseCents": 44800000,
+      "highCents": 47100000,
+      "asOf": "2026-07-16",
+      "sourceLabel": "Property value estimate",
+      "methodologyKey": "property.estimated-value"
+    }
+  },
+  "assumptionRegistry": {
+    "national": {
+      "stateCode": "US",
+      "asOf": "2026-07-16",
+      "sourceLabel": "National seller-cost starting assumptions",
+      "methodologyKey": "seller-costs.national",
+      "rows": [
+        { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
+        { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.015 },
+        { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
+        { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1387500 }
+      ]
+    },
+    "states": {
+      "CA": {
+        "stateCode": "CA",
+        "asOf": "2026-07-16",
+        "sourceLabel": "California seller-cost starting assumptions",
+        "methodologyKey": "seller-costs.california",
+        "rows": [
+          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
+          { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.015 },
+          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
+          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1387500 }
+        ]
+      },
+      "TX": {
+        "stateCode": "TX",
+        "asOf": "2026-07-16",
+        "sourceLabel": "Texas seller-cost starting assumptions",
+        "methodologyKey": "seller-costs.texas",
+        "rows": [
+          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
+          { "id": "titleEscrowTransfer", "label": "Title and escrow costs", "mode": "percent", "value": 0.0125 },
+          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
+          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1250000 }
+        ]
+      },
+      "FL": {
+        "stateCode": "FL",
+        "asOf": "2026-07-16",
+        "sourceLabel": "Florida seller-cost starting assumptions",
+        "methodologyKey": "seller-costs.florida",
+        "rows": [
+          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
+          { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.0175 },
+          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
+          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1100000 }
+        ]
+      }
+    }
+  },
+  "statementExtraction": {
+    "acceptedTypes": ["application/pdf", "image/png", "image/jpeg"],
+    "suggestedPayoffCents": 41800000,
+    "statementDate": "2026-07-01",
+    "sourceFieldLabel": "Unpaid principal balance"
+  }
+}
