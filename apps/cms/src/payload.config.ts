@@ -1,13 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { buildConfig, type CollectionConfig } from 'payload'
+import { buildConfig } from 'payload'
 
-const Users: CollectionConfig = {
-  slug: 'users',
-  auth: true,
-  admin: { useAsTitle: 'email' },
-  fields: [],
-  versions: { drafts: true },
-}
+import { Users } from './collections/Users'
 
 export default buildConfig({
   admin: { user: Users.slug },
