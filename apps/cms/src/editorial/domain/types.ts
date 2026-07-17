@@ -23,3 +23,7 @@ export type TransitionActor = EditorialActor | Role
 export interface TransitionContext {
   developmentalRevisionCount?: number
 }
+
+export interface PersistedRevisionContext {
+  developmentalRevisionCount: number
+}

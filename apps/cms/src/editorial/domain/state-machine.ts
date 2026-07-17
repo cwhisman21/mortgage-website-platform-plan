@@ -2,6 +2,7 @@ import { canApprove, canPublish } from '../../access/editorial'
 import type {
   EditorialActor,
   EditorialStatus,
+  PersistedRevisionContext,
   TransitionActor,
   TransitionContext,
 } from './types'
@@ -28,12 +29,13 @@ const orderedTransitions = {
 const normalizeActor = (actor: TransitionActor): EditorialActor =>
   typeof actor === 'string' ? { roles: [actor] } : actor
 
-export function assertTransition(
-  from: EditorialStatus,
-  to: EditorialStatus,
-  actor: TransitionActor,
-  context: TransitionContext = {},
-): void {
+type TransitionArguments =
+  | [from: 'developmental-review', to: 'revision', actor: TransitionActor, context: PersistedRevisionContext]
+  | [from: 'developmental-review', to: Exclude<EditorialStatus, 'revision'>, actor: TransitionActor, context?: TransitionContext]
+  | [from: Exclude<EditorialStatus, 'developmental-review'>, to: EditorialStatus, actor: TransitionActor, context?: TransitionContext]
+
+export function assertTransition(...args: TransitionArguments): void {
+  const [from, to, actor, context = {}] = args
   if (to === 'approved' && from === 'awaiting-approval') {
     if (!canApprove(normalizeActor(actor))) throw new Error('Human approval required')
     return
@@ -50,11 +52,13 @@ export function assertTransition(
     throw new Error(`Invalid transition: ${from} -> ${to}`)
   }
 
-  if (
-    from === 'developmental-review' &&
-    to === 'revision' &&
-    (context.developmentalRevisionCount ?? 0) >= MAX_DEVELOPMENTAL_REVISIONS
-  ) {
-    throw new Error('Developmental revision limit reached')
+  if (from === 'developmental-review' && to === 'revision') {
+    const count = context.developmentalRevisionCount
+    if (count === undefined || !Number.isInteger(count) || count < 0) {
+      throw new Error('Valid persisted developmental revision count required')
+    }
+    if (count >= MAX_DEVELOPMENTAL_REVISIONS) {
+      throw new Error('Developmental revision limit reached')
+    }
   }
 }

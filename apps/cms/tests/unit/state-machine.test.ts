@@ -12,7 +12,10 @@ const orderedStages = [
 describe('editorial state machine', () => {
   it.each(orderedStages.slice(0, -1).map((from, index) => [from, orderedStages[index + 1]] as const))(
     'allows the ordered automated transition from %s to %s',
-    (from, to) => expect(() => assertTransition(from, to, automation)).not.toThrow(),
+    (from, to) => {
+      const transition = assertTransition as (from: EditorialStatus, to: EditorialStatus, actor: typeof automation) => void
+      expect(() => transition(from, to, automation)).not.toThrow()
+    },
   )
 
   it('rejects skipped, reverse, and terminal-state transitions', () => {
@@ -26,6 +29,18 @@ describe('editorial state machine', () => {
     expect(() => assertTransition('revision', 'drafting', automation)).not.toThrow()
     expect(() => assertTransition('developmental-review', 'revision', automation, { developmentalRevisionCount: 1 })).not.toThrow()
     expect(() => assertTransition('developmental-review', 'revision', automation, { developmentalRevisionCount: 2 })).toThrow('Developmental revision limit reached')
+  })
+
+  it.each([
+    ['missing', undefined],
+    ['negative', { developmentalRevisionCount: -1 }],
+    ['fractional', { developmentalRevisionCount: 1.5 }],
+    ['non-finite', { developmentalRevisionCount: Number.NaN }],
+  ])('rejects %s persisted developmental revision counts', (_label, context) => {
+    const transition = assertTransition as (...args: unknown[]) => void
+    expect(() => transition('developmental-review', 'revision', automation, context)).toThrow(
+      'Valid persisted developmental revision count required',
+    )
   })
 
   it('allows work to enter blocked state but not leave it through this state machine', () => {
