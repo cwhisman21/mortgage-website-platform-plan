@@ -7,7 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderHomeStateExplorer, renderLocationsHero } from "/site/locations-hero.mjs";
-import { renderCampaignHero } from "/site/campaign-hero.mjs";
+import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs";
 import {
   buildLearningCenterModel,
   serializeLearningCenterSearch,
@@ -92,6 +92,7 @@ let activeTagSearchController = null;
 let sellerWorkspaceFixture = {};
 let sellerCostRegistry = {};
 let activeSellerWorkspaceController = null;
+let activeCampaignHeroController = null;
 const articleBundlePromises = new Map();
 let articleModalReturnFocus = null;
 let articleModalOrigin = null;
@@ -3205,6 +3206,8 @@ function wireCurrentTagSearch(found) {
 }
 
 function render() {
+  activeCampaignHeroController?.destroy();
+  activeCampaignHeroController = null;
   activeTagSearchController?.destroy();
   activeTagSearchController = null;
   activeSellerWorkspaceController?.destroy();
@@ -3264,6 +3267,7 @@ function render() {
   app.innerHTML = html;
   document.body.classList.remove("no-scroll");
   wireInteractions();
+  activeCampaignHeroController = initCampaignHero(app);
   if (found?.type === "seller") {
     activeSellerWorkspaceController = wireSellerWorkspace(
       document.querySelector("[data-seller-workspace]"),
@@ -3293,7 +3297,6 @@ function render() {
   } else if (found?.type === "blog" && found.item.route === "/learning-center/editorial-team") {
     trackPublicEvent("contributor_directory_view");
   }
-  window.initSnapSlotHero?.();
   flushPendingSave();
   requestAnimationFrame(scrollToCurrentAnchor);
   if (found?.type === "newsArticle") void hydrateDirectArticle(found.item);

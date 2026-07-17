@@ -6,23 +6,36 @@ const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const indexSource = fs.readFileSync(new URL("./index.html", import.meta.url), "utf8");
 const stylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 
-test("homepage uses the original composite campaign image as the hero", async () => {
-  const { renderCampaignHero } = await import("./campaign-hero.mjs");
+test("homepage renders the ordered campaign frame sequence", async () => {
+  const {
+    CAMPAIGN_HERO_FRAMES,
+    campaignHeroFrameIndex,
+    renderCampaignHero,
+  } = await import("./campaign-hero.mjs");
   const html = renderCampaignHero();
 
-  assert.match(html, /class="campaign-hero campaign-hero-image-only"/);
-  assert.match(html, /class="campaign-hero-image"/);
-  assert.match(html, /campaign-mortgage-machine\.png/);
+  assert.equal(CAMPAIGN_HERO_FRAMES.length, 30);
+  assert.equal(CAMPAIGN_HERO_FRAMES[0], "/site/assets/campaign-hero-frames/ezgif-frame-001.png");
+  assert.equal(CAMPAIGN_HERO_FRAMES[29], "/site/assets/campaign-hero-frames/ezgif-frame-030.png");
+  assert.equal(new Set(CAMPAIGN_HERO_FRAMES).size, 30);
+  assert.equal(campaignHeroFrameIndex(-1), 0);
+  assert.equal(campaignHeroFrameIndex(0.5), 15);
+  assert.equal(campaignHeroFrameIndex(2), 29);
+  assert.match(html, /data-campaign-sequence/);
+  assert.match(html, /data-campaign-frame/);
+  assert.match(html, /ezgif-frame-001\.png/);
+  assert.match(html, /width="1855"/);
+  assert.match(html, /height="1751"/);
   assert.match(html, /class="campaign-image-cta"/);
-  assert.doesNotMatch(html, /campaign-hero-copy/);
-  assert.doesNotMatch(html, /campaign-option/);
-  assert.doesNotMatch(html, /class="lead"/);
-  assert.doesNotMatch(html, /class="hero-actions"/);
+  assert.match(html, /data-cta-action="compareOffer"/);
+  assert.match(html, /<h1 class="visually-hidden">A better way to compare mortgage options<\/h1>/);
 });
 
 test("campaign hero is connected to the homepage renderer", () => {
-  assert.match(appSource, /import \{ renderCampaignHero \} from "\/site\/campaign-hero\.mjs"/);
+  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs"/);
   assert.match(appSource, /\$\{renderCampaignHero\(\)\}/);
+  assert.match(appSource, /activeCampaignHeroController\?\.destroy\(\)/);
+  assert.match(appSource, /activeCampaignHeroController = initCampaignHero\(app\)/);
 });
 
 test("public site loads the approved Figma typography", () => {
@@ -32,11 +45,13 @@ test("public site loads the approved Figma typography", () => {
   assert.match(stylesSource, /--font-body:\s*"Inter"/);
 });
 
-test("campaign artwork is stored with the deployable site", () => {
-  assert.equal(
-    fs.existsSync(new URL("./assets/campaign-mortgage-machine.png", import.meta.url)),
-    true,
-  );
+test("campaign sequence defines the approved responsive and reduced-motion travel", () => {
+  assert.match(stylesSource, /--campaign-scroll-travel:\s*1595px/);
+  assert.match(stylesSource, /height:\s*calc\(100vh \+ var\(--campaign-scroll-travel\)\)/);
+  assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*position:\s*sticky/s);
+  assert.match(stylesSource, /@media \(max-width:\s*760px\)[\s\S]*--campaign-scroll-travel:\s*1015px/);
+  assert.match(stylesSource, /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*--campaign-scroll-travel:\s*0px/);
+  assert.match(stylesSource, /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*position:\s*relative/);
 });
 
 test("homepage follows the approved Figma decision-flow sequence", () => {

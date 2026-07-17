@@ -359,6 +359,21 @@ button {
   border-bottom: 1px solid var(--line);
   background: #fff;
 }
+.campaign-hero-sequence {
+  --campaign-scroll-travel: 1595px;
+  height: calc(100vh + var(--campaign-scroll-travel));
+  position: relative;
+}
+
+.campaign-hero-stage {
+  display: grid;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  place-items: center;
+}
+
 
 .campaign-hero-inner {
   position: relative;
@@ -372,6 +387,11 @@ button {
   width: 100%;
   height: auto;
 }
+.campaign-hero-sequence .campaign-hero-image {
+  max-height: 100vh;
+  object-fit: contain;
+}
+
 
 .campaign-image-cta {
   position: absolute;
@@ -1146,6 +1166,24 @@ h3 {
   font-weight: 950;
   outline: 0;
   box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  .campaign-hero-sequence {
+    --campaign-scroll-travel: 1015px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaign-hero-sequence {
+    --campaign-scroll-travel: 0px;
+    height: auto;
+  }
+
+  .campaign-hero-stage {
+    position: relative;
+    height: auto;
+  }
 }
 
 .calculator-value-box:focus-within {
