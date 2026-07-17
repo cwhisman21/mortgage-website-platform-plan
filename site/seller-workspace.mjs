@@ -1,5 +1,3 @@
-const VALUE_KEYS = Object.freeze(["low", "base", "high"]);
-
 function clone(value) {
   return value == null ? value : structuredClone(value);
 }
@@ -28,17 +26,6 @@ function normalizedValuation(value) {
     throw new Error("Valuation amounts must be ordered low, base, and high");
   }
   return valuation;
-}
-
-function normalizedAssumptionRow(row) {
-  if (!row?.id || !row?.label || !["percent", "fixed"].includes(row.mode)) {
-    throw new Error("Each seller-cost assumption requires an id, label, and percent or fixed mode");
-  }
-  const value = Number(row.value);
-  if (!Number.isFinite(value) || value < 0 || (row.mode === "fixed" && !Number.isInteger(value))) {
-    throw new Error(`Seller-cost assumption ${row.id} has an invalid value`);
-  }
-  return { ...clone(row), value };
 }
 
 export function createFixtureSellerAdapters(fixture = {}) {
@@ -87,108 +74,6 @@ export function createFixtureSellerAdapters(fixture = {}) {
       },
     }),
   });
-}
-
-export function confirmSellerValue(valuation, baseOverride) {
-  const source = normalizedValuation(valuation);
-  if (baseOverride === undefined || baseOverride === null || baseOverride === "") {
-    return { ...source, isManual: false };
-  }
-
-  const baseCents = integerCents(baseOverride, "Confirmed value", { allowZero: false });
-  const lowRatio = source.lowCents / source.baseCents;
-  const highRatio = source.highCents / source.baseCents;
-  return {
-    ...source,
-    lowCents: Math.round(baseCents * lowRatio),
-    baseCents,
-    highCents: Math.round(baseCents * highRatio),
-    isManual: true,
-  };
-}
-
-export function resolveSellerAssumptions(registry = {}, stateCode) {
-  const requestedStateCode = normalizedStateCode(stateCode);
-  const stateRecord = registry.states?.[requestedStateCode];
-  const source = stateRecord || registry.national;
-  if (!source) throw new Error("Seller-cost assumptions require a national fallback");
-  const rows = (source.rows || []).map(normalizedAssumptionRow);
-  if (!rows.length) throw new Error("Seller-cost assumptions require at least one cost row");
-  const duplicate = rows.find((row, index) => rows.findIndex((candidate) => candidate.id === row.id) !== index);
-  if (duplicate) throw new Error(`Duplicate seller-cost assumption ${duplicate.id}`);
-  return {
-    ...clone(source),
-    stateCode: normalizedStateCode(source.stateCode) || "US",
-    requestedStateCode,
-    rows,
-    isFallback: !stateRecord,
-  };
-}
-
-function costForPath(row, salePriceCents, override) {
-  if (override !== undefined) return integerCents(override, `${row.label} override`);
-  if (row.mode === "fixed") return integerCents(row.value, row.label);
-  return Math.round(salePriceCents * row.value);
-}
-
-function calculatePath(key, salePriceCents, payoffCents, rows, overrides) {
-  const costs = Object.fromEntries(rows.map((row) => [
-    row.id,
-    costForPath(row, salePriceCents, overrides[row.id]),
-  ]));
-  const totalSellingCostsCents = Object.values(costs).reduce((sum, value) => sum + value, 0);
-  const netCents = salePriceCents - payoffCents - totalSellingCostsCents;
-  return {
-    key,
-    salePriceCents,
-    payoffCents,
-    costs,
-    totalSellingCostsCents,
-    netCents,
-    kind: netCents >= 0 ? "proceeds" : "shortfall",
-    amountCents: Math.abs(netCents),
-  };
-}
-
-export function calculateSellerProceeds({ values, payoffCents, assumptions, overrides = {} } = {}) {
-  const confirmedValues = {
-    lowCents: integerCents(values?.lowCents, "Low estimated value", { allowZero: false }),
-    baseCents: integerCents(values?.baseCents, "Base estimated value", { allowZero: false }),
-    highCents: integerCents(values?.highCents, "High estimated value", { allowZero: false }),
-  };
-  if (confirmedValues.lowCents > confirmedValues.baseCents || confirmedValues.baseCents > confirmedValues.highCents) {
-    throw new Error("Estimated values must be ordered low, base, and high");
-  }
-  const normalizedPayoffCents = integerCents(payoffCents, "Mortgage payoff");
-  const rows = (assumptions?.rows || []).map(normalizedAssumptionRow);
-  if (!rows.length) throw new Error("At least one seller-cost assumption is required");
-  const normalizedOverrides = Object.fromEntries(
-    Object.entries(overrides || {}).map(([id, value]) => [id, integerCents(value, `${id} override`)]),
-  );
-  const paths = Object.fromEntries(VALUE_KEYS.map((key) => [
-    key,
-    calculatePath(key, confirmedValues[`${key}Cents`], normalizedPayoffCents, rows, normalizedOverrides),
-  ]));
-  const baseRows = rows.map((row) => ({
-    ...row,
-    amountCents: paths.base.costs[row.id],
-    isOverride: Object.hasOwn(normalizedOverrides, row.id),
-  }));
-
-  return {
-    values: confirmedValues,
-    payoffCents: normalizedPayoffCents,
-    assumptions: clone(assumptions),
-    overrides: normalizedOverrides,
-    paths,
-    baseRows,
-    allocation: {
-      payoffCents: normalizedPayoffCents,
-      sellingCostsCents: paths.base.totalSellingCostsCents,
-      resultCents: paths.base.amountCents,
-      resultKind: paths.base.kind,
-    },
-  };
 }
 
 export function formatSellerCurrency(cents) {

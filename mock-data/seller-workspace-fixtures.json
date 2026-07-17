@@ -59,58 +59,6 @@
       "methodologyKey": "property.estimated-value"
     }
   },
-  "assumptionRegistry": {
-    "national": {
-      "stateCode": "US",
-      "asOf": "2026-07-16",
-      "sourceLabel": "National seller-cost starting assumptions",
-      "methodologyKey": "seller-costs.national",
-      "rows": [
-        { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
-        { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.015 },
-        { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
-        { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1387500 }
-      ]
-    },
-    "states": {
-      "CA": {
-        "stateCode": "CA",
-        "asOf": "2026-07-16",
-        "sourceLabel": "California seller-cost starting assumptions",
-        "methodologyKey": "seller-costs.california",
-        "rows": [
-          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
-          { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.015 },
-          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
-          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1387500 }
-        ]
-      },
-      "TX": {
-        "stateCode": "TX",
-        "asOf": "2026-07-16",
-        "sourceLabel": "Texas seller-cost starting assumptions",
-        "methodologyKey": "seller-costs.texas",
-        "rows": [
-          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
-          { "id": "titleEscrowTransfer", "label": "Title and escrow costs", "mode": "percent", "value": 0.0125 },
-          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
-          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1250000 }
-        ]
-      },
-      "FL": {
-        "stateCode": "FL",
-        "asOf": "2026-07-16",
-        "sourceLabel": "Florida seller-cost starting assumptions",
-        "methodologyKey": "seller-costs.florida",
-        "rows": [
-          { "id": "agentCompensation", "label": "Agent compensation", "mode": "percent", "value": 0.05 },
-          { "id": "titleEscrowTransfer", "label": "Title, escrow, and transfer costs", "mode": "percent", "value": 0.0175 },
-          { "id": "repairsConcessions", "label": "Repairs and seller concessions", "mode": "percent", "value": 0.02 },
-          { "id": "otherSellerCosts", "label": "Other seller costs", "mode": "fixed", "value": 1100000 }
-        ]
-      }
-    }
-  },
   "statementExtraction": {
     "acceptedTypes": ["application/pdf", "image/png", "image/jpeg"],
     "suggestedPayoffCents": 41800000,

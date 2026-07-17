@@ -1,12 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+
+import * as sellerWorkspace from "./seller-workspace.mjs";
 
 import {
   applySellerRowEdit,
   calculateSellerNetSheet,
   calculateStatutoryTransferTax,
-  calculateSellerProceeds,
-  confirmSellerValue,
   createFixtureSellerAdapters,
   defaultExpectedCloseDate,
   formatSellerCurrency,
@@ -14,10 +15,21 @@ import {
   prorateAnnualCents,
   resetSellerAssumptions,
   resolveSellerCostRows,
-  resolveSellerAssumptions,
   selectSellerValue,
   setSellerOptionalRow,
 } from "./seller-workspace.mjs";
+
+test("Task 1 seller assumption compatibility has been removed", () => {
+  const productionFixture = JSON.parse(fs.readFileSync(
+    new URL("../mock-data/seller-workspace-fixtures.json", import.meta.url),
+    "utf8",
+  ));
+
+  assert.equal("assumptionRegistry" in productionFixture, false);
+  assert.equal("confirmSellerValue" in sellerWorkspace, false);
+  assert.equal("resolveSellerAssumptions" in sellerWorkspace, false);
+  assert.equal("calculateSellerProceeds" in sellerWorkspace, false);
+});
 
 const fixture = {
   addressSuggestions: [
@@ -43,32 +55,6 @@ const fixture = {
       asOf: "2026-07-16",
       sourceLabel: "Property value estimate",
       methodologyKey: "property.estimated-value",
-    },
-  },
-  assumptionRegistry: {
-    national: {
-      stateCode: "US",
-      asOf: "2026-07-16",
-      sourceLabel: "National seller-cost starting assumptions",
-      rows: [
-        { id: "agentCompensation", label: "Agent compensation", mode: "percent", value: 0.05 },
-        { id: "titleEscrowTransfer", label: "Title, escrow, and transfer costs", mode: "percent", value: 0.015 },
-        { id: "repairsConcessions", label: "Repairs and seller concessions", mode: "percent", value: 0.02 },
-        { id: "otherSellerCosts", label: "Other seller costs", mode: "fixed", value: 1_387_500 },
-      ],
-    },
-    states: {
-      CA: {
-        stateCode: "CA",
-        asOf: "2026-07-16",
-        sourceLabel: "California seller-cost starting assumptions",
-        rows: [
-          { id: "agentCompensation", label: "Agent compensation", mode: "percent", value: 0.05 },
-          { id: "titleEscrowTransfer", label: "Title, escrow, and transfer costs", mode: "percent", value: 0.015 },
-          { id: "repairsConcessions", label: "Repairs and seller concessions", mode: "percent", value: 0.02 },
-          { id: "otherSellerCosts", label: "Other seller costs", mode: "fixed", value: 1_387_500 },
-        ],
-      },
     },
   },
   statementExtraction: {
@@ -366,77 +352,6 @@ test("fixture adapters normalize valuation and statement suggestions", async () 
     adapters.statement.read({ name: "statement.txt", type: "text/plain", size: 100 }),
     /supported PDF, PNG, or JPEG/i,
   );
-});
-
-test("manual value confirmation preserves the source range relationship", () => {
-  const confirmed = confirmSellerValue(fixture.valuations["property-harbor-view"], 80_000_000);
-
-  assert.equal(confirmed.baseCents, 80_000_000);
-  assert.equal(confirmed.lowCents, 76_689_655);
-  assert.equal(confirmed.highCents, 83_310_345);
-  assert.equal(confirmed.isManual, true);
-});
-
-test("state assumptions use a controlled national fallback", () => {
-  const california = resolveSellerAssumptions(fixture.assumptionRegistry, "ca");
-  const fallback = resolveSellerAssumptions(fixture.assumptionRegistry, "NV");
-
-  assert.equal(california.stateCode, "CA");
-  assert.equal(california.isFallback, false);
-  assert.equal(fallback.stateCode, "US");
-  assert.equal(fallback.requestedStateCode, "NV");
-  assert.equal(fallback.isFallback, true);
-  california.rows[0].value = 9;
-  assert.equal(fixture.assumptionRegistry.states.CA.rows[0].value, 0.05);
-});
-
-test("proceeds calculate low base and high paths with percent and fixed costs", () => {
-  const assumptions = resolveSellerAssumptions(fixture.assumptionRegistry, "CA");
-  const result = calculateSellerProceeds({
-    values: confirmSellerValue(fixture.valuations["property-harbor-view"]),
-    payoffCents: 41_800_000,
-    assumptions,
-  });
-
-  assert.equal(result.paths.base.salePriceCents, 72_500_000);
-  assert.equal(result.paths.base.costs.agentCompensation, 3_625_000);
-  assert.equal(result.paths.base.costs.titleEscrowTransfer, 1_087_500);
-  assert.equal(result.paths.base.costs.repairsConcessions, 1_450_000);
-  assert.equal(result.paths.base.costs.otherSellerCosts, 1_387_500);
-  assert.equal(result.paths.base.totalSellingCostsCents, 7_550_000);
-  assert.equal(result.paths.base.netCents, 23_150_000);
-  assert.equal(result.paths.base.kind, "proceeds");
-  assert.ok(result.paths.low.netCents < result.paths.base.netCents);
-  assert.ok(result.paths.high.netCents > result.paths.base.netCents);
-});
-
-test("a fixed homeowner override applies to every value path", () => {
-  const assumptions = resolveSellerAssumptions(fixture.assumptionRegistry, "CA");
-  const result = calculateSellerProceeds({
-    values: confirmSellerValue(fixture.valuations["property-harbor-view"]),
-    payoffCents: 41_800_000,
-    assumptions,
-    overrides: { agentCompensation: 2_000_000 },
-  });
-
-  assert.equal(result.paths.low.costs.agentCompensation, 2_000_000);
-  assert.equal(result.paths.base.costs.agentCompensation, 2_000_000);
-  assert.equal(result.paths.high.costs.agentCompensation, 2_000_000);
-  assert.equal(result.overrides.agentCompensation, 2_000_000);
-});
-
-test("calculations round to integer cents and expose a shortfall", () => {
-  const result = calculateSellerProceeds({
-    values: { lowCents: 10_000_001, baseCents: 10_000_003, highCents: 10_000_005 },
-    payoffCents: 11_000_000,
-    assumptions: {
-      rows: [{ id: "sellingCost", label: "Selling cost", mode: "percent", value: 0.033333 }],
-    },
-  });
-
-  assert.equal(Number.isInteger(result.paths.base.costs.sellingCost), true);
-  assert.equal(result.paths.base.kind, "shortfall");
-  assert.equal(result.paths.base.amountCents, Math.abs(result.paths.base.netCents));
 });
 
 test("currency formatting accepts cents and preserves signs", () => {
