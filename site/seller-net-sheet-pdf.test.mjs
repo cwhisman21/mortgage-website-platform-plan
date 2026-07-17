@@ -6,6 +6,7 @@ import {
   buildSellerNetSheetPdfModel,
   createSellerNetSheetPdf,
   downloadSellerNetSheetPdf,
+  planSellerNetSheetPdfLayout,
 } from "./seller-net-sheet-pdf.mjs";
 
 const unlockedInput = {
@@ -100,6 +101,102 @@ test("PDF generation paginates long normalized statements", async () => {
   for (const page of pdf.getPages()) assert.deepEqual(page.getSize(), { width: 612, height: 792 });
 });
 
+function textOperations(layout) {
+  return layout.operations.filter((operation) => operation.type === "text");
+}
+
+function assertOperationsInsideLetterMargins(layout) {
+  for (const operation of textOperations(layout)) {
+    assert.ok(operation.x >= 44, `${operation.role} starts before the left margin`);
+    assert.ok(operation.y >= 44, `${operation.role} starts below the bottom margin`);
+    assert.ok(operation.x + operation.width <= 568.001, `${operation.role} crosses the right margin`);
+    assert.ok(operation.y + operation.height <= 748.001, `${operation.role} crosses the top margin`);
+  }
+}
+
+test("production layout trace contains the complete statement once inside Letter margins", async () => {
+  const layout = await planSellerNetSheetPdfLayout(unlockedInput);
+  const operations = textOperations(layout);
+  const texts = operations.map((operation) => operation.text);
+
+  assertOperationsInsideLetterMargins(layout);
+  for (const requiredText of [
+    "Seller Net Sheet",
+    unlockedInput.address,
+    "Selling expenses",
+    "Existing obligations",
+    "Summary",
+    "Total selling expenses",
+    "Net before obligations",
+    "Total obligations",
+    "Projected net proceeds",
+    "Final value comparison",
+    "Low-value proceeds",
+    "High-value proceeds",
+  ]) {
+    assert.ok(texts.includes(requiredText), `missing ${requiredText}`);
+  }
+  assert.equal(operations.filter((operation) => operation.role === "disclaimer").length, 1);
+});
+
+test("every continuation page repeats the brand and complete address context", async () => {
+  const input = structuredClone(unlockedInput);
+  input.address = "1842 " + "HarborViewDrive".repeat(70) + ", San Diego, CA 92109";
+  input.netSheet.groups.sellingExpenses = Array.from({ length: 48 }, (_, index) => ({
+    id: `cost-${index}`,
+    label: `Seller cost ${index + 1}`,
+    amountCents: 10_000 + index,
+  }));
+
+  const layout = await planSellerNetSheetPdfLayout(input);
+  assert.ok(layout.pageCount > 1);
+  assertOperationsInsideLetterMargins(layout);
+  for (let page = 2; page <= layout.pageCount; page += 1) {
+    const pageOperations = textOperations(layout).filter((operation) => operation.page === page);
+    assert.ok(pageOperations.some((operation) => operation.role === "brand" && operation.text === "SNAP MORTGAGE"));
+    const address = pageOperations
+      .filter((operation) => operation.role === "continuation-address")
+      .map((operation) => operation.text)
+      .join("")
+      .replaceAll(/\s/g, "");
+    assert.equal(address, input.address.replaceAll(/\s/g, ""), `page ${page} has incomplete address context`);
+  }
+});
+
+test("a section that fits on a fresh page starts there instead of splitting", async () => {
+  const input = structuredClone(unlockedInput);
+  input.netSheet.groups.sellingExpenses = Array.from({ length: 21 }, (_, index) => ({
+    id: `fresh-page-cost-${index}`,
+    label: `Fresh-page seller cost ${index + 1}`,
+    amountCents: 10_000 + index,
+  }));
+
+  const layout = await planSellerNetSheetPdfLayout(input);
+  const operations = textOperations(layout);
+  const sectionTitle = operations.find((operation) => operation.role === "section-title" && operation.text === "Selling expenses");
+
+  assert.equal(sectionTitle.page, 2);
+  assert.equal(operations.some((operation) => operation.page === 1 && operation.section === "Selling expenses" && operation.role === "row-label"), false);
+});
+
+test("oversized unbroken row labels split across bounded pages with repeated value context", async () => {
+  const input = structuredClone(unlockedInput);
+  input.address = "A".repeat(900);
+  const oversizedLabel = "B".repeat(9_000);
+  input.netSheet.groups.sellingExpenses = [{ id: "oversized", label: oversizedLabel, amountCents: 123_456 }];
+
+  const layout = await planSellerNetSheetPdfLayout(input);
+  const rowLabels = textOperations(layout).filter((operation) => operation.role === "row-label" && operation.rowId === "oversized");
+  const rowPages = [...new Set(rowLabels.map((operation) => operation.page))];
+
+  assertOperationsInsideLetterMargins(layout);
+  assert.ok(rowPages.length > 1);
+  assert.equal(rowLabels.map((operation) => operation.text).join(""), oversizedLabel);
+  for (const page of rowPages) {
+    assert.ok(textOperations(layout).some((operation) => operation.page === page && operation.role === "row-value" && operation.rowId === "oversized"));
+  }
+});
+
 test("PDF filename removes unsafe address characters", async () => {
   const input = structuredClone(unlockedInput);
   input.address = "  12 O'Neil / Harbor #5, San Diego, CA  ";
@@ -147,4 +244,27 @@ test("direct download clicks a temporary anchor and revokes its object URL", asy
   ]);
   assert.equal(calls[0][1], "application/pdf");
   assert.ok(calls[0][2] > 0);
+});
+
+test("direct download removes the anchor and revokes the URL when click throws", async () => {
+  const calls = [];
+  const browser = {
+    URL: {
+      createObjectURL() { calls.push("create"); return "blob:throwing-click"; },
+      revokeObjectURL(url) { calls.push(`revoke:${url}`); },
+    },
+    document: {
+      createElement() {
+        return {
+          click() { calls.push("click"); throw new Error("blocked download"); },
+          remove() { calls.push("remove"); },
+        };
+      },
+      body: { append() { calls.push("append"); } },
+    },
+    setTimeout(callback) { calls.push("timeout"); callback(); },
+  };
+
+  await assert.rejects(downloadSellerNetSheetPdf(unlockedInput, browser), /blocked download/);
+  assert.deepEqual(calls, ["create", "append", "click", "remove", "timeout", "revoke:blob:throwing-click"]);
 });
