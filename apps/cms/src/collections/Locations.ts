@@ -7,7 +7,7 @@ export const Locations: CollectionConfig = {
     { name: 'name', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },
     { name: 'geographyType', type: 'select', required: true, options: ['state', 'city'] },
-    { name: 'stateCode', type: 'text', required: true, index: true },
+    { name: 'stateCode', type: 'text', required: true },
     { name: 'parentLocation', type: 'relationship', relationTo: 'locations' },
   ],
 }
