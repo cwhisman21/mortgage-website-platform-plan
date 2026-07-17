@@ -128,6 +128,7 @@ let sessionState = {
 
 let pendingSaveAfterLogin = null;
 let modalReturnFocus = null;
+let modalDismissHandler = null;
 
 const sources = {
   freddiePmms: {
@@ -1609,7 +1610,7 @@ function modalShell() {
         <button class="modal-close" type="button" aria-label="Close" data-modal-close>&times;</button>
         <p class="eyebrow" data-modal-eyebrow>Snap Homes</p>
         <h2 id="modal-title" data-modal-title></h2>
-        <p data-modal-body></p>
+        <div class="modal-body" data-modal-body></div>
         <div class="modal-actions" data-modal-actions></div>
       </div>
     </div>
@@ -3272,12 +3273,10 @@ function render() {
         isLoggedIn: sessionState.isLoggedIn,
         primaryTags: tagContextForRoute(found.item.route).primaryTags,
         openAccount: ({ mode }) => {
-          if (mode === "open" && sessionState.isLoggedIn) {
-            openActionModal("account");
-          } else {
-            openAuthModal("Create or log in to Snap Homes to continue with this property and your next steps.", { rerender: false });
-          }
-          return Promise.resolve({ status: "completed" });
+          return openAuthModal(
+            `Verify your Snap Homes sign-in to open this seller analysis and downloadable net sheet${mode === "open" ? "." : " in your account."}`,
+            { rerender: false },
+          );
         },
         track: trackPublicEvent,
       },
@@ -3300,27 +3299,38 @@ function render() {
   if (found?.type === "newsArticle") void hydrateDirectArticle(found.item);
 }
 
-function closeModal() {
+function closeModal(options = {}) {
+  const notifyDismiss = options?.notifyDismiss !== false;
   const modal = document.querySelector("[data-modal]");
   if (modal) modal.hidden = true;
   document.body.classList.remove("no-scroll");
+  const onDismiss = modalDismissHandler;
+  modalDismissHandler = null;
   if (modalReturnFocus && document.contains(modalReturnFocus)) {
     modalReturnFocus.focus();
   }
   modalReturnFocus = null;
+  if (notifyDismiss) onDismiss?.();
 }
 
-function openModal({ eyebrow = "Snap Homes", title, body, actions = [] }) {
+function openModal({ eyebrow = "Snap Homes", title, body, bodyHtml, actions = [], onDismiss = null }) {
   const modal = document.querySelector("[data-modal]");
   const titleNode = document.querySelector("[data-modal-title]");
   const bodyNode = document.querySelector("[data-modal-body]");
   const eyebrowNode = document.querySelector("[data-modal-eyebrow]");
   const actionsNode = document.querySelector("[data-modal-actions]");
-  if (!modal || !titleNode || !bodyNode || !actionsNode) return;
+  if (!modal || !titleNode || !bodyNode || !actionsNode) return null;
+  if (modalDismissHandler) {
+    const dismissPreviousModal = modalDismissHandler;
+    modalDismissHandler = null;
+    dismissPreviousModal();
+  }
   modalReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  modalDismissHandler = typeof onDismiss === "function" ? onDismiss : null;
   eyebrowNode.textContent = String(eyebrow ?? "");
   titleNode.textContent = String(title ?? "");
-  bodyNode.textContent = String(body ?? "");
+  if (typeof bodyHtml === "string") bodyNode.innerHTML = bodyHtml;
+  else bodyNode.textContent = String(body ?? "");
   actionsNode.innerHTML = "";
   actions.forEach((action, index) => {
     const button = document.createElement("button");
@@ -3332,9 +3342,9 @@ function openModal({ eyebrow = "Snap Homes", title, body, actions = [] }) {
   });
   modal.hidden = false;
   document.body.classList.add("no-scroll");
-  actionsNode.querySelector("button")?.focus();
+  (bodyNode.querySelector("input, button, [href]") || actionsNode.querySelector("button"))?.focus();
+  return { modal, bodyNode, actionsNode };
 }
-
 function openActionModal(action) {
   const config = CTA_MODALS[action] || CTA_MODALS.leadForm;
   openModal({
@@ -3396,30 +3406,121 @@ function refreshAccountMenu() {
   wireAccountInteractions(nextRoot);
 }
 
-function openAuthModal(reason = "Account creation and login are not connected here. Continuing changes only the account-menu state for this browsing session.", { rerender = true } = {}) {
-  openModal({
-    eyebrow: "Snap Homes",
-    title: "Account connection notice",
-    body: reason,
-    actions: [
-      {
-        label: "Continue for this session",
-        onClick: () => {
-          sessionState.isLoggedIn = true;
-          persistSessionState();
-          closeModal();
-          if (rerender) render();
-          else refreshAccountMenu();
-        }
-      },
-      {
-        label: "Close",
-        onClick: closeModal
+function openAuthModal(reason = "Sign in to continue to your Snap Homes account.", { rerender = true } = {}) {
+  return new Promise((resolve) => {
+    let settled = false;
+    let verificationTimer = null;
+    let completionTimer = null;
+    let emailInput = null;
+    let passwordInput = null;
+
+    const clearCredentials = () => {
+      if (emailInput) emailInput.value = "";
+      if (passwordInput) passwordInput.value = "";
+    };
+    const finishCancelled = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(verificationTimer);
+      window.clearTimeout(completionTimer);
+      clearCredentials();
+      resolve({ status: "cancelled" });
+    };
+    const finishVerified = () => {
+      if (settled) return;
+      settled = true;
+      clearCredentials();
+      sessionState.isLoggedIn = true;
+      persistSessionState();
+      modalDismissHandler = null;
+      closeModal({ notifyDismiss: false });
+      if (rerender) render();
+      else refreshAccountMenu();
+      resolve({ status: "completed" });
+    };
+
+    const opened = openModal({
+      eyebrow: "Snap Homes",
+      title: sessionState.isLoggedIn ? "Verify your Snap Homes sign-in" : "Sign in to Snap Homes",
+      bodyHtml: `
+        <p class="account-login-intro">${esc(reason)}</p>
+        <form class="account-login-form" data-account-login-form novalidate>
+          <label class="account-login-field">
+            <span>Email address</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" aria-describedby="account-login-email-error" required>
+            <span class="account-login-error" id="account-login-email-error" data-account-login-error="email" role="alert" hidden></span>
+          </label>
+          <label class="account-login-field">
+            <span>Password</span>
+            <input type="password" name="password" autocomplete="current-password" aria-describedby="account-login-password-error" minlength="6" required>
+            <span class="account-login-error" id="account-login-password-error" data-account-login-error="password" role="alert" hidden></span>
+          </label>
+          <p class="account-login-status" data-account-login-status role="status" aria-live="polite"></p>
+          <div class="account-login-actions">
+            <button class="button" type="submit" data-account-login-submit>Verify and continue</button>
+            <button class="button secondary" type="button" data-account-login-cancel>Cancel</button>
+          </div>
+        </form>
+      `,
+      onDismiss: finishCancelled,
+    });
+
+    if (!opened) {
+      finishCancelled();
+      return;
+    }
+
+    const form = opened.bodyNode.querySelector("[data-account-login-form]");
+    emailInput = form?.querySelector("input[name='email']") || null;
+    passwordInput = form?.querySelector("input[name='password']") || null;
+    const submitButton = form?.querySelector("[data-account-login-submit]") || null;
+    const cancelButton = form?.querySelector("[data-account-login-cancel]") || null;
+    const emailError = form?.querySelector("[data-account-login-error='email']") || null;
+    const passwordError = form?.querySelector("[data-account-login-error='password']") || null;
+    const status = form?.querySelector("[data-account-login-status]") || null;
+
+    const clearFieldError = (input, error) => {
+      input?.removeAttribute("aria-invalid");
+      if (error) {
+        error.textContent = "";
+        error.hidden = true;
       }
-    ]
+    };
+    emailInput?.addEventListener("input", () => clearFieldError(emailInput, emailError));
+    passwordInput?.addEventListener("input", () => clearFieldError(passwordInput, passwordError));
+    cancelButton?.addEventListener("click", closeModal);
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      clearFieldError(emailInput, emailError);
+      clearFieldError(passwordInput, passwordError);
+
+      const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput?.value.trim() || "");
+      const passwordIsValid = (passwordInput?.value || "").length >= 6;
+      if (!emailIsValid && emailError) {
+        emailInput?.setAttribute("aria-invalid", "true");
+        emailError.textContent = "Enter a valid email address.";
+        emailError.hidden = false;
+      }
+      if (!passwordIsValid && passwordError) {
+        passwordInput?.setAttribute("aria-invalid", "true");
+        passwordError.textContent = "Enter at least 6 characters.";
+        passwordError.hidden = false;
+      }
+      if (!emailIsValid || !passwordIsValid) {
+        (emailIsValid ? passwordInput : emailInput)?.focus();
+        return;
+      }
+
+      form.setAttribute("aria-busy", "true");
+      if (submitButton) submitButton.disabled = true;
+      if (status) status.textContent = "Verifying your account...";
+      verificationTimer = window.setTimeout(() => {
+        if (status) status.textContent = "Account verified. Opening your seller analysis...";
+        completionTimer = window.setTimeout(finishVerified, 220);
+      }, 560);
+    });
   });
 }
-
 function showToast(message) {
   const toast = document.querySelector("[data-toast]");
   if (!toast) return;

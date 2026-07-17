@@ -4007,7 +4007,7 @@ tr:last-child td {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 140;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -4063,6 +4063,87 @@ tr:last-child td {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.modal-body {
+  display: grid;
+  gap: 18px;
+}
+
+.account-login-intro {
+  max-width: 46ch;
+  line-height: 1.55;
+}
+
+.account-login-form {
+  display: grid;
+  gap: 18px;
+}
+
+.account-login-field {
+  display: grid;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 750;
+}
+
+.account-login-field input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid #aebbd2;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 550;
+  outline: none;
+}
+
+.account-login-field input:focus-visible {
+  border-color: var(--snap-blue);
+  box-shadow: 0 0 0 3px rgba(11, 85, 255, 0.16);
+}
+
+.account-login-field input[aria-invalid="true"] {
+  border-color: #b42318;
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+}
+
+.account-login-error {
+  color: #9b1c1c;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.account-login-status {
+  min-height: 22px;
+  color: #176b62 !important;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.account-login-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.account-login-actions .button {
+  min-height: 48px;
+}
+
+.account-login-form[aria-busy="true"] input {
+  opacity: 0.72;
+}
+
+@media (max-width: 520px) {
+  .modal-card {
+    padding: 26px 20px 22px;
+  }
+
+  .account-login-actions .button {
+    flex: 1 1 100%;
+  }
 }
 
 .visually-hidden {
