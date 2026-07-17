@@ -255,6 +255,7 @@ function collectCanonicalRecords(inputs) {
   for (const hub of editorial.topicHubs || []) {
     if (hub.public !== false && hub.route && !/^editorial team$/i.test(hub.name || "")) records.push(makeRecord("topic-guides", hub));
   }
+  for (const sellerPage of seed.sellerPages || []) records.push(makeRecord("topic-guides", sellerPage));
   for (const article of news.articles || []) records.push(makeRecord("local-market-news", article));
   for (const product of products.values()) records.push(makeRecord("product-guides", product));
   for (const calculator of seed.calculators || []) records.push(makeRecord("calculators", calculator));
@@ -282,6 +283,11 @@ function candidatesForRecord(record, identityByCandidateId = new Map()) {
   const locationPriority = isLocalNews ? 0 : 3;
   const productPriority = isLocalNews ? 4 : isProductGuide ? 0 : 1;
   const goalPriority = isLocalNews ? 9 : isProductGuide ? 1 : 5;
+  if (source.route === "/sell") {
+    addCandidate(candidates, "market-topic", "Home Values", 0);
+    addCandidate(candidates, "loan-program", "Home Equity / HELOC", 1);
+    addCandidate(candidates, "property-concept", "Owner Costs", 2);
+  }
   const productIds = source.productIds || (record.family === "product-guides" ? [source.id] : []);
   if (!isLocalNews) {
     for (const productId of productIds) {

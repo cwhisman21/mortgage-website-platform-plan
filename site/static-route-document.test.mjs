@@ -21,7 +21,7 @@ const inputs = {
 };
 const planoNewsBundle = readJson("mock-data/location-news/texas/plano.json");
 
-const currentDataWarningPattern = /Check current local costs before you decide[\s\S]*not current market facts[\s\S]*Confirm today(?:'|&#39;)s figures/i;
+const currentDataWarningPattern = /Use current property details[\s\S]*can vary by property and change over time[\s\S]*home you are considering/i;
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -309,12 +309,91 @@ test("representative static documents expose route data before the SPA boots", a
 
   const prequal = render("/prequal/start");
   assert.match(prequal, /<h1>Review mortgage prequalification<\/h1>/);
-  assert.match(prequal, /No name, email, phone number, documents, or financial account details/);
+  assert.match(prequal, /Choose a mortgage option on the rates page/);
   assert.doesNotMatch(prequal, /prequalKey|query state|saved rate/i);
 
   const officer = render("/loan-officers/ava-martinez");
   assert.match(officer, /Ava Martinez/);
   assert.doesNotMatch(officer, /NMLS|licensed states|specialty areas|languages listed/i);
+
+  const company = render("/companies/harborline-home-lending");
+  assert.match(company, /<h1>Harborline Home Lending<\/h1>/);
+  assert.match(company, /company-placeholder\.svg/);
+  assert.match(company, /href="\/rates"/);
+});
+
+test("seller document is crawlable before the address-first workspace enhances", async () => {
+  const { createStaticRouteContext, renderStaticRouteDocument } = await staticModule();
+  const context = createStaticRouteContext(inputs);
+  const record = context.recordsByRoute.get("/sell");
+
+  assert.equal(record?.entry.type, "seller");
+  const html = renderStaticRouteDocument(record, context, { siteOrigin: "https://mortgage.example" });
+
+  assert.equal(record.found.item.metaTitle, "Sell a Home: Value and Proceeds in Snap Homes | Snap Mortgage");
+  assert.equal(
+    record.found.item.metaDescription,
+    "See a property-value range, choose a value, confirm known obligations, then open detailed selling costs and projected proceeds through Snap Homes.",
+  );
+  assert.equal(
+    record.found.item.purpose,
+    "Help homeowners see a property-value range, choose a value, confirm known obligations, and open detailed selling costs and projected proceeds through Snap Homes.",
+  );
+  assert.match(html, /<h1>Start with what your sale could leave you\.<\/h1>/);
+  assert.match(html, /Explore my property value range/);
+  assert.match(html, /property[- ]value/i);
+  assert.match(html, /mortgage payoff/i);
+  assert.match(html, /selling costs/i);
+  assert.match(html, /Snap Homes/i);
+  assert.match(html, /Compare offers beyond the headline price/);
+  assert.match(html, /Plan closing/i);
+  assert.match(html, /seller-workspace\.css/);
+  assert.match(html, /data-static-route="\/sell"/);
+  assert.doesNotMatch(html, /Enter my own value/i);
+  assert.doesNotMatch(html, /No account is required to see the estimate/i);
+  assert.doesNotMatch(html, /The complete estimate remains visible/i);
+  assert.doesNotMatch(html, /Save this home and estimate in Snap Homes/i);
+  assert.doesNotMatch(html, /1842 Harbor View Drive|data-seller-projected-result|data-seller-net-sheet-row/i);
+});
+
+test("seller document answers borrower questions and links the approved source ledger", async () => {
+  const { createStaticRouteContext, renderStaticRouteDocument } = await staticModule();
+  const context = createStaticRouteContext(inputs);
+  const record = context.recordsByRoute.get("/sell");
+  const html = renderStaticRouteDocument(record, context, { siteOrigin: "https://mortgage.example" });
+  const workspaceStart = html.indexOf("data-seller-workspace");
+  const staticEducationStart = html.indexOf("static-seller-education");
+  const faqLandmarks = html.match(/<section\b[^>]*class="[^"]*(?:seller-faq-section|static-seller-faq)[^"]*"[^>]*>/g) || [];
+  const sourceLedgerLandmarks = html.match(/<section\b[^>]*class="[^"]*(?:seller-methodology|static-seller-source-ledger)[^"]*"[^>]*>/g) || [];
+
+  assert.equal(faqLandmarks.length, 1, "the seller document must contain one FAQ landmark");
+  assert.equal(sourceLedgerLandmarks.length, 1, "the seller document must contain one source-ledger landmark");
+  assert.match(html, /Is the estimated home value an appraisal\?/i);
+  assert.match(html, /Why can my mortgage payoff differ from my loan balance\?/i);
+
+  for (const sourceUrl of [
+    "https://www.sdarcc.gov/content/arcc/home/divisions/recorder-clerk/recording.html",
+    "https://www.consumerfinance.gov/rules-policy/regulations/1026/38/",
+    "https://www.consumerfinance.gov/rules-policy/regulations/1026/2020-12-28/36/",
+    "https://www.boe.ca.gov/lawguides/property/current/ptlg/annt/170-0087.html",
+    "https://www.nar.realtor/the-facts/what-the-nar-settlement-means-for-home-buyers-and-sellers",
+  ]) {
+    const sourceLinkIndex = html.indexOf(`href="${sourceUrl}"`);
+    assert.ok(
+      sourceLinkIndex > workspaceStart && sourceLinkIndex < staticEducationStart,
+      `${sourceUrl} must be an outbound source link from renderSellerWorkspace`,
+    );
+  }
+});
+
+test("seller runtime loads and passes the cost registry without making unrelated fixtures required", () => {
+  const appSource = fs.readFileSync(path.join(siteDir, "app.js"), "utf8");
+
+  assert.match(appSource, /const SELLER_COST_REGISTRY_URL = "\/mock-data\/seller-cost-registry\.json";/);
+  assert.match(appSource, /let sellerCostRegistry = \{\};/);
+  assert.match(appSource, /fetchOptionalJson\(SELLER_COST_REGISTRY_URL\)/);
+  assert.match(appSource, /renderSellerWorkspace\(page, sellerWorkspaceFixture, \{[\s\S]*?costRegistry: sellerCostRegistry,/);
+  assert.match(appSource, /wireSellerWorkspace\([\s\S]*?costRegistry: sellerCostRegistry,/);
 });
 
 test("all canonical non-root documents are crawlable, substantive, and SPA-compatible", async () => {
@@ -322,7 +401,7 @@ test("all canonical non-root documents are crawlable, substantive, and SPA-compa
   const context = createStaticRouteContext(inputs);
   const records = context.manifest.filter((entry) => entry.route !== "/").map((entry) => context.recordsByRoute.get(entry.route));
 
-  assert.equal(records.length, 871 + inputs.tagRegistry.tags.length);
+  assert.equal(records.length, 882 + inputs.tagRegistry.tags.length);
   for (const record of records) {
     const html = renderStaticRouteDocument(record, context, { siteOrigin: "https://mortgage.example" });
     const metadata = context.metadataFor(record, { siteOrigin: "https://mortgage.example" });

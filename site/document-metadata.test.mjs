@@ -259,7 +259,7 @@ test("base search and query states are noindex with the base search canonical", 
   assert.equal(queryMetadata.description, baseMetadata.description);
 });
 
-test("prequalification metadata describes the no-PII selected-provider scenario summary", async () => {
+test("prequalification metadata describes the selected provider and Snap Prequal continuation", async () => {
   const { resolveDocumentMetadata } = await metadataModule();
   const metadata = resolveDocumentMetadata(
     { type: "prequalHandoff", item: { route: "/prequal/start" } },
@@ -268,10 +268,27 @@ test("prequalification metadata describes the no-PII selected-provider scenario 
 
   assert.equal(metadata.canonical, "https://mortgage.example/prequal/start");
   assert.match(metadata.title, /Prequalification/);
-  assert.match(metadata.description, /no-PII/i);
   assert.match(metadata.description, /selected provider/i);
-  assert.match(metadata.description, /illustrative.*scenario/i);
+  assert.match(metadata.description, /mortgage option/i);
+  assert.match(metadata.description, /Snap Prequal/i);
   assert.doesNotMatch(metadata.description, /secure|contact details|available|licensed team|team availability/i);
+});
+
+test("seller metadata describes visible value and the Snap Homes proceeds analysis", async () => {
+  const { resolveDocumentMetadata } = await metadataModule();
+  const seller = seed.sellerPages.find(({ route }) => route === "/sell");
+  const metadata = resolveDocumentMetadata(
+    { type: "seller", item: seller },
+    { ...options, path: seller.route },
+  );
+
+  assert.equal(metadata.canonical, "https://mortgage.example/sell");
+  assert.equal(metadata.title, "Sell a Home: Value and Proceeds in Snap Homes | Snap Mortgage");
+  assert.match(metadata.description, /property-value range/i);
+  assert.match(metadata.description, /known obligations/i);
+  assert.match(metadata.description, /selling costs/i);
+  assert.match(metadata.description, /projected proceeds/i);
+  assert.match(metadata.description, /Snap Homes/i);
 });
 
 test("loan-officer and branch metadata omits unverified professional and location claims", async () => {

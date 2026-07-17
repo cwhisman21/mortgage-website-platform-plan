@@ -1,6 +1,6 @@
 {
   "version": "snap-rates-marketplace-v1",
-  "disclosure": "These are illustrative comparison inputs, not personalized pricing, provider quotes, rankings, offers, or commitments to lend. Inputs reviewed 2026-07-13; that date does not mean any sample was available. The displayed loan amount, principal-and-interest payment, listed upfront cost, simplified APR, and eight-year borrowing cost are recalculated from the entered price and down payment or refinance balance, each sample's term, illustrative rate and points value, and listed lender fees. Purpose, term, FHA or VA selection, points, property details, and result type narrow the samples shown. ZIP, credit range, and debt-to-income selections stay with the comparison summary but do not change these example prices. Open Details for assumptions and exclusions.",
+  "disclosure": "Rates, APRs, payments, points, fees, and cost comparisons can change. Pricing data last updated July 13, 2026. Results use the scenario entered, the pricing data available to Snap Mortgage, and the assumptions shown in each expanded result. Purpose, term, FHA or VA selection, points, property details, and result type affect which options appear. Provider pricing may also vary by ZIP code, credit profile, debt-to-income ratio, property details, and market conditions. Review the full assumptions, exclusions, and provider terms before continuing.",
   "sampleOfferDisclosure": "No name, email, phone, or other personal information is requested or sent from this comparison. Continuing opens a provider-specific scenario summary. No application is submitted, no provider receives data, and no credit decision or rate lock occurs.",
   "allowedValues": {
     "mortgageType": [
@@ -55,7 +55,7 @@
   },
   "detailsTemplates": {
     "purchaseStandard": {
-      "summary": "this illustrative purchase estimate combines principal and interest with lender-controlled upfront fees for side-by-side comparison.",
+      "summary": "this purchase estimate combines principal and interest with lender-controlled upfront fees for side-by-side comparison.",
       "sampleScenario": {
         "purpose": "Purchase",
         "price": 470000,
@@ -66,14 +66,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
-        "excludedCosts": "Down payment, prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, program fees, mortgage insurance except the editable example, and other third-party charges.",
+        "excludedCosts": "Down payment, prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, program fees, mortgage insurance except the editable amount, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [
@@ -100,7 +100,7 @@
       ]
     },
     "purchaseFha": {
-      "summary": "this illustrative FHA purchase estimate keeps lender charges visible while separating recurring mortgage insurance in the payment tab.",
+      "summary": "this FHA purchase estimate keeps lender charges visible while separating recurring mortgage insurance in the payment tab.",
       "sampleScenario": {
         "purpose": "Purchase",
         "price": 470000,
@@ -111,14 +111,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
         "excludedCosts": "Down payment, prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, FHA mortgage-insurance charges, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [
@@ -145,7 +145,7 @@
       ]
     },
     "purchaseVa": {
-      "summary": "this illustrative VA purchase estimate highlights lender-controlled fees while keeping any VA-specific funding assumptions outside the quoted rate comparison.",
+      "summary": "this VA purchase estimate highlights lender-controlled fees while keeping VA funding-fee details separate from the rate comparison.",
       "sampleScenario": {
         "purpose": "Purchase",
         "price": 470000,
@@ -156,14 +156,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
         "excludedCosts": "Down payment, prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, VA funding-fee treatment, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [
@@ -190,7 +190,7 @@
       ]
     },
     "refinanceStandard": {
-      "summary": "this illustrative refinance estimate compares lender-controlled charges and eight-year cost for a standard rate-and-term scenario.",
+      "summary": "this refinance estimate compares lender-controlled charges and eight-year cost for a standard rate-and-term scenario.",
       "sampleScenario": {
         "purpose": "Refinance",
         "propertyValue": 880000,
@@ -201,14 +201,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
-        "excludedCosts": "Prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, program fees, mortgage insurance except the editable example, and other third-party charges.",
+        "excludedCosts": "Prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, program fees, mortgage insurance except the editable amount, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [
@@ -235,7 +235,7 @@
       ]
     },
     "refinanceFha": {
-      "summary": "this illustrative refinance estimate keeps recurring mortgage-insurance assumptions visible in the payment panel while preserving comparable lender fees.",
+      "summary": "this FHA refinance estimate keeps recurring mortgage-insurance assumptions visible in the payment panel while preserving comparable lender fees.",
       "sampleScenario": {
         "purpose": "Refinance",
         "propertyValue": 880000,
@@ -246,14 +246,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
         "excludedCosts": "Prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, FHA mortgage-insurance charges, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [
@@ -280,7 +280,7 @@
       ]
     },
     "refinanceVa": {
-      "summary": "this illustrative VA refinance estimate preserves comparable lender fees while leaving provider-specific funding assumptions outside the quote display.",
+      "summary": "this VA refinance estimate preserves comparable lender fees while keeping provider-specific funding details separate from the rate display.",
       "sampleScenario": {
         "purpose": "Refinance",
         "propertyValue": 880000,
@@ -291,14 +291,14 @@
         "zip": "92109",
         "propertyType": "single-family home",
         "occupancy": "primary residence",
-        "lockAssumption": "A 30-day fixed-rate lock period is assumed only to define the sample; no rate is live or locked.",
+        "lockAssumption": "Pricing assumes a 30-day rate-lock period. Availability and lock terms must be confirmed with the provider.",
         "lenderCredits": 0,
-        "aprTreatment": "Simplified APR is calculated from the illustrative note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
-        "paymentIncludes": "Principal and interest are calculated from the loan amount, illustrative note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate planning assumptions.",
+        "aprTreatment": "Simplified APR is calculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
+        "paymentIncludes": "Principal and interest are calculated from the loan amount, displayed note rate, and term. Taxes, insurance, HOA dues, and mortgage-insurance entries remain separate payment assumptions.",
         "includedCosts": "Listed upfront cost equals the points charge for the loan amount plus the listed lender fee lines, less any stated lender credit.",
         "excludedCosts": "Prepaid interest, escrow reserves, taxes, insurance, HOA, title, appraisal, recording, VA funding-fee treatment, and other third-party charges.",
         "comparisonHorizon": "Borrowing cost adds interest paid through the first 96 payments, or the full term if shorter, to listed upfront cost. Principal repayment is not counted as a borrowing cost.",
-        "source": "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "source": "Snap Mortgage comparison data.",
         "reviewedDate": "2026-07-13"
       },
       "feeLines": [

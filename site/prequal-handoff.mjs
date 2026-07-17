@@ -126,9 +126,9 @@ export function createPrequalHandoffView({ adapter, request } = {}) {
     providerSubline: handoff.productLabel,
     productLabel: handoff.productLabel,
     detailMetrics: [
-      ["Illustrative rate", formatRatePercent(handoff.rate)],
+      ["Rate", formatRatePercent(handoff.rate)],
       ["Simplified APR", formatRatePercent(handoff.apr)],
-      ["Illustrative points", String(handoff.points)],
+      ["Points", String(handoff.points)],
       ["Monthly P&I", formatMoney(handoff.principalAndInterest)],
     ],
     returnUrl: returnToRatesUrl({ scenario: handoff.scenario }),
@@ -137,7 +137,7 @@ export function createPrequalHandoffView({ adapter, request } = {}) {
 }
 
 export function renderPrequalHandoffMarkup(view) {
-  const lead = "Your selected illustrative option and comparison details are shown below before you open a separate prequalification experience. Nothing has been sent to the provider, and you can return to rate results without losing your comparison view.";
+  const lead = "Your selected mortgage option and comparison details are ready. Review them before opening Snap Prequal, or return to rate results without losing your comparison view.";
   const body = view.status === "known"
     ? "Review the provider name, product, and mortgage scenario you selected. Starting prequalification opens a notice only; this page does not submit an application or send borrower information."
     : "Your comparison scenario is still available. Reopen your rate results and choose the provider you want to carry forward.";

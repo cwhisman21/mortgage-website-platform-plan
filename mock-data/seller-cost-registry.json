@@ -3,6 +3,7 @@
   "reviewedAt": "2026-07-16",
   "defaultRows": [
     { "id": "sellerTitleEscrowSettlement", "group": "sellingExpenses", "label": "Seller title, escrow, and settlement services", "mode": "percent_of_sale_price", "value": 0.01, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },
+    { "id": "stateCountyTransferTax", "group": "sellingExpenses", "label": "State and county transfer cost", "mode": "fixed_amount", "value": 0, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption; jurisdiction formula not configured", "asOf": "2026-07-16" },
     { "id": "listingCompensation", "group": "sellingExpenses", "label": "Listing-side compensation", "mode": "percent_of_sale_price", "value": 0.025, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable negotiated assumption", "asOf": "2026-07-16" },
     { "id": "buyerAgentCompensation", "group": "sellingExpenses", "label": "Buyer-agent compensation", "mode": "percent_of_sale_price", "value": 0.025, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable negotiated assumption", "asOf": "2026-07-16" },
     { "id": "buyerClosingCostCredit", "group": "sellingExpenses", "label": "Buyer closing-cost credit", "mode": "fixed_amount", "value": 0, "optional": false, "sourceType": "configured_assumption", "sourceLabel": "Editable planning assumption", "asOf": "2026-07-16" },

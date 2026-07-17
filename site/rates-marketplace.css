@@ -41,40 +41,10 @@
   overflow: hidden;
 }
 
-.rates-mobile-scenario {
-  display: none;
-}
-
 .rates-marketplace-form {
   display: grid;
   gap: 16px;
   padding: 20px;
-}
-
-.rates-form-heading {
-  align-items: flex-start;
-}
-
-.rates-form-heading > div {
-  min-width: 0;
-}
-
-.rates-form-heading h2 {
-  font-size: 21px;
-  line-height: 1.25;
-}
-
-.rates-form-heading p {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.45;
-}
-
-.rates-form-heading .text-button {
-  flex: 0 0 auto;
-  padding: 2px 0;
-  font-size: 0.82rem;
 }
 
 .rates-form-grid,
@@ -167,8 +137,19 @@
   padding: 0;
 }
 
+.rates-form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.rates-form-actions .text-button {
+  flex: 0 0 auto;
+}
+
 .rates-form-actions .button {
-  width: 100%;
+  flex: 1 1 auto;
+  width: auto;
 }
 
 .rates-results-panel {
@@ -656,58 +637,6 @@ img.rates-provider-media {
     gap: 12px;
   }
 
-  .rates-mobile-scenario {
-    display: flex;
-    width: 100%;
-    min-height: 68px;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 14px;
-    border: 0;
-    background: #fff;
-    color: var(--ink);
-    text-align: left;
-  }
-
-  .rates-mobile-scenario span {
-    display: grid;
-    min-width: 0;
-    gap: 2px;
-  }
-
-  .rates-mobile-scenario small {
-    color: var(--muted);
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-
-  .rates-mobile-scenario strong {
-    overflow: hidden;
-    font-size: 0.84rem;
-    line-height: 1.3;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .rates-mobile-scenario em {
-    flex: 0 0 auto;
-    color: var(--snap-blue-700);
-    font-size: 0.84rem;
-    font-style: normal;
-    font-weight: 800;
-  }
-
-  .rates-filter-rail .rates-marketplace-form {
-    display: none;
-    border-top: 1px solid var(--line);
-  }
-
-  .rates-filter-rail[data-mobile-open="true"] .rates-marketplace-form {
-    display: grid;
-  }
-
   .rates-marketplace-form {
     padding: 16px;
   }
@@ -850,14 +779,9 @@ img.rates-provider-media {
     font-size: 2rem;
   }
 
-  .rates-form-heading,
   .rates-field-pair,
   .rates-linked-inputs {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .rates-form-heading {
-    display: grid;
   }
 
   .rates-segmented {
@@ -885,4 +809,28 @@ img.rates-provider-media {
   .rates-donut-wrap {
     padding: 12px;
   }
+}
+
+.rates-input-shell > input {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  outline: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.rates-input-shell:focus-within {
+  border-color: var(--snap-blue);
+  box-shadow: 0 0 0 3px rgba(11, 85, 255, 0.18);
+}
+
+.rates-input-shell input[type="number"]::-webkit-inner-spin-button,
+.rates-input-shell input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }

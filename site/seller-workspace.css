@@ -258,11 +258,12 @@
 
 .seller-locked-account {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) auto;
-  gap: 24px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: 48px;
+  align-items: stretch;
   margin-top: 24px;
-  padding: 28px;
+  padding: 36px;
+  border-top: 4px solid var(--snap-teal);
   border-radius: var(--radius);
   background: var(--snap-navy);
   color: #fff;
@@ -273,9 +274,10 @@
 }
 
 .seller-locked-account h2 {
-  margin: 0 0 8px;
+  max-width: 620px;
+  margin: 0 0 10px;
   color: #fff;
-  font-size: 24px;
+  font-size: clamp(28px, 3vw, 40px);
 }
 
 .seller-locked-account p {
@@ -283,40 +285,69 @@
   color: #dce8fb;
 }
 
-.seller-locked-categories {
+.seller-account-pitch,
+.seller-account-next {
   display: grid;
-  gap: 10px;
-  margin: 0;
+  align-content: center;
+  gap: 14px;
 }
 
-.seller-locked-categories div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(220, 232, 251, 0.28);
+.seller-account-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.seller-locked-categories div:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.seller-locked-categories dt {
-  font-weight: 800;
-}
-
-.seller-locked-categories dd {
-  margin: 0;
-  color: #dce8fb;
+.seller-account-benefits li {
+  position: relative;
+  padding-left: 18px;
+  color: #fff;
   font-size: 14px;
-  text-align: right;
+  font-weight: 750;
+}
+
+.seller-account-benefits li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--snap-teal);
+}
+
+.seller-account-next {
+  padding-left: 40px;
+  border-left: 1px solid rgba(220, 232, 251, 0.28);
+}
+
+.seller-account-callout {
+  max-width: 440px;
+  color: #fff !important;
+  font-family: var(--display-font);
+  font-size: 26px;
+  line-height: 1.15;
 }
 
 .seller-account-actions {
   display: grid;
   gap: 10px;
+}
+
+.seller-locked-account .seller-account-actions .button {
+  width: 100%;
+  min-height: 56px;
+  font-size: 18px;
+  box-shadow: 0 12px 30px rgba(11, 85, 255, 0.28);
+}
+
+.seller-account-transfer {
+  color: #dce8fb !important;
+  font-size: 13px;
 }
 
 .seller-account-error {
@@ -844,12 +875,6 @@
   margin-block: 18px 34px;
 }
 
-.seller-account-actions {
-  display: flex;
-  gap: 10px;
-  flex: 0 0 auto;
-}
-
 .seller-step-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -982,8 +1007,16 @@
   min-height: 46px;
   flex: 1;
   border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
   background: transparent;
   padding: 11px;
+}
+
+.seller-prefixed-input:focus-within {
+  border-color: var(--snap-blue);
+  box-shadow: 0 0 0 3px rgba(11, 85, 255, 0.18);
 }
 
 .seller-address-suggestions {
@@ -1047,9 +1080,14 @@
 }
 
 .seller-range-field input[type="range"] {
+  --seller-range-progress: 50%;
   inline-size: 100%;
   min-height: 44px;
   margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
@@ -1062,34 +1100,44 @@
 }
 
 .seller-range-field input[type="range"]::-webkit-slider-runnable-track {
-  height: 8px;
+  height: 20px;
+  border: 1px solid #c9d3df;
   border-radius: 999px;
-  background: var(--line-strong);
+  background: linear-gradient(to right, var(--snap-teal) 0 var(--seller-range-progress), #e2e7ed var(--seller-range-progress) 100%);
 }
 
 .seller-range-field input[type="range"]::-webkit-slider-thumb {
-  width: 44px;
+  width: 48px;
   height: 44px;
-  margin-top: -18px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  background: var(--snap-blue);
-  box-shadow: 0 0 0 1px var(--snap-blue-700);
+  margin-top: -12px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid #b6c2d0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, transparent 0 19px, #a4b1c0 19px 21px, transparent 21px 27px, #a4b1c0 27px 29px, transparent 29px 100%), #fff;
+  box-shadow: 0 3px 10px rgba(10, 25, 48, 0.2);
 }
 
 .seller-range-field input[type="range"]::-moz-range-track {
-  height: 8px;
+  height: 20px;
+  border: 1px solid #c9d3df;
   border-radius: 999px;
-  background: var(--line-strong);
+  background: #e2e7ed;
+}
+
+.seller-range-field input[type="range"]::-moz-range-progress {
+  height: 20px;
+  border-radius: 999px 0 0 999px;
+  background: var(--snap-teal);
 }
 
 .seller-range-field input[type="range"]::-moz-range-thumb {
-  width: 44px;
+  width: 48px;
   height: 44px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  background: var(--snap-blue);
-  box-shadow: 0 0 0 1px var(--snap-blue-700);
+  border: 1px solid #b6c2d0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, transparent 0 19px, #a4b1c0 19px 21px, transparent 21px 27px, #a4b1c0 27px 29px, transparent 29px 100%), #fff;
+  box-shadow: 0 3px 10px rgba(10, 25, 48, 0.2);
 }
 
 .seller-value-endpoints {
@@ -1159,6 +1207,217 @@
   justify-self: start;
 }
 
+.seller-sheet-dialog-panel {
+  width: min(1120px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.seller-sheet-document {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+}
+
+.seller-sheet-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  padding-right: 48px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.seller-sheet-heading h1 {
+  margin: 0;
+  font-size: clamp(34px, 4vw, 52px);
+}
+
+.seller-sheet-address {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-weight: 750;
+}
+
+.seller-sheet-date {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.seller-sheet-date span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.seller-sheet-header-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.seller-sheet-value {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  min-width: 0;
+  padding: 28px;
+  border-radius: 8px;
+  background: var(--snap-navy);
+  color: #fff;
+}
+
+.seller-sheet-value .eyebrow,
+.seller-sheet-account-gate .eyebrow {
+  color: var(--snap-teal);
+}
+
+.seller-sheet-value > strong {
+  font-family: var(--display-font);
+  font-size: clamp(44px, 6vw, 68px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.seller-sheet-confirmed {
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.seller-sheet-confirmed h2,
+.seller-sheet-section h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.seller-sheet-confirmed dl,
+.seller-sheet-section dl {
+  margin: 0;
+}
+
+.seller-sheet-statement {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 42px;
+}
+
+.seller-sheet-section {
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 2px solid var(--ink);
+}
+
+.seller-sheet-summary {
+  grid-column: 1 / -1;
+  border-top-color: var(--snap-blue);
+}
+
+.seller-sheet-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, auto);
+  gap: 20px;
+  align-items: center;
+  min-height: 48px;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.seller-sheet-row dt,
+.seller-sheet-row dd {
+  min-width: 0;
+  margin: 0;
+}
+
+.seller-sheet-row dt {
+  overflow-wrap: anywhere;
+}
+
+.seller-sheet-row dd {
+  display: flex;
+  justify-content: flex-end;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: right;
+}
+
+.seller-concealed-value {
+  display: inline-block;
+  width: 104px;
+  height: 18px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #c9d4e5;
+  filter: blur(5px);
+}
+
+.seller-concealed-value > span {
+  display: block;
+  width: 78%;
+  height: 100%;
+  background: #9fafc4;
+}
+
+.seller-sheet-projected-row {
+  color: var(--snap-blue-700);
+  font-size: 18px;
+}
+
+.seller-sheet-account-gate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.6fr);
+  gap: 30px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 28px;
+  border-top: 4px solid var(--snap-teal);
+  border-radius: 8px;
+  background: var(--snap-navy);
+  color: #fff;
+}
+
+.seller-sheet-account-gate h3 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 28px;
+}
+
+.seller-sheet-account-gate p {
+  margin: 0;
+  color: #dce8fb;
+}
+
+.seller-sheet-account-gate .seller-account-actions {
+  align-content: center;
+}
+
+.seller-sheet-account-gate .button {
+  width: 100%;
+  min-height: 54px;
+}
+
+.seller-reopen-sheet {
+  margin-top: 14px;
+}
+
+.seller-sheet-dialog-panel .seller-results {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.seller-sheet-dialog-panel .seller-result-heading h1 {
+  font-size: clamp(34px, 4vw, 52px);
+}
+
+.seller-sheet-dialog-panel .seller-result-workspace {
+  gap: 36px;
+}
 .seller-workspace button,
 .seller-workspace input,
 .seller-workspace a {
@@ -1226,8 +1485,12 @@
   .seller-selected-value,
   .seller-obligation-confirmation { padding: 20px; }
   .seller-locked-account { padding: 20px; }
-  .seller-locked-categories div { align-items: start; flex-direction: column; gap: 4px; }
-  .seller-locked-categories dd { text-align: left; }
+  .seller-account-benefits { grid-template-columns: 1fr; }
+  .seller-account-next {
+    padding: 24px 0 0;
+    border-top: 1px solid rgba(220, 232, 251, 0.28);
+    border-left: 0;
+  }
   .seller-selected-value > strong { font-size: clamp(42px, 14vw, 52px); }
   .seller-obligation-confirmation dl div { align-items: start; flex-direction: column; gap: 4px; }
   .seller-obligation-confirmation dd { text-align: left; }
@@ -1294,6 +1557,59 @@
     padding: 24px;
   }
 
+  .seller-sheet-dialog-panel {
+    width: calc(100vw - 24px);
+    max-width: none;
+    max-height: calc(100dvh - 24px);
+    padding: 22px;
+  }
+
+  .seller-sheet-heading {
+    align-items: start;
+    flex-direction: column;
+    padding-right: 34px;
+  }
+
+  .seller-sheet-heading h1 {
+    font-size: 34px;
+  }
+
+  .seller-sheet-date {
+    text-align: left;
+  }
+
+  .seller-sheet-header-grid,
+  .seller-sheet-statement,
+  .seller-sheet-account-gate {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .seller-sheet-value,
+  .seller-sheet-account-gate {
+    padding: 22px;
+  }
+
+  .seller-sheet-value > strong {
+    font-size: clamp(40px, 13vw, 54px);
+  }
+
+  .seller-sheet-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .seller-sheet-row dd {
+    max-width: 130px;
+  }
+
+  .seller-sheet-account-gate .button {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .seller-sheet-dialog-panel .seller-result-workspace {
+    gap: 28px;
+  }
   .seller-dialog-panel h2 { font-size: 32px; }
   .seller-value-confirmation > strong { font-size: 46px; }
   .seller-range-field output { font-size: 30px; }

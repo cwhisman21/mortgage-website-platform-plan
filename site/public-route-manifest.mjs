@@ -3,11 +3,12 @@ export const PUBLIC_ROUTE_GROUP_COUNTS = Object.freeze({
   locations: 789,
   // Compatibility snapshot only; manifest validation derives the live Learning Center count below.
   learningCenter: 41,
+  companies: 10,
   loanOfficers: 17,
   branches: 7,
   calculators: 6,
   loanOptions: 6,
-  singleton: 4,
+  singleton: 5,
   prequal: 1,
 });
 
@@ -98,6 +99,8 @@ export function createPublicRouteManifest({ seed = {}, editorialContent = {}, ta
   entries.push(routeEntry("learningCenter", "directory", findRoute(seed.directoryPages, "/learning-center/search", "directoryPages"), "directoryPages"));
   for (const tag of tagRegistry.tags || []) entries.push(tagRouteEntry(tag));
 
+  addAll("companies", "company", seed.companies, "companies");
+
   entries.push(routeEntry("loanOfficers", "directory", findRoute(seed.directoryPages, "/loan-officers", "directoryPages"), "directoryPages"));
   addAll("loanOfficers", "loanOfficer", seed.loanOfficers, "loanOfficers");
 
@@ -112,6 +115,7 @@ export function createPublicRouteManifest({ seed = {}, editorialContent = {}, ta
 
   addAll("singleton", "product", (seed.products || []).filter((product) => SINGLETON_ROUTES.has(product.route)), "products");
   addAll("singleton", "rates", (seed.ratesPages || []).filter((page) => SINGLETON_ROUTES.has(page.route)), "ratesPages");
+  addAll("singleton", "seller", seed.sellerPages, "sellerPages");
 
   entries.push(routeEntry("prequal", "prequalHandoff", { id: "prequal-start", route: "/prequal/start" }, "static"));
 

@@ -38,11 +38,11 @@ test("dynamic state and city pages put the four-card news carousel immediately a
   assert.match(cardSource, /Read more/);
 });
 
-test("dynamic location examples carry a borrower-facing current-data warning", () => {
-  const noticeSource = sourceBetween("function illustrativeLocationSnapshotNotice", "function locationsPage()");
-  assert.match(noticeSource, /Check current local costs before you decide/);
-  assert.match(noticeSource, /not current market facts/);
-  assert.match(noticeSource, /Confirm today's figures/);
+test("dynamic location pages carry borrower-facing current-data guidance", () => {
+  const noticeSource = sourceBetween("function locationSnapshotGuidance", "function locationsPage()");
+  assert.match(noticeSource, /Use current property details/);
+  assert.match(noticeSource, /change over time/);
+  assert.match(noticeSource, /Review the dated sources/);
   assert.doesNotMatch(noticeSource, /seed|integration|public reliance|provenance|planning assumption/i);
 
   for (const [start, end] of [
@@ -50,7 +50,7 @@ test("dynamic location examples carry a borrower-facing current-data warning", (
     ["function statePage(state)", "function cityPage(city)"],
     ["function cityPage(city)", "function productPage("],
   ]) {
-    assert.match(sourceBetween(start, end), /illustrativeLocationSnapshotNotice\(\)/, start);
+    assert.match(sourceBetween(start, end), /locationSnapshotGuidance\(\)/, start);
   }
   assert.doesNotMatch(appSource, /marketSnapshotReference\("(?:state|city)_snapshot"/);
   assert.match(appSource, /function publicFreshnessRecord/);
@@ -59,8 +59,11 @@ test("dynamic location examples carry a borrower-facing current-data warning", (
 });
 
 test("navigation, notice actions, calculator inputs, and content labels use borrower-facing language", () => {
-  assert.match(appSource, /navLink\("\/loan-officers", "Loan officers"\)/);
-  assert.doesNotMatch(appSource, /navLink\("\/loan-officers", "Experts"\)/);
+  assert.match(appSource, /navLink\("\/rates", "Rates"\)/);
+  assert.match(appSource, /navLink\("\/learning-center", "Learning"\)/);
+  assert.match(appSource, /navLink\("\/loan-options", "Loan Options"\)/);
+  assert.match(appSource, /header-nav-action[^>]*data-cta-action="compareOffer"[^>]*>Compare Your Offer/);
+  assert.doesNotMatch(appSource, /navLink\("\/loan-officers", "(?:Loan officers|Experts)"\)/);
   assert.doesNotMatch(appSource, /Request mortgage guidance|Request guidance|primary: "Get guidance"/);
   assert.doesNotMatch(appSource, />Start prequalification|Start a prequalification conversation/);
   assert.match(appSource, /function humanizePublicLabel/);

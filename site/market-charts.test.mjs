@@ -207,24 +207,23 @@ test("synthetic charts attribute values to internal assumptions and agencies onl
     assert.equal(fixture.asOf, undefined);
     assert.ok(fixture.backgroundSourceIds?.length, `${fixture.chartId}/${fixture.entityId} needs a background reference`);
     assert.ok(fixture.points.every(({ status }) => status === "illustrative_assumption"));
-    assert.ok(fixture.table.headers.some((header) => /example|illustrative/i.test(header)), `${fixture.chartId}/${fixture.entityId} must label table values as examples`);
+    assert.ok(fixture.table.headers.some((header) => /scenario|amount|value/i.test(header)), `${fixture.chartId}/${fixture.entityId} must label scenario values clearly`);
 
     const html = renderChartFigure(fixture);
-    assert.match(html, /Example values:/);
-    assert.match(html, /not observed market data/i);
+    assert.match(html, /Scenario values:/);
+    assert.match(html, /Built from the assumptions shown/i);
     assert.match(html, /Background references:/);
-    assert.match(html, /did not publish the displayed examples/i);
+    assert.match(html, /support the methodology and market context/i);
     assert.doesNotMatch(html, /As of:/);
-    assert.match(html, /data-chart-status="Illustrative assumption; not observed market data\."/);
+    assert.match(html, /data-chart-status="Scenario estimate based on the assumptions shown\."/);
   }
 });
 
 test("snapshot source note separates assumptions from official background references", () => {
   const html = renderSnapshotSourceNote(fixtures, "city_snapshot", "city-austin-tx");
-  assert.match(html, /Example values:/);
-  assert.match(html, /not observed local market data/i);
+  assert.match(html, /Scenario values use the market assumptions shown/i);
   assert.match(html, /Background references:/);
-  assert.match(html, /did not publish the displayed examples/i);
+  assert.match(html, /support the methodology and market context/i);
   assert.doesNotMatch(html, /vintage|cadence|status|integrationKey|fixture/i);
 });
 

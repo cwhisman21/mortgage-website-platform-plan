@@ -40,15 +40,30 @@ test("public route manifest deterministically owns one canonical route per accep
   assert.deepEqual(groupCounts, {
     branches: 7,
     calculators: 6,
+    companies: 10,
     learningCenter: learningCenterBaseCount + tagRegistry.tags.length,
     loanOfficers: 17,
     loanOptions: 6,
     locations: 789,
     prequal: 1,
     root: 1,
-    singleton: 4,
+    singleton: 5,
   });
+  assert.deepEqual(
+    manifest.filter((entry) => entry.type === "seller"),
+    [{
+      route: "/sell",
+      type: "seller",
+      group: "singleton",
+      itemId: "seller-home",
+      source: "sellerPages",
+    }],
+  );
   assert.equal(manifest.find((entry) => entry.route === "/prequal/start")?.type, "prequalHandoff");
+  assert.deepEqual(
+    manifest.filter((entry) => entry.type === "company").map((entry) => entry.route),
+    seed.companies.map((entry) => entry.route).sort(),
+  );
   assert.equal(manifest.filter((entry) => entry.type === "contributor").length, 6);
   assert.deepEqual(
     manifest.filter((entry) => entry.type === "contributor").map((entry) => entry.route),

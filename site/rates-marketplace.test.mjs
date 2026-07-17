@@ -14,6 +14,40 @@ function loadFixture() {
   return JSON.parse(source);
 }
 
+function loadSeed() {
+  const source = fs.readFileSync(
+    new URL("../mock-data/production-seed.json", import.meta.url),
+    "utf8",
+  );
+  return JSON.parse(source);
+}
+
+test("enriches every rates provider with its canonical profile and placeholder media", async () => {
+  const { enrichMarketplaceProviderProfiles } = await loadMarketplaceModule();
+  const rawFixture = loadFixture();
+  const seed = loadSeed();
+  const enriched = enrichMarketplaceProviderProfiles(rawFixture, seed);
+  const companiesByName = new Map(seed.companies.map((company) => [company.name, company]));
+  const officersByName = new Map(seed.loanOfficers.map((officer) => [officer.name, officer]));
+
+  assert.notEqual(enriched, rawFixture);
+  assert.equal(rawFixture.offers.every((offer) => !offer.profileRoute), true);
+  assert.equal(enriched.offers.every((offer) => offer.profileRoute?.startsWith("/")), true);
+
+  for (const offer of enriched.offers) {
+    const canonical = offer.resultType === "company"
+      ? companiesByName.get(offer.displayName)
+      : officersByName.get(offer.displayName);
+    assert.ok(canonical, `missing canonical profile for ${offer.displayName}`);
+    assert.equal(offer.profileRoute, canonical.route);
+    if (offer.resultType === "company") {
+      assert.equal(offer.logoUrl, "/site/assets/images/company-placeholder.svg");
+    } else {
+      assert.equal(offer.headshotUrl, "/site/assets/images/loan-officer-placeholder.svg");
+    }
+  }
+});
+
 test("resolves each field in URL, account, cache, default order", async () => {
   const { MARKETPLACE_DEFAULTS, resolveScenarioContext } =
     await loadMarketplaceModule();
@@ -170,10 +204,11 @@ test("normalizes the fixture contract", async () => {
 
   assert.equal(fixture.version, "snap-rates-marketplace-v1");
   assert.equal(fixture.offers.length, 40);
-  assert.match(fixture.disclosure, /illustrative comparison inputs, not personalized pricing/i);
-  assert.match(fixture.disclosure, /reviewed 2026-07-13/i);
+  assert.match(fixture.disclosure, /Rates, APRs, payments, points, fees, and cost comparisons can change/i);
+  assert.match(fixture.disclosure, /last updated July 13, 2026/i);
   assert.match(fixture.sampleOfferDisclosure, /No application is submitted/i);
   assert.doesNotMatch(`${fixture.disclosure} ${fixture.sampleOfferDisclosure}`, /fixture data|UI development|fictional/i);
+  assert.doesNotMatch(`${fixture.disclosure} ${fixture.sampleOfferDisclosure}`, /\billustrative\b|\bsample offers?\b/i);
   assert.equal("reviewTemplates" in rawFixture, false);
   assert.equal(rawFixture.allowedValues.sort.includes("highestRating"), false);
   assert.equal(rawFixture.offers.every((offer) => offer.rating === 0 && offer.reviewCount === 0), true);
@@ -413,7 +448,7 @@ test("derives one reproducible cost scenario from the entered loan amount and te
   );
   assert.equal(offer.calculation.horizonMonths, 96);
   assert.ok(offer.apr > offer.rate);
-  assert.match(offer.calculation.aprMethod, /listed points and lender fees/i);
+  assert.match(offer.calculation.aprMethod, /displayed note rate, term, points, and listed lender fees/i);
 });
 
 test("purchase and refinance amounts recalculate costs without inventing unsupported terms", async () => {

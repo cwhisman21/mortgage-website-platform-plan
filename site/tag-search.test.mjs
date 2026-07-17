@@ -105,7 +105,7 @@ test("normalizes the complete public registry artifact and resolves representati
   const publicRegistry = normalizeTagRegistry(raw);
 
   assert.equal(publicRegistry.tags.length, 824);
-  assert.equal(publicRegistry.assignments.length, 3197);
+  assert.equal(publicRegistry.assignments.length, 3198);
   assert.deepEqual(
     tagsForRoute(publicRegistry, "/buy").primaryTags.map(({ id }) => id),
     ["tag-loan-program-home-purchase-loans", "tag-borrower-goal-buy-a-home"],

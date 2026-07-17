@@ -19,13 +19,17 @@ import {
   setSellerOptionalRow,
 } from "./seller-workspace.mjs";
 
-test("Task 1 seller assumption compatibility has been removed", () => {
-  const productionFixture = JSON.parse(fs.readFileSync(
-    new URL("../mock-data/seller-workspace-fixtures.json", import.meta.url),
-    "utf8",
-  ));
+const productionSellerFixture = JSON.parse(fs.readFileSync(
+  new URL("../mock-data/seller-workspace-fixtures.json", import.meta.url),
+  "utf8",
+));
+const productionCostRegistry = JSON.parse(fs.readFileSync(
+  new URL("../mock-data/seller-cost-registry.json", import.meta.url),
+  "utf8",
+));
 
-  assert.equal("assumptionRegistry" in productionFixture, false);
+test("Task 1 seller assumption compatibility has been removed", () => {
+  assert.equal("assumptionRegistry" in productionSellerFixture, false);
   assert.equal("confirmSellerValue" in sellerWorkspace, false);
   assert.equal("resolveSellerAssumptions" in sellerWorkspace, false);
   assert.equal("calculateSellerProceeds" in sellerWorkspace, false);
@@ -147,6 +151,79 @@ test("cost rows prefer city rules and materialize annual tax data", () => {
     optional: false,
     annualCents: 870_000,
   });
+});
+
+function productionFixtureSellerState(propertyId) {
+  const address = productionSellerFixture.addressSuggestions.find((candidate) => candidate.id === propertyId);
+  const valuation = productionSellerFixture.valuations[propertyId];
+  assert.ok(address, `Missing production address fixture ${propertyId}`);
+  assert.ok(valuation, `Missing production valuation fixture ${propertyId}`);
+  const state = {
+    valueRange: selectSellerValue(valuation),
+    obligations: { firstMortgageCents: 0, secondMortgageHelocCents: 0, otherLiensCents: 0 },
+    expectedClosingDate: "2026-08-15",
+    costRows: resolveSellerCostRows(productionCostRegistry, address),
+    activeOptionalIds: [],
+    overrides: {},
+  };
+  return { ...state, netSheet: calculateSellerNetSheet(state) };
+}
+
+test("Austin fixture resolves and edits the required national transfer-cost fallback", () => {
+  const state = productionFixtureSellerState("property-barton-springs");
+  const transferRows = state.costRows.filter((row) => row.id === "stateCountyTransferTax");
+
+  assert.equal(transferRows.length, 1, "Austin must include one state and county transfer-cost row");
+  assert.deepEqual(transferRows[0], {
+    id: "stateCountyTransferTax",
+    group: "sellingExpenses",
+    label: "State and county transfer cost",
+    mode: "fixed_amount",
+    value: 0,
+    optional: false,
+    sourceType: "configured_assumption",
+    sourceLabel: "Editable planning assumption; jurisdiction formula not configured",
+    asOf: "2026-07-16",
+  });
+
+  const edited = applySellerRowEdit(state, { rowId: "stateCountyTransferTax", value: 125_000 });
+  assert.deepEqual(edited.overrides.stateCountyTransferTax, { mode: "fixed_amount", value: 125_000 });
+  assert.equal(
+    edited.netSheet.groups.sellingExpenses.find((row) => row.id === "stateCountyTransferTax").amountCents,
+    125_000,
+  );
+});
+
+test("Orlando fixture resolves and edits the required national transfer-cost fallback", () => {
+  const state = productionFixtureSellerState("property-orange-grove");
+  const transferRows = state.costRows.filter((row) => row.id === "stateCountyTransferTax");
+
+  assert.equal(transferRows.length, 1, "Orlando must include one state and county transfer-cost row");
+  assert.equal(transferRows[0].mode, "fixed_amount");
+  assert.equal(transferRows[0].value, 0);
+  assert.equal(transferRows[0].optional, false);
+  assert.equal(transferRows[0].sourceType, "configured_assumption");
+
+  const edited = applySellerRowEdit(state, { rowId: "stateCountyTransferTax", value: 95_000 });
+  assert.deepEqual(edited.overrides.stateCountyTransferTax, { mode: "fixed_amount", value: 95_000 });
+  assert.equal(
+    edited.netSheet.groups.sellingExpenses.find((row) => row.id === "stateCountyTransferTax").amountCents,
+    95_000,
+  );
+});
+
+test("San Diego official statutory transfer formula overrides the national fallback", () => {
+  const state = productionFixtureSellerState("property-harbor-view");
+  const transferRows = state.costRows.filter((row) => row.id === "stateCountyTransferTax");
+
+  assert.equal(transferRows.length, 1, "San Diego must replace rather than duplicate the fallback row");
+  assert.equal(transferRows[0].mode, "statutory_transfer_tax");
+  assert.equal(transferRows[0].sourceType, "official");
+  assert.equal(transferRows[0].sourceLabel, "San Diego County Recorder documentary transfer tax");
+  assert.equal(
+    state.netSheet.groups.sellingExpenses.find((row) => row.id === "stateCountyTransferTax").amountCents,
+    79_750,
+  );
 });
 
 test("net sheet omits inactive optional rows and applies typed overrides", () => {

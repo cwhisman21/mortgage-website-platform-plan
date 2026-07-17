@@ -235,7 +235,7 @@
       "geographicScope": "United States consumer mortgage education",
       "claimSupported": "Loan Estimate payment, APR, closing-cost, prepaid, escrow, and cash-to-close comparisons.",
       "reviewedAt": "2026-07-13",
-      "limitation": "An illustrative result is not a Loan Estimate, and CFPB attribution cannot support rates, fees, payments, or other scenario values that CFPB did not publish.",
+      "limitation": "A comparison result is not a Loan Estimate, and CFPB attribution cannot support rates, fees, payments, or other scenario values that CFPB did not publish.",
       "approvalState": "research_reviewed_not_publication_approved",
       "authoritative": true
     },

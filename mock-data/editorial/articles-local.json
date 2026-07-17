@@ -79,7 +79,7 @@
           "route": "/calculators/mortgage-payment"
         }
       ],
-      "conclusion": "Austin data can make a financing conversation sharper, but it cannot decide whether a particular home is affordable or how much leverage an offer has. Keep dated market facts, illustrative payment scenarios, and property-specific decisions in separate columns. That makes it easier to update the plan when a real quote, inspection, insurance estimate, or competing offer changes the facts.",
+      "conclusion": "Austin data can make a financing conversation sharper, but it cannot decide whether a particular home is affordable or how much leverage an offer has. Keep dated market facts, estimated payment scenarios, and property-specific decisions in separate columns. That makes it easier to update the plan when a rate quote, inspection, insurance estimate, or competing offer changes the facts.",
       "faqs": [
         {
           "question": "Does the FHFA Austin index show what a specific home is worth?",
@@ -1426,7 +1426,7 @@
               ["Taxes, insurance, and mortgage insurance", "Monthly, annual, or escrowed", "Property records, current quotes, program rules, and Loan Estimate"],
               ["HOA and maintenance", "Monthly, periodic, or event-driven", "Association documents, property condition, and household reserve plan"]
             ],
-            "note": "The cost stack is illustrative and contains no assumed dollar values. Replace each line with property- and borrower-specific information."
+            "note": "This table organizes the cost categories without assuming dollar values. Replace each line with property- and borrower-specific information."
           }
         },
         {

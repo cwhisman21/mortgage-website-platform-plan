@@ -40,7 +40,7 @@ const asRows = (points, formatter = (value) => String(value)) => points.map((poi
 const illustrativePoints = (points) => points.map((point) => ({ ...point, status: "illustrative_assumption" }));
 
 const sources = [
-  { id: "illustrative-assumptions", kind: "internal_assumption", label: "Illustrative example values", cadence: "Scenario-specific", integrationKey: "planning.assumptions" },
+  { id: "illustrative-assumptions", kind: "internal_assumption", label: "Scenario estimate values", cadence: "Scenario-specific", integrationKey: "planning.assumptions" },
   { id: "fhfa-hpi", kind: "background_reference", label: "FHFA House Price Index", url: "https://www.fhfa.gov/reports/house-price-index/2026/Q1", cadence: "Quarterly release", asOf: "2026 Q1", integrationKey: "market.hpi" },
   { id: "freddie-pmms", kind: "official_observation", label: "Freddie Mac Primary Mortgage Market Survey archive", url: "https://www.freddiemac.com/pmms/archive", cadence: "Weekly", asOf: "July 9, 2026", integrationKey: "rates.pmms" },
   { id: "census-acs", kind: "background_reference", label: "U.S. Census Bureau American Community Survey", url: "https://www.census.gov/programs-surveys/acs/news/updates/2026.html", cadence: "Annual", asOf: "2024 ACS 5-year estimates (2020-2024), released January 29, 2026", integrationKey: "market.demographics" },
@@ -63,12 +63,12 @@ function priceTrendFixture(scope, location) {
   });
   return {
     chartId: "market.price_trend", entityId: location.id, scope,
-    title: `How an example home-price index can move in ${location.name}`,
-    summary: "These example values show how a home-price index can move over time. They are not observed prices, an FHFA series, or a property valuation.",
-    chartType: "line", unit: "Example index", frequency: "Example quarterly periods", geography: location.name,
+    title: `Home-price index scenario for ${location.name}`,
+    summary: "Follow the relative movement used in this planning scenario alongside the dated FHFA house-price research below.",
+    chartType: "line", unit: "Scenario index", frequency: "Quarterly scenario", geography: location.name,
     sourceId: "illustrative-assumptions", backgroundSourceIds: ["fhfa-hpi"],
     integrationKey: `market.hpi.${scope}`, dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Example period", "Example index value"], rows: asRows(points) },
+    table: { headers: ["Period", "Scenario index value"], rows: asRows(points) },
   };
 }
 
@@ -78,21 +78,21 @@ function locationCompareFixture(scope, location) {
   const points = scope === "state"
     ? [
       { label: location.name, value: roundedDollar(local) },
-      { label: "U.S. example baseline", value: national },
+      { label: "U.S. comparison", value: national },
     ]
     : [
       { label: location.name, value: roundedDollar(local) },
-      { label: "State example baseline", value: roundedDollar(local * seededValue(`state|${location.id}`, 0.78, 1.22)) },
-      { label: "U.S. example baseline", value: national },
+      { label: "State comparison", value: roundedDollar(local * seededValue(`state|${location.id}`, 0.78, 1.22)) },
+      { label: "U.S. comparison", value: national },
     ];
   return {
     chartId: "market.location_compare", entityId: location.id, scope,
-    title: `${location.name} example home-price comparison`,
-    summary: "These example values compare hypothetical areas. They are not ACS estimates, observed local prices, or appraisals.",
-    chartType: "bar", unit: "Example dollars", frequency: "Example annual comparison", geography: location.name,
+    title: `${location.name} home-price scenario comparison`,
+    summary: "Compare the local scenario with state and national reference points, then apply the price of the property you are considering.",
+    chartType: "bar", unit: "Scenario dollars", frequency: "Annual scenario", geography: location.name,
     sourceId: "illustrative-assumptions", backgroundSourceIds: ["census-acs"],
     integrationKey: `market.comparison.${scope}`, dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Example area", "Example home-price value"], rows: asRows(points, displayMoney) },
+    table: { headers: ["Area", "Scenario home-price value"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -106,12 +106,12 @@ function paymentBreakdownFixture(city) {
   ];
   return {
     chartId: "market.payment_breakdown", entityId: city.id, scope: "city",
-    title: `${city.name} example monthly payment breakdown`,
-    summary: "This example payment is not a local cost estimate, quote, APR, or Loan Estimate.",
-    chartType: "payment", unit: "Example monthly dollars", frequency: "One example scenario", geography: city.name,
+    title: `${city.name} monthly payment scenario`,
+    summary: "Review how principal, interest, taxes, insurance, and mortgage insurance contribute to the monthly estimate.",
+    chartType: "payment", unit: "Monthly dollars", frequency: "Current scenario", geography: city.name,
     sourceId: "illustrative-assumptions", backgroundSourceIds: ["cfpb-loan-estimate"],
     integrationKey: "market.payment.city", dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Payment component", "Example monthly amount"], rows: asRows(points, displayMoney) },
+    table: { headers: ["Payment component", "Monthly amount"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -173,12 +173,12 @@ function productScenarioFixture(product) {
 
   return {
     chartId: "product.scenario_compare", entityId: product.id, scope: "product",
-    title: `${product.name} example financing scenario`,
-    summary: "These values illustrate one financing scenario. They are not program eligibility, a loan approval, or a quote.",
-    chartType: "bar", unit: "Example dollars", frequency: "One example scenario", geography: "Example scenario (not a geographic observation)",
+    title: `${product.name} financing scenario`,
+    summary: "Compare the property value, cash contribution, current balance, and financing amount used in this scenario.",
+    chartType: "bar", unit: "Scenario dollars", frequency: "Current scenario", geography: "Mortgage scenario",
     sourceId: "illustrative-assumptions", backgroundSourceIds: [product.id.includes("fha") ? "hud-fha-limits" : "fhfa-conforming-limits"],
     integrationKey: "product.scenario", dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Scenario measure", "Example amount"], rows: asRows(points, displayMoney) },
+    table: { headers: ["Scenario measure", "Amount"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -191,12 +191,12 @@ function calculatorBreakdownFixture(calculator) {
   ];
   return {
     chartId: "calculator.payment_breakdown", entityId: calculator.id, scope: "calculator",
-    title: `${calculator.name} example breakdown`,
+    title: `${calculator.name} breakdown`,
     summary: "The starting values show how the monthly components fit together. Change the inputs to see how the estimate moves.",
-    chartType: "payment", unit: "Example monthly dollars", frequency: "One example scenario", geography: "Example scenario (not a geographic observation)",
+    chartType: "payment", unit: "Monthly dollars", frequency: "Current scenario", geography: "Mortgage scenario",
     sourceId: "illustrative-assumptions", backgroundSourceIds: ["cfpb-loan-estimate"],
     integrationKey: "calculator.breakdown", dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Payment component", "Example monthly amount"], rows: asRows(points, displayMoney) },
+    table: { headers: ["Payment component", "Monthly amount"], rows: asRows(points, displayMoney) },
   };
 }
 
@@ -210,12 +210,12 @@ function articleEvidenceFixture(article) {
   });
   return {
     chartId: "article.evidence", entityId: article.id, scope: "article",
-    title: `Example chart for ${article.title}`,
-    summary: "These index values illustrate a possible pattern. They are not article evidence, an FHFA series, or a local valuation.",
-    chartType: "line", unit: "Example index", frequency: "Example quarterly periods", geography: "Example scenario (not a geographic observation)",
+    title: `Mortgage trend scenario for ${article.title}`,
+    summary: "Use this index scenario to compare how a changing trend can affect the questions raised in the article.",
+    chartType: "line", unit: "Scenario index", frequency: "Quarterly scenario", geography: "Mortgage scenario",
     sourceId: "illustrative-assumptions", backgroundSourceIds: ["fhfa-hpi"],
     integrationKey: "article.evidence", dataMode: planningMode, points: illustrativePoints(points),
-    table: { headers: ["Example period", "Example index value"], rows: asRows(points) },
+    table: { headers: ["Period", "Scenario index value"], rows: asRows(points) },
   };
 }
 

@@ -69,3 +69,8 @@ test("interactive calculator hub elements expose visible keyboard focus", () => 
   assert.match(stylesSource, /outline:\s*2px solid var\(--snap-blue\)/);
   assert.match(stylesSource, /outline-offset:\s*2px/);
 });
+
+test("calculator currency shells own one continuous focus treatment", () => {
+  assert.match(stylesSource, /\.calculator-value-box input\s*\{[\s\S]*?border:\s*0;[\s\S]*?outline:\s*0;[\s\S]*?box-shadow:\s*none;/);
+  assert.match(stylesSource, /\.calculator-value-box:focus-within\s*\{[\s\S]*?border-color:\s*var\(--snap-blue\);[\s\S]*?box-shadow:/);
+});

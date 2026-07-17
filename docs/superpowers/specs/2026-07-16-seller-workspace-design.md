@@ -2,7 +2,9 @@
 
 **Date:** July 16, 2026
 
-**Status:** Approved for implementation
+**Status:** Partially superseded by `2026-07-16-seller-net-sheet-account-gate-design.md`
+
+> Do not implement this document's freeform value, public-result, short pro forma, account-continuation, or no-download decisions. The newer seller net-sheet account-gate design controls those areas.
 
 **Surface:** Public `/sell` page
 

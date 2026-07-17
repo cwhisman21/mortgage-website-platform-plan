@@ -18,6 +18,14 @@ function loadFixture() {
   return JSON.parse(source);
 }
 
+const ratesStylesheet = fs.readFileSync(new URL("./rates-marketplace.css", import.meta.url), "utf8");
+
+test("the currency shell owns the only visible input border", () => {
+  assert.match(ratesStylesheet, /\.rates-input-shell\s*>\s*input\s*\{[\s\S]*?border:\s*0;[\s\S]*?outline:\s*0;[\s\S]*?box-shadow:\s*none;[\s\S]*?-webkit-appearance:\s*none;/);
+  assert.match(ratesStylesheet, /\.rates-input-shell:focus-within\s*\{[\s\S]*?border-color:\s*var\(--snap-blue\);[\s\S]*?box-shadow:/);
+  assert.match(ratesStylesheet, /input\[type="number"\]::-webkit-inner-spin-button[\s\S]*?-webkit-appearance:\s*none;[\s\S]*?display:\s*none/);
+});
+
 function textFromHtml(html) {
   return String(html)
     .replace(/<script[\s\S]*?<\/script>/gi, "")
@@ -302,11 +310,14 @@ test("renders the approved filter rail, utility bar, comparison rows, and bottom
   }
   assert.doesNotMatch(text, /Highest rating/i);
   assert.doesNotMatch(text, /Your comparison filters/i);
+  assert.doesNotMatch(html, /<h2[^>]*>\s*Your scenario\s*<\/h2>/i);
+  assert.doesNotMatch(text, /Changes are applied together/i);
+  assert.doesNotMatch(html, /rates-mobile-scenario/);
   assert.equal((html.match(/data-marketplace-sort/g) || []).length, 1);
-  assert.match(text, /illustrative results/i);
-  assert.match(textFromHtml(loanOfficerHtml), /illustrative results/i);
-  assert.doesNotMatch(combinedHtml, /illustrative lender scenarios/i);
-  assert.match(text, /About these illustrative results/i);
+  assert.match(text, /mortgage options/i);
+  assert.match(textFromHtml(loanOfficerHtml), /mortgage options/i);
+  assert.match(text, /Rate and cost details/i);
+  assert.doesNotMatch(textFromHtml(combinedHtml), /\billustrative\b|\bsample mortgage\b|\bsample offers?\b/i);
   assert.ok(html.indexOf("data-rates-disclosure") > html.lastIndexOf("data-offer-id="));
   assert.match(text, /Rate/i);
   assert.match(text, /APR/i);
@@ -325,7 +336,7 @@ test("renders the approved filter rail, utility bar, comparison rows, and bottom
   assert.match(textFromHtml(loanOfficerHtml), /Payment/);
   assert.doesNotMatch(textFromHtml(loanOfficerHtml), /Customer reviews/);
   assert.doesNotMatch(combinedHtml, /data-offer-tab="reviews"/);
-  assert.match(textFromHtml(loanOfficerHtml), /Complete illustrative assumptions/i);
+  assert.match(textFromHtml(loanOfficerHtml), /Scenario and pricing details/i);
   assert.match(textFromHtml(loanOfficerHtml), /Loan amount and LTV/i);
   assert.match(textFromHtml(loanOfficerHtml), /Credit assumption/i);
   assert.match(textFromHtml(loanOfficerHtml), /Geography assumption/i);
@@ -337,6 +348,7 @@ test("renders the approved filter rail, utility bar, comparison rows, and bottom
   assert.doesNotMatch(combinedHtml, /NMLS\s*\d|Rating|\/ 5|Taylor B\.|Jordan M\.|Morgan S\.|Avery L\./i);
   assert.equal(html.includes('href="/companies/'), false);
   assert.equal(loanOfficerHtml.includes('href="/loan-officers/'), false);
+  assert.match(html, /class="rates-form-actions"[\s\S]*data-reset-marketplace[\s\S]*data-update-marketplace/);
   assert.match(paymentHtml, /data-chart-segment/);
   assert.match(paymentHtml, /aria-describedby="[^"]*payment-detail/);
   assert.match(combinedHtml, /role="tabpanel"/);
@@ -392,7 +404,9 @@ test("uses a fixed provider media slot for company logos and loan-officer photos
   const company = fixture.offers.find((offer) => offer.resultType === "company" && offer.mortgageType === "purchase");
   const officer = fixture.offers.find((offer) => offer.resultType === "loanOfficer" && offer.mortgageType === "purchase");
   company.logoUrl = "/assets/rates/company-mark.png";
+  company.profileRoute = "/companies/company-mark";
   officer.headshotUrl = "/assets/rates/loan-officer.jpg";
+  officer.profileRoute = "/loan-officers/loan-officer";
   officer.companyName = "Harbor Ridge Mortgage";
 
   const companyHtml = renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS });
@@ -403,8 +417,10 @@ test("uses a fixed provider media slot for company logos and loan-officer photos
 
   assert.match(companyHtml, /class="rates-provider-media company"/);
   assert.match(companyHtml, /src="\/assets\/rates\/company-mark\.png"/);
+  assert.match(companyHtml, /href="\/companies\/company-mark"/);
   assert.match(officerHtml, /class="rates-provider-media loan-officer"/);
   assert.match(officerHtml, /src="\/assets\/rates\/loan-officer\.jpg"/);
+  assert.match(officerHtml, /href="\/loan-officers\/loan-officer"/);
   assert.match(textFromHtml(officerHtml), /Harbor Ridge Mortgage/);
 });
 

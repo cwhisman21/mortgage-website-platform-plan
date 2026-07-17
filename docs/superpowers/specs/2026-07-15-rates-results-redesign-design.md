@@ -177,6 +177,7 @@ Remove the always-visible disclosure from above the offers. After the result lis
 - Use white surfaces, neutral text, restrained gray rules, and radii no greater than 8px.
 - Use Lucide icons already available to the project for sort direction, expand/collapse, and disclosure affordances.
 - Keep column widths stable so hover, expansion, longer provider names, and changing values do not shift the surrounding layout.
+- Keep interface anatomy, control explanations, interaction sequences, and control-state examples in internal design documentation only. The borrower-facing rates page moves directly from useful context into the working scenario controls and results.
 
 ## Accessibility
 
@@ -243,11 +244,12 @@ Do not hand-edit generated route HTML when a canonical generator owns it.
 8. Results can expand independently, and Expand all/Collapse all works for the rendered set.
 9. Each expanded result retains its own active tab.
 10. The existing Details, Payment, Reviews, chart interaction, assumptions, and accessibility behavior still works.
-11. Disclosure copy appears below results in a collapsed accessible accordion.
-12. Mobile layouts require no horizontal scrolling and keep all actions tappable.
-13. Empty, validation, and fixture-error states remain borrower-facing and navigable.
-14. Static routes continue to resolve without not-found regressions.
-15. No real rates, provider availability, licensing, reviews, ranking, application, or underwriting behavior is implied.
+11. No internal interface-instruction block appears on the borrower-facing page, including control anatomy, interaction-sequence, or visible-state examples.
+12. Disclosure copy appears below results in a collapsed accessible accordion.
+13. Mobile layouts require no horizontal scrolling and keep all actions tappable.
+14. Empty, validation, and fixture-error states remain borrower-facing and navigable.
+15. Static routes continue to resolve without not-found regressions.
+16. No real rates, provider availability, licensing, reviews, ranking, application, or underwriting behavior is implied.
 
 ## Validation Plan
 

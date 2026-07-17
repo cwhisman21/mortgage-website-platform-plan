@@ -41,6 +41,22 @@ function dollarsToCents(value) {
   return Number.isFinite(dollars) ? Math.round(dollars * 100) : Number.NaN;
 }
 
+function optionalDollarsToCents(value) {
+  return String(value ?? "").trim() === "" ? 0 : dollarsToCents(value);
+}
+
+function optionalCurrencyInput(cents) {
+  return Number(cents) === 0 ? "" : (Number(cents) / 100).toFixed(2);
+}
+
+function sellerRangeProgress(valueRange) {
+  const low = Number(valueRange?.lowCents);
+  const high = Number(valueRange?.highCents);
+  const selected = Number(valueRange?.selectedCents);
+  if (![low, high, selected].every(Number.isFinite) || high <= low) return 0;
+  return Number((Math.min(1, Math.max(0, (selected - low) / (high - low))) * 100).toFixed(2));
+}
+
 function firstPreviewState(fixture, costRegistry = {}) {
   const address = fixture?.addressSuggestions?.[0];
   const valuation = address && fixture?.valuations?.[address.id];
@@ -106,6 +122,20 @@ function sellerFaq() {
     </details>`).join("")}</div>`;
 }
 
+function sellerSourceLedger() {
+  const sources = [
+    ["San Diego County Recorder: documentary transfer tax", "https://www.sdarcc.gov/content/arcc/home/divisions/recorder-clerk/recording.html", "Transfer-tax guidance used for the controlled San Diego County planning rule."],
+    ["CFPB Regulation Z: Closing Disclosure", "https://www.consumerfinance.gov/rules-policy/regulations/1026/38/", "Seller transaction, mortgage-payoff, credit, and other-obligation fields on applicable Closing Disclosures."],
+    ["CFPB Regulation Z: mortgage payoff statements", "https://www.consumerfinance.gov/rules-policy/regulations/1026/2020-12-28/36/", "Requirements for a mortgage payoff statement calculated as of a specified date."],
+    ["California Board of Equalization: property-tax proration", "https://www.boe.ca.gov/lawguides/property/current/ptlg/annt/170-0087.html", "California guidance that property-tax proration is typically a contract matter between buyer and seller."],
+    ["National Association of Realtors: compensation negotiability", "https://www.nar.realtor/the-facts/what-the-nar-settlement-means-for-home-buyers-and-sellers", "Consumer guidance that agent compensation remains negotiable and is not set by law."],
+  ];
+  return `<div class="seller-source-ledger" data-seller-source-ledger>
+        <h3>Seller cost and closing source ledger</h3>
+        <ul>${sources.map(([label, href, scope]) => `<li><a href="${esc(href)}">${esc(label)}</a><p>${esc(scope)}</p></li>`).join("")}</ul>
+      </div>`;
+}
+
 function sellerEducation() {
   return `
     <section class="section seller-process-section" aria-labelledby="seller-process-title">
@@ -132,6 +162,7 @@ function sellerEducation() {
         <a href="/learning-center/search?tags=home-equity">Home equity</a>
         <a href="/learning-center/search?tags=borrower-planning">Seller planning</a>
       </nav>
+      ${sellerSourceLedger()}
       <p class="seller-updated">Last updated <time datetime="2026-07-16">July 16, 2026</time></p>
     </section>`;
 }
@@ -184,7 +215,8 @@ function renderEntry(primaryTags = []) {
     <section class="section compact seller-entry-cta">
       <div><p class="eyebrow">Ready to start?</p><h2>Start with your property value and known obligations.</h2><p>Enter the address first, then choose a value within the returned range.</p></div>
       <button class="button" type="button" data-seller-open-address>Enter my home address</button>
-    </section>`;
+    </section>
+    ${sellerEducation()}`;
 }
 
 function renderLockedSummary(state) {
@@ -196,6 +228,7 @@ function renderLockedSummary(state) {
         <p class="eyebrow">Sell a home</p>
         <h1 id="seller-locked-summary-title">Your property details are confirmed.</h1>
         <p>${esc(state.address.displayAddress)}</p>
+        <button class="text-button seller-reopen-sheet" type="button" data-seller-reopen-sheet>View my seller analysis</button>
       </div>
       <div class="seller-locked-grid">
         <section class="seller-selected-value" aria-labelledby="seller-selected-value-title">
@@ -207,26 +240,32 @@ function renderLockedSummary(state) {
           <h2 id="seller-obligation-confirmation-title">Confirmed obligations</h2>
           <dl>
             <div><dt>First mortgage payoff</dt><dd>${esc(formatSellerCurrency(obligations.firstMortgageCents))}</dd></div>
-            <div><dt>Second mortgage or HELOC payoff</dt><dd>${esc(formatSellerCurrency(obligations.secondMortgageHelocCents))}</dd></div>
-            <div><dt>Other liens</dt><dd>${esc(formatSellerCurrency(obligations.otherLiensCents))}</dd></div>
+            <div><dt>Second mortgage or HELOC payoff</dt><dd>${esc(enteredObligationValue(obligations.secondMortgageHelocCents))}</dd></div>
+            <div><dt>Other liens</dt><dd>${esc(enteredObligationValue(obligations.otherLiensCents))}</dd></div>
             <div><dt>Expected closing date</dt><dd>${esc(state.expectedClosingDate)}</dd></div>
           </dl>
         </section>
       </div>
       <section class="seller-locked-account" data-seller-account aria-labelledby="seller-locked-account-title">
-        <div>
-          <p class="eyebrow">Seller analysis</p>
-          <h2 id="seller-locked-account-title">Open the details in Snap Homes.</h2>
-          <p>Your seller analysis includes the cost categories and proceeds view below.</p>
+        <div class="seller-account-pitch">
+          <p class="eyebrow">Your seller analysis is ready</p>
+          <h2 id="seller-locked-account-title">See what could be left after the sale.</h2>
+          <p>Your value and obligations are set. Continue in Snap Homes to reveal the estimated costs that shape your projected proceeds.</p>
+          <ul class="seller-account-benefits">
+            <li>Itemized selling expenses</li>
+            <li>Payoffs and liens</li>
+            <li>Low, selected, and high proceeds</li>
+            <li>Downloadable seller net sheet</li>
+          </ul>
         </div>
-        <dl class="seller-locked-categories">
-          <div><dt>Selling expenses</dt><dd>Available in your seller analysis</dd></div>
-          <div><dt>Existing obligations</dt><dd>Available in your seller analysis</dd></div>
-          <div><dt>Projected proceeds</dt><dd>Available in your seller analysis</dd></div>
-        </dl>
-        <div class="seller-account-actions">
-          <button class="button" type="button" data-seller-open-account${state.accountPending ? " disabled" : ""}>${esc(state.accountPending ? "Opening account..." : accountLabel)}</button>
-          <p class="seller-account-error" data-seller-account-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+        <div class="seller-account-next">
+          <p class="eyebrow">One step left</p>
+          <p class="seller-account-callout">Reveal the full breakdown and download your net sheet.</p>
+          <div class="seller-account-actions">
+            <button class="button" type="button" data-seller-open-account${state.accountPending ? " disabled" : ""}>${esc(state.accountPending ? "Opening account..." : accountLabel)}</button>
+            <p class="seller-account-transfer">Your property details will carry over.</p>
+            <p class="seller-account-error" data-seller-account-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+          </div>
         </div>
       </section>
     </section>
@@ -321,16 +360,51 @@ function renderSalePriceEditor(state) {
     </form>`;
 }
 
-function renderSummaryRow(label, amountCents, className = "") {
-  return `<div class="seller-net-row seller-net-total ${esc(className)}"><dt>${esc(label)}</dt><dd><strong>${esc(formatSellerCurrency(amountCents))}</strong></dd></div>`;
+function sellerNetSheetLabels(netSheet) {
+  return {
+    projected: netSheet.projected.kind === "shortfall" ? "Projected shortfall" : "Projected net proceeds",
+    low: netSheet.scenarios.low.kind === "shortfall" ? "Low-value shortfall" : "Low-value proceeds",
+    high: netSheet.scenarios.high.kind === "shortfall" ? "High-value shortfall" : "High-value proceeds",
+  };
+}
+
+function setSellerPreviewText(root, selector, value) {
+  const element = root.querySelector(selector);
+  if (element) element.textContent = String(value);
+}
+
+export function syncSellerSalePricePreview(root, state) {
+  if (!root || state?.editingRowId !== "salePrice" || !state.netSheet) return false;
+  const { netSheet } = state;
+  const labels = sellerNetSheetLabels(netSheet);
+  const range = root.querySelector("[data-seller-edit-sale-price-range]");
+  if (range) range.value = String(state.valueRange.selectedCents);
+  setSellerPreviewText(root, "[data-seller-edit-sale-price-output]", formatSellerCurrency(state.valueRange.selectedCents));
+  for (const row of [...netSheet.groups.sellingExpenses, ...netSheet.groups.obligations]) {
+    setSellerPreviewText(root, `[data-seller-row="${row.id}"] .seller-row-amount`, formatSellerCurrency(row.amountCents));
+  }
+  setSellerPreviewText(root, '[data-seller-summary="total-selling-expenses"] [data-seller-summary-amount]', formatSellerCurrency(netSheet.totalSellingExpensesCents));
+  setSellerPreviewText(root, '[data-seller-summary="net-before-obligations"] [data-seller-summary-amount]', formatSellerCurrency(netSheet.netBeforeObligationsCents));
+  setSellerPreviewText(root, '[data-seller-summary="total-obligations"] [data-seller-summary-amount]', formatSellerCurrency(netSheet.totalObligationsCents));
+  setSellerPreviewText(root, '[data-seller-summary="projected"] [data-seller-summary-label]', labels.projected);
+  setSellerPreviewText(root, '[data-seller-summary="projected"] [data-seller-summary-amount]', formatSellerCurrency(netSheet.projected.amountCents));
+  setSellerPreviewText(root, "[data-seller-projected-label]", labels.projected);
+  setSellerPreviewText(root, "[data-seller-projected-amount]", formatSellerCurrency(netSheet.projected.amountCents));
+  setSellerPreviewText(root, "[data-seller-low-label]", labels.low);
+  setSellerPreviewText(root, "[data-seller-low-proceeds]", formatSellerCurrency(netSheet.scenarios.low.amountCents));
+  setSellerPreviewText(root, "[data-seller-high-label]", labels.high);
+  setSellerPreviewText(root, "[data-seller-high-proceeds]", formatSellerCurrency(netSheet.scenarios.high.amountCents));
+  return true;
+}
+
+function renderSummaryRow(key, label, amountCents, className = "") {
+  return `<div class="seller-net-row seller-net-total ${esc(className)}" data-seller-summary="${esc(key)}"><dt data-seller-summary-label>${esc(label)}</dt><dd><strong data-seller-summary-amount>${esc(formatSellerCurrency(amountCents))}</strong></dd></div>`;
 }
 
 export function renderSellerNetSheet(state) {
   if (state?.phase !== "unlocked" || !state.netSheet) throw new Error("Seller net sheet requires unlocked calculated state");
   const { netSheet } = state;
-  const projectedLabel = netSheet.projected.kind === "shortfall" ? "Projected shortfall" : "Projected net proceeds";
-  const lowLabel = netSheet.scenarios.low.kind === "shortfall" ? "Low-value shortfall" : "Low-value proceeds";
-  const highLabel = netSheet.scenarios.high.kind === "shortfall" ? "High-value shortfall" : "High-value proceeds";
+  const { projected: projectedLabel, low: lowLabel, high: highLabel } = sellerNetSheetLabels(netSheet);
   return `
     <section class="seller-results" data-seller-net-sheet tabindex="-1" aria-labelledby="seller-net-sheet-title">
       <header class="seller-result-heading">
@@ -343,12 +417,12 @@ export function renderSellerNetSheet(state) {
           <div class="seller-selected-price-line">${renderSalePriceEditor(state)}</div>
           <div class="seller-close-date"><span>Expected closing date</span><div>${renderDateEditor(state)}</div></div>
           <div class="seller-projected-result" data-seller-projected-result>
-            <span>${esc(projectedLabel)}</span>
-            <strong id="seller-projected-result-title">${esc(formatSellerCurrency(netSheet.projected.amountCents))}</strong>
+            <span data-seller-projected-label>${esc(projectedLabel)}</span>
+            <strong id="seller-projected-result-title" data-seller-projected-amount>${esc(formatSellerCurrency(netSheet.projected.amountCents))}</strong>
           </div>
           <dl class="seller-final-comparison" aria-label="Low and high final comparison">
-            <div><dt>${esc(lowLabel)}</dt><dd data-seller-low-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.low.amountCents))}</dd></div>
-            <div><dt>${esc(highLabel)}</dt><dd data-seller-high-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.high.amountCents))}</dd></div>
+            <div><dt data-seller-low-label>${esc(lowLabel)}</dt><dd data-seller-low-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.low.amountCents))}</dd></div>
+            <div><dt data-seller-high-label>${esc(highLabel)}</dt><dd data-seller-high-proceeds>${esc(formatSellerCurrency(netSheet.scenarios.high.amountCents))}</dd></div>
           </dl>
         </section>
         <div class="seller-statement">
@@ -365,10 +439,10 @@ export function renderSellerNetSheet(state) {
           <section class="seller-net-summary" aria-labelledby="seller-net-summary-title">
             <h2 id="seller-net-summary-title">Summary</h2>
             <dl>
-              ${renderSummaryRow("Total selling expenses", netSheet.totalSellingExpensesCents)}
-              ${renderSummaryRow("Net before obligations", netSheet.netBeforeObligationsCents)}
-              ${renderSummaryRow("Total obligations", netSheet.totalObligationsCents)}
-              ${renderSummaryRow(projectedLabel, netSheet.projected.amountCents, "seller-net-projected")}
+              ${renderSummaryRow("total-selling-expenses", "Total selling expenses", netSheet.totalSellingExpensesCents)}
+              ${renderSummaryRow("net-before-obligations", "Net before obligations", netSheet.netBeforeObligationsCents)}
+              ${renderSummaryRow("total-obligations", "Total obligations", netSheet.totalObligationsCents)}
+              ${renderSummaryRow("projected", projectedLabel, netSheet.projected.amountCents, "seller-net-projected")}
             </dl>
           </section>
         </div>
@@ -386,21 +460,37 @@ function renderUnlockedAnalysis(state) {
   return `${renderSellerNetSheet(state)}${sellerEducation()}`;
 }
 
+function sellerAddressOptionId(suggestion) {
+  const stableId = String(suggestion?.id || "option").replace(/[^A-Za-z0-9_-]/g, "-");
+  return `seller-address-option-${stableId}`;
+}
+
+function activeSellerAddressOptionId(state) {
+  const active = state.suggestions?.[state.activeSuggestionIndex];
+  return active ? sellerAddressOptionId(active) : "";
+}
+
+function renderSellerAddressOptions(state) {
+  return (state.suggestions || []).map((suggestion, index) => `
+        <button id="${esc(sellerAddressOptionId(suggestion))}" type="button" role="option" aria-selected="${index === state.activeSuggestionIndex ? "true" : "false"}" data-seller-address-option="${esc(suggestion.id)}">${esc(suggestion.displayAddress)}</button>`).join("");
+}
+
 function renderAddressStep(state) {
+  const activeOptionId = activeSellerAddressOptionId(state);
   return `
     <form data-seller-address-form>
       <label class="seller-field" for="seller-home-address"><span>Home address</span>
-        <input id="seller-home-address" name="address" value="${esc(state.addressQuery)}" autocomplete="street-address" data-seller-address-input role="combobox" aria-autocomplete="list" aria-controls="seller-address-suggestions" aria-expanded="${state.suggestions.length ? "true" : "false"}" />
+        <input id="seller-home-address" name="address" value="${esc(state.addressQuery)}" autocomplete="street-address" data-seller-address-input role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-controls="seller-address-suggestions" aria-expanded="${state.suggestions.length ? "true" : "false"}"${activeOptionId ? ` aria-activedescendant="${esc(activeOptionId)}"` : ""} />
       </label>
-      <ul class="seller-address-suggestions" id="seller-address-suggestions" role="listbox"${state.suggestions.length ? "" : " hidden"}>
-        ${state.suggestions.map((suggestion, index) => `<li role="option" aria-selected="${index === state.activeSuggestionIndex ? "true" : "false"}"><button type="button" data-seller-address-option="${esc(suggestion.id)}">${esc(suggestion.displayAddress)}</button></li>`).join("")}
-      </ul>
+      <div class="seller-address-suggestions" id="seller-address-suggestions" role="listbox"${state.suggestions.length ? "" : " hidden"}>${renderSellerAddressOptions(state)}
+      </div>
       <button class="button" type="submit" data-seller-find-home>Find my home</button>
     </form>`;
 }
 
 function renderValueStep(state) {
   const { valueRange } = state;
+  const progress = sellerRangeProgress(valueRange);
   return `
     <div class="seller-value-confirmation">
       <p class="eyebrow">Estimated home value</p>
@@ -409,10 +499,16 @@ function renderValueStep(state) {
     </div>
     <label class="seller-range-field" for="seller-value-range"><span>Selected property value</span>
       <output data-seller-selected-value for="seller-value-range">${esc(formatSellerCurrency(valueRange.selectedCents))}</output>
-      <input id="seller-value-range" type="range" min="${esc(valueRange.lowCents)}" max="${esc(valueRange.highCents)}" step="${esc(valueRange.stepCents)}" value="${esc(valueRange.selectedCents)}" data-seller-value-range />
+      <input id="seller-value-range" type="range" min="${esc(valueRange.lowCents)}" max="${esc(valueRange.highCents)}" step="${esc(valueRange.stepCents)}" value="${esc(valueRange.selectedCents)}" style="--seller-range-progress: ${esc(progress)}%" aria-valuetext="${esc(formatSellerCurrency(valueRange.selectedCents))}" data-seller-value-range />
     </label>
     <div class="seller-value-endpoints"><span>Low <strong>${esc(formatSellerCurrency(valueRange.lowCents))}</strong></span><span>High <strong>${esc(formatSellerCurrency(valueRange.highCents))}</strong></span></div>
     <div class="seller-dialog-actions"><button class="button" type="button" data-seller-use-value>Use this value</button></div>`;
+}
+
+function obligationErrorAttributes(state, fieldName) {
+  return state.obligationErrorField === fieldName
+    ? ' aria-invalid="true" aria-describedby="seller-obligations-error"'
+    : "";
 }
 
 function renderObligationsStep(state) {
@@ -421,19 +517,128 @@ function renderObligationsStep(state) {
       <label class="seller-upload-field"><span>Mortgage statement</span><input type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg" data-seller-statement /><strong>Select mortgage statement</strong><small>The suggested payoff remains editable and must be confirmed.</small></label>
       ${state.statement ? `<p class="seller-file-status">${esc(state.statement.fileName)}: suggested amount ready to confirm.</p>` : ""}
       <div class="seller-divider"><span>or enter the amount</span></div>
-      <label class="seller-field"><span>First mortgage payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="firstMortgage" inputmode="decimal" value="${esc(state.firstMortgageInput)}" /></span></label>
-      <label class="seller-field"><span>Second mortgage or HELOC payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="secondMortgageHeloc" inputmode="decimal" value="${esc(state.secondMortgageHelocInput)}" /></span></label>
-      <label class="seller-field"><span>Other liens</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="otherLiens" inputmode="decimal" value="${esc(state.otherLiensInput)}" /></span></label>
-      <label class="seller-field"><span>Expected closing date</span><input name="expectedClosingDate" type="date" value="${esc(state.expectedClosingDate)}" /></label>
+      <label class="seller-field"><span>First mortgage payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="firstMortgage" inputmode="decimal" value="${esc(state.firstMortgageInput)}"${obligationErrorAttributes(state, "firstMortgage")} /></span></label>
+      <label class="seller-field"><span>Second mortgage or HELOC payoff</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="secondMortgageHeloc" inputmode="decimal" value="${esc(state.secondMortgageHelocInput)}" placeholder="If any"${obligationErrorAttributes(state, "secondMortgageHeloc")} /></span></label>
+      <label class="seller-field"><span>Other liens</span><span class="seller-prefixed-input"><span aria-hidden="true">$</span><input name="otherLiens" inputmode="decimal" value="${esc(state.otherLiensInput)}" placeholder="If any"${obligationErrorAttributes(state, "otherLiens")} /></span></label>
+      <label class="seller-field"><span>Expected closing date</span><input name="expectedClosingDate" type="date" value="${esc(state.expectedClosingDate)}"${obligationErrorAttributes(state, "expectedClosingDate")} /></label>
       <button class="button" type="submit">Confirm property details</button>
     </form>`;
 }
+function renderConcealedAmount() {
+  return `<span class="seller-concealed-value" data-seller-concealed-value aria-hidden="true"><span></span></span>`;
+}
+
+function renderLockedCostRow(row) {
+  return `<div class="seller-sheet-row"><dt>${esc(row.label)}</dt><dd>${renderConcealedAmount()}</dd></div>`;
+}
+
+function enteredObligationValue(cents) {
+  return Number(cents) === 0 ? "None entered" : formatSellerCurrency(cents);
+}
+
+function renderLockedSellerSheet(state) {
+  const accountLabel = state.isLoggedIn ? "Open My Account" : "Create My Account";
+  const sellingRows = (state.costRows || [])
+    .filter((row) => row.group === "sellingExpenses" && !row.optional);
+  const calculatedObligationRows = (state.costRows || [])
+    .filter((row) => row.group === "obligations" && !row.optional);
+  const obligations = state.obligations || {};
+
+  return `
+    <section class="seller-sheet-document seller-locked-sheet" data-seller-locked-sheet aria-labelledby="seller-locked-sheet-title">
+      <header class="seller-sheet-heading">
+        <div>
+          <p class="eyebrow">Seller analysis</p>
+          <h1 id="seller-locked-sheet-title" data-seller-locked-sheet-title tabindex="-1">Seller&#39;s estimate of net proceeds</h1>
+          <p class="seller-sheet-address">${esc(state.address?.displayAddress || "")}</p>
+        </div>
+        <div class="seller-sheet-date">
+          <span>Expected closing date</span>
+          <strong>${esc(state.expectedClosingDate)}</strong>
+        </div>
+      </header>
+
+      <div class="seller-sheet-header-grid">
+        <section class="seller-sheet-value" aria-labelledby="seller-sheet-value-title">
+          <p class="eyebrow">Selected property value</p>
+          <strong id="seller-sheet-value-title">${esc(formatSellerCurrency(state.valueRange.selectedCents))}</strong>
+          <div class="seller-value-endpoints">
+            <span>Low <strong>${esc(formatSellerCurrency(state.valueRange.lowCents))}</strong></span>
+            <span>High <strong>${esc(formatSellerCurrency(state.valueRange.highCents))}</strong></span>
+          </div>
+        </section>
+        <section class="seller-sheet-confirmed" aria-labelledby="seller-sheet-confirmed-title">
+          <h2 id="seller-sheet-confirmed-title">Confirmed property details</h2>
+          <dl>
+            <div class="seller-sheet-row"><dt>First mortgage payoff</dt><dd>${esc(enteredObligationValue(obligations.firstMortgageCents))}</dd></div>
+            <div class="seller-sheet-row"><dt>Second mortgage or HELOC payoff</dt><dd>${esc(enteredObligationValue(obligations.secondMortgageHelocCents))}</dd></div>
+            <div class="seller-sheet-row"><dt>Other liens</dt><dd>${esc(enteredObligationValue(obligations.otherLiensCents))}</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <div class="seller-sheet-statement">
+        <section class="seller-sheet-section" aria-labelledby="seller-locked-expenses-title">
+          <h2 id="seller-locked-expenses-title">Estimated selling expenses</h2>
+          <dl>${sellingRows.map(renderLockedCostRow).join("")}</dl>
+        </section>
+
+        <section class="seller-sheet-section" aria-labelledby="seller-locked-obligations-title">
+          <h2 id="seller-locked-obligations-title">Existing obligations</h2>
+          <dl>
+            <div class="seller-sheet-row"><dt>First mortgage payoff</dt><dd>${esc(enteredObligationValue(obligations.firstMortgageCents))}</dd></div>
+            <div class="seller-sheet-row"><dt>Second mortgage or HELOC payoff</dt><dd>${esc(enteredObligationValue(obligations.secondMortgageHelocCents))}</dd></div>
+            <div class="seller-sheet-row"><dt>Other liens</dt><dd>${esc(enteredObligationValue(obligations.otherLiensCents))}</dd></div>
+            ${calculatedObligationRows.map(renderLockedCostRow).join("")}
+          </dl>
+        </section>
+
+        <section class="seller-sheet-section seller-sheet-summary" aria-labelledby="seller-locked-summary-title">
+          <h2 id="seller-locked-summary-title">Summary and proceeds</h2>
+          <p class="visually-hidden">Amounts available after account access.</p>
+          <dl>
+            <div class="seller-sheet-row"><dt>Total selling expenses</dt><dd>${renderConcealedAmount()}</dd></div>
+            <div class="seller-sheet-row"><dt>Net before obligations</dt><dd>${renderConcealedAmount()}</dd></div>
+            <div class="seller-sheet-row"><dt>Total obligations</dt><dd>${renderConcealedAmount()}</dd></div>
+            <div class="seller-sheet-row seller-sheet-projected-row"><dt>Projected net proceeds</dt><dd>${renderConcealedAmount()}</dd></div>
+          </dl>
+          <div class="seller-sheet-account-gate" data-seller-account>
+            <div>
+              <p class="eyebrow">Your complete seller analysis is ready</p>
+              <h3>Reveal your estimated costs and projected proceeds.</h3>
+              <p>Create or open your Snap Homes account to view the complete breakdown and download your net sheet.</p>
+            </div>
+            <div class="seller-account-actions">
+              <button class="button" type="button" data-seller-open-account${state.accountPending ? " disabled" : ""}>${esc(state.accountPending ? "Opening account..." : accountLabel)}</button>
+              <p class="seller-account-error" data-seller-account-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>`;
+}
+
+
 
 function dialogTitle(step) {
   return step === "value" ? "Choose the property value" : step === "obligations" ? "Confirm obligations and timing" : "What is your home address?";
 }
 
-function renderDialog(state) {
+export function renderSellerDialog(state) {
+  const isSheet = state.dialogStep === "locked-sheet" || state.dialogStep === "unlocked-sheet";
+  if (isSheet && !state.modalOpen) return "";
+  if (isSheet) {
+    const unlocked = state.dialogStep === "unlocked-sheet";
+    const sheetBody = unlocked ? renderSellerNetSheet(state) : renderLockedSellerSheet(state);
+    const titleId = unlocked ? "seller-net-sheet-title" : "seller-locked-sheet-title";
+    return `
+      <div class="seller-dialog-backdrop" data-seller-dialog role="dialog" aria-modal="true" aria-labelledby="${titleId}"${state.modalOpen ? "" : " hidden"}>
+        <section class="seller-dialog-panel seller-sheet-dialog-panel" data-seller-sheet-dialog>
+          <button class="seller-dialog-close" type="button" aria-label="Close seller estimate" data-seller-dialog-close>&times;</button>
+          ${sheetBody}
+        </section>
+      </div>`;
+  }
   const stepNumber = state.dialogStep === "value" ? 2 : state.dialogStep === "obligations" ? 3 : 1;
   const body = state.dialogStep === "value" ? renderValueStep(state) : state.dialogStep === "obligations" ? renderObligationsStep(state) : renderAddressStep(state);
   return `
@@ -444,7 +649,7 @@ function renderDialog(state) {
         <h2 id="seller-dialog-title">${esc(dialogTitle(state.dialogStep))}</h2>
         <p>${state.dialogStep === "address" ? "We will use the address to find the property and return a value range when available." : state.dialogStep === "value" ? "Review the range and choose the value you want to use." : "Select a statement for a suggested first-mortgage payoff or enter the balances directly, then add your expected closing date."}</p>
         ${body}
-        <p class="seller-dialog-error" data-seller-dialog-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
+        <p class="seller-dialog-error"${state.dialogStep === "obligations" ? ' id="seller-obligations-error"' : ""} data-seller-dialog-error${state.error ? "" : " hidden"}>${esc(state.error)}</p>
         <p class="visually-hidden" data-seller-dialog-status aria-live="polite">${esc(state.status)}</p>
         ${stepNumber > 1 ? `<button class="text-link text-button seller-dialog-back" type="button" data-seller-dialog-back>Back</button>` : ""}
       </section>
@@ -457,8 +662,16 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
     : null;
   const state = {
     phase: preview === "unlocked" ? "unlocked" : preview === "locked" ? "locked" : "entry",
-    modalOpen: ["value", "obligations"].includes(preview),
-    dialogStep: preview === "obligations" ? "obligations" : preview === "value" ? "value" : "address",
+    modalOpen: ["value", "obligations", "locked", "unlocked"].includes(preview),
+    dialogStep: preview === "unlocked"
+      ? "unlocked-sheet"
+      : preview === "locked"
+        ? "locked-sheet"
+        : preview === "obligations"
+          ? "obligations"
+          : preview === "value"
+            ? "value"
+            : "address",
     addressQuery: "",
     suggestions: [],
     activeSuggestionIndex: -1,
@@ -467,19 +680,21 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
     valueRange: previewState?.valueRange || null,
     obligations: previewState?.obligations || null,
     firstMortgageInput: previewState ? (previewState.obligations.firstMortgageCents / 100).toFixed(2) : "",
-    secondMortgageHelocInput: previewState ? (previewState.obligations.secondMortgageHelocCents / 100).toFixed(2) : "",
-    otherLiensInput: previewState ? (previewState.obligations.otherLiensCents / 100).toFixed(2) : "",
+    secondMortgageHelocInput: previewState ? optionalCurrencyInput(previewState.obligations.secondMortgageHelocCents) : "",
+    otherLiensInput: previewState ? optionalCurrencyInput(previewState.obligations.otherLiensCents) : "",
     expectedClosingDate: previewState?.expectedClosingDate || "",
     costRows: previewState?.costRows || [],
     activeOptionalIds: [],
     overrides: {},
     editingRowId: "",
+    salePriceEditOriginalCents: null,
     netSheet: null,
     analysisUnlocked: preview === "unlocked",
     accountPending: false,
     downloadPending: false,
     downloadError: "",
     statement: null,
+    obligationErrorField: "",
     error: "",
     status: "",
     isLoggedIn: Boolean(isLoggedIn),
@@ -492,12 +707,13 @@ function initialState({ fixture, costRegistry, preview, isLoggedIn, primaryTags 
 }
 
 function renderInner(state) {
+  const modalOwnsUnlockedSheet = state.modalOpen && state.dialogStep === "unlocked-sheet";
   const content = state.phase === "entry"
     ? renderEntry(state.primaryTags)
-    : state.phase === "unlocked"
+    : state.phase === "unlocked" && !modalOwnsUnlockedSheet
       ? renderUnlockedAnalysis(state)
       : renderLockedSummary(state);
-  return `${content}${renderDialog(state)}`;
+  return `${content}${renderSellerDialog(state)}`;
 }
 
 function buildCalculationInput(state) {
@@ -532,40 +748,61 @@ function isValidExpectedCloseDate(value) {
 
 export function transitionSellerObligations(state, input = {}) {
   const firstMortgageCents = dollarsToCents(input.firstMortgage);
-  const secondMortgageHelocCents = dollarsToCents(input.secondMortgageHeloc);
-  const otherLiensCents = dollarsToCents(input.otherLiens);
+  const secondMortgageHelocCents = optionalDollarsToCents(input.secondMortgageHeloc);
+  const otherLiensCents = optionalDollarsToCents(input.otherLiens);
   const expectedClosingDate = String(input.expectedClosingDate || "");
-  let obligations;
-  try {
-    obligations = normalizeSellerObligations({ firstMortgageCents, secondMortgageHelocCents, otherLiensCents });
-  } catch {
+  const inputState = {
+    ...state,
+    dialogStep: "obligations",
+    firstMortgageInput: String(input.firstMortgage ?? ""),
+    secondMortgageHelocInput: String(input.secondMortgageHeloc ?? ""),
+    otherLiensInput: String(input.otherLiens ?? ""),
+    expectedClosingDate,
+  };
+  const invalidAmount = [
+    ["firstMortgage", firstMortgageCents],
+    ["secondMortgageHeloc", secondMortgageHelocCents],
+    ["otherLiens", otherLiensCents],
+  ].find(([, cents]) => !Number.isFinite(cents) || !Number.isInteger(cents) || cents < 0);
+  if (invalidAmount) {
+    const invalidField = invalidAmount[0];
+    const error = "Enter a valid payoff or lien amount, or leave optional fields blank.";
     return {
       ok: false,
-      error: "Enter each known payoff or lien amount. Use 0 when a balance does not apply.",
-      focusSelector: "[data-seller-obligations-form] input[name='firstMortgage']",
+      error,
+      invalidField,
+      focusSelector: `[data-seller-obligations-form] input[name='${invalidField}']`,
+      state: { ...inputState, error, obligationErrorField: invalidField },
     };
   }
   if (!isValidExpectedCloseDate(expectedClosingDate)) {
+    const invalidField = "expectedClosingDate";
+    const error = "Enter a valid expected closing date.";
     return {
       ok: false,
-      error: "Enter a valid expected closing date.",
+      error,
+      invalidField,
       focusSelector: "[data-seller-obligations-form] input[name='expectedClosingDate']",
+      state: { ...inputState, error, obligationErrorField: invalidField },
     };
   }
+  const obligations = normalizeSellerObligations({ firstMortgageCents, secondMortgageHelocCents, otherLiensCents });
   return {
     ok: true,
     state: {
       ...state,
       obligations,
       firstMortgageInput: (obligations.firstMortgageCents / 100).toFixed(2),
-      secondMortgageHelocInput: (obligations.secondMortgageHelocCents / 100).toFixed(2),
-      otherLiensInput: (obligations.otherLiensCents / 100).toFixed(2),
+      secondMortgageHelocInput: optionalCurrencyInput(obligations.secondMortgageHelocCents),
+      otherLiensInput: optionalCurrencyInput(obligations.otherLiensCents),
       expectedClosingDate,
       phase: "locked",
       analysisUnlocked: false,
       netSheet: null,
-      modalOpen: false,
+      dialogStep: "locked-sheet",
+      modalOpen: true,
       statement: null,
+      obligationErrorField: "",
       error: "",
     },
   };
@@ -575,6 +812,8 @@ function preserveLockedSellerState(state, error) {
   return {
     ...state,
     phase: "locked",
+    dialogStep: "locked-sheet",
+    modalOpen: true,
     analysisUnlocked: false,
     accountPending: false,
     netSheet: null,
@@ -606,6 +845,8 @@ export async function transitionSellerAccountUnlock(state, {
         accountPending: false,
         netSheet: calculateSellerNetSheet(buildCalculationInput(state)),
         phase: "unlocked",
+        dialogStep: "unlocked-sheet",
+        modalOpen: true,
         error: "",
       },
     };
@@ -680,12 +921,45 @@ export function reduceSellerNetSheetInteraction(state, descriptor = {}) {
   const isKeydown = descriptor.type === "keydown";
   const action = descriptor.type === "action" ? descriptor.action : "";
 
+  if (action === "preview-sale-price") {
+    if (state.editingRowId !== "salePrice" || !descriptor.edit) {
+      return { handled: false, preventDefault: false, state, effect: null };
+    }
+    try {
+      const edited = applySellerRowEdit(state, {
+        rowId: "salePrice",
+        mode: "sale_price",
+        value: sellerEditValue(descriptor.edit),
+      });
+      return {
+        handled: true,
+        preventDefault: false,
+        state: {
+          ...edited,
+          editingRowId: "salePrice",
+          salePriceEditOriginalCents: state.salePriceEditOriginalCents ?? state.valueRange.selectedCents,
+        },
+        effect: { type: "sync-sale-price-preview" },
+      };
+    } catch {
+      return { handled: false, preventDefault: false, state, effect: null };
+    }
+  }
+
   if ((isKeydown && descriptor.key === "Escape") || action === "cancel-edit") {
     if (!state.editingRowId) return { handled: false, preventDefault: false, state, effect: null };
     const rowId = state.editingRowId;
+    const cancelled = rowId === "salePrice" && state.salePriceEditOriginalCents != null
+      ? applySellerRowEdit(state, {
+        rowId: "salePrice",
+        mode: "sale_price",
+        value: state.salePriceEditOriginalCents,
+      })
+      : state;
     return sellerInteractionResult({
-      ...state,
+      ...cancelled,
       editingRowId: "",
+      salePriceEditOriginalCents: null,
       status: "Edit cancelled.",
     }, `[data-seller-edit-row="${rowId}"]`, { preventDefault: isKeydown });
   }
@@ -704,6 +978,7 @@ export function reduceSellerNetSheetInteraction(state, descriptor = {}) {
       return sellerInteractionResult({
         ...edited,
         editingRowId: "",
+        salePriceEditOriginalCents: null,
         status: "Seller net sheet updated.",
       }, `[data-seller-edit-row="${rowId}"]`, { preventDefault: isKeydown });
     } catch {
@@ -718,6 +993,7 @@ export function reduceSellerNetSheetInteraction(state, descriptor = {}) {
     return sellerInteractionResult({
       ...state,
       editingRowId: descriptor.rowId,
+      salePriceEditOriginalCents: descriptor.rowId === "salePrice" ? state.valueRange.selectedCents : null,
       status: "",
     }, "[data-seller-edit-input]");
   }
@@ -746,6 +1022,7 @@ export function reduceSellerNetSheetInteraction(state, descriptor = {}) {
     return sellerInteractionResult({
       ...edited,
       editingRowId: "",
+      salePriceEditOriginalCents: null,
       status: "Seller assumptions reset.",
     }, "[data-seller-reset-assumptions]");
   }
@@ -785,12 +1062,26 @@ export function wireSellerWorkspace(root, {
     if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
   };
   const openDialog = (trigger, step = "address") => {
+    const resolvedStep = step === "resume"
+      ? state.phase === "unlocked"
+        ? "unlocked-sheet"
+        : state.phase === "locked"
+          ? "locked-sheet"
+          : "address"
+      : step;
     returnFocus = trigger || document.activeElement;
     state.modalOpen = true;
-    state.dialogStep = step;
+    state.dialogStep = resolvedStep;
     state.error = "";
-    redraw(step === "address" ? "[data-seller-address-input]" : ".seller-dialog-panel button");
-    emit("seller_flow_opened", { step });
+    const focusSelector = resolvedStep === "address"
+      ? "[data-seller-address-input]"
+      : resolvedStep === "locked-sheet"
+        ? "[data-seller-locked-sheet-title]"
+        : resolvedStep === "unlocked-sheet"
+          ? "[data-seller-projected-result-title]"
+          : ".seller-dialog-panel button";
+    redraw(focusSelector);
+    emit("seller_flow_opened", { step: resolvedStep });
   };
   const selectAddress = (id) => {
     const selected = state.suggestions.find((suggestion) => suggestion.id === id);
@@ -804,6 +1095,7 @@ export function wireSellerWorkspace(root, {
     const list = root.querySelector("#seller-address-suggestions");
     if (list) list.hidden = true;
     input?.setAttribute("aria-expanded", "false");
+    input?.removeAttribute("aria-activedescendant");
   };
   const findHome = async () => {
     state.error = "";
@@ -848,27 +1140,28 @@ export function wireSellerWorkspace(root, {
       expectedClosingDate: formValues.get("expectedClosingDate"),
     });
     if (!transition.ok) {
-      state.error = transition.error;
+      Object.assign(state, transition.state);
       redraw(transition.focusSelector);
       return;
     }
     Object.assign(state, transition.state);
-    redraw();
-    requestAnimationFrame(() => root.querySelector("[data-seller-locked-summary]")?.focus());
-    emit("seller_flow_completed", { step: "locked", status: "confirmed" });
+    redraw("[data-seller-locked-sheet-title]");
+    emit("seller_flow_advanced", { step: "locked-sheet" });
+    emit("seller_flow_completed", { step: "locked-sheet", status: "confirmed" });
   };
   const unlockSellerAnalysis = async () => {
     state.accountPending = true;
     state.error = "";
-    redraw("[data-seller-account]");
+    redraw("[data-seller-locked-sheet-title]");
+    emit("seller_account_handoff_started", { step: "account" });
     const transition = await transitionSellerAccountUnlock(state, { openAccount });
     Object.assign(state, transition.state);
     if (transition.ok) {
-      redraw("[data-seller-net-sheet]");
+      redraw("[data-seller-projected-result-title]");
       emit("seller_analysis_unlocked", { step: "account", status: "completed" });
       return;
     }
-    redraw("[data-seller-account]");
+    redraw("[data-seller-open-account]");
   };
   const downloadSellerAnalysis = async () => {
     if (state.phase !== "unlocked" || !state.analysisUnlocked || !state.netSheet || state.downloadPending) return;
@@ -889,6 +1182,7 @@ export function wireSellerWorkspace(root, {
     if (!result.handled) return result;
     Object.assign(state, result.state);
     if (result.effect?.type === "redraw") redraw(result.effect.focusSelector);
+    else if (result.effect?.type === "sync-sale-price-preview") syncSellerSalePricePreview(root, state);
     return result;
   };
   const editDescriptor = (form, values) => ({
@@ -901,6 +1195,7 @@ export function wireSellerWorkspace(root, {
     const target = event.target.closest("button, [data-seller-open-address]");
     if (!target || !root.contains(target)) return;
     if (target.matches("[data-seller-open-address], [data-seller-edit-address]")) openDialog(target, "address");
+    else if (target.matches("[data-seller-reopen-sheet]")) openDialog(target, "resume");
     else if (target.matches("[data-seller-dialog-close]")) closeDialog();
     else if (target.matches("[data-seller-address-option]")) selectAddress(target.dataset.sellerAddressOption);
     else if (target.matches("[data-seller-use-value]")) useSelectedValue();
@@ -928,8 +1223,15 @@ export function wireSellerWorkspace(root, {
   };
   const handleInput = async (event) => {
     if (event.target.matches("[data-seller-edit-sale-price-range]")) {
-      const output = root.querySelector("[data-seller-edit-sale-price-output]");
-      if (output) output.textContent = formatSellerCurrency(Number(event.target.value));
+      dispatchNetSheetInteraction({
+        type: "action",
+        action: "preview-sale-price",
+        edit: {
+          rowId: "salePrice",
+          mode: "sale_price",
+          rawValue: event.target.value,
+        },
+      });
       return;
     }
     if (event.target.matches("[data-seller-percent-input]")) {
@@ -940,6 +1242,8 @@ export function wireSellerWorkspace(root, {
     }
     if (event.target.matches("[data-seller-value-range]")) {
       state.valueRange.selectedCents = Number(event.target.value);
+      event.target.style.setProperty("--seller-range-progress", `${sellerRangeProgress(state.valueRange)}%`);
+      event.target.setAttribute("aria-valuetext", formatSellerCurrency(state.valueRange.selectedCents));
       const output = root.querySelector("[data-seller-selected-value]");
       if (output) output.textContent = formatSellerCurrency(state.valueRange.selectedCents);
       return;
@@ -956,9 +1260,12 @@ export function wireSellerWorkspace(root, {
     state.activeSuggestionIndex = state.suggestions.length ? 0 : -1;
     const list = root.querySelector("#seller-address-suggestions");
     if (!list) return;
-    list.innerHTML = state.suggestions.map((suggestion, index) => `<li role="option" aria-selected="${index === state.activeSuggestionIndex ? "true" : "false"}"><button type="button" data-seller-address-option="${esc(suggestion.id)}">${esc(suggestion.displayAddress)}</button></li>`).join("");
+    list.innerHTML = renderSellerAddressOptions(state);
     list.hidden = !state.suggestions.length;
     event.target.setAttribute("aria-expanded", String(Boolean(state.suggestions.length)));
+    const activeOptionId = activeSellerAddressOptionId(state);
+    if (activeOptionId) event.target.setAttribute("aria-activedescendant", activeOptionId);
+    else event.target.removeAttribute("aria-activedescendant");
   };
   const handleChange = async (event) => {
     if (!event.target.matches("[data-seller-statement]")) return;
@@ -997,6 +1304,7 @@ export function wireSellerWorkspace(root, {
       else selectAddress(state.suggestions[Math.max(0, state.activeSuggestionIndex)].id);
       if (event.key !== "Enter") {
         root.querySelectorAll("#seller-address-suggestions [role='option']").forEach((option, index) => option.setAttribute("aria-selected", String(index === state.activeSuggestionIndex)));
+        input.setAttribute("aria-activedescendant", activeSellerAddressOptionId(state));
       }
       return;
     }

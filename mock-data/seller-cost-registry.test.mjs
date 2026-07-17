@@ -19,15 +19,37 @@ async function loadRegistry() {
 
 test("seller cost registry rows use supported identifiers, groups, and modes", async () => {
   const registry = await loadRegistry();
-  const jurisdictionRows = Object.values(registry.jurisdictions || {}).flatMap((entry) => entry.rows || []);
-  const rows = [...registry.defaultRows, ...registry.optionalRows, ...jurisdictionRows];
-  const ids = rows.map((row) => row.id);
+  const baseRows = [...registry.defaultRows, ...registry.optionalRows];
+  const jurisdictionEntries = Object.entries(registry.jurisdictions || {});
+  const jurisdictionRows = jurisdictionEntries.flatMap(([, entry]) => entry.rows || []);
+  const rows = [...baseRows, ...jurisdictionRows];
 
-  assert.equal(new Set(ids).size, ids.length, "row ids must be unique");
+  assert.equal(new Set(baseRows.map((row) => row.id)).size, baseRows.length, "base row ids must be unique");
+  for (const [jurisdiction, entry] of jurisdictionEntries) {
+    const ids = (entry.rows || []).map((row) => row.id);
+    assert.equal(new Set(ids).size, ids.length, `${jurisdiction} row ids must be unique`);
+  }
   for (const row of rows) {
     assert.equal(allowedGroups.has(row.group), true, `${row.id} must use an allowed group`);
     assert.equal(allowedModes.has(row.mode), true, `${row.id} must use an allowed mode`);
   }
+});
+
+test("seller cost registry provides a required editable national transfer-cost fallback", async () => {
+  const registry = await loadRegistry();
+  const row = registry.defaultRows.find((candidate) => candidate.id === "stateCountyTransferTax");
+
+  assert.deepEqual(row, {
+    id: "stateCountyTransferTax",
+    group: "sellingExpenses",
+    label: "State and county transfer cost",
+    mode: "fixed_amount",
+    value: 0,
+    optional: false,
+    sourceType: "configured_assumption",
+    sourceLabel: "Editable planning assumption; jurisdiction formula not configured",
+    asOf: "2026-07-16",
+  });
 });
 
 test("seller cost registry validates amounts, statutory formulas, and sources", async () => {

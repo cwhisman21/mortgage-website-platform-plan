@@ -69,6 +69,16 @@ test("product routes resolve the product copy version instead of an unrelated pa
   assert.equal(freshness.basis, "product-copy-version");
 });
 
+test("the seller workspace resolves its own reviewed date", () => {
+  const freshness = resolveContentFreshness({
+    type: "seller",
+    item: { updatedAt: "2026-07-16" },
+  });
+
+  assert.equal(freshness.date, "2026-07-16");
+  assert.equal(freshness.basis, "seller-page-updated-at");
+});
+
 test("only explicitly evergreen routes may use the factual audit date", () => {
   assert.equal(FACTUAL_AUDIT_DATE, "2026-07-13");
   assert.equal(resolveContentFreshness({ type: "directory", item: {} }), null);

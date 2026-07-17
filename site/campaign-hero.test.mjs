@@ -45,10 +45,12 @@ test("homepage follows the approved Figma decision-flow sequence", () => {
     appSource.indexOf("function locationsPage()"),
   );
 
-  assert.match(homeSource, /home-metrics/);
-  assert.match(homeSource, /Choose your goal/);
-  assert.match(homeSource, /home-decision-grid/);
-  assert.match(homeSource, /Bring your research into one clear comparison/);
+  assert.match(homeSource, /I want to \.\.\./);
+  assert.match(homeSource, /home-primary-actions/);
+  assert.match(homeSource, /Start your auto-prequal/);
+  assert.match(homeSource, /Compare Your Offer/);
+  assert.match(homeSource, /renderHomeStateExplorer/);
+  assert.doesNotMatch(homeSource, /home-metrics|Choose your goal|home-decision-grid|Bring your research into one clear comparison/);
   assert.doesNotMatch(homeSource, /routeStrip\(/);
   assert.doesNotMatch(homeSource, /ctaDeck\(/);
 });

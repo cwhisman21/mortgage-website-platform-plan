@@ -29,6 +29,7 @@ const routeCollections = [
   seed.states,
   seed.cities,
   seed.branches,
+  seed.companies,
   seed.loanOfficers,
   seed.products,
   seed.ratesPages,
@@ -44,6 +45,7 @@ const collectionNames = [
   "states",
   "cities",
   "branches",
+  "companies",
   "loanOfficers",
   "products",
   "ratesPages",
@@ -221,7 +223,7 @@ const statePageSource = appSource.slice(
 const stateHero = statePageSource.indexOf("${hero({");
 const stateFeed = statePageSource.indexOf("locationNewsFeed(state)");
 const stateBrief = statePageSource.indexOf("${editorialSection({");
-const stateTable = statePageSource.indexOf('<section class="section">', stateBrief);
+const stateTable = statePageSource.indexOf('id="city-comparison"', stateBrief);
 if (!(stateHero < stateFeed && stateFeed < stateBrief && stateBrief < stateTable)) {
   fail("state news feed placement is incorrect");
 }

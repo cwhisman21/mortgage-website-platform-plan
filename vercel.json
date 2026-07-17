@@ -14,11 +14,13 @@
     { "source": "/calculators/:path*", "destination": "/site/generated/routes/calculators/:path*/index.html" },
     { "source": "/loan-officers", "destination": "/site/generated/routes/loan-officers/index.html" },
     { "source": "/loan-officers/:path*", "destination": "/site/generated/routes/loan-officers/:path*/index.html" },
+    { "source": "/companies/:path*", "destination": "/site/generated/routes/companies/:path*/index.html" },
     { "source": "/branches", "destination": "/site/generated/routes/branches/index.html" },
     { "source": "/branches/:path*", "destination": "/site/generated/routes/branches/:path*/index.html" },
     { "source": "/buy", "destination": "/site/generated/routes/buy/index.html" },
     { "source": "/refinance", "destination": "/site/generated/routes/refinance/index.html" },
     { "source": "/home-equity", "destination": "/site/generated/routes/home-equity/index.html" },
+    { "source": "/sell", "destination": "/site/generated/routes/sell/index.html" },
     { "source": "/sitemap.xml", "destination": "/site/sitemap.xml" },
     { "source": "/robots.txt", "destination": "/site/robots.txt" }
   ],

@@ -8,6 +8,21 @@ const siteDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(siteDir, "..");
 const read = (relativePath) => fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
 
+const sellerPublicSourceFiles = [
+  "site/app.js",
+  "site/seller-workspace-ui.mjs",
+  "site/static-route-document.mjs",
+  "mock-data/production-seed.json",
+  "site/generated/routes/sell/index.html",
+];
+
+const rejectedSellerPhrases = [
+  "Enter my own value",
+  "No account is required to see the estimate",
+  "The complete estimate remains visible",
+  "Save this home and estimate in Snap Homes",
+];
+
 const publicSourceFiles = [
   "site/app.js",
   "site/index.html",
@@ -89,6 +104,17 @@ const forbiddenPatterns = [
   ["layout assumptions", /\blayout assumptions?\b/i],
   ["illustrative planning assumption", /\billustrative planning assumptions?\b/i],
   ["source or as-of dates", /\bsource or as-of dates?\b/i],
+  ["what each control does", /\bwhat each control does\b/i],
+  ["interaction sequence", /\binteraction sequence\b/i],
+  ["visible control states", /\bvisible control states\b/i],
+  ["purpose switch", /\bpurpose switch\b/i],
+  ["numeric and currency input", /\bnumeric and currency input\b/i],
+  ["linked down payment", /\blinked down payment\b/i],
+  ["advanced accordion", /\badvanced accordion\b/i],
+  ["validation and correction", /\bvalidation and correction\b/i],
+  ["illustrative qualifier", /\billustrative\b/i],
+  ["sample offer qualifier", /\bsample offers?\b/i],
+  ["sample mortgage qualifier", /\bsample mortgage\b/i],
 ];
 
 const appCopyPatterns = [
@@ -305,6 +331,17 @@ test("borrower-visible templates and public content contain no scaffolding langu
   assertNoFindings("Borrower-visible scaffolding language remains:", [...new Set(findings)]);
 });
 
+test("seller public copy rejects superseded public-result promises", () => {
+  const findings = sellerPublicSourceFiles.flatMap((relativePath) => {
+    const source = read(relativePath).toLowerCase();
+    return rejectedSellerPhrases
+      .filter((phrase) => source.includes(phrase.toLowerCase()))
+      .map((phrase) => `${relativePath}: ${phrase}`);
+  });
+
+  assertNoFindings("Superseded seller copy remains:", findings);
+});
+
 test("public tag display names and descriptions contain no scaffolding language", () => {
   const relativePath = "mock-data/public-tag-registry.json";
   const registry = JSON.parse(read(relativePath));
@@ -406,31 +443,39 @@ test("canonical seed copy contains no public content-model vocabulary", () => {
   assertNoFindings("Canonical borrower copy still exposes content-model vocabulary:", [...new Set(findings)]);
 });
 
-test("sample-offer wording appears only inside the marketplace disclosure", () => {
-  const findings = [];
-  const files = [
-    ...publicSourceFiles,
-    "mock-data/production-seed.json",
-    "mock-data/editorial-content.json",
-    "mock-data/rates-marketplace-fixtures.json",
-  ];
+test("production-facing rates copy never labels results as samples or illustrations", async () => {
+  const { MARKETPLACE_DEFAULTS, normalizeMarketplaceFixture } = await import("./rates-marketplace.mjs");
+  const { renderRatesMarketplace } = await import("./rates-marketplace-ui.mjs");
+  const fixture = normalizeMarketplaceFixture(JSON.parse(read("mock-data/rates-marketplace-fixtures.json")));
+  const company = fixture.offers.find((offer) => offer.resultType === "company");
+  const loanOfficer = fixture.offers.find((offer) => offer.resultType === "loanOfficer");
+  const html = [
+    renderRatesMarketplace({ fixture, state: MARKETPLACE_DEFAULTS }),
+    renderRatesMarketplace({
+      fixture,
+      state: {
+        ...MARKETPLACE_DEFAULTS,
+        expandedOfferIds: [company.id],
+        expandedTabsByOffer: { [company.id]: "payment" },
+      },
+    }),
+    renderRatesMarketplace({
+      fixture,
+      state: {
+        ...MARKETPLACE_DEFAULTS,
+        resultType: "loanOfficer",
+        expandedOfferIds: [loanOfficer.id],
+        expandedTabsByOffer: { [loanOfficer.id]: "details" },
+      },
+    }),
+  ].join("\n");
+  const visibleText = decodeHtmlText(html)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
 
-  for (const relativePath of files) {
-    const source = read(relativePath);
-    const disclosureStart = relativePath === "site/rates-marketplace-ui.mjs" ? source.indexOf("function disclosure(") : -1;
-    const disclosureEnd = disclosureStart >= 0 ? source.indexOf("\nfunction ", disclosureStart + 1) : -1;
-    for (const match of source.matchAll(/\bsample offers?\b/gi)) {
-      const line = lineNumber(source, match.index);
-      const lineText = source.split(/\r?\n/)[line - 1] || "";
-      const inRendererDisclosure = relativePath === "site/rates-marketplace-ui.mjs" && match.index >= disclosureStart && match.index < disclosureEnd;
-      const inFixtureDisclosure = relativePath === "mock-data/rates-marketplace-fixtures.json" && /"(?:sampleOfferDisclosure|disclosure)"\s*:/.test(lineText);
-      if (!inRendererDisclosure && !inFixtureDisclosure) {
-        findings.push(`${relativePath}:${line} "${compact(lineText)}"`);
-      }
-    }
-  }
-
-  assertNoFindings("'Sample offer' wording is allowed only in the marketplace disclosure:", findings);
+  assert.doesNotMatch(visibleText, /\b(?:illustrative|sample)\b/i);
 });
 
 test("article cards never turn internal reviewStatus values into borrower copy", () => {

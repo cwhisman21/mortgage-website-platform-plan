@@ -289,9 +289,9 @@
         },
         {
           "afterSectionId": "place-the-loan-amount-in-context",
-          "heading": "Review sample mortgage options with the county limit in mind",
-          "body": "Use the rates page to compare illustrative structures, then refine the property and borrower inputs without treating the first result as a quote.",
-          "label": "Compare sample mortgage options",
+          "heading": "Review mortgage options with the county limit in mind",
+          "body": "Use the rates page to compare available structures, then refine the property and borrower details before choosing an option.",
+          "label": "Compare mortgage options",
           "route": "/rates"
         }
       ],
@@ -590,7 +590,7 @@
           "heading": "Translate the hurricane deductible into cash",
           "paragraphs": [
             "Florida law defines when the hurricane deductible applies and how it operates across covered hurricane losses during a calendar year. The Department of Financial Services explains that available deductible options and exceptions depend on dwelling limits and policy type. The declarations page must show the deductible as a dollar amount even when the contract also expresses it as a percentage.",
-            "For a planning example, a 2 percent hurricane deductible on a $450,000 dwelling limit represents $9,000. That arithmetic is illustrative only; the actual dollar amount, covered event, remaining calendar-year deductible, and claim treatment come from the policy and Florida rules. Keep the deductible in a liquid-reserve discussion rather than dividing it across the monthly payment as though it were a premium."
+            "A 2 percent hurricane deductible on a $450,000 dwelling limit equals $9,000. The actual dollar amount, covered event, remaining calendar-year deductible, and claim treatment come from the policy and Florida rules. Keep the deductible in a liquid-reserve discussion rather than dividing it across the monthly payment as though it were a premium."
           ]
         },
         {
@@ -1176,7 +1176,7 @@
         {
           "afterSectionId": "compare-jumbo-offers",
           "heading": "Compare available rate scenarios",
-          "body": "Use the same loan amount and term while reviewing illustrative comparisons, then confirm actual terms through written lender disclosures.",
+          "body": "Use the same loan amount and term while reviewing rate and cost comparisons, then confirm actual terms through written lender disclosures.",
           "label": "Review mortgage rate options",
           "route": "/rates"
         }

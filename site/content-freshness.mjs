@@ -7,6 +7,7 @@ const FRESHNESS_SCOPE = Object.freeze({
   "governing-evidence-date": "Supporting market evidence reviewed through this date",
   "market-snapshot-last-updated": "Market snapshot reviewed through this date",
   "product-copy-version": "Product guidance reviewed through this date",
+  "seller-page-updated-at": "Seller guidance reviewed through this date",
   "factual-audit-date": "Page guidance reviewed through this date",
 });
 const FRESHNESS_BASES = new Set(Object.keys(FRESHNESS_SCOPE));
@@ -93,6 +94,10 @@ export function resolveContentFreshness(found, {
 
   if (type === "product") {
     return resolution(productCopyBundle.version, "product-copy-version");
+  }
+
+  if (type === "seller") {
+    return resolution(item.updatedAt, "seller-page-updated-at");
   }
 
   if (evergreen === true) {

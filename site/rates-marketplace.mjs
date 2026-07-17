@@ -68,6 +68,8 @@ const PRIVATE_FIELD_DENYLIST = new Set([
 const DEFAULT_VISIBLE_COUNT = 8;
 const DEFAULT_EXPANDED_TAB = "details";
 const EMPTY_DISTRIBUTION = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+const COMPANY_PLACEHOLDER_URL = "/site/assets/images/company-placeholder.svg";
+const LOAN_OFFICER_PLACEHOLDER_URL = "/site/assets/images/loan-officer-placeholder.svg";
 
 export const MARKETPLACE_DEFAULTS = Object.freeze({
   mortgageType: "purchase",
@@ -95,6 +97,32 @@ export const MARKETPLACE_DEFAULTS = Object.freeze({
 
 function clone(value) {
   return value == null ? value : JSON.parse(JSON.stringify(value));
+}
+
+export function enrichMarketplaceProviderProfiles(rawFixture, seed = {}) {
+  const fixture = clone(rawFixture);
+  if (!fixture || !Array.isArray(fixture.offers)) return fixture;
+
+  const companiesByName = new Map(
+    (seed.companies || []).map((company) => [company.name, company]),
+  );
+  const officersByName = new Map(
+    (seed.loanOfficers || []).map((officer) => [officer.name, officer]),
+  );
+
+  fixture.offers = fixture.offers.map((offer) => {
+    const isLoanOfficer = offer.resultType === "loanOfficer";
+    const profile = (isLoanOfficer ? officersByName : companiesByName).get(offer.displayName);
+    return {
+      ...offer,
+      profileRoute: profile?.route || offer.profileRoute || null,
+      ...(isLoanOfficer
+        ? { headshotUrl: offer.headshotUrl || profile?.headshotUrl || LOAN_OFFICER_PLACEHOLDER_URL }
+        : { logoUrl: offer.logoUrl || profile?.logoUrl || COMPANY_PLACEHOLDER_URL }),
+    };
+  });
+
+  return fixture;
 }
 
 function isAllowed(field, value) {
@@ -482,7 +510,7 @@ export function deriveOfferForScenario(rawOffer, scenario = MARKETPLACE_DEFAULTS
     lenderCredits,
     upfrontCost: exactUpfrontCost,
     aprMethod:
-      "Simplified APR calculated from the sample note rate, sample term, and listed points and lender fees.",
+      "Simplified APR calculated from the displayed note rate, term, points, and listed lender fees.",
   };
 
   const sample = offer.details?.sampleScenario || {};
@@ -509,15 +537,15 @@ export function deriveOfferForScenario(rawOffer, scenario = MARKETPLACE_DEFAULTS
       propertyType: readableScenarioValue("propertyType", resolvedScenario.propertyType),
       occupancy: readableScenarioValue("occupancy", resolvedScenario.occupancy),
       aprTreatment:
-        "A simplified APR is recalculated from the sample note rate, sample term, listed points, and listed lender fees. It is not an official disclosure.",
+        "Simplified APR is recalculated from the displayed note rate, term, listed points, and listed lender fees. Review the provider's Loan Estimate for the official APR and itemized costs.",
       paymentIncludes:
-        "Principal and interest are recalculated from the entered loan amount, sample note rate, and selected term. Tax, insurance, HOA, and mortgage-insurance entries remain editable planning assumptions.",
+        "Principal and interest are recalculated from the entered loan amount, displayed note rate, and selected term. Tax, insurance, HOA, and mortgage-insurance entries remain editable payment assumptions.",
       includedCosts:
         "Upfront cost equals the points charge for the entered loan amount plus the listed lender fee lines, less any stated lender credit.",
       comparisonHorizon:
         "The cost comparison adds interest paid through the first 96 payments, or the full term if shorter, to the listed upfront cost. Principal repayment is not counted as a borrowing cost.",
       source:
-        "Illustrative Snap comparison inputs; no provider supplied personalized pricing, credit, property, or licensing information for these examples.",
+        "Snap Mortgage comparison data.",
     },
   };
 

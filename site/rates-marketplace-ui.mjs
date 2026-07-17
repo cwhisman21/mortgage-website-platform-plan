@@ -5,7 +5,6 @@ import {
   parseMarketplaceState,
   resolveScenarioContext,
   serializeMarketplaceState,
-  summarizeScenario,
   updateDownPayment,
   validateScenario,
 } from "./rates-marketplace.mjs";
@@ -127,7 +126,6 @@ function normalizeUiState(state = {}, previous = {}) {
     state.expandedTab || previous.expandedTab || "details",
   );
   normalized.advancedFiltersOpen = Boolean(state.advancedFiltersOpen ?? previous.advancedFiltersOpen);
-  normalized.mobileFiltersOpen = Boolean(state.mobileFiltersOpen ?? previous.mobileFiltersOpen);
   return normalized;
 }
 
@@ -208,23 +206,7 @@ function scenarioForm(state) {
   const advancedOpen = Boolean(state.advancedFiltersOpen);
   const advancedId = "rates-advanced-filters";
   return `
-    <button
-      class="rates-mobile-scenario"
-      type="button"
-      aria-expanded="${state.mobileFiltersOpen ? "true" : "false"}"
-      data-toggle-mobile-filters
-    >
-      <span><small>Your scenario</small><strong>${esc(summarizeScenario(state))}</strong></span>
-      <em>${state.mobileFiltersOpen ? "Close" : "Edit"}</em>
-    </button>
     <form class="rates-marketplace-form" data-rates-form>
-      <div class="rates-form-heading">
-        <div>
-          <h2>Your scenario</h2>
-          <p>Changes are applied together when you select Update offers.</p>
-        </div>
-        <button type="button" class="text-button" data-reset-marketplace data-analytics-event="rates_marketplace_reset">Reset filters</button>
-      </div>
       <div class="rates-form-grid">
         <label class="rates-field rates-field-wide">
           <span>Mortgage type</span>
@@ -303,6 +285,7 @@ function scenarioForm(state) {
         </label>
       </div>
       <div class="rates-form-actions">
+        <button type="button" class="text-button" data-reset-marketplace data-analytics-event="rates_marketplace_reset">Reset</button>
         <button class="button" type="submit" data-update-marketplace data-analytics-event="rates_marketplace_update">Update offers</button>
       </div>
       <p class="rates-form-error" id="rates-form-error" role="alert" data-rates-form-error hidden></p>
@@ -313,7 +296,7 @@ function scenarioForm(state) {
 function disclosure(fixture) {
   return `
     <details class="rates-disclosure" data-rates-disclosure>
-      <summary>About these illustrative results <span aria-hidden="true">⌄</span></summary>
+      <summary>Rate and cost details <span aria-hidden="true">⌄</span></summary>
       <div class="rates-disclosure-body">
         <p>${esc(fixture.disclosure)}</p>
         ${fixture.sampleOfferDisclosure ? `<p>${esc(fixture.sampleOfferDisclosure)}</p>` : ""}
@@ -425,7 +408,7 @@ function paymentPanel(offer, state) {
   return `
     <div class="rates-payment-panel" data-payment-panel="${esc(offer.id)}">
       <div class="rates-payment-editor">
-        <h4>Edit illustrative monthly payment assumptions</h4>
+        <h4>Edit monthly payment assumptions</h4>
         <div class="rates-payment-line fixed"><span>Principal and interest</span><strong>${esc(formatCurrency(offer.principalAndInterest))}</strong></div>
         ${PAYMENT_FIELDS
           .map(
@@ -489,8 +472,8 @@ function reviewsPanel() {
     <div class="rates-reviews-panel">
       <div>
         <h4>Review evidence checklist</h4>
-        <p>These illustrative providers include no customer testimony, customer identities, scores, or provider review claims.</p>
-        <p>Use attributable evidence before relying on public review signals.</p>
+        <p>Customer review data is not available for this result.</p>
+        <p>Review the source and verification method when customer feedback is available.</p>
       </div>
       <div>
         <h4>Source, date, and volume</h4>
@@ -528,23 +511,23 @@ function completeAssumptions(offer) {
     : `${formatCurrency(sample.propertyValue)} property value; ${sample.cashOut || "no cash out included"}`;
   const reviewDate = sample.reviewedDate || "review date unavailable";
   return `
-    <div class="rates-expanded-grid rates-assumptions-grid" aria-label="Complete illustrative assumptions">
+    <div class="rates-expanded-grid rates-assumptions-grid" aria-label="Scenario and pricing details">
       <div>
-        <h4>Complete illustrative assumptions</h4>
+        <h4>Scenario and pricing details</h4>
         <ul class="rates-plain-list">
           <li><strong>Purpose and product:</strong> ${esc(sample.purpose || offer.mortgageType)}; ${esc(offer.productLabel)}.</li>
-          <li><strong>Term:</strong> ${esc(offer.term)}-year fixed sample.</li>
-          <li><strong>Loan amount and LTV:</strong> ${esc(formatCurrency(sample.loanAmount))}; ${esc(sample.ltv)}% illustrative LTV.</li>
+          <li><strong>Term:</strong> ${esc(offer.term)}-year fixed.</li>
+          <li><strong>Loan amount and LTV:</strong> ${esc(formatCurrency(sample.loanAmount))}; ${esc(sample.ltv)}% LTV.</li>
           <li><strong>Credit assumption:</strong> ${esc(sample.creditRange)} self-selected range; no credit report is requested.</li>
         </ul>
       </div>
       <div>
         <h4>Pricing assumptions</h4>
         <ul class="rates-plain-list">
-          <li><strong>Geography assumption:</strong> ZIP ${esc(sample.zip)} for sample context only; no local pricing or provider availability is claimed.</li>
+          <li><strong>Geography assumption:</strong> ZIP ${esc(sample.zip)}.</li>
           <li><strong>Property and occupancy:</strong> ${esc(propertyBasis)}; ${esc(sample.propertyType)}, ${esc(sample.occupancy)}.</li>
           <li><strong>Lock assumption:</strong> ${esc(sample.lockAssumption)}</li>
-          <li><strong>Points and credits:</strong> ${esc(formatPoints(offer.points))} sample discount points; ${esc(formatCurrency(sample.lenderCredits))} lender credits.</li>
+          <li><strong>Points and credits:</strong> ${esc(formatPoints(offer.points))} discount points; ${esc(formatCurrency(sample.lenderCredits))} lender credits.</li>
           <li><strong>APR treatment:</strong> ${esc(sample.aprTreatment)}</li>
         </ul>
       </div>
@@ -555,7 +538,7 @@ function completeAssumptions(offer) {
           <li><strong>Included costs:</strong> ${esc(sample.includedCosts)}</li>
           <li><strong>Excluded costs:</strong> ${esc(sample.excludedCosts)}</li>
           <li><strong>Comparison horizon:</strong> ${esc(sample.comparisonHorizon)}</li>
-          <li><strong>Source and date:</strong> ${esc(sample.source)} Inputs reviewed ${esc(reviewDate)}; this is not a live pricing timestamp.</li>
+          <li><strong>Source and date:</strong> ${esc(sample.source)} Reviewed ${esc(reviewDate)}.</li>
         </ul>
       </div>
     </div>
@@ -573,7 +556,7 @@ function expandedPanel(offer, state) {
   const selectedTabId = `rates-tab-${offer.id}-${tab}`;
   return `
     <section class="rates-expanded-panel" id="${esc(panelId)}" data-expanded-offer="${esc(offer.id)}">
-        <div class="rates-tabs" role="tablist" aria-label="Illustrative comparison details">
+        <div class="rates-tabs" role="tablist" aria-label="Mortgage option details">
         ${tabs
           .map((item) => `<button type="button" role="tab" id="rates-tab-${esc(offer.id)}-${esc(item)}" class="${tab === item ? "active" : ""}" aria-selected="${tab === item ? "true" : "false"}" aria-controls="${esc(tabPanelId)}" tabindex="${tab === item ? "0" : "-1"}" data-offer-tab="${esc(item)}" data-offer-id="${esc(offer.id)}" data-analytics-event="rates_marketplace_tab">${esc(item[0].toUpperCase() + item.slice(1))}</button>`)
           .join("")}
@@ -590,7 +573,7 @@ function resultsHeader(state, result) {
   return `
     <div class="rates-results-utility">
       <div class="rates-results-count">
-        <h2>${esc(result.total)} illustrative results</h2>
+        <h2>${esc(result.total)} mortgage options</h2>
         ${visibleIds.length ? `<button class="text-button" type="button" data-expand-all aria-expanded="${allExpanded ? "true" : "false"}" data-analytics-event="rates_marketplace_expand_all">${allExpanded ? "Collapse all" : "Expand all"}</button>` : ""}
       </div>
       <div class="rates-results-controls">
@@ -638,12 +621,12 @@ function renderBody(fixture, state) {
     <section class="rates-marketplace-hero">
       <div>
         <p class="eyebrow">Compare mortgage costs</p>
-        <h1>Compare sample mortgage costs across companies and loan officers</h1>
-        <p>Start with anonymous illustrative results, refine the details that matter to you, and compare the same cost measures across companies or loan officers before choosing a next step.</p>
+        <h1>Compare mortgage options across companies and loan officers</h1>
+        <p>Enter your scenario, refine the details that matter to you, and compare rates, payments, points, and borrowing costs before choosing a next step.</p>
       </div>
     </section>
     <section class="rates-marketplace-workspace">
-      <aside class="rates-filter-rail" data-mobile-open="${state.mobileFiltersOpen ? "true" : "false"}">
+      <aside class="rates-filter-rail">
         ${scenarioForm(state)}
       </aside>
       <div class="rates-results-panel" data-rates-results>
@@ -662,8 +645,8 @@ function noMatchState(resultType) {
   const resultLabel = resultType === "loanOfficer" ? "loan officers" : "companies";
   return `
     <div class="rates-empty-state">
-      <strong>No illustrative ${esc(resultLabel)} match those filters yet.</strong>
-      <p>The current examples use 30-year terms. Choose 30-year, include FHA or VA options, or read the public rate education below before contacting a loan officer.</p>
+      <strong>No ${esc(resultLabel)} match those filters.</strong>
+      <p>Try a 30-year term, include FHA or VA options, or adjust the scenario details to broaden the results.</p>
       <a href="/learning-center">Review mortgage education</a>
       <a href="/loan-officers">Find loan officer guidance</a>
     </div>
@@ -675,7 +658,7 @@ function errorState(message) {
     <section class="rates-marketplace" data-rates-marketplace>
       <div class="rates-empty-state">
         <strong>Rate comparison is temporarily unavailable.</strong>
-        <p>${esc(message || "The illustrative sample results could not be read.")}</p>
+        <p>${esc(message || "Rate results could not be loaded. Please try again.")}</p>
         <a href="/rates#rate-table">Continue to rate education</a>
         <a href="/loan-officers">Find loan officer guidance</a>
       </div>
@@ -902,7 +885,6 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
   }));
   state.visibleCount = state.visibleCount || DEFAULT_VISIBLE_COUNT;
   let advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
-  let mobileFiltersOpen = false;
   let downPaymentSource = "downPaymentPercent";
 
   const rerender = () => {
@@ -910,7 +892,6 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     container.innerHTML = renderBody(normalizedFixture, {
       ...state,
       advancedFiltersOpen,
-      mobileFiltersOpen,
     });
     bind();
   };
@@ -919,7 +900,6 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     state = normalizeUiState({ ...state, ...next }, state);
     state.visibleCount = next.visibleCount || state.visibleCount || DEFAULT_VISIBLE_COUNT;
     advancedFiltersOpen = Boolean(state.advancedFiltersOpen);
-    mobileFiltersOpen = Boolean(state.mobileFiltersOpen);
     emitAnalytics(track, eventName, payload);
     rerender();
   };
@@ -941,7 +921,6 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
         visibleCount: DEFAULT_VISIBLE_COUNT,
         expandedOfferIds: [],
         expandedTabsByOffer: {},
-        mobileFiltersOpen: false,
       }, "rates_marketplace_update");
     });
 
@@ -958,15 +937,6 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
     container.querySelector("[data-toggle-advanced-filters]")?.addEventListener("click", () => {
       advancedFiltersOpen = !advancedFiltersOpen;
       setAdvancedFiltersOpen(container, advancedFiltersOpen);
-    });
-
-    container.querySelector("[data-toggle-mobile-filters]")?.addEventListener("click", (event) => {
-      mobileFiltersOpen = !mobileFiltersOpen;
-      const rail = container.querySelector(".rates-filter-rail");
-      rail?.setAttribute("data-mobile-open", String(mobileFiltersOpen));
-      event.currentTarget?.setAttribute?.("aria-expanded", String(mobileFiltersOpen));
-      const action = event.currentTarget?.querySelector?.("em");
-      if (action) action.textContent = mobileFiltersOpen ? "Close" : "Edit";
     });
 
     container.querySelectorAll("[data-mortgage-type-option]").forEach((button) => {
@@ -988,14 +958,12 @@ export function wireRatesMarketplace(root, { fixture, accountContext = {}, navig
 
     container.querySelector("[data-reset-marketplace]")?.addEventListener("click", () => {
       advancedFiltersOpen = false;
-      mobileFiltersOpen = false;
       setState({
         ...MARKETPLACE_DEFAULTS,
         visibleCount: DEFAULT_VISIBLE_COUNT,
         expandedOfferIds: [],
         expandedTabsByOffer: {},
         advancedFiltersOpen: false,
-        mobileFiltersOpen: false,
       }, "rates_marketplace_reset");
     });
 

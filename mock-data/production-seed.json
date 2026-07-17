@@ -10,9 +10,11 @@
     "states": 51,
     "cities": 737,
     "branches": 6,
+    "companies": 10,
     "loanOfficers": 16,
     "products": 8,
     "ratesPages": 1,
+    "sellerPages": 1,
     "locationProductModules": 836,
     "blogPages": 10,
     "articles": 24,
@@ -37504,6 +37506,58 @@
       "coverageNote": "Only the branch name and related mortgage education are shown."
     }
   ],
+  "companies": [
+    {
+      "id": "company-harborline-home-lending",
+      "name": "Harborline Home Lending",
+      "route": "/companies/harborline-home-lending"
+    },
+    {
+      "id": "company-cypress-point-mortgage",
+      "name": "Cypress Point Mortgage",
+      "route": "/companies/cypress-point-mortgage"
+    },
+    {
+      "id": "company-northstar-home-finance",
+      "name": "Northstar Home Finance",
+      "route": "/companies/northstar-home-finance"
+    },
+    {
+      "id": "company-juniper-rate-co",
+      "name": "Juniper Rate Co.",
+      "route": "/companies/juniper-rate-co"
+    },
+    {
+      "id": "company-summit-harbor-mortgage",
+      "name": "Summit Harbor Mortgage",
+      "route": "/companies/summit-harbor-mortgage"
+    },
+    {
+      "id": "company-meridian-bay-lending",
+      "name": "Meridian Bay Lending",
+      "route": "/companies/meridian-bay-lending"
+    },
+    {
+      "id": "company-redwood-trail-mortgage",
+      "name": "Redwood Trail Mortgage",
+      "route": "/companies/redwood-trail-mortgage"
+    },
+    {
+      "id": "company-silver-oak-funding",
+      "name": "Silver Oak Funding",
+      "route": "/companies/silver-oak-funding"
+    },
+    {
+      "id": "company-blue-mesa-mortgage",
+      "name": "Blue Mesa Mortgage",
+      "route": "/companies/blue-mesa-mortgage"
+    },
+    {
+      "id": "company-lighthouse-equity-co",
+      "name": "Lighthouse Equity Co.",
+      "route": "/companies/lighthouse-equity-co"
+    }
+  ],
   "loanOfficers": [
     {
       "id": "lo-ava-martinez",
@@ -37704,6 +37758,23 @@
         "Refinance",
         "Cash-out refinance",
         "HELOC"
+      ]
+    }
+  ],
+  "sellerPages": [
+    {
+      "id": "seller-home",
+      "name": "Sell a Home",
+      "route": "/sell",
+      "metaTitle": "Sell a Home: Value and Proceeds in Snap Homes | Snap Mortgage",
+      "metaDescription": "See a property-value range, choose a value, confirm known obligations, then open detailed selling costs and projected proceeds through Snap Homes.",
+      "purpose": "Help homeowners see a property-value range, choose a value, confirm known obligations, and open detailed selling costs and projected proceeds through Snap Homes.",
+      "updatedAt": "2026-07-16",
+      "relatedRoutes": [
+        "/home-equity",
+        "/refinance",
+        "/learning-center",
+        "/calculators/mortgage-payment"
       ]
     }
   ],

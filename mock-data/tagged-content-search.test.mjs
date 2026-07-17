@@ -150,6 +150,23 @@ function readCanonicalInputs() {
   };
 }
 
+test("indexes the seller proceeds workspace once with controlled primary tags", () => {
+  const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
+  const records = searchIndex.records.filter(({ route }) => route === "/sell");
+  const assignment = registry.assignments.find(({ route }) => route === "/sell");
+
+  assert.equal(records.length, 1);
+  assert.equal(records[0].family, "topic-guides");
+  assert.deepEqual(assignment.primaryTagIds, [
+    "tag-market-topic-home-values",
+    "tag-loan-program-home-equity-heloc",
+    "tag-property-concept-owner-costs",
+  ]);
+  assert.deepEqual(records[0].primaryTagIds, assignment.primaryTagIds);
+  assert.match(records[0].preview, /confirm known obligations/i);
+  assert.match(records[0].preview, /selling costs/i);
+});
+
 test("prioritizes a city home-values story by location and subject instead of generic product goals", () => {
   const { registry, searchIndex } = buildTaggedContentSearch(readCanonicalInputs(), { updatedAt: "2026-07-14" });
   const record = searchIndex.records.find(({ id }) => id === "news-austin-tx-affordability-home-values");

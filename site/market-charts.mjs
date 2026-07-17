@@ -42,7 +42,7 @@ function validateChartFixture(fixture, sourceById) {
     assertFixture(source.kind === "internal_assumption", "Planning charts must use an internal assumption source.");
     assertFixture(!fixture.asOf, "Planning charts must not carry an observation asOf date.");
     assertFixture(Array.isArray(fixture.backgroundSourceIds) && fixture.backgroundSourceIds.length > 0, "Planning charts must include background source ids.");
-    assertFixture(fixture.points.every((point) => point.status === "illustrative_assumption"), "Planning chart points must be labeled as illustrative assumptions.");
+    assertFixture(fixture.points.every((point) => point.status === "illustrative_assumption"), "Planning chart points must use the scenario-assumption status.");
   } else if (fixture.dataMode === "official_observation") {
     assertFixture(source.kind === "official_observation", "Official charts must use an official observation source.");
     assertFixture(nonEmptyString(fixture.asOf), "Official charts must include an asOf date.");
@@ -232,7 +232,7 @@ function pointDetails(fixture, index) {
   const source = String(fixture._source?.label || "Source");
   const context = `${fixture.geography} | ${fixture.unit} | ${fixture.frequency}`;
   const status = point.status === "illustrative_assumption"
-    ? "Illustrative assumption; not observed market data."
+    ? "Scenario estimate based on the assumptions shown."
     : "Official Freddie Mac PMMS weekly average.";
   const asOf = fixture.asOf ? String(fixture.asOf) : "";
   return { label, value, source, context, status, asOf };
@@ -339,7 +339,7 @@ export function renderChartFigure(fixture) {
   const references = (fixture._backgroundSources || []).map(sourceMarkup).join(", ");
   let evidenceMarkup;
   if (fixture.dataMode === "planning_illustration") {
-    evidenceMarkup = `Example values: ${sourceMarkup(source)}. These examples are built from the stated assumptions, not observed market data. Background references: ${references}. The linked agencies did not publish the displayed examples.`;
+    evidenceMarkup = `Scenario values: ${sourceMarkup(source)}. Built from the assumptions shown. Background references: ${references}. The linked agencies support the methodology and market context.`;
   } else if (fixture.dataMode === "input_estimate") {
     evidenceMarkup = `Estimate based on the inputs shown. Assumption source: ${sourceMarkup(source)}.${references ? ` Background references: ${references}.` : ""}`;
   } else {
@@ -356,7 +356,7 @@ export function renderSnapshotSourceNote(fixtures, scope, entityId) {
   if (!sources.length) return "";
   if (note.dataMode === "planning_illustration") {
     const backgroundSources = (note.backgroundSourceIds || []).map((sourceId) => sourceById.get(sourceId)).filter(Boolean);
-    return `<p class="market-chart-source">Example values: these examples are not observed local market data. Background references: ${backgroundSources.map(sourceMarkup).join(", ")}. The linked agencies did not publish the displayed examples.</p>`;
+    return `<p class="market-chart-source">Scenario values use the market assumptions shown. Background references: ${backgroundSources.map(sourceMarkup).join(", ")}. The linked agencies support the methodology and market context.</p>`;
   }
   return `<p class="market-chart-source">Sources: ${sources.map(sourceMarkup).join(", ")}. As of: ${escapeHtml(sources.map((source) => source.asOf).join("; "))}.</p>`;
 }

@@ -27,6 +27,7 @@ import {
   renderPrimaryTagLinks,
   renderSearchResultCard,
 } from "./tag-presentation.mjs";
+import { renderSellerWorkspace } from "./seller-workspace-ui.mjs";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -55,9 +56,11 @@ function itemForEntry(entry, maps) {
     state: maps.states,
     city: maps.cities,
     branch: maps.branches,
+    company: maps.companies,
     loanOfficer: maps.loanOfficers,
     product: maps.products,
     rates: maps.ratesPages,
+    seller: maps.sellerPages,
     blog: maps.blogPages,
     article: maps.articles,
     calculator: maps.calculators,
@@ -126,9 +129,11 @@ export function createStaticRouteContext({
     states: mapById(data.states),
     cities: mapById(data.cities),
     branches: mapById(data.branches),
+    companies: mapById(data.companies),
     loanOfficers: mapById(data.loanOfficers),
     products: mapById(data.products),
     ratesPages: mapById(data.ratesPages),
+    sellerPages: mapById(data.sellerPages),
     blogPages: mapById(data.blogPages),
     articles: mapById(data.articles),
     calculators: mapById(data.calculators),
@@ -366,6 +371,9 @@ function recordDescription(record) {
   if (record?.entry?.type === "loanOfficer") {
     return `${item.name} appears on a name-only profile with neutral mortgage education and notice-only actions.`;
   }
+  if (record?.entry?.type === "company") {
+    return `Compare mortgage rates, payments, points, fees, and borrowing costs for ${item.name}.`;
+  }
   if (record?.entry?.type === "branch") {
     return `${item.name} appears on a name-only branch entry with neutral mortgage education and notice-only actions.`;
   }
@@ -436,8 +444,8 @@ function locationSnapshotAssumptionNotice() {
   return `
     <aside class="section compact planning-assumption" data-location-snapshot-assumption>
       <div class="content-layout"><div class="main-stack">
-        <h2>Check current local costs before you decide</h2>
-        <p>The prices, payments, inventory, property taxes, insurance costs, and time-on-market figures shown here are examples for exploring how a mortgage may fit your budget. They are not current market facts, a rate quote, or property-specific costs. Confirm today's figures for the location and property you are considering before choosing a loan or making an offer.</p>
+        <h2>Use current property details</h2>
+        <p>Prices, payments, inventory, property taxes, insurance costs, and time on market can vary by property and change over time. Review the dated sources and use details for the home you are considering when comparing loan options.</p>
       </div></div>
     </aside>`;
 }
@@ -491,7 +499,7 @@ function renderLocations(record, context) {
     "Compare state and city housing context before turning a broad budget into a property-specific mortgage review.",
     [
       `Browse ${context.data.states.length} state guides and ${context.data.cities.length} city guides with consistent price, payment, inventory, tax, insurance, and loan-option context.`,
-      "Treat every snapshot figure as an illustrative planning example. Use dated local reporting and current property information before relying on price, payment, inventory, tax, insurance, or days-on-market values.",
+      "Use dated local reporting and current property information when comparing price, payment, inventory, tax, insurance, or days-on-market values.",
     ],
   )}${linkedCards("Browse state mortgage guides", stateRecords, { limit: stateRecords.length })}`;
 }
@@ -506,19 +514,19 @@ function renderState(record, context) {
     `${state.name} mortgage and housing guide`,
     `Compare the cost questions that commonly matter across ${state.name} before narrowing to a city or property.`,
     [
-      `For a simple comparison, the examples below use ${snapshot.medianHomePrice || "a home-price"} for price, ${snapshot.paymentScenario || "a monthly amount"} for payment, and ${snapshot.inventory || "an inventory value"} for inventory. They are not current ${state.name} market facts.`,
+      `The cost snapshot below brings ${snapshot.medianHomePrice || "a home price"}, ${snapshot.paymentScenario || "a monthly payment"}, and ${snapshot.inventory || "an inventory measure"} into one view. Pair it with dated local reporting and current property details.`,
       `${completeSentence(snapshot.propertyTaxContext, "Property taxes vary by jurisdiction and property")} ${completeSentence(snapshot.insuranceContext, "Insurance needs a property-specific review")} Confirm both for the city, county, and property you are considering.`,
     ],
   )}${renderStaticLocationNews(state, context)}${locationSnapshotAssumptionNotice()}
     <section class="section compact"><div class="content-layout"><div class="main-stack">
-      <h2>${escapeHtml(state.name)} example housing costs</h2>
+      <h2>${escapeHtml(state.name)} housing-cost snapshot</h2>
       ${snapshotList([
         ["Median home price", snapshot.medianHomePrice],
         ["Payment scenario", snapshot.paymentScenario],
         ["Inventory", snapshot.inventory],
-        ["Data status", "Illustrative example"],
+        ["Data use", "Market context"],
       ])}
-      <p>Use these examples to understand how price, payment, inventory, taxes, and insurance fit together. Check dated market evidence, property records, current insurance information, association charges, and lender-provided terms before relying on a comparison.</p>
+      <p>Compare how price, payment, inventory, taxes, and insurance fit together. Check dated market evidence, property records, current insurance information, association charges, and lender-provided terms for the home you are considering.</p>
     </div></div></section>
     ${linkedCards(`${state.name} city guides`, cityRecords, { limit: cityRecords.length })}
     ${linkedCards("Loan paths to compare", productRecords)}`;
@@ -538,12 +546,12 @@ function renderCity(record, context) {
     `${city.name}, ${state?.abbr || ""} mortgage market guide`,
     `Compare the housing-cost questions that commonly matter in ${city.name} before reviewing a specific property.`,
     [
-      `For a simple comparison, the examples below use ${snapshot.medianHomePrice || "a local home-price"} for price, ${snapshot.paymentScenario || "a monthly amount"} for payment, ${snapshot.inventory || "an inventory value"} for inventory, and ${formatDaysOnMarket(snapshot.daysOnMarket)} for days on market. They are not current ${city.name} market facts.`,
+      `The market snapshot below brings ${snapshot.medianHomePrice || "a local home price"}, ${snapshot.paymentScenario || "a monthly payment"}, ${snapshot.inventory || "an inventory measure"}, and ${formatDaysOnMarket(snapshot.daysOnMarket)} for days on market into one view. Pair it with dated local reporting and current property details.`,
       `For a property in ${city.name}, use current market evidence plus the actual price, down payment, loan terms, tax record, insurance quote, association dues, condition, and closing-cost details. A citywide measure cannot predict one home's value or financing result.`,
     ],
   )}${renderStaticLocationNews(city, context)}${locationSnapshotAssumptionNotice()}
     <section class="section compact"><div class="content-layout"><div class="main-stack">
-      <h2>Illustrative local payment and market inputs</h2>
+      <h2>Local payment and market inputs</h2>
       ${snapshotList([
         ["Median home price", snapshot.medianHomePrice],
         ["Payment scenario", snapshot.paymentScenario],
@@ -552,7 +560,7 @@ function renderCity(record, context) {
         ["Insurance", snapshot.insurance],
         ["Days on market", formatDaysOnMarket(snapshot.daysOnMarket)],
       ])}
-      <p>Use these examples to understand the relationship among price, payment, taxes, insurance, mortgage insurance, association dues, and financing terms. Replace each value with current property and loan information before making a decision.</p>
+      <p>Compare the relationship among price, payment, taxes, insurance, mortgage insurance, association dues, and financing terms. Use current property and loan information before making a decision.</p>
     </div></div></section>
     ${linkedCards(`Loan options to compare in ${city.name}`, products)}
     ${linkedCards("Nearby markets to compare", nearby)}
@@ -734,6 +742,45 @@ function renderLoanOfficer(record, context) {
     ${linkedCards("Related education links", [...cities, branchRecord])}`;
 }
 
+function renderSeller(record, context) {
+  const workspace = renderSellerWorkspace(record.found.item, {}, {
+    primaryTags: context.tagContextForRoute(record.entry.route).primaryTags,
+  });
+  return `${workspace}
+    <section class="section compact static-seller-education" aria-labelledby="static-seller-education-title">
+      <div class="content-layout"><div class="main-stack">
+        <p class="eyebrow">From estimate to closing</p>
+        <h2 id="static-seller-education-title">Plan the sale from property value through closing.</h2>
+        <p>Use a property-value range as a planning starting point, then compare it with the home's condition, recent sales, and current market evidence.</p>
+        <p>Confirm each mortgage payoff and known lien because a payoff statement can include daily interest and other amounts that differ from a displayed loan balance.</p>
+        <p>Review selling costs such as title and settlement services, transfer taxes, negotiated compensation, credits, repairs, and other seller expenses before relying on projected proceeds.</p>
+        <p>Compare offers by financing, contingencies, credits, timing, and expected proceeds, then plan closing by confirming final costs, payoff statements, required documents, and the settlement date.</p>
+      </div></div>
+    </section>`;
+}
+
+function renderCompany(record) {
+  const company = record.found.item;
+  return `${pageIntro(
+    "Mortgage company",
+    company.name,
+    `Compare rate, APR, payment, points, upfront cost, and eight-year borrowing cost for ${company.name} options that match your mortgage scenario.`,
+    [
+      "Use the same property, credit, term, occupancy, and cost preferences when comparing this company with other mortgage providers.",
+      "Open each result to review its assumptions and fee details, then continue with the option that best fits the comparison you want to make.",
+    ],
+  )}
+    <section class="section compact"><div class="content-layout"><div class="main-stack">
+      <div class="profile-hero-card">
+        <img class="avatar profile-avatar company-profile-avatar" src="/site/assets/images/company-placeholder.svg" alt="" />
+        <div><h2>${escapeHtml(company.name)}</h2><p>Mortgage company profile</p></div>
+      </div>
+      <h2>Compare mortgage options</h2>
+      <p>Review purchase and refinance options using rate, APR, payment, points, upfront cost, and a consistent borrowing-cost horizon.</p>
+      <p><a class="button" href="/rates">Compare rates and costs</a></p>
+    </div></div></section>`;
+}
+
 function renderBranch(record, context) {
   const branch = record.found.item;
   const cities = recordsForIds(branch.cityIds, context.maps.cities, context.recordsByRoute);
@@ -835,7 +882,7 @@ function renderPrequal() {
   return `${pageIntro(
     "Continue your comparison",
     "Review mortgage prequalification",
-    "Choose an illustrative option on the rates page, then continue with that selection and the visible assumptions you entered. No name, email, phone number, documents, or financial account details are requested on the public comparison page.",
+    "Choose a mortgage option on the rates page, then continue with that selection and the scenario details you entered.",
     [
       "Opening this address does not submit an application, send a contact request, authorize a credit check, upload a document, or make a credit decision. When you continue from a selected result, the next experience can identify the option and summarize the comparison assumptions.",
       "Prequalification is an early review based on information you provide later. It is not an approval, commitment to lend, verified property valuation, rate lock, or guarantee of available terms.",
@@ -851,9 +898,11 @@ function renderRouteBody(record, context) {
     city: renderCity,
     product: renderProduct,
     rates: renderRates,
+    seller: renderSeller,
     blog: renderBlog,
     article: renderArticle,
     contributor: renderContributor,
+    company: renderCompany,
     loanOfficer: renderLoanOfficer,
     branch: renderBranch,
     calculator: renderCalculator,
@@ -883,6 +932,8 @@ function relatedRecords(record, context) {
   } else if (record.entry.type === "product") {
     add(context.recordsByRoute.get("/loan-options"));
     addIds(item.relatedCalculatorIds, context.maps.calculators);
+  } else if (record.entry.type === "company") {
+    add(context.recordsByRoute.get("/rates"));
   } else if (record.entry.type === "loanOfficer") {
     add(context.recordsByRoute.get("/loan-officers"));
     add(context.recordsByRoute.get(context.maps.branches.get(item.branchId)?.route));
@@ -894,6 +945,8 @@ function relatedRecords(record, context) {
   } else if (record.entry.type === "calculator") {
     add(context.recordsByRoute.get("/calculators"));
     add(...context.data.products.slice(0, 3).map((product) => context.recordsByRoute.get(product.route)));
+  } else if (record.entry.type === "seller") {
+    for (const route of item.relatedRoutes || []) add(context.recordsByRoute.get(route));
   } else if (["blog", "article", "contributor"].includes(record.entry.type)) {
     add(context.recordsByRoute.get("/learning-center"));
     for (const route of item.relatedRoutes || []) add(context.recordsByRoute.get(route));
@@ -980,6 +1033,7 @@ function renderHead(metadata) {
   <meta name="twitter:image" content="${escapeHtml(metadata.twitter.image)}" />
   <script type="application/ld+json" data-document-jsonld>${jsonForScript(metadata.jsonLd)}</script>
   <link rel="stylesheet" href="/site/styles.css" />
+  <link rel="stylesheet" href="/site/seller-workspace.css" />
 </head>`;
 }
 
@@ -1042,7 +1096,7 @@ ${renderHead(metadata)}
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Snap Mortgage home"><img class="brand-logo" src="/site/assets/images/snap-loans.svg" alt="Snap Loans" /></a>
-        <nav aria-label="Primary"><a href="/locations">Locations</a><a href="/rates">Rates</a><a href="/loan-options">Loan options</a><a href="/calculators">Calculators</a><a href="/learning-center">Learning center</a><a href="/loan-officers">Loan officers</a></nav>
+        <nav class="site-nav" aria-label="Primary"><a href="/rates">Rates</a><a href="/learning-center">Learning</a><a href="/loan-options">Loan Options</a><button class="header-nav-action" type="button" data-cta-action="compareOffer">Compare Your Offer</button></nav>
       </div>
     </header>
     <div class="page" id="main" role="main">

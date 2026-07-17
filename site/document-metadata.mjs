@@ -55,6 +55,7 @@ function titleFor(found, statesById) {
     article: `${item.title} | Snap Mortgage`,
     newsArticle: `${item.title} | Snap Mortgage`,
     tag: `${item.displayName} Mortgage Resources | Snap Mortgage`,
+    company: `${item.name} Mortgage Options | Snap Mortgage`,
     loanOfficer: `${item.name} | Snap Mortgage Profile`,
     branch: `${item.name} | Snap Mortgage Profile`,
     calculator: `${item.name} | Snap Mortgage Calculator`,
@@ -82,7 +83,7 @@ function descriptionFor(found, { statesById, productCopyBundle }) {
     home: "Compare rates, local markets, loan options, calculators, account save actions, and mortgage education.",
     locations: directoryDescription({ route: "/locations" }),
     rates: "Review public mortgage-rate benchmarks, APR details, rate-review options, and offer-comparison questions.",
-    prequalHandoff: "Review a no-PII summary of the selected provider and illustrative mortgage scenario before deciding whether to continue. No application is submitted.",
+    prequalHandoff: "Review the selected provider, mortgage option, and scenario before continuing to Snap Prequal.",
   };
   if (explicitDescriptions[found?.type]) return explicitDescriptions[found.type];
 
@@ -97,6 +98,9 @@ function descriptionFor(found, { statesById, productCopyBundle }) {
   }
   if (found?.type === "loanOfficer") {
     return compact(`Open the name-only ${item.name} profile and neutral mortgage education links. The page does not establish identity, credentials, authorization, service, association, or contact details.`);
+  }
+  if (found?.type === "company") {
+    return compact(`Compare mortgage rate, APR, payment, points, upfront cost, and borrowing-cost details for ${item.name} before choosing a next step.`);
   }
   if (found?.type === "branch") {
     return compact(`Open the name-only ${item.name} entry and neutral mortgage education links. The page does not establish a location, operation, team relationship, service, or contact details.`);
