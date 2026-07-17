@@ -108,9 +108,11 @@ function textOperations(layout) {
 function assertOperationsInsideLetterMargins(layout) {
   for (const operation of textOperations(layout)) {
     assert.ok(operation.x >= 44, `${operation.role} starts before the left margin`);
-    assert.ok(operation.y >= 44, `${operation.role} starts below the bottom margin`);
+    assert.ok(operation.ascent >= 0, `${operation.role} is missing ascent metrics`);
+    assert.ok(operation.descent >= 0, `${operation.role} is missing descent metrics`);
+    assert.ok(operation.y - operation.descent >= 43.999, `${operation.role} descends below the bottom margin`);
     assert.ok(operation.x + operation.width <= 568.001, `${operation.role} crosses the right margin`);
-    assert.ok(operation.y + operation.height <= 748.001, `${operation.role} crosses the top margin`);
+    assert.ok(operation.y + operation.ascent <= 748.001, `${operation.role} ascends above the top margin`);
   }
 }
 
@@ -137,6 +139,17 @@ test("production layout trace contains the complete statement once inside Letter
     assert.ok(texts.includes(requiredText), `missing ${requiredText}`);
   }
   assert.equal(operations.filter((operation) => operation.role === "disclaimer").length, 1);
+});
+
+test("Helvetica 11pt disclaimer baseline reserves its measured descent", async () => {
+  const layout = await planSellerNetSheetPdfLayout(unlockedInput);
+  const disclaimerLines = textOperations(layout).filter((operation) => operation.role.startsWith("disclaimer"));
+  const bottomLine = disclaimerLines.at(-1);
+
+  assert.equal(bottomLine.size, 11);
+  assert.ok(Math.abs(bottomLine.ascent - 7.898) < 0.001);
+  assert.ok(Math.abs(bottomLine.descent - 2.277) < 0.001);
+  assert.ok(Math.abs((bottomLine.y - bottomLine.descent) - 44) < 0.001);
 });
 
 test("every continuation page repeats the brand and complete address context", async () => {

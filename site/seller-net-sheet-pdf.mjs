@@ -177,15 +177,20 @@ export async function planSellerNetSheetPdfLayout(input) {
   let page = 0;
   let y;
 
+  const textMetrics = (font, size) => {
+    const ascent = font.heightAtSize(size, { descender: false });
+    const height = font.heightAtSize(size, { descender: true });
+    return { ascent, descent: height - ascent, height };
+  };
   const addText = ({ text, x, y: textY, font = "regular", size = BODY_SIZE, color = DARK_INK, role, ...context }) => {
     const pdfFont = fonts[font];
     const width = pdfFont.widthOfTextAtSize(text, size);
-    const height = pdfFont.heightAtSize(size, { descender: true });
+    const { ascent, descent, height } = textMetrics(pdfFont, size);
     if (x < MARGIN - 0.001 || x + width > PAGE_WIDTH - MARGIN + 0.001
-      || textY < MARGIN - 0.001 || textY + height > PAGE_HEIGHT - MARGIN + 0.001) {
+      || textY - descent < MARGIN - 0.001 || textY + ascent > PAGE_HEIGHT - MARGIN + 0.001) {
       throw new RangeError(`${role || "text"} exceeds the PDF margins`);
     }
-    operations.push({ type: "text", page, role, text, x, y: textY, width, height, font, size, color, ...context });
+    operations.push({ type: "text", page, role, text, x, y: textY, width, height, ascent, descent, font, size, color, ...context });
   };
   const addRightText = (text, options) => {
     const pdfFont = fonts[options.font || "regular"];
@@ -278,10 +283,14 @@ export async function planSellerNetSheetPdfLayout(input) {
     const lines = rowLines(row);
     const font = row.dominant ? "bold" : "regular";
     const valueSize = row.dominant ? 13 : BODY_SIZE;
+    const rowDescent = Math.max(
+      textMetrics(fonts[font], BODY_SIZE).descent,
+      textMetrics(fonts[font], valueSize).descent,
+    );
     let lineIndex = 0;
     while (lineIndex < lines.length) {
-      if (y < MARGIN) continueSection(sectionTitle);
-      const availableLines = Math.floor((y - MARGIN) / 14) + 1;
+      if (y - rowDescent < MARGIN) continueSection(sectionTitle);
+      const availableLines = Math.floor((y - rowDescent - MARGIN) / 14) + 1;
       if (availableLines < 1) {
         continueSection(sectionTitle);
         continue;
@@ -340,9 +349,12 @@ export async function planSellerNetSheetPdfLayout(input) {
   y -= comparisonHeight + 18;
 
   const disclaimerLines = wrapText(model.disclaimer, regular, BODY_SIZE, PAGE_WIDTH - (MARGIN * 2));
-  const disclaimerHeight = disclaimerLines.length * 14;
-  if (y - disclaimerHeight < MARGIN) addPage(true);
-  const disclaimerY = MARGIN + ((disclaimerLines.length - 1) * 14);
+  const disclaimerMetrics = textMetrics(regular, BODY_SIZE);
+  const disclaimerHeight = disclaimerMetrics.descent
+    + ((disclaimerLines.length - 1) * 14)
+    + disclaimerMetrics.ascent;
+  if (y < MARGIN + disclaimerHeight) addPage(true);
+  const disclaimerY = MARGIN + disclaimerMetrics.descent + ((disclaimerLines.length - 1) * 14);
   disclaimerLines.forEach((line, index) => addText({
     text: line,
     x: MARGIN,
