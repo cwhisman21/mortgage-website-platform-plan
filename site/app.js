@@ -6,7 +6,7 @@ import {
   renderSnapshotSourceNote,
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
-import { renderLocationsHero } from "/site/locations-hero.mjs";
+import { renderHomeStateExplorer, renderLocationsHero } from "/site/locations-hero.mjs";
 import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260718-10";
 import {
   buildLearningCenterModel,
@@ -1646,20 +1646,61 @@ function pageShell(content) {
   return `<div data-page-content data-design-system="snap-figma-v1">${header()}<main id="main" class="page" tabindex="-1">${content}${currentPageFreshness()}</main>${footer()}</div>${modalShell()}`;
 }
 
-function homePage() {
-  const decisionCards = [
-    { title: "Buy a home", text: "Compare local costs, rates, and loan options before choosing purchase financing.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Explore buying options" },
-    { title: "Refinance", text: "Review your current payment, timing, closing costs, and market context together.", href: "/refinance", iconName: "rates", accent: accentColors[1], linkLabel: "Review refinance options" },
-    { title: "Use home equity", text: "Learn how home equity options may change payment, cash flow, and long-term cost.", href: "/home-equity", iconName: "calculator", accent: accentColors[2], linkLabel: "Explore home equity" }
-  ];
+function homeReadingItems(limit = 10) {
+  const articleItems = first(data.articles || [], Math.ceil(limit * 0.7)).map((article) => ({
+    kind: "article",
+    title: article.title,
+    text: article.summary || article.dek || article.previewText || "Read practical mortgage guidance connected to local markets, loan options, and borrower decisions.",
+    href: article.route,
+    label: "Article",
+    linkLabel: "Read more",
+  }));
+  const blogItems = (data.blogPages || [])
+    .filter((page) => page.route && page.route !== "/learning-center")
+    .map((page) => ({
+      kind: "blog",
+      title: page.name,
+      text: page.purpose || page.description || "Explore related guides, calculators, and next steps.",
+      href: page.route,
+      label: "Learning guide",
+      linkLabel: "Open topic",
+    }));
 
-  const leadCards = [
-    { title: "Compare mortgage rates", text: "Review benchmark rates, APR details, assumptions, and payment next steps.", href: "/rates", iconName: "rates", accent: accentColors[0], linkLabel: "Compare rates" },
-    { title: "Explore local markets", text: "Open state and city pages with price, payment, tax, insurance, and inventory details.", href: "/locations", iconName: "location", accent: accentColors[1], linkLabel: "Browse locations" },
-    { title: "Buy with less cash down", text: "Compare FHA, VA, and conventional options before choosing a product direction.", href: "/loan-options/fha-loans", iconName: "home", accent: accentColors[2], linkLabel: "See options" },
-    { title: "Estimate a payment", text: "Model price, down payment, rate, taxes, insurance, and local assumptions.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[3], linkLabel: "Calculate" },
-    { title: "First-time buyer guide", text: "Read checklists and market prep for the first conversation with a lender.", href: "/learning-center/buying-a-home", iconName: "guide", accent: accentColors[4], linkLabel: "Start learning" },
-    { title: "Browse loan officer profiles", text: "Review name-only profiles and mortgage education; official service and direct-contact details are not shown.", href: "/loan-officers", iconName: "expert", accent: accentColors[5], linkLabel: "Browse profiles" }
+  return articleItems.concat(blogItems).slice(0, limit);
+}
+
+function homeReadingCard(item, index) {
+  return `
+    <article class="card home-reading-card" style="--card-accent:${accentColors[(index + 2) % accentColors.length]}">
+      <div class="card-icon">${icon(item.kind === "blog" ? "guide" : "article")}</div>
+      <p class="home-reading-type">${esc(item.label)}</p>
+      <h3><a href="${route(item.href)}">${esc(item.title)}</a></h3>
+      <p>${esc(item.text)}</p>
+      <a class="text-link" href="${route(item.href)}">${esc(item.linkLabel)}</a>
+    </article>`;
+}
+
+function homeReadingCarousel() {
+  const items = homeReadingItems(10);
+  return `
+    <div class="home-reading-carousel-shell" data-news-carousel-root data-home-reading-carousel>
+      <div class="news-carousel home-reading-carousel" data-news-carousel-track tabindex="0" aria-label="Helpful mortgage articles and topic guides">
+        ${items.map(homeReadingCard).join("")}
+      </div>
+      <div class="news-carousel-controls home-reading-controls" aria-label="Helpful reads carousel controls">
+        <button type="button" class="icon-button" data-news-carousel="previous" aria-label="Previous reads">&larr;</button>
+        <button type="button" class="icon-button" data-news-carousel="next" aria-label="Next reads">&rarr;</button>
+      </div>
+    </div>`;
+}
+function homePage() {
+  const goalCards = [
+    { title: "Buy a house", text: "Compare purchase options, monthly costs, and the cash you may need before choosing a home.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Plan a purchase" },
+    { title: "Refinance my home", text: "Compare your current mortgage with a new rate, term, payment, or cash-out direction.", href: "/refinance", iconName: "rates", accent: accentColors[1], linkLabel: "Review refinancing" },
+    { title: "Use home equity", text: "Learn how home equity options may change payment, cash flow, and long-term cost.", href: "/home-equity", iconName: "calculator", accent: accentColors[2], linkLabel: "Explore home equity" },
+    { title: "Calculate payments", text: "Estimate principal, interest, taxes, insurance, and other monthly housing costs.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[3], linkLabel: "Calculate a payment" },
+    { title: "See current rates", text: "Compare rates, APR, points, payment, upfront costs, and longer-run borrowing cost.", href: "/rates", iconName: "rates", accent: accentColors[4], linkLabel: "Compare rates" },
+    { title: "Browse loan officer profiles", text: "Review available profiles and choose whose mortgage options you want to explore.", href: "/loan-officers", iconName: "expert", accent: accentColors[5], linkLabel: "Browse profiles" }
   ];
 
   const productCards = first(data.products, 4).map((product, index) =>
@@ -1675,12 +1716,17 @@ function homePage() {
 
   return pageShell(`
     ${renderCampaignHero()}
-    ${section("Compare with the numbers in view", { label: "Mortgage intelligence", text: "Start with public benchmarks, broad market coverage, and tools that keep assumptions visible." }, `<div class="grid three home-metrics">${metric("30-year fixed benchmark", rateBenchmarks[0].rate, "Public survey benchmark; personal terms require review.")}${metric("Local market coverage", `${data.states.length} state guides`, `${data.cities.length} city guides available.`)}${metric("Planning tools", `${data.calculators.length} calculators`, "Estimate payment, affordability, refinance, and rent versus buy.")}</div>`, "compact")}
-    ${section("Choose your goal", { label: "Your goals", text: "Begin with the mortgage goal that matches the decision in front of you." }, `<div class="grid three home-decision-grid">${decisionCards.map(card).join("")}</div>`, "compact")}
-    ${section("Research with the right context", { label: "Mortgage guidance", text: "Open deeper market data, rate details, calculators, education, or lender-review information without losing your place." }, `<div class="grid three">${leadCards.map(card).join("")}</div>`, "home-paths")}
+    ${section("I want to ...", { label: "Choose your next step", text: "Start with the decision in front of you and move directly to the matching tools and guidance." }, `<div class="grid three">${goalCards.map(card).join("")}</div>`, "home-paths")}
+    <section class="section compact home-primary-actions" aria-labelledby="home-primary-actions-title">
+      <div><p class="eyebrow">Ready to compare?</p><h2 id="home-primary-actions-title">Put your mortgage options in motion.</h2><p>Start with prequalification or organize the terms from an offer you already have.</p></div>
+      <div class="home-primary-action-buttons">
+        ${ctaButton("prequal", { label: "Start your auto-prequal" })}
+        ${ctaButton("compareOffer", { label: "Compare Your Offer", variant: "secondary" })}
+      </div>
+    </section>
     ${section("Loan options", { label: "Products", text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby." }, `<div class="grid four">${productCards.join("")}</div>`, "compact product-shelf")}
-    ${section("Helpful next reads", { label: "Learning center", text: "Read guides that connect market questions, loan options, calculators, and facts a lender may review." }, `<div class="grid three">${first(data.blogPages.filter((page) => page.route !== "/learning-center"), 3).map((page, index) => card({ title: page.name, text: page.purpose, href: page.route, iconName: "guide", accent: accentColors[(index + 2) % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`, "compact reading-shelf")}
-    ${section("Bring your research into one clear comparison", { label: "Your next step", text: "Organize an offer, review contact options, or read the Snap Homes continuation notice." }, contextualCta("Choose the next step that fits your situation.", "Each action opens a notice only; no question, document, or borrower information is sent.", ["compareOffer", "loContact", "account"]), "compact home-cta-section")}
+    ${renderHomeStateExplorer(data.states)}
+    ${section("Helpful next reads", { label: "Learning center", text: "Read articles and topic guides that connect market questions, loan options, calculators, and facts a lender may review." }, homeReadingCarousel(), "compact reading-shelf")}
   `);
 }
 
@@ -3890,7 +3936,8 @@ function wireInteractions() {
   wireDirectoryFilters();
   document.querySelectorAll("[data-news-carousel]").forEach((button) => {
     button.addEventListener("click", () => {
-      const track = document.querySelector("[data-news-carousel-track]");
+      const root = button.closest("[data-news-carousel-root]");
+      const track = root?.querySelector("[data-news-carousel-track]") || document.querySelector("[data-news-carousel-track]");
       if (!track) return;
       track.scrollBy({ left: track.clientWidth * (button.dataset.newsCarousel === "previous" ? -0.9 : 0.9), behavior: "smooth" });
     });

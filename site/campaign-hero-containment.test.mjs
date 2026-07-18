@@ -33,6 +33,61 @@ test("campaign styles do not alter root or shared header layout", () => {
   assert.doesNotMatch(heroStyles, /(^|\})\s*(?:html|body|\.header-inner|\.brand|\.brand-logo)(?:\s*,[^\{]+)?\s*\{/m);
 });
 
+test("shared root overflow clipping preserves viewport sticky positioning", () => {
+  for (const selector of ["html", "body"]) {
+    const rootRule = ruleBlock(baseStyles, selector);
+    assert.match(rootRule, /overflow-x:\s*clip;/, `${selector} clips horizontal paint overflow`);
+    assert.doesNotMatch(rootRule, /overflow-x:\s*hidden;/, `${selector} does not create a scrolling ancestor`);
+  }
+});
+
+test("shared styles retain the restored homepage desktop layout contracts", () => {
+  const readingShell = ruleBlock(baseStyles, ".home-reading-carousel-shell");
+  assert.match(readingShell, /display:\s*grid;/);
+  assert.match(readingShell, /gap:\s*14px;/);
+
+  const readingCarousel = ruleBlock(baseStyles, ".home-reading-carousel");
+  assert.match(readingCarousel, /grid-auto-columns:\s*minmax\(286px,\s*340px\);/);
+  assert.match(readingCarousel, /padding-bottom:\s*16px;/);
+
+  const primaryActions = ruleBlock(baseStyles, ".home-primary-actions");
+  assert.match(primaryActions, /display:\s*flex;/);
+  assert.match(primaryActions, /justify-content:\s*space-between;/);
+  assert.match(primaryActions, /border-top:\s*4px solid var\(--snap-blue\);/);
+  assert.match(primaryActions, /background:\s*var\(--navy\);/);
+
+  const stateExplorer = ruleBlock(baseStyles, ".home-state-explorer");
+  assert.match(stateExplorer, /display:\s*grid;/);
+  assert.match(stateExplorer, /gap:\s*20px;/);
+  assert.match(stateExplorer, /text-align:\s*center;/);
+
+  const stateMap = ruleBlock(baseStyles, ".home-state-explorer .us-state-map");
+  assert.match(stateMap, /width:\s*min\(1100px,\s*100%\);/);
+  assert.match(stateMap, /background:\s*transparent;/);
+  assert.match(stateMap, /box-shadow:\s*none;/);
+
+  const stateList = ruleBlock(baseStyles, ".home-state-list-grid");
+  assert.match(stateList, /grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);/);
+});
+
+test("restored homepage actions and state list stack on mobile", () => {
+  const mobileStart = baseStyles.lastIndexOf("@media (max-width: 760px)");
+  assert.notEqual(mobileStart, -1, "Expected a 760px mobile breakpoint");
+  const mobileStyles = baseStyles.slice(mobileStart);
+
+  const primaryActions = ruleBlock(mobileStyles, ".home-primary-actions");
+  assert.match(primaryActions, /align-items:\s*stretch;/);
+  assert.match(primaryActions, /padding:\s*28px 22px;/);
+  assert.match(primaryActions, /flex-direction:\s*column;/);
+
+  const actionButtons = ruleBlock(mobileStyles, ".home-primary-action-buttons");
+  assert.match(actionButtons, /display:\s*grid;/);
+  assert.match(actionButtons, /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
+
+  const stateList = ruleBlock(mobileStyles, ".home-state-list-grid");
+  assert.match(stateList, /grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/);
+});
+
 test("campaign content is visible by default and animated only after enhancement", () => {
   for (const selector of [".campaign-loan-card", ".campaign-primary-cta", ".campaign-hero-disclosure"]) {
     const fallbackRule = ruleBlock(heroStyles, selector);

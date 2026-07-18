@@ -466,10 +466,29 @@ test("homepage follows the approved Figma decision-flow sequence", () => {
     appSource.indexOf("function locationsPage()"),
   );
 
-  assert.match(homeSource, /home-metrics/);
-  assert.match(homeSource, /Choose your goal/);
-  assert.match(homeSource, /home-decision-grid/);
-  assert.match(homeSource, /Bring your research into one clear comparison/);
+  assert.match(homeSource, /I want to \.\.\./);
+  const goalSource = homeSource.slice(
+    homeSource.indexOf("const goalCards = ["),
+    homeSource.indexOf("const productCards"),
+  );
+  assert.equal((goalSource.match(/{ title:/g) || []).length, 6);
+  for (const title of [
+    "Buy a house",
+    "Refinance my home",
+    "Use home equity",
+    "Calculate payments",
+    "See current rates",
+    "Browse loan officer profiles",
+  ]) {
+    assert.match(goalSource, new RegExp(title));
+  }
+  assert.match(homeSource, /home-primary-actions/);
+  assert.match(homeSource, /Start your auto-prequal/);
+  assert.match(homeSource, /Compare Your Offer/);
+  assert.match(homeSource, /renderHomeStateExplorer\(data\.states\)/);
+  assert.match(homeSource, /homeReadingCarousel\(\)/);
+  assert.match(appSource, /homeReadingItems\(10\)/);
+  assert.doesNotMatch(homeSource, /home-metrics|Choose your goal|home-decision-grid|Bring your research into one clear comparison/);
   assert.doesNotMatch(homeSource, /routeStrip\(/);
   assert.doesNotMatch(homeSource, /ctaDeck\(/);
 });
