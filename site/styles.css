@@ -121,8 +121,9 @@ button {
 
 .brand-logo {
   display: block;
-  width: 148px;
-  height: auto;
+  height: 72px;
+  width: auto;
+  max-width: 100%;
 }
 
 .brand-mark {
@@ -4631,7 +4632,8 @@ tr:last-child td {
   }
 
   .brand-logo {
-    width: 112px;
+    height: 56px;
+    width: auto;
   }
 
   .brand-sub {

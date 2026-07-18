@@ -6,7 +6,16 @@ import test from "node:test";
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const staticRouteSource = fs.readFileSync(new URL("./static-route-document.mjs", import.meta.url), "utf8");
 const newsRouteSource = fs.readFileSync(new URL("./location-news-static.mjs", import.meta.url), "utf8");
-const heroStyles = fs.readFileSync(new URL("./campaign-hero.css", import.meta.url), "utf8");
+const baseStyles = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+
+function generatedHtmlFiles(directory, files = []) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const entryUrl = new URL(`${entry.name}${entry.isDirectory() ? "/" : ""}`, directory);
+    if (entry.isDirectory()) generatedHtmlFiles(entryUrl, files);
+    else if (entry.isFile() && entry.name.endsWith(".html")) files.push(entryUrl);
+  }
+  return files;
+}
 
 test("public headers use the supplied Snap Mortgage logo", () => {
   for (const source of [appSource, staticRouteSource, newsRouteSource]) {
@@ -19,8 +28,20 @@ test("public headers use the supplied Snap Mortgage logo", () => {
 test("the supplied logo is displayed at readable desktop and mobile heights", () => {
   const headerSource = appSource.slice(appSource.indexOf("function header()"), appSource.indexOf("function footer()"));
   assert.doesNotMatch(headerSource, /Mortgage intelligence|brand-sub/i);
-  assert.match(heroStyles, /\.brand-logo\s*\{[^}]*height:\s*72px;[^}]*width:\s*auto;[^}]*max-width:\s*100%;/s);
-  assert.match(heroStyles, /@media \(max-width:\s*760px\)[\s\S]*?\.brand-logo\s*\{[^}]*height:\s*56px;[^}]*width:\s*auto;/s);
+  assert.match(baseStyles, /\.brand-logo\s*\{[^}]*height:\s*72px;[^}]*width:\s*auto;[^}]*max-width:\s*100%;/s);
+  assert.match(baseStyles, /@media \(max-width:\s*760px\)[\s\S]*?\.brand-logo\s*\{[^}]*height:\s*56px;[^}]*width:\s*auto;/s);
+});
+
+test("every generated public document uses the supplied logo", () => {
+  const files = generatedHtmlFiles(new URL("./generated/", import.meta.url));
+  assert.equal(files.length, 4847);
+
+  for (const file of files) {
+    const html = fs.readFileSync(file, "utf8");
+    assert.doesNotMatch(html, /snap-loans\.svg|alt="Snap Loans"/, file.pathname);
+    assert.match(html, /\/site\/assets\/images\/snap-mortgage\.png/, file.pathname);
+    assert.match(html, /alt="Snap Mortgage"/, file.pathname);
+  }
 });
 
 test("the deployed logo matches the supplied artwork", () => {

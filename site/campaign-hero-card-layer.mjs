@@ -13,8 +13,6 @@ function optionCard({ key, frame, lender, loanType, accent, featured = false }) 
       class="campaign-loan-card${featured ? " campaign-loan-card--featured" : ""}"
       data-reel-card="${key}"
       data-reveal-frame="${frame}"
-      aria-hidden="true"
-      inert
       style="--campaign-card-accent: ${accent}"
     >
       <header class="campaign-loan-card__header">
@@ -52,11 +50,8 @@ export function renderCampaignHeroCardLayer() {
         class="campaign-primary-cta"
         href="/prequal/start"
         data-post-reveal-cta
-        aria-hidden="true"
-        inert
-        tabindex="-1"
       >Start My Comparison <span aria-hidden="true">&rarr;</span></a>
-      <p class="campaign-hero-disclosure" data-post-reveal-disclosure aria-hidden="true" inert>Illustrative comparison only. Loan types shown are examples, not an offer or commitment to lend. Availability, eligibility, pricing, costs, and terms vary by lender and borrower.</p>
+      <p class="campaign-hero-disclosure" data-post-reveal-disclosure>Illustrative comparison only. Loan types shown are examples, not an offer or commitment to lend. Availability, eligibility, pricing, costs, and terms vary by lender and borrower.</p>
     </section>
   `;
 }

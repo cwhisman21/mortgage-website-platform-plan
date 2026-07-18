@@ -9,6 +9,159 @@ const baseStylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url
 const campaignStylesSource = fs.readFileSync(new URL("./campaign-hero.css", import.meta.url), "utf8");
 const stylesSource = `${baseStylesSource}\n${campaignStylesSource}`;
 
+function mutableClassList() {
+  const values = new Set();
+  return {
+    add: (value) => values.add(value),
+    contains: (value) => values.has(value),
+    remove: (value) => values.delete(value),
+    toggle(value, force) {
+      if (force) values.add(value);
+      else values.delete(value);
+    },
+  };
+}
+
+function revealFixture(revealFrame) {
+  const attributes = new Map([["aria-hidden", "true"]]);
+  return {
+    classList: mutableClassList(),
+    dataset: { revealFrame: String(revealFrame) },
+    inert: true,
+    getAttribute: (name) => attributes.get(name) ?? null,
+    setAttribute: (name, value) => attributes.set(name, String(value)),
+    removeAttribute: (name) => attributes.delete(name),
+  };
+}
+
+function createCampaignHeroHarness({ reducedMotion = false } = {}) {
+  let scrollY = 0;
+  let nextAnimationFrameId = 1;
+  let timeoutCalls = 0;
+  const animationFrames = new Map();
+  const listeners = new Map();
+  const imageRequests = [];
+  const images = [];
+  const styleValues = new Map([["--campaign-scroll-step", "35px"]]);
+  const frame = { src: "/site/assets/campaign-hero-frames/ezgif-frame-001.png" };
+  const stage = { offsetHeight: 600 };
+  const cards = [revealFixture(17), revealFixture(22), revealFixture(25)];
+  const cta = revealFixture(25);
+  const disclosure = revealFixture(25);
+  cta.setAttribute("tabindex", "-1");
+  const track = {
+    classList: mutableClassList(),
+    dataset: {},
+    offsetHeight: 2140,
+    style: {
+      getPropertyValue: (name) => styleValues.get(name) || "",
+      setProperty: (name, value) => styleValues.set(name, value),
+    },
+    getBoundingClientRect() {
+      return { top: -scrollY, bottom: this.offsetHeight - scrollY };
+    },
+    querySelector(selector) {
+      if (selector === ".campaign-hero-stage") return stage;
+      if (selector === "[data-campaign-frame]") return frame;
+      if (selector === "[data-post-reveal-cta]") return cta;
+      if (selector === "[data-post-reveal-disclosure]") return disclosure;
+      return null;
+    },
+    querySelectorAll: (selector) => selector === "[data-reveal-frame]" ? cards : [],
+  };
+  const header = { getBoundingClientRect: () => ({ height: 0 }) };
+  const root = {
+    querySelector(selector) {
+      if (selector === "[data-campaign-sequence]") return track;
+      if (selector === ".site-header") return header;
+      return null;
+    },
+  };
+
+  class FakeImage {
+    constructor() {
+      this.onload = null;
+      this.onerror = null;
+      images.push(this);
+    }
+
+    set src(value) {
+      this._src = value;
+      imageRequests.push(value);
+    }
+
+    get src() {
+      return this._src;
+    }
+  }
+
+  const environment = {
+    Image: FakeImage,
+    document: {
+      documentElement: { contains: (element) => element === track },
+      querySelector: () => header,
+    },
+    innerHeight: 600,
+    matchMedia: () => ({ matches: reducedMotion }),
+    requestAnimationFrame(callback) {
+      const id = nextAnimationFrameId++;
+      animationFrames.set(id, callback);
+      return id;
+    },
+    cancelAnimationFrame: (id) => animationFrames.delete(id),
+    setTimeout(callback) {
+      timeoutCalls += 1;
+      callback();
+      return timeoutCalls;
+    },
+    clearTimeout() {},
+    addEventListener: (name, listener) => listeners.set(name, listener),
+    removeEventListener(name, listener) {
+      if (listeners.get(name) === listener) listeners.delete(name);
+    },
+    getComputedStyle: () => ({ getPropertyValue: (name) => styleValues.get(name) || "" }),
+    scrollBy({ top }) {
+      scrollY += top;
+    },
+    scrollTo(_x, y) {
+      scrollY = y;
+    },
+  };
+  Object.defineProperties(environment, {
+    scrollY: { get: () => scrollY },
+    pageYOffset: { get: () => scrollY },
+  });
+
+  function flushAnimationFrames() {
+    while (animationFrames.size) {
+      const callbacks = [...animationFrames.values()];
+      animationFrames.clear();
+      callbacks.forEach((callback) => callback(0));
+    }
+  }
+
+  return {
+    cards,
+    cta,
+    disclosure,
+    environment,
+    frame,
+    imageRequests,
+    images,
+    root,
+    track,
+    get timeoutCalls() {
+      return timeoutCalls;
+    },
+    flushAnimationFrames,
+    setProgress(progress) {
+      scrollY = progress * 1540;
+      listeners.get("scroll")?.();
+      flushAnimationFrames();
+    },
+  };
+}
+
 test("campaign hero card layer renders persistent copy and staged accessible options", async () => {
   const { renderCampaignHeroCardLayer } = await import("./campaign-hero-card-layer.mjs");
   const html = renderCampaignHeroCardLayer();
@@ -38,8 +191,9 @@ test("campaign hero card layer renders persistent copy and staged accessible opt
   assert.doesNotMatch(html, /data-cta-action="startPrequal"/);
   assert.doesNotMatch(html, /Loan Type|5\.\d+%|APR|Est\. Payment|Best shown|Example terms|Final terms|underwriting|&#10003;/);
   assert.match(html, /not an offer or commitment to lend/);
-  assert.match(html, /aria-hidden="true"/);
-  assert.match(html, /tabindex="-1"/);
+  assert.doesNotMatch(html, /<article[^>]+(?:aria-hidden|\sinert(?:\s|>))/);
+  assert.doesNotMatch(html, /<a[^>]+data-post-reveal-cta[^>]+(?:aria-hidden|\sinert(?:\s|>)|tabindex)/);
+  assert.doesNotMatch(html, /<p[^>]+data-post-reveal-disclosure[^>]+(?:aria-hidden|\sinert(?:\s|>))/);
 });
 
 test("campaign hero card layer reveals, holds, and reverses at logical frame thresholds", async () => {
@@ -173,7 +327,7 @@ test("browser entrypoints load the application module with the campaign module",
   assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-10"/);
   assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
   assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-10"/);
-  assert.match(staticRouteSource, /href="\/site\/campaign-hero\.css\?v=20260718-10"/);
+  assert.doesNotMatch(staticRouteSource, /campaign-hero\.css/);
 });
 
 test("public site loads the approved Figma typography", () => {
@@ -217,6 +371,63 @@ test("campaign cards share a base height while Lender 3 is slightly larger", () 
   assert.match(stylesSource, /\.campaign-loan-card--featured\.is-revealed\s*\{[^}]*scale\(1\.02\)/s);
 });
 
+test("campaign hero initialization preloads a bounded window without a timer sweep", async () => {
+  const { initCampaignHero } = await import("./campaign-hero.mjs");
+  const harness = createCampaignHeroHarness();
+  const controller = initCampaignHero(harness.root, harness.environment);
+
+  harness.flushAnimationFrames();
+
+  assert.equal(harness.timeoutCalls, 0);
+  assert.ok(harness.imageRequests.length <= 4, `expected at most four preload requests, received ${harness.imageRequests.length}`);
+  controller.destroy();
+});
+
+test("campaign hero progressively preloads adjacent frames as the current frame advances", async () => {
+  const { CAMPAIGN_HERO_FRAMES, initCampaignHero } = await import("./campaign-hero.mjs");
+  const harness = createCampaignHeroHarness();
+  const controller = initCampaignHero(harness.root, harness.environment);
+
+  harness.flushAnimationFrames();
+  harness.setProgress(0.5);
+
+  const requestedUrls = new Set(harness.imageRequests);
+  CAMPAIGN_HERO_FRAMES.slice(20, 25).forEach((url) => assert.ok(requestedUrls.has(url), `expected adjacent preload for ${url}`));
+  assert.ok(harness.imageRequests.length <= 9, `expected a bounded progressive window, received ${harness.imageRequests.length} requests`);
+  controller.destroy();
+});
+
+test("campaign hero deduplicates preload requests for logical hold frames by URL", async () => {
+  const { CAMPAIGN_HERO_FRAMES, initCampaignHero } = await import("./campaign-hero.mjs");
+  const harness = createCampaignHeroHarness();
+  const controller = initCampaignHero(harness.root, harness.environment);
+
+  harness.flushAnimationFrames();
+  for (let frameIndex = 29; frameIndex < CAMPAIGN_HERO_FRAMES.length; frameIndex += 1) {
+    harness.setProgress(frameIndex / (CAMPAIGN_HERO_FRAMES.length - 1));
+  }
+
+  const finalFrameUrl = CAMPAIGN_HERO_FRAMES.at(-1);
+  assert.equal(harness.imageRequests.filter((url) => url === finalFrameUrl).length, 1);
+  controller.destroy();
+});
+
+test("campaign hero enhancement lifecycle restores an accessible static fallback on destroy", async () => {
+  const { initCampaignHero } = await import("./campaign-hero.mjs");
+  const harness = createCampaignHeroHarness();
+  const controller = initCampaignHero(harness.root, harness.environment);
+
+  assert.equal(harness.track.classList.contains("is-enhanced"), true);
+  controller.destroy();
+
+  assert.equal(harness.track.classList.contains("is-enhanced"), false);
+  assert.equal(harness.track.dataset.campaignInitialized, undefined);
+  assert.equal(harness.cards.every((card) => card.getAttribute("aria-hidden") === "false" && card.inert === false), true);
+  assert.equal(harness.cta.getAttribute("aria-hidden"), "false");
+  assert.equal(harness.cta.inert, false);
+  assert.equal(harness.disclosure.getAttribute("aria-hidden"), "false");
+});
+
 test("campaign hero queues no more than one 35px wheel step per animation frame", async () => {
   const { campaignHeroQueuedWheelDelta } = await import("./campaign-hero.mjs");
   const campaignSource = fs.readFileSync(new URL("./campaign-hero.mjs", import.meta.url), "utf8");
@@ -245,8 +456,8 @@ test("reduced-motion mode exposes the complete static comparison", () => {
   );
 });
 
-test("root overflow clipping preserves the campaign hero sticky scroll container", () => {
-  assert.match(campaignStylesSource, /html[\s\S]*body\s*\{[^}]*overflow-x:\s*clip/s);
+test("campaign hero styles do not alter root overflow", () => {
+  assert.doesNotMatch(campaignStylesSource, /(^|\})\s*(?:html|body)(?:\s*,[^\{]+)?\s*\{/m);
 });
 
 test("homepage follows the approved Figma decision-flow sequence", () => {

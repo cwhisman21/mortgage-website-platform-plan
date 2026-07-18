@@ -10,6 +10,8 @@ export const CAMPAIGN_HERO_FRAMES = Object.freeze([
   ...Array(15).fill(sourceFrames.at(-1)),
 ]);
 
+const PRELOAD_RADIUS = 2;
+
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
@@ -73,47 +75,56 @@ export function initCampaignHero(root = document, environment = window) {
   if (!track || !stage || !frame || track.dataset.campaignInitialized === "true") return null;
 
   track.dataset.campaignInitialized = "true";
+  track.classList.add("is-enhanced");
 
   const ImageConstructor = environment.Image;
   const requestFrame = environment.requestAnimationFrame.bind(environment);
   const cancelFrame = environment.cancelAnimationFrame?.bind(environment) || (() => {});
-  const requestIdle = environment.requestIdleCallback?.bind(environment);
-  const cancelIdle = environment.cancelIdleCallback?.bind(environment) || environment.clearTimeout.bind(environment);
   const reducedMotion = environment.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
-  const loadedFrames = new Set([0]);
+  const loadedFrameUrls = new Set([CAMPAIGN_HERO_FRAMES[0]]);
   const loadingFrames = new Map();
   let currentFrameIndex = 0;
+  let requestedFrameIndex = 0;
   let animationFrameId = 0;
   let wheelFrameId = 0;
   let pendingWheelDelta = 0;
-  let idleId = 0;
   let destroyed = false;
 
   function preload(index, showWhenReady = false) {
     if (destroyed || index < 0 || index >= CAMPAIGN_HERO_FRAMES.length) return;
+    const frameUrl = CAMPAIGN_HERO_FRAMES[index];
+    if (showWhenReady) requestedFrameIndex = index;
 
-    if (loadedFrames.has(index)) {
+    if (loadedFrameUrls.has(frameUrl)) {
       if (showWhenReady && index !== currentFrameIndex) {
-        frame.src = CAMPAIGN_HERO_FRAMES[index];
+        frame.src = frameUrl;
         currentFrameIndex = index;
       }
       return;
     }
 
-    if (loadingFrames.has(index)) return;
+    if (loadingFrames.has(frameUrl)) return;
 
     const image = new ImageConstructor();
-    loadingFrames.set(index, image);
+    loadingFrames.set(frameUrl, image);
     image.onload = () => {
-      loadingFrames.delete(index);
-      loadedFrames.add(index);
-      if (!destroyed && showWhenReady) {
-        frame.src = CAMPAIGN_HERO_FRAMES[index];
-        currentFrameIndex = index;
+      loadingFrames.delete(frameUrl);
+      loadedFrameUrls.add(frameUrl);
+      if (!destroyed && CAMPAIGN_HERO_FRAMES[requestedFrameIndex] === frameUrl) {
+        frame.src = frameUrl;
+        currentFrameIndex = requestedFrameIndex;
       }
     };
-    image.onerror = () => loadingFrames.delete(index);
-    image.src = CAMPAIGN_HERO_FRAMES[index];
+    image.onerror = () => loadingFrames.delete(frameUrl);
+    image.src = frameUrl;
+  }
+
+  function preloadAdjacentFrames(index) {
+    preload(index, true);
+    for (let offset = 1; offset <= PRELOAD_RADIUS; offset += 1) {
+      preload(index - offset);
+      preload(index + offset);
+    }
   }
 
   function scrollProgress() {
@@ -189,7 +200,7 @@ export function initCampaignHero(root = document, environment = window) {
     const nextFrameIndex = campaignHeroFrameIndex(scrollProgress());
     const logicalFrame = nextFrameIndex + 1;
     track.dataset.currentFrame = String(syncCampaignHeroCardLayer(logicalFrame, track));
-    if (nextFrameIndex !== currentFrameIndex) preload(nextFrameIndex, true);
+    if (nextFrameIndex !== requestedFrameIndex) preloadAdjacentFrames(nextFrameIndex);
   }
 
   function scheduleUpdate() {
@@ -209,13 +220,14 @@ export function initCampaignHero(root = document, environment = window) {
     environment.removeEventListener("resize", handleResize);
     if (animationFrameId) cancelFrame(animationFrameId);
     if (wheelFrameId) cancelFrame(wheelFrameId);
-    if (idleId) cancelIdle(idleId);
     pendingWheelDelta = 0;
     loadingFrames.forEach((image) => {
       image.onload = null;
       image.onerror = null;
     });
     loadingFrames.clear();
+    syncCampaignHeroCardLayer(CAMPAIGN_HERO_FRAMES.length, track);
+    track.classList.remove("is-enhanced");
     delete track.dataset.campaignInitialized;
   }
 
@@ -223,18 +235,12 @@ export function initCampaignHero(root = document, environment = window) {
     const finalFrameIndex = CAMPAIGN_HERO_FRAMES.length - 1;
     frame.src = CAMPAIGN_HERO_FRAMES.at(-1);
     currentFrameIndex = finalFrameIndex;
+    requestedFrameIndex = finalFrameIndex;
     track.dataset.currentFrame = String(syncCampaignHeroCardLayer(CAMPAIGN_HERO_FRAMES.length, track));
     return { destroy };
   }
 
-  CAMPAIGN_HERO_FRAMES.slice(1, 5).forEach((_, offset) => preload(offset + 1));
-  const preloadRemaining = () => {
-    idleId = 0;
-    CAMPAIGN_HERO_FRAMES.slice(5).forEach((_, offset) => preload(offset + 5));
-  };
-  idleId = requestIdle
-    ? requestIdle(preloadRemaining, { timeout: 1200 })
-    : environment.setTimeout(preloadRemaining, 0);
+  preloadAdjacentFrames(0);
 
   environment.addEventListener("scroll", scheduleUpdate, { passive: true });
   environment.addEventListener("wheel", handleWheel, { passive: false });

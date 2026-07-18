@@ -980,7 +980,6 @@ function renderHead(metadata) {
   <meta name="twitter:image" content="${escapeHtml(metadata.twitter.image)}" />
   <script type="application/ld+json" data-document-jsonld>${jsonForScript(metadata.jsonLd)}</script>
   <link rel="stylesheet" href="/site/styles.css" />
-  <link rel="stylesheet" href="/site/campaign-hero.css?v=20260718-10" />
 </head>`;
 }
 
