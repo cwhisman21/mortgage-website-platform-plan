@@ -4,25 +4,176 @@ import test from "node:test";
 
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
 const indexSource = fs.readFileSync(new URL("./index.html", import.meta.url), "utf8");
-const stylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+const staticRouteSource = fs.readFileSync(new URL("./static-route-document.mjs", import.meta.url), "utf8");
+const baseStylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
+const campaignStylesSource = fs.readFileSync(new URL("./campaign-hero.css", import.meta.url), "utf8");
+const stylesSource = `${baseStylesSource}\n${campaignStylesSource}`;
 
-test("homepage uses the original composite campaign image as the hero", async () => {
-  const { renderCampaignHero } = await import("./campaign-hero.mjs");
+test("campaign hero card layer renders persistent copy and staged accessible options", async () => {
+  const { renderCampaignHeroCardLayer } = await import("./campaign-hero-card-layer.mjs");
+  const html = renderCampaignHeroCardLayer();
+
+  assert.match(html, /Compare lender options/);
+  assert.match(html, /There is a better way than hoping for the best/);
+  assert.match(html, /Compare lender options side by side without guessing which path is strongest/);
+  assert.match(html, /Lender 1/);
+  assert.match(html, /Lender 2/);
+  assert.match(html, /Lender 3/);
+  assert.match(html, /class="campaign-loan-card campaign-loan-card--featured"[\s\S]*Lender 3/);
+  assert.match(html, /30-Year Conventional/);
+  assert.match(html, /FHA Loan/);
+  assert.match(html, /VA Loan/);
+  assert.match(html, /Rate and payment view/);
+  assert.match(html, /Fees and credits/);
+  assert.match(html, /Next-step clarity/);
+  assert.match(html, /data-reveal-frame="17"/);
+  assert.match(html, /data-reveal-frame="22"/);
+  assert.match(html, /data-reveal-frame="25"/);
+  assert.match(html, /--campaign-card-accent: var\(--campaign-reel-blue\)/);
+  assert.match(html, /--campaign-card-accent: var\(--campaign-reel-green\)/);
+  assert.doesNotMatch(html, /--campaign-card-accent: var\(--snap-blue\)/);
+  assert.match(html, /data-post-reveal-cta/);
+  assert.match(html, /data-post-reveal-disclosure/);
+  assert.match(html, /href="\/prequal\/start"/);
+  assert.doesNotMatch(html, /data-cta-action="startPrequal"/);
+  assert.doesNotMatch(html, /Loan Type|5\.\d+%|APR|Est\. Payment|Best shown|Example terms|Final terms|underwriting|&#10003;/);
+  assert.match(html, /not an offer or commitment to lend/);
+  assert.match(html, /aria-hidden="true"/);
+  assert.match(html, /tabindex="-1"/);
+});
+
+test("campaign hero card layer reveals, holds, and reverses at logical frame thresholds", async () => {
+  const { syncCampaignHeroCardLayer } = await import("./campaign-hero-card-layer.mjs");
+
+  function classList() {
+    const values = new Set();
+    return {
+      contains: (value) => values.has(value),
+      toggle(value, force) {
+        if (force) values.add(value);
+        else values.delete(value);
+      },
+    };
+  }
+
+  function fixture(revealFrame) {
+    const attributes = new Map([["aria-hidden", "true"]]);
+    return {
+      classList: classList(),
+      dataset: { revealFrame: String(revealFrame) },
+      inert: true,
+      getAttribute: (name) => attributes.get(name) ?? null,
+      setAttribute: (name, value) => attributes.set(name, String(value)),
+      removeAttribute: (name) => attributes.delete(name),
+    };
+  }
+
+  const cards = [fixture(17), fixture(22), fixture(25)];
+  const cta = fixture(25);
+  cta.setAttribute("tabindex", "-1");
+  const disclosure = fixture(25);
+  const root = {
+    querySelectorAll: (selector) => selector === "[data-reveal-frame]" ? cards : [],
+    querySelector: (selector) => {
+      if (selector === "[data-post-reveal-cta]") return cta;
+      if (selector === "[data-post-reveal-disclosure]") return disclosure;
+      return null;
+    },
+  };
+
+  assert.equal(syncCampaignHeroCardLayer(17, root), 17);
+  assert.equal(cards[0].classList.contains("is-revealed"), true);
+  assert.equal(cards[0].getAttribute("aria-hidden"), "false");
+  assert.equal(cards[0].inert, false);
+  assert.equal(cards[1].classList.contains("is-revealed"), false);
+
+  syncCampaignHeroCardLayer(22, root);
+  assert.equal(cards[1].classList.contains("is-revealed"), true);
+  assert.equal(cards[2].classList.contains("is-revealed"), false);
+
+  syncCampaignHeroCardLayer(25, root);
+  assert.equal(cards[2].classList.contains("is-revealed"), true);
+  assert.equal(cta.classList.contains("is-ready"), true);
+  assert.equal(cta.getAttribute("aria-hidden"), "false");
+  assert.equal(cta.getAttribute("tabindex"), null);
+  assert.equal(cta.inert, false);
+  assert.equal(disclosure.classList.contains("is-ready"), true);
+  assert.equal(disclosure.getAttribute("aria-hidden"), "false");
+
+  assert.equal(syncCampaignHeroCardLayer(45, root), 45);
+  assert.equal(cards.every((card) => card.classList.contains("is-revealed")), true);
+  assert.equal(cta.classList.contains("is-ready"), true);
+
+  syncCampaignHeroCardLayer(24, root);
+  assert.equal(cards[2].classList.contains("is-revealed"), false);
+  assert.equal(cards[2].getAttribute("aria-hidden"), "true");
+  assert.equal(cards[2].inert, true);
+  assert.equal(cta.classList.contains("is-ready"), false);
+  assert.equal(cta.getAttribute("tabindex"), "-1");
+  assert.equal(disclosure.classList.contains("is-ready"), false);
+  assert.equal(disclosure.getAttribute("aria-hidden"), "true");
+
+  syncCampaignHeroCardLayer(21, root);
+  assert.equal(cards[1].classList.contains("is-revealed"), false);
+  syncCampaignHeroCardLayer(16, root);
+  assert.equal(cards[0].classList.contains("is-revealed"), false);
+});
+
+test("homepage renders the ordered campaign frame sequence", async () => {
+  const {
+    CAMPAIGN_HERO_FRAMES,
+    campaignHeroClampedScrollDelta,
+    campaignHeroFrameIndex,
+    campaignHeroScrollProgress,
+    renderCampaignHero,
+  } = await import("./campaign-hero.mjs");
   const html = renderCampaignHero();
 
-  assert.match(html, /class="campaign-hero campaign-hero-image-only"/);
-  assert.match(html, /class="campaign-hero-image"/);
-  assert.match(html, /campaign-mortgage-machine\.png/);
-  assert.match(html, /class="campaign-image-cta"/);
-  assert.doesNotMatch(html, /campaign-hero-copy/);
-  assert.doesNotMatch(html, /campaign-option/);
-  assert.doesNotMatch(html, /class="lead"/);
-  assert.doesNotMatch(html, /class="hero-actions"/);
+  assert.equal(CAMPAIGN_HERO_FRAMES.length, 45);
+  assert.equal(CAMPAIGN_HERO_FRAMES[0], "/site/assets/campaign-hero-frames/ezgif-frame-001.png");
+  assert.equal(new Set(CAMPAIGN_HERO_FRAMES).size, 30);
+  assert.equal(CAMPAIGN_HERO_FRAMES[19], "/site/assets/campaign-hero-frames/ezgif-frame-020.png");
+  assert.deepEqual(
+    CAMPAIGN_HERO_FRAMES.slice(29),
+    Array(16).fill("/site/assets/campaign-hero-frames/ezgif-frame-030.png"),
+  );
+  assert.equal(campaignHeroFrameIndex(-1), 0);
+  assert.equal(campaignHeroFrameIndex(0.5), 22);
+  assert.equal(campaignHeroFrameIndex(2), 44);
+  const progressInput = { trackDocumentTop: 92, trackHeight: 2168, stageHeight: 628 };
+  assert.equal(campaignHeroScrollProgress({ ...progressInput, trackTop: 92 }), 0);
+  assert.equal(campaignHeroScrollProgress({ ...progressInput, trackTop: 91 }), 1 / 1540);
+  assert.equal(campaignHeroScrollProgress({ ...progressInput, trackTop: -1448 }), 1);
+  assert.equal(campaignHeroClampedScrollDelta(650, 35), 35);
+  assert.equal(campaignHeroClampedScrollDelta(-650, 35), -35);
+  assert.equal(campaignHeroClampedScrollDelta(24, 35), 24);
+  assert.equal(campaignHeroClampedScrollDelta(650, 0), 650);
+  assert.match(html, /data-campaign-sequence/);
+  assert.match(html, /data-campaign-frame/);
+  assert.match(html, /ezgif-frame-001\.png/);
+  assert.match(html, /width="1855"/);
+  assert.match(html, /height="1751"/);
+  assert.match(html, /class="campaign-hero-visual"/);
+  assert.match(html, /class="campaign-hero-copy-layer"/);
+  assert.doesNotMatch(html, /campaign-image-cta/);
+  assert.doesNotMatch(html, /<h1 class="visually-hidden">/);
+  assert.doesNotMatch(campaignStylesSource, /\.campaign-image-cta\b/);
 });
 
 test("campaign hero is connected to the homepage renderer", () => {
-  assert.match(appSource, /import \{ renderCampaignHero \} from "\/site\/campaign-hero\.mjs"/);
+  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs\?v=20260718-10"/);
   assert.match(appSource, /\$\{renderCampaignHero\(\)\}/);
+  assert.match(appSource, /activeCampaignHeroController\?\.destroy\(\)/);
+  assert.match(appSource, /activeCampaignHeroController = initCampaignHero\(app\)/);
+});
+
+test("browser entrypoints load the application module with the campaign module", () => {
+  assert.match(indexSource, /src="\/site\/app\.js\?v=20260718-10"/);
+  assert.match(staticRouteSource, /src="\/site\/app\.js"/);
+  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-10"/);
+  assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
+  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-10"/);
+  assert.match(staticRouteSource, /href="\/site\/campaign-hero\.css\?v=20260718-10"/);
 });
 
 test("public site loads the approved Figma typography", () => {
@@ -32,11 +183,70 @@ test("public site loads the approved Figma typography", () => {
   assert.match(stylesSource, /--font-body:\s*"Inter"/);
 });
 
-test("campaign artwork is stored with the deployable site", () => {
-  assert.equal(
-    fs.existsSync(new URL("./assets/campaign-mortgage-machine.png", import.meta.url)),
-    true,
+test("campaign sequence defines the approved responsive and reduced-motion travel", () => {
+  assert.match(stylesSource, /--campaign-scroll-travel:\s*1540px/);
+  assert.match(stylesSource, /--campaign-scroll-step:\s*35px/);
+  assert.match(stylesSource, /height:\s*calc\(100vh - var\(--campaign-sticky-top\) \+ var\(--campaign-scroll-travel\)\)/);
+  assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*position:\s*sticky/s);
+  assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*top:\s*var\(--campaign-sticky-top\)[^}]*height:\s*calc\(100vh - var\(--campaign-sticky-top\)\)/s);
+  assert.match(stylesSource, /\.campaign-hero-visual\s*\{[^}]*width:\s*60%[^}]*max-width:\s*63\.564vh[^}]*margin-left:\s*auto[^}]*margin-right:\s*15vw/s);
+  assert.match(stylesSource, /\.campaign-hero-sequence \.campaign-hero-image\s*\{[^}]*width:\s*100%[^}]*max-height:\s*none/s);
+  assert.match(stylesSource, /@media \(max-width:\s*760px\)[\s\S]*--campaign-scroll-travel:\s*1540px/);
+  assert.match(stylesSource, /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*--campaign-scroll-travel:\s*0px/);
+  assert.match(stylesSource, /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*position:\s*relative/);
+});
+
+test("mobile campaign hero stacks text, machine, cards, CTA, and disclosure in order", () => {
+  const mobileStyles = stylesSource.slice(stylesSource.indexOf("@media (max-width: 900px)"));
+
+  assert.match(mobileStyles, /\.campaign-hero-copy-layer\s*\{[^}]*display:\s*contents/s);
+  assert.doesNotMatch(mobileStyles, /\.campaign-hero-copy-layer\s*\{[^}]*display:\s*none/s);
+  assert.match(mobileStyles, /\.campaign-hero-eyebrow\s*\{[^}]*order:\s*1/s);
+  assert.match(mobileStyles, /\.campaign-hero-title\s*\{[^}]*order:\s*2/s);
+  assert.match(mobileStyles, /\.campaign-hero-lede\s*\{[^}]*order:\s*3/s);
+  assert.match(mobileStyles, /\.campaign-hero-sequence \.campaign-hero-visual\s*\{[^}]*order:\s*4/s);
+  assert.match(mobileStyles, /\.campaign-loan-card-stack\s*\{[^}]*order:\s*5/s);
+  assert.match(mobileStyles, /\.campaign-primary-cta\s*\{[^}]*order:\s*6/s);
+  assert.match(mobileStyles, /\.campaign-hero-disclosure\s*\{[^}]*order:\s*7/s);
+});
+
+test("campaign cards share a base height while Lender 3 is slightly larger", () => {
+  assert.match(stylesSource, /\.campaign-loan-card-stack\s*\{[^}]*align-items:\s*stretch/s);
+  assert.match(stylesSource, /\.campaign-loan-card\s*\{[^}]*height:\s*100%[^}]*display:\s*flex[^}]*flex-direction:\s*column/s);
+  assert.match(stylesSource, /\.campaign-loan-card__body\s*\{[^}]*display:\s*flex[^}]*flex:\s*1[^}]*flex-direction:\s*column/s);
+  assert.match(stylesSource, /\.campaign-loan-card--featured\.is-revealed\s*\{[^}]*scale\(1\.02\)/s);
+});
+
+test("campaign hero queues no more than one 35px wheel step per animation frame", async () => {
+  const { campaignHeroQueuedWheelDelta } = await import("./campaign-hero.mjs");
+  const campaignSource = fs.readFileSync(new URL("./campaign-hero.mjs", import.meta.url), "utf8");
+
+  assert.equal(campaignHeroQueuedWheelDelta(0, 650, 35), 35);
+  assert.equal(campaignHeroQueuedWheelDelta(35, 650, 35), 35);
+  assert.equal(campaignHeroQueuedWheelDelta(0, -650, 35), -35);
+  assert.equal(campaignHeroQueuedWheelDelta(35, -10, 35), 25);
+  assert.match(campaignSource, /pendingWheelDelta = campaignHeroQueuedWheelDelta\(pendingWheelDelta, delta, step\)/);
+  assert.match(campaignSource, /if \(!wheelFrameId\) wheelFrameId = requestFrame\(flushWheelStep\)/);
+});
+
+test("campaign hero caps desktop wheel travel while the sticky sequence is active", () => {
+  const campaignSource = fs.readFileSync(new URL("./campaign-hero.mjs", import.meta.url), "utf8");
+  assert.match(campaignSource, /function handleWheel\(event\)/);
+  assert.match(campaignSource, /environment\.addEventListener\("wheel",\s*handleWheel,\s*\{\s*passive:\s*false\s*\}\)/);
+  assert.match(campaignSource, /environment\.removeEventListener\("wheel",\s*handleWheel\)/);
+});
+
+test("reduced-motion mode exposes the complete static comparison", () => {
+  const campaignSource = fs.readFileSync(new URL("./campaign-hero.mjs", import.meta.url), "utf8");
+
+  assert.match(
+    campaignSource,
+    /if \(reducedMotion\) \{[\s\S]*frame\.src = CAMPAIGN_HERO_FRAMES\.at\(-1\)[\s\S]*syncCampaignHeroCardLayer\(CAMPAIGN_HERO_FRAMES\.length, track\)[\s\S]*return \{ destroy \}/,
   );
+});
+
+test("root overflow clipping preserves the campaign hero sticky scroll container", () => {
+  assert.match(campaignStylesSource, /html[\s\S]*body\s*\{[^}]*overflow-x:\s*clip/s);
 });
 
 test("homepage follows the approved Figma decision-flow sequence", () => {

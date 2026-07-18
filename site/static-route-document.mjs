@@ -980,6 +980,7 @@ function renderHead(metadata) {
   <meta name="twitter:image" content="${escapeHtml(metadata.twitter.image)}" />
   <script type="application/ld+json" data-document-jsonld>${jsonForScript(metadata.jsonLd)}</script>
   <link rel="stylesheet" href="/site/styles.css" />
+  <link rel="stylesheet" href="/site/campaign-hero.css?v=20260718-10" />
 </head>`;
 }
 
@@ -1041,7 +1042,7 @@ ${renderHead(metadata)}
   <div id="app" data-static-route="${escapeHtml(record.entry.route)}">
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="/" aria-label="Snap Mortgage home"><img class="brand-logo" src="/site/assets/images/snap-loans.svg" alt="Snap Loans" /></a>
+        <a class="brand" href="/" aria-label="Snap Mortgage home"><img class="brand-logo" src="/site/assets/images/snap-mortgage.png" alt="Snap Mortgage" /></a>
         <nav aria-label="Primary"><a href="/locations">Locations</a><a href="/rates">Rates</a><a href="/loan-options">Loan options</a><a href="/calculators">Calculators</a><a href="/learning-center">Learning center</a><a href="/loan-officers">Loan officers</a></nav>
       </div>
     </header>

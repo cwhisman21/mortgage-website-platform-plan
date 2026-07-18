@@ -7,7 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderLocationsHero } from "/site/locations-hero.mjs";
-import { renderCampaignHero } from "/site/campaign-hero.mjs";
+import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260718-10";
 import {
   buildLearningCenterModel,
   serializeLearningCenterSearch,
@@ -86,6 +86,7 @@ let searchIndexRecords = null;
 let searchIndexLoadError = null;
 let searchIndexPromise = null;
 let activeTagSearchController = null;
+let activeCampaignHeroController = null;
 const articleBundlePromises = new Map();
 let articleModalReturnFocus = null;
 let articleModalOrigin = null;
@@ -93,7 +94,7 @@ let articleModalScrollY = 0;
 let activeArticleRequestId = 0;
 
 const ASSETS = {
-  logo: "/site/assets/images/snap-loans.svg",
+  logo: "/site/assets/images/snap-mortgage.png",
   borrower: "/site/assets/images/borrower.png",
   mortgage: "/site/assets/images/mortgage.png",
   house: "/site/assets/images/house-icon.png"
@@ -747,8 +748,7 @@ function header() {
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="${route("/")}">
-          <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Loans" />
-          <span class="brand-sub">Mortgage intelligence</span>
+          <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Mortgage" />
         </a>
         <button class="nav-toggle" type="button" aria-label="Open navigation" data-nav-toggle>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -3172,6 +3172,8 @@ function wireCurrentTagSearch(found) {
 }
 
 function render() {
+  activeCampaignHeroController?.destroy();
+  activeCampaignHeroController = null;
   activeTagSearchController?.destroy();
   activeTagSearchController = null;
 
@@ -3227,6 +3229,7 @@ function render() {
   app.innerHTML = html;
   document.body.classList.remove("no-scroll");
   wireInteractions();
+  activeCampaignHeroController = initCampaignHero(app);
   if (isTagSearchPath(path)) {
     activeTagSearchController = wireCurrentTagSearch(found);
     if (!Array.isArray(searchIndexRecords) && !searchIndexPromise) {

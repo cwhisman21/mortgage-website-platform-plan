@@ -1,0 +1,497 @@
+html,
+body {
+  overflow-x: clip;
+}
+
+.header-inner {
+  grid-template-columns: 180px 1fr auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.brand-logo {
+  display: block;
+  height: 72px;
+  width: auto;
+  max-width: 100%;
+}
+
+.campaign-hero {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.campaign-hero-sequence {
+  --campaign-scroll-travel: 1540px;
+  --campaign-scroll-step: 35px;
+  --campaign-sticky-top: 0px;
+  --campaign-reel-blue: #0750c7;
+  --campaign-reel-green: #0f8b49;
+  height: calc(100vh - var(--campaign-sticky-top) + var(--campaign-scroll-travel));
+  position: relative;
+}
+
+.campaign-hero-stage {
+  display: grid;
+  position: sticky;
+  top: var(--campaign-sticky-top);
+  height: calc(100vh - var(--campaign-sticky-top));
+  overflow: hidden;
+  place-items: center;
+}
+
+.campaign-hero-inner {
+  position: relative;
+  width: min(1672px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(520px, 1.08fr) minmax(430px, 0.92fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: center;
+  padding: clamp(24px, 4vw, 64px);
+}
+
+.campaign-hero-visual {
+  position: relative;
+  width: 60%;
+  max-width: 63.564vh;
+  margin-left: auto;
+  margin-right: 15vw;
+}
+
+.campaign-hero-sequence .campaign-hero-visual {
+  width: 100%;
+  max-width: min(63.564vh, 720px);
+  margin: 0 auto;
+}
+
+.campaign-hero-copy-layer {
+  min-width: 0;
+  color: var(--ink);
+}
+
+.campaign-hero-eyebrow {
+  margin: 0 0 10px;
+  color: var(--snap-blue);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.campaign-hero-title {
+  max-width: 700px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 3.7vw, 64px);
+  line-height: 0.98;
+}
+
+.campaign-hero-lede {
+  max-width: 680px;
+  margin: 16px 0 22px;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.4;
+}
+
+.campaign-loan-card-stack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.campaign-loan-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--campaign-card-accent), #dfe8f4 74%);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(21, 38, 75, 0.14);
+  opacity: 0;
+  transform: translateY(44px) scale(0.985);
+  transition: opacity 280ms ease, transform 560ms cubic-bezier(0.16, 0.94, 0.22, 1);
+}
+
+.campaign-loan-card.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.campaign-loan-card--featured.is-revealed {
+  z-index: 1;
+  transform: translateY(-3px) scale(1.02);
+}
+
+.campaign-loan-card__header {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--campaign-card-accent);
+  color: #fff;
+}
+
+.campaign-loan-card__header h2 {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 19px);
+}
+
+.campaign-loan-card__header svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.campaign-loan-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px 12px 12px;
+}
+
+.campaign-option-status,
+.campaign-terms-list div,
+.campaign-verified-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.campaign-option-status {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.campaign-example-badge {
+  flex: 0 0 auto;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--campaign-card-accent), #fff 88%);
+  color: var(--campaign-card-accent);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.campaign-terms-list {
+  margin: 0;
+}
+
+.campaign-terms-list div {
+  min-height: 34px;
+  border-bottom: 1px solid var(--line);
+}
+
+.campaign-terms-list dt,
+.campaign-verified-row {
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+.campaign-terms-list dd {
+  margin: 0;
+  color: var(--campaign-card-accent);
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.campaign-verified-row {
+  margin: auto 0 0;
+  padding-top: 9px;
+}
+
+.campaign-primary-cta {
+  display: inline-flex;
+  min-height: 48px;
+  margin-top: 20px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 22px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--snap-blue), var(--snap-blue-700));
+  color: #fff;
+  font-weight: 850;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 260ms ease, transform 420ms cubic-bezier(0.16, 0.94, 0.22, 1);
+}
+
+.campaign-primary-cta.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.campaign-primary-cta:focus-visible {
+  outline: 3px solid rgba(var(--snap-primary-rgb), 0.38);
+  outline-offset: 4px;
+}
+
+.campaign-hero-disclosure {
+  max-width: 680px;
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 320ms ease;
+}
+
+.campaign-hero-disclosure.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.campaign-hero-image,
+.campaign-hero-sequence .campaign-hero-image {
+  display: block;
+  width: 100%;
+  max-height: none;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .campaign-hero-inner {
+    display: grid;
+    height: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: 6px;
+    padding: 10px 14px 14px;
+  }
+
+  .campaign-hero-copy-layer {
+    display: contents;
+  }
+
+  .campaign-hero-eyebrow {
+    order: 1;
+    margin: 0;
+    text-align: center;
+    font-size: 10px;
+  }
+
+  .campaign-hero-title {
+    order: 2;
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: clamp(26px, 7.5vw, 34px);
+    line-height: 1;
+  }
+
+  .campaign-hero-lede {
+    order: 3;
+    max-width: 440px;
+    margin: 2px auto 4px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .campaign-hero-sequence .campaign-hero-visual {
+    order: 4;
+    width: min(58vw, 360px);
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  .campaign-loan-card-stack {
+    order: 5;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .campaign-loan-card {
+    transform: translateY(20px) scale(0.985);
+  }
+
+  .campaign-loan-card__header {
+    min-height: 30px;
+    padding: 5px 6px;
+  }
+
+  .campaign-loan-card__header h2 {
+    font-size: 11px;
+  }
+
+  .campaign-loan-card__header svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .campaign-loan-card__body {
+    padding: 4px 6px 6px;
+  }
+
+  .campaign-option-status {
+    min-height: 30px;
+    padding-bottom: 4px;
+    font-size: 9px;
+    line-height: 1.1;
+  }
+
+  .campaign-example-badge {
+    padding: 2px 4px;
+    font-size: 6px;
+  }
+
+  .campaign-terms-list div {
+    min-height: 28px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .campaign-terms-list dt,
+  .campaign-verified-row {
+    font-size: 8px;
+    line-height: 1.1;
+  }
+
+  .campaign-terms-list dd {
+    font-size: 10px;
+  }
+
+  .campaign-verified-row {
+    padding-top: 4px;
+  }
+
+  .campaign-primary-cta {
+    order: 6;
+    min-height: 38px;
+    margin: 4px auto 0;
+    padding: 0 18px;
+    font-size: 13px;
+  }
+
+  .campaign-hero-disclosure {
+    order: 7;
+    max-width: 440px;
+    margin: 2px auto 0;
+    text-align: center;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 720px) {
+  .campaign-hero-inner {
+    gap: 3px;
+    padding: 6px 10px 8px;
+  }
+
+  .campaign-hero-eyebrow {
+    font-size: 8px;
+  }
+
+  .campaign-hero-title {
+    font-size: 24px;
+  }
+
+  .campaign-hero-lede {
+    font-size: 10px;
+    line-height: 1.15;
+  }
+
+  .campaign-hero-sequence .campaign-hero-visual {
+    width: min(40vw, 160px);
+  }
+
+  .campaign-loan-card__header {
+    min-height: 24px;
+    padding: 3px 4px;
+  }
+
+  .campaign-loan-card__header h2 {
+    font-size: 9px;
+  }
+
+  .campaign-loan-card__body {
+    padding: 2px 4px 3px;
+  }
+
+  .campaign-option-status {
+    min-height: 22px;
+    padding-bottom: 2px;
+    font-size: 7px;
+  }
+
+  .campaign-example-badge {
+    padding: 1px 3px;
+    font-size: 5.5px;
+  }
+
+  .campaign-terms-list div {
+    min-height: 20px;
+  }
+
+  .campaign-terms-list dt,
+  .campaign-verified-row {
+    font-size: 6.5px;
+  }
+
+  .campaign-terms-list dd {
+    font-size: 8px;
+  }
+
+  .campaign-verified-row {
+    padding-top: 2px;
+  }
+
+  .campaign-primary-cta {
+    min-height: 32px;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .campaign-hero-disclosure {
+    font-size: 6.5px;
+  }
+}
+
+@media (max-width: 760px) {
+  .brand-logo {
+    height: 56px;
+    width: auto;
+  }
+
+  .campaign-hero-sequence {
+    --campaign-scroll-travel: 1540px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaign-hero-sequence {
+    --campaign-scroll-travel: 0px;
+    --campaign-scroll-step: 0px;
+    height: auto;
+  }
+
+  .campaign-hero-stage {
+    position: relative;
+    height: auto;
+  }
+}
