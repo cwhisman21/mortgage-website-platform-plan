@@ -7,6 +7,7 @@ const indexSource = fs.readFileSync(new URL("./index.html", import.meta.url), "u
 const staticRouteSource = fs.readFileSync(new URL("./static-route-document.mjs", import.meta.url), "utf8");
 const baseStylesSource = fs.readFileSync(new URL("./styles.css", import.meta.url), "utf8");
 const campaignStylesSource = fs.readFileSync(new URL("./campaign-hero.css", import.meta.url), "utf8");
+const campaignModuleSource = fs.readFileSync(new URL("./campaign-hero.mjs", import.meta.url), "utf8");
 const stylesSource = `${baseStylesSource}\n${campaignStylesSource}`;
 
 function mutableClassList() {
@@ -166,9 +167,9 @@ test("campaign hero card layer renders persistent copy and staged accessible opt
   const { renderCampaignHeroCardLayer } = await import("./campaign-hero-card-layer.mjs");
   const html = renderCampaignHeroCardLayer();
 
-  assert.match(html, /Compare lender options/);
+  assert.doesNotMatch(html, /Compare lender options/i);
   assert.match(html, /There is a better way than hoping for the best/);
-  assert.match(html, /Compare lender options side by side without guessing which path is strongest/);
+  assert.match(html, /See lender choices side by side without guessing which path is strongest/);
   assert.match(html, /Lender 1/);
   assert.match(html, /Lender 2/);
   assert.match(html, /Lender 3/);
@@ -315,18 +316,19 @@ test("homepage renders the ordered campaign frame sequence", async () => {
 });
 
 test("campaign hero is connected to the homepage renderer", () => {
-  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs\?v=20260718-10"/);
+  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs\?v=20260718-12"/);
   assert.match(appSource, /\$\{renderCampaignHero\(\)\}/);
   assert.match(appSource, /activeCampaignHeroController\?\.destroy\(\)/);
   assert.match(appSource, /activeCampaignHeroController = initCampaignHero\(app\)/);
 });
 
 test("browser entrypoints load the application module with the campaign module", () => {
-  assert.match(indexSource, /src="\/site\/app\.js\?v=20260718-10"/);
+  assert.match(indexSource, /src="\/site\/app\.js\?v=20260718-12"/);
   assert.match(staticRouteSource, /src="\/site\/app\.js"/);
-  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-10"/);
+  assert.match(campaignModuleSource, /from "\.\/campaign-hero-card-layer\.mjs\?v=20260718-12"/);
+  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-12"/);
   assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
-  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-10"/);
+  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-12"/);
   assert.doesNotMatch(staticRouteSource, /campaign-hero\.css/);
 });
 
@@ -355,13 +357,13 @@ test("mobile campaign hero stacks text, machine, cards, CTA, and disclosure in o
 
   assert.match(mobileStyles, /\.campaign-hero-copy-layer\s*\{[^}]*display:\s*contents/s);
   assert.doesNotMatch(mobileStyles, /\.campaign-hero-copy-layer\s*\{[^}]*display:\s*none/s);
-  assert.match(mobileStyles, /\.campaign-hero-eyebrow\s*\{[^}]*order:\s*1/s);
-  assert.match(mobileStyles, /\.campaign-hero-title\s*\{[^}]*order:\s*2/s);
-  assert.match(mobileStyles, /\.campaign-hero-lede\s*\{[^}]*order:\s*3/s);
-  assert.match(mobileStyles, /\.campaign-hero-sequence \.campaign-hero-visual\s*\{[^}]*order:\s*4/s);
-  assert.match(mobileStyles, /\.campaign-loan-card-stack\s*\{[^}]*order:\s*5/s);
-  assert.match(mobileStyles, /\.campaign-primary-cta\s*\{[^}]*order:\s*6/s);
-  assert.match(mobileStyles, /\.campaign-hero-disclosure\s*\{[^}]*order:\s*7/s);
+  assert.doesNotMatch(mobileStyles, /\.campaign-hero-eyebrow\s*\{/s);
+  assert.match(mobileStyles, /\.campaign-hero-title\s*\{[^}]*order:\s*1/s);
+  assert.match(mobileStyles, /\.campaign-hero-lede\s*\{[^}]*order:\s*2/s);
+  assert.match(mobileStyles, /\.campaign-hero-sequence \.campaign-hero-visual\s*\{[^}]*order:\s*3/s);
+  assert.match(mobileStyles, /\.campaign-loan-card-stack\s*\{[^}]*order:\s*4/s);
+  assert.match(mobileStyles, /\.campaign-primary-cta\s*\{[^}]*order:\s*5/s);
+  assert.match(mobileStyles, /\.campaign-hero-disclosure\s*\{[^}]*order:\s*6/s);
 });
 
 test("campaign cards share a base height while Lender 3 is slightly larger", () => {

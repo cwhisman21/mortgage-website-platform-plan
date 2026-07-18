@@ -22,7 +22,6 @@ function optionCard({ key, frame, lender, loanType, accent, featured = false }) 
       <div class="campaign-loan-card__body">
         <div class="campaign-option-status">
           <strong>${loanType}</strong>
-          <span class="campaign-example-badge">Example</span>
         </div>
         <dl class="campaign-terms-list">
           <div><dt>Rate and payment view</dt><dd>Compare</dd></div>
@@ -38,9 +37,8 @@ function optionCard({ key, frame, lender, loanType, accent, featured = false }) 
 export function renderCampaignHeroCardLayer() {
   return `
     <section class="campaign-hero-copy-layer" aria-label="Mortgage comparison options">
-      <p class="campaign-hero-eyebrow">Compare lender options</p>
       <h1 class="campaign-hero-title">There is a better way than hoping for the best</h1>
-      <p class="campaign-hero-lede">Compare lender options side by side without guessing which path is strongest.</p>
+      <p class="campaign-hero-lede">See lender choices side by side without guessing which path is strongest.</p>
       <div class="campaign-loan-card-stack" data-card-stack aria-label="Illustrative lender comparisons">
         ${optionCard({ key: "good", frame: 17, lender: "Lender 1", loanType: "30-Year Conventional", accent: "var(--campaign-reel-blue)" })}
         ${optionCard({ key: "better", frame: 22, lender: "Lender 2", loanType: "FHA Loan", accent: "var(--campaign-reel-blue)" })}

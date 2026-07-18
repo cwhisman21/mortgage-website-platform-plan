@@ -22,6 +22,7 @@ test("public headers use the supplied Snap Mortgage logo", () => {
     assert.match(source, /\/site\/assets\/images\/snap-mortgage\.png/);
     assert.match(source, /alt="Snap Mortgage"/);
   }
+  assert.match(appSource, /logo: "\/site\/assets\/images\/snap-mortgage\.png\?v=20260718-12"/);
   assert.equal(fs.existsSync(new URL("./assets/images/snap-mortgage.png", import.meta.url)), true);
 });
 
@@ -47,5 +48,5 @@ test("every generated public document uses the supplied logo", () => {
 test("the deployed logo matches the supplied artwork", () => {
   const logo = fs.readFileSync(new URL("./assets/images/snap-mortgage.png", import.meta.url));
   const digest = createHash("sha256").update(logo).digest("hex");
-  assert.equal(digest, "68f3ecd267b30579013721d57b1f30833d12b1c1231d32a5a703889f684706fe");
+  assert.equal(digest, "39d7dfbd5b41d87b0d8f85f29235580bec2e1322c17e53d01303c431dacb964e");
 });

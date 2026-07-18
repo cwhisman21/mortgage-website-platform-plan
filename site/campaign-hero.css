@@ -7,8 +7,8 @@
   --campaign-scroll-travel: 1540px;
   --campaign-scroll-step: 35px;
   --campaign-sticky-top: 0px;
-  --campaign-reel-blue: #0750c7;
-  --campaign-reel-green: #0f8b49;
+  --campaign-reel-blue: #0b55ff;
+  --campaign-reel-green: #158b4a;
   height: calc(100vh - var(--campaign-sticky-top) + var(--campaign-scroll-travel));
   position: relative;
 }
@@ -19,7 +19,7 @@
   top: var(--campaign-sticky-top);
   height: calc(100vh - var(--campaign-sticky-top));
   overflow: hidden;
-  place-items: center;
+  place-items: start center;
 }
 
 .campaign-hero-inner {
@@ -31,7 +31,7 @@
   grid-template-columns: minmax(520px, 1.08fr) minmax(430px, 0.92fr);
   gap: clamp(28px, 4vw, 72px);
   align-items: center;
-  padding: clamp(24px, 4vw, 64px);
+  padding: clamp(12px, 1.5vw, 24px) clamp(24px, 4vw, 64px) clamp(24px, 4vw, 64px);
 }
 
 .campaign-hero-visual {
@@ -53,18 +53,11 @@
   color: var(--ink);
 }
 
-.campaign-hero-eyebrow {
-  margin: 0 0 10px;
-  color: var(--snap-blue);
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 
 .campaign-hero-title {
   max-width: 700px;
   margin: 0;
+  color: #0b55ff;
   font-family: var(--font-display);
   font-size: clamp(38px, 3.7vw, 64px);
   line-height: 0.98;
@@ -125,7 +118,11 @@
   justify-content: space-between;
   gap: 8px;
   padding: 9px 12px;
-  background: var(--campaign-card-accent);
+  background: linear-gradient(
+    180deg,
+    var(--campaign-card-accent),
+    color-mix(in srgb, var(--campaign-card-accent), #001b55 18%)
+  );
   color: #fff;
 }
 
@@ -164,17 +161,6 @@
   font-size: 13px;
 }
 
-.campaign-example-badge {
-  flex: 0 0 auto;
-  padding: 3px 6px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--campaign-card-accent), #fff 88%);
-  color: var(--campaign-card-accent);
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
 
 .campaign-terms-list {
   margin: 0;
@@ -275,24 +261,18 @@
     display: grid;
     height: 100%;
     grid-template-columns: minmax(0, 1fr);
-    align-content: center;
+    align-content: start;
     gap: 6px;
-    padding: 10px 14px 14px;
+    padding: 8px 14px 14px;
   }
 
   .campaign-hero-copy-layer {
     display: contents;
   }
 
-  .campaign-hero-eyebrow {
-    order: 1;
-    margin: 0;
-    text-align: center;
-    font-size: 10px;
-  }
 
   .campaign-hero-title {
-    order: 2;
+    order: 1;
     max-width: 440px;
     margin: 0 auto;
     text-align: center;
@@ -301,7 +281,7 @@
   }
 
   .campaign-hero-lede {
-    order: 3;
+    order: 2;
     max-width: 440px;
     margin: 2px auto 4px;
     text-align: center;
@@ -310,14 +290,14 @@
   }
 
   .campaign-hero-sequence .campaign-hero-visual {
-    order: 4;
+    order: 3;
     width: min(58vw, 360px);
     max-width: none;
     margin: 0 auto;
   }
 
   .campaign-loan-card-stack {
-    order: 5;
+    order: 4;
     width: 100%;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
@@ -353,10 +333,6 @@
     line-height: 1.1;
   }
 
-  .campaign-example-badge {
-    padding: 2px 4px;
-    font-size: 10px;
-  }
 
   .campaign-terms-list div {
     min-height: 28px;
@@ -381,7 +357,7 @@
   }
 
   .campaign-primary-cta {
-    order: 6;
+    order: 5;
     min-height: 38px;
     margin: 4px auto 0;
     padding: 0 18px;
@@ -389,7 +365,7 @@
   }
 
   .campaign-hero-disclosure {
-    order: 7;
+    order: 6;
     max-width: 440px;
     margin: 2px auto 0;
     text-align: center;
@@ -404,9 +380,6 @@
     padding: 6px 10px 8px;
   }
 
-  .campaign-hero-eyebrow {
-    font-size: 8px;
-  }
 
   .campaign-hero-title {
     font-size: 24px;
@@ -440,10 +413,6 @@
     font-size: 10px;
   }
 
-  .campaign-example-badge {
-    padding: 1px 3px;
-    font-size: 10px;
-  }
 
   .campaign-terms-list div {
     min-height: 20px;

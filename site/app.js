@@ -7,7 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderHomeStateExplorer, renderLocationsHero } from "/site/locations-hero.mjs";
-import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260718-10";
+import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260718-12";
 import {
   buildLearningCenterModel,
   serializeLearningCenterSearch,
@@ -94,7 +94,7 @@ let articleModalScrollY = 0;
 let activeArticleRequestId = 0;
 
 const ASSETS = {
-  logo: "/site/assets/images/snap-mortgage.png",
+  logo: "/site/assets/images/snap-mortgage.png?v=20260718-12",
   borrower: "/site/assets/images/borrower.png",
   mortgage: "/site/assets/images/mortgage.png",
   house: "/site/assets/images/house-icon.png"
@@ -707,55 +707,51 @@ function navLink(path, label) {
   return `<a class="${active ? "active" : ""}" href="${route(path)}">${esc(label)}</a>`;
 }
 
-function accountMenu() {
+function accountNavigation() {
   const savedBadge = sessionState.savedCount > 0 ? `<span class="account-badge" data-saved-count>${sessionState.savedCount}</span>` : "";
   if (!sessionState.isLoggedIn) {
     return `
-      <div class="account-menu" data-account-root>
-        <button class="account-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-account-toggle>
-          <span class="hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="account-name">Menu</span>
+      <div class="site-nav-account-actions" aria-label="Account">
+        <button class="site-nav-action" type="button" data-auth-action="login" data-account-target>
+          Log in
           ${savedBadge}
         </button>
-        <div class="account-dropdown" data-account-menu hidden>
-          <button type="button" data-auth-action="login">Log in</button>
-          <button type="button" data-cta-action="leadForm">Review guidance options</button>
-        </div>
+        <button class="site-nav-action" type="button" data-cta-action="leadForm">Review guidance options</button>
       </div>
     `;
   }
   return `
-    <div class="account-menu" data-account-root>
-      <button class="account-trigger logged-in" type="button" aria-haspopup="true" aria-expanded="false" data-account-toggle>
-        <span class="hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="account-avatar" aria-hidden="true">${icon("account")}</span>
-        <span class="account-name">${esc(SNAP_CUSTOMER.name)}</span>
+    <div class="site-nav-account-actions" aria-label="Account">
+      <button class="site-nav-action site-nav-account" type="button" data-account-action="open" data-account-target>
+        My Account
         ${savedBadge}
       </button>
-      <div class="account-dropdown" data-account-menu hidden>
-        <button type="button" data-account-action="open">Open My Account</button>
-        <button type="button" data-cta-action="leadForm">Review guidance options</button>
-        <button type="button" data-cta-action="rateReview">Review rates</button>
-        <button type="button" data-cta-action="compareOffer">Compare an offer</button>
-        <button type="button" data-account-action="signout">Sign out</button>
-      </div>
+      <button class="site-nav-action" type="button" data-cta-action="leadForm">Review guidance options</button>
+      <button class="site-nav-action" type="button" data-cta-action="rateReview">Review rates</button>
+      <button class="site-nav-action" type="button" data-cta-action="compareOffer">Compare an offer</button>
+      <button class="site-nav-action" type="button" data-account-action="signout">Sign out</button>
     </div>
   `;
 }
 
 function header() {
+  const firstName = SNAP_CUSTOMER.name.trim().split(/\s+/)[0] || SNAP_CUSTOMER.name;
+  const welcome = sessionState.isLoggedIn
+    ? `<p class="header-welcome" aria-label="Welcome back, ${esc(SNAP_CUSTOMER.name)}"><span class="header-welcome-full" aria-hidden="true">Welcome back, ${esc(SNAP_CUSTOMER.name)}</span><span class="header-welcome-compact" aria-hidden="true">Welcome back, ${esc(firstName)}</span></p>`
+    : "";
   return `
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="${route("/")}">
           <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Mortgage" />
         </a>
-        <button class="nav-toggle" type="button" aria-label="Open navigation" data-nav-toggle>
+        ${welcome}
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-nav-toggle>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" fill="none" />
           </svg>
         </button>
-        <nav class="site-nav" data-nav>
+        <nav class="site-nav" id="site-navigation" data-nav>
           ${navLink("/locations", "Locations")}
           ${navLink("/rates", "Rates")}
           ${navLink("/buy", "Buy")}
@@ -764,10 +760,8 @@ function header() {
           ${navLink("/calculators", "Calculators")}
           ${navLink("/learning-center", "Learning")}
           ${navLink("/loan-officers", "Loan officers")}
+          ${accountNavigation()}
         </nav>
-        <div class="header-actions">
-          ${accountMenu()}
-        </div>
       </div>
     </header>
   `;
@@ -3372,9 +3366,9 @@ function showToast(message) {
 }
 
 function updateAccountBadge() {
-  const trigger = document.querySelector("[data-account-toggle]");
-  if (!trigger) return;
-  let badge = trigger.querySelector("[data-saved-count]");
+  const target = document.querySelector("[data-account-target]");
+  if (!target) return;
+  let badge = target.querySelector("[data-saved-count]");
   if (sessionState.savedCount <= 0) {
     badge?.remove();
     return;
@@ -3383,16 +3377,17 @@ function updateAccountBadge() {
     badge = document.createElement("span");
     badge.className = "account-badge";
     badge.setAttribute("data-saved-count", "");
-    trigger.appendChild(badge);
+    target.appendChild(badge);
   }
   badge.textContent = String(sessionState.savedCount);
 }
 
 function animateSaveToAccount(trigger) {
-  const target = document.querySelector("[data-account-toggle]");
+  const target = document.querySelector("[data-account-target]");
   if (!trigger || !target) return;
+  const to = target.getClientRects()[0];
+  if (!to) return;
   const from = trigger.getBoundingClientRect();
-  const to = target.getBoundingClientRect();
   const chip = document.createElement("span");
   chip.className = "save-flight";
   chip.textContent = "Saved";
@@ -3417,7 +3412,7 @@ function saveToAccount(trigger, label = "Saved item") {
     savedAt: new Date().toISOString()
   });
   persistSessionState();
-  animateSaveToAccount(trigger || document.querySelector("[data-account-toggle]"));
+  animateSaveToAccount(trigger || document.querySelector("[data-account-target]"));
   updateAccountBadge();
   showToast("Saved for this browsing session");
 }
@@ -3426,7 +3421,7 @@ function flushPendingSave() {
   if (!pendingSaveAfterLogin || !sessionState.isLoggedIn) return;
   const label = pendingSaveAfterLogin.label;
   pendingSaveAfterLogin = null;
-  window.setTimeout(() => saveToAccount(document.querySelector("[data-account-toggle]"), label), 120);
+  window.setTimeout(() => saveToAccount(document.querySelector("[data-account-target]"), label), 120);
 }
 
 function handleDocumentClick(event) {
@@ -3464,22 +3459,21 @@ function handleDocumentClick(event) {
       }
     }
   }
-  const accountToggle = document.querySelector("[data-account-toggle]");
-  const accountMenuNode = document.querySelector("[data-account-menu]");
-  const root = document.querySelector("[data-account-root]");
-  if (root && !root.contains(event.target) && accountMenuNode) {
-    accountMenuNode.hidden = true;
-    accountToggle?.setAttribute("aria-expanded", "false");
+  const headerNode = document.querySelector(".site-header");
+  const nav = document.querySelector("[data-nav]");
+  if (nav?.classList.contains("open") && headerNode && !headerNode.contains(event.target)) {
+    closeNavigation({ restoreFocus: false });
   }
 }
 
-function closeAccountMenu({ restoreFocus = true } = {}) {
-  const accountToggle = document.querySelector("[data-account-toggle]");
-  const accountMenuNode = document.querySelector("[data-account-menu]");
-  if (!accountMenuNode || accountMenuNode.hidden) return;
-  accountMenuNode.hidden = true;
-  accountToggle?.setAttribute("aria-expanded", "false");
-  if (restoreFocus) accountToggle?.focus();
+function closeNavigation({ restoreFocus = true } = {}) {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-nav]");
+  if (!nav?.classList.contains("open")) return;
+  nav.classList.remove("open");
+  toggle?.setAttribute("aria-expanded", "false");
+  toggle?.setAttribute("aria-label", "Open navigation");
+  if (restoreFocus) toggle?.focus();
 }
 
 function handleDocumentKeydown(event) {
@@ -3490,7 +3484,7 @@ function handleDocumentKeydown(event) {
   if (event.key === "Escape") {
     if (articleModal && !articleModal.hidden) closeArticleModal();
     else if (modalIsOpen) closeModal();
-    else closeAccountMenu();
+    else closeNavigation();
     return;
   }
   if (event.key !== "Tab" || !modalIsOpen) return;
@@ -3537,16 +3531,9 @@ function wireInteractions() {
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-nav]");
   toggle?.addEventListener("click", () => {
-    nav?.classList.toggle("open");
-  });
-
-  const accountToggle = document.querySelector("[data-account-toggle]");
-  const accountMenuNode = document.querySelector("[data-account-menu]");
-  accountToggle?.addEventListener("click", () => {
-    if (!accountMenuNode) return;
-    const nextHidden = !accountMenuNode.hidden;
-    accountMenuNode.hidden = nextHidden;
-    accountToggle.setAttribute("aria-expanded", String(!nextHidden));
+    const isOpen = nav?.classList.toggle("open") ?? false;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
   });
 
   document.removeEventListener("click", handleDocumentClick);
@@ -3576,7 +3563,7 @@ function wireInteractions() {
 
   document.querySelectorAll("[data-auth-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       openAuthModal();
     });
   });
@@ -3584,7 +3571,7 @@ function wireInteractions() {
   document.querySelectorAll("[data-account-action]").forEach((button) => {
     button.addEventListener("click", () => {
       const action = button.getAttribute("data-account-action");
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       if (action === "open") {
         if (sessionState.isLoggedIn) openActionModal("account");
         else openAuthModal("Account login is not connected here. Continue only for this browsing session.");
@@ -3599,7 +3586,7 @@ function wireInteractions() {
 
   document.querySelectorAll("[data-cta-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       openActionModal(button.getAttribute("data-cta-action"));
     });
   });
@@ -3922,7 +3909,7 @@ function wireInteractions() {
       wireRentBuyComparisonTabs(result);
       result.querySelectorAll("[data-cta-action]").forEach((button) => {
         button.addEventListener("click", () => {
-          closeAccountMenu({ restoreFocus: false });
+          closeNavigation({ restoreFocus: false });
           openActionModal(button.getAttribute("data-cta-action"));
         });
       });

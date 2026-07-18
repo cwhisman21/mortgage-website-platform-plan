@@ -1,4 +1,4 @@
-import { renderCampaignHeroCardLayer, syncCampaignHeroCardLayer } from "./campaign-hero-card-layer.mjs";
+import { renderCampaignHeroCardLayer, syncCampaignHeroCardLayer } from "./campaign-hero-card-layer.mjs?v=20260718-12";
 
 const sourceFrames = Array.from(
   { length: 30 },

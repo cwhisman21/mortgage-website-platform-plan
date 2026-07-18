@@ -71,20 +71,22 @@ test("shared styles retain the restored homepage desktop layout contracts", () =
 });
 
 test("restored homepage actions and state list stack on mobile", () => {
-  const mobileStart = baseStyles.lastIndexOf("@media (max-width: 760px)");
-  assert.notEqual(mobileStart, -1, "Expected a 760px mobile breakpoint");
-  const mobileStyles = baseStyles.slice(mobileStart);
+  const mobileLayoutStart = baseStyles.indexOf("@media (max-width: 760px)", baseStyles.indexOf(".home-primary-actions {"));
+  const mobileOverrideStart = baseStyles.lastIndexOf("@media (max-width: 760px)");
+  assert.notEqual(mobileLayoutStart, -1, "Expected the homepage mobile layout breakpoint");
+  assert.notEqual(mobileOverrideStart, -1, "Expected the homepage mobile override breakpoint");
+  const mobileLayoutStyles = baseStyles.slice(mobileLayoutStart, baseStyles.indexOf("/* Consolidated account navigation", mobileLayoutStart));
+  const mobileOverrideStyles = baseStyles.slice(mobileOverrideStart);
 
-  const primaryActions = ruleBlock(mobileStyles, ".home-primary-actions");
-  assert.match(primaryActions, /align-items:\s*stretch;/);
-  assert.match(primaryActions, /padding:\s*28px 22px;/);
-  assert.match(primaryActions, /flex-direction:\s*column;/);
+  const primaryActions = ruleBlock(mobileOverrideStyles, '[data-design-system="snap-figma-v1"] .section.compact.home-primary-actions');
+  assert.match(primaryActions, /padding:\s*14px 22px;/);
+  assert.match(primaryActions, /gap:\s*12px;/);
 
-  const actionButtons = ruleBlock(mobileStyles, ".home-primary-action-buttons");
+  const actionButtons = ruleBlock(mobileLayoutStyles, ".home-primary-action-buttons");
   assert.match(actionButtons, /display:\s*grid;/);
   assert.match(actionButtons, /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
 
-  const stateList = ruleBlock(mobileStyles, ".home-state-list-grid");
+  const stateList = ruleBlock(mobileLayoutStyles, ".home-state-list-grid");
   assert.match(stateList, /grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/);
 });
 
@@ -105,9 +107,9 @@ test("mobile card and disclosure copy remains readable", () => {
   const mobileStyles = heroStyles.slice(mobileStart, shortMobileStart);
   const shortMobileStyles = heroStyles.slice(shortMobileStart, heroStyles.indexOf("@media (max-width: 760px)"));
 
+  assert.doesNotMatch(heroStyles, /\.campaign-example-badge/);
   for (const source of [mobileStyles, shortMobileStyles]) {
     assert.match(ruleBlock(source, ".campaign-option-status"), /font-size:\s*10px;/);
-    assert.match(ruleBlock(source, ".campaign-example-badge"), /font-size:\s*10px;/);
     assert.match(ruleBlock(source, ".campaign-terms-list dd"), /font-size:\s*10px;/);
     assert.match(ruleBlock(source, ".campaign-hero-disclosure"), /font-size:\s*11px;/);
   }
