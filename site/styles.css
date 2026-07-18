@@ -6412,6 +6412,10 @@ tr:last-child td {
   padding: 64px 0;
 }
 
+[data-design-system="snap-figma-v1"] .section.home-paths {
+  padding-top: 32px;
+}
+
 [data-design-system="snap-figma-v1"] .section.compact {
   padding: 48px 0;
 }
@@ -8178,6 +8182,10 @@ body.tag-results-modal-open {
 }
 
 @media (max-width: 760px) {
+  [data-design-system="snap-figma-v1"] .section.home-paths {
+    padding-top: 24px;
+  }
+
   .site-nav.open {
     grid-template-columns: minmax(0, 1fr);
     padding-bottom: 12px;

@@ -109,11 +109,30 @@ test("campaign hero removes the comparison eyebrow and uses the exact blue headl
   assert.doesNotMatch(heroCardSource, /campaign-hero-eyebrow/);
   assert.match(ruleBlock(heroStyles, ".campaign-hero-title"), /color:\s*#0b55ff;/);
 });
-test("campaign hero text begins near the top of the sticky stage", () => {
+test("campaign hero shifts breathing room above the copy and trims the following section gap", () => {
   assert.match(ruleBlock(heroStyles, ".campaign-hero-stage"), /place-items:\s*start center;/);
+
+  const desktopHero = ruleBlock(heroStyles, ".campaign-hero-inner");
+  assert.match(
+    desktopHero,
+    /padding:\s*clamp\(28px,\s*2\.75vw,\s*44px\) clamp\(24px,\s*4vw,\s*64px\) clamp\(8px,\s*1\.5vw,\s*24px\);/,
+  );
+
   const mobileStart = heroStyles.indexOf("@media (max-width: 900px)");
   const shortMobileStart = heroStyles.indexOf("@media (max-width: 900px) and (max-height: 720px)");
   const mobileHero = ruleBlock(heroStyles.slice(mobileStart, shortMobileStart), ".campaign-hero-inner");
+  const shortMobileHero = ruleBlock(heroStyles.slice(shortMobileStart), ".campaign-hero-inner");
   assert.match(mobileHero, /align-content:\s*start;/);
-  assert.match(mobileHero, /padding:\s*8px 14px 14px;/);
+  assert.match(mobileHero, /padding:\s*20px 14px 2px;/);
+  assert.match(shortMobileHero, /padding:\s*12px 10px 2px;/);
+
+  const homePaths = ruleBlock(baseStyles, '[data-design-system="snap-figma-v1"] .section.home-paths');
+  assert.match(homePaths, /padding-top:\s*32px;/);
+
+  const mobileHomeStart = baseStyles.lastIndexOf("@media (max-width: 760px)");
+  const mobileHomePaths = ruleBlock(
+    baseStyles.slice(mobileHomeStart),
+    '[data-design-system="snap-figma-v1"] .section.home-paths',
+  );
+  assert.match(mobileHomePaths, /padding-top:\s*24px;/);
 });
