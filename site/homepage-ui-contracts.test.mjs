@@ -115,7 +115,7 @@ test("campaign hero shifts breathing room above the copy and trims the following
   const desktopHero = ruleBlock(heroStyles, ".campaign-hero-inner");
   assert.match(
     desktopHero,
-    /padding:\s*clamp\(28px,\s*2\.75vw,\s*44px\) clamp\(24px,\s*4vw,\s*64px\) clamp\(8px,\s*1\.5vw,\s*24px\);/,
+    /padding:\s*clamp\(40px,\s*3\.75vw,\s*60px\) clamp\(24px,\s*4vw,\s*64px\) clamp\(8px,\s*1\.5vw,\s*24px\);/,
   );
 
   const mobileStart = heroStyles.indexOf("@media (max-width: 900px)");
@@ -123,16 +123,16 @@ test("campaign hero shifts breathing room above the copy and trims the following
   const mobileHero = ruleBlock(heroStyles.slice(mobileStart, shortMobileStart), ".campaign-hero-inner");
   const shortMobileHero = ruleBlock(heroStyles.slice(shortMobileStart), ".campaign-hero-inner");
   assert.match(mobileHero, /align-content:\s*start;/);
-  assert.match(mobileHero, /padding:\s*20px 14px 2px;/);
-  assert.match(shortMobileHero, /padding:\s*12px 10px 2px;/);
+  assert.match(mobileHero, /padding:\s*32px 14px 2px;/);
+  assert.match(shortMobileHero, /padding:\s*20px 10px 2px;/);
 
   const homePaths = ruleBlock(baseStyles, '[data-design-system="snap-figma-v1"] .section.home-paths');
-  assert.match(homePaths, /padding-top:\s*32px;/);
+  assert.match(homePaths, /padding-top:\s*8px;/);
 
   const mobileHomeStart = baseStyles.lastIndexOf("@media (max-width: 760px)");
   const mobileHomePaths = ruleBlock(
     baseStyles.slice(mobileHomeStart),
     '[data-design-system="snap-figma-v1"] .section.home-paths',
   );
-  assert.match(mobileHomePaths, /padding-top:\s*24px;/);
+  assert.match(mobileHomePaths, /padding-top:\s*8px;/);
 });
