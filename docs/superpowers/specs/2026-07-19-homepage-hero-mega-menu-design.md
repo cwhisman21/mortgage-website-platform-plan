@@ -89,15 +89,17 @@ Cards remain aligned with the existing reel colors and reveal frames:
 
 | Card | Header | Rate | APR | Down payment | Points | Accent |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 1 | Lender 1 | 6.125% | 6.284% | 5% | 0.000 | Blue |
-| 2 | Lender 2 | 6.000% | 6.221% | 10% | 0.625 | Blue |
-| 3 | Lender 3 | 5.875% | 6.164% | 20% | 1.000 | Green and slightly enlarged |
+| 1 | Lender 1 | 6.125% | 6.284% | 5% | 1.000 | Blue |
+| 2 | Lender 2 | 6.000% | 6.221% | 10% | 0.500 | Blue |
+| 3 | Lender 3 | 5.875% | 6.164% | 20% | 0.000 | Green and slightly enlarged |
 
 - The visible field label is exactly `Down payment`.
 - APR is at least as prominent as the interest rate.
 - No conventional, FHA, VA, veteran, or other product/program labels appear.
 - Values are structured placeholder examples until the rate feed is connected.
-- The three examples may use different displayed down payments and therefore must not be described as a ranking or an apples-to-apples quote comparison.
+- The three examples use different displayed down payments and therefore must not be described as an overall loan ranking or an apples-to-apples quote comparison.
+- Rate, APR, and points improve monotonically from Lender 1 through Lender 3.
+- Lender 3 is the displayed `Best` example because it has the lowest rate, lowest APR, and lowest points in this placeholder set. `Best` applies only to those visible example pricing fields and is not a universal borrower recommendation or total-cost conclusion.
 
 ### Data boundary
 
@@ -119,10 +121,11 @@ The future feed integration can replace this data source without changing card m
 
 Keep a close-proximity disclosure beneath the CTA. It must explain that:
 
-- Values are example daily-pricing inputs, not personalized pricing or a ranking.
+- Values are example daily-pricing inputs, not personalized pricing or an overall loan ranking.
 - They are not a quote, approval, offer, rate lock, or commitment to lend.
 - Rate, APR, points, fees, down payment, availability, and terms can vary by borrower, property, market, and lender review.
 - Displayed down payments are examples, not universal minimum requirements.
+- The `Best` treatment identifies the lowest displayed example rate, APR, and points only; it does not establish the best loan for a viewer.
 
 ## Header
 
@@ -227,7 +230,8 @@ The account-action row remains inside the menu and includes the existing logged-
 - Assert reduced-motion mode disables copy exit.
 - Assert exact 25% mobile artwork sizing at both mobile rules.
 - Assert the three neutral cards contain rate, APR, down payment, and points and contain no product types.
-- Assert down payments are 5%, 10%, and 20%.
+- Assert down payments are 5%, 10%, and 20%, and points improve from 1.000 to 0.500 to 0.000.
+- Assert the green featured card owns the lowest displayed rate, APR, and points before it receives the `Best` treatment.
 - Assert the disclosure remains adjacent to the CTA.
 - Assert one hamburger controls one menu and the welcome remains outside it.
 - Assert the four semantic nav groups, account row, and `Start my Auto Prequal` CTA exist inside the menu.
@@ -251,7 +255,7 @@ The account-action row remains inside the menu and includes the existing logged-
 2. The hero remains a 45-frame, 35px-per-frame sequence with unchanged reveal timing.
 3. Mobile machine artwork is exactly 25% larger at both mobile size rules.
 4. Mobile heading and supporting sentence are visually out of view by frame 10 and return on reverse scroll.
-5. Cards show neutral lender labels and the approved rate, APR, down payment, and points values without product types.
+5. Cards show neutral lender labels and the approved rate, APR, down payment, and improving points values without product types; the green final card is `Best` because it has the lowest displayed rate, APR, and points.
 6. The expanded menu is a slightly translucent full-width white overlay above the hero.
 7. The menu contains grouped navigation, existing account actions, and a full-width `Start my Auto Prequal` CTA.
 8. The compact search-shaped element is visibly present but noninteractive.
