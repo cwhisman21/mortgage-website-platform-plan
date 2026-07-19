@@ -6413,7 +6413,7 @@ tr:last-child td {
 }
 
 [data-design-system="snap-figma-v1"] .section.home-paths {
-  padding-top: 8px;
+  padding-top: 2px;
 }
 
 [data-design-system="snap-figma-v1"] .section.compact {
@@ -8183,7 +8183,7 @@ body.tag-results-modal-open {
 
 @media (max-width: 760px) {
   [data-design-system="snap-figma-v1"] .section.home-paths {
-    padding-top: 8px;
+    padding-top: 2px;
   }
 
   .site-nav.open {

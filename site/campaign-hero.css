@@ -7,9 +7,10 @@
   --campaign-scroll-travel: 1540px;
   --campaign-scroll-step: 35px;
   --campaign-sticky-top: 0px;
+  --campaign-stage-height: calc(100vh - var(--campaign-sticky-top));
   --campaign-reel-blue: #0b55ff;
   --campaign-reel-green: #158b4a;
-  height: calc(100vh - var(--campaign-sticky-top) + var(--campaign-scroll-travel));
+  height: calc(var(--campaign-stage-height) + var(--campaign-scroll-travel));
   position: relative;
 }
 
@@ -17,9 +18,15 @@
   display: grid;
   position: sticky;
   top: var(--campaign-sticky-top);
-  height: calc(100vh - var(--campaign-sticky-top));
+  height: var(--campaign-stage-height);
   overflow: hidden;
   place-items: start center;
+}
+
+@supports (height: 100dvh) {
+  .campaign-hero-sequence {
+    --campaign-stage-height: calc(100dvh - var(--campaign-sticky-top));
+  }
 }
 
 .campaign-hero-inner {
@@ -31,7 +38,7 @@
   grid-template-columns: minmax(520px, 1.08fr) minmax(430px, 0.92fr);
   gap: clamp(28px, 4vw, 72px);
   align-items: center;
-  padding: clamp(40px, 3.75vw, 60px) clamp(24px, 4vw, 64px) clamp(8px, 1.5vw, 24px);
+  padding: clamp(52px, 4.5vw, 72px) clamp(24px, 4vw, 64px) clamp(8px, 1.5vw, 24px);
 }
 
 .campaign-hero-visual {
@@ -263,7 +270,7 @@
     grid-template-columns: minmax(0, 1fr);
     align-content: start;
     gap: 6px;
-    padding: 32px 14px 2px;
+    padding: 48px 14px 2px;
   }
 
   .campaign-hero-copy-layer {
@@ -377,7 +384,7 @@
 @media (max-width: 900px) and (max-height: 720px) {
   .campaign-hero-inner {
     gap: 3px;
-    padding: 20px 10px 2px;
+    padding: 40px 10px 2px;
   }
 
 

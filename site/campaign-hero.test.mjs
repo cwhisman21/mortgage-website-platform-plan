@@ -326,9 +326,9 @@ test("browser entrypoints load the application module with the campaign module",
   assert.match(indexSource, /src="\/site\/app\.js\?v=20260718-12"/);
   assert.match(staticRouteSource, /src="\/site\/app\.js"/);
   assert.match(campaignModuleSource, /from "\.\/campaign-hero-card-layer\.mjs\?v=20260718-12"/);
-  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-13"/);
+  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-14"/);
   assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
-  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-13"/);
+  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-14"/);
   assert.doesNotMatch(staticRouteSource, /campaign-hero\.css/);
 });
 
@@ -342,9 +342,11 @@ test("public site loads the approved Figma typography", () => {
 test("campaign sequence defines the approved responsive and reduced-motion travel", () => {
   assert.match(stylesSource, /--campaign-scroll-travel:\s*1540px/);
   assert.match(stylesSource, /--campaign-scroll-step:\s*35px/);
-  assert.match(stylesSource, /height:\s*calc\(100vh - var\(--campaign-sticky-top\) \+ var\(--campaign-scroll-travel\)\)/);
+  assert.match(stylesSource, /--campaign-stage-height:\s*calc\(100vh - var\(--campaign-sticky-top\)\)/);
+  assert.match(stylesSource, /height:\s*calc\(var\(--campaign-stage-height\) \+ var\(--campaign-scroll-travel\)\)/);
   assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*position:\s*sticky/s);
-  assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*top:\s*var\(--campaign-sticky-top\)[^}]*height:\s*calc\(100vh - var\(--campaign-sticky-top\)\)/s);
+  assert.match(stylesSource, /\.campaign-hero-stage\s*\{[^}]*top:\s*var\(--campaign-sticky-top\)[^}]*height:\s*var\(--campaign-stage-height\)/s);
+  assert.match(stylesSource, /@supports \(height:\s*100dvh\)[\s\S]*--campaign-stage-height:\s*calc\(100dvh - var\(--campaign-sticky-top\)\)/);
   assert.match(stylesSource, /\.campaign-hero-visual\s*\{[^}]*width:\s*60%[^}]*max-width:\s*63\.564vh[^}]*margin-left:\s*auto[^}]*margin-right:\s*15vw/s);
   assert.match(stylesSource, /\.campaign-hero-sequence \.campaign-hero-image\s*\{[^}]*width:\s*100%[^}]*max-height:\s*none/s);
   assert.match(stylesSource, /@media \(max-width:\s*760px\)[\s\S]*--campaign-scroll-travel:\s*1540px/);
