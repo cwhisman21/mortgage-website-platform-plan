@@ -72,6 +72,7 @@ These values are an exact 25% increase. Desktop artwork dimensions do not change
 - Only the hero heading and supporting sentence participate in the copy-exit motion.
 - They begin moving upward as the sequence leaves frame 1.
 - They are fully above the clipped stage and visually transparent by frame 10.
+- At completion, each moving copy element uses at least `translateY(-140%)` and `opacity: 0`; the exact easing may be tuned without changing the frame-10 endpoint.
 - The motion is continuous rather than a single threshold jump.
 - Reverse scrolling restores the copy continuously.
 - The elements remain in the document and accessibility tree; the effect is visual only.
@@ -139,7 +140,7 @@ Preserve the existing header contract:
 - It shows a search icon and the word `Search`.
 - It is intentionally nonfunctional in this release.
 - It is not focusable and does not impersonate a working input or button.
-- On mobile it shrinks to approximately 80px while preserving the visible welcome text and hamburger.
+- On mobile it uses `clamp(56px, 20vw, 80px)` while preserving the visible welcome text and hamburger, including at 320px viewport width.
 - No search index, submission handler, suggestion layer, or analytics event is added.
 
 ## Mega-Menu Overlay
@@ -181,7 +182,7 @@ The account-action row remains inside the menu and includes the existing logged-
 
 - The last menu row is a full-width CTA labeled exactly `Start my Auto Prequal`.
 - It links to `/prequal/start`.
-- It spans the menu's inner content width on all breakpoints.
+- It spans 100% of the menu's padded inner content width on all breakpoints, retaining the same left and right gutters as the navigation groups rather than touching the viewport edges.
 - It remains in normal menu flow rather than covering links.
 - Activating it follows normal navigation behavior and closes the menu through the existing link-close path.
 
