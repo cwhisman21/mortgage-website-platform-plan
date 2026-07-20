@@ -74,6 +74,10 @@ test("the single hamburger opens a full-width translucent semantic mega-menu", (
 
   const search = ruleBlock(releaseStyles, ".header-search-placeholder");
   assert.match(search, /width:\s*230px;/);
+  const desktopHeader = ruleBlock(releaseStyles, '[data-design-system="snap-figma-v1"] .header-inner');
+  assert.match(desktopHeader, /grid-template-columns:\s*minmax\(120px,\s*1fr\) 230px minmax\(120px,\s*1fr\);/);
+  assert.match(ruleBlock(releaseStyles, ".header-welcome"), /margin-right:\s*58px;/);
+  assert.match(ruleBlock(releaseStyles, ".nav-toggle"), /grid-column:\s*3;/);
   const openNavigation = ruleBlock(releaseStyles, ".site-nav.open");
   assert.match(openNavigation, /position:\s*absolute;/);
   assert.match(openNavigation, /inset:\s*100% 0 auto;/);
@@ -93,10 +97,12 @@ test("the single hamburger opens a full-width translucent semantic mega-menu", (
   assert.match(ruleBlock(releaseStyles, ".site-nav-cta"), /width:\s*100%;/);
 
   const tablet = releaseStyles.slice(releaseStyles.indexOf("@media (max-width: 1040px)"));
+  assert.match(ruleBlock(tablet, '[data-design-system="snap-figma-v1"] .header-inner'), /minmax\(100px,\s*1fr\) 230px minmax\(100px,\s*1fr\)/);
   assert.match(ruleBlock(tablet, ".site-nav-groups"), /repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   const mobile = releaseStyles.slice(releaseStyles.indexOf("@media (max-width: 760px)"));
   assert.match(ruleBlock(mobile, ".site-nav-groups"), /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
   assert.match(ruleBlock(mobile, ".header-search-placeholder"), /width:\s*clamp\(56px,\s*20vw,\s*80px\);/);
+  assert.match(ruleBlock(mobile, ".nav-toggle"), /grid-column:\s*4;/);
   assert.match(ruleBlock(mobile, '[data-design-system="snap-figma-v1"] .header-inner'), /42px;/);
 });
 

@@ -362,7 +362,7 @@ test("browser entrypoints load the application module with the campaign module",
   assert.match(indexSource, /src="\/site\/app\.js\?v=20260719-1"/);
   assert.match(staticRouteSource, /src="\/site\/app\.js"/);
   assert.match(campaignModuleSource, /from "\.\/campaign-hero-card-layer\.mjs\?v=20260719-1"/);
-  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260719-1"/);
+  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260720-1"/);
   assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
   assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260719-1"/);
   assert.doesNotMatch(staticRouteSource, /campaign-hero\.css/);
