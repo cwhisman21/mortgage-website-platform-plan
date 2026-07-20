@@ -153,49 +153,34 @@
   padding: 10px 12px 12px;
 }
 
-.campaign-option-status,
-.campaign-terms-list div,
-.campaign-verified-row {
-  display: flex;
+.campaign-best-badge {
+  display: inline-flex;
+  min-height: 24px;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--campaign-card-accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
 }
 
 .campaign-option-status {
+  min-height: 32px;
+  margin: 0;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--line);
-  font-size: 13px;
-}
-
-
-.campaign-terms-list {
-  margin: 0;
-}
-
-.campaign-terms-list div {
-  min-height: 34px;
-  border-bottom: 1px solid var(--line);
-}
-
-.campaign-terms-list dt,
-.campaign-verified-row {
   color: var(--ink-soft);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.2;
 }
 
-.campaign-terms-list dd {
-  margin: 0;
-  color: var(--campaign-card-accent);
-  font-size: clamp(12px, 1vw, 16px);
-  font-weight: 850;
-  white-space: nowrap;
-}
-
-.campaign-verified-row {
-  margin: auto 0 0;
-  padding-top: 9px;
-}
+.campaign-terms-list { margin: 0; }
+.campaign-terms-list div { display: flex; min-height: 32px; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); }
+.campaign-terms-list dt { color: var(--ink-soft); font-size: 11px; }
+.campaign-terms-list dd { margin: 0; color: var(--campaign-card-accent); font-size: clamp(12px, 1vw, 16px); font-weight: 850; white-space: nowrap; }
 
 .campaign-primary-cta {
   display: inline-flex;
@@ -350,18 +335,11 @@
   }
 
   .campaign-terms-list dt,
-  .campaign-verified-row {
+  .campaign-terms-list dd {
     font-size: 10px;
     line-height: 1.1;
   }
 
-  .campaign-terms-list dd {
-    font-size: 10px;
-  }
-
-  .campaign-verified-row {
-    padding-top: 4px;
-  }
 
   .campaign-primary-cta {
     order: 5;
@@ -426,17 +404,10 @@
   }
 
   .campaign-terms-list dt,
-  .campaign-verified-row {
-    font-size: 10px;
-  }
-
   .campaign-terms-list dd {
     font-size: 10px;
   }
 
-  .campaign-verified-row {
-    padding-top: 2px;
-  }
 
   .campaign-primary-cta {
     min-height: 32px;

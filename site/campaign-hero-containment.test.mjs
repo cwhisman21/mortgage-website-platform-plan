@@ -108,6 +108,7 @@ test("mobile card and disclosure copy remains readable", () => {
   const shortMobileStyles = heroStyles.slice(shortMobileStart, heroStyles.indexOf("@media (max-width: 760px)"));
 
   assert.doesNotMatch(heroStyles, /\.campaign-example-badge/);
+  assert.doesNotMatch(heroStyles, /\.campaign-verified-row/);
   for (const source of [mobileStyles, shortMobileStyles]) {
     assert.match(ruleBlock(source, ".campaign-option-status"), /font-size:\s*10px;/);
     assert.match(ruleBlock(source, ".campaign-terms-list dd"), /font-size:\s*10px;/);

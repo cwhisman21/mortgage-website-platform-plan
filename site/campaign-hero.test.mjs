@@ -163,38 +163,68 @@ function createCampaignHeroHarness({ reducedMotion = false } = {}) {
   };
 }
 
-test("campaign hero card layer renders persistent copy and staged accessible options", async () => {
-  const { renderCampaignHeroCardLayer } = await import("./campaign-hero-card-layer.mjs");
+test("campaign hero renders immutable neutral daily-pricing examples", async () => {
+  const {
+    CAMPAIGN_HERO_PRICING_EXAMPLES,
+    campaignPricingExampleIsBest,
+    renderCampaignHeroCardLayer,
+  } = await import("./campaign-hero-card-layer.mjs");
   const html = renderCampaignHeroCardLayer();
 
-  assert.doesNotMatch(html, /Compare lender options/i);
+  assert.equal(Object.isFrozen(CAMPAIGN_HERO_PRICING_EXAMPLES), true);
+  assert.equal(CAMPAIGN_HERO_PRICING_EXAMPLES.every(Object.isFrozen), true);
+  assert.deepEqual(
+    CAMPAIGN_HERO_PRICING_EXAMPLES.map(
+      ({ lender, rate, apr, downPayment, points, revealFrame, featured }) => ({
+        lender, rate, apr, downPayment, points, revealFrame, featured,
+      }),
+    ),
+    [
+      { lender: "Lender 1", rate: "6.125%", apr: "6.284%", downPayment: "5%", points: "1.000", revealFrame: 17, featured: false },
+      { lender: "Lender 2", rate: "6.000%", apr: "6.221%", downPayment: "10%", points: "0.500", revealFrame: 22, featured: false },
+      { lender: "Lender 3", rate: "5.875%", apr: "6.164%", downPayment: "20%", points: "0.000", revealFrame: 25, featured: true },
+    ],
+  );
+
+  for (const field of ["rate", "apr", "points"]) {
+    const values = CAMPAIGN_HERO_PRICING_EXAMPLES.map((entry) => Number.parseFloat(entry[field]));
+    assert.ok(
+      values.every((value, index) => index === 0 || value < values[index - 1]),
+      `${field} must improve across the displayed examples`,
+    );
+  }
+  const featured = CAMPAIGN_HERO_PRICING_EXAMPLES.find((entry) => entry.featured);
+  assert.equal(campaignPricingExampleIsBest(featured, CAMPAIGN_HERO_PRICING_EXAMPLES), true);
+  assert.equal(campaignPricingExampleIsBest(CAMPAIGN_HERO_PRICING_EXAMPLES[0], CAMPAIGN_HERO_PRICING_EXAMPLES), false);
+  assert.equal(CAMPAIGN_HERO_PRICING_EXAMPLES.some((entry) => "asOf" in entry), false);
+
   assert.match(html, /There is a better way than hoping for the best/);
   assert.match(html, /See lender choices side by side without guessing which path is strongest/);
-  assert.match(html, /Lender 1/);
-  assert.match(html, /Lender 2/);
-  assert.match(html, /Lender 3/);
-  assert.match(html, /class="campaign-loan-card campaign-loan-card--featured"[\s\S]*Lender 3/);
-  assert.match(html, /30-Year Conventional/);
-  assert.match(html, /FHA Loan/);
-  assert.match(html, /VA Loan/);
-  assert.match(html, /Rate and payment view/);
-  assert.match(html, /Fees and credits/);
-  assert.match(html, /Next-step clarity/);
+  assert.equal((html.match(/>Daily pricing example<\/p>/g) || []).length, 3);
+  assert.equal((html.match(/<dt>Rate<\/dt>/g) || []).length, 3);
+  assert.equal((html.match(/<dt>APR<\/dt>/g) || []).length, 3);
+  assert.equal((html.match(/<dt>Down payment<\/dt>/g) || []).length, 3);
+  assert.equal((html.match(/<dt>Points<\/dt>/g) || []).length, 3);
+  for (const value of ["6.125%", "6.284%", "5%", "1.000", "6.000%", "6.221%", "10%", "0.500", "5.875%", "6.164%", "20%", "0.000"]) {
+    assert.match(html, new RegExp(value.replace(".", "\\.")));
+  }
+  assert.match(html, /campaign-loan-card--featured[\s\S]*campaign-best-badge[^>]*>Best/);
+  assert.doesNotMatch(html, /\b(?:Conventional|FHA|VA|veteran)\b/i);
+  assert.doesNotMatch(html, /Daily pricing example\s+(?:as of|effective)/i);
   assert.match(html, /data-reveal-frame="17"/);
   assert.match(html, /data-reveal-frame="22"/);
   assert.match(html, /data-reveal-frame="25"/);
   assert.match(html, /--campaign-card-accent: var\(--campaign-reel-blue\)/);
   assert.match(html, /--campaign-card-accent: var\(--campaign-reel-green\)/);
-  assert.doesNotMatch(html, /--campaign-card-accent: var\(--snap-blue\)/);
-  assert.match(html, /data-post-reveal-cta/);
-  assert.match(html, /data-post-reveal-disclosure/);
   assert.match(html, /href="\/prequal\/start"/);
-  assert.doesNotMatch(html, /data-cta-action="startPrequal"/);
-  assert.doesNotMatch(html, /Loan Type|5\.\d+%|APR|Est\. Payment|Best shown|Example terms|Final terms|underwriting|&#10003;/);
-  assert.match(html, /not an offer or commitment to lend/);
+  assert.match(html, /not personalized pricing or an overall loan ranking/i);
+  assert.match(html, /not a quote, approval, offer, rate lock, or commitment to lend/i);
+  assert.match(html, /not universal minimum requirements/i);
+  assert.match(html, /lowest displayed example rate, APR, and points only/i);
+  assert.match(html, /does not establish the best loan for a viewer/i);
+  assert.match(html, /<\/a>\s*<p class="campaign-hero-disclosure" data-post-reveal-disclosure>/);
   assert.doesNotMatch(html, /<article[^>]+(?:aria-hidden|\sinert(?:\s|>))/);
   assert.doesNotMatch(html, /<a[^>]+data-post-reveal-cta[^>]+(?:aria-hidden|\sinert(?:\s|>)|tabindex)/);
-  assert.doesNotMatch(html, /<p[^>]+data-post-reveal-disclosure[^>]+(?:aria-hidden|\sinert(?:\s|>))/);
 });
 
 test("campaign hero card layer reveals, holds, and reverses at logical frame thresholds", async () => {

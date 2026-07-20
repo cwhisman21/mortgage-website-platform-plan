@@ -99,7 +99,7 @@ test("campaign hero uses the approved reel palette and no Example card badges", 
   assert.match(heroStyles, /--campaign-reel-green:\s*#158b4a;/);
   assert.match(ruleBlock(heroStyles, ".campaign-loan-card__header"), /linear-gradient\(\s*180deg,\s*var\(--campaign-card-accent\)/);
   assert.doesNotMatch(html, /campaign-example-badge|>Example</);
-  assert.doesNotMatch(heroCardSource, /campaign-example-badge/);
+  assert.equal((html.match(/>Daily pricing example<\/p>/g) || []).length, 3);
 });
 
 test("campaign hero removes the comparison eyebrow and uses the exact blue headline", async () => {
