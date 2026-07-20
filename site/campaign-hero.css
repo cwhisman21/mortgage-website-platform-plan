@@ -1,6 +1,6 @@
 .campaign-hero {
-  border-bottom: 1px solid var(--line);
-  background: #fff;
+  border-bottom: 0;
+  background: #0b55ff;
 }
 
 .campaign-hero-sequence {
@@ -20,7 +20,28 @@
   top: var(--campaign-sticky-top);
   height: var(--campaign-stage-height);
   overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(118deg, #f5f8ff 0%, #e2edff 42%, #8db9ff 70%, #0b55ff 100%);
   place-items: start center;
+}
+
+.campaign-hero-stage::before,
+.campaign-hero-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.campaign-hero-stage::before {
+  background: rgba(190, 214, 255, 0.58);
+  clip-path: polygon(0 14%, 56% 0, 100% 28%, 100% 58%, 42% 38%, 0 64%);
+}
+
+.campaign-hero-stage::after {
+  background: rgba(88, 211, 161, 0.34);
+  clip-path: polygon(0 66%, 35% 42%, 100% 68%, 100% 100%, 0 100%);
 }
 
 @supports (height: 100dvh) {
@@ -31,6 +52,7 @@
 
 .campaign-hero-inner {
   position: relative;
+  z-index: 1;
   width: min(1672px, 100%);
   margin: 0 auto;
   overflow: hidden;
@@ -281,9 +303,18 @@
     line-height: 1.25;
   }
 
+  .campaign-hero-sequence.is-enhanced .campaign-hero-title,
+  .campaign-hero-sequence.is-enhanced .campaign-hero-lede,
+  .campaign-hero-sequence[data-campaign-initialized="true"] .campaign-hero-title,
+  .campaign-hero-sequence[data-campaign-initialized="true"] .campaign-hero-lede {
+    opacity: var(--campaign-copy-exit-opacity, 1);
+    transform: var(--campaign-copy-exit-transform, none);
+    will-change: opacity, transform;
+  }
+
   .campaign-hero-sequence .campaign-hero-visual {
     order: 3;
-    width: min(58vw, 360px);
+    width: min(72.5vw, 450px);
     max-width: none;
     margin: 0 auto;
   }
@@ -376,7 +407,7 @@
   }
 
   .campaign-hero-sequence .campaign-hero-visual {
-    width: min(40vw, 160px);
+    width: min(50vw, 200px);
   }
 
   .campaign-loan-card__header {
@@ -436,5 +467,14 @@
   .campaign-hero-stage {
     position: relative;
     height: auto;
+  }
+
+  .campaign-hero-sequence.is-enhanced .campaign-hero-title,
+  .campaign-hero-sequence.is-enhanced .campaign-hero-lede,
+  .campaign-hero-sequence[data-campaign-initialized="true"] .campaign-hero-title,
+  .campaign-hero-sequence[data-campaign-initialized="true"] .campaign-hero-lede {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
   }
 }

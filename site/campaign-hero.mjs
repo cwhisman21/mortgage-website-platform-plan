@@ -1,4 +1,4 @@
-import { renderCampaignHeroCardLayer, syncCampaignHeroCardLayer } from "./campaign-hero-card-layer.mjs?v=20260718-12";
+import { renderCampaignHeroCardLayer, syncCampaignHeroCardLayer } from "./campaign-hero-card-layer.mjs?v=20260719-1";
 
 const sourceFrames = Array.from(
   { length: 30 },
@@ -11,9 +11,30 @@ export const CAMPAIGN_HERO_FRAMES = Object.freeze([
 ]);
 
 const PRELOAD_RADIUS = 2;
+const COPY_EXIT_COMPLETE_FRAME = 10;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
+}
+
+export function campaignHeroCopyExitProgress(progress) {
+  const safeProgress = Number.isFinite(progress) ? clamp(progress, 0, 1) : 0;
+  const framePosition = safeProgress * (CAMPAIGN_HERO_FRAMES.length - 1);
+  return clamp(framePosition / (COPY_EXIT_COMPLETE_FRAME - 1), 0, 1);
+}
+
+function syncCampaignHeroCopyExit(track, progress) {
+  const exitProgress = campaignHeroCopyExitProgress(progress);
+  const percent = Number((-140 * exitProgress).toFixed(3));
+  const pixels = Number((-160 * exitProgress).toFixed(3));
+  track.style.setProperty(
+    "--campaign-copy-exit-transform",
+    `translateY(calc(${percent}% - ${Math.abs(pixels)}px))`,
+  );
+  track.style.setProperty(
+    "--campaign-copy-exit-opacity",
+    (1 - exitProgress).toFixed(4),
+  );
 }
 
 export function campaignHeroClampedScrollDelta(delta, maxDelta) {
@@ -197,8 +218,10 @@ export function initCampaignHero(root = document, environment = window) {
       return;
     }
 
-    const nextFrameIndex = campaignHeroFrameIndex(scrollProgress());
+    const progress = scrollProgress();
+    const nextFrameIndex = campaignHeroFrameIndex(progress);
     const logicalFrame = nextFrameIndex + 1;
+    syncCampaignHeroCopyExit(track, progress);
     track.dataset.currentFrame = String(syncCampaignHeroCardLayer(logicalFrame, track));
     if (nextFrameIndex !== requestedFrameIndex) preloadAdjacentFrames(nextFrameIndex);
   }
@@ -226,12 +249,14 @@ export function initCampaignHero(root = document, environment = window) {
       image.onerror = null;
     });
     loadingFrames.clear();
+    syncCampaignHeroCopyExit(track, 0);
     syncCampaignHeroCardLayer(CAMPAIGN_HERO_FRAMES.length, track);
     track.classList.remove("is-enhanced");
     delete track.dataset.campaignInitialized;
   }
 
   if (reducedMotion) {
+    syncCampaignHeroCopyExit(track, 0);
     const finalFrameIndex = CAMPAIGN_HERO_FRAMES.length - 1;
     frame.src = CAMPAIGN_HERO_FRAMES.at(-1);
     currentFrameIndex = finalFrameIndex;

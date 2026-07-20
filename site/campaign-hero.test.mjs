@@ -308,6 +308,7 @@ test("homepage renders the ordered campaign frame sequence", async () => {
   const {
     CAMPAIGN_HERO_FRAMES,
     campaignHeroClampedScrollDelta,
+    campaignHeroCopyExitProgress,
     campaignHeroFrameIndex,
     campaignHeroScrollProgress,
     renderCampaignHero,
@@ -325,6 +326,11 @@ test("homepage renders the ordered campaign frame sequence", async () => {
   assert.equal(campaignHeroFrameIndex(-1), 0);
   assert.equal(campaignHeroFrameIndex(0.5), 22);
   assert.equal(campaignHeroFrameIndex(2), 44);
+  assert.equal(campaignHeroCopyExitProgress(0), 0);
+  assert.equal(campaignHeroCopyExitProgress(9 / 88), 0.5);
+  assert.equal(campaignHeroCopyExitProgress(9 / 44), 1);
+  assert.equal(campaignHeroCopyExitProgress(1), 1);
+  assert.equal(campaignHeroCopyExitProgress(Number.NaN), 0);
   const progressInput = { trackDocumentTop: 92, trackHeight: 2168, stageHeight: 628 };
   assert.equal(campaignHeroScrollProgress({ ...progressInput, trackTop: 92 }), 0);
   assert.equal(campaignHeroScrollProgress({ ...progressInput, trackTop: 91 }), 1 / 1540);
@@ -346,19 +352,19 @@ test("homepage renders the ordered campaign frame sequence", async () => {
 });
 
 test("campaign hero is connected to the homepage renderer", () => {
-  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs\?v=20260718-12"/);
+  assert.match(appSource, /import \{ initCampaignHero, renderCampaignHero \} from "\/site\/campaign-hero\.mjs\?v=20260719-1"/);
   assert.match(appSource, /\$\{renderCampaignHero\(\)\}/);
   assert.match(appSource, /activeCampaignHeroController\?\.destroy\(\)/);
   assert.match(appSource, /activeCampaignHeroController = initCampaignHero\(app\)/);
 });
 
 test("browser entrypoints load the application module with the campaign module", () => {
-  assert.match(indexSource, /src="\/site\/app\.js\?v=20260718-12"/);
+  assert.match(indexSource, /src="\/site\/app\.js\?v=20260719-1"/);
   assert.match(staticRouteSource, /src="\/site\/app\.js"/);
-  assert.match(campaignModuleSource, /from "\.\/campaign-hero-card-layer\.mjs\?v=20260718-12"/);
-  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260718-14"/);
+  assert.match(campaignModuleSource, /from "\.\/campaign-hero-card-layer\.mjs\?v=20260719-1"/);
+  assert.match(indexSource, /href="\/site\/styles\.css\?v=20260719-1"/);
   assert.match(staticRouteSource, /href="\/site\/styles\.css"/);
-  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260718-14"/);
+  assert.match(indexSource, /href="\/site\/campaign-hero\.css\?v=20260719-1"/);
   assert.doesNotMatch(staticRouteSource, /campaign-hero\.css/);
 });
 
@@ -415,6 +421,44 @@ test("campaign hero initialization preloads a bounded window without a timer swe
   assert.equal(harness.timeoutCalls, 0);
   assert.ok(harness.imageRequests.length <= 4, `expected at most four preload requests, received ${harness.imageRequests.length}`);
   controller.destroy();
+});
+
+test("campaign hero copy exit is continuous through frame 10 and reverses", async () => {
+  const { initCampaignHero } = await import("./campaign-hero.mjs");
+  const harness = createCampaignHeroHarness();
+  const controller = initCampaignHero(harness.root, harness.environment);
+  harness.flushAnimationFrames();
+
+  harness.setProgress(9 / 88);
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-transform"), "translateY(calc(-70% - 80px))");
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-opacity"), "0.5000");
+
+  harness.setProgress(9 / 44);
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-transform"), "translateY(calc(-140% - 160px))");
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-opacity"), "0.0000");
+
+  harness.setProgress(0);
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-transform"), "translateY(calc(0% - 0px))");
+  assert.equal(harness.track.style.getPropertyValue("--campaign-copy-exit-opacity"), "1.0000");
+  controller.destroy();
+});
+
+test("campaign hero uses Layered Horizon and exact 25 percent mobile artwork growth", () => {
+  assert.match(campaignStylesSource, /\.campaign-hero-stage\s*\{[^}]*isolation:\s*isolate[^}]*linear-gradient/s);
+  assert.match(campaignStylesSource, /\.campaign-hero-stage::before[\s\S]*pointer-events:\s*none/);
+  assert.match(campaignStylesSource, /\.campaign-hero-stage::after[\s\S]*pointer-events:\s*none/);
+  assert.match(campaignStylesSource, /\.campaign-hero-inner\s*\{[^}]*z-index:\s*1/s);
+
+  const mobileStart = campaignStylesSource.indexOf("@media (max-width: 900px)");
+  const shortStart = campaignStylesSource.indexOf("@media (max-width: 900px) and (max-height: 720px)");
+  const standardMobile = campaignStylesSource.slice(mobileStart, shortStart);
+  const shortMobile = campaignStylesSource.slice(shortStart, campaignStylesSource.indexOf("@media (max-width: 760px)"));
+  assert.match(standardMobile, /width:\s*min\(72\.5vw,\s*450px\);/);
+  assert.match(shortMobile, /width:\s*min\(50vw,\s*200px\);/);
+  assert.doesNotMatch(campaignStylesSource, /min\(58vw,\s*360px\)|min\(40vw,\s*160px\)/);
+  assert.match(standardMobile, /--campaign-copy-exit-transform/);
+  assert.match(standardMobile, /--campaign-copy-exit-opacity/);
+  assert.match(campaignStylesSource, /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*opacity:\s*1[\s\S]*transform:\s*none/);
 });
 
 test("campaign hero progressively preloads adjacent frames as the current frame advances", async () => {

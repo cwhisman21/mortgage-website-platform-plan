@@ -59,7 +59,7 @@ test("dynamic location examples carry a borrower-facing current-data warning", (
 });
 
 test("navigation, notice actions, calculator inputs, and content labels use borrower-facing language", () => {
-  assert.match(appSource, /navLink\("\/loan-officers", "Loan officers"\)/);
+  assert.match(appSource, /path: "\/loan-officers", label: "Loan Officers"/);
   assert.doesNotMatch(appSource, /navLink\("\/loan-officers", "Experts"\)/);
   assert.doesNotMatch(appSource, /Request mortgage guidance|Request guidance|primary: "Get guidance"/);
   assert.doesNotMatch(appSource, />Start prequalification|Start a prequalification conversation/);

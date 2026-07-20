@@ -23,7 +23,8 @@ function ruleBlock(source, selector) {
 }
 
 test("header uses one navigation menu and a plain logged-in welcome", () => {
-  const headerSource = sourceBetween(appSource, "function accountNavigation()", "function footer()");
+  const headerSource = sourceBetween(appSource, "const SITE_NAVIGATION_GROUPS", "function footer()");
+  const navigationModelSource = sourceBetween(headerSource, "const SITE_NAVIGATION_GROUPS", "function navigationGroup");
   const navSource = sourceBetween(headerSource, '<nav class="site-nav"', "</nav>");
 
   assert.equal((headerSource.match(/data-nav-toggle/g) || []).length, 1);
@@ -40,23 +41,71 @@ test("header uses one navigation menu and a plain logged-in welcome", () => {
   assert.match(headerSource, /class="header-welcome" aria-label="Welcome back, \$\{esc\(SNAP_CUSTOMER\.name\)\}"/);
   assert.match(headerSource, /header-welcome-full[^>]*>Welcome back, \$\{esc\(SNAP_CUSTOMER\.name\)\}/);
   assert.match(headerSource, /\$\{welcome\}\s*<button class="nav-toggle"/);
-  assert.match(navSource, /\$\{accountNavigation\(\)\}/);
+  assert.equal((navigationModelSource.match(/\bid: "/g) || []).length, 4);
+  for (const [heading, links] of [
+    ["Explore", [["/locations", "Locations"], ["/rates", "Rates"]]],
+    ["Mortgage goals", [["/buy", "Buy"], ["/refinance", "Refinance"], ["/loan-options", "Loan Options"]]],
+    ["Tools and learning", [["/calculators", "Calculators"], ["/learning-center", "Learning"]]],
+    ["Guidance", [["/loan-officers", "Loan Officers"], ["/branches", "Branches"]]],
+  ]) {
+    assert.match(headerSource, new RegExp(`label: "${heading}"`));
+    for (const [path, label] of links) {
+      assert.match(headerSource, new RegExp(`path: "${path}", label: "${label}"`));
+    }
+  }
+  assert.match(headerSource, /<section class="site-nav-group" aria-labelledby="site-nav-\$\{id\}">/);
+  assert.match(headerSource, /<h2 class="site-nav-group-title" id="site-nav-\$\{id\}">/);
+  assert.match(headerSource, /<ul class="site-nav-group-list">/);
+  assert.match(navSource, /\$\{accountNavigation\(\)\}[\s\S]*class="site-nav-cta"[\s\S]*Start my Auto Prequal/);
+  assert.match(navSource, /class="site-nav-cta" href="\$\{route\("\/prequal\/start"\)\}"/);
+  assert.match(headerSource, /class="header-search-placeholder" aria-hidden="true"/);
+  const searchSource = sourceBetween(headerSource, '<div class="header-search-placeholder"', "</div>");
+  assert.match(searchSource, /\$\{icon\("search"\)\}/);
+  assert.match(searchSource, /<span>Search<\/span>/);
+  assert.doesNotMatch(searchSource, /<(?:input|button|a)\b|tabindex=|role="search"|data-/);
+  assert.doesNotMatch(navSource, /role="dialog"|aria-modal/);
   assert.match(headerSource, /header-welcome-compact[^>]*>Welcome back, \$\{esc\(firstName\)\}/);
   assert.doesNotMatch(headerSource, /accountMenu|account-trigger|hamburger-lines|account-dropdown|data-account-(?:toggle|menu|root)/);
 });
-test("the single hamburger owns primary and account navigation at every viewport", () => {
+test("the single hamburger opens a full-width translucent semantic mega-menu", () => {
+  const releaseStyles = baseStyles.slice(baseStyles.indexOf("/* Full-width semantic mega-menu release. */"));
   assert.match(ruleBlock(baseStyles, ".nav-toggle"), /display:\s*inline-flex;/);
   assert.match(ruleBlock(baseStyles, ".site-nav"), /display:\s*none;/);
-  const openNavigation = ruleBlock(baseStyles, ".site-nav.open");
-  assert.match(openNavigation, /display:\s*grid;/);
-  assert.match(openNavigation, /grid-column:\s*1 \/ -1;/);
-  assert.match(openNavigation, /grid-row:\s*2;/);
+
+  const search = ruleBlock(releaseStyles, ".header-search-placeholder");
+  assert.match(search, /width:\s*230px;/);
+  const openNavigation = ruleBlock(releaseStyles, ".site-nav.open");
+  assert.match(openNavigation, /position:\s*absolute;/);
+  assert.match(openNavigation, /inset:\s*100% 0 auto;/);
+  assert.match(openNavigation, /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
+  assert.match(openNavigation, /gap:\s*0;/);
+  assert.match(openNavigation, /width:\s*100%;/);
+  assert.match(openNavigation, /background:\s*rgba\(255,\s*255,\s*255,\s*0\.96\);/);
+  assert.match(openNavigation, /backdrop-filter:\s*blur\(12px\);/);
+  assert.match(openNavigation, /border:\s*0;/);
+  assert.match(openNavigation, /box-shadow:/);
+
+  const inner = ruleBlock(releaseStyles, ".site-nav-inner");
+  assert.match(inner, /max-height:\s*calc\(100vh - 76px\);/);
+  assert.match(inner, /max-height:\s*calc\(100dvh - 76px\);/);
+  assert.match(inner, /overflow-y:\s*auto;/);
+  assert.match(ruleBlock(releaseStyles, ".site-nav-groups"), /grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);/);
+  assert.match(ruleBlock(releaseStyles, ".site-nav-cta"), /width:\s*100%;/);
+
+  const tablet = releaseStyles.slice(releaseStyles.indexOf("@media (max-width: 1040px)"));
+  assert.match(ruleBlock(tablet, ".site-nav-groups"), /repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  const mobile = releaseStyles.slice(releaseStyles.indexOf("@media (max-width: 760px)"));
+  assert.match(ruleBlock(mobile, ".site-nav-groups"), /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
+  assert.match(ruleBlock(mobile, ".header-search-placeholder"), /width:\s*clamp\(56px,\s*20vw,\s*80px\);/);
+  assert.match(ruleBlock(mobile, '[data-design-system="snap-figma-v1"] .header-inner'), /42px;/);
 });
 
 test("navigation state is synchronized and saved items target the consolidated account action", () => {
   assert.match(appSource, /function closeNavigation\([\s\S]*classList\.remove\("open"\)[\s\S]*aria-expanded", "false"/);
   assert.match(appSource, /toggle\.setAttribute\("aria-expanded", String\(isOpen\)\)/);
   assert.match(appSource, /event\.key === "Escape"[\s\S]*closeNavigation\(\)/);
+  assert.match(appSource, /nav\?\.classList\.contains\("open"\)[\s\S]*!headerNode\.contains\(event\.target\)[\s\S]*closeNavigation\(\{ restoreFocus: false \}\)/);
+  assert.match(appSource, /if \(event\.key !== "Tab" \|\| !modalIsOpen\) return/);
   assert.match(appSource, /querySelector\("\[data-account-target\]"\)/);
   assert.match(appSource, /target\.getClientRects\(\)\[0\]/);
   assert.doesNotMatch(appSource, /data-account-toggle|function closeAccountMenu/);

@@ -7,7 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderHomeStateExplorer, renderLocationsHero } from "/site/locations-hero.mjs";
-import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260718-12";
+import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260719-1";
 import {
   buildLearningCenterModel,
   serializeLearningCenterSearch,
@@ -470,7 +470,8 @@ function icon(name) {
     prequal: '<path d="M8 4h8l2 3v13H6V7l2-3Z"/><path d="m9 13 2 2 4-5"/><path d="M9 18h6"/>',
     leadForm: '<path d="M5 5h14v10H8l-3 3V5Z"/><path d="M8 9h8M8 12h5"/>',
     compare: '<path d="M7 4v16M17 4v16"/><path d="M4 8h6l-3 6-3-6ZM14 8h6l-3 6-3-6Z"/><path d="M4 18h16"/>',
-    lock: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>'
+    lock: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+    search: '<circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/>'
   };
   return `<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">${paths[name] || paths.home}</svg></span>`;
 }
@@ -707,6 +708,24 @@ function navLink(path, label) {
   return `<a class="${active ? "active" : ""}" href="${route(path)}">${esc(label)}</a>`;
 }
 
+const SITE_NAVIGATION_GROUPS = Object.freeze([
+  Object.freeze({ id: "explore", label: "Explore", links: Object.freeze([Object.freeze({ path: "/locations", label: "Locations" }), Object.freeze({ path: "/rates", label: "Rates" })]) }),
+  Object.freeze({ id: "mortgage-goals", label: "Mortgage goals", links: Object.freeze([Object.freeze({ path: "/buy", label: "Buy" }), Object.freeze({ path: "/refinance", label: "Refinance" }), Object.freeze({ path: "/loan-options", label: "Loan Options" })]) }),
+  Object.freeze({ id: "tools-learning", label: "Tools and learning", links: Object.freeze([Object.freeze({ path: "/calculators", label: "Calculators" }), Object.freeze({ path: "/learning-center", label: "Learning" })]) }),
+  Object.freeze({ id: "guidance", label: "Guidance", links: Object.freeze([Object.freeze({ path: "/loan-officers", label: "Loan Officers" }), Object.freeze({ path: "/branches", label: "Branches" })]) }),
+]);
+
+function navigationGroup({ id, label, links }) {
+  return `
+    <section class="site-nav-group" aria-labelledby="site-nav-${id}">
+      <h2 class="site-nav-group-title" id="site-nav-${id}">${esc(label)}</h2>
+      <ul class="site-nav-group-list">
+        ${links.map(({ path, label: linkLabel }) => `<li>${navLink(path, linkLabel)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
 function accountNavigation() {
   const savedBadge = sessionState.savedCount > 0 ? `<span class="account-badge" data-saved-count>${sessionState.savedCount}</span>` : "";
   if (!sessionState.isLoggedIn) {
@@ -745,22 +764,24 @@ function header() {
         <a class="brand" href="${route("/")}">
           <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Mortgage" />
         </a>
+        <div class="header-search-placeholder" aria-hidden="true">
+          ${icon("search")}
+          <span>Search</span>
+        </div>
         ${welcome}
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-nav-toggle>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" fill="none" />
           </svg>
         </button>
-        <nav class="site-nav" id="site-navigation" data-nav>
-          ${navLink("/locations", "Locations")}
-          ${navLink("/rates", "Rates")}
-          ${navLink("/buy", "Buy")}
-          ${navLink("/refinance", "Refinance")}
-          ${navLink("/loan-options", "Loan Options")}
-          ${navLink("/calculators", "Calculators")}
-          ${navLink("/learning-center", "Learning")}
-          ${navLink("/loan-officers", "Loan officers")}
-          ${accountNavigation()}
+        <nav class="site-nav" id="site-navigation" data-nav aria-label="Primary navigation">
+          <div class="site-nav-inner">
+            <div class="site-nav-groups">
+              ${SITE_NAVIGATION_GROUPS.map(navigationGroup).join("")}
+            </div>
+            ${accountNavigation()}
+            <a class="site-nav-cta" href="${route("/prequal/start")}">Start my Auto Prequal</a>
+          </div>
         </nav>
       </div>
     </header>
