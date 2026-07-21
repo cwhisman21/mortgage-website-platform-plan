@@ -3,31 +3,95 @@
   "$id": "https://snapmortgage.com/schemas/hero-image.schema.json",
   "title": "HeroImageRecord",
   "description": "Framework-neutral CMS contract for editorial hero images and provenance.",
-  "type": "object", "additionalProperties": false,
-  "required": ["page_type", "hero_variant", "headline", "dek", "primary_cta", "desktop_asset", "alt_text", "focal_point_desktop", "focal_point_mobile", "contrast_mode", "review_status"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["page_type", "hero_variant", "eyebrow", "headline", "dek", "primary_cta", "decorative", "alt_text", "focal_point_desktop", "focal_point_mobile", "contrast_mode", "review_status"],
   "properties": {
-    "page_type": {"type":"string","enum":["city","state","buy","refinance","home_equity","loan_product","learning_center","topic_hub","article","loan_officer","branch","company","search_directory","prequalification","seller_move_up"]},
-    "hero_variant": {"type":"string","enum":["full_bleed_environmental_portrait","tall_diagonal_image_slab","wide_panoramic_band","rotated_architectural_window","circular_criteria_or_brand_field","layered_editorial_collage","evidence_or_report_strip","vertical_human_portrait","structured_search_or_planning_interface","media_left_editorial_panel","horizon_composition","stacked_planning_panels"]},
-    "headline":{"type":"string","minLength":1}, "dek":{"type":"string","minLength":1},
-    "primary_cta":{"$ref":"#/$defs/cta_reference"}, "secondary_cta":{"$ref":"#/$defs/cta_reference"},
-    "desktop_asset":{"$ref":"#/$defs/asset_reference"}, "mobile_asset":{"$ref":"#/$defs/asset_reference"}, "poster_asset":{"$ref":"#/$defs/asset_reference"}, "has_motion":{"type":"boolean","default":false},
-    "alt_text":{"type":"string"}, "focal_point_desktop":{"$ref":"#/$defs/focal_point"}, "focal_point_mobile":{"$ref":"#/$defs/focal_point"},
-    "contrast_mode":{"type":"string","enum":["left_scrim","right_scrim","bottom_scrim","solid_panel","none"]},
-    "local_evidence_brief":{"$ref":"#/$defs/local_evidence_brief"},
-    "review_status":{"type":"string","enum":["draft","editorial_review","rights_review","approved","retired"]},
-    "reviewed_at":{"type":"string","format":"date-time"}, "reviewed_by":{"$ref":"#/$defs/user_reference"}
+    "page_type": { "type": "string", "enum": ["city", "state", "buy", "refinance", "home_equity", "loan_product", "learning_center", "topic_hub", "article", "loan_officer", "branch", "company", "search_directory", "prequalification", "seller_move_up"] },
+    "hero_variant": { "type": "string", "enum": ["full_bleed_environmental_portrait", "tall_diagonal_image_slab", "wide_panoramic_band", "rotated_architectural_window", "circular_criteria_or_brand_field", "layered_editorial_collage", "media_left_editorial_panel", "evidence_or_report_strip", "vertical_human_portrait", "structured_search_or_planning_interface", "horizon_composition", "stacked_planning_panels"] },
+    "variant_exception": { "$ref": "#/$defs/approval_record" },
+    "eyebrow": { "type": "string", "minLength": 1 },
+    "headline": { "type": "string", "minLength": 1 },
+    "dek": { "type": "string", "minLength": 1 },
+    "primary_cta": { "$ref": "#/$defs/cta_reference" },
+    "secondary_cta": { "$ref": "#/$defs/cta_reference" },
+    "desktop_asset": { "$ref": "#/$defs/asset_reference" },
+    "mobile_asset": { "$ref": "#/$defs/asset_reference" },
+    "has_motion": { "type": "boolean", "default": false },
+    "motion_asset": { "$ref": "#/$defs/asset_reference" },
+    "poster_asset": { "$ref": "#/$defs/asset_reference" },
+    "reduced_motion_behavior": { "type": "string", "enum": ["show_poster"] },
+    "decorative": { "type": "boolean" },
+    "alt_text": { "type": "string" },
+    "focal_point_desktop": { "$ref": "#/$defs/focal_point" },
+    "focal_point_mobile": { "$ref": "#/$defs/focal_point" },
+    "contrast_mode": { "type": "string", "enum": ["left_scrim", "right_scrim", "bottom_scrim", "solid_panel", "none"] },
+    "local_evidence_brief": { "$ref": "#/$defs/local_evidence_brief" },
+    "review_status": { "type": "string", "enum": ["draft", "editorial_review", "rights_review", "approved", "retired"] },
+    "reviewed_at": { "type": "string", "format": "date-time" },
+    "reviewed_by": { "$ref": "#/$defs/user_reference" }
   },
-  "allOf":[
-    {"if":{"properties":{"page_type":{"enum":["city","state"]}},"required":["page_type"]},"then":{"required":["local_evidence_brief"]}},
-    {"if":{"properties":{"has_motion":{"const":true}},"required":["has_motion"]},"then":{"required":["poster_asset"]}},
-    {"if":{"properties":{"review_status":{"const":"approved"}},"required":["review_status"]},"then":{"required":["reviewed_at","reviewed_by"]}}
+  "allOf": [
+    { "if": { "properties": { "page_type": { "enum": ["city", "state"] } }, "required": ["page_type"] }, "then": { "required": ["local_evidence_brief"] } },
+    { "if": { "properties": { "local_evidence_brief": { "properties": { "asset_selection_tier": { "const": "non_photographic_fallback" } }, "required": ["asset_selection_tier"] } }, "required": ["local_evidence_brief"] }, "else": { "required": ["desktop_asset"] } },
+    { "if": { "properties": { "has_motion": { "const": true } }, "required": ["has_motion"] }, "then": { "required": ["motion_asset", "poster_asset", "reduced_motion_behavior"], "properties": { "reduced_motion_behavior": { "const": "show_poster" } } } },
+    { "if": { "properties": { "decorative": { "const": true } }, "required": ["decorative"] }, "then": { "properties": { "alt_text": { "maxLength": 0 } } }, "else": { "properties": { "alt_text": { "minLength": 1 } } } },
+    { "if": { "properties": { "review_status": { "const": "approved" } }, "required": ["review_status"] }, "then": { "required": ["reviewed_at", "reviewed_by"] } },
+    { "if": { "properties": { "page_type": { "const": "city" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/full_bleed_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "state" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/full_bleed_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "buy" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "tall_diagonal_image_slab" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "refinance" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/wide_panoramic_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "home_equity" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "rotated_architectural_window" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "loan_product" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/circular_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "learning_center" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "layered_editorial_collage" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "topic_hub" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "media_left_editorial_panel" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "article" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "evidence_or_report_strip" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "loan_officer" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "vertical_human_portrait" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "branch" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/wide_panoramic_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "company" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/circular_or_exception" } },
+    { "if": { "properties": { "page_type": { "const": "search_directory" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "structured_search_or_planning_interface" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "prequalification" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "horizon_composition" } } }, { "required": ["variant_exception"] }] } },
+    { "if": { "properties": { "page_type": { "const": "seller_move_up" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "stacked_planning_panels" } } }, { "required": ["variant_exception"] }] } }
   ],
   "$defs": {
-    "cta_reference":{"type":"object","additionalProperties":false,"required":["cta_id"],"properties":{"cta_id":{"type":"string","minLength":1},"label_override":{"type":"string","minLength":1}}},
-    "user_reference":{"type":"object","additionalProperties":false,"required":["user_id"],"properties":{"user_id":{"type":"string","minLength":1},"display_name":{"type":"string","minLength":1}}},
-    "focal_point":{"type":"object","additionalProperties":false,"required":["x","y"],"properties":{"x":{"type":"number","minimum":0,"maximum":1},"y":{"type":"number","minimum":0,"maximum":1}}},
-    "asset_reference":{"type":"object","additionalProperties":false,"required":["asset_id","asset_origin"],"properties":{"asset_id":{"type":"string","minLength":1},"asset_origin":{"type":"string","enum":["stock","commissioned","internal","generated"]},"is_external":{"type":"boolean","default":false},"source_url":{"type":"string","format":"uri"},"rights_record":{"$ref":"#/$defs/rights_record"}},"allOf":[{"if":{"properties":{"is_external":{"const":true}},"required":["is_external"]},"then":{"required":["source_url","rights_record"],"properties":{"rights_record":{"allOf":[{"$ref":"#/$defs/rights_record"},{"required":["license_url"]}]}}}}]},
-    "rights_record":{"type":"object","additionalProperties":false,"required":["creator_or_agency","license_name","acquired_at","usage_notes"],"properties":{"creator_or_agency":{"type":"string","minLength":1},"license_name":{"type":"string","minLength":1},"license_url":{"type":"string","format":"uri"},"acquired_at":{"type":"string","format":"date"},"attribution_text":{"type":"string"},"usage_notes":{"type":"string","minLength":1},"release_status":{"type":"string","enum":["not_applicable","verified","not_verified","required"]},"reverify_at":{"type":"string","format":"date"},"generation_prompt":{"type":"string"},"generation_reviewer":{"$ref":"#/$defs/user_reference"}}},
-    "local_evidence_brief":{"type":"object","additionalProperties":false,"required":["target_geography","visual_truths","misleading_stereotypes_to_avoid","desired_lived_behavior","crop_safe_focal_subject","source_links"],"properties":{"target_geography":{"type":"string","minLength":1},"visual_truths":{"type":"array","minItems":3,"maxItems":5,"items":{"type":"string","minLength":1}},"misleading_stereotypes_to_avoid":{"type":"array","minItems":2,"items":{"type":"string","minLength":1}},"desired_lived_behavior":{"type":"string","minLength":1},"required_season_or_weather":{"type":"string","minLength":1},"crop_safe_focal_subject":{"type":"string","minLength":1},"source_links":{"type":"array","minItems":1,"items":{"type":"string","format":"uri"}}}}
+    "cta_reference": { "type": "object", "additionalProperties": false, "required": ["cta_id"], "properties": { "cta_id": { "type": "string", "minLength": 1 }, "label_override": { "type": "string", "minLength": 1 } } },
+    "user_reference": { "type": "object", "additionalProperties": false, "required": ["user_id"], "properties": { "user_id": { "type": "string", "minLength": 1 }, "display_name": { "type": "string", "minLength": 1 } } },
+    "approval_record": { "type": "object", "additionalProperties": false, "required": ["rationale", "approved_at", "approved_by"], "properties": { "rationale": { "type": "string", "minLength": 1 }, "approved_at": { "type": "string", "format": "date-time" }, "approved_by": { "$ref": "#/$defs/user_reference" } } },
+    "focal_point": { "type": "object", "additionalProperties": false, "required": ["x", "y"], "properties": { "x": { "type": "number", "minimum": 0, "maximum": 1 }, "y": { "type": "number", "minimum": 0, "maximum": 1 } } },
+    "asset_reference": {
+      "type": "object", "additionalProperties": false, "required": ["asset_id", "asset_origin"],
+      "properties": { "asset_id": { "type": "string", "minLength": 1 }, "asset_origin": { "type": "string", "enum": ["stock", "commissioned", "internal", "generated"] }, "source_url": { "type": "string", "format": "uri" }, "rights_record": { "$ref": "#/$defs/rights_record" } },
+      "allOf": [
+        { "if": { "properties": { "asset_origin": { "enum": ["stock", "commissioned"] } }, "required": ["asset_origin"] }, "then": { "required": ["source_url", "rights_record"], "properties": { "rights_record": { "allOf": [{ "$ref": "#/$defs/rights_record" }, { "required": ["license_url"] }] } } } },
+        { "if": { "properties": { "asset_origin": { "const": "generated" } }, "required": ["asset_origin"] }, "then": { "required": ["rights_record"], "properties": { "rights_record": { "allOf": [{ "$ref": "#/$defs/rights_record" }, { "required": ["generation_prompt", "generation_reviewer"] }] } } } }
+      ]
+    },
+    "rights_record": { "type": "object", "additionalProperties": false, "required": ["creator_or_agency", "license_name", "acquired_at", "usage_notes"], "properties": { "creator_or_agency": { "type": "string", "minLength": 1 }, "license_name": { "type": "string", "minLength": 1 }, "license_url": { "type": "string", "format": "uri" }, "acquired_at": { "type": "string", "format": "date" }, "attribution_text": { "type": "string" }, "usage_notes": { "type": "string", "minLength": 1 }, "release_status": { "type": "string", "enum": ["not_applicable", "verified", "not_verified", "required"] }, "reverify_at": { "type": "string", "format": "date" }, "generation_prompt": { "type": "string", "minLength": 1 }, "generation_reviewer": { "$ref": "#/$defs/user_reference" } } },
+    "non_photographic_fallback": { "type": "object", "additionalProperties": false, "required": ["treatment_id", "rationale", "approved_at", "approved_by"], "properties": { "treatment_id": { "type": "string", "minLength": 1 }, "rationale": { "type": "string", "minLength": 1 }, "approved_at": { "type": "string", "format": "date-time" }, "approved_by": { "$ref": "#/$defs/user_reference" } } },
+    "local_evidence_brief": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_geography", "asset_selection_tier", "selected_asset_geography", "geography_evidence", "visual_truths", "misleading_stereotypes_to_avoid", "desired_lived_behavior", "crop_safe_focal_subject", "source_links"],
+      "properties": {
+        "target_geography": { "type": "string", "minLength": 1 },
+        "asset_selection_tier": { "type": "string", "enum": ["exact_geography", "verified_subregion", "commissioned_or_generated", "non_photographic_fallback"] },
+        "selected_asset_geography": { "type": "string", "minLength": 1 },
+        "geography_evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri" } },
+        "locality_exception_approval": { "$ref": "#/$defs/approval_record" },
+        "non_photographic_fallback": { "$ref": "#/$defs/non_photographic_fallback" },
+        "visual_truths": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "type": "string", "minLength": 1 } },
+        "misleading_stereotypes_to_avoid": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 } },
+        "desired_lived_behavior": { "type": "string", "minLength": 1 },
+        "required_season_or_weather": { "type": "string", "minLength": 1 },
+        "crop_safe_focal_subject": { "type": "string", "minLength": 1 },
+        "source_links": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri" } }
+      },
+      "allOf": [
+        { "if": { "properties": { "asset_selection_tier": { "const": "verified_subregion" } }, "required": ["asset_selection_tier"] }, "then": { "required": ["locality_exception_approval"] } },
+        { "if": { "properties": { "asset_selection_tier": { "const": "non_photographic_fallback" } }, "required": ["asset_selection_tier"] }, "then": { "required": ["non_photographic_fallback"] } }
+      ]
+    },
+    "full_bleed_or_exception": { "anyOf": [{ "properties": { "hero_variant": { "const": "full_bleed_environmental_portrait" } } }, { "required": ["variant_exception"] }] },
+    "wide_panoramic_or_exception": { "anyOf": [{ "properties": { "hero_variant": { "const": "wide_panoramic_band" } } }, { "required": ["variant_exception"] }] },
+    "circular_or_exception": { "anyOf": [{ "properties": { "hero_variant": { "const": "circular_criteria_or_brand_field" } } }, { "required": ["variant_exception"] }] }
   }
 }
