@@ -26,7 +26,9 @@ function contractErrors(record) {
     const brief = record.local_evidence_brief;
     if (!brief) errors.push('local_evidence_brief:required');
     else {
-      if (!brief.asset_selection_tier || !brief.selected_asset_geography || !brief.geography_evidence?.length) errors.push('locality:audit');
+      if (!brief.asset_selection_status || !brief.geography_evidence?.length) errors.push('locality:audit');
+      if (brief.asset_selection_status === 'selected' && (!brief.asset_selection_tier || !brief.selected_asset_geography)) errors.push('locality:selected-incomplete');
+      if (brief.asset_selection_status === 'unselected' && (brief.asset_selection_tier || brief.selected_asset_geography)) errors.push('locality:unselected-has-selection');
       if (brief.asset_selection_tier === 'verified_subregion' && !brief.locality_exception_approval) errors.push('locality:exception');
       if (brief.asset_selection_tier === 'non_photographic_fallback' && !brief.non_photographic_fallback) errors.push('locality:fallback');
     }
@@ -34,6 +36,12 @@ function contractErrors(record) {
   for (const key of ['desktop_asset', 'mobile_asset', 'motion_asset', 'poster_asset']) {
     const asset = record[key];
     if (!asset) continue;
+    if (asset.selection_status === 'unselected') {
+      const allowed = ['selection_status', 'rights_review_status', 'publishing_status'];
+      if (Object.keys(asset).some((field) => !allowed.includes(field))) errors.push(`${key}:unselected-has-acquisition`);
+      continue;
+    }
+    if (asset.selection_status !== 'selected') errors.push(`${key}:selection-status`);
     if (['stock', 'commissioned'].includes(asset.asset_origin) && (!asset.source_url || !asset.rights_record?.license_url)) errors.push(`${key}:external-rights`);
     if (asset.asset_origin === 'generated' && (!asset.rights_record?.generation_prompt || !asset.rights_record?.generation_reviewer)) errors.push(`${key}:generated-provenance`);
   }
@@ -45,7 +53,7 @@ const rights = {
   creator_or_agency: 'Example creator', license_name: 'Commercial license',
   license_url: 'https://example.com/license', acquired_at: '2026-07-20', usage_notes: 'Web hero use permitted',
 };
-const internalAsset = { asset_id: 'asset-internal', asset_origin: 'internal' };
+const internalAsset = { selection_status: 'selected', asset_id: 'asset-internal', asset_origin: 'internal' };
 const base = {
   page_type: 'buy', hero_variant: 'tall_diagonal_image_slab', eyebrow: 'Buying a home',
   headline: 'Plan your next home purchase', dek: 'Compare practical paths with a local expert.',
@@ -60,27 +68,27 @@ test('declares the approved enum contract', () => {
   assert.equal(schema.title, 'HeroImageRecord');
   assert.deepEqual(schema.properties.contrast_mode.enum, ['left_scrim', 'right_scrim', 'bottom_scrim', 'solid_panel', 'none']);
   assert.deepEqual(schema.properties.review_status.enum, ['draft', 'editorial_review', 'rights_review', 'approved', 'retired']);
-  assert.deepEqual(schema.$defs.asset_reference.properties.asset_origin.enum, ['stock', 'commissioned', 'internal', 'generated']);
+  assert.deepEqual(schema.$defs.selected_asset_reference.properties.asset_origin.enum, ['stock', 'commissioned', 'internal', 'generated']);
   assert.deepEqual(schema.properties.hero_variant.enum, [...new Set(Object.values(variantByPageType))]);
 });
 
 test('accepts a representative valid hero', () => assert.deepEqual(contractErrors(base), []));
 
 test('asset origin determines external and generated provenance requirements', () => {
-  const stock = { ...base, desktop_asset: { asset_id: 'stock', asset_origin: 'stock' } };
+  const stock = { ...base, desktop_asset: { selection_status: 'selected', asset_id: 'stock', asset_origin: 'stock' } };
   assert.ok(contractErrors(stock).includes('desktop_asset:external-rights'));
-  const generated = { ...base, desktop_asset: { asset_id: 'gen', asset_origin: 'generated', rights_record: rights } };
+  const generated = { ...base, desktop_asset: { selection_status: 'selected', asset_id: 'gen', asset_origin: 'generated', rights_record: rights } };
   assert.ok(contractErrors(generated).includes('desktop_asset:generated-provenance'));
-  assert.equal('is_external' in schema.$defs.asset_reference.properties, false);
-  assert.ok(schema.$defs.asset_reference.allOf.some((rule) => rule.if?.properties?.asset_origin));
+  assert.equal('is_external' in schema.$defs.selected_asset_reference.properties, false);
+  assert.ok(schema.$defs.selected_asset_reference.allOf.some((rule) => rule.if?.properties?.asset_origin));
 });
 
 test('city and state heroes carry auditable locality ladder evidence or fallback approval', () => {
   const city = { ...base, page_type: 'city', hero_variant: 'full_bleed_environmental_portrait' };
   assert.ok(contractErrors(city).includes('local_evidence_brief:required'));
-  const subregion = { ...city, local_evidence_brief: { asset_selection_tier: 'verified_subregion', selected_asset_geography: 'Travis County', geography_evidence: ['https://example.com/map'] } };
+  const subregion = { ...city, local_evidence_brief: { asset_selection_status: 'selected', asset_selection_tier: 'verified_subregion', selected_asset_geography: 'Travis County', geography_evidence: ['https://example.com/map'] } };
   assert.ok(contractErrors(subregion).includes('locality:exception'));
-  const fallback = { ...city, local_evidence_brief: { asset_selection_tier: 'non_photographic_fallback', selected_asset_geography: 'Austin, TX', geography_evidence: ['https://example.com/place'] } };
+  const fallback = { ...city, local_evidence_brief: { asset_selection_status: 'selected', asset_selection_tier: 'non_photographic_fallback', selected_asset_geography: 'Austin, TX', geography_evidence: ['https://example.com/place'] } };
   assert.ok(contractErrors(fallback).includes('locality:fallback'));
   assert.ok(schema.$defs.local_evidence_brief.allOf.length >= 2);
 });
@@ -96,7 +104,7 @@ test('page type enforces its composition unless an approval exception is complet
 test('motion requires its source, poster, and explicit reduced-motion poster behavior', () => {
   const invalid = { ...base, has_motion: true, poster_asset: internalAsset };
   assert.ok(contractErrors(invalid).includes('motion:fallback'));
-  const valid = { ...invalid, motion_asset: { asset_id: 'motion', asset_origin: 'internal' }, reduced_motion_behavior: 'show_poster' };
+  const valid = { ...invalid, motion_asset: { selection_status: 'selected', asset_id: 'motion', asset_origin: 'internal' }, reduced_motion_behavior: 'show_poster' };
   assert.equal(contractErrors(valid).includes('motion:fallback'), false);
   const rule = schema.allOf.find((entry) => entry.if?.properties?.has_motion);
   assert.deepEqual(rule.then.required, ['motion_asset', 'poster_asset', 'reduced_motion_behavior']);

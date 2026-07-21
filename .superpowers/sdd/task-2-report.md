@@ -21,7 +21,7 @@ DONE
 
 ## Draft Safety
 
-The base `HeroImageRecord` requires a desktop asset for photographic variants. Each manifest entry therefore uses an explicit `asset_selection_status: "unselected"` plus an internal `pending-hero-*` placeholder. Its rights record says that no asset has been selected or acquired, marks release status `not_verified`, and prohibits publication. No source asset URL, license URL, review timestamp, reviewer, variant exception, fallback approval, generated prompt, or selected-asset approval was invented.
+The base `HeroImageRecord` now distinguishes planned and selected asset references. Every manifest entry uses only an honest planning slot: `selection_status: "unselected"`, `rights_review_status: "not_started"`, and `publishing_status: "prohibited"`. Planning slots cannot carry an asset ID, origin, source URL, rights record, acquisition date, or license. Local evidence briefs likewise use `asset_selection_status: "unselected"` and cannot claim an asset-selection tier, selected geography, or approval. Selected assets retain strict provenance rules, and an approved hero cannot use a planned asset.
 
 ## Research
 
@@ -70,3 +70,46 @@ Manifest audit result: 29 unique routes; page-type counts are 4 state, 12 city, 
 
 - The manifest is intentionally not publishable. Asset selection, individual-license verification, creator attribution, release checks, crop review, alt-text finalization, editorial review, and rights review remain future work.
 - `/company`, `/prequalification`, and `/seller-move-up` are representative planning routes for spec families not listed in the 91-route prototype inventory.
+
+## Review Fixes (2026-07-21)
+
+- Added the artifact's top-level `$schema` property to the wrapper contract.
+- Added a dependency-free JSON Schema evaluator to the Task 2 test. It traverses local and external `$ref` values, required/properties/additional-properties rules, arrays, scalar constraints, `allOf`, `anyOf`, `oneOf`, `if/then/else`, and `not`.
+- Replaced all 29 invented pending asset records with acquisition-free planning slots.
+- Added negative tests for acquisition facts on unselected slots, selected locality tiers on unselected briefs, and approval of heroes that still contain planned assets.
+- Replaced the stale Irvine URL with current `cityofirvine.gov` sources.
+
+Review RED command:
+
+`node --test schemas/hero-image.schema.test.mjs mock-data/hero-asset-manifest.test.mjs`
+
+Review RED result: expected failure — 9 tests passed and 5 failed on the wrapper mismatch, invented acquisition model, selected locality tier, and missing planned/selected schema branches.
+
+Review GREEN command:
+
+`node --test schemas/hero-image.schema.test.mjs mock-data/hero-asset-manifest.test.mjs`
+
+Review GREEN result: PASS — 14 tests passed, 0 failed.
+
+## Local Truth-to-Evidence Audit
+
+Each truth below was checked against the named authoritative sources. `source_links` and `geography_evidence` now contain the corresponding URLs.
+
+| Route | Truth coverage |
+| --- | --- |
+| Texas | TPWD ecoregions supports statewide terrain, vegetation, and light; TDHCA regional allocation methodology supports distinct urban/rural housing regions. |
+| California | California State Parks supports coast-range, valley, Sierra, desert, and climate cues; HCD statewide plans support varied housing and community context. |
+| Colorado | Colorado Climate Center supports plains, foothills, mountains, seasonal light, and altitude; CSU Extension supports semi-arid, water-wise residential landscaping. |
+| Florida | Florida DEP coastal and wetland resources support dunes, mangroves, wetlands, water, and humid landscapes; Florida Division of Library and Information Services supports regionally varied residential architecture. |
+| Austin | City community profile supports limestone, converging ecoregions, and oak vegetation; historic-district records support neighborhood housing; Urban Trails supports daily walking and cycling. |
+| Dallas | Citywide plans support parks, trails, complete streets, and housing patterns; The Bottoms area plan supports residential form, walkable streets, and park connections. |
+| Houston | The Houston Bike Plan directly supports all three revised truths: bayou greenways, neighborhood/destination connections, and routine walking or cycling. |
+| Irvine | Gateway Preserve supports housing beside preserved open space; Open Space & Trails supports landscape and recreation; Neighborhood Parks supports village-scale parks and daily activity. |
+| San Diego | Open Space Canyons supports canyon terrain and trail behavior; the Southeastern San Diego/Encanto community plan supports neighborhood housing and parks. |
+| Sacramento | Urban Forestry supports canopy, shade, neighborhood trees, and daily stewardship; Riverfront planning supports the Sacramento/American River setting and bicycle use. |
+| Denver | Colorado Climate Center supports high-plains and Front Range light; Denver parkway guidelines support tree-lined residential parkways; Mountain Parks supports foothill and mountain backdrops. |
+| Colorado Springs | Parks, Trails & Open Spaces supports foothills, red rock, grasslands, canyons, and trail behavior; Greater Westside planning supports residential neighborhoods beside open space. |
+| Boulder | OSMP supports foothills, grassland, open space, and trail routines; the Boulder Valley Comprehensive Plan supports the urban/natural edge, housing, and neighborhood context. |
+| Tampa | City neighborhood guidance supports bungalows, multifamily housing, parks, and grand oaks; South Seminole Heights supports river, bungalow, tree, and boardwalk cues. |
+| Orlando | Historic Preservation Districts supports documented home styles and tree-lined brick streets; the Lake Eola master plan supports lake-edge neighborhoods and routine park use. |
+| Miami | City Historic Preservation supports Mediterranean Revival, Art Deco, Craftsman, and Bahamian housing; Miami-Dade forests supports tropical hardwood hammock; City Parks supports resident activity and Biscayne Bay island ecology. |

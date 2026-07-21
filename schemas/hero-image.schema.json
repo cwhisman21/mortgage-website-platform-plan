@@ -36,7 +36,18 @@
     { "if": { "properties": { "local_evidence_brief": { "properties": { "asset_selection_tier": { "const": "non_photographic_fallback" } }, "required": ["asset_selection_tier"] } }, "required": ["local_evidence_brief"] }, "else": { "required": ["desktop_asset"] } },
     { "if": { "properties": { "has_motion": { "const": true } }, "required": ["has_motion"] }, "then": { "required": ["motion_asset", "poster_asset", "reduced_motion_behavior"], "properties": { "reduced_motion_behavior": { "const": "show_poster" } } } },
     { "if": { "properties": { "decorative": { "const": true } }, "required": ["decorative"] }, "then": { "properties": { "alt_text": { "maxLength": 0 } } }, "else": { "properties": { "alt_text": { "minLength": 1 } } } },
-    { "if": { "properties": { "review_status": { "const": "approved" } }, "required": ["review_status"] }, "then": { "required": ["reviewed_at", "reviewed_by"] } },
+    {
+      "if": { "properties": { "review_status": { "const": "approved" } }, "required": ["review_status"] },
+      "then": {
+        "required": ["reviewed_at", "reviewed_by"],
+        "properties": {
+          "desktop_asset": { "$ref": "#/$defs/selected_asset_reference" },
+          "mobile_asset": { "$ref": "#/$defs/selected_asset_reference" },
+          "motion_asset": { "$ref": "#/$defs/selected_asset_reference" },
+          "poster_asset": { "$ref": "#/$defs/selected_asset_reference" }
+        }
+      }
+    },
     { "if": { "properties": { "page_type": { "const": "city" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/full_bleed_or_exception" } },
     { "if": { "properties": { "page_type": { "const": "state" } }, "required": ["page_type"] }, "then": { "$ref": "#/$defs/full_bleed_or_exception" } },
     { "if": { "properties": { "page_type": { "const": "buy" } }, "required": ["page_type"] }, "then": { "anyOf": [{ "properties": { "hero_variant": { "const": "tall_diagonal_image_slab" } } }, { "required": ["variant_exception"] }] } },
@@ -59,8 +70,24 @@
     "approval_record": { "type": "object", "additionalProperties": false, "required": ["rationale", "approved_at", "approved_by"], "properties": { "rationale": { "type": "string", "minLength": 1 }, "approved_at": { "type": "string", "format": "date-time" }, "approved_by": { "$ref": "#/$defs/user_reference" } } },
     "focal_point": { "type": "object", "additionalProperties": false, "required": ["x", "y"], "properties": { "x": { "type": "number", "minimum": 0, "maximum": 1 }, "y": { "type": "number", "minimum": 0, "maximum": 1 } } },
     "asset_reference": {
-      "type": "object", "additionalProperties": false, "required": ["asset_id", "asset_origin"],
-      "properties": { "asset_id": { "type": "string", "minLength": 1 }, "asset_origin": { "type": "string", "enum": ["stock", "commissioned", "internal", "generated"] }, "source_url": { "type": "string", "format": "uri" }, "rights_record": { "$ref": "#/$defs/rights_record" } },
+      "oneOf": [
+        { "$ref": "#/$defs/planned_asset_reference" },
+        { "$ref": "#/$defs/selected_asset_reference" }
+      ]
+    },
+    "planned_asset_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection_status", "rights_review_status", "publishing_status"],
+      "properties": {
+        "selection_status": { "type": "string", "const": "unselected" },
+        "rights_review_status": { "type": "string", "const": "not_started" },
+        "publishing_status": { "type": "string", "const": "prohibited" }
+      }
+    },
+    "selected_asset_reference": {
+      "type": "object", "additionalProperties": false, "required": ["selection_status", "asset_id", "asset_origin"],
+      "properties": { "selection_status": { "type": "string", "const": "selected" }, "asset_id": { "type": "string", "minLength": 1 }, "asset_origin": { "type": "string", "enum": ["stock", "commissioned", "internal", "generated"] }, "source_url": { "type": "string", "format": "uri" }, "rights_record": { "$ref": "#/$defs/rights_record" } },
       "allOf": [
         { "if": { "properties": { "asset_origin": { "enum": ["stock", "commissioned"] } }, "required": ["asset_origin"] }, "then": { "required": ["source_url", "rights_record"], "properties": { "rights_record": { "allOf": [{ "$ref": "#/$defs/rights_record" }, { "required": ["license_url"] }] } } } },
         { "if": { "properties": { "asset_origin": { "const": "generated" } }, "required": ["asset_origin"] }, "then": { "required": ["rights_record"], "properties": { "rights_record": { "allOf": [{ "$ref": "#/$defs/rights_record" }, { "required": ["generation_prompt", "generation_reviewer"] }] } } } }
@@ -70,9 +97,10 @@
     "non_photographic_fallback": { "type": "object", "additionalProperties": false, "required": ["treatment_id", "rationale", "approved_at", "approved_by"], "properties": { "treatment_id": { "type": "string", "minLength": 1 }, "rationale": { "type": "string", "minLength": 1 }, "approved_at": { "type": "string", "format": "date-time" }, "approved_by": { "$ref": "#/$defs/user_reference" } } },
     "local_evidence_brief": {
       "type": "object", "additionalProperties": false,
-      "required": ["target_geography", "asset_selection_tier", "selected_asset_geography", "geography_evidence", "visual_truths", "misleading_stereotypes_to_avoid", "desired_lived_behavior", "crop_safe_focal_subject", "source_links"],
+      "required": ["target_geography", "asset_selection_status", "geography_evidence", "visual_truths", "misleading_stereotypes_to_avoid", "desired_lived_behavior", "crop_safe_focal_subject", "source_links"],
       "properties": {
         "target_geography": { "type": "string", "minLength": 1 },
+        "asset_selection_status": { "type": "string", "enum": ["unselected", "selected"] },
         "asset_selection_tier": { "type": "string", "enum": ["exact_geography", "verified_subregion", "commissioned_or_generated", "non_photographic_fallback"] },
         "selected_asset_geography": { "type": "string", "minLength": 1 },
         "geography_evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri" } },
@@ -86,6 +114,23 @@
         "source_links": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri" } }
       },
       "allOf": [
+        {
+          "if": { "properties": { "asset_selection_status": { "const": "selected" } }, "required": ["asset_selection_status"] },
+          "then": { "required": ["asset_selection_tier", "selected_asset_geography"] }
+        },
+        {
+          "if": { "properties": { "asset_selection_status": { "const": "unselected" } }, "required": ["asset_selection_status"] },
+          "then": {
+            "not": {
+              "anyOf": [
+                { "required": ["asset_selection_tier"] },
+                { "required": ["selected_asset_geography"] },
+                { "required": ["locality_exception_approval"] },
+                { "required": ["non_photographic_fallback"] }
+              ]
+            }
+          }
+        },
         { "if": { "properties": { "asset_selection_tier": { "const": "verified_subregion" } }, "required": ["asset_selection_tier"] }, "then": { "required": ["locality_exception_approval"] } },
         { "if": { "properties": { "asset_selection_tier": { "const": "non_photographic_fallback" } }, "required": ["asset_selection_tier"] }, "then": { "required": ["non_photographic_fallback"] } }
       ]

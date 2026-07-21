@@ -4,8 +4,9 @@
   "title": "HeroAssetManifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "status", "entries"],
+  "required": ["$schema", "schema_version", "status", "entries"],
   "properties": {
+    "$schema": { "type": "string", "const": "../schemas/hero-asset-manifest.schema.json" },
     "schema_version": { "type": "string", "const": "1.0.0" },
     "status": { "type": "string", "const": "draft" },
     "entries": {
