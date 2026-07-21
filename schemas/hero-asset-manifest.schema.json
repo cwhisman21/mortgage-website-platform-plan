@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snapmortgage.com/schemas/hero-asset-manifest.schema.json",
+  "title": "HeroAssetManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "entries"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "status": { "type": "string", "const": "draft" },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/manifest_entry" }
+    }
+  },
+  "$defs": {
+    "manifest_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "coverage_kind", "asset_selection_status", "hero"],
+      "properties": {
+        "route": { "type": "string", "pattern": "^/[a-z0-9/-]+$" },
+        "coverage_kind": {
+          "type": "string",
+          "enum": ["prototype_route", "representative_page_family"]
+        },
+        "asset_selection_status": { "type": "string", "const": "unselected" },
+        "hero": { "$ref": "hero-image.schema.json" }
+      }
+    }
+  }
+}

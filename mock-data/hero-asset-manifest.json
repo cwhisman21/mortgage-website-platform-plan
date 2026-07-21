@@ -1,0 +1,371 @@
+{
+  "$schema": "../schemas/hero-asset-manifest.schema.json",
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "entries": [
+    {
+      "route": "/locations/texas", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "state", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Texas mortgage guide",
+        "headline": "Plan a Texas home decision with local context", "dek": "Compare markets, products, and experts across a state with sharply different regions.",
+        "primary_cta": { "cta_id": "explore-texas-markets", "label_override": "Explore Texas markets" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-texas", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending asset depicting everyday Texas life across more than one ecological region.",
+        "focal_point_desktop": { "x": 0.66, "y": 0.52 }, "focal_point_mobile": { "x": 0.62, "y": 0.48 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Texas", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-geography selection for Texas",
+          "geography_evidence": ["https://tpwd.texas.gov/education/hunter-education/online-course/wildlife-conservation/texas-ecoregions"],
+          "visual_truths": ["Show more than one Texas landscape, such as Gulf prairie, Hill Country limestone, pine woods, plains, or Trans-Pecos terrain.", "Include ordinary housing or a lived-in streetscape rather than an isolated vista.", "Use vegetation and hard summer light appropriate to the selected Texas region."],
+          "misleading_stereotypes_to_avoid": ["A lone cowboy, cattle, or oil pump as shorthand for the whole state.", "One generic desert scene presented as representative of all Texas."],
+          "desired_lived_behavior": "Residents walking, talking, or arriving home in a recognizable neighborhood setting.", "required_season_or_weather": "Regionally plausible daylight; avoid rare dramatic weather.",
+          "crop_safe_focal_subject": "One resident-scale activity with landscape and housing cues retained in both crops.",
+          "source_links": ["https://tpwd.texas.gov/education/hunter-education/online-course/wildlife-conservation/texas-ecoregions"]
+        },
+        "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/california", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "state", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "California mortgage guide",
+        "headline": "Compare California markets beyond a single postcard", "dek": "Explore housing decisions across coastal, valley, mountain, and inland communities.",
+        "primary_cta": { "cta_id": "explore-california-markets", "label_override": "Explore California markets" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-california", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending asset showing lived-in California housing across distinct terrain.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.5 }, "focal_point_mobile": { "x": 0.62, "y": 0.48 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "California", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-geography selection for California",
+          "geography_evidence": ["https://www.parks.ca.gov/pages/735/files/Natural%20History%20ADA%20compressed.pdf"],
+          "visual_truths": ["Represent California's coast ranges, Central Valley, Sierra, or inland dry landscapes without collapsing them into one view.", "Include housing and an everyday resident activity.", "Use vegetation, slope, and light consistent with the selected subregion."],
+          "misleading_stereotypes_to_avoid": ["Hollywood signs, red carpets, or celebrity luxury as statewide shorthand.", "A beach-only image implying all Californians live on the coast."],
+          "desired_lived_behavior": "A resident moving through a neighborhood, trail, or shared outdoor space.", "required_season_or_weather": "Dry or wet-season cues must match the selected subregion.",
+          "crop_safe_focal_subject": "A human-scale neighborhood moment with terrain visible around it.",
+          "source_links": ["https://www.parks.ca.gov/pages/735/files/Natural%20History%20ADA%20compressed.pdf"]
+        },
+        "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/colorado", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "state", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Colorado mortgage guide",
+        "headline": "See Colorado housing in its real regional context", "dek": "Compare Front Range, plains, mountain, and Western Slope home decisions.",
+        "primary_cta": { "cta_id": "explore-colorado-markets", "label_override": "Explore Colorado markets" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-colorado", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending asset showing Colorado residents near varied housing and terrain.",
+        "focal_point_desktop": { "x": 0.67, "y": 0.5 }, "focal_point_mobile": { "x": 0.61, "y": 0.47 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Colorado", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-geography selection for Colorado",
+          "geography_evidence": ["https://climate.colostate.edu/climate_long.html"],
+          "visual_truths": ["Show the relationship among populated corridors, high plains, foothills, or mountains rather than mountains alone.", "Include regionally plausible housing and water-wise vegetation.", "Use strong high-elevation light and seasonally credible sky or snow conditions."],
+          "misleading_stereotypes_to_avoid": ["A ski resort or luxury chalet standing in for the whole state.", "Permanent deep snow in ordinary Front Range neighborhoods."],
+          "desired_lived_behavior": "Residents walking, cycling, or using a neighborhood open space as part of daily life.", "required_season_or_weather": "Season must be explicit and internally consistent.",
+          "crop_safe_focal_subject": "A resident-scale foreground with both housing and terrain surviving mobile crop.",
+          "source_links": ["https://climate.colostate.edu/climate_long.html"]
+        },
+        "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/florida", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "state", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Florida mortgage guide",
+        "headline": "Plan for Florida homes, water, and regional tradeoffs", "dek": "Explore housing across coastal, inland, subtropical, and northern Florida communities.",
+        "primary_cta": { "cta_id": "explore-florida-markets", "label_override": "Explore Florida markets" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-florida", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending asset showing everyday Florida housing with regionally accurate water and vegetation.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.52 }, "focal_point_mobile": { "x": 0.62, "y": 0.5 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Florida", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-geography selection for Florida",
+          "geography_evidence": ["https://floridadep.gov/rcp/coastal-access-guide/content/resources", "https://floridadep.gov/water/submerged-lands-environmental-resources-coordination/content/wetland-evaluation-and"],
+          "visual_truths": ["Show water, wetlands, dunes, mangroves, flatwoods, or inland lakes only where appropriate to the chosen region.", "Include ordinary housing and shaded outdoor life.", "Use humid light, storm-ready details, or tropical and subtropical vegetation without exaggeration."],
+          "misleading_stereotypes_to_avoid": ["A resort beach or theme park as shorthand for the entire state.", "Endless palms with no neighborhood or regional distinction."],
+          "desired_lived_behavior": "Residents walking, cycling, or gathering near a lived-in neighborhood and water-aware landscape.", "required_season_or_weather": "Warm humid conditions without sensational hurricane imagery.",
+          "crop_safe_focal_subject": "A grounded resident activity with housing and one water or vegetation cue.",
+          "source_links": ["https://floridadep.gov/rcp/coastal-access-guide/content/resources", "https://floridadep.gov/water/submerged-lands-environmental-resources-coordination/content/wetland-evaluation-and"]
+        },
+        "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/texas/austin", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Austin mortgage guide", "headline": "Understand Austin beyond the downtown skyline", "dek": "Use neighborhood, inventory, and local expert context to plan your next move.",
+        "primary_cta": { "cta_id": "meet-austin-experts", "label_override": "Meet Austin experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-texas-austin", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Austin neighborhood scene with residents, limestone terrain, and a connected urban trail.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.52 }, "focal_point_mobile": { "x": 0.63, "y": 0.48 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Austin, Texas", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Austin",
+          "geography_evidence": ["https://www.austintexas.gov/transportation-public-works/urban-trails"],
+          "visual_truths": ["Limestone, creek, greenbelt, or oak and cedar vegetation tied to Central Texas.", "A neighborhood-scale mix of homes rather than only downtown towers.", "People walking, biking, or rolling on a trail that connects neighborhoods and parks."],
+          "misleading_stereotypes_to_avoid": ["A music-stage or cowboy tableau with no residential context.", "The State Capitol or skyline as the sole local signal."],
+          "desired_lived_behavior": "A resident using an urban trail for an ordinary neighborhood trip.", "required_season_or_weather": "Bright warm-season light with credible heat-aware clothing and shade.",
+          "crop_safe_focal_subject": "A trail user offset right with creek, vegetation, and nearby housing retained.",
+          "source_links": ["https://www.austintexas.gov/transportation-public-works/urban-trails"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/texas/dallas", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Dallas mortgage guide", "headline": "Compare Dallas homes through real neighborhood texture", "dek": "See how housing, streets, parks, and local choices shape the market.",
+        "primary_cta": { "cta_id": "meet-dallas-experts", "label_override": "Meet Dallas experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-texas-dallas", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Dallas neighborhood scene with homes, shade trees, and connected public space.",
+        "focal_point_desktop": { "x": 0.67, "y": 0.53 }, "focal_point_mobile": { "x": 0.61, "y": 0.5 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Dallas, Texas", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Dallas",
+          "geography_evidence": ["https://dallascityhall.com/departments/pnv/Pages/Citywide-Plans.aspx"],
+          "visual_truths": ["North Texas prairie light and broad-canopy street trees where locally present.", "A residential block with varied detached homes, apartments, or infill.", "A park, trail, sidewalk, or public-realm connection used by residents."],
+          "misleading_stereotypes_to_avoid": ["Glass towers and freeways as the only Dallas identity.", "Ranch gates, cattle, or western props disconnected from city life."],
+          "desired_lived_behavior": "Neighbors walking a dog, pushing a stroller, or heading toward a park.", "required_season_or_weather": "Clear warm light with credible shade and vegetation.",
+          "crop_safe_focal_subject": "Residents on a sidewalk or trail with home fronts and trees visible.",
+          "source_links": ["https://dallascityhall.com/departments/pnv/Pages/Citywide-Plans.aspx", "https://dallascityhall.com/departments/pnv/Pages/The-Bottoms-area-plan-landing-page.aspx"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/texas/houston", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Houston mortgage guide", "headline": "Plan a Houston move with bayou and neighborhood context", "dek": "Compare housing, insurance, equity, and experts across a sprawling Gulf Coast city.",
+        "primary_cta": { "cta_id": "meet-houston-experts", "label_override": "Meet Houston experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-texas-houston", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Houston scene connecting a lived-in neighborhood to a bayou greenway.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.52 }, "focal_point_mobile": { "x": 0.62, "y": 0.49 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Houston, Texas", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Houston",
+          "geography_evidence": ["https://houstontx.gov/planning/houston_bike_plan/docs-pdfs/HBP-Chapter-6-Implementation_Feb17.pdf"],
+          "visual_truths": ["Flat Gulf Coast terrain with bayou, drainage, or flood-aware landscape cues.", "A varied neighborhood of bungalows, townhomes, apartments, or newer infill.", "Residents using a bayou greenway, neighborhood park, or shaded sidewalk."],
+          "misleading_stereotypes_to_avoid": ["Oil derricks or mission-control imagery with no home context.", "A generic downtown skyline presented as daily Houston life."],
+          "desired_lived_behavior": "A resident walking or cycling between neighborhood and bayou green space.", "required_season_or_weather": "Humid, warm light; no disaster or active-flood depiction.",
+          "crop_safe_focal_subject": "A person on a greenway with bayou edge and housing context retained.",
+          "source_links": ["https://houstontx.gov/planning/houston_bike_plan/docs-pdfs/HBP-Chapter-6-Implementation_Feb17.pdf"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/california/irvine", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Irvine mortgage guide", "headline": "See Irvine through villages, trails, and open space", "dek": "Compare planned neighborhoods, home types, and local financing paths.",
+        "primary_cta": { "cta_id": "meet-irvine-experts", "label_override": "Meet Irvine experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-california-irvine", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Irvine scene with a village edge, trail users, and dry foothill vegetation.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.52 }, "focal_point_mobile": { "x": 0.62, "y": 0.48 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Irvine, California", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Irvine",
+          "geography_evidence": ["https://cityofirvine.org/news-media/news-article/city-announces-plans-establish-gateway-preserve"],
+          "visual_truths": ["Master-planned village housing with landscaped setbacks or shared green space.", "Dry San Joaquin Hills or preserved open-space vegetation at a neighborhood edge.", "Residents walking or biking on an interconnected trail."],
+          "misleading_stereotypes_to_avoid": ["An oceanfront scene—Irvine is inland from the coast.", "A sterile corporate campus with no residential life."],
+          "desired_lived_behavior": "A family or individual using a trail between a village and open space.", "required_season_or_weather": "Dry Mediterranean-climate light and water-conscious landscaping.",
+          "crop_safe_focal_subject": "Trail users with both village architecture and foothill vegetation.",
+          "source_links": ["https://cityofirvine.org/news-media/news-article/city-announces-plans-establish-gateway-preserve"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/california/san-diego", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "San Diego mortgage guide", "headline": "Understand San Diego from canyon to neighborhood", "dek": "Compare coastal-region homes, VA options, affordability, and local expertise.",
+        "primary_cta": { "cta_id": "meet-san-diego-experts", "label_override": "Meet San Diego experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-california-san-diego", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending San Diego neighborhood scene shaped by a canyon, dry vegetation, and everyday trail use.",
+        "focal_point_desktop": { "x": 0.69, "y": 0.51 }, "focal_point_mobile": { "x": 0.63, "y": 0.47 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "San Diego, California", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for San Diego",
+          "geography_evidence": ["https://www.sandiego.gov/park-and-recreation/parks/oscp"],
+          "visual_truths": ["A neighborhood edge visibly shaped by one of the city's canyons or mesas.", "Dry coastal-scrub vegetation and regionally plausible low-rise housing.", "Residents walking or hiking close to home in open space."],
+          "misleading_stereotypes_to_avoid": ["A beach postcard with no neighborhood context.", "Palm trees and perfect surf presented as the whole city."],
+          "desired_lived_behavior": "A resident entering a neighborhood canyon trail for an ordinary walk.", "required_season_or_weather": "Soft coastal or bright dry-season light consistent with the location.",
+          "crop_safe_focal_subject": "A trail user on the canyon rim with housing and native vegetation visible.",
+          "source_links": ["https://www.sandiego.gov/park-and-recreation/parks/oscp"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/california/sacramento", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Sacramento mortgage guide", "headline": "Plan a Sacramento move under the real tree canopy", "dek": "Compare neighborhoods, move-up choices, inventory, and local experts.",
+        "primary_cta": { "cta_id": "meet-sacramento-experts", "label_override": "Meet Sacramento experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-california-sacramento", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Sacramento scene with a shaded residential street, residents, and river-city cues.",
+        "focal_point_desktop": { "x": 0.67, "y": 0.52 }, "focal_point_mobile": { "x": 0.61, "y": 0.49 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Sacramento, California", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Sacramento",
+          "geography_evidence": ["https://www.cityofsacramento.gov/public-works/maintenance-services/urban-forestry", "https://www.cityofsacramento.gov/city-manager/oied/priority-projects-investment/riverfront.html"],
+          "visual_truths": ["Mature shade trees on an established residential block.", "Flat valley terrain with Sacramento or American River context where visible.", "Residents biking, walking, or caring for a neighborhood tree."],
+          "misleading_stereotypes_to_avoid": ["The State Capitol as the sole city identity.", "A generic arid California suburb with no canopy or river context."],
+          "desired_lived_behavior": "A resident biking or walking beneath street trees toward a neighborhood destination.", "required_season_or_weather": "Warm dry-season light with credible deep shade.",
+          "crop_safe_focal_subject": "A person beneath a mature tree with home fronts and street texture retained.",
+          "source_links": ["https://www.cityofsacramento.gov/public-works/maintenance-services/urban-forestry", "https://www.cityofsacramento.gov/city-manager/oied/priority-projects-investment/riverfront.html"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/colorado/denver", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Denver mortgage guide", "headline": "Compare Denver homes with Front Range context", "dek": "Connect neighborhood choices, relocation planning, and local mortgage expertise.",
+        "primary_cta": { "cta_id": "meet-denver-experts", "label_override": "Meet Denver experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-colorado-denver", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Denver scene with a lived-in neighborhood, parkway, and distant Front Range.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.5 }, "focal_point_mobile": { "x": 0.62, "y": 0.47 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Denver, Colorado", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Denver",
+          "geography_evidence": ["https://denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Urban-Parks/Mountain-Parks/Conservation-Areas"],
+          "visual_truths": ["A walkable block of brick homes, bungalows, apartments, or infill rather than only downtown.", "High-plains vegetation and strong light with the Front Range as background, not subject.", "Residents using a parkway, bike route, or neighborhood park."],
+          "misleading_stereotypes_to_avoid": ["A ski slope or alpine cabin presented as Denver.", "A giant mountain composite looming unrealistically over downtown."],
+          "desired_lived_behavior": "A resident walking or cycling through an established neighborhood.", "required_season_or_weather": "A clearly plausible season; snow only when streets, clothing, and vegetation agree.",
+          "crop_safe_focal_subject": "A resident and home frontage with subtle mountain or parkway context.",
+          "source_links": ["https://denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Parks-Recreation/Urban-Parks/Mountain-Parks/Conservation-Areas"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/colorado/colorado-springs", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Colorado Springs mortgage guide", "headline": "See Colorado Springs where neighborhoods meet foothills", "dek": "Compare VA paths, local inventory, and home choices below Pikes Peak.",
+        "primary_cta": { "cta_id": "meet-colorado-springs-experts", "label_override": "Meet local experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-colorado-colorado-springs", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Colorado Springs neighborhood scene with trail users, foothills, and red-rock terrain.",
+        "focal_point_desktop": { "x": 0.69, "y": 0.51 }, "focal_point_mobile": { "x": 0.63, "y": 0.47 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Colorado Springs, Colorado", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Colorado Springs",
+          "geography_evidence": ["https://coloradosprings.gov/parks-trails-open-space"],
+          "visual_truths": ["Neighborhoods at the base of Pikes Peak or along foothill mesas.", "Red-rock formations, grassland, canyon, or ponderosa vegetation where locally accurate.", "Residents walking, running, or biking on a multi-use trail."],
+          "misleading_stereotypes_to_avoid": ["Garden of the Gods rocks with no lived-in city context.", "A remote alpine village or ski-town scene."],
+          "desired_lived_behavior": "A resident using a neighborhood-connected trail rather than posing at a landmark.", "required_season_or_weather": "Dry high-altitude light with seasonally accurate vegetation.",
+          "crop_safe_focal_subject": "A trail user with a neighborhood edge and foothill cue in frame.",
+          "source_links": ["https://coloradosprings.gov/parks-trails-open-space", "https://coloradosprings.gov/parktrails"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/colorado/boulder", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Boulder mortgage guide", "headline": "Evaluate Boulder homes beside real open-space edges", "dek": "Compare high-cost housing choices, inventory, and specialist support.",
+        "primary_cta": { "cta_id": "meet-boulder-experts", "label_override": "Meet Boulder experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-colorado-boulder", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Boulder scene with residents, compact housing, foothills, and open space.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.5 }, "focal_point_mobile": { "x": 0.62, "y": 0.46 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Boulder, Colorado", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Boulder",
+          "geography_evidence": ["https://bouldercolorado.gov/government/departments/open-space-mountain-parks"],
+          "visual_truths": ["The abrupt meeting of neighborhoods, grassland open space, and foothills.", "Compact homes, apartments, or established residential blocks.", "Residents walking, cycling, or using a trail as an everyday routine."],
+          "misleading_stereotypes_to_avoid": ["The Flatirons alone with no evidence of city life.", "An all-luxury mountain enclave or ski-resort aesthetic."],
+          "desired_lived_behavior": "A resident traveling by bike or foot between home and open space.", "required_season_or_weather": "Clear high-altitude light with seasonally credible grass and trees.",
+          "crop_safe_focal_subject": "A trail or bike user with both residential edge and foothills visible.",
+          "source_links": ["https://bouldercolorado.gov/government/departments/open-space-mountain-parks"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/florida/tampa", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Tampa mortgage guide", "headline": "Compare Tampa homes from bungalow blocks to waterfront", "dek": "Use neighborhood, insurance, refinance, and expert context to make a plan.",
+        "primary_cta": { "cta_id": "meet-tampa-experts", "label_override": "Meet Tampa experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-florida-tampa", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Tampa scene with residents, shaded bungalow architecture, and river or bay context.",
+        "focal_point_desktop": { "x": 0.67, "y": 0.52 }, "focal_point_mobile": { "x": 0.61, "y": 0.49 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Tampa, Florida", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Tampa",
+          "geography_evidence": ["https://www.tampa.gov/guide/neighborhoods"],
+          "visual_truths": ["A real mix of bungalow, ranch, detached, multifamily, or waterfront housing.", "Grand oaks, subtropical vegetation, and shade on a lived-in block.", "Residents walking near the Hillsborough River, a neighborhood park, or connected waterfront."],
+          "misleading_stereotypes_to_avoid": ["A resort beach implying Tampa is an oceanfront beach city.", "Pirate props or stadium imagery as the main local signal."],
+          "desired_lived_behavior": "Neighbors walking from a shaded residential block toward a park or river.", "required_season_or_weather": "Warm humid daylight with credible shade and cloud conditions.",
+          "crop_safe_focal_subject": "Residents beside a bungalow or oak with subtle water context.",
+          "source_links": ["https://www.tampa.gov/guide/neighborhoods", "https://www.tampa.gov/neighborhoods/south-seminole-heights"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/florida/orlando", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Orlando mortgage guide", "headline": "See Orlando through lakes and lived-in neighborhoods", "dek": "Compare first-time buyer paths, inventory, and local home choices.",
+        "primary_cta": { "cta_id": "meet-orlando-experts", "label_override": "Meet Orlando experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-florida-orlando", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Orlando scene with a lake, tree-lined brick street, historic homes, and residents.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.52 }, "focal_point_mobile": { "x": 0.62, "y": 0.49 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Orlando, Florida", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Orlando",
+          "geography_evidence": ["https://www.orlando.gov/Our-Government/News-and-Information/History/Historic-Preservation-Districts"],
+          "visual_truths": ["A neighborhood lake integrated into daily residential life.", "Tree-lined or brick streets with bungalows, Mediterranean Revival, Tudor, or other documented local styles.", "Residents walking, running, or cycling between homes and lakeside space."],
+          "misleading_stereotypes_to_avoid": ["Theme parks, castles, or resort pools as Orlando's identity.", "A generic palm-lined subdivision with no lake or historic texture."],
+          "desired_lived_behavior": "A resident walking a dog or cycling along a lake-connected neighborhood street.", "required_season_or_weather": "Warm humid conditions with afternoon-cloud or filtered-light realism.",
+          "crop_safe_focal_subject": "A resident at a shaded lake-edge street with home details visible.",
+          "source_links": ["https://www.orlando.gov/Our-Government/News-and-Information/History/Historic-Preservation-Districts"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/locations/florida/miami", "coverage_kind": "prototype_route", "asset_selection_status": "unselected",
+      "hero": {
+        "page_type": "city", "hero_variant": "full_bleed_environmental_portrait", "eyebrow": "Miami mortgage guide", "headline": "Understand Miami beyond towers and postcard beaches", "dek": "Compare condo, jumbo, insurance, and neighborhood decisions with local context.",
+        "primary_cta": { "cta_id": "meet-miami-experts", "label_override": "Meet Miami experts" },
+        "desktop_asset": { "asset_id": "pending-hero-locations-florida-miami", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } },
+        "has_motion": false, "decorative": false, "alt_text": "Pending Miami scene with residents, climate-adapted historic homes, tropical canopy, and bay context.",
+        "focal_point_desktop": { "x": 0.68, "y": 0.51 }, "focal_point_mobile": { "x": 0.62, "y": 0.48 }, "contrast_mode": "left_scrim",
+        "local_evidence_brief": {
+          "target_geography": "Miami, Florida", "asset_selection_tier": "exact_geography", "selected_asset_geography": "Pending exact-city selection for Miami",
+          "geography_evidence": ["https://www.miami.gov/Planning-Zoning-Land-Use/Historic-Preservation", "https://www.miamidade.gov/global/environment/ecosystems/forests.page"],
+          "visual_truths": ["Mediterranean Revival, Art Deco, Craftsman, Bahamian, or climate-adapted mid-century residential architecture.", "Tropical hardwood hammock, mangrove, or dense subtropical canopy where locally accurate.", "Everyday neighborhood life with Biscayne Bay or water-awareness as supporting context."],
+          "misleading_stereotypes_to_avoid": ["South Beach nightlife or luxury cars as the whole of Miami.", "A generic turquoise beach with no city or neighborhood evidence."],
+          "desired_lived_behavior": "Residents walking or gathering on a shaded block near a park or bayfront connection.", "required_season_or_weather": "Humid tropical light without disaster imagery or implausible empty streets.",
+          "crop_safe_focal_subject": "Residents beside a recognizable home type and tropical canopy.",
+          "source_links": ["https://www.miami.gov/Planning-Zoning-Land-Use/Historic-Preservation", "https://www.miamidade.gov/global/environment/ecosystems/forests.page"]
+        }, "review_status": "draft"
+      }
+    },
+    {
+      "route": "/buy", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "buy", "hero_variant": "tall_diagonal_image_slab", "eyebrow": "Buy a home", "headline": "Evaluate the home before you make the move", "dek": "Compare financing paths while you inspect the place and neighborhood.", "primary_cta": { "cta_id": "start-buying-plan", "label_override": "Start a buying plan" }, "desktop_asset": { "asset_id": "pending-hero-buy", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending asset of buyers evaluating a real home or neighborhood.", "focal_point_desktop": { "x": 0.72, "y": 0.5 }, "focal_point_mobile": { "x": 0.58, "y": 0.45 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/refinance", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "refinance", "hero_variant": "wide_panoramic_band", "eyebrow": "Refinance", "headline": "Review the numbers in the home you already know", "dek": "Compare payment, term, costs, and equity before changing your loan.", "primary_cta": { "cta_id": "compare-refinance-options", "label_override": "Compare refinance options" }, "desktop_asset": { "asset_id": "pending-hero-refinance", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending asset of a homeowner reviewing a decision in an established home.", "focal_point_desktop": { "x": 0.68, "y": 0.48 }, "focal_point_mobile": { "x": 0.58, "y": 0.43 }, "contrast_mode": "bottom_scrim", "review_status": "draft" }
+    },
+    {
+      "route": "/home-equity", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "home_equity", "hero_variant": "rotated_architectural_window", "eyebrow": "Home equity", "headline": "Connect your equity decision to a practical goal", "dek": "Compare HELOC, cash-out, and other paths without assuming an outcome.", "primary_cta": { "cta_id": "explore-equity-options", "label_override": "Explore equity options" }, "desktop_asset": { "asset_id": "pending-hero-home-equity", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending asset of a useful home space and a grounded improvement decision.", "focal_point_desktop": { "x": 0.7, "y": 0.5 }, "focal_point_mobile": { "x": 0.58, "y": 0.47 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/loan-options/fha-loans", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "loan_product", "hero_variant": "circular_criteria_or_brand_field", "eyebrow": "FHA loans", "headline": "See where an FHA loan may fit your plan", "dek": "Review borrower fit, property context, costs, and tradeoffs with an expert.", "primary_cta": { "cta_id": "explore-fha-fit", "label_override": "Explore FHA fit" }, "desktop_asset": { "asset_id": "pending-hero-loan-options-fha-loans", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending FHA-specific asset showing a borrower evaluating a qualifying home.", "focal_point_desktop": { "x": 0.7, "y": 0.48 }, "focal_point_mobile": { "x": 0.55, "y": 0.44 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/learning-center", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "learning_center", "hero_variant": "layered_editorial_collage", "eyebrow": "Learning Center", "headline": "Reporting and guides for real mortgage decisions", "dek": "Find current local context, product explainers, and practical planning tools.", "primary_cta": { "cta_id": "browse-learning-center", "label_override": "Browse the Learning Center" }, "desktop_asset": { "asset_id": "pending-hero-learning-center", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending collage of reporting, local housing imagery, guides, and data fragments.", "focal_point_desktop": { "x": 0.65, "y": 0.5 }, "focal_point_mobile": { "x": 0.54, "y": 0.46 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/learning-center/buying-a-home", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "topic_hub", "hero_variant": "media_left_editorial_panel", "eyebrow": "Buying a home", "headline": "Build a buying plan one decision at a time", "dek": "Use practical guides for budgets, offers, inspections, and loan comparisons.", "primary_cta": { "cta_id": "browse-buying-guides", "label_override": "Browse buying guides" }, "desktop_asset": { "asset_id": "pending-hero-learning-center-buying-a-home", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending asset of a buyer evaluating a specific home and neighborhood.", "focal_point_desktop": { "x": 0.32, "y": 0.48 }, "focal_point_mobile": { "x": 0.5, "y": 0.44 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/learning-center/austin-mortgage-market-update", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "article", "hero_variant": "evidence_or_report_strip", "eyebrow": "Local market update", "headline": "Austin payments, inventory, and buyer leverage", "dek": "A reporting-led view of the data and local conditions behind this update.", "primary_cta": { "cta_id": "read-austin-update", "label_override": "Read the update" }, "desktop_asset": { "asset_id": "pending-hero-learning-center-austin-market-update", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending report strip directly depicting the Austin place or evidence discussed.", "focal_point_desktop": { "x": 0.68, "y": 0.5 }, "focal_point_mobile": { "x": 0.56, "y": 0.46 }, "contrast_mode": "bottom_scrim", "review_status": "draft" }
+    },
+    {
+      "route": "/loan-officers/ava-martinez", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "loan_officer", "hero_variant": "vertical_human_portrait", "eyebrow": "Loan officer", "headline": "Meet Ava Martinez", "dek": "Work with a local mortgage professional on the choices in front of you.", "primary_cta": { "cta_id": "contact-ava-martinez", "label_override": "Contact Ava" }, "desktop_asset": { "asset_id": "pending-hero-loan-officers-ava-martinez", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited; use only Ava Martinez's approved likeness.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending approved professional portrait of Ava Martinez.", "focal_point_desktop": { "x": 0.72, "y": 0.38 }, "focal_point_mobile": { "x": 0.53, "y": 0.34 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/branches/austin-central", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "branch", "hero_variant": "wide_panoramic_band", "eyebrow": "Austin Central branch", "headline": "Local mortgage guidance from Austin Central", "dek": "Meet the team and understand the neighborhood context around this branch.", "primary_cta": { "cta_id": "contact-austin-central", "label_override": "Contact the branch" }, "desktop_asset": { "asset_id": "pending-hero-branches-austin-central", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited; verify the actual branch and address.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending verified photograph of the Austin Central branch or its immediate neighborhood.", "focal_point_desktop": { "x": 0.66, "y": 0.5 }, "focal_point_mobile": { "x": 0.54, "y": 0.47 }, "contrast_mode": "bottom_scrim", "review_status": "draft" }
+    },
+    {
+      "route": "/company", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "company", "hero_variant": "circular_criteria_or_brand_field", "eyebrow": "Our company", "headline": "Mortgage guidance built around useful local context", "dek": "See how our people, research, and operating standards support borrowers.", "primary_cta": { "cta_id": "learn-about-company", "label_override": "How we work" }, "desktop_asset": { "asset_id": "pending-hero-company", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending asset of the real team working in a human-scale environment.", "focal_point_desktop": { "x": 0.7, "y": 0.46 }, "focal_point_mobile": { "x": 0.55, "y": 0.43 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/loan-officers", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "search_directory", "hero_variant": "structured_search_or_planning_interface", "eyebrow": "Find an expert", "headline": "Search for a loan officer who fits your market", "dek": "Filter by location, specialty, and service area without a competing decorative image.", "primary_cta": { "cta_id": "search-loan-officers", "label_override": "Search loan officers" }, "desktop_asset": { "asset_id": "pending-hero-loan-officer-directory", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending subtle supporting imagery of real loan officers and local service areas.", "focal_point_desktop": { "x": 0.75, "y": 0.5 }, "focal_point_mobile": { "x": 0.56, "y": 0.46 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    },
+    {
+      "route": "/prequalification", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "prequalification", "hero_variant": "horizon_composition", "eyebrow": "Prequalification", "headline": "Get clearer about the range you may explore", "dek": "Share a few details to prepare for a conversation without implying approval.", "primary_cta": { "cta_id": "start-prequalification", "label_override": "Start prequalification" }, "desktop_asset": { "asset_id": "pending-hero-prequalification", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending calm scene of a person preparing for a home decision.", "focal_point_desktop": { "x": 0.68, "y": 0.48 }, "focal_point_mobile": { "x": 0.56, "y": 0.44 }, "contrast_mode": "left_scrim", "review_status": "draft" }
+    },
+    {
+      "route": "/seller-move-up", "coverage_kind": "representative_page_family", "asset_selection_status": "unselected",
+      "hero": { "page_type": "seller_move_up", "hero_variant": "stacked_planning_panels", "eyebrow": "Sell and move up", "headline": "Plan the transition from this home to the next", "dek": "Compare timing, equity, payment, and contingency tradeoffs in one sequence.", "primary_cta": { "cta_id": "start-move-up-plan", "label_override": "Start a move-up plan" }, "desktop_asset": { "asset_id": "pending-hero-seller-move-up", "asset_origin": "internal", "rights_record": { "creator_or_agency": "Pending selection", "license_name": "Pending verification", "acquired_at": "2026-07-21", "usage_notes": "Draft planning placeholder; no asset has been selected or acquired. Publishing is prohibited.", "release_status": "not_verified" } }, "has_motion": false, "decorative": false, "alt_text": "Pending planning panels connecting a current home, future home, and transition decision.", "focal_point_desktop": { "x": 0.68, "y": 0.5 }, "focal_point_mobile": { "x": 0.56, "y": 0.46 }, "contrast_mode": "solid_panel", "review_status": "draft" }
+    }
+  ]
+}
