@@ -4,11 +4,25 @@
   "title": "HeroAssetManifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["$schema", "schema_version", "status", "entries"],
+  "required": [
+    "$schema",
+    "schema_version",
+    "status",
+    "locality_candidate_pools",
+    "entries"
+  ],
   "properties": {
-    "$schema": { "type": "string", "const": "../schemas/hero-asset-manifest.schema.json" },
-    "schema_version": { "type": "string", "const": "1.0.0" },
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/hero-asset-manifest.schema.json"
+    },
+    "schema_version": { "type": "string", "const": "1.1.0" },
     "status": { "type": "string", "const": "draft" },
+    "locality_candidate_pools": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/locality_candidate_pool" }
+    },
     "entries": {
       "type": "array",
       "minItems": 1,
@@ -16,6 +30,216 @@
     }
   },
   "$defs": {
+    "visible_locality_signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signal_type", "evidence"],
+      "properties": {
+        "signal_type": {
+          "type": "string",
+          "enum": [
+            "regional_architecture",
+            "terrain_or_ecology",
+            "street_or_neighborhood_form",
+            "lived_behavior",
+            "civic_cultural_infrastructure",
+            "season_or_light"
+          ]
+        },
+        "evidence": { "type": "string", "minLength": 1 }
+      }
+    },
+    "locality_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["geography_claim", "visible_signals", "signal_count"],
+      "properties": {
+        "geography_claim": { "type": "string", "minLength": 1 },
+        "visible_signals": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/visible_locality_signal" }
+        },
+        "signal_count": { "type": "integer", "minimum": 1, "maximum": 6 }
+      }
+    },
+    "source_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "locality_asset_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "repository_asset_id",
+        "asset_type",
+        "source_tier",
+        "claimed_geography",
+        "asset_page_url",
+        "source_repository",
+        "creator_or_agency",
+        "displayed_caption",
+        "license_name",
+        "license_url",
+        "required_attribution",
+        "source_accessed_at",
+        "source_dimensions",
+        "release_status",
+        "risk_notes",
+        "selection_eligibility",
+        "candidate_disposition",
+        "locality_evidence",
+        "selection_rationale",
+        "acquisition_status",
+        "rights_review_status",
+        "publishing_status"
+      ],
+      "properties": {
+        "candidate_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "repository_asset_id": { "type": "string", "minLength": 1 },
+        "asset_type": { "type": "string", "const": "photograph" },
+        "source_tier": {
+          "type": "string",
+          "enum": ["exact_geography", "verified_subregion"]
+        },
+        "claimed_geography": { "type": "string", "minLength": 1 },
+        "asset_page_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "source_repository": { "type": "string", "minLength": 1 },
+        "creator_or_agency": { "type": "string", "minLength": 1 },
+        "displayed_caption": { "type": "string", "minLength": 1 },
+        "license_name": { "type": "string", "minLength": 1 },
+        "license_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "required_attribution": { "type": "string", "minLength": 1 },
+        "source_accessed_at": { "type": "string", "format": "date" },
+        "source_dimensions": { "$ref": "#/$defs/source_dimensions" },
+        "release_status": {
+          "type": "string",
+          "enum": ["not_applicable", "verified", "not_verified", "required"]
+        },
+        "risk_notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "selection_eligibility": {
+          "type": "string",
+          "enum": ["eligible_for_candidate_selection", "blocked_pending_clearance"]
+        },
+        "candidate_disposition": {
+          "type": "string",
+          "enum": ["selected", "alternate", "blocked"]
+        },
+        "locality_evidence": { "$ref": "#/$defs/locality_evidence" },
+        "selection_rationale": { "type": "string", "minLength": 1 },
+        "acquisition_status": { "type": "string", "const": "not_acquired" },
+        "rights_review_status": { "type": "string", "const": "not_started" },
+        "publishing_status": { "type": "string", "const": "prohibited" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "release_status": { "enum": ["not_verified", "required"] }
+            },
+            "required": ["release_status"]
+          },
+          "then": {
+            "properties": {
+              "selection_eligibility": { "const": "blocked_pending_clearance" },
+              "candidate_disposition": { "const": "blocked" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "candidate_disposition": { "const": "selected" } },
+            "required": ["candidate_disposition"]
+          },
+          "then": {
+            "properties": {
+              "selection_eligibility": { "const": "eligible_for_candidate_selection" },
+              "release_status": { "enum": ["not_applicable", "verified"] }
+            }
+          }
+        }
+      ]
+    },
+    "locality_candidate_pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "target_geography",
+        "geography_kind",
+        "selection_outcome",
+        "candidates"
+      ],
+      "properties": {
+        "route": { "type": "string", "pattern": "^/[a-z0-9/-]+$" },
+        "target_geography": { "type": "string", "minLength": 1 },
+        "geography_kind": { "type": "string", "enum": ["state", "city"] },
+        "selection_outcome": {
+          "type": "string",
+          "enum": ["candidate_selected", "unresolved"]
+        },
+        "selected_candidate_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "unresolved_reason": { "type": "string", "minLength": 1 },
+        "candidates": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/locality_asset_candidate" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "selection_outcome": { "const": "candidate_selected" } },
+            "required": ["selection_outcome"]
+          },
+          "then": {
+            "required": ["selected_candidate_id"],
+            "not": { "required": ["unresolved_reason"] },
+            "properties": {
+              "candidates": {
+                "contains": {
+                  "properties": { "candidate_disposition": { "const": "selected" } },
+                  "required": ["candidate_disposition"]
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "selection_outcome": { "const": "unresolved" } },
+            "required": ["selection_outcome"]
+          },
+          "then": {
+            "required": ["unresolved_reason"],
+            "not": { "required": ["selected_candidate_id"] },
+            "properties": {
+              "candidates": {
+                "not": {
+                  "contains": {
+                    "properties": { "candidate_disposition": { "const": "selected" } },
+                    "required": ["candidate_disposition"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "manifest_entry": {
       "type": "object",
       "additionalProperties": false,

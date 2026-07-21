@@ -51,7 +51,8 @@ function schemaErrors(value, node, context, path = "$") {
   const errors = [];
   const push = (message) => errors.push(`${path}: ${message}`);
   const actualType = Array.isArray(value) ? "array" : value === null ? "null" : typeof value;
-  if (node.type && actualType !== node.type) push(`expected ${node.type}, got ${actualType}`);
+  const matchesType = node.type === "integer" ? Number.isInteger(value) : actualType === node.type;
+  if (node.type && !matchesType) push(`expected ${node.type}, got ${actualType}`);
   if (Object.hasOwn(node, "const") && value !== node.const) push(`expected const ${JSON.stringify(node.const)}`);
   if (node.enum && !node.enum.some((item) => Object.is(item, value))) push("not in enum");
   if (typeof value === "string") {
@@ -72,6 +73,15 @@ function schemaErrors(value, node, context, path = "$") {
     if (node.minItems !== undefined && value.length < node.minItems) push("fewer than minItems");
     if (node.maxItems !== undefined && value.length > node.maxItems) push("more than maxItems");
     if (node.items) value.forEach((item, index) => errors.push(...schemaErrors(item, node.items, context, `${path}[${index}]`)));
+    if (node.contains) {
+      const matches = value.filter((item, index) =>
+        schemaErrors(item, node.contains, context, `${path}[${index}]`).length === 0
+      ).length;
+      const minimum = node.minContains ?? 1;
+      const maximum = node.maxContains ?? Number.POSITIVE_INFINITY;
+      if (matches < minimum) push("fewer than minContains");
+      if (matches > maximum) push("more than maxContains");
+    }
   }
   if (actualType === "object") {
     for (const key of node.required ?? []) if (!Object.hasOwn(value, key)) push(`missing ${key}`);

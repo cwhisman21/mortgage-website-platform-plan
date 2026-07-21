@@ -1,7 +1,1216 @@
 {
   "$schema": "../schemas/hero-asset-manifest.schema.json",
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "status": "draft",
+  "locality_candidate_pools": [
+    {
+      "route": "/locations/texas",
+      "target_geography": "Texas",
+      "geography_kind": "state",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "Both rights-verifiable photographs depict narrow natural subregions and omit housing or lived context; neither responsibly represents a state spanning Gulf Coast, Hill Country, plains, border, and major metros.",
+      "candidates": [
+        {
+          "candidate_id": "texas-hill-country-rutledge",
+          "repository_asset_id": "File:Texas hill country.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Texas Hill Country, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Texas_hill_country.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Matthew Rutledge",
+          "displayed_caption": "Texas Hill Country",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Texas Hill Country — Matthew Rutledge — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 4416, "height": 3312 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No person or distinctive private property is the central subject; final rights review must still verify the source record and crop."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The repository title, caption, and categories identify Texas Hill Country.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Low limestone hills and oak-juniper vegetation read as Hill Country ecology." },
+              { "signal_type": "season_or_light", "evidence": "Hard warm-weather light and dry grasses establish a specific seasonal character." }
+            ],
+            "signal_count": 2
+          },
+          "selection_rationale": "Rights and subregional identity are supportable, but the scene is too geographically narrow and lacks housing or lived context for a Texas state hero.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "texas-big-bend-rio-grande-adbar",
+          "repository_asset_id": "File:Big Bend Rio Grande.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Big Bend National Park, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Big_Bend_Rio_Grande.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Adbar",
+          "displayed_caption": "Big Bend National Park landscape with road and Rio Grande near Santa Elena Canyon, looking east",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Big Bend Rio Grande — Adbar — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2856, "height": 1904 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No person or distinctive private property is the central subject; National Park Service rules and the source record still require final review."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source caption locates the view in Big Bend National Park near Santa Elena Canyon.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "The Rio Grande corridor, desert vegetation, and canyon terrain establish the Trans-Pecos subregion." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The park road makes the protected-land setting legible." },
+              { "signal_type": "season_or_light", "evidence": "Clear arid light reinforces the desert climate." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "The exact subregion is credible, but Big Bend alone would stereotype Texas as desert wilderness and provides no state-scale housing context.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/california",
+      "target_geography": "California",
+      "geography_kind": "state",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "The two verified options represent only the Big Sur coast and an unnamed California desert; neither conveys California's urban, agricultural, inland, and coastal housing contexts without leaning on scenery stereotypes.",
+      "candidates": [
+        {
+          "candidate_id": "california-big-sur-coast-norton",
+          "repository_asset_id": "File:Big Sur Coast.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Big Sur coast, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Big_Sur_Coast.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Mike Norton",
+          "displayed_caption": "Big Sur Coast",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Big Sur Coast — Mike Norton — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2912, "height": 4368 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The portrait orientation constrains responsive hero crops; no person or distinctive private property is the central subject."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The individual asset page identifies the Big Sur Coast in California.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Pacific cliffs, ocean, and coastal scrub establish the Big Sur subregion." },
+              { "signal_type": "season_or_light", "evidence": "Clear coastal daylight provides a distinct marine atmosphere." }
+            ],
+            "signal_count": 2
+          },
+          "selection_rationale": "The scene is verifiable and usable as a Big Sur image, but a landmark coast is too narrow and tourism-coded for a statewide mortgage guide.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "california-desert-landscape-brovell",
+          "repository_asset_id": "File:Desert landscape in California.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "California desert",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Desert_landscape_in_California.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Brovell",
+          "displayed_caption": "Desert landscape in California",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Desert landscape in California — Brovell — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2800, "height": 2128 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The source does not name a more precise California subregion; final review must not infer one from appearance alone."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source identifies only a desert landscape in California, so no narrower location is claimed.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "An arid basin and sparse vegetation establish a California desert environment." },
+              { "signal_type": "season_or_light", "evidence": "Dry, high-contrast daylight supports the arid setting." }
+            ],
+            "signal_count": 2
+          },
+          "selection_rationale": "The image is a verified California subregion but is too imprecise and would reduce the state to a desert stereotype.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/colorado",
+      "target_geography": "Colorado",
+      "geography_kind": "state",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "Both verified photographs are Rocky Mountain National Park landscapes. Selecting either would erase the Front Range urban corridor, plains, Western Slope communities, and the lived housing context required of a statewide page.",
+      "candidates": [
+        {
+          "candidate_id": "colorado-rmnp-trail-ridge-sbmeaper1",
+          "repository_asset_id": "File:Mountains of Rocky Mountain National Park.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Rocky Mountain National Park, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Mountains_of_Rocky_Mountain_National_Park.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "sbmeaper1",
+          "displayed_caption": "Terra Tomah, Mount Julian, Chief Cheley Peak, and Mount Ida from Trail Ridge Road in Rocky Mountain National Park",
+          "license_name": "CC0 1.0 Universal Public Domain Dedication",
+          "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "required_attribution": "No attribution legally required; credit sbmeaper1 and Wikimedia Commons as a voluntary provenance practice.",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 6073, "height": 3416 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No person or distinctive private property is the central subject; the CC0 declaration and source identity still require final verification."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The caption names peaks and the Trail Ridge Road viewpoint within Rocky Mountain National Park.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Alpine relief and tundra vegetation establish the high Rockies." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The Trail Ridge Road viewpoint identifies a specific protected-land corridor." },
+              { "signal_type": "season_or_light", "evidence": "Clear summer alpine light distinguishes the elevation and season." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Technically strong and rights-clear as a park image, but it repeats Colorado's mountain-only stereotype and contains no community context.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "colorado-rmnp-longs-peak-mcleod",
+          "repository_asset_id": "File:Rocky Mountain National Park, Colorado.jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Rocky Mountain National Park, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Rocky_Mountain_National_Park,_Colorado.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Scott McLeod",
+          "displayed_caption": "Half Mountain, Longs Peak, and Thatchtop in Rocky Mountain National Park, Colorado",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Rocky Mountain National Park, Colorado — Scott McLeod — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 5472, "height": 3648 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No person or distinctive private property is the central subject; final rights review must verify the source record and intended crop."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source caption names three Rocky Mountain National Park landforms in Colorado.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Rocky alpine peaks and forested slopes establish the national-park subregion." },
+              { "signal_type": "season_or_light", "evidence": "Clear high-elevation daylight provides regional seasonal character." }
+            ],
+            "signal_count": 2
+          },
+          "selection_rationale": "The source and license are credible, but this second park vista adds no statewide or lived-context coverage.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/florida",
+      "target_geography": "Florida",
+      "geography_kind": "state",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "The Everglades option is narrow South Florida ecology and the Perdido Key option is a Panhandle aerial with unresolved property-clearance concerns; neither supports a balanced statewide housing narrative.",
+      "candidates": [
+        {
+          "candidate_id": "florida-everglades-dronepicr",
+          "repository_asset_id": "File:Everglades Nationalpark Florida (22037258798).jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Everglades National Park, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Everglades_Nationalpark_Florida_(22037258798).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "dronepicr",
+          "displayed_caption": "Everglades Nationalpark Florida",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Everglades Nationalpark Florida — dronepicr — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2448, "height": 3264 },
+          "release_status": "not_applicable",
+          "risk_notes": ["Portrait orientation limits responsive crops; no person or distinctive private property is the central subject."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The repository title and categories identify Everglades National Park in Florida.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Sawgrass wetland and open water establish Everglades ecology." },
+              { "signal_type": "season_or_light", "evidence": "Humid cloud cover and diffuse subtropical light establish weather character." }
+            ],
+            "signal_count": 2
+          },
+          "selection_rationale": "The exact park ecosystem is credible, but wetland wilderness alone is too narrow for a statewide mortgage guide.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "florida-perdido-key-palmer",
+          "repository_asset_id": "File:Perdido Key, Florida by C. Palmer (2010 aerial view).jpg",
+          "asset_type": "photograph",
+          "source_tier": "verified_subregion",
+          "claimed_geography": "Perdido Key, Escambia County, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Perdido_Key,_Florida_by_C._Palmer_(2010_aerial_view).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Curtis Palmer",
+          "displayed_caption": "Aerial view of the community and beaches of Perdido Key in Escambia County",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Perdido Key, Florida aerial view — Curtis Palmer — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2048, "height": 1124 },
+          "release_status": "not_verified",
+          "risk_notes": ["The aerial centers identifiable residential and resort property; no property-release evidence is supplied, and resolution is below the selection floor."],
+          "selection_eligibility": "blocked_pending_clearance",
+          "candidate_disposition": "blocked",
+          "locality_evidence": {
+            "geography_claim": "The source caption identifies Perdido Key and Escambia County in the Florida Panhandle.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Gulf beach, dune, and barrier-island water define the Panhandle coast." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "Linear development along a narrow barrier island is clearly visible." },
+              { "signal_type": "season_or_light", "evidence": "Bright late-June coastal light establishes summer conditions." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "This provides housing form but is Panhandle-specific, under-resolution, and blocked because the identifiable-property release position is unverified.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/texas/austin",
+      "target_geography": "Austin, Texas",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "austin-west-campus-spheroidite",
+      "candidates": [
+        {
+          "candidate_id": "austin-west-campus-spheroidite",
+          "repository_asset_id": "File:West Campus as seen from University of Texas Main Building tower 2015.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "West Campus, Austin, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:West_Campus_as_seen_from_University_of_Texas_Main_Building_tower_2015.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Spheroidite",
+          "displayed_caption": "Panoramic stitch of West Campus from the University of Texas Main Building tower",
+          "license_name": "Creative Commons Attribution-ShareAlike 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "required_attribution": "West Campus from UT Main Building tower — Spheroidite — CC BY-SA 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 6440, "height": 1640 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; architecture, trademark, viewpoint-access, and crop review remain required."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The source identifies West Campus and the University of Texas tower viewpoint in Austin.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The mixed low- and mid-rise West Campus housing stock is visible across the panorama." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "A dense street-and-lot pattern reads as an inner Austin neighborhood." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Mature oak canopy runs through the residential fabric." },
+              { "signal_type": "season_or_light", "evidence": "Warm clear spring light supports the Central Texas setting." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected as a research candidate because it is exact-city, exceptionally wide, housing-relevant, and clears four visible locality-signal categories without relying on a landmark-only skyline.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "austin-cherrywood-majumdar",
+          "repository_asset_id": "File:Cherrywood, Austin, TX 78722, USA - panoramio.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Cherrywood, Austin, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Cherrywood,_Austin,_TX_78722,_USA_-_panoramio.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Arnab Majumdar",
+          "displayed_caption": "Cherrywood, Austin, TX 78722, USA",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Cherrywood, Austin — Arnab Majumdar — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 1600, "height": 1080 },
+          "release_status": "not_verified",
+          "risk_notes": ["Identifiable residential property is central, no property-release evidence is supplied, and the file is below the selection-resolution floor."],
+          "selection_eligibility": "blocked_pending_clearance",
+          "candidate_disposition": "blocked",
+          "locality_evidence": {
+            "geography_claim": "The asset title and geocoded source identify Austin's Cherrywood neighborhood.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Detached neighborhood housing provides residential rather than skyline context." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "A low-rise residential street and setbacks establish neighborhood scale." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Mature shade trees reinforce Central Austin's established-neighborhood canopy." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "The locality is exact and housing-relevant, but unresolved property clearance and inadequate dimensions make it unselectable.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/texas/dallas",
+      "target_geography": "Dallas, Texas",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "dallas-trinity-river-webster",
+      "candidates": [
+        {
+          "candidate_id": "dallas-trinity-river-webster",
+          "repository_asset_id": "File:Dallas Texas Skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Dallas, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Dallas_Texas_Skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Tony Webster",
+          "displayed_caption": "Dallas skyline from across the Trinity River in Trammell Crow Park",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Dallas Texas Skyline — Tony Webster — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 7952, "height": 5304 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must cover architecture, trademarks, and park-viewpoint context."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The source caption locates the Dallas skyline view in Trammell Crow Park across the Trinity River.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Dallas's recognizable high-rise profile anchors the city identity." },
+              { "signal_type": "terrain_or_ecology", "evidence": "The Trinity River floodplain supplies a local environmental context." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Trammell Crow Park paths and open-space infrastructure frame the city." },
+              { "signal_type": "season_or_light", "evidence": "Clear spring light and green floodplain vegetation establish season." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected for exact-city provenance, large crop-safe dimensions, and the uncommon combination of skyline, Trinity River ecology, and public open space.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "dallas-skyline-mcstravick",
+          "repository_asset_id": "File:Dallas Skyline-01.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Dallas, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Dallas_Skyline-01.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "John McStravick",
+          "displayed_caption": "Dallas, Texas skyline",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Dallas Skyline — John McStravick — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2514, "height": 1656 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; width is below the selection floor."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The file title, caption, and repository categories identify Dallas.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The downtown high-rise profile identifies a major North Texas urban core." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "Foreground roads and towers show auto-oriented metropolitan form." },
+              { "signal_type": "season_or_light", "evidence": "Dusk illumination supplies city-specific evening character." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "A valid exact-city alternate, but it is more conventional, has less environmental context, and falls short of the selected-resolution floor.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/texas/houston",
+      "target_geography": "Houston, Texas",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "houston-buffalo-bayou-webster",
+      "candidates": [
+        {
+          "candidate_id": "houston-buffalo-bayou-webster",
+          "repository_asset_id": "File:Houston Texas Skyline and the Buffalo Bayou (54182707440).jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Houston, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Houston_Texas_Skyline_and_the_Buffalo_Bayou_(54182707440).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Tony Webster",
+          "displayed_caption": "Houston skyline and Buffalo Bayou from the Rosemont pedestrian bridge",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Houston Texas Skyline and the Buffalo Bayou — Tony Webster — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 7952, "height": 5304 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must cover architecture, trademarks, and public-viewpoint context."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The asset page identifies Houston, Buffalo Bayou, and the Rosemont pedestrian bridge viewpoint.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Houston's high-rise skyline establishes the metropolitan core." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Buffalo Bayou and lush riparian vegetation establish a defining local watershed." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The bayou park and pedestrian bridge show public greenway infrastructure." },
+              { "signal_type": "season_or_light", "evidence": "Humid, green warm-season conditions distinguish the Gulf Coast climate." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected because it combines exact-city provenance with Houston's bayou ecology, public infrastructure, skyline, and high-resolution crop flexibility.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "houston-white-oak-bayou-feller",
+          "repository_asset_id": "File:Skyline, from N. Durham over White Oak Bayou, Houston, Texas 0221101703.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Houston, Texas",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Skyline,_from_N._Durham_over_White_Oak_Bayou,_Houston,_Texas_0221101703.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Patrick Feller",
+          "displayed_caption": "Houston skyline from North Durham over White Oak Bayou",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Houston skyline over White Oak Bayou — Patrick Feller — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2538, "height": 1591 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; width is below the selection floor."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source title identifies North Durham, White Oak Bayou, and Houston.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The downtown skyline supplies Houston urban identity." },
+              { "signal_type": "terrain_or_ecology", "evidence": "White Oak Bayou provides a specific local watershed foreground." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "The separated skyline and bayou corridor show Houston's spread-out urban form." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "A credible exact-city alternate with bayou context, but older capture and sub-threshold width make it less robust for production crops.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/california/irvine",
+      "target_geography": "Irvine, California",
+      "geography_kind": "city",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "Both exact-city photographs show managed open space, but neither contains enough distinctive architecture, neighborhood form, or lived context to identify Irvine without its caption; no candidate is selected on visual evidence alone.",
+      "candidates": [
+        {
+          "candidate_id": "irvine-william-mason-park-salatas",
+          "repository_asset_id": "File:Lake in william mason park irvine california.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "William R. Mason Regional Park, Irvine, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Lake_in_william_mason_park_irvine_california.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "John Salatas",
+          "displayed_caption": "Lake in William R. Mason Park, Irvine, California",
+          "license_name": "Creative Commons Attribution-ShareAlike 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "required_attribution": "Lake in William Mason Park, Irvine — John Salatas — CC BY-SA 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 5184, "height": 3456 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or distinctive private property is the central subject; the visual is not independently distinctive enough to Irvine."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source title and caption identify William R. Mason Regional Park in Irvine.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "A managed lake and mature trees show irrigated Southern California park ecology." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The planned regional park is a legible civic amenity." },
+              { "signal_type": "season_or_light", "evidence": "Clear springlike light and green landscaping establish a mild coastal-inland climate." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Exact geography and technical quality are adequate, but a generic-looking park cannot meet Irvine's locality bar without caption dependence.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "irvine-great-park-downtowngal",
+          "repository_asset_id": "File:Orange County Great Park from the west.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Orange County Great Park, Irvine, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Orange_County_Great_Park_from_the_west.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Downtowngal",
+          "displayed_caption": "Orange County Great Park from the west",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Orange County Great Park from the west — Downtowngal — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2160, "height": 1084 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or distinctive private property is the central subject; the image is below the selection-resolution floor and visually nonspecific."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source identifies the Orange County Great Park in Irvine and the western viewpoint.",
+            "visible_signals": [
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The large planned park and former-airfield scale provide civic-land-use context." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Dry open terrain and distant foothill haze establish inland Orange County conditions." },
+              { "signal_type": "season_or_light", "evidence": "Bright dry-season light differentiates the landscape from a lush coastal park." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "The place claim is exact, but the low-resolution distant view lacks the built and neighborhood cues needed for a trustworthy Irvine hero.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/california/san-diego",
+      "target_geography": "San Diego, California",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "san-diego-coronado-dusk-russellstreet",
+      "candidates": [
+        {
+          "candidate_id": "san-diego-coronado-dusk-russellstreet",
+          "repository_asset_id": "File:San Diego skyline at dusk from Coronado 2015.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "San Diego skyline and bay viewed from Coronado, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:San_Diego_skyline_at_dusk_from_Coronado_2015.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "russellstreet",
+          "displayed_caption": "San Diego skyline across San Diego Bay from Coronado at dusk",
+          "license_name": "Creative Commons Attribution-ShareAlike 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+          "required_attribution": "San Diego skyline at dusk from Coronado — russellstreet — CC BY-SA 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 5289, "height": 3537 },
+          "release_status": "not_applicable",
+          "risk_notes": ["A historical upload note referenced CC BY 2.0, while the current Flickr review records CC BY-SA 2.0; use the current share-alike license and require counsel verification before acquisition."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The caption identifies the San Diego skyline, San Diego Bay, and the Coronado viewpoint.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The waterfront high-rise skyline establishes downtown San Diego." },
+              { "signal_type": "terrain_or_ecology", "evidence": "San Diego Bay supplies a defining coastal geography." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Harbor and waterfront infrastructure make the city's maritime setting legible." },
+              { "signal_type": "season_or_light", "evidence": "Clear coastal dusk light gives a specific marine atmosphere." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected as the strongest exact-city, high-resolution composition with bay, harbor, skyline, and coastal-light signals; license-history discrepancy remains a documented pre-acquisition check.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "san-diego-bay-fastily-08oceanbeach",
+          "repository_asset_id": "File:SanDiegoSkylineBay.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "San Diego Bay, San Diego, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:SanDiegoSkylineBay.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "FASTILY; derivative crop by 08OceanBeach SD",
+          "displayed_caption": "San Diego skyline on the bay",
+          "license_name": "Creative Commons Attribution 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by/3.0/",
+          "required_attribution": "SanDiegoSkylineBay — FASTILY, derivative crop by 08OceanBeach SD — CC BY 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 2702, "height": 1744 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The derivative-file chain and attribution wording require explicit review; no identifiable person or single distinctive private property is central."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The repository title, caption, and categories identify the San Diego skyline and bay.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The waterfront skyline establishes downtown San Diego." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Broad bay water identifies the coastal setting." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Waterfront and harbor infrastructure provide maritime context." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "A viable exact-city alternate, but the derivative chain and only moderate dimensions make the primary candidate easier to govern.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/california/sacramento",
+      "target_geography": "Sacramento, California",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "sacramento-river-tower-bridge-soloviev",
+      "candidates": [
+        {
+          "candidate_id": "sacramento-river-tower-bridge-soloviev",
+          "repository_asset_id": "File:Sacramento, California skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Sacramento, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Sacramento,_California_skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Quintin Soloviev",
+          "displayed_caption": "Aerial Sacramento skyline featuring Tower Bridge and the Sacramento River",
+          "license_name": "Creative Commons Attribution 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "required_attribution": "Sacramento, California skyline — Quintin Soloviev — CC BY 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 8000, "height": 5302 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; aerial capture permissions, architecture, and trademarks remain for final review."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The asset page identifies Sacramento, the Sacramento River, and Tower Bridge.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "The Sacramento River and flat valley setting establish local geography." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Tower Bridge provides an unmistakable civic-transportation anchor." },
+              { "signal_type": "regional_architecture", "evidence": "The low- and mid-rise capital-city skyline differentiates Sacramento's scale." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "A broad downtown grid and river edge show city form." },
+              { "signal_type": "season_or_light", "evidence": "Warm valley twilight establishes seasonal atmosphere." }
+            ],
+            "signal_count": 5
+          },
+          "selection_rationale": "Selected for exact geography, excellent dimensions, and five mutually distinct signals spanning river ecology, civic identity, built form, and light.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "sacramento-skyline-river-smith",
+          "repository_asset_id": "File:Sacramento skyline from the river.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Sacramento skyline viewed from West Sacramento, California",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Sacramento_skyline_from_the_river.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Justin Smith (Wikimedia Commons user J.smith)",
+          "displayed_caption": "Sacramento skyline seen from the Ziggurat in West Sacramento",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Sacramento skyline from the river — Justin Smith — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3702, "height": 1127 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The source notes a West Sacramento building viewpoint and the shallow height is below the selection floor; final review must confirm viewpoint permission and credit wording."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The caption identifies the Sacramento skyline and the Ziggurat viewpoint in neighboring West Sacramento.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The capital-city skyline establishes Sacramento's urban scale." },
+              { "signal_type": "terrain_or_ecology", "evidence": "The Sacramento River foreground identifies the river-valley setting." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "The horizontal downtown grid reads clearly from across the river." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "A useful exact-target view, but the shallow file, neighboring-city viewpoint, and access note make it a weaker governed option.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/colorado/denver",
+      "target_geography": "Denver, Colorado",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "denver-sunken-gardens-beall",
+      "candidates": [
+        {
+          "candidate_id": "denver-sunken-gardens-beall",
+          "repository_asset_id": "File:SunkenGardensDenver.JPG",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Sunken Gardens Park, Denver, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:SunkenGardensDenver.JPG",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Jeffrey Beall",
+          "displayed_caption": "Sunken Gardens park in Denver",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Sunken Gardens Denver — Jeffrey Beall — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3456, "height": 2304 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject in the repository preview; confirm at full resolution and review architecture before acquisition."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The caption and categories identify Sunken Gardens Park, Lincoln Park, and Denver.",
+            "visible_signals": [
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The historic public park provides a neighborhood-scale civic foreground." },
+              { "signal_type": "regional_architecture", "evidence": "Denver's downtown skyline rises behind the park." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "Open space embedded beside the urban core shows central Denver land-use form." },
+              { "signal_type": "season_or_light", "evidence": "Clear high-plains daylight and green-season lawn establish local atmosphere." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected because it layers public neighborhood space and the skyline at production-usable dimensions, avoiding a mountain-landmark-only Denver treatment.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "denver-westside-neighborhood-beall",
+          "repository_asset_id": "File:Westside Neighborhood.JPG",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "1300 block of Lipan Street, Westside/Lincoln Park, Denver, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Westside_Neighborhood.JPG",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Jeffrey Beall",
+          "displayed_caption": "1300 block of Lipan Street in Denver's Westside/Lincoln Park neighborhood",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Westside Neighborhood — Jeffrey Beall — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3456, "height": 2304 },
+          "release_status": "not_verified",
+          "risk_notes": ["Identifiable private homes are the central subject and the source supplies no property-release evidence."],
+          "selection_eligibility": "blocked_pending_clearance",
+          "candidate_disposition": "blocked",
+          "locality_evidence": {
+            "geography_claim": "The source caption names the Lipan Street block and Denver neighborhood.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Historic detached housing presents genuine Denver residential fabric." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "Narrow lots and a regular street grid establish inner-neighborhood form." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Mature street trees and dry high-plains landscaping add environmental context." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "The image is unusually housing-relevant, but the hero cannot use identifiable homes without a verified property-clearance position.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/colorado/colorado-springs",
+      "target_geography": "Colorado Springs, Colorado",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "colorado-springs-skyline-soloviev",
+      "candidates": [
+        {
+          "candidate_id": "colorado-springs-skyline-soloviev",
+          "repository_asset_id": "File:Colorado Springs, Colorado (cropped).jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Colorado Springs, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Colorado_Springs,_Colorado_(cropped).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Quintin Soloviev",
+          "displayed_caption": "Downtown Colorado Springs skyline, March 2026",
+          "license_name": "Creative Commons Attribution 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "required_attribution": "Colorado Springs, Colorado (cropped) — Quintin Soloviev — CC BY 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 6479, "height": 4322 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; the derivative crop chain, architecture, and any visible trademarks require final review."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The source title and caption identify downtown Colorado Springs and a March 2026 capture.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "The comparatively low-rise downtown profile reflects Colorado Springs' urban scale." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "The compact downtown grid is visible across the crop." },
+              { "signal_type": "season_or_light", "evidence": "Clear March high-altitude light establishes a specific Front Range season." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Selected for exact-city provenance, recent capture, strong resolution, and three supportable urban signals; it is intentionally evaluated without assuming a mountain cue not guaranteed by the caption.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "colorado-springs-garden-gods-teberth",
+          "repository_asset_id": "File:Garden of the Gods, Colorado Springs, Colorado.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Garden of the Gods, Colorado Springs, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Garden_of_the_Gods,_Colorado_Springs,_Colorado.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Teberth",
+          "displayed_caption": "Garden of the Gods, Colorado Springs, Colorado",
+          "license_name": "Creative Commons Attribution-ShareAlike 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "required_attribution": "Garden of the Gods, Colorado Springs — Teberth — CC BY-SA 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 1535, "height": 1535 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The square image is below the selection-resolution floor; no person or distinctive private property is the central subject."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The repository identifies Garden of the Gods within Colorado Springs.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Red sandstone formations and foothill vegetation establish a specific local landscape." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The named municipal park is a defining public landscape." },
+              { "signal_type": "season_or_light", "evidence": "Clear high-altitude light reinforces the Front Range setting." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Highly recognizable but landmark-only, square, and under-resolution; retained as an alternate rather than making the mortgage page a tourism treatment.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/colorado/boulder",
+      "target_geography": "Boulder, Colorado",
+      "geography_kind": "city",
+      "selection_outcome": "unresolved",
+      "unresolved_reason": "The rights-eligible Chautauqua image is landscape-only and the stronger Pearl Street image contains identifiable people without release evidence. Neither can be selected under the locality-plus-clearance rules.",
+      "candidates": [
+        {
+          "candidate_id": "boulder-chautauqua-flatirons-scudder",
+          "repository_asset_id": "File:Chautauqua park with flatirons.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Chautauqua Park, Boulder, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Chautauqua_park_with_flatirons.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Laura Scudder (Wikimedia Commons user Laurascudder)",
+          "displayed_caption": "Chautauqua Park with the Flatirons",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Chautauqua Park with Flatirons — Laura Scudder — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3072, "height": 2304 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The legacy page's author metadata is not fully machine-readable; confirm creator identity, migration licensing, and the absence of identifiable people at full resolution."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The title, caption, and categories identify Chautauqua Park and the Flatirons in Boulder.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "The Flatirons and foothill meadow are unmistakable Boulder landforms." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Chautauqua Park provides a specific public-open-space context." },
+              { "signal_type": "season_or_light", "evidence": "Cool foothill light and grass condition establish a visible season." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Exact and recognizable, but it represents Boulder only as scenery and supplies no neighborhood, housing, or lived-city signal.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "boulder-pearl-street-webster",
+          "repository_asset_id": "File:Pearl Street - Downtown Boulder - Colorado in Winter (52878129986).jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Pearl Street, downtown Boulder, Colorado",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Pearl_Street_-_Downtown_Boulder_-_Colorado_in_Winter_(52878129986).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Tony Webster",
+          "displayed_caption": "Pearl Street between 14th and 15th streets in downtown Boulder in winter",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Pearl Street, downtown Boulder in winter — Tony Webster — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 9504, "height": 6336 },
+          "release_status": "not_verified",
+          "risk_notes": ["Identifiable people are visible in a central public-street scene, and the asset page provides no model or publicity-release evidence."],
+          "selection_eligibility": "blocked_pending_clearance",
+          "candidate_disposition": "blocked",
+          "locality_evidence": {
+            "geography_claim": "The source caption identifies Pearl Street between 14th and 15th in downtown Boulder.",
+            "visible_signals": [
+              { "signal_type": "street_or_neighborhood_form", "evidence": "A pedestrian-oriented downtown street establishes Boulder urban form." },
+              { "signal_type": "regional_architecture", "evidence": "Low-rise storefront architecture distinguishes the historic commercial core." },
+              { "signal_type": "lived_behavior", "evidence": "People walking and gathering show actual use of the public realm." },
+              { "signal_type": "season_or_light", "evidence": "Snow and winter clothing establish a specific Front Range season." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "This is the stronger lived-city candidate, but identifiable people without documented releases make it explicitly unselectable.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/florida/tampa",
+      "target_geography": "Tampa, Florida",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "tampa-hillsborough-river-sonnysideup",
+      "candidates": [
+        {
+          "candidate_id": "tampa-hillsborough-river-sonnysideup",
+          "repository_asset_id": "File:Tampa Skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Tampa, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Tampa_Skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Sonny SideUp",
+          "displayed_caption": "Tampa skyline across the Hillsborough River",
+          "license_name": "Creative Commons Attribution 2.0 Generic",
+          "license_url": "https://creativecommons.org/licenses/by/2.0/",
+          "required_attribution": "Tampa Skyline — Sonny SideUp — CC BY 2.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3761, "height": 2508 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must cover architecture, trademarks, and source record."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The file title, caption, and categories identify Tampa and the Hillsborough River.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "The Hillsborough River and subtropical vegetation establish Tampa's waterfront ecology." },
+              { "signal_type": "regional_architecture", "evidence": "The downtown skyline provides the city anchor." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "The flat river edge and downtown concentration show Tampa's urban form." },
+              { "signal_type": "season_or_light", "evidence": "Bright humid-weather light supports the Gulf Coast setting." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected for exact-city river context, adequate crop dimensions, and four distinct signals; it is stronger than the lower-resolution bridge alternate.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "tampa-platt-bridge-szelistowski",
+          "repository_asset_id": "File:Downtown Tampa Skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Downtown Tampa viewed from the West Platt Street bridge, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Downtown_Tampa_Skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Mark Szelistowski",
+          "displayed_caption": "Downtown Tampa skyline from the West Platt Street bridge",
+          "license_name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+          "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+          "required_attribution": "Downtown Tampa Skyline — Mark Szelistowski — CC BY-SA 3.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 640, "height": 427 },
+          "release_status": "not_applicable",
+          "risk_notes": ["The file is far below the hero-resolution floor; no identifiable person or single distinctive private property is central."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The source caption names downtown Tampa and the West Platt Street bridge viewpoint.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Downtown high-rises identify Tampa's core." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The bridge and river edge give a specific public-infrastructure context." },
+              { "signal_type": "season_or_light", "evidence": "Subtropical daylight reinforces Gulf Coast conditions." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "Exact but unusably small for a modern responsive hero; retained only as a documented alternate.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/florida/orlando",
+      "target_geography": "Orlando, Florida",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "orlando-lake-eola-rivera",
+      "candidates": [
+        {
+          "candidate_id": "orlando-lake-eola-rivera",
+          "repository_asset_id": "File:Lake Eola and Orlando skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Lake Eola, Orlando, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Lake_Eola_and_Orlando_skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Michael Rivera",
+          "displayed_caption": "Lake Eola and the Orlando skyline",
+          "license_name": "Creative Commons Attribution-ShareAlike 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "required_attribution": "Lake Eola and Orlando skyline — Michael Rivera — CC BY-SA 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 5184, "height": 3456 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must cover the memorial fountain, architecture, and trademarks."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The source title and caption identify Lake Eola and the Orlando skyline.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Lake Eola and subtropical greenery distinguish central Orlando." },
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "The park and memorial fountain provide a civic anchor." },
+              { "signal_type": "regional_architecture", "evidence": "The compact downtown skyline establishes the city core." },
+              { "signal_type": "season_or_light", "evidence": "Green December conditions and humid light show Central Florida seasonality." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected for high-resolution exact-city provenance and a strong mix of lake ecology, public space, civic iconography, and skyline context.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "orlando-lake-eola-prieur",
+          "repository_asset_id": "File:High-rises in Orlando from Lake Eola Park (May 2023).jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Lake Eola Park, Orlando, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:High-rises_in_Orlando_from_Lake_Eola_Park_(May_2023).jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Benoît Prieur",
+          "displayed_caption": "High-rises in Orlando from Lake Eola Park, May 2023",
+          "license_name": "CC0 1.0 Universal Public Domain Dedication",
+          "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "required_attribution": "No attribution legally required; credit Benoît Prieur and Wikimedia Commons as a voluntary provenance practice.",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 3764, "height": 3008 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must verify the CC0 declaration and treatment of civic artwork."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The repository caption identifies Orlando high-rises from Lake Eola Park in May 2023.",
+            "visible_signals": [
+              { "signal_type": "civic_cultural_infrastructure", "evidence": "Lake Eola Park and its fountain establish a central civic space." },
+              { "signal_type": "regional_architecture", "evidence": "Downtown high-rises define Orlando's compact core." },
+              { "signal_type": "terrain_or_ecology", "evidence": "Lake water and subtropical park vegetation ground the city environmentally." },
+              { "signal_type": "season_or_light", "evidence": "May greenery and bright humid light establish season." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "A strong rights-friendly alternate; the selected image offers a broader water-to-skyline composition while retaining the same civic context.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    },
+    {
+      "route": "/locations/florida/miami",
+      "target_geography": "Miami, Florida",
+      "geography_kind": "city",
+      "selection_outcome": "candidate_selected",
+      "selected_candidate_id": "miami-biscayne-bay-hughes",
+      "candidates": [
+        {
+          "candidate_id": "miami-biscayne-bay-hughes",
+          "repository_asset_id": "File:Miami - City Skyline from Biscayne Bay 1.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Miami skyline from Biscayne Bay, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Miami_-_City_Skyline_from_Biscayne_Bay_1.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "P. Hughes",
+          "displayed_caption": "Miami city skyline from Biscayne Bay",
+          "license_name": "Creative Commons Attribution 4.0 International",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "required_attribution": "Miami — City Skyline from Biscayne Bay — P. Hughes — CC BY 4.0 — via Wikimedia Commons",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 4288, "height": 2848 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must cover architecture, trademarks, and water-based viewpoint context."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "selected",
+          "locality_evidence": {
+            "geography_claim": "The source title and caption identify Miami and the Biscayne Bay viewpoint.",
+            "visible_signals": [
+              { "signal_type": "terrain_or_ecology", "evidence": "Biscayne Bay establishes Miami's coastal geography." },
+              { "signal_type": "regional_architecture", "evidence": "Dense waterfront high-rises identify Miami's urban core." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "The continuous waterfront tower wall shows coastal density and development form." },
+              { "signal_type": "season_or_light", "evidence": "Bright tropical winter light supplies South Florida atmosphere." }
+            ],
+            "signal_count": 4
+          },
+          "selection_rationale": "Selected for exact-city and bay provenance, high-resolution crop safety, and four coherent local signals beyond an unsupported skyline label.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        },
+        {
+          "candidate_id": "miami-skyline-wilfredor",
+          "repository_asset_id": "File:Miami, Florida, Skyline.jpg",
+          "asset_type": "photograph",
+          "source_tier": "exact_geography",
+          "claimed_geography": "Miami, Florida",
+          "asset_page_url": "https://commons.wikimedia.org/wiki/File:Miami,_Florida,_Skyline.jpg",
+          "source_repository": "Wikimedia Commons",
+          "creator_or_agency": "Wilfredor",
+          "displayed_caption": "Miami, Florida skyline",
+          "license_name": "CC0 1.0 Universal Public Domain Dedication",
+          "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "required_attribution": "No attribution legally required; credit Wilfredor and Wikimedia Commons as a voluntary provenance practice.",
+          "source_accessed_at": "2026-07-21",
+          "source_dimensions": { "width": 7413, "height": 4703 },
+          "release_status": "not_applicable",
+          "risk_notes": ["No identifiable person or single distinctive private property is the central subject; final review must verify the CC0 declaration and visible architecture or trademarks."],
+          "selection_eligibility": "eligible_for_candidate_selection",
+          "candidate_disposition": "alternate",
+          "locality_evidence": {
+            "geography_claim": "The individual asset title, caption, and categories identify Miami, Florida.",
+            "visible_signals": [
+              { "signal_type": "regional_architecture", "evidence": "Modern high-rise construction establishes Miami's urban profile." },
+              { "signal_type": "street_or_neighborhood_form", "evidence": "Dense vertical development shows the city's coastal-core form." },
+              { "signal_type": "season_or_light", "evidence": "Tropical haze and bright light reinforce South Florida conditions." }
+            ],
+            "signal_count": 3
+          },
+          "selection_rationale": "A technically excellent alternate with unusually simple CC0 terms, but it supplies less environmental and civic context than the Biscayne Bay candidate.",
+          "acquisition_status": "not_acquired",
+          "rights_review_status": "not_started",
+          "publishing_status": "prohibited"
+        }
+      ]
+    }
+  ],
   "entries": [
     {
       "route": "/locations/texas",
