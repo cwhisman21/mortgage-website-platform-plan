@@ -23,6 +23,17 @@ test("contains every operational section", () => {
   requiredSections.forEach((section) => assert.ok(playbook.includes(section), section));
 });
 
+test("makes the assigning-editor and producer signoffs copyable and auditable", () => {
+  assert.match(
+    playbook,
+    /intake_accepted_signoff:\s+role: assigning_editor\s+identity: <user reference>\s+decision: intake_accepted\s+timestamp: <ISO 8601 timestamp>\s+notes: <decision notes>/,
+  );
+  assert.match(
+    playbook,
+    /production_package_complete_signoff:\s+role: image_producer\s+identity: <user reference>\s+decision: production_package_complete\s+timestamp: <ISO 8601 timestamp>\s+notes: <decision notes>/,
+  );
+});
+
 test("puts the locality decision ladder in the approved order", () => {
   const ladder = [
     "Exact geography",

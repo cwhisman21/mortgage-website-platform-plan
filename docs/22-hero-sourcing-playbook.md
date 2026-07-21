@@ -60,7 +60,7 @@ Operator checklist:
 - [ ] Confirm static media is the default. Record a written editorial reason before considering motion.
 - [ ] Keep the CMS hero in `draft` with an unselected, publish-prohibited asset slot.
 
-Exit: the assigning editor signs “Intake accepted.”
+Exit: the assigning editor records the structured `intake_accepted_signoff` shown in the intake template. The record is incomplete without the editor's identity, explicit decision, timestamp, and notes.
 
 ### 2. Research the place or subject before searching for imagery
 
@@ -172,7 +172,7 @@ Motion is an exception for a small number of flagship surfaces. When approved:
 - [ ] Set `reduced_motion_behavior: "show_poster"`; when `prefers-reduced-motion: reduce` is active, do not start animation and show the poster.
 - [ ] Test poster display before load, on failure, on data-saving paths, and after motion is disabled. Motion may not delay the usable hero or destabilize layout.
 
-Exit: accessibility and visual QA signs “Delivery approved.”
+Exit: after every required still, motion, poster, crop, export, checksum, and case-file item is complete, the image producer records the structured `production_package_complete_signoff` shown in the crop/export template. Accessibility and visual QA then signs “Delivery approved.”
 
 ### 8. Move the CMS record through review states
 
@@ -226,7 +226,12 @@ route: <exact public route>
 page_type: <schema enum>
 hero_variant: <assigned schema enum>
 protected_route_check: passed
-assigning_editor: <user reference>
+intake_accepted_signoff:
+  role: assigning_editor
+  identity: <user reference>
+  decision: intake_accepted
+  timestamp: <ISO 8601 timestamp>
+  notes: <decision notes>
 target_geography: <city, state, or subject>
 geography_evidence:
   - <authoritative direct URL>
@@ -333,6 +338,12 @@ upscale_check: passed
 motion_asset: <asset ID or not used>
 poster_asset: <asset ID or not used>
 reduced_motion_behavior: <show_poster or not used>
+production_package_complete_signoff:
+  role: image_producer
+  identity: <user reference>
+  decision: production_package_complete
+  timestamp: <ISO 8601 timestamp>
+  notes: <decision notes>
 editorial_compliance_signoff: <user, decision, timestamp, notes>
 accessibility_visual_qa_signoff: <user, decision, timestamp, notes>
 publisher_signoff: <user, decision, timestamp, notes>
