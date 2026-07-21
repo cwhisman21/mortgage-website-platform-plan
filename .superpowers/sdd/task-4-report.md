@@ -1,73 +1,39 @@
-# Task 4 Report: Pilot Locality Hero Candidates
+# Task 4 Report: Audited Locality Hero Candidate Pass
 
-## Outcome
+## Corrected outcome
 
-Completed a governed research candidate pool for all four prototype states and twelve prototype cities.
+The 32-source corpus is an audited failed free-stock pass, not a selected hero set.
 
-- 16 locality pools
-- 32 unique photographic candidates
-- 10 city research selections
-- 6 explicit unresolved outcomes: Texas, California, Colorado, Florida, Irvine, and Boulder
-- 0 acquired assets
-- 0 rights-approved assets
-- 0 publishable assets
-- 0 generated substitutes
+- 16 locality pools, all unresolved and publication-prohibited
+- 10 candidates nominated for rights review only
+- 10 candidates explicitly ineligible on editorial-locality grounds
+- 0 selected, acquired, rights-complete, approved, or publishable assets
+- 0 newly sourced or generated assets in this correction
 
-Each candidate points to an individual Wikimedia Commons asset page and an official Creative Commons license page. Metadata records creator/agency, caption, dimensions, access date, required attribution, release position, risk notes, visible locality evidence, disposition, and nonpublication status.
+Every route now proceeds to a commissioned neighborhood-scale lived-behavior photograph or approved tier-3 generation under the existing playbook.
 
-## Implementation
+## Fixes
 
-- Advanced `hero-asset-manifest.json` to schema version 1.1.0 and added `locality_candidate_pools` without altering any of the 29 existing hero entries.
-- Extended `hero-asset-manifest.schema.json` with candidate-pool, candidate, locality-signal, release-risk, disposition, and acquisition-state contracts.
-- Preserved `hero-image.schema.json` publication gates unchanged.
-- Extended the repository's dependency-free schema test helper to support JSON Schema `integer`, `contains`, `minContains`, and `maxContains` semantics required by the stronger manifest contract.
-- Added a dependency-free candidate suite covering route completeness, unique source pages, provenance, signal thresholds, selected/unresolved outcomes, release blocking, protected routes, status boundaries, dimensions, and unchanged publication gates.
-- Added the 16-route human review plus set-level repetition and stereotype audit in `docs/24-hero-locality-candidate-review.md`.
+- Reclassified the ten former selections as nominations and replaced `selected_candidate_id` with `nominated_candidate_id`.
+- Split `rights_eligibility` from `editorial_locality_eligibility` while preserving all source, license, and release facts.
+- Marked both Texas, both California, both Colorado state, Everglades, both Irvine, and Boulder Chautauqua candidates editorially ineligible with reasons.
+- Renamed `required_attribution` to `attribution_label`; the final rights record must add source/license links and crop/change notices.
+- Added structural visual motifs and a failed manual set audit: skyline 9/maximum 4, water 7/maximum 3, lived behavior 0/minimum 4.
+- Added Austin's unproven required 4:5 mobile-crop risk.
+- Updated the 16-row review so every route is unresolved and routed to commissioning or approved tier-3 generation.
 
-## TDD and verification evidence
+Schema v1.2.0 models the playbook order: research candidate → nominated → acquired with complete rights → selected → reviewed/approved. A future selection requires acquisition and complete rights; a failed manual audit, missing lived behavior, or repetition-threshold failure prevents selection.
 
-Red phase:
+## TDD and verification
 
-- `node --test mock-data/hero-locality-candidates.test.mjs`
-- Result before implementation: 9 tests, 6 passed, 3 failed because pools and schema v1.1.0 did not yet exist.
+- RED: `node --test mock-data/hero-locality-candidates.test.mjs` — 3 passed, 8 failed for the expected missing review behavior.
+- GREEN: the same suite — 11/11 passed.
+- Affected compatibility suite — 33/33 passed.
+- Dependency-free repository suite, excluding the independently stale generated-route freshness test — 516/516 passed.
+- Parsed preservation audit: all 29 hero entries unchanged; all candidate source/license/release facts unchanged; 16 unresolved, 10 nominated, 0 selected, 10 editorially ineligible; 16 documentation rows.
 
-Green phase:
+Known unrelated repository conditions remain: four CMS TypeScript tests require absent `vitest`, and checked-in generated HTML is stale even though its generator does not read this manifest.
 
-- `node --test mock-data/hero-locality-candidates.test.mjs`
-- Result: 9/9 passed.
+## Remaining concern
 
-Affected compatibility suite:
-
-- `node --test mock-data/hero-asset-manifest.test.mjs schemas/hero-image.schema.test.mjs docs/hero-sourcing-playbook.test.mjs mock-data/hero-locality-candidates.test.mjs`
-- Result: 31/31 passed.
-
-Dependency-free repository suite:
-
-- All `*.test.mjs` except the independently stale `mock-data/generate-static-routes.test.mjs`
-- Result: 514/514 passed.
-
-Raw all-files run:
-
-- `node --test`
-- Result: 517/522 passed.
-- Four unrelated CMS TypeScript tests could not load because `vitest` is not installed in this worktree.
-- The checked-in static-route freshness test reports the repository's generated HTML as stale. It does not read the hero candidate manifest, and it also fails when isolated. No generated route files were changed or regenerated for this task.
-
-Additional checks:
-
-- JSON-schema wrapper validation passed with the new candidate pools.
-- `git diff --check` passed.
-- Parsed comparison against `HEAD` confirmed all 29 original manifest `entries` are unchanged.
-- The review contains exactly 16 route rows.
-
-## Unresolved decisions and production risk
-
-- State sourcing remains unresolved because the verifiable choices are narrow scenery, not balanced statewide housing/lived context.
-- Irvine remains unresolved because exact-city park views are not visually distinctive enough without captions.
-- Boulder remains unresolved because the landscape option lacks lived context and the stronger Pearl Street option contains identifiable people without release evidence.
-- Nine of ten selected city candidates include a skyline; seven use water foregrounds; none contains a selected `lived_behavior` signal. The set is too repetitive for production approval.
-- Selected candidates are research preferences only. Counsel and production must still verify license version, attribution, creator identity, releases, architecture/artwork/trademark treatment, source stability, full-resolution content, and crop suitability.
-
-## Self-review
-
-No weakening of publication or review gates was introduced. Candidates with unresolved person/property release concerns are blocked and cannot be selected. Protected routes and page families remain excluded. The most important concern is the available pool's systematic skyline/landscape bias; the documentation treats that as a remediation requirement rather than a cosmetic caveat.
+The free-stock corpus does not depict release-cleared neighborhood-scale lived behavior and must not ship as the locality hero system. Rights-blocked sources remain blocked, editorially ineligible sources cannot be nominated or selected, and all publishing gates remain intact.

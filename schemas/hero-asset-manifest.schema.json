@@ -8,6 +8,7 @@
     "$schema",
     "schema_version",
     "status",
+    "locality_set_audit",
     "locality_candidate_pools",
     "entries"
   ],
@@ -16,8 +17,9 @@
       "type": "string",
       "const": "../schemas/hero-asset-manifest.schema.json"
     },
-    "schema_version": { "type": "string", "const": "1.1.0" },
+    "schema_version": { "type": "string", "const": "1.2.0" },
     "status": { "type": "string", "const": "draft" },
+    "locality_set_audit": { "$ref": "#/$defs/locality_set_audit" },
     "locality_candidate_pools": {
       "type": "array",
       "minItems": 1,
@@ -29,7 +31,78 @@
       "items": { "$ref": "#/$defs/manifest_entry" }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "locality_set_audit": {
+            "properties": { "manual_editorial_result": { "const": "failed" } },
+            "required": ["manual_editorial_result"]
+          }
+        },
+        "required": ["locality_set_audit"]
+      },
+      "then": {
+        "properties": {
+          "locality_candidate_pools": {
+            "items": {
+              "properties": { "selection_outcome": { "const": "unresolved" } },
+              "required": ["selection_outcome"]
+            }
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
+    "selection_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_skyline_count",
+        "maximum_water_count",
+        "minimum_lived_behavior_count"
+      ],
+      "properties": {
+        "maximum_skyline_count": { "type": "integer", "minimum": 0 },
+        "maximum_water_count": { "type": "integer", "minimum": 0 },
+        "minimum_lived_behavior_count": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "locality_set_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "review_method",
+        "manual_editorial_result",
+        "selection_thresholds",
+        "observed_nominated_skyline_count",
+        "observed_nominated_water_count",
+        "observed_nominated_lived_behavior_count",
+        "failure_reasons"
+      ],
+      "properties": {
+        "scope": { "type": "string", "const": "prototype_locality_candidate_set" },
+        "review_method": { "type": "string", "const": "manual_editorial_audit" },
+        "manual_editorial_result": {
+          "type": "string",
+          "enum": ["passed", "failed"]
+        },
+        "selection_thresholds": { "$ref": "#/$defs/selection_thresholds" },
+        "observed_nominated_skyline_count": { "type": "integer", "minimum": 0 },
+        "observed_nominated_water_count": { "type": "integer", "minimum": 0 },
+        "observed_nominated_lived_behavior_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failure_reasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "visible_locality_signal": {
       "type": "object",
       "additionalProperties": false,
@@ -48,6 +121,20 @@
         },
         "evidence": { "type": "string", "minLength": 1 }
       }
+    },
+    "visual_motif": {
+      "type": "string",
+      "enum": [
+        "skyline",
+        "water",
+        "landscape",
+        "park",
+        "neighborhood",
+        "housing",
+        "civic_infrastructure",
+        "landmark",
+        "lived_behavior"
+      ]
     },
     "locality_evidence": {
       "type": "object",
@@ -76,6 +163,13 @@
     "locality_asset_candidate": {
       "type": "object",
       "additionalProperties": false,
+      "x-lifecycle-order": [
+        "research_candidate",
+        "nominated",
+        "acquired_rights_complete",
+        "selected",
+        "reviewed_approved"
+      ],
       "required": [
         "candidate_id",
         "repository_asset_id",
@@ -88,17 +182,21 @@
         "displayed_caption",
         "license_name",
         "license_url",
-        "required_attribution",
+        "attribution_label",
         "source_accessed_at",
         "source_dimensions",
         "release_status",
         "risk_notes",
-        "selection_eligibility",
+        "rights_eligibility",
+        "editorial_locality_eligibility",
         "candidate_disposition",
+        "lifecycle_stage",
+        "visual_motifs",
         "locality_evidence",
         "selection_rationale",
         "acquisition_status",
         "rights_review_status",
+        "editorial_review_status",
         "publishing_status"
       ],
       "properties": {
@@ -116,7 +214,7 @@
         "displayed_caption": { "type": "string", "minLength": 1 },
         "license_name": { "type": "string", "minLength": 1 },
         "license_url": { "type": "string", "format": "uri", "pattern": "^https://" },
-        "required_attribution": { "type": "string", "minLength": 1 },
+        "attribution_label": { "type": "string", "minLength": 1 },
         "source_accessed_at": { "type": "string", "format": "date" },
         "source_dimensions": { "$ref": "#/$defs/source_dimensions" },
         "release_status": {
@@ -128,21 +226,128 @@
           "minItems": 1,
           "items": { "type": "string", "minLength": 1 }
         },
-        "selection_eligibility": {
+        "rights_eligibility": {
           "type": "string",
-          "enum": ["eligible_for_candidate_selection", "blocked_pending_clearance"]
+          "enum": ["eligible_for_rights_review", "blocked_pending_clearance"]
+        },
+        "editorial_locality_eligibility": {
+          "type": "string",
+          "enum": ["eligible_for_nomination", "ineligible"]
+        },
+        "editorial_locality_ineligibility_reasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
         },
         "candidate_disposition": {
           "type": "string",
-          "enum": ["selected", "alternate", "blocked"]
+          "enum": ["research_candidate", "nominated", "selected", "blocked"]
+        },
+        "lifecycle_stage": {
+          "type": "string",
+          "enum": [
+            "research_candidate",
+            "nominated",
+            "acquired_rights_complete",
+            "selected",
+            "reviewed_approved"
+          ]
+        },
+        "visual_motifs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/visual_motif" }
         },
         "locality_evidence": { "$ref": "#/$defs/locality_evidence" },
         "selection_rationale": { "type": "string", "minLength": 1 },
-        "acquisition_status": { "type": "string", "const": "not_acquired" },
-        "rights_review_status": { "type": "string", "const": "not_started" },
-        "publishing_status": { "type": "string", "const": "prohibited" }
+        "acquisition_status": {
+          "type": "string",
+          "enum": ["not_acquired", "acquired"]
+        },
+        "rights_review_status": {
+          "type": "string",
+          "enum": ["not_started", "in_progress", "complete"]
+        },
+        "editorial_review_status": {
+          "type": "string",
+          "enum": ["not_started", "in_progress", "approved"]
+        },
+        "publishing_status": {
+          "type": "string",
+          "enum": ["prohibited", "authorized"]
+        }
       },
       "allOf": [
+        {
+          "if": {
+            "properties": { "lifecycle_stage": { "const": "research_candidate" } },
+            "required": ["lifecycle_stage"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "enum": ["research_candidate", "blocked"] },
+              "acquisition_status": { "const": "not_acquired" },
+              "publishing_status": { "const": "prohibited" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "lifecycle_stage": { "const": "nominated" } },
+            "required": ["lifecycle_stage"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "const": "nominated" },
+              "publishing_status": { "const": "prohibited" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle_stage": { "const": "acquired_rights_complete" }
+            },
+            "required": ["lifecycle_stage"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "const": "nominated" },
+              "acquisition_status": { "const": "acquired" },
+              "rights_review_status": { "const": "complete" },
+              "publishing_status": { "const": "prohibited" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "lifecycle_stage": { "const": "selected" } },
+            "required": ["lifecycle_stage"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "const": "selected" },
+              "acquisition_status": { "const": "acquired" },
+              "rights_review_status": { "const": "complete" },
+              "publishing_status": { "const": "prohibited" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "lifecycle_stage": { "const": "reviewed_approved" } },
+            "required": ["lifecycle_stage"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "const": "selected" },
+              "acquisition_status": { "const": "acquired" },
+              "rights_review_status": { "const": "complete" },
+              "editorial_review_status": { "const": "approved" }
+            }
+          }
+        },
         {
           "if": {
             "properties": {
@@ -152,9 +357,28 @@
           },
           "then": {
             "properties": {
-              "selection_eligibility": { "const": "blocked_pending_clearance" },
-              "candidate_disposition": { "const": "blocked" }
+              "rights_eligibility": { "const": "blocked_pending_clearance" },
+              "candidate_disposition": { "const": "blocked" },
+              "publishing_status": { "const": "prohibited" }
             }
+          }
+        },
+        {
+          "if": {
+            "properties": { "editorial_locality_eligibility": { "const": "ineligible" } },
+            "required": ["editorial_locality_eligibility"]
+          },
+          "then": {
+            "required": ["editorial_locality_ineligibility_reasons"],
+            "properties": {
+              "candidate_disposition": {
+                "enum": ["research_candidate", "blocked"]
+              },
+              "publishing_status": { "const": "prohibited" }
+            }
+          },
+          "else": {
+            "not": { "required": ["editorial_locality_ineligibility_reasons"] }
           }
         },
         {
@@ -164,8 +388,26 @@
           },
           "then": {
             "properties": {
-              "selection_eligibility": { "const": "eligible_for_candidate_selection" },
-              "release_status": { "enum": ["not_applicable", "verified"] }
+              "rights_eligibility": { "const": "eligible_for_rights_review" },
+              "editorial_locality_eligibility": { "const": "eligible_for_nomination" },
+              "acquisition_status": { "const": "acquired" },
+              "rights_review_status": { "const": "complete" },
+              "publishing_status": { "const": "prohibited" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "publishing_status": { "const": "authorized" } },
+            "required": ["publishing_status"]
+          },
+          "then": {
+            "properties": {
+              "candidate_disposition": { "const": "selected" },
+              "lifecycle_stage": { "const": "reviewed_approved" },
+              "acquisition_status": { "const": "acquired" },
+              "rights_review_status": { "const": "complete" },
+              "editorial_review_status": { "const": "approved" }
             }
           }
         }
@@ -179,6 +421,8 @@
         "target_geography",
         "geography_kind",
         "selection_outcome",
+        "publishing_status",
+        "next_sourcing_step",
         "candidates"
       ],
       "properties": {
@@ -190,7 +434,13 @@
           "enum": ["candidate_selected", "unresolved"]
         },
         "selected_candidate_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "nominated_candidate_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
         "unresolved_reason": { "type": "string", "minLength": 1 },
+        "publishing_status": { "type": "string", "const": "prohibited" },
+        "next_sourcing_step": {
+          "type": "string",
+          "const": "commission_lived_behavior_or_approved_tier_3_generation"
+        },
         "candidates": {
           "type": "array",
           "minItems": 2,
@@ -234,6 +484,21 @@
                     "required": ["candidate_disposition"]
                   }
                 }
+              }
+            }
+          }
+        },
+        {
+          "if": { "required": ["nominated_candidate_id"] },
+          "then": {
+            "properties": {
+              "candidates": {
+                "contains": {
+                  "properties": { "candidate_disposition": { "const": "nominated" } },
+                  "required": ["candidate_disposition"]
+                },
+                "minContains": 1,
+                "maxContains": 1
               }
             }
           }

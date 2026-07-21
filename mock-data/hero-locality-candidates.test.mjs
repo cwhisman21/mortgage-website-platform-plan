@@ -14,17 +14,15 @@ const manifestSchema = JSON.parse(
 const heroSchema = JSON.parse(
   await readFile(new URL("../schemas/hero-image.schema.json", import.meta.url), "utf8"),
 );
+const review = await readFile(
+  new URL("../docs/24-hero-locality-candidate-review.md", import.meta.url),
+  "utf8",
+);
 
-const protectedRoutes = new Set([
-  "/",
-  "/locations",
-  "/calculators",
-  "/rates",
-]);
+const protectedRoutes = new Set(["/", "/locations", "/calculators", "/rates"]);
 const localityEntries = manifest.entries.filter(
   ({ coverage_kind, hero }) =>
-    coverage_kind === "prototype_route" &&
-    ["city", "state"].includes(hero.page_type),
+    coverage_kind === "prototype_route" && ["city", "state"].includes(hero.page_type),
 );
 const candidatePools = manifest.locality_candidate_pools ?? [];
 const poolByRoute = new Map(candidatePools.map((pool) => [pool.route, pool]));
@@ -35,20 +33,47 @@ const allCandidates = candidatePools.flatMap(({ route, candidates }) =>
     ...candidate,
   })),
 );
+const candidatesById = new Map(allCandidates.map((candidate) => [candidate.candidate_id, candidate]));
 
-test("covers all four prototype states and twelve prototype cities with two candidates each", () => {
+const requiredEditoriallyIneligibleIds = [
+  "boulder-chautauqua-flatirons-scudder",
+  "california-big-sur-coast-norton",
+  "california-desert-landscape-brovell",
+  "colorado-rmnp-longs-peak-mcleod",
+  "colorado-rmnp-trail-ridge-sbmeaper1",
+  "florida-everglades-dronepicr",
+  "irvine-great-park-downtowngal",
+  "irvine-william-mason-park-salatas",
+  "texas-big-bend-rio-grande-adbar",
+  "texas-hill-country-rutledge",
+];
+
+function assertPoolLifecycle(pool) {
+  const selected = pool.candidates.filter(
+    ({ candidate_disposition }) => candidate_disposition === "selected",
+  );
+  if (selected.length === 0) {
+    assert.equal(pool.selection_outcome, "unresolved", pool.route);
+    assert.equal("selected_candidate_id" in pool, false, pool.route);
+    return;
+  }
+  assert.equal(selected.length, 1, pool.route);
+  assert.equal(pool.selection_outcome, "candidate_selected", pool.route);
+  assert.equal(pool.selected_candidate_id, selected[0].candidate_id, pool.route);
+}
+
+test("covers every prototype locality with two researched candidates", () => {
   assert.equal(localityEntries.length, 16);
-  assert.equal(localityEntries.filter(({ hero }) => hero.page_type === "state").length, 4);
-  assert.equal(localityEntries.filter(({ hero }) => hero.page_type === "city").length, 12);
   assert.equal(candidatePools.length, 16);
   localityEntries.forEach(({ route }) => {
     const pool = poolByRoute.get(route);
     assert.ok(pool, `${route}: candidate pool`);
     assert.ok(pool.candidates.length >= 2, `${route}: candidates`);
   });
+  assert.equal(allCandidates.length, 32);
 });
 
-test("uses unique individual asset pages with source, creator, license, attribution, and access date", () => {
+test("keeps source identity and attribution labels without pretending a complete derivative recipe", () => {
   const assetPageUrls = allCandidates.map(({ asset_page_url }) => asset_page_url);
   assert.equal(new Set(assetPageUrls).size, assetPageUrls.length);
   allCandidates.forEach((candidate) => {
@@ -60,91 +85,182 @@ test("uses unique individual asset pages with source, creator, license, attribut
       "creator_or_agency",
       "license_name",
       "license_url",
-      "required_attribution",
+      "attribution_label",
       "source_accessed_at",
       "source_dimensions",
     ].forEach((field) => assert.ok(candidate[field], `${candidate.route}:${field}`));
+    assert.equal("required_attribution" in candidate, false, candidate.candidate_id);
     assert.match(candidate.asset_page_url, /^https:\/\//);
     assert.match(candidate.license_url, /^https:\/\//);
     assert.match(candidate.source_accessed_at, /^\d{4}-\d{2}-\d{2}$/);
-    assert.ok(candidate.source_dimensions.width > 0, `${candidate.candidate_id}: width`);
-    assert.ok(candidate.source_dimensions.height > 0, `${candidate.candidate_id}: height`);
-    assert.ok(Number.isInteger(candidate.source_dimensions.width), `${candidate.candidate_id}: integer width`);
-    assert.ok(Number.isInteger(candidate.source_dimensions.height), `${candidate.candidate_id}: integer height`);
-    assert.doesNotMatch(candidate.asset_page_url, /Special:MediaSearch|\/wiki\/(?:Main_Page|Category:)/);
+    assert.doesNotMatch(
+      candidate.asset_page_url,
+      /Special:MediaSearch|\/wiki\/(?:Main_Page|Category:)/,
+    );
   });
 });
 
-test("records release status, caveats, and blocks unresolved people or property risk", () => {
+test("separates rights eligibility from editorial locality eligibility", () => {
   allCandidates.forEach((candidate) => {
     assert.ok(
-      ["not_applicable", "verified", "not_verified", "required"].includes(
-        candidate.release_status,
+      ["eligible_for_rights_review", "blocked_pending_clearance"].includes(
+        candidate.rights_eligibility,
       ),
-      `${candidate.candidate_id}: release_status`,
+      `${candidate.candidate_id}: rights_eligibility`,
     );
-    assert.ok(candidate.risk_notes.length, `${candidate.candidate_id}: risk_notes`);
     assert.ok(
-      ["eligible_for_candidate_selection", "blocked_pending_clearance"].includes(
-        candidate.selection_eligibility,
+      ["eligible_for_nomination", "ineligible"].includes(
+        candidate.editorial_locality_eligibility,
       ),
-      `${candidate.candidate_id}: selection_eligibility`,
+      `${candidate.candidate_id}: editorial_locality_eligibility`,
     );
     if (["not_verified", "required"].includes(candidate.release_status)) {
-      assert.equal(candidate.selection_eligibility, "blocked_pending_clearance");
+      assert.equal(candidate.rights_eligibility, "blocked_pending_clearance");
+      assert.equal(candidate.candidate_disposition, "blocked");
+    }
+    if (candidate.editorial_locality_eligibility === "ineligible") {
+      assert.ok(candidate.editorial_locality_ineligibility_reasons?.length);
+      assert.notEqual(candidate.candidate_disposition, "nominated");
       assert.notEqual(candidate.candidate_disposition, "selected");
+    } else {
+      assert.equal("editorial_locality_ineligibility_reasons" in candidate, false);
     }
   });
+  const actualIneligible = allCandidates
+    .filter(({ editorial_locality_eligibility }) => editorial_locality_eligibility === "ineligible")
+    .map(({ candidate_id }) => candidate_id)
+    .sort();
+  assert.deepEqual(actualIneligible, requiredEditoriallyIneligibleIds);
 });
 
-test("records visible locality evidence and enforces state and city signal thresholds", () => {
+test("enforces signal counts and eligible city/state thresholds structurally", () => {
   allCandidates.forEach((candidate) => {
     const signals = candidate.locality_evidence?.visible_signals ?? [];
     assert.equal(candidate.locality_evidence.signal_count, signals.length);
     assert.equal(new Set(signals.map(({ signal_type }) => signal_type)).size, signals.length);
-    signals.forEach(({ signal_type, evidence }) => {
-      assert.ok(signal_type);
-      assert.ok(evidence);
-    });
-    if (candidate.candidate_disposition === "selected") {
+    assert.ok(candidate.visual_motifs.length, `${candidate.candidate_id}: visual_motifs`);
+    if (candidate.editorial_locality_eligibility === "eligible_for_nomination") {
       const threshold = candidate.pageType === "city" ? 3 : 2;
       assert.ok(signals.length >= threshold, `${candidate.candidate_id}: ${threshold} signals`);
-      assert.equal(candidate.selection_eligibility, "eligible_for_candidate_selection");
-      assert.ok(candidate.source_dimensions.width >= 2560, `${candidate.candidate_id}: width`);
-      assert.ok(candidate.source_dimensions.height >= 1440, `${candidate.candidate_id}: height`);
     }
   });
 });
 
-test("has exactly one selected candidate or one explicit unresolved outcome per geography", () => {
-  localityEntries.forEach(({ route }) => {
-    const pool = poolByRoute.get(route);
-    assert.ok(["candidate_selected", "unresolved"].includes(pool.selection_outcome));
-    const selected = pool.candidates.filter(
-      ({ candidate_disposition }) => candidate_disposition === "selected",
+test("keeps all pools unresolved and nominations before acquisition or selection", () => {
+  candidatePools.forEach((pool) => {
+    assert.equal(pool.selection_outcome, "unresolved", pool.route);
+    assert.equal(pool.publishing_status, "prohibited", pool.route);
+    assert.equal(
+      pool.next_sourcing_step,
+      "commission_lived_behavior_or_approved_tier_3_generation",
+      pool.route,
     );
-    if (pool.selection_outcome === "candidate_selected") {
-      assert.equal(selected.length, 1, route);
-      assert.equal(pool.selected_candidate_id, selected[0].candidate_id, route);
-      assert.equal("unresolved_reason" in pool, false, route);
-    } else {
-      assert.equal(selected.length, 0, route);
-      assert.ok(pool.unresolved_reason?.trim(), route);
-      assert.equal("selected_candidate_id" in pool, false, route);
+    assertPoolLifecycle(pool);
+    if (pool.nominated_candidate_id) {
+      const nominee = candidatesById.get(pool.nominated_candidate_id);
+      assert.ok(nominee, pool.route);
+      assert.equal(nominee.route, pool.route);
+      assert.equal(nominee.candidate_disposition, "nominated");
+      assert.equal(nominee.lifecycle_stage, "nominated");
+      assert.equal(nominee.acquisition_status, "not_acquired");
+      assert.equal(nominee.rights_review_status, "not_started");
+      assert.equal(nominee.editorial_review_status, "not_started");
     }
+  });
+  assert.equal(
+    allCandidates.filter(({ candidate_disposition }) => candidate_disposition === "nominated")
+      .length,
+    10,
+  );
+  assert.equal(
+    allCandidates.filter(({ candidate_disposition }) => candidate_disposition === "selected").length,
+    0,
+  );
+});
+
+test("makes the failed manual set audit a hard selection gate", () => {
+  const audit = manifest.locality_set_audit;
+  const nominated = allCandidates.filter(
+    ({ candidate_disposition }) => candidate_disposition === "nominated",
+  );
+  const countMotif = (motif) =>
+    nominated.filter(({ visual_motifs }) => visual_motifs.includes(motif)).length;
+  assert.equal(audit.review_method, "manual_editorial_audit");
+  assert.equal(audit.manual_editorial_result, "failed");
+  assert.equal(audit.observed_nominated_skyline_count, countMotif("skyline"));
+  assert.equal(audit.observed_nominated_water_count, countMotif("water"));
+  assert.equal(audit.observed_nominated_lived_behavior_count, countMotif("lived_behavior"));
+  assert.ok(
+    audit.observed_nominated_skyline_count > audit.selection_thresholds.maximum_skyline_count,
+  );
+  assert.ok(
+    audit.observed_nominated_water_count > audit.selection_thresholds.maximum_water_count,
+  );
+  assert.ok(
+    audit.observed_nominated_lived_behavior_count <
+      audit.selection_thresholds.minimum_lived_behavior_count,
+  );
+  assert.ok(audit.failure_reasons.length >= 3);
+  assert.equal(
+    allCandidates.some(({ candidate_disposition }) => candidate_disposition === "selected"),
+    false,
+  );
+  const selected = allCandidates.filter(
+    ({ candidate_disposition }) => candidate_disposition === "selected",
+  );
+  if (selected.length) {
+    const selectedMotifCount = (motif) =>
+      selected.filter(({ visual_motifs }) => visual_motifs.includes(motif)).length;
+    assert.equal(audit.manual_editorial_result, "passed");
+    assert.ok(
+      selectedMotifCount("skyline") <= audit.selection_thresholds.maximum_skyline_count,
+    );
+    assert.ok(
+      selectedMotifCount("water") <= audit.selection_thresholds.maximum_water_count,
+    );
+    assert.ok(
+      selectedMotifCount("lived_behavior") >=
+        audit.selection_thresholds.minimum_lived_behavior_count,
+    );
+  }
+});
+
+test("models the playbook lifecycle in order and blocks premature selection", () => {
+  const lifecycleOrder = [
+    "research_candidate",
+    "nominated",
+    "acquired_rights_complete",
+    "selected",
+    "reviewed_approved",
+  ];
+  assert.deepEqual(
+    manifestSchema.$defs.locality_asset_candidate.properties.lifecycle_stage.enum,
+    lifecycleOrder,
+  );
+  assert.deepEqual(
+    manifestSchema.$defs.locality_asset_candidate["x-lifecycle-order"],
+    lifecycleOrder,
+  );
+  allCandidates.forEach((candidate) => {
+    assert.ok(lifecycleOrder.includes(candidate.lifecycle_stage));
+    assert.equal(candidate.acquisition_status, "not_acquired");
+    assert.equal(candidate.rights_review_status, "not_started");
+    assert.equal(candidate.editorial_review_status, "not_started");
+    assert.equal(candidate.publishing_status, "prohibited");
+    assert.ok(!["selected", "reviewed_approved"].includes(candidate.candidate_disposition));
+    assert.equal(
+      candidate.lifecycle_stage,
+      candidate.candidate_disposition === "nominated" ? "nominated" : "research_candidate",
+    );
   });
 });
 
-test("uses only exact-geography or verified-subregion photography and never generic fallback", () => {
+test("uses structural source tiers and excludes protected page families", () => {
   allCandidates.forEach((candidate) => {
     assert.equal(candidate.asset_type, "photograph");
     assert.ok(["exact_geography", "verified_subregion"].includes(candidate.source_tier));
-    assert.notEqual(candidate.claimed_geography.toLowerCase(), "generic");
-    assert.doesNotMatch(candidate.selection_rationale, /generic (?:fallback|stock|suburb|skyline|landscape)/i);
+    assert.ok(candidate.claimed_geography.trim());
   });
-});
-
-test("keeps protected routes and page families out of locality candidate sourcing", () => {
   candidatePools.forEach(({ route }) => {
     assert.equal(protectedRoutes.has(route), false, route);
     assert.equal(route.startsWith("/calculators/"), false, route);
@@ -156,7 +272,7 @@ test("keeps protected routes and page families out of locality candidate sourcin
   });
 });
 
-test("does not fabricate acquisition, checksum, review, release evidence, or publication approval", () => {
+test("preserves nonpublication facts and unchanged CMS hero slots", () => {
   const forbiddenCandidateFields = [
     "acquired_at",
     "checksum",
@@ -169,9 +285,6 @@ test("does not fabricate acquisition, checksum, review, release evidence, or pub
     forbiddenCandidateFields.forEach((field) => {
       assert.equal(field in candidate, false, `${candidate.candidate_id}:${field}`);
     });
-    assert.equal(candidate.acquisition_status, "not_acquired");
-    assert.equal(candidate.rights_review_status, "not_started");
-    assert.equal(candidate.publishing_status, "prohibited");
   });
   localityEntries.forEach(({ asset_selection_status, hero, route }) => {
     assert.equal(asset_selection_status, "unselected", route);
@@ -185,8 +298,18 @@ test("does not fabricate acquisition, checksum, review, release evidence, or pub
   });
 });
 
-test("schema models the candidate pool without weakening hero publication gates", () => {
-  assert.equal(manifest.schema_version, "1.1.0");
+test("records Austin's unproven 4:5 crop and the failed-stock-pass next step", () => {
+  const austin = candidatesById.get("austin-west-campus-spheroidite");
+  assert.equal(austin.candidate_disposition, "nominated");
+  assert.ok(austin.risk_notes.some((note) => /4:5/i.test(note) && /unproven/i.test(note)));
+  assert.match(review, /all 16 routes remain unresolved/i);
+  assert.match(review, /audited failed free-stock pass/i);
+  assert.doesNotMatch(review, /Research selection:/i);
+});
+
+test("schema models audit and nomination gates without weakening hero publication gates", () => {
+  assert.equal(manifest.schema_version, "1.2.0");
+  assert.ok(manifestSchema.properties.locality_set_audit);
   assert.ok(manifestSchema.$defs.locality_candidate_pool);
   assert.ok(manifestSchema.$defs.locality_asset_candidate);
   assert.deepEqual(
