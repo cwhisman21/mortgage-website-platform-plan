@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snapmortgage.com/schemas/hero-image.schema.json",
+  "title": "HeroImageRecord",
+  "description": "Framework-neutral CMS contract for editorial hero images and provenance.",
+  "type": "object", "additionalProperties": false,
+  "required": ["page_type", "hero_variant", "headline", "dek", "primary_cta", "desktop_asset", "alt_text", "focal_point_desktop", "focal_point_mobile", "contrast_mode", "review_status"],
+  "properties": {
+    "page_type": {"type":"string","enum":["city","state","buy","refinance","home_equity","loan_product","learning_center","topic_hub","article","loan_officer","branch","company","search_directory","prequalification","seller_move_up"]},
+    "hero_variant": {"type":"string","enum":["full_bleed_environmental_portrait","tall_diagonal_image_slab","wide_panoramic_band","rotated_architectural_window","circular_criteria_or_brand_field","layered_editorial_collage","evidence_or_report_strip","vertical_human_portrait","structured_search_or_planning_interface","media_left_editorial_panel","horizon_composition","stacked_planning_panels"]},
+    "headline":{"type":"string","minLength":1}, "dek":{"type":"string","minLength":1},
+    "primary_cta":{"$ref":"#/$defs/cta_reference"}, "secondary_cta":{"$ref":"#/$defs/cta_reference"},
+    "desktop_asset":{"$ref":"#/$defs/asset_reference"}, "mobile_asset":{"$ref":"#/$defs/asset_reference"}, "poster_asset":{"$ref":"#/$defs/asset_reference"}, "has_motion":{"type":"boolean","default":false},
+    "alt_text":{"type":"string"}, "focal_point_desktop":{"$ref":"#/$defs/focal_point"}, "focal_point_mobile":{"$ref":"#/$defs/focal_point"},
+    "contrast_mode":{"type":"string","enum":["left_scrim","right_scrim","bottom_scrim","solid_panel","none"]},
+    "local_evidence_brief":{"$ref":"#/$defs/local_evidence_brief"},
+    "review_status":{"type":"string","enum":["draft","editorial_review","rights_review","approved","retired"]},
+    "reviewed_at":{"type":"string","format":"date-time"}, "reviewed_by":{"$ref":"#/$defs/user_reference"}
+  },
+  "allOf":[
+    {"if":{"properties":{"page_type":{"enum":["city","state"]}},"required":["page_type"]},"then":{"required":["local_evidence_brief"]}},
+    {"if":{"properties":{"has_motion":{"const":true}},"required":["has_motion"]},"then":{"required":["poster_asset"]}},
+    {"if":{"properties":{"review_status":{"const":"approved"}},"required":["review_status"]},"then":{"required":["reviewed_at","reviewed_by"]}}
+  ],
+  "$defs": {
+    "cta_reference":{"type":"object","additionalProperties":false,"required":["cta_id"],"properties":{"cta_id":{"type":"string","minLength":1},"label_override":{"type":"string","minLength":1}}},
+    "user_reference":{"type":"object","additionalProperties":false,"required":["user_id"],"properties":{"user_id":{"type":"string","minLength":1},"display_name":{"type":"string","minLength":1}}},
+    "focal_point":{"type":"object","additionalProperties":false,"required":["x","y"],"properties":{"x":{"type":"number","minimum":0,"maximum":1},"y":{"type":"number","minimum":0,"maximum":1}}},
+    "asset_reference":{"type":"object","additionalProperties":false,"required":["asset_id","asset_origin"],"properties":{"asset_id":{"type":"string","minLength":1},"asset_origin":{"type":"string","enum":["stock","commissioned","internal","generated"]},"is_external":{"type":"boolean","default":false},"source_url":{"type":"string","format":"uri"},"rights_record":{"$ref":"#/$defs/rights_record"}},"allOf":[{"if":{"properties":{"is_external":{"const":true}},"required":["is_external"]},"then":{"required":["source_url","rights_record"],"properties":{"rights_record":{"allOf":[{"$ref":"#/$defs/rights_record"},{"required":["license_url"]}]}}}}]},
+    "rights_record":{"type":"object","additionalProperties":false,"required":["creator_or_agency","license_name","acquired_at","usage_notes"],"properties":{"creator_or_agency":{"type":"string","minLength":1},"license_name":{"type":"string","minLength":1},"license_url":{"type":"string","format":"uri"},"acquired_at":{"type":"string","format":"date"},"attribution_text":{"type":"string"},"usage_notes":{"type":"string","minLength":1},"release_status":{"type":"string","enum":["not_applicable","verified","not_verified","required"]},"reverify_at":{"type":"string","format":"date"},"generation_prompt":{"type":"string"},"generation_reviewer":{"$ref":"#/$defs/user_reference"}}},
+    "local_evidence_brief":{"type":"object","additionalProperties":false,"required":["target_geography","visual_truths","misleading_stereotypes_to_avoid","desired_lived_behavior","crop_safe_focal_subject","source_links"],"properties":{"target_geography":{"type":"string","minLength":1},"visual_truths":{"type":"array","minItems":3,"maxItems":5,"items":{"type":"string","minLength":1}},"misleading_stereotypes_to_avoid":{"type":"array","minItems":2,"items":{"type":"string","minLength":1}},"desired_lived_behavior":{"type":"string","minLength":1},"required_season_or_weather":{"type":"string","minLength":1},"crop_safe_focal_subject":{"type":"string","minLength":1},"source_links":{"type":"array","minItems":1,"items":{"type":"string","format":"uri"}}}}
+  }
+}
