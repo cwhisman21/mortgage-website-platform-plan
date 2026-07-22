@@ -4,9 +4,9 @@ Date: 2026-07-21
 
 Status: executable release gate for every in-scope hero asset, page, location set, and page-family set
 
-Inputs: `docs/21-hero-image-system-spec.md`, `docs/22-hero-sourcing-playbook.md`, both hero schemas, `mock-data/hero-asset-manifest.json`, and the candidate reviews in `docs/24-hero-locality-candidate-review.md` and `docs/25-hero-page-family-candidate-review.md`
+Inputs: the approved hero specification, `docs/22-hero-sourcing-playbook.md`, both hero schemas, `mock-data/hero-asset-manifest.json`, and `docs/24-hero-locality-candidate-review.md` / `docs/25-hero-page-family-candidate-review.md`
 
-This checklist is the last production control before a CMS publisher may authorize a hero. Every checkbox needs linked evidence, a status, and an accountable reviewer. A visual opinion, nomination, provider-level license summary, or approval by silence is not approval.
+Every mandatory check is a keyed `check_result`. Visual opinion, nomination, provider-level license summaries, or approval by silence cannot satisfy a check.
 
 ## Current release state
 
@@ -15,78 +15,127 @@ The manifest is version 1.3.0 and remains `draft`. The current state is honestly
 - 16 locality pools contain 32 researched locality candidates and 10 nominations, but 0 acquired, 0 selected, 0 approved, and 0 authorized assets.
 - The locality manual audit failed: skyline 9 against a maximum of 4, water 7 against a maximum of 3, and lived behavior 0 against a minimum of 4.
 - 13 page-family pools contain 19 nominated external candidates, but 0 acquired, 0 rights-complete, 0 approved, and 0 authorized assets.
-- The page-family audit is `failed` with `decision: no_selection`. The Learning Center evidence candidate has disputed rights; loan officer and branch assets are still internal-only requirements; Company is internal-first; Search/directory still requires a reviewed non-photographic treatment.
-- All 29 hero entries remain `unselected`, `draft`, and publish-prohibited. This document does not advance any candidate lifecycle state.
+- The page-family audit is `failed` with `decision: no_selection`. Learning Center includes disputed rights; loan officer and branch assets are unresolved internal-only requirements; Company is internal-first; Search/directory needs a reviewed non-photographic treatment.
+- All 29 hero entries remain `unselected`, `draft`, and publish-prohibited. This gate advances no lifecycle state.
 
 Current release decision: `BLOCK`. Publishing status: `prohibited`.
 
 ## Status contract
 
-Use exactly one status at each check, gate, and release level:
+Use exactly `PASS`, `FAIL`, or `BLOCK` per check:
 
-| Status | Exact meaning | Required action |
-| --- | --- | --- |
-| `PASS` | The requirement is met and immutable evidence is linked. | Continue to the next gate. |
-| `FAIL` | Evidence proves the requirement is not met. | Reject or correct the asset/package, record an owner, and retest the failed check plus dependent checks. |
-| `BLOCK` | Evidence, authority, required signoff, or a prerequisite is missing, disputed, expired, or unresolved. | Keep `publishing_status: prohibited`; do not infer a pass. Resolve the block, reopen affected approvals, and retest. |
+- `PASS`: requirement met. `PASS` requires a nonempty `evidence_uris` array containing immutable evidence for that exact check.
+- `FAIL`: evidence proves the requirement is not met. `FAIL` requires a nonempty `evidence_uris` array showing the observed failure.
+- `BLOCK`: evidence, authority, prerequisite, or signoff is missing, disputed, expired, or unresolved. `BLOCK` requires a nonempty `block_reason`; include block-reason evidence in `evidence_uris` wherever available.
 
-`overall_status` is the worst status among every applicable asset, page, set, regression, and signoff record. Any `FAIL` or `BLOCK` prevents release. A failed manual set audit is `BLOCK` for every member of that set. Disputed rights are `BLOCK`. A missing required signoff is `BLOCK`. Only `PASS` permits publication.
+Missing or disputed evidence resolves to `BLOCK`. It never passes by omission. A condition that does not apply still uses `PASS` with evidence documenting why it does not apply; there is no fourth status.
 
-Use `not_applicable` only for a named conditional check with a written rationale and reviewer. It is not a fourth status and cannot replace required evidence.
+Each record's `required_check_results` must contain every ID in the catalog below. Record overall status cannot be `PASS` unless every key in `required_check_results` is `PASS`. Publication cannot be authorized unless every key in `required_check_results` is `PASS` for the release and all referenced asset, page, set, and protected-route records. Missing keys are `BLOCK`.
+
+### Universal check result
+
+Copy this value for every key and replace every angle-bracket instruction:
+
+```yaml check-result-template
+check_result:
+  check_id: <exact key from required_check_results>
+  status: <PASS | FAIL | BLOCK>
+  evidence_uris:
+    - <immutable evidence URI; nonempty for PASS/FAIL and when block evidence exists>
+  reviewer:
+    user_id: <stable user ID>
+    display_name: <reviewer name>
+  checked_at: <ISO 8601 timestamp>
+  notes: <what was inspected, method, environment, and decision>
+  block_reason: <required nonempty when status BLOCK; otherwise omit>
+```
+
+The `reviewer` is the accountable person for the individual check. Role signoffs do not replace check-level identity, time, notes, or evidence.
+
+### Machine-readable check catalog
+
+This JSON is the normative mandatory-ID catalog. Templates and implementations must match it exactly.
+
+```json qa-check-catalog
+{
+  "check_result": {
+    "required_fields": ["check_id", "status", "evidence_uris", "reviewer", "checked_at", "notes"],
+    "status_enum": ["PASS", "FAIL", "BLOCK"],
+    "block_reason_required_when": "status=BLOCK",
+    "evidence_nonempty_when": "status=PASS|FAIL"
+  },
+  "rules": {
+    "missing_or_disputed_evidence_status": "BLOCK",
+    "overall_pass_requires_every_required_check_pass": true,
+    "authorize_requires_every_required_check_pass": true
+  },
+  "records": {
+    "asset": { "required_check_ids": ["asset_provenance_identity", "asset_acquisition_actor", "asset_entitlement", "asset_allowed_use", "asset_modification_rights", "asset_geography_rights", "asset_advertising_rights", "asset_sharealike_change_notice", "asset_reverification", "asset_attribution_placement", "asset_people_minor_privacy", "asset_ownership_releases", "asset_endorsement_sensitive_use", "asset_third_party_trademark", "asset_alt_decorative", "asset_generated_job_timestamp", "asset_generated_input_rights", "asset_generated_untouched_output", "asset_generated_iteration_edits", "asset_generated_disclosure_reviewer", "asset_archive_source_integrity", "asset_derivative_integrity", "asset_no_upscale"] },
+    "page": { "required_check_ids": ["page_responsive_crops_focal", "page_rendered_contrast", "page_zoom_reflow", "page_keyboard_focus", "page_screen_reader_alt", "page_cta_visibility_clearance", "page_motion_muted_nonessential", "page_reduced_motion_poster", "page_data_saving_failure_poster", "page_derivative_integrity", "page_no_upscale", "page_hero_cls", "page_route_cls", "page_viewport_preload_winner", "page_nonwinner_preload", "page_lcp", "page_subject_relevance", "page_attribution_placement", "page_composition", "page_regulated_claims"] },
+    "location_set": { "required_check_ids": ["location_signal_thresholds", "location_truth_to_source", "location_exact_place_ladder", "location_no_generic_fallback", "location_local_recognition", "location_stereotype_audit", "location_repetition_audit", "location_manual_audit"] },
+    "family_set": { "required_check_ids": ["family_cliche_audit", "family_repetition_audit", "family_actual_loan_officer", "family_actual_branch", "family_company_internal_first", "family_nonphoto_search", "family_rights_disputes", "family_manual_audit"] },
+    "protected_route": { "required_check_ids": ["protected_route_inventory", "protected_route_visual_baselines", "protected_route_dom_style_assets", "protected_route_accessibility_requests", "protected_route_no_governed_hero"] },
+    "release": { "required_check_ids": ["release_asset_records", "release_page_records", "release_set_records", "release_protected_regression", "release_required_signoffs", "release_cms_state", "release_preview_match"] }
+  }
+}
+```
 
 ## Evidence artifacts
 
-Store these artifacts in the immutable release case and link them from the records below:
+Evidence URIs must resolve to immutable case artifacts and identify checksum when file-backed, capture timestamp, actor, environment/viewport, and the check ID supported. Bare URLs, mutable chat, and inherited evidence without an explicit link do not pass.
 
-1. Asset case: acquired original, `original_sha256`, original filename, `source_dimensions`, color profile, source page snapshot, exact controlling `terms_snapshot`, receipt/entitlement where relevant, release evidence, and risk review.
-2. Generation case when applicable: prompt, negative instructions, model/provider/version, terms snapshot, timestamp, job/seed ID, inputs and their rights, untouched output, output checksum, iteration history, edits, disclosure, and independent reviewer.
-3. Page case: route build ID, approved asset IDs/checksums, desktop/tablet/mobile screenshots, crop coordinates, contrast measurements, CTA-clearance overlays, responsive delivery trace, layout-shift evidence, LCP/preload trace, motion/reduced-motion capture, claims review, and composition mapping.
-4. Set case: machine counts plus a signed contact sheet/manual audit for locality signals, exact-place truth, stereotypes, skyline/water/lived behavior, clichÃ©s, creator/subject/composition repetition, and source strategy.
-5. Protected-route baseline: before/after screenshots and DOM/style/build hashes for every protected experience.
-6. Release ledger: superseded record IDs, retest history, exceptions, each named signoff, final preview URL/build ID, and publish or rejection event.
-
-Evidence must identify artifact URI, SHA-256 where file-backed, captured timestamp, environment/viewport, actor, and the check it supports. Mutable chat messages and bare source URLs are not sufficient evidence.
+- Asset case: exact acquired original; source and controlling terms snapshots; creator, acquisition actor, entitlement/receipt, use permissions/restrictions, releases, reverify date, archive record, and responsive derivatives.
+- Generation case: complete prompt/negative instructions/model/terms, generated timestamp and job/seed, every input and its rights, untouched output, iterations, edits, disclosure, output checksum, and independent reviewer.
+- Page case: exact build/route/asset checksums, desktop/tablet/mobile crops, focal points, rendered accessibility results, motion/poster paths, responsive delivery, CLS, request waterfall, preload winner/nonwinners, and LCP trace.
+- Set case: route/contact-sheet inventory, signal and motif counts, truth sources, exact-place ladder logs, stereotype/cliche/repetition findings, and signed manual audit.
+- Protected case: route inventory and before/after visual, DOM/style/asset, accessibility, and network evidence.
+- Release ledger: referenced record IDs, exceptions, retests, named signoffs, final preview/build, and publish/reject event.
 
 ## Asset-level gate
 
-Complete once for every still, mobile alternate, motion file, poster, collage component, internal asset, and generated output.
+Complete every asset ID for each still, mobile alternate, motion file, poster, collage component, internal asset, and generated output:
 
-- [ ] Identity/provenance: `asset_id`, `asset_origin`, original filename, `source_url` or internal ownership trail, repository, `creator_or_agency`, `acquired_at`, and acquisition actor match the exact bytes reviewed.
-- [ ] Exact rights basis: record `rights_basis_type`, `rights_basis_name` and version, `license_url` or controlling terms URL, immutable `source_snapshot`, exact `terms_snapshot`, account/receipt entitlement, allowed use, modifications, geography, attribution, ShareAlike/change notices, advertising limits, and `reverify_at` where applicable.
-- [ ] Rights chain: the source is the rights holder, authorized licensor, commissioned provider, or traceable agency. Disputed rights are `BLOCK`; provider reputation or a public-domain mark alone cannot pass.
-- [ ] Creator and attribution: creator/agency is named; `attribution_text` is exact, complete, and placed/tested when required.
-- [ ] Releases: `release_status`, `model_release_evidence`, `property_release_evidence`, recognizable-person/minor/publicity/privacy review, and ownership/likeness consent are complete. `not_verified` or `required` without evidence is `BLOCK`.
-- [ ] Third-party risk: `third_party_risk_review`, `trademark_review`, artwork/logo/signage/vehicle/screen/personal-data review, private-property review, and no-endorsement/sensitive-use analysis are signed.
-- [ ] Accessibility semantics: `decorative` is explicit. Meaningful media has verifiable `alt_text` that neither repeats the headline nor makes a claim; decorative media has `alt_text: ""`.
-- [ ] Integrity: `original_sha256`, `source_dimensions`, source format, archive location, and delivered derivative checksums match the case.
-- [ ] Resolution: native pixels support every approved crop. `upscale_check: passed` means no upscale occurred; otherwise status is `FAIL`.
-- [ ] Generated media, when applicable: `generated_disclosure`, complete `generation_prompt`, `negative_instructions`, `generation_model`, generated timestamp/job ID, inputs, `generation_terms_snapshot`, `original_output_sha256`, edits, and `generation_reviewer` distinct from the producer are recorded. Documentary, real-person, landmark, signage, malformed-detail, and regulated-claim checks pass.
-- [ ] State: the selected CMS reference, origin, source, rights record, checksum, and case file agree. A nomination or unacquired candidate cannot pass.
+- [ ] `asset_provenance_identity`: asset ID/origin, source URL or internal ownership trail, creator/agency, original filename, and exact bytes agree.
+- [ ] `asset_acquisition_actor`: named acquisition actor and acquisition timestamp/date are evidenced.
+- [ ] `asset_entitlement`: exact license product/account, receipt/subscription entitlement, source/terms snapshots, and rights chain are evidenced.
+- [ ] `asset_allowed_use`: commercial mortgage-site hero use, routes, CDN/web distribution, overlays, crops, compression, and promotions are allowed.
+- [ ] `asset_modification_rights`, `asset_geography_rights`, `asset_advertising_rights`, `asset_sharealike_change_notice`, and `asset_reverification`: each condition is separately evidenced, including attribution/link/change/ShareAlike obligations and time limits.
+- [ ] `asset_attribution_placement`: exact attribution is rendered in the required location and format.
+- [ ] `asset_people_minor_privacy`: every recognizable person, minor/guardian authority, privacy/publicity, sensitive-use context, and personal data are resolved.
+- [ ] `asset_ownership_releases`: model/property/likeness/commissioned/internal ownership evidence is complete.
+- [ ] `asset_endorsement_sensitive_use`: no person, brand, property, business, or government endorsement/customer/financial circumstance is implied.
+- [ ] `asset_third_party_trademark`: marks, logos, artwork, architecture, signage, vehicles, screens, interiors, and third-party rights are resolved.
+- [ ] `asset_alt_decorative`: meaningful alt is visible/verifiable/nonrepetitive, or decorative state and empty alt are evidenced.
+- [ ] Generated IDs evidence job and timestamp; every input right; untouched original output; iteration and edit history; internal disclosure and independent reviewer. Generated media cannot invent documentary claims or real-person likenesses.
+- [ ] `asset_archive_source_integrity`: archive/source checksum, dimensions, format, color profile, and URI match the reviewed master.
+- [ ] `asset_derivative_integrity`: every derivative records checksum, width, height, format, bytes, settings, and source master.
+- [ ] `asset_no_upscale`: each derivative/crop fits within native source pixels. Any upscale is `FAIL`.
 
-Asset gate result is `PASS` only when every applicable check passes and the named rights reviewer and image producer have signed.
+Disputed rights, unresolved releases, missing entitlement, or missing generated provenance are `BLOCK`.
 
 ## Page-level gate
 
-Run against the release build and exact route after asset approval.
+Run every page ID on the exact final route/build:
 
-- [ ] `desktop_preview` at 1440 px with a 560â€“720 px hero, `tablet_preview` at every implementation breakpoint, and `mobile_preview` at the approved 4:5 or portrait-friendly ratio are stored with viewport/build metadata.
-- [ ] `focal_point_desktop` and `focal_point_mobile` preserve the primary subject, faces, required local cues, and documentary meaning.
-- [ ] `text_cta_clearance` overlays prove headline, dek, primary CTA, and optional secondary CTA do not cover faces, essential cues, or each other; CTAs remain visible.
-- [ ] WCAG 2.2 AA contrast is measured for all text/control states at every crop and breakpoint, including the worst image frame where motion exists. Record ratios, colors, tool/method, and `contrast_mode`.
-- [ ] Meaningful/decorative behavior and alt output are verified in rendered markup; zoom, reflow, keyboard focus, and screen-reader naming remain usable.
-- [ ] Motion has a separately cleared `poster_asset`; motion is non-essential and muted. With `prefers-reduced-motion: reduce`, animation never starts and the truthful poster appears. Poster-before-load, failure, data-saving, and disabled-motion paths pass.
-- [ ] `reserved_aspect_ratio` or intrinsic dimensions reserve the final box. Capture CLS for the hero and route; asset/poster swaps do not move content.
-- [ ] Responsive delivery includes AVIF and WebP plus JPEG fallback when the selected stack requires it. `srcset` and `sizes` select viewport-appropriate derivatives, derivative dimensions/bytes/checksums are logged, and no derivative is upscaled.
-- [ ] Above-fold performance evidence shows only the current viewport's hero candidate receives high priority/preload. Record request waterfall, chosen candidate, priority, hero LCP element, LCP timing, and budget/result; non-winning alternates and motion are not eagerly preloaded.
-- [ ] The page uses its schema-assigned composition. Any change has a complete `variant_exception` with rationale, identity, timestamp, notes, and design approval.
-- [ ] `regulated_claim_review` confirms the image and surrounding copy do not imply approval, eligibility, rate, savings, protected-class targeting, wealth, customer status, endorsement, or borrower outcome.
-- [ ] Subject relevance is unique to the page; actual IDs/checksums rendered match the approved records and required attribution is visible.
-
-Page gate result is `PASS` only when every applicable check passes and editorial, design, accessibility, and compliance reviewers have signed.
+- [ ] `page_responsive_crops_focal`: desktop at 1440 px/560â€“720 px hero, every tablet breakpoint, mobile 4:5 or approved portrait ratio, focal points, faces, local cues, text separation, and CTA visibility are evidenced.
+- [ ] `page_rendered_contrast`: measured WCAG 2.2 AA results cover every crop, state, contrast mode, and worst motion frame.
+- [ ] `page_zoom_reflow`, `page_keyboard_focus`, and `page_screen_reader_alt`: rendered 200%/400% behavior, reflow, focus order/visibility, accessible names, decorative output, and alt results pass.
+- [ ] `page_cta_visibility_clearance`: headline/dek/actions remain visible and clear of faces, focal subjects, cues, and one another at all viewports.
+- [ ] `page_motion_muted_nonessential`: motion is muted, nonessential, separately rights-cleared, and cannot delay the usable hero.
+- [ ] `page_reduced_motion_poster`: `poster_asset` is truthful and readable; `prefers-reduced-motion: reduce` prevents animation start and displays it.
+- [ ] `page_data_saving_failure_poster`: poster-before-load, data-saving, disabled-motion, load-failure, and playback-failure paths pass.
+- [ ] `page_derivative_integrity`: selected AVIF/WebP and JPEG fallback where required record dimensions, bytes, checksum, format, crop, and actual request.
+- [ ] `page_no_upscale`: the delivered crop/derivative is not upscaled.
+- [ ] `page_hero_cls` and `page_route_cls`: reserved aspect ratio/intrinsic dimensions and measured hero-specific/whole-route CLS traces pass.
+- [ ] `page_viewport_preload_winner`: only the current viewport winner receives above-fold preload/high priority.
+- [ ] `page_nonwinner_preload`: alternates, nonmatching sources, poster/motion, and nonwinning candidates are not eagerly preloaded.
+- [ ] `page_lcp`: hero LCP element, timing, environment, waterfall, selected candidate, and budget/result are recorded.
+- [ ] `page_subject_relevance`: subject is uniquely relevant and direct documentary meaning survives crops.
+- [ ] `page_attribution_placement`: rendered attribution matches asset obligations.
+- [ ] `page_composition`: assigned variant is used or a complete named/timestamped `variant_exception` is evidenced.
+- [ ] `page_regulated_claims`: image/context do not imply approval, eligibility, rates, savings, wealth, protected-class targeting, customer status, endorsement, or borrower outcome.
 
 ## Location-set gate
-
-Run on the complete intended city/state release set after every member passes asset and page gates.
 
 ```yaml
 city_signal_minimum: 3
@@ -96,34 +145,31 @@ maximum_water_count: 3
 minimum_lived_behavior_count: 4
 ```
 
-- [ ] `truth_to_source_evidence` maps every counted architecture, terrain/ecology, street form, lived behavior, civic/infrastructure, season/light, and geography claim to authoritative evidence and the visible pixels.
-- [ ] `exact_place_ladder_log` proves exact geography was searched first, then verified subregion, then commissioned/generated work, then approved non-photographic treatment or hold. Each skipped/rejected tier has query, source, date, operator, and reason.
-- [ ] City selections contain at least three distinct visible signal types. State selections contain at least two and do not collapse a state into one narrow neighborhood or landscape.
-- [ ] `generic_fallback_check` proves there is no silent generic suburb, skyline, landscape, or stock substitute. Any generic fallback is `BLOCK`.
-- [ ] `local_recognition_review` records named editorial/research review of ordinary resident-recognizable place truth and neighborhood-scale lived behavior.
-- [ ] `stereotype_review` checks every evidence brief's avoid list, state diversity, tourism/landmark dominance, protected-class tokenism, and misleading season/weather.
-- [ ] `repetition_review` records skyline, water, lived-behavior, architecture, creator, subject, crop, and composition counts plus a signed contact-sheet judgment.
-- [ ] The numeric thresholds pass and the manual editorial audit passes. Numeric success cannot override manual failure.
+- [ ] `location_signal_thresholds`: cities have three distinct visible signal types; states have two and represent more than one narrow stereotype.
+- [ ] `location_truth_to_source`: every counted cue/geography claim maps to an authoritative truth source and visible pixels.
+- [ ] `location_exact_place_ladder`: logs prove exact place, verified subregion, commissioned/generated, then non-photographic/hold order with rejections.
+- [ ] `location_no_generic_fallback`: no silent generic suburb, skyline, landscape, or stock substitute. Generic fallback is `BLOCK`.
+- [ ] `location_local_recognition`: named review confirms ordinary resident-recognizable place truth and lived behavior.
+- [ ] `location_stereotype_audit`: avoid lists, state diversity, tourism/landmark dominance, tokenism, and season/weather pass.
+- [ ] `location_repetition_audit`: skyline, water, lived behavior, architecture, creator, subject, crop, and composition counts/contact sheet pass.
+- [ ] `location_manual_audit`: signed manual editorial result passes. Numeric success cannot override manual failure.
 
-If `manual_editorial_result: failed`, the set status is `BLOCK`, every pool stays unresolved, and no `selected_candidate_id` or publish authorization may be recorded.
+If `manual_editorial_result: failed`, the set and every member remain `BLOCK`; no selection or authorization is permitted.
 
 ## Family-set gate
 
-Run on all intended non-location families together after member asset/page gates.
-
-- [ ] ClichÃ© audit checks key handoff, cash pile, handshake, generic laptop, anonymous boardroom, staged celebration, keys-as-certainty, moving-box-only storytelling, generic house reuse, and tourist/office shorthand.
-- [ ] `repetition_review` compares asset URLs, creators, people/casting, action, property form, paperwork, crop, color, and composition; adjacent families do not drift into the same visual idea.
-- [ ] Buy, Refinance, Home Equity, canonical products, Learning Center, topic hub, article, prequalification, and seller/move-up remain subject-specific and their final crops are reviewed simultaneously.
-- [ ] `actual_loan_officer_asset_check` verifies the current named person's approved likeness; stock/generated substitutes are `FAIL`.
-- [ ] `actual_branch_asset_check` verifies the current branch exterior/interior or immediate operating context; stock/generated substitutes are `FAIL`.
-- [ ] `company_internal_first_check` verifies actual Snap people/operating context or documents an approved sourcing exception after internal-first commissioning is exhausted.
-- [ ] `non_photo_search_check` verifies Search/directory uses the approved accessible structured search/planning composition and truthful data instead of decorative stock photography.
-- [ ] Rights eligibility is rechecked across components. A disputed component, including an unresolved public-domain assertion or third-party data right, is `BLOCK`.
-- [ ] The manual family audit result is `passed`; a failed audit is `BLOCK` even when prohibited-clichÃ© and duplicate counts are zero.
+- [ ] `family_cliche_audit`: key handoff, cash, handshake, generic laptop/boardroom/house, staged celebration, certainty keys, and moving-box-only storytelling are audited.
+- [ ] `family_repetition_audit`: URL, creator, people/casting, action, property, paperwork, crop, color, and composition are compared together.
+- [ ] `family_actual_loan_officer`: actual current approved named portrait; stock/generated substitutes fail.
+- [ ] `family_actual_branch`: actual verified current branch/immediate operating context; stock/generated substitutes fail.
+- [ ] `family_company_internal_first`: actual Snap people/operations or a signed exception after internal commissioning is exhausted.
+- [ ] `family_nonphoto_search`: accessible structured search/planning composition with truthful data and no decorative stock.
+- [ ] `family_rights_disputes`: every component is clear; disputed marks/data/license/public-domain assertions are `BLOCK`.
+- [ ] `family_manual_audit`: signed full-set audit passes. Zero cliches/duplicates cannot override a failed audit.
 
 ## Protected-route regression gate
 
-The hero system must leave these experiences unchanged:
+The system must leave unchanged:
 
 - Homepage (`/`).
 - Locations directory (`/locations`).
@@ -131,199 +177,192 @@ The hero system must leave these experiences unchanged:
 - Individual calculators (`/calculators/*`).
 - Rates (`/rates`).
 
-- [ ] Inventory every deployed individual calculator route and retain it in the regression record.
-- [ ] Capture unchanged baseline evidence before implementation and matching release-build evidence at desktop, tablet, and mobile.
-- [ ] Compare hero DOM, styles, assets, content, interactions, accessibility tree, requests, and screenshots; record accepted noise separately.
-- [ ] Confirm no protected route imports, resolves, preloads, or publishes a governed hero asset/configuration.
-- [ ] Any unexplained change is `FAIL`; any missing route/baseline is `BLOCK`.
+- [ ] `protected_route_inventory`: all exact protected routes, including every calculator, are inventoried.
+- [ ] `protected_route_visual_baselines`: before/after desktop/tablet/mobile screenshots match, with accepted noise recorded.
+- [ ] `protected_route_dom_style_assets`: hero DOM, content, styles, interactions, and asset/build hashes remain unchanged.
+- [ ] `protected_route_accessibility_requests`: accessibility tree/behavior and network/preload requests remain unchanged.
+- [ ] `protected_route_no_governed_hero`: no protected route imports, resolves, preloads, or publishes governed hero configuration/assets.
+
+Unexplained change is `FAIL`; missing route or baseline evidence is `BLOCK`.
 
 ## Retest and reopen rules
 
-1. A `FAIL` returns the affected record to its owning production step. Retest the failed check and every dependent page/set/regression check on a new build.
-2. A `BLOCK` remains publish-prohibited until the missing evidence or authority is supplied; the blocker resolver cannot self-approve a role requiring independence.
-3. A new checksum, replacement asset, re-export, crop or focal-point change, text/CTA/layout change, contrast-mode change, format/loader change, motion/poster change, or composition change reopens asset/page and downstream set approvals.
-4. A rights complaint or rights dispute, terms/source change, materially new use, mistaken location/identity, expired permission, or withdrawn release immediately reopens rights/compliance review and requires unpublish/retirement while reviewed.
-5. A set membership change reopens both the new/changed member and the full relevant set audit. A protected-route implementation change reopens the complete protected regression gate.
-6. Retest records link the prior record, reason, changed IDs/checksums/build, tests rerun, reviewer, timestamp, decision, and superseding record. Never overwrite prior evidence.
+1. `FAIL` returns to the owning production step; retest the failed check and every dependent page/set/regression check on a new build.
+2. `BLOCK` remains publish-prohibited until resolved; the resolver cannot self-approve a role requiring independence.
+3. New checksum, replacement, export/crop/focal change, text/CTA/layout/contrast change, loader/format change, motion/poster change, or composition change reopens affected and downstream checks.
+4. Rights complaint/dispute, source/terms change, new use, mistaken location/identity, expired permission, or withdrawn release immediately reopens rights/compliance and requires unpublish/retirement.
+5. Set membership changes reopen the member and full set. Protected implementation changes reopen all protected checks.
+6. Retest records retain prior ID, reason, changed asset/build/checksum, IDs rerun, reviewer, timestamp, decision, and superseding record. Never overwrite evidence.
 
 ## Publish gate
 
-The publisher may set `publishing_status: authorized` only when all of these are true:
+- [ ] `release_asset_records`: every referenced asset record exists, is acquired/rights-complete/checksum-matched/current, and all required checks pass.
+- [ ] `release_page_records`: every final-build route record exists and all required checks pass.
+- [ ] `release_set_records`: applicable location/family records exist, every check passes, and manual results are `passed`.
+- [ ] `release_protected_regression`: same-build protected record exists and every check passes.
+- [ ] `release_required_signoffs`: named editorial, rights, design, accessibility, compliance, assigning editor, image producer, and publisher decisions are present.
+- [ ] `release_cms_state`: CMS is `approved` with `reviewed_at`/`reviewed_by`; referenced IDs/evidence agree.
+- [ ] `release_preview_match`: final preview/build asset IDs, checksums, crops, attribution, and delivery match approved records.
 
-- [ ] Every referenced asset record is `PASS`, rights-complete, acquired, checksum-matched, and not expired/disputed.
-- [ ] Every route record is `PASS` on the final build.
-- [ ] Applicable locality and family set records are `PASS` with `manual_editorial_result: passed`.
-- [ ] Protected-route regression is `PASS` for the same build.
-- [ ] Required editorial, rights, design, accessibility, and compliance signoffs are present; assigning editor, image producer, and publisher sign where required.
-- [ ] CMS state is `approved` with `reviewed_at` and `reviewed_by`; final preview asset IDs, checksums, attribution, and evidence links match.
-
-Otherwise set `overall_status: BLOCK` or `FAIL` as applicable and keep `publishing_status: prohibited`. Direct-to-production delivery is forbidden.
+Any non-`PASS` required result makes `overall_status` `FAIL` or `BLOCK` and keeps `publishing_status: prohibited`. Direct-to-production delivery is forbidden.
 
 ## Copyable QA records
 
-Replace every angle-bracket instruction with verified evidence. Decisions are `approved` or `rejected`; QA statuses are `PASS`, `FAIL`, or `BLOCK`.
+Each `<check_result>` below means a complete copy of the universal shape, with `check_id` equal to its map key.
 
 ### Per-asset record
 
-```yaml
+```yaml hero-asset-record
 record_type: hero_asset_qa
 asset_id: <immutable ID>
 asset_origin: <stock | commissioned | internal | generated>
-status: <PASS | FAIL | BLOCK>
-source_url: <individual asset URL or internal case URI>
-creator_or_agency: <verified name>
-acquired_at: <YYYY-MM-DD>
-rights_basis_type: <license | ownership | commissioned_agreement | public_domain | generated_terms | disputed>
-rights_basis_name: <exact title and version>
-license_url: <direct controlling URL or not_applicable with rationale>
-source_snapshot: <immutable URI, timestamp, checksum>
-terms_snapshot: <immutable URI, timestamp, checksum>
-attribution_text: <exact text or verified empty>
-release_status: <not_applicable | verified | not_verified | required>
-model_release_evidence: <URI or reason not applicable>
-property_release_evidence: <URI or reason not applicable>
-third_party_risk_review: <status, findings, evidence>
-trademark_review: <status, findings, evidence>
-decorative: <true | false>
-alt_text: <visible verifiable description or empty>
-original_sha256: <sha256>
-source_dimensions: { width: <pixels>, height: <pixels> }
-upscale_check: <passed | failed>
-generated_disclosure: <internal label or not applicable>
-generation_prompt: <complete prompt or not applicable>
-negative_instructions: <complete list or not applicable>
-generation_model: <provider, product, version or not applicable>
-generation_terms_snapshot: <URI/checksum or not applicable>
-original_output_sha256: <sha256 or not applicable>
-generation_reviewer: <identity or not applicable>
-evidence_artifacts: [<immutable artifact URIs>]
-failure_or_block_reason: <specific reason or none>
-retest_of: <record ID or none>
+overall_status: <PASS | FAIL | BLOCK>
+required_check_results:
+  asset_provenance_identity: <check_result>
+  asset_acquisition_actor: <check_result>
+  asset_entitlement: <check_result>
+  asset_allowed_use: <check_result>
+  asset_modification_rights: <check_result>
+  asset_geography_rights: <check_result>
+  asset_advertising_rights: <check_result>
+  asset_sharealike_change_notice: <check_result>
+  asset_reverification: <check_result>
+  asset_attribution_placement: <check_result>
+  asset_people_minor_privacy: <check_result>
+  asset_ownership_releases: <check_result>
+  asset_endorsement_sensitive_use: <check_result>
+  asset_third_party_trademark: <check_result>
+  asset_alt_decorative: <check_result>
+  asset_generated_job_timestamp: <check_result>
+  asset_generated_input_rights: <check_result>
+  asset_generated_untouched_output: <check_result>
+  asset_generated_iteration_edits: <check_result>
+  asset_generated_disclosure_reviewer: <check_result>
+  asset_archive_source_integrity: <check_result>
+  asset_derivative_integrity: <check_result>
+  asset_no_upscale: <check_result>
 signoffs:
-  - { role: image_producer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: rights_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: image_producer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: rights_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
 
 ### Per-page record
 
-```yaml
+```yaml hero-page-record
 record_type: hero_page_qa
 route: <exact route>
 build_id: <immutable build>
 asset_ids_and_checksums: [<ID:sha256>]
-status: <PASS | FAIL | BLOCK>
-desktop_preview: <URI, viewport, timestamp>
-tablet_preview: <URI, viewport, timestamp>
-mobile_preview: <URI, viewport, timestamp>
-focal_point_desktop: { x: <0..1>, y: <0..1> }
-focal_point_mobile: { x: <0..1>, y: <0..1> }
-text_cta_clearance: <PASS/FAIL and overlay URI>
-contrast_results: <WCAG 2.2 AA ratios by breakpoint/state>
-poster_asset: <ID/checksum or not used>
-reduced_motion_test: <prefers-reduced-motion: reduce evidence or not used>
-reserved_aspect_ratio: <ratio/intrinsic dimensions>
-CLS: <measured value and trace URI>
-responsive_formats: [AVIF, WebP, <JPEG fallback or documented stack rationale>]
-responsive_selection: <srcset/sizes/request trace URI>
-preload: <winning above-fold request or none with reason>
-LCP: <element, timing, environment, trace URI>
-composition_mapping: <assigned variant>
-variant_exception: <approval record or none>
-regulated_claim_review: <PASS/FAIL, findings, evidence>
-failure_or_block_reason: <specific reason or none>
-retest_of: <record ID or none>
+overall_status: <PASS | FAIL | BLOCK>
+required_check_results:
+  page_responsive_crops_focal: <check_result>
+  page_rendered_contrast: <check_result>
+  page_zoom_reflow: <check_result>
+  page_keyboard_focus: <check_result>
+  page_screen_reader_alt: <check_result>
+  page_cta_visibility_clearance: <check_result>
+  page_motion_muted_nonessential: <check_result>
+  page_reduced_motion_poster: <check_result>
+  page_data_saving_failure_poster: <check_result>
+  page_derivative_integrity: <check_result>
+  page_no_upscale: <check_result>
+  page_hero_cls: <check_result>
+  page_route_cls: <check_result>
+  page_viewport_preload_winner: <check_result>
+  page_nonwinner_preload: <check_result>
+  page_lcp: <check_result>
+  page_subject_relevance: <check_result>
+  page_attribution_placement: <check_result>
+  page_composition: <check_result>
+  page_regulated_claims: <check_result>
 signoffs:
-  - { role: assigning_editor, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: editorial_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: design_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: accessibility_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: compliance_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: assigning_editor, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: editorial_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: design_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: accessibility_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: compliance_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
 
 ### Location-set record
 
-```yaml
+```yaml location-set-record
 record_type: hero_location_set_qa
 release_set_id: <immutable ID>
 member_routes_and_assets: [<route:asset ID:sha256>]
-status: <PASS | FAIL | BLOCK>
-city_signal_minimum: 3
-state_signal_minimum: 2
-maximum_skyline_count: 4
-maximum_water_count: 3
-minimum_lived_behavior_count: 4
-observed_counts: { skyline: <n>, water: <n>, lived_behavior: <n> }
-truth_to_source_evidence: <matrix URI>
-exact_place_ladder_log: <case URI>
-generic_fallback_check: <PASS/FAIL with findings>
-local_recognition_review: <PASS/FAIL with named reviewer>
-stereotype_review: <PASS/FAIL with contact sheet>
-repetition_review: <PASS/FAIL with counts/contact sheet>
-manual_editorial_result: <passed | failed>
-failure_or_block_reason: <specific reason or none>
-signoff: { role: editorial_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+overall_status: <PASS | FAIL | BLOCK>
+required_check_results:
+  location_signal_thresholds: <check_result>
+  location_truth_to_source: <check_result>
+  location_exact_place_ladder: <check_result>
+  location_no_generic_fallback: <check_result>
+  location_local_recognition: <check_result>
+  location_stereotype_audit: <check_result>
+  location_repetition_audit: <check_result>
+  location_manual_audit: <check_result>
+signoff: { role: editorial_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
 
 ### Family-set record
 
-```yaml
+```yaml family-set-record
 record_type: hero_family_set_qa
 release_set_id: <immutable ID>
 member_routes_and_assets: [<route:asset ID:sha256>]
-status: <PASS | FAIL | BLOCK>
-cliche_audit: <PASS/FAIL with counts/contact sheet>
-repetition_review: <PASS/FAIL across URL/creator/subject/action/crop/composition>
-actual_loan_officer_asset_check: <PASS/FAIL/not applicable with evidence>
-actual_branch_asset_check: <PASS/FAIL/not applicable with evidence>
-company_internal_first_check: <PASS/FAIL/not applicable with evidence>
-non_photo_search_check: <PASS/FAIL/not applicable with evidence>
-rights_dispute_check: <PASS/BLOCK with evidence>
-manual_editorial_result: <passed | failed>
-failure_or_block_reason: <specific reason or none>
+overall_status: <PASS | FAIL | BLOCK>
+required_check_results:
+  family_cliche_audit: <check_result>
+  family_repetition_audit: <check_result>
+  family_actual_loan_officer: <check_result>
+  family_actual_branch: <check_result>
+  family_company_internal_first: <check_result>
+  family_nonphoto_search: <check_result>
+  family_rights_disputes: <check_result>
+  family_manual_audit: <check_result>
 signoffs:
-  - { role: editorial_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: design_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: editorial_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: design_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
 
 ### Protected-route regression record
 
-```yaml
+```yaml protected-route-record
 record_type: protected_route_regression
 build_id: <immutable build>
-status: <PASS | FAIL | BLOCK>
-routes:
-  - { route: /, baseline: <URI/hash>, release: <URI/hash>, result: <PASS | FAIL | BLOCK> }
-  - { route: /locations, baseline: <URI/hash>, release: <URI/hash>, result: <PASS | FAIL | BLOCK> }
-  - { route: /calculators, baseline: <URI/hash>, release: <URI/hash>, result: <PASS | FAIL | BLOCK> }
-  - { route_pattern: /calculators/*, inventory: <URI>, baseline_set: <URI/hash>, release_set: <URI/hash>, result: <PASS | FAIL | BLOCK> }
-  - { route: /rates, baseline: <URI/hash>, release: <URI/hash>, result: <PASS | FAIL | BLOCK> }
-unchanged_baseline_evidence: <screenshots, DOM/style/request/accessibility comparisons>
-failure_or_block_reason: <specific reason or none>
-signoff: { role: design_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+routes: [/, /locations, /calculators, /calculators/*, /rates]
+overall_status: <PASS | FAIL | BLOCK>
+required_check_results:
+  protected_route_inventory: <check_result>
+  protected_route_visual_baselines: <check_result>
+  protected_route_dom_style_assets: <check_result>
+  protected_route_accessibility_requests: <check_result>
+  protected_route_no_governed_hero: <check_result>
+signoff: { role: design_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
 
 ### Release signoff record
 
-```yaml
+```yaml release-record
 record_type: hero_release_signoff
 release_id: <immutable ID>
 build_id: <immutable build>
-asset_record_ids: [<IDs>]
-page_record_ids: [<IDs>]
-set_record_ids: [<IDs>]
-protected_regression_record_id: <ID>
+referenced_record_ids: [<asset/page/set/protected IDs>]
 overall_status: <PASS | FAIL | BLOCK>
 publishing_status: <authorized | prohibited>
-retest_history: [<superseded record IDs>]
+required_check_results:
+  release_asset_records: <check_result>
+  release_page_records: <check_result>
+  release_set_records: <check_result>
+  release_protected_regression: <check_result>
+  release_required_signoffs: <check_result>
+  release_cms_state: <check_result>
+  release_preview_match: <check_result>
 signoffs:
-  - { role: assigning_editor, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: image_producer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: editorial_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: rights_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: design_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: accessibility_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: compliance_reviewer, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-  - { role: publisher, identity: <user ID and name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
-final_preview: <route/build evidence URI>
-decision_reason: <release or rejection rationale>
+  - { role: assigning_editor, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: image_producer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: editorial_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: rights_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: design_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: accessibility_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: compliance_reviewer, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
+  - { role: publisher, identity: <user ID/name>, decision: <approved | rejected>, timestamp: <ISO 8601>, notes: <notes> }
 ```
