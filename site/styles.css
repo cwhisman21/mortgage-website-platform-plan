@@ -8023,3 +8023,142 @@ body.tag-results-modal-open {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* Governed editorial heroes render only after the manifest, asset, and page gates pass. */
+.governed-hero {
+  position: relative;
+  display: grid;
+  min-height: clamp(520px, 68vh, 720px);
+  overflow: hidden;
+  color: #fff;
+  background: #121826;
+  isolation: isolate;
+}
+
+.governed-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(10, 16, 28, .82), rgba(10, 16, 28, .38) 46%, rgba(10, 16, 28, .08)),
+    linear-gradient(0deg, rgba(10, 16, 28, .58), rgba(10, 16, 28, 0) 52%);
+  pointer-events: none;
+}
+
+.governed-hero-media,
+.governed-hero-motion {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.governed-hero-media img,
+.governed-hero-motion {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focal-x, 50%) var(--focal-y, 50%);
+}
+
+.governed-hero-copy {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  max-width: 760px;
+  padding: clamp(120px, 18vh, 180px) clamp(22px, 7vw, 96px) clamp(70px, 10vh, 112px);
+}
+
+.governed-hero-copy h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(3rem, 5.8vw, 6.7rem);
+  line-height: .94;
+  letter-spacing: 0;
+}
+
+.governed-hero-copy .lead {
+  max-width: 58ch;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, .9);
+}
+
+.governed-hero--diagonal-slab .governed-hero-media {
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 22% 100%);
+}
+
+.governed-hero--panoramic-band {
+  min-height: clamp(460px, 58vh, 620px);
+}
+
+.governed-hero--rotated-window .governed-hero-media {
+  inset: 9% 7% 9% auto;
+  width: min(52vw, 680px);
+  rotate: -3deg;
+  border-radius: 6px;
+}
+
+.governed-hero--circular-field .governed-hero-media {
+  inset: 11% 7% auto auto;
+  width: min(48vw, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.governed-hero--media-panel .governed-hero-media,
+.governed-hero--human-portrait .governed-hero-media {
+  inset: 0 auto 0 0;
+  width: min(48vw, 680px);
+}
+
+.governed-hero--report-strip {
+  min-height: clamp(420px, 52vh, 560px);
+}
+
+.governed-hero--structured-search .governed-hero-media,
+.governed-hero--planning-panels .governed-hero-media {
+  opacity: .72;
+}
+
+@media (max-width: 760px) {
+  .governed-hero {
+    min-height: 560px;
+  }
+
+  .governed-hero::after {
+    background: linear-gradient(0deg, rgba(10, 16, 28, .86), rgba(10, 16, 28, .5) 54%, rgba(10, 16, 28, .12));
+  }
+
+  .governed-hero-media img,
+  .governed-hero-motion {
+    object-position: var(--mobile-focal-x, var(--focal-x, 50%)) var(--mobile-focal-y, var(--focal-y, 50%));
+  }
+
+  .governed-hero-copy {
+    align-self: end;
+    padding: 170px 22px 42px;
+  }
+
+  .governed-hero-copy h1 {
+    max-width: 10ch;
+    font-size: clamp(2.6rem, 13vw, 4.5rem);
+  }
+
+  .governed-hero--diagonal-slab .governed-hero-media,
+  .governed-hero--rotated-window .governed-hero-media,
+  .governed-hero--circular-field .governed-hero-media,
+  .governed-hero--media-panel .governed-hero-media,
+  .governed-hero--human-portrait .governed-hero-media {
+    inset: 0;
+    width: 100%;
+    rotate: 0deg;
+    border-radius: 0;
+    clip-path: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .governed-hero-motion {
+    display: none;
+  }
+}

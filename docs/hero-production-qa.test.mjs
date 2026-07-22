@@ -5,7 +5,7 @@ import test from "node:test";
 const qa = await readFile(new URL("./23-hero-production-qa.md", import.meta.url), "utf8");
 
 function fencedBlock(label) {
-  const match = qa.match(new RegExp("```" + label + "\\n([\\s\\S]*?)\\n```"));
+  const match = qa.match(new RegExp("```" + label + "\\r?\\n([\\s\\S]*?)\\r?\\n```"));
   assert.ok(match, `missing fenced block: ${label}`);
   return match[1];
 }
@@ -45,8 +45,8 @@ test("every copyable record keys every mandatory check ID", () => {
   const labels = { asset: "hero-asset-record", page: "hero-page-record", location_set: "location-set-record", family_set: "family-set-record", protected_route: "protected-route-record", release: "release-record" };
   for (const [record, label] of Object.entries(labels)) {
     const block = fencedBlock(`yaml ${label}`);
-    const section = block.match(/required_check_results:\n([\s\S]*?)(?:\n\S|$)/)?.[1] ?? "";
-    const ids = [...section.matchAll(/^  ([a-z0-9_]+): <check_result>$/gm)].map((match) => match[1]);
+    const section = block.match(/required_check_results:\r?\n([\s\S]*?)(?:\r?\n\S|$)/)?.[1] ?? "";
+    const ids = [...section.matchAll(/^  ([a-z0-9_]+): <check_result>\r?$/gm)].map((match) => match[1]);
     assert.deepEqual(ids, expected[record], record);
   }
 });

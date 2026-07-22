@@ -28,6 +28,10 @@ import {
   renderSearchResultCard,
 } from "./tag-presentation.mjs";
 import { renderSellerWorkspace } from "./seller-workspace-ui.mjs";
+import {
+  isProtectedHeroRoute,
+  renderGovernedHeroOrFallback,
+} from "./hero-image-renderer.mjs";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -114,6 +118,7 @@ export function createStaticRouteContext({
   ratesMarketplaceFixture = {},
   tagRegistry = { tags: [], assignments: [] },
   searchIndex = { records: [] },
+  heroManifest = null,
 } = {}) {
   const editorialContent = normalizeEditorialContent(editorialBundle);
   const articles = applyArticleAuthorIds(
@@ -201,6 +206,7 @@ export function createStaticRouteContext({
     searchRecords: indexedSearchRecords,
     searchRecordsByRoute,
     tagRedirects,
+    heroManifest,
     tagContextForRoute(route) {
       return tagsForRoute(normalizedTagRegistry, route);
     },
@@ -236,6 +242,12 @@ function pageIntro(eyebrow, title, lead, paragraphs = [], { tagContext, routeHre
         ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
       </div></div>
     </section>`;
+}
+
+function governedPageIntro(record, context, ...args) {
+  const fallback = pageIntro(...args);
+  if (!context?.heroManifest || isProtectedHeroRoute(record.entry.route)) return fallback;
+  return renderGovernedHeroOrFallback(record.entry.route, context.heroManifest, fallback);
 }
 
 const TAG_FAMILY_LABELS = Object.freeze({
@@ -493,7 +505,7 @@ function renderStaticLocationNews(location, context) {
 
 function renderLocations(record, context) {
   const stateRecords = context.data.states.map((state) => context.recordsByRoute.get(state.route));
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Local mortgage planning",
     "Mortgage guides by location",
     "Compare state and city housing context before turning a broad budget into a property-specific mortgage review.",
@@ -509,7 +521,7 @@ function renderState(record, context) {
   const snapshot = state.marketSnapshot || {};
   const cityRecords = recordsForIds(state.cityIds, context.maps.cities, context.recordsByRoute);
   const productRecords = recordsForIds(state.featuredProductIds, context.maps.products, context.recordsByRoute);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "State mortgage guide",
     `${state.name} mortgage and housing guide`,
     `Compare the cost questions that commonly matter across ${state.name} before narrowing to a city or property.`,
@@ -541,7 +553,7 @@ function renderCity(record, context) {
   const officers = recordsForIds(city.loanOfficerIds, context.maps.loanOfficers, context.recordsByRoute);
   const branches = recordsForIds(city.branchIds, context.maps.branches, context.recordsByRoute);
   const articles = recordsForIds(city.articleIds, context.maps.articles, context.recordsByRoute);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Local mortgage market",
     `${city.name}, ${state?.abbr || ""} mortgage market guide`,
     `Compare the housing-cost questions that commonly matter in ${city.name} before reviewing a specific property.`,
@@ -574,7 +586,7 @@ function renderProduct(record, context) {
   if (!content) throw new Error(`Missing product content for ${product.id}`);
   const calculators = recordsForIds(product.relatedCalculatorIds, context.maps.calculators, context.recordsByRoute);
   const tagContext = context.tagContextForRoute(record.entry.route);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Loan option guide",
     product.name,
     content.title,
@@ -631,7 +643,7 @@ function renderLearningHome(record, context) {
     .map((page) => context.recordsByRoute.get(page.route));
   const articles = context.data.articles.slice(0, 12).map((article) => context.recordsByRoute.get(article.route));
   const contributors = context.editorialContent.contributors.map((contributor) => context.recordsByRoute.get(contributor.route));
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Borrower education",
     "Mortgage learning center",
     "Read mortgage guidance organized around buying, refinancing, equity, loan programs, local markets, rates, taxes, insurance, and evidence-based decision questions.",
@@ -647,7 +659,7 @@ function renderBlog(record, context) {
   const hub = context.publicTopicHubsByRoute.get(record.entry.route);
   const tagContext = context.tagContextForRoute(record.entry.route);
   if (!hub) {
-    return `${pageIntro(
+    return `${governedPageIntro(record, context,
       "Mortgage learning topic",
       record.found.item.name,
       record.found.item.metaDescription || "Review related borrower guidance and practical comparison questions.",
@@ -705,7 +717,7 @@ function renderContributor(record, context) {
     (article) => staticContributorArticleCard(article, context),
     { limit: 12, showCount: true },
   );
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     contributor.title,
     contributor.name,
     contributor.shortBio || contributor.bio,
@@ -726,7 +738,7 @@ function renderLoanOfficer(record, context) {
   const branch = context.maps.branches.get(officer.branchId);
   const cities = recordsForIds(branch?.cityIds, context.maps.cities, context.recordsByRoute);
   const branchRecord = branch && context.recordsByRoute.get(branch.route);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Name-only profile",
     officer.name,
     `${officer.name} appears by name with neutral mortgage education. This profile does not establish identity, credentials, state authorization, specialties, languages, availability, branch association, or direct-contact details.`,
@@ -759,9 +771,9 @@ function renderSeller(record, context) {
     </section>`;
 }
 
-function renderCompany(record) {
+function renderCompany(record, context) {
   const company = record.found.item;
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Mortgage company",
     company.name,
     `Compare rate, APR, payment, points, upfront cost, and eight-year borrowing cost for ${company.name} options that match your mortgage scenario.`,
@@ -785,7 +797,7 @@ function renderBranch(record, context) {
   const branch = record.found.item;
   const cities = recordsForIds(branch.cityIds, context.maps.cities, context.recordsByRoute);
   const officers = recordsForIds(branch.loanOfficerIds, context.maps.loanOfficers, context.recordsByRoute);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     "Name-only branch entry",
     branch.name,
     `${branch.name} appears by name with neutral mortgage education. This entry does not establish a location, operating footprint, team relationship, credentials, availability, or direct-contact details.`,
@@ -867,7 +879,7 @@ function renderDirectory(record, context) {
   };
   const config = configurations[route];
   if (!config) throw new Error(`Unsupported directory route ${route}`);
-  return `${pageIntro(
+  return `${governedPageIntro(record, context,
     config.eyebrow,
     config.title,
     config.lead,

@@ -19,6 +19,7 @@ const inputs = {
   tagRegistry: readJson("mock-data/public-tag-registry.json"),
   searchIndex: readJson("mock-data/search-index.json"),
 };
+const heroManifest = readJson("mock-data/hero-asset-manifest.json");
 const planoNewsBundle = readJson("mock-data/location-news/texas/plano.json");
 
 const currentDataWarningPattern = /Use current property details[\s\S]*can vary by property and change over time[\s\S]*home you are considering/i;
@@ -83,6 +84,47 @@ function tagMetadata(tag, siteOrigin = "https://mortgage.example") {
     openGraph: { type: "website", title, description: tag.description, url: canonical, image: "" },
     twitter: { card: "summary", title, description: tag.description, image: "" },
     jsonLd: [],
+  };
+}
+
+function syntheticApprovedHeroManifest(route) {
+  return {
+    status: "approved",
+    entries: [
+      {
+        route,
+        asset_selection_status: "selected",
+        publishing_status: "published",
+        hero: {
+          page_type: "city",
+          hero_variant: "full_bleed_environmental_portrait",
+          eyebrow: "City market guide",
+          headline: "Austin mortgage planning with local evidence",
+          dek: "A documentary hero reserved for an approved asset and route.",
+          primary_cta: { cta_id: "start", label_override: "Review Austin options" },
+          desktop_asset: {
+            selection_status: "selected",
+            asset_id: "synthetic-austin-desktop",
+            asset_origin: "internal",
+            src: "/site/assets/test/austin-desktop.webp",
+          },
+          mobile_asset: {
+            selection_status: "selected",
+            asset_id: "synthetic-austin-mobile",
+            asset_origin: "internal",
+            src: "/site/assets/test/austin-mobile.webp",
+          },
+          decorative: false,
+          alt_text: "An approved Austin housing scene with local context",
+          focal_point_desktop: { x: 0.62, y: 0.45 },
+          focal_point_mobile: { x: 0.48, y: 0.4 },
+          contrast_mode: "left_scrim",
+          review_status: "approved",
+          reviewed_at: "2026-07-22T12:00:00Z",
+          reviewed_by: { user_id: "qa" },
+        },
+      },
+    ],
   };
 }
 
@@ -394,6 +436,43 @@ test("seller runtime loads and passes the cost registry without making unrelated
   assert.match(appSource, /fetchOptionalJson\(SELLER_COST_REGISTRY_URL\)/);
   assert.match(appSource, /renderSellerWorkspace\(page, sellerWorkspaceFixture, \{[\s\S]*?costRegistry: sellerCostRegistry,/);
   assert.match(appSource, /wireSellerWorkspace\([\s\S]*?costRegistry: sellerCostRegistry,/);
+});
+
+test("governed static heroes publish only for approved manifest entries", async () => {
+  const { createStaticRouteContext, renderStaticRouteDocument } = await staticModule();
+  const baseContext = createStaticRouteContext(inputs);
+  const draftContext = createStaticRouteContext({ ...inputs, heroManifest });
+  const cityRecord = baseContext.recordsByRoute.get("/locations/texas/austin");
+  const fallbackHtml = renderStaticRouteDocument(cityRecord, baseContext, { siteOrigin: "https://mortgage.example" });
+  const draftHtml = renderStaticRouteDocument(cityRecord, draftContext, { siteOrigin: "https://mortgage.example" });
+
+  assert.equal(draftHtml, fallbackHtml);
+  assert.doesNotMatch(draftHtml, /data-governed-hero/);
+
+  const approvedContext = createStaticRouteContext({
+    ...inputs,
+    heroManifest: syntheticApprovedHeroManifest("/locations/texas/austin"),
+  });
+  const approvedHtml = renderStaticRouteDocument(cityRecord, approvedContext, { siteOrigin: "https://mortgage.example" });
+  assert.match(approvedHtml, /data-governed-hero/);
+  assert.match(approvedHtml, /Austin mortgage planning with local evidence/);
+  assert.match(approvedHtml, /<source media="\(max-width: 760px\)" srcset="\/site\/assets\/test\/austin-mobile\.webp"/);
+  assert.doesNotMatch(approvedHtml, /<section class="section static-route-intro"/);
+});
+
+test("protected static routes bypass governed hero resolution", async () => {
+  const { createStaticRouteContext, renderStaticRouteDocument } = await staticModule();
+  const context = createStaticRouteContext({
+    ...inputs,
+    heroManifest: syntheticApprovedHeroManifest("/calculators/mortgage-payment"),
+  });
+
+  for (const route of ["/locations", "/rates", "/calculators", "/calculators/mortgage-payment"]) {
+    const record = context.recordsByRoute.get(route);
+    const html = renderStaticRouteDocument(record, context, { siteOrigin: "https://mortgage.example" });
+    assert.doesNotMatch(html, /data-governed-hero/, route);
+    assert.doesNotMatch(html, /Austin mortgage planning with local evidence/, route);
+  }
 });
 
 test("all canonical non-root documents are crawlable, substantive, and SPA-compatible", async () => {
