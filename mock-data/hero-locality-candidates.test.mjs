@@ -308,7 +308,7 @@ test("records Austin's unproven 4:5 crop and the failed-stock-pass next step", (
 });
 
 test("schema models audit and nomination gates without weakening hero publication gates", () => {
-  assert.equal(manifest.schema_version, "1.2.0");
+  assert.equal(manifest.schema_version, "1.3.0");
   assert.ok(manifestSchema.properties.locality_set_audit);
   assert.ok(manifestSchema.$defs.locality_candidate_pool);
   assert.ok(manifestSchema.$defs.locality_asset_candidate);

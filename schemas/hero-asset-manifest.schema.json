@@ -10,6 +10,8 @@
     "status",
     "locality_set_audit",
     "locality_candidate_pools",
+    "page_family_set_audit",
+    "page_family_candidate_pools",
     "entries"
   ],
   "properties": {
@@ -17,13 +19,20 @@
       "type": "string",
       "const": "../schemas/hero-asset-manifest.schema.json"
     },
-    "schema_version": { "type": "string", "const": "1.2.0" },
+    "schema_version": { "type": "string", "const": "1.3.0" },
     "status": { "type": "string", "const": "draft" },
     "locality_set_audit": { "$ref": "#/$defs/locality_set_audit" },
     "locality_candidate_pools": {
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "#/$defs/locality_candidate_pool" }
+    },
+    "page_family_set_audit": { "$ref": "#/$defs/page_family_set_audit" },
+    "page_family_candidate_pools": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": { "$ref": "#/$defs/page_family_candidate_pool" }
     },
     "entries": {
       "type": "array",
@@ -501,6 +510,299 @@
                 "maxContains": 1
               }
             }
+          }
+        }
+      ]
+    },
+    "page_family_set_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "review_method",
+        "manual_editorial_result",
+        "audited_candidate_count",
+        "prohibited_cliches",
+        "observed_prohibited_cliche_count",
+        "candidate_ids_with_prohibited_cliches",
+        "observed_duplicate_asset_url_count",
+        "duplicate_asset_urls",
+        "repetition_findings",
+        "decision"
+      ],
+      "properties": {
+        "scope": { "type": "string", "const": "non_location_page_family_candidate_set" },
+        "review_method": { "type": "string", "const": "manual_editorial_audit" },
+        "manual_editorial_result": { "type": "string", "const": "failed" },
+        "audited_candidate_count": { "type": "integer", "const": 18 },
+        "prohibited_cliches": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "key_handoff",
+              "cash_pile",
+              "handshake",
+              "generic_laptop",
+              "anonymous_boardroom"
+            ]
+          }
+        },
+        "observed_prohibited_cliche_count": { "type": "integer", "const": 0 },
+        "candidate_ids_with_prohibited_cliches": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "observed_duplicate_asset_url_count": { "type": "integer", "const": 0 },
+        "duplicate_asset_urls": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "repetition_findings": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "decision": { "type": "string", "const": "no_selection" }
+      }
+    },
+    "page_family_asset_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "asset_origin",
+        "asset_page_url",
+        "source_repository",
+        "creator_or_agency",
+        "displayed_caption",
+        "license_name",
+        "license_url",
+        "source_accessed_at",
+        "attribution_label",
+        "release_assessment",
+        "release_property_trademark_risks",
+        "page_relevance",
+        "crop_risks",
+        "assigned_hero_variant",
+        "composition_fit",
+        "composition_fit_notes",
+        "prohibited_cliches_detected",
+        "candidate_disposition",
+        "lifecycle_stage",
+        "acquisition_status",
+        "rights_review_status",
+        "editorial_review_status",
+        "crop_review_status",
+        "publishing_status"
+      ],
+      "properties": {
+        "candidate_id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "asset_origin": { "type": "string", "const": "stock" },
+        "asset_page_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "source_repository": { "type": "string", "enum": ["Pexels", "Wikimedia Commons"] },
+        "creator_or_agency": { "type": "string", "minLength": 1 },
+        "displayed_caption": { "type": "string", "minLength": 1 },
+        "license_name": { "type": "string", "minLength": 1 },
+        "license_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "source_accessed_at": { "type": "string", "format": "date" },
+        "attribution_label": { "type": "string", "minLength": 1 },
+        "release_assessment": { "type": "string", "const": "pending_acquisition_review" },
+        "release_property_trademark_risks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "page_relevance": { "type": "string", "minLength": 1 },
+        "crop_risks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "assigned_hero_variant": {
+          "type": "string",
+          "enum": [
+            "tall_diagonal_image_slab",
+            "wide_panoramic_band",
+            "rotated_architectural_window",
+            "circular_criteria_or_brand_field",
+            "layered_editorial_collage",
+            "media_left_editorial_panel",
+            "evidence_or_report_strip",
+            "horizon_composition",
+            "stacked_planning_panels"
+          ]
+        },
+        "composition_fit": {
+          "type": "string",
+          "enum": ["supports_assigned_variant", "component_for_assigned_composition"]
+        },
+        "composition_fit_notes": { "type": "string", "minLength": 1 },
+        "prohibited_cliches_detected": { "type": "array", "maxItems": 0 },
+        "candidate_disposition": { "type": "string", "const": "nominated" },
+        "lifecycle_stage": { "type": "string", "const": "nominated" },
+        "acquisition_status": { "type": "string", "const": "not_acquired" },
+        "rights_review_status": { "type": "string", "const": "not_started" },
+        "editorial_review_status": { "type": "string", "const": "not_started" },
+        "crop_review_status": { "type": "string", "const": "not_started" },
+        "publishing_status": { "type": "string", "const": "prohibited" }
+      }
+    },
+    "internal_asset_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_origin_requirement",
+        "required_subject",
+        "substitute_prohibition",
+        "acceptance_requirements"
+      ],
+      "properties": {
+        "asset_origin_requirement": { "type": "string", "const": "internal" },
+        "required_subject": { "type": "string", "minLength": 1 },
+        "substitute_prohibition": { "type": "string", "minLength": 1 },
+        "acceptance_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "structured_composition_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["photo_required", "treatment", "acceptance_requirements"],
+      "properties": {
+        "photo_required": { "type": "boolean", "const": false },
+        "treatment": { "type": "string", "minLength": 1 },
+        "acceptance_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "page_family_candidate_pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "page_type",
+        "hero_variant",
+        "source_strategy",
+        "selection_outcome",
+        "unresolved_reason",
+        "publishing_status",
+        "next_sourcing_step",
+        "candidates"
+      ],
+      "properties": {
+        "route": { "type": "string", "pattern": "^/[a-z0-9/-]+$" },
+        "page_type": {
+          "type": "string",
+          "enum": [
+            "buy",
+            "refinance",
+            "home_equity",
+            "loan_product",
+            "learning_center",
+            "topic_hub",
+            "article",
+            "loan_officer",
+            "branch",
+            "company",
+            "search_directory",
+            "prequalification",
+            "seller_move_up"
+          ]
+        },
+        "hero_variant": {
+          "type": "string",
+          "enum": [
+            "tall_diagonal_image_slab",
+            "wide_panoramic_band",
+            "rotated_architectural_window",
+            "circular_criteria_or_brand_field",
+            "layered_editorial_collage",
+            "media_left_editorial_panel",
+            "evidence_or_report_strip",
+            "vertical_human_portrait",
+            "structured_search_or_planning_interface",
+            "horizon_composition",
+            "stacked_planning_panels"
+          ]
+        },
+        "source_strategy": {
+          "type": "string",
+          "enum": [
+            "external_stock_candidates",
+            "internal_only",
+            "internal_preferred",
+            "non_photographic"
+          ]
+        },
+        "selection_outcome": { "type": "string", "const": "unresolved" },
+        "unresolved_reason": { "type": "string", "minLength": 1 },
+        "publishing_status": { "type": "string", "const": "prohibited" },
+        "next_sourcing_step": {
+          "type": "string",
+          "enum": [
+            "acquire_and_review_nominees_or_commission",
+            "obtain_actual_internal_asset",
+            "commission_actual_internal_operating_photography",
+            "design_and_review_structured_non_photographic_treatment"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/page_family_asset_candidate" }
+        },
+        "internal_asset_requirement": { "$ref": "#/$defs/internal_asset_requirement" },
+        "structured_composition_requirement": {
+          "$ref": "#/$defs/structured_composition_requirement"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "source_strategy": { "const": "external_stock_candidates" } },
+            "required": ["source_strategy"]
+          },
+          "then": {
+            "properties": { "candidates": { "minItems": 2 } },
+            "not": {
+              "anyOf": [
+                { "required": ["internal_asset_requirement"] },
+                { "required": ["structured_composition_requirement"] }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source_strategy": { "enum": ["internal_only", "internal_preferred"] }
+            },
+            "required": ["source_strategy"]
+          },
+          "then": {
+            "required": ["internal_asset_requirement"],
+            "properties": { "candidates": { "maxItems": 0 } },
+            "not": { "required": ["structured_composition_requirement"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "source_strategy": { "const": "non_photographic" } },
+            "required": ["source_strategy"]
+          },
+          "then": {
+            "required": ["structured_composition_requirement"],
+            "properties": { "candidates": { "maxItems": 0 } },
+            "not": { "required": ["internal_asset_requirement"] }
           }
         }
       ]
