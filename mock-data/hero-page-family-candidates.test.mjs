@@ -118,6 +118,48 @@ test("records at least two real rights-verifiable external candidates where stoc
   }
 });
 
+test("preserves the exact live source caption for the refinance kitchen nominee", () => {
+  const candidate = manifest.page_family_candidate_pools
+    .flatMap(({ candidates }) => candidates)
+    .find(({ candidate_id }) => candidate_id === "refi-kitchen-finance-review-rankin");
+  assert.equal(candidate.displayed_caption, "A Man in a Kitchen");
+});
+
+test("covers the current home, sell-and-buy transition, and future-home tradeoffs as separate seller panels", () => {
+  const seller = manifest.page_family_candidate_pools.find(
+    ({ page_type }) => page_type === "seller_move_up",
+  );
+  assert.ok(seller.candidates.length >= 3);
+  assert.deepEqual(
+    new Set(seller.candidates.map(({ seller_journey_phase }) => seller_journey_phase)),
+    new Set(["current_home", "sell_and_buy_transition", "future_home_tradeoffs"]),
+  );
+  seller.candidates.forEach((candidate) => {
+    assert.equal(candidate.composition_fit, "component_for_assigned_composition");
+    assert.match(candidate.page_relevance, /current home|sell-and-buy|future home|tradeoff/i);
+  });
+});
+
+test("uses current domain-specific housing evidence in the Learning Center newsroom collage", () => {
+  const learning = manifest.page_family_candidate_pools.find(
+    ({ page_type }) => page_type === "learning_center",
+  );
+  const evidence = learning.candidates.filter(
+    ({ editorial_evidence_role }) => editorial_evidence_role === "current_housing_market_evidence",
+  );
+  assert.ok(evidence.length >= 1);
+  evidence.forEach((candidate) => {
+    assert.equal(candidate.source_repository, "Wikimedia Commons");
+    assert.match(candidate.displayed_caption, /housing price|home price|housing market/i);
+    assert.match(candidate.page_relevance, /mortgage|housing|market|newsroom/i);
+    assert.equal(candidate.composition_fit, "component_for_assigned_composition");
+  });
+  assert.equal(
+    learning.candidates.some(({ candidate_id }) => candidate_id === "learning-printed-charts-blazek"),
+    false,
+  );
+});
+
 test("keeps every candidate before acquisition, selection, review, and publication", () => {
   const forbiddenFields = [
     "asset_id",
@@ -192,7 +234,7 @@ test("keeps company internal-first and search/directory non-photographic", () =>
 test("audits the complete candidate set for prohibited clichés and repeated assets", () => {
   const candidates = manifest.page_family_candidate_pools.flatMap(({ candidates }) => candidates);
   const audit = manifest.page_family_set_audit;
-  assert.equal(candidates.length, 18);
+  assert.equal(candidates.length, 19);
   assert.equal(audit.scope, "non_location_page_family_candidate_set");
   assert.equal(audit.review_method, "manual_editorial_audit");
   assert.deepEqual(audit.prohibited_cliches, prohibitedCliches);
@@ -227,6 +269,9 @@ test("documents 13 family rationales and the full-set lifecycle and cliché audi
     "Seller/move-up",
   ].forEach((label) => assert.match(review, new RegExp(`\\| ${label.replace("/", "\\/")} \\|`, "i")));
   ["key handoff", "cash pile", "handshake", "generic laptop", "anonymous boardroom"].forEach(
+    (phrase) => assert.match(review, new RegExp(phrase, "i")),
+  );
+  ["current home", "sell-and-buy transition", "future home", "housing-market evidence"].forEach(
     (phrase) => assert.match(review, new RegExp(phrase, "i")),
   );
 });

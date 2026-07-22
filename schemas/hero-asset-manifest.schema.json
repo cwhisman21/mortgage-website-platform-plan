@@ -534,7 +534,7 @@
         "scope": { "type": "string", "const": "non_location_page_family_candidate_set" },
         "review_method": { "type": "string", "const": "manual_editorial_audit" },
         "manual_editorial_result": { "type": "string", "const": "failed" },
-        "audited_candidate_count": { "type": "integer", "const": 18 },
+        "audited_candidate_count": { "type": "integer", "const": 19 },
         "prohibited_cliches": {
           "type": "array",
           "minItems": 5,
@@ -641,6 +641,14 @@
           "enum": ["supports_assigned_variant", "component_for_assigned_composition"]
         },
         "composition_fit_notes": { "type": "string", "minLength": 1 },
+        "editorial_evidence_role": {
+          "type": "string",
+          "const": "current_housing_market_evidence"
+        },
+        "seller_journey_phase": {
+          "type": "string",
+          "enum": ["current_home", "sell_and_buy_transition", "future_home_tradeoffs"]
+        },
         "prohibited_cliches_detected": { "type": "array", "maxItems": 0 },
         "candidate_disposition": { "type": "string", "const": "nominated" },
         "lifecycle_stage": { "type": "string", "const": "nominated" },
