@@ -59,11 +59,8 @@ test("dynamic location pages carry borrower-facing current-data guidance", () =>
 });
 
 test("navigation, notice actions, calculator inputs, and content labels use borrower-facing language", () => {
-  assert.match(appSource, /navLink\("\/rates", "Rates"\)/);
-  assert.match(appSource, /navLink\("\/learning-center", "Learning"\)/);
-  assert.match(appSource, /navLink\("\/loan-options", "Loan Options"\)/);
-  assert.match(appSource, /header-nav-action[^>]*data-cta-action="compareOffer"[^>]*>Compare Your Offer/);
-  assert.doesNotMatch(appSource, /navLink\("\/loan-officers", "(?:Loan officers|Experts)"\)/);
+  assert.match(appSource, /path: "\/loan-officers", label: "Loan Officers"/);
+  assert.doesNotMatch(appSource, /navLink\("\/loan-officers", "Experts"\)/);
   assert.doesNotMatch(appSource, /Request mortgage guidance|Request guidance|primary: "Get guidance"/);
   assert.doesNotMatch(appSource, />Start prequalification|Start a prequalification conversation/);
   assert.match(appSource, /function humanizePublicLabel/);

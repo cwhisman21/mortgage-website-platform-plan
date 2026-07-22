@@ -55,7 +55,7 @@ export function renderArticleDocument(article, media, { siteOrigin = DEFAULT_SIT
   <script type="application/ld+json">${jsonForScript(structuredData)}</script>
   <link rel="stylesheet" href="/site/styles.css" />
 </head><body>
-  <header class="site-header"><div class="header-inner"><a class="brand" href="/"><img class="brand-logo" src="/site/assets/images/snap-loans.svg" alt="Snap Loans" /></a></div></header>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="/"><img class="brand-logo" src="/site/assets/images/snap-mortgage.png" alt="Snap Mortgage" /></a></div></header>
   <main class="page">${renderArticleContent(article, media, { author, tagContext })}</main>
   <footer class="site-footer"><div class="footer-inner"><a href="/locations">Locations</a><a href="/learning-center">Learning center</a></div></footer>
 </body></html>`.replace(/[ \t]+(?=\r?\n)/g, "");
