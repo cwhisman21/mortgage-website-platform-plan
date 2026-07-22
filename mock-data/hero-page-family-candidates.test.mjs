@@ -103,11 +103,17 @@ test("records at least two real rights-verifiable external candidates where stoc
     for (const candidate of pool.candidates) {
       assert.equal(candidate.asset_origin, "stock", candidate.candidate_id);
       assertDirectAssetUrl(candidate.asset_page_url, candidate.candidate_id);
-      new URL(candidate.license_url);
+      if (candidate.rights_basis_type === "disputed") {
+        new URL(candidate.rights_basis_url);
+      } else {
+        new URL(candidate.license_url);
+      }
       assert.ok(candidate.source_repository.trim(), candidate.candidate_id);
       assert.ok(candidate.creator_or_agency.trim(), candidate.candidate_id);
       assert.ok(candidate.displayed_caption.trim(), candidate.candidate_id);
-      assert.ok(candidate.license_name.trim(), candidate.candidate_id);
+      if (candidate.rights_basis_type !== "disputed") {
+        assert.ok(candidate.license_name.trim(), candidate.candidate_id);
+      }
       assert.match(candidate.source_accessed_at, /^\d{4}-\d{2}-\d{2}$/);
       assert.ok(candidate.attribution_label.trim(), candidate.candidate_id);
       assert.equal(candidate.release_assessment, "pending_acquisition_review");
@@ -158,6 +164,31 @@ test("uses current domain-specific housing evidence in the Learning Center newsr
     learning.candidates.some(({ candidate_id }) => candidate_id === "learning-printed-charts-blazek"),
     false,
   );
+});
+
+test("blocks the NY Fed heatmap under disputed terms instead of treating a public-domain mark as a license", () => {
+  const candidate = manifest.page_family_candidate_pools
+    .flatMap(({ candidates }) => candidates)
+    .find(({ candidate_id }) => candidate_id === "learning-september-2025-house-price-heatmap");
+  assert.equal(candidate.rights_basis_type, "disputed");
+  assert.match(candidate.rights_basis_name, /(New York|NY) Fed/i);
+  assert.match(candidate.rights_basis_name, /(Wikimedia Commons|Commons)/i);
+  assert.equal(candidate.rights_basis_url, "https://www.newyorkfed.org/privacy/termsofuse.html");
+  assert.equal(candidate.original_source_url, "https://www.newyorkfed.org/research/home-price-index");
+  assert.equal(candidate.controlling_terms_url, "https://www.newyorkfed.org/privacy/termsofuse.html");
+  assert.equal(candidate.commons_public_domain_assertion_status, "disputed");
+  assert.equal(
+    candidate.commons_public_domain_mark_url,
+    "https://creativecommons.org/publicdomain/mark/1.0/",
+  );
+  assert.equal(candidate.rights_eligibility, "blocked_pending_clearance");
+  assert.equal(candidate.rights_review_status, "not_started");
+  assert.equal(candidate.publishing_status, "prohibited");
+  assert.equal("license_name" in candidate, false);
+  assert.equal("license_url" in candidate, false);
+  assert.ok(candidate.conditional_attribution_and_use_restrictions.length >= 5);
+  assert.match(candidate.attribution_label, /subject to the Terms of Use/i);
+  assert.ok(schema.$defs.page_family_asset_candidate.allOf?.length);
 });
 
 test("keeps every candidate before acquisition, selection, review, and publication", () => {
@@ -249,6 +280,20 @@ test("audits the complete candidate set for prohibited clichés and repeated ass
   });
 });
 
+test("derives the complete repeated-creator set and matches the manifest audit", () => {
+  const candidates = manifest.page_family_candidate_pools.flatMap(({ candidates }) => candidates);
+  const creatorCounts = new Map();
+  candidates.forEach(({ creator_or_agency }) => {
+    creatorCounts.set(creator_or_agency, (creatorCounts.get(creator_or_agency) ?? 0) + 1);
+  });
+  const repeatedCreators = [...creatorCounts]
+    .filter(([, count]) => count > 1)
+    .map(([creator]) => creator)
+    .sort();
+  assert.deepEqual(repeatedCreators, ["Pavel Danilyuk", "RDNE Stock project"]);
+  assert.deepEqual(manifest.page_family_set_audit.repeated_creators, repeatedCreators);
+});
+
 test("documents 13 family rationales and the full-set lifecycle and cliché audit", () => {
   assert.match(review, /13 page families/i);
   assert.match(review, /nomination is not acquisition, selection, or approval/i);
@@ -272,6 +317,9 @@ test("documents 13 family rationales and the full-set lifecycle and cliché audi
     (phrase) => assert.match(review, new RegExp(phrase, "i")),
   );
   ["current home", "sell-and-buy transition", "future home", "housing-market evidence"].forEach(
+    (phrase) => assert.match(review, new RegExp(phrase, "i")),
+  );
+  ["Pavel Danilyuk", "RDNE Stock project", "public-domain assertion is disputed"].forEach(
     (phrase) => assert.match(review, new RegExp(phrase, "i")),
   );
 });

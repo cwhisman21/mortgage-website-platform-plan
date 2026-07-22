@@ -527,6 +527,7 @@
         "candidate_ids_with_prohibited_cliches",
         "observed_duplicate_asset_url_count",
         "duplicate_asset_urls",
+        "repeated_creators",
         "repetition_findings",
         "decision"
       ],
@@ -561,6 +562,16 @@
           "type": "array",
           "maxItems": 0
         },
+        "repeated_creators": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["Pavel Danilyuk", "RDNE Stock project"]
+          }
+        },
         "repetition_findings": {
           "type": "array",
           "minItems": 1,
@@ -579,8 +590,6 @@
         "source_repository",
         "creator_or_agency",
         "displayed_caption",
-        "license_name",
-        "license_url",
         "source_accessed_at",
         "attribution_label",
         "release_assessment",
@@ -608,6 +617,19 @@
         "displayed_caption": { "type": "string", "minLength": 1 },
         "license_name": { "type": "string", "minLength": 1 },
         "license_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "rights_basis_type": { "type": "string", "enum": ["license", "public_domain_mark", "terms_of_use", "disputed"] },
+        "rights_basis_name": { "type": "string", "minLength": 1 },
+        "rights_basis_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "original_source_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "controlling_terms_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "commons_public_domain_mark_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "commons_public_domain_assertion_status": { "type": "string", "const": "disputed" },
+        "rights_eligibility": { "type": "string", "const": "blocked_pending_clearance" },
+        "conditional_attribution_and_use_restrictions": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "type": "string", "minLength": 1 }
+        },
         "source_accessed_at": { "type": "string", "format": "date" },
         "attribution_label": { "type": "string", "minLength": 1 },
         "release_assessment": { "type": "string", "const": "pending_acquisition_review" },
@@ -657,7 +679,25 @@
         "editorial_review_status": { "type": "string", "const": "not_started" },
         "crop_review_status": { "type": "string", "const": "not_started" },
         "publishing_status": { "type": "string", "const": "prohibited" }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "rights_basis_type": { "const": "disputed" } },
+            "required": ["rights_basis_type"]
+          },
+          "then": {
+            "required": ["rights_basis_name", "rights_basis_url", "original_source_url", "controlling_terms_url", "commons_public_domain_mark_url", "commons_public_domain_assertion_status", "rights_eligibility", "conditional_attribution_and_use_restrictions"],
+            "not": {
+              "anyOf": [
+                { "required": ["license_name"] },
+                { "required": ["license_url"] }
+              ]
+            }
+          },
+          "else": { "required": ["license_name", "license_url"] }
+        }
+      ]
     },
     "internal_asset_requirement": {
       "type": "object",
