@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://mortgage-website-platform-plan-thinkwhale.vercel.app/sitemap.xml

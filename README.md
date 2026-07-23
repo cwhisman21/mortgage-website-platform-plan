@@ -1,70 +1,30 @@
 # Mortgage Website Platform Plan
 
-Planning repo for a high-value mortgage website and local mortgage intelligence platform.
+Planning repository for Snap Mortgage public website, Snap Homes, CRM/admin, content architecture, local mortgage intelligence, compliance, data model, and workflow design.
 
-This is not an app implementation yet. It captures the product architecture, page system, CMS/admin needs, data relationships, SEO strategy, AI local-news pipeline, compliance concerns, and grill-me questions before build work begins.
+## Runtime Repositories
 
-## Start Here
+- Public website: https://github.com/Think-Whale/mortgage-website
+- Snap Homes: https://github.com/Think-Whale/snap-homes
+- CRM/admin: https://github.com/Think-Whale/mortgage-platform-admin
 
-If you are opening this repo in a new Codex chat, start with:
+## This Repository Contains
 
-- [Agent Instructions](AGENTS.md)
-- [Chat Handoff](docs/00-chat-handoff.md)
-- [Grill Me Questions](docs/08-grill-me-questions.md)
+- Product strategy and PRDs.
+- Information architecture.
+- Page templates and content models.
+- Data model and CMS/admin requirements.
+- Shared ecosystem asset and platform-contract planning.
+- Research plans and content operations plans.
+- n8n/editorial workflow planning.
 
-New chats do not automatically have the original conversation. The handoff file preserves the context needed to continue.
+## This Repository Does Not Deploy Apps
 
-## Working Concept
+Do not add public website runtime code, Snap Homes runtime code, CRM/admin runtime code, generated static pages, or Vercel app configs to this planning repo.
 
-Build a mortgage editorial and placement platform that helps borrowers understand their local housing and mortgage market, compare options, and connect with the right local loan officer or branch.
+## Runtime Repo Ownership
 
-The site should be more than a lender brochure:
-
-- Local city and state dashboards with standardized facts, tables, charts, and news.
-- Product pages for purchase, refinance, equity, FHA, VA, jumbo, and other loan paths, with location-specific product modules embedded on city and state pages.
-- Blog/news publishing tied back to locations, products, loan officers, branches, and calculators.
-- Sticky contextual CTAs that move with the user as they scroll.
-- Admin/CMS controls for locations, products, loan officers, branches, editorial content, market data, CTAs, and compliance review.
-
-## Current Status
-
-- Planning and architecture only.
-- No production code yet.
-- Git repo initialized locally.
-- GitHub remote still needs to be created and connected.
-
-## Recommended Repo Use
-
-Use this repo as the source of truth for:
-
-- Website wireframes and page requirements.
-- Backend/admin requirements.
-- Data model and content relationships.
-- SEO and local editorial strategy.
-- Future implementation issues and PRDs.
-
-## Docs
-
-- [Chat Handoff](docs/00-chat-handoff.md)
-- [Vision And Positioning](docs/01-vision-and-positioning.md)
-- [Information Architecture](docs/02-information-architecture.md)
-- [Page Templates](docs/03-page-templates.md)
-- [Backend And CMS Admin](docs/04-backend-and-cms-admin.md)
-- [Data Model](docs/05-data-model.md)
-- [AI Local News Pipeline](docs/06-ai-local-news-pipeline.md)
-- [SEO And Compliance](docs/07-seo-and-compliance.md)
-- [Grill Me Questions](docs/08-grill-me-questions.md)
-- [GitHub Setup Guide](docs/09-github-setup-guide.md)
-- [V1 PRD](docs/10-v1-prd.md)
-- [Wireframe Block Spec](docs/11-wireframe-block-spec.md)
-- [Prototype Content Seed Plan](docs/12-prototype-content-seed-plan.md)
-- [Prototype Route Inventory](docs/13-prototype-route-inventory.md)
-- [Design Reference Examples](docs/14-design-reference-examples.md)
-- [Production Research And Content Plan](docs/15-production-research-and-content-plan.md)
-- [Location News Feed Plan](docs/19-location-news-feed-plan.md)
-- [Location News Research And Build Brief](docs/20-location-news-research-and-build-brief.md)
-- [Location News Feed Implementation Plan](docs/superpowers/plans/2026-07-10-location-news-feed-implementation.md)
-
-## Seed Data
-
-- [Production Research Seed Data](mock-data/production-seed.json)
+- Public website runtime: `Think-Whale/mortgage-website`
+- Snap Homes runtime: `Think-Whale/snap-homes`
+- CRM/admin runtime: `Think-Whale/mortgage-platform-admin`
+- Planning/docs only: this repository

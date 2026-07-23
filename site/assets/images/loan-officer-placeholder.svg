@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Loan officer photo placeholder">
-  <circle cx="64" cy="64" r="64" fill="#eef4ff"/>
-  <circle cx="64" cy="47" r="23" fill="#b8c8e8"/>
-  <path d="M22 116c4-27 20-42 42-42s38 15 42 42" fill="#7893c5"/>
-  <path d="M45 77c5 7 11 11 19 11s14-4 19-11" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="5" opacity=".75"/>
-</svg>
