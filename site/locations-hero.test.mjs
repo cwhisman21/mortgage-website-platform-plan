@@ -1,7 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { renderHomeStateExplorer, renderLocationsHero } from "./locations-hero.mjs";
+import * as locationsHero from "./locations-hero.mjs";
+
+const { renderLocationsHero } = locationsHero;
 
 const seed = JSON.parse(fs.readFileSync(new URL("../mock-data/production-seed.json", import.meta.url), "utf8"));
 const appSource = fs.readFileSync(new URL("./app.js", import.meta.url), "utf8");
@@ -37,8 +39,14 @@ test("styles the locations hero as a large centered map composition", () => {
   assert.match(stylesheet, /@media \(max-width: 760px\)[\s\S]*\.locations-hero-search/);
 });
 
-test("renders the homepage state map with a collapsed crawlable state list", () => {
-  const html = renderHomeStateExplorer(seed.states);
+test("homepage state explorer renders one map and a crawlable state list", () => {
+  assert.equal(
+    typeof locationsHero.renderHomeStateExplorer,
+    "function",
+    "locations-hero.mjs must export renderHomeStateExplorer",
+  );
+
+  const html = locationsHero.renderHomeStateExplorer(seed.states);
 
   assert.match(html, /<h2[^>]*>Where are you looking\?<\/h2>/);
   assert.equal((html.match(/data-state-id=/g) || []).length, 51);

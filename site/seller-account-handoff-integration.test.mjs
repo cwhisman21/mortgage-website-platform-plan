@@ -320,16 +320,9 @@ test("account menu refresh replaces and wires only the new account root", () => 
       },
     };
   };
-  const toggle = listeners({ "aria-expanded": "false" });
-  const menu = { hidden: true };
   const accountAction = listeners({ "data-account-action": "open" });
   const ctaAction = listeners({ "data-cta-action": "compareOffer" });
   const replacementRoot = {
-    querySelector(selector) {
-      if (selector === "[data-account-toggle]") return toggle;
-      if (selector === "[data-account-menu]") return menu;
-      return null;
-    },
     querySelectorAll(selector) {
       if (selector === "[data-auth-action]") return [];
       if (selector === "[data-account-action]") return [accountAction];
@@ -338,10 +331,10 @@ test("account menu refresh replaces and wires only the new account root", () => 
     },
   };
   const openedActions = [];
-  let closeAccountCalls = 0;
+  let closeNavigationCalls = 0;
   const wireAccountInteractions = Function(
     "document",
-    "closeAccountMenu",
+    "closeNavigation",
     "openAuthModal",
     "sessionState",
     "openActionModal",
@@ -351,7 +344,7 @@ test("account menu refresh replaces and wires only the new account root", () => 
     `"use strict";\n${topLevelFunctionSource("wireAccountInteractions", "refreshAccountMenu")}\nreturn wireAccountInteractions;`,
   )(
     {},
-    () => { closeAccountCalls += 1; },
+    () => { closeNavigationCalls += 1; },
     () => { throw new Error("logged-in account action must not open auth"); },
     { isLoggedIn: true },
     (action) => { openedActions.push(action); },
@@ -375,33 +368,25 @@ test("account menu refresh replaces and wires only the new account root", () => 
       return template;
     },
     querySelector(selector) {
-      assert.equal(selector, "[data-account-root]");
+      assert.equal(selector, ".site-nav-account-actions");
       return currentRoot;
     },
   };
   const wiredRoots = [];
-  const renderAccountMenu = Function(
+  const renderAccountNavigation = Function(
     "sessionState",
-    "SNAP_CUSTOMER",
-    "icon",
-    "esc",
-    "mobilePublicMenu",
-    `"use strict";\n${topLevelFunctionSource("accountMenu", "header")}\nreturn accountMenu;`,
+    `"use strict";\n${topLevelFunctionSource("accountNavigation", "header")}\nreturn accountNavigation;`,
   )(
     { isLoggedIn: true, savedCount: 0 },
-    { name: "Caleb" },
-    () => '<span class="account-icon"></span>',
-    (value) => String(value),
-    () => '<div data-mobile-public-menu></div>',
   );
   const refreshAccountMenu = Function(
     "document",
-    "accountMenu",
+    "accountNavigation",
     "wireAccountInteractions",
     `"use strict";\n${topLevelFunctionSource("refreshAccountMenu", "openAuthModal")}\nreturn refreshAccountMenu;`,
   )(
     fakeDocument,
-    renderAccountMenu,
+    renderAccountNavigation,
     (root) => {
       wiredRoots.push(root);
       wireAccountInteractions(root);
@@ -409,22 +394,18 @@ test("account menu refresh replaces and wires only the new account root", () => 
   );
 
   refreshAccountMenu();
-  toggle.click();
   accountAction.click();
   ctaAction.click();
 
   assert.equal(replacedWith, replacementRoot);
   assert.deepEqual(wiredRoots, [replacementRoot]);
-  assert.match(template.innerHTML, /account-trigger logged-in/);
-  assert.match(template.innerHTML, /Open My Account/);
+  assert.match(template.innerHTML, /site-nav-account-actions/);
+  assert.match(template.innerHTML, /My Account/);
   assert.match(template.innerHTML, /Sign out/);
   assert.doesNotMatch(template.innerHTML, /data-auth-action/);
-  assert.equal(toggle.listenerCount(), 1);
   assert.equal(accountAction.listenerCount(), 1);
   assert.equal(ctaAction.listenerCount(), 1);
-  assert.equal(menu.hidden, false);
-  assert.equal(toggle.attributes["aria-expanded"], "true");
-  assert.equal(closeAccountCalls, 2);
+  assert.equal(closeNavigationCalls, 2);
   assert.deepEqual(openedActions, ["account", "compareOffer"]);
 });
 

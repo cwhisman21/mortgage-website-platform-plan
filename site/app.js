@@ -7,7 +7,7 @@ import {
   wireMarketChartInteractions,
 } from "/site/market-charts.mjs";
 import { renderHomeStateExplorer, renderLocationsHero } from "/site/locations-hero.mjs";
-import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs";
+import { initCampaignHero, renderCampaignHero } from "/site/campaign-hero.mjs?v=20260719-1";
 import {
   buildLearningCenterModel,
   serializeLearningCenterSearch,
@@ -100,7 +100,7 @@ let articleModalScrollY = 0;
 let activeArticleRequestId = 0;
 
 const ASSETS = {
-  logo: "/site/assets/images/snap-loans.svg",
+  logo: "/site/assets/images/snap-mortgage.png?v=20260718-12",
   borrower: "/site/assets/images/borrower.png",
   mortgage: "/site/assets/images/mortgage.png",
   house: "/site/assets/images/house-icon.png"
@@ -477,7 +477,8 @@ function icon(name) {
     prequal: '<path d="M8 4h8l2 3v13H6V7l2-3Z"/><path d="m9 13 2 2 4-5"/><path d="M9 18h6"/>',
     leadForm: '<path d="M5 5h14v10H8l-3 3V5Z"/><path d="M8 9h8M8 12h5"/>',
     compare: '<path d="M7 4v16M17 4v16"/><path d="M4 8h6l-3 6-3-6ZM14 8h6l-3 6-3-6Z"/><path d="M4 18h16"/>',
-    lock: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>'
+    lock: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+    search: '<circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/>'
   };
   return `<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">${paths[name] || paths.home}</svg></span>`;
 }
@@ -718,69 +719,81 @@ function navLink(path, label) {
   return `<a class="${active ? "active" : ""}" href="${route(path)}">${esc(label)}</a>`;
 }
 
-function mobilePublicMenu() {
+const SITE_NAVIGATION_GROUPS = Object.freeze([
+  Object.freeze({ id: "explore", label: "Explore", links: Object.freeze([Object.freeze({ path: "/locations", label: "Locations" }), Object.freeze({ path: "/rates", label: "Rates" })]) }),
+  Object.freeze({ id: "mortgage-goals", label: "Mortgage goals", links: Object.freeze([Object.freeze({ path: "/buy", label: "Buy" }), Object.freeze({ path: "/sell", label: "Sell" }), Object.freeze({ path: "/refinance", label: "Refinance" }), Object.freeze({ path: "/loan-options", label: "Loan Options" })]) }),
+  Object.freeze({ id: "tools-learning", label: "Tools and learning", links: Object.freeze([Object.freeze({ path: "/calculators", label: "Calculators" }), Object.freeze({ path: "/learning-center", label: "Learning" })]) }),
+  Object.freeze({ id: "guidance", label: "Guidance", links: Object.freeze([Object.freeze({ path: "/loan-officers", label: "Loan Officers" }), Object.freeze({ path: "/branches", label: "Branches" })]) }),
+]);
+
+function navigationGroup({ id, label, links }) {
   return `
-    <div class="mobile-public-menu" data-mobile-public-menu>
-      <a href="${route("/rates")}">Rates</a>
-      <a href="${route("/learning-center")}">Learning</a>
-      <a href="${route("/loan-options")}">Loan Options</a>
-      <button type="button" data-cta-action="compareOffer">Compare Your Offer</button>
-    </div>`;
+    <section class="site-nav-group" aria-labelledby="site-nav-${id}">
+      <h2 class="site-nav-group-title" id="site-nav-${id}">${esc(label)}</h2>
+      <ul class="site-nav-group-list">
+        ${links.map(({ path, label: linkLabel }) => `<li>${navLink(path, linkLabel)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
 }
 
-function accountMenu() {
+function accountNavigation() {
   const savedBadge = sessionState.savedCount > 0 ? `<span class="account-badge" data-saved-count>${sessionState.savedCount}</span>` : "";
   if (!sessionState.isLoggedIn) {
     return `
-      <div class="account-menu" data-account-root>
-        <button class="account-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-account-toggle>
-          <span class="hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-          <span class="account-name">Menu</span>
+      <div class="site-nav-account-actions" aria-label="Account">
+        <button class="site-nav-action" type="button" data-auth-action="login" data-account-target>
+          Log in
           ${savedBadge}
         </button>
-        <div class="account-dropdown" data-account-menu hidden>
-          ${mobilePublicMenu()}
-          <button type="button" data-auth-action="login">Log in</button>
-          <button type="button" data-cta-action="leadForm">Review guidance options</button>
-        </div>
+        <button class="site-nav-action" type="button" data-cta-action="leadForm">Review guidance options</button>
       </div>
     `;
   }
   return `
-    <div class="account-menu" data-account-root>
-      <button class="account-trigger logged-in" type="button" aria-haspopup="true" aria-expanded="false" data-account-toggle>
-        <span class="hamburger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="account-avatar" aria-hidden="true">${icon("account")}</span>
-        <span class="account-name">${esc(SNAP_CUSTOMER.name)}</span>
+    <div class="site-nav-account-actions" aria-label="Account">
+      <button class="site-nav-action site-nav-account" type="button" data-account-action="open" data-account-target>
+        My Account
         ${savedBadge}
       </button>
-      <div class="account-dropdown" data-account-menu hidden>
-        ${mobilePublicMenu()}
-        <button type="button" data-account-action="open">Open My Account</button>
-        <button type="button" data-cta-action="leadForm">Review guidance options</button>
-        <button type="button" data-account-action="signout">Sign out</button>
-      </div>
+      <button class="site-nav-action" type="button" data-cta-action="leadForm">Review guidance options</button>
+      <button class="site-nav-action" type="button" data-cta-action="rateReview">Review rates</button>
+      <button class="site-nav-action" type="button" data-cta-action="compareOffer">Compare an offer</button>
+      <button class="site-nav-action" type="button" data-account-action="signout">Sign out</button>
     </div>
   `;
 }
 
 function header() {
+  const firstName = SNAP_CUSTOMER.name.trim().split(/\s+/)[0] || SNAP_CUSTOMER.name;
+  const welcome = sessionState.isLoggedIn
+    ? `<p class="header-welcome" aria-label="Welcome back, ${esc(SNAP_CUSTOMER.name)}"><span class="header-welcome-full" aria-hidden="true">Welcome back, ${esc(SNAP_CUSTOMER.name)}</span><span class="header-welcome-compact" aria-hidden="true">Welcome back, ${esc(firstName)}</span></p>`
+    : "";
   return `
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="${route("/")}">
-          <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Loans" />
-          <span class="brand-sub">Mortgage intelligence</span>
+          <img class="brand-logo" src="${ASSETS.logo}" alt="Snap Mortgage" />
         </a>
-        <nav class="site-nav" data-nav>
-          ${navLink("/rates", "Rates")}
-          ${navLink("/learning-center", "Learning")}
-          ${navLink("/loan-options", "Loan Options")}
-          <button class="header-nav-action" type="button" data-cta-action="compareOffer">Compare Your Offer</button>
-        </nav>
-        <div class="header-actions">
-          ${accountMenu()}
+        <div class="header-search-placeholder" aria-hidden="true">
+          ${icon("search")}
+          <span>Search</span>
         </div>
+        ${welcome}
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-nav-toggle>
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+        </button>
+        <nav class="site-nav" id="site-navigation" data-nav aria-label="Primary navigation">
+          <div class="site-nav-inner">
+            <div class="site-nav-groups">
+              ${SITE_NAVIGATION_GROUPS.map(navigationGroup).join("")}
+            </div>
+            ${accountNavigation()}
+            <a class="site-nav-cta" href="${route("/prequal/start")}">Start my Auto Prequal</a>
+          </div>
+        </nav>
       </div>
     </header>
   `;
@@ -1659,11 +1672,59 @@ function pageShell(content) {
   return `<div data-page-content data-design-system="snap-figma-v1">${header()}<main id="main" class="page" tabindex="-1">${content}${currentPageFreshness()}</main>${footer()}</div>${modalShell()}`;
 }
 
+function homeReadingItems(limit = 10) {
+  const articleItems = first(data.articles || [], Math.ceil(limit * 0.7)).map((article) => ({
+    kind: "article",
+    title: article.title,
+    text: article.summary || article.dek || article.previewText || "Read practical mortgage guidance connected to local markets, loan options, and borrower decisions.",
+    href: article.route,
+    label: "Article",
+    linkLabel: "Read more",
+  }));
+  const blogItems = (data.blogPages || [])
+    .filter((page) => page.route && page.route !== "/learning-center")
+    .map((page) => ({
+      kind: "blog",
+      title: page.name,
+      text: page.purpose || page.description || "Explore related guides, calculators, and next steps.",
+      href: page.route,
+      label: "Learning guide",
+      linkLabel: "Open topic",
+    }));
+
+  return articleItems.concat(blogItems).slice(0, limit);
+}
+
+function homeReadingCard(item, index) {
+  return `
+    <article class="card home-reading-card" style="--card-accent:${accentColors[(index + 2) % accentColors.length]}">
+      <div class="card-icon">${icon(item.kind === "blog" ? "guide" : "article")}</div>
+      <p class="home-reading-type">${esc(item.label)}</p>
+      <h3><a href="${route(item.href)}">${esc(item.title)}</a></h3>
+      <p>${esc(item.text)}</p>
+      <a class="text-link" href="${route(item.href)}">${esc(item.linkLabel)}</a>
+    </article>`;
+}
+
+function homeReadingCarousel() {
+  const items = homeReadingItems(10);
+  return `
+    <div class="home-reading-carousel-shell" data-news-carousel-root data-home-reading-carousel>
+      <div class="news-carousel home-reading-carousel" data-news-carousel-track tabindex="0" aria-label="Helpful mortgage articles and topic guides">
+        ${items.map(homeReadingCard).join("")}
+      </div>
+      <div class="news-carousel-controls home-reading-controls" aria-label="Helpful reads carousel controls">
+        <button type="button" class="icon-button" data-news-carousel="previous" aria-label="Previous reads">&larr;</button>
+        <button type="button" class="icon-button" data-news-carousel="next" aria-label="Next reads">&rarr;</button>
+      </div>
+    </div>`;
+}
 function homePage() {
   const goalCards = [
     { title: "Buy a house", text: "Compare purchase options, monthly costs, and the cash you may need before choosing a home.", href: "/buy", iconName: "home", accent: accentColors[0], linkLabel: "Plan a purchase" },
     { title: "Refinance my home", text: "Compare your current mortgage with a new rate, term, payment, or cash-out direction.", href: "/refinance", iconName: "rates", accent: accentColors[1], linkLabel: "Review refinancing" },
     { title: "Sell my home", text: "Estimate home value, mortgage payoff, selling costs, and what the sale could leave you.", href: "/sell", iconName: "home", accent: accentColors[2], linkLabel: "Estimate sale proceeds" },
+    { title: "Use home equity", text: "Learn how home equity options may change payment, cash flow, and long-term cost.", href: "/home-equity", iconName: "calculator", accent: accentColors[2], linkLabel: "Explore home equity" },
     { title: "Calculate payments", text: "Estimate principal, interest, taxes, insurance, and other monthly housing costs.", href: "/calculators/mortgage-payment", iconName: "calculator", accent: accentColors[3], linkLabel: "Calculate a payment" },
     { title: "See current rates", text: "Compare rates, APR, points, payment, upfront costs, and longer-run borrowing cost.", href: "/rates", iconName: "rates", accent: accentColors[4], linkLabel: "Compare rates" },
     { title: "Browse loan officer profiles", text: "Review available profiles and choose whose mortgage options you want to explore.", href: "/loan-officers", iconName: "expert", accent: accentColors[5], linkLabel: "Browse profiles" }
@@ -1691,8 +1752,8 @@ function homePage() {
       </div>
     </section>
     ${section("Loan options", { label: "Products", text: "Compare purchase, refinance, FHA, VA, and other options with tools and local factors nearby." }, `<div class="grid four">${productCards.join("")}</div>`, "compact product-shelf")}
-    ${section("Helpful next reads", { label: "Learning center", text: "Read guides that connect market questions, loan options, calculators, and facts a lender may review." }, `<div class="grid three">${first(data.blogPages.filter((page) => page.route !== "/learning-center"), 3).map((page, index) => card({ title: page.name, text: page.purpose, href: page.route, iconName: "guide", accent: accentColors[(index + 2) % accentColors.length], linkLabel: "Open topic" })).join("")}</div>`, "compact reading-shelf")}
     ${renderHomeStateExplorer(data.states)}
+    ${section("Helpful next reads", { label: "Learning center", text: "Read articles and topic guides that connect market questions, loan options, calculators, and facts a lender may review." }, homeReadingCarousel(), "compact reading-shelf")}
   `);
 }
 
@@ -3358,18 +3419,9 @@ function openActionModal(action) {
 }
 
 function wireAccountInteractions(root = document) {
-  const accountToggle = root.querySelector("[data-account-toggle]");
-  const accountMenuNode = root.querySelector("[data-account-menu]");
-  accountToggle?.addEventListener("click", () => {
-    if (!accountMenuNode) return;
-    const nextHidden = !accountMenuNode.hidden;
-    accountMenuNode.hidden = nextHidden;
-    accountToggle.setAttribute("aria-expanded", String(!nextHidden));
-  });
-
   root.querySelectorAll("[data-auth-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       openAuthModal();
     });
   });
@@ -3377,7 +3429,7 @@ function wireAccountInteractions(root = document) {
   root.querySelectorAll("[data-account-action]").forEach((button) => {
     button.addEventListener("click", () => {
       const action = button.getAttribute("data-account-action");
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       if (action === "open") {
         if (sessionState.isLoggedIn) openActionModal("account");
         else openAuthModal("Account login is not connected here. Continue only for this browsing session.");
@@ -3392,17 +3444,17 @@ function wireAccountInteractions(root = document) {
 
   root.querySelectorAll("[data-cta-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      closeAccountMenu({ restoreFocus: false });
+      closeNavigation({ restoreFocus: false });
       openActionModal(button.getAttribute("data-cta-action"));
     });
   });
 }
 
 function refreshAccountMenu() {
-  const currentRoot = document.querySelector("[data-account-root]");
+  const currentRoot = document.querySelector(".site-nav-account-actions");
   if (!currentRoot) return;
   const template = document.createElement("template");
-  template.innerHTML = accountMenu().trim();
+  template.innerHTML = accountNavigation().trim();
   const nextRoot = template.content.firstElementChild;
   if (!nextRoot) return;
   currentRoot.replaceWith(nextRoot);
@@ -3536,9 +3588,9 @@ function showToast(message) {
 }
 
 function updateAccountBadge() {
-  const trigger = document.querySelector("[data-account-toggle]");
-  if (!trigger) return;
-  let badge = trigger.querySelector("[data-saved-count]");
+  const target = document.querySelector("[data-account-target]");
+  if (!target) return;
+  let badge = target.querySelector("[data-saved-count]");
   if (sessionState.savedCount <= 0) {
     badge?.remove();
     return;
@@ -3547,16 +3599,17 @@ function updateAccountBadge() {
     badge = document.createElement("span");
     badge.className = "account-badge";
     badge.setAttribute("data-saved-count", "");
-    trigger.appendChild(badge);
+    target.appendChild(badge);
   }
   badge.textContent = String(sessionState.savedCount);
 }
 
 function animateSaveToAccount(trigger) {
-  const target = document.querySelector("[data-account-toggle]");
+  const target = document.querySelector("[data-account-target]");
   if (!trigger || !target) return;
+  const to = target.getClientRects()[0];
+  if (!to) return;
   const from = trigger.getBoundingClientRect();
-  const to = target.getBoundingClientRect();
   const chip = document.createElement("span");
   chip.className = "save-flight";
   chip.textContent = "Saved";
@@ -3581,7 +3634,7 @@ function saveToAccount(trigger, label = "Saved item") {
     savedAt: new Date().toISOString()
   });
   persistSessionState();
-  animateSaveToAccount(trigger || document.querySelector("[data-account-toggle]"));
+  animateSaveToAccount(trigger || document.querySelector("[data-account-target]"));
   updateAccountBadge();
   showToast("Saved for this browsing session");
 }
@@ -3590,7 +3643,7 @@ function flushPendingSave() {
   if (!pendingSaveAfterLogin || !sessionState.isLoggedIn) return;
   const label = pendingSaveAfterLogin.label;
   pendingSaveAfterLogin = null;
-  window.setTimeout(() => saveToAccount(document.querySelector("[data-account-toggle]"), label), 120);
+  window.setTimeout(() => saveToAccount(document.querySelector("[data-account-target]"), label), 120);
 }
 
 function handleDocumentClick(event) {
@@ -3629,22 +3682,21 @@ function handleDocumentClick(event) {
       }
     }
   }
-  const accountToggle = document.querySelector("[data-account-toggle]");
-  const accountMenuNode = document.querySelector("[data-account-menu]");
-  const root = document.querySelector("[data-account-root]");
-  if (root && !root.contains(event.target) && accountMenuNode) {
-    accountMenuNode.hidden = true;
-    accountToggle?.setAttribute("aria-expanded", "false");
+  const headerNode = document.querySelector(".site-header");
+  const nav = document.querySelector("[data-nav]");
+  if (nav?.classList.contains("open") && headerNode && !headerNode.contains(event.target)) {
+    closeNavigation({ restoreFocus: false });
   }
 }
 
-function closeAccountMenu({ restoreFocus = true } = {}) {
-  const accountToggle = document.querySelector("[data-account-toggle]");
-  const accountMenuNode = document.querySelector("[data-account-menu]");
-  if (!accountMenuNode || accountMenuNode.hidden) return;
-  accountMenuNode.hidden = true;
-  accountToggle?.setAttribute("aria-expanded", "false");
-  if (restoreFocus) accountToggle?.focus();
+function closeNavigation({ restoreFocus = true } = {}) {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-nav]");
+  if (!nav?.classList.contains("open")) return;
+  nav.classList.remove("open");
+  toggle?.setAttribute("aria-expanded", "false");
+  toggle?.setAttribute("aria-label", "Open navigation");
+  if (restoreFocus) toggle?.focus();
 }
 
 function handleDocumentKeydown(event) {
@@ -3655,7 +3707,7 @@ function handleDocumentKeydown(event) {
   if (event.key === "Escape") {
     if (articleModal && !articleModal.hidden) closeArticleModal();
     else if (modalIsOpen) closeModal();
-    else closeAccountMenu();
+    else closeNavigation();
     return;
   }
   if (event.key !== "Tab" || !modalIsOpen) return;
@@ -3699,6 +3751,13 @@ function wireInteractions() {
     }, { once: true });
   });
 
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-nav]");
+  toggle?.addEventListener("click", () => {
+    const isOpen = nav?.classList.toggle("open") ?? false;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
   document.removeEventListener("click", handleDocumentClick);
   document.addEventListener("click", handleDocumentClick);
 
@@ -4044,7 +4103,7 @@ function wireInteractions() {
       wireRentBuyComparisonTabs(result);
       result.querySelectorAll("[data-cta-action]").forEach((button) => {
         button.addEventListener("click", () => {
-          closeAccountMenu({ restoreFocus: false });
+          closeNavigation({ restoreFocus: false });
           openActionModal(button.getAttribute("data-cta-action"));
         });
       });
@@ -4058,7 +4117,8 @@ function wireInteractions() {
   wireDirectoryFilters();
   document.querySelectorAll("[data-news-carousel]").forEach((button) => {
     button.addEventListener("click", () => {
-      const track = document.querySelector("[data-news-carousel-track]");
+      const root = button.closest("[data-news-carousel-root]");
+      const track = root?.querySelector("[data-news-carousel-track]") || document.querySelector("[data-news-carousel-track]");
       if (!track) return;
       track.scrollBy({ left: track.clientWidth * (button.dataset.newsCarousel === "previous" ? -0.9 : 0.9), behavior: "smooth" });
     });
